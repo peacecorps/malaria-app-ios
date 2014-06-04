@@ -7,6 +7,7 @@
 //
 
 #import "PCMAppDelegate.h"
+#import "PCMSetupScreenViewController.h"
 
 @implementation PCMAppDelegate
 
@@ -14,6 +15,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    PCMSetupScreenViewController *setupVC = [[PCMSetupScreenViewController alloc] init];
+    self.window.rootViewController = setupVC;
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

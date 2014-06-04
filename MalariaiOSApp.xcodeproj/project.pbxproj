@@ -19,6 +19,8 @@
 		D1BE3E73193F85AE007E692D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BE3E5B193F85AE007E692D /* UIKit.framework */; };
 		D1BE3E7B193F85AE007E692D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D1BE3E79193F85AE007E692D /* InfoPlist.strings */; };
 		D1BE3E7D193F85AE007E692D /* MalariaiOSAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BE3E7C193F85AE007E692D /* MalariaiOSAppTests.m */; };
+		D1BE3E89193F85C4007E692D /* PCMSetupScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1BE3E87193F85C4007E692D /* PCMSetupScreenViewController.m */; };
+		D1BE3E8A193F85C4007E692D /* PCMSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1BE3E88193F85C4007E692D /* PCMSetupScreenViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		D1BE3E78193F85AE007E692D /* MalariaiOSAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOSAppTests-Info.plist"; sourceTree = "<group>"; };
 		D1BE3E7A193F85AE007E692D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D1BE3E7C193F85AE007E692D /* MalariaiOSAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MalariaiOSAppTests.m; sourceTree = "<group>"; };
+		D1BE3E86193F85C4007E692D /* PCMSetupScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMSetupScreenViewController.h; sourceTree = "<group>"; };
+		D1BE3E87193F85C4007E692D /* PCMSetupScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMSetupScreenViewController.m; sourceTree = "<group>"; };
+		D1BE3E88193F85C4007E692D /* PCMSetupScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMSetupScreenViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 		D1BE3E4B193F85AE007E692D = {
 			isa = PBXGroup;
 			children = (
+				D1BE3E86193F85C4007E692D /* PCMSetupScreenViewController.h */,
+				D1BE3E87193F85C4007E692D /* PCMSetupScreenViewController.m */,
+				D1BE3E88193F85C4007E692D /* PCMSetupScreenViewController.xib */,
 				D1BE3E5D193F85AE007E692D /* MalariaiOSApp */,
 				D1BE3E76193F85AE007E692D /* MalariaiOSAppTests */,
 				D1BE3E56193F85AE007E692D /* Frameworks */,
@@ -220,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1BE3E8A193F85C4007E692D /* PCMSetupScreenViewController.xib in Resources */,
 				D1BE3E62193F85AE007E692D /* InfoPlist.strings in Resources */,
 				D1BE3E6A193F85AE007E692D /* Images.xcassets in Resources */,
 			);
@@ -241,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1BE3E64193F85AE007E692D /* main.m in Sources */,
+				D1BE3E89193F85C4007E692D /* PCMSetupScreenViewController.m in Sources */,
 				D1BE3E68193F85AE007E692D /* PCMAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

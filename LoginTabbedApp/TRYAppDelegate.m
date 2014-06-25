@@ -7,6 +7,9 @@
 //
 
 #import "TRYAppDelegate.h"
+#import "TRYHomeViewController.h"
+#import "PCMSettingsViewController.h"
+#import "TRYLoginViewController.h"
 
 @implementation TRYAppDelegate
 
@@ -16,9 +19,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    //init the view controllers for the tabs, Home and settings
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //Home controller
+    TRYHomeViewController *homeVC = [[TRYHomeViewController alloc]init];
+    homeVC.tabBarItem.title = @"Home";
+    //Settings controller
+    PCMSettingsViewController *settingsVC = [[PCMSettingsViewController alloc]init];
+    settingsVC.tabBarItem.title = @"Settings";
+    
+    //init the UITabBarController
+    
+    self.tabBarController = [[UITabBarController alloc]init];
+    self.tabBarController.viewControllers = @[homeVC,settingsVC];
+    
+    //Add the tab bar controller to the window
+    //[self.window setRootViewController:self.tabBarController];
+    
+    //Add the login view controller as the root controller of the app window
+    TRYLoginViewController *loginVC = [[TRYLoginViewController alloc]init];
+    [self.window setRootViewController:loginVC];
+
+   
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -22,6 +22,12 @@
 		D15369EE195950DE0033BC15 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369D2195950DE0033BC15 /* CoreData.framework */; };
 		D15369F6195950DE0033BC15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D15369F4195950DE0033BC15 /* InfoPlist.strings */; };
 		D15369F8195950DE0033BC15 /* LoginTabbedAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D15369F7195950DE0033BC15 /* LoginTabbedAppTests.m */; };
+		D1536A041959511D0033BC15 /* TRYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A021959511D0033BC15 /* TRYHomeViewController.m */; };
+		D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A031959511D0033BC15 /* TRYHomeViewController.xib */; };
+		D1536A0C195951780033BC15 /* PCMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A0A195951780033BC15 /* PCMSettingsViewController.m */; };
+		D1536A0D195951780033BC15 /* PCMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */; };
+		D1536A11195953170033BC15 /* TRYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A0F195953170033BC15 /* TRYLoginViewController.m */; };
+		D1536A12195953170033BC15 /* TRYLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A10195953170033BC15 /* TRYLoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,15 @@
 		D15369F3195950DE0033BC15 /* LoginTabbedAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginTabbedAppTests-Info.plist"; sourceTree = "<group>"; };
 		D15369F5195950DE0033BC15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D15369F7195950DE0033BC15 /* LoginTabbedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTabbedAppTests.m; sourceTree = "<group>"; };
+		D1536A011959511D0033BC15 /* TRYHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYHomeViewController.h; sourceTree = "<group>"; };
+		D1536A021959511D0033BC15 /* TRYHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYHomeViewController.m; sourceTree = "<group>"; };
+		D1536A031959511D0033BC15 /* TRYHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYHomeViewController.xib; sourceTree = "<group>"; };
+		D1536A09195951780033BC15 /* PCMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMSettingsViewController.h; sourceTree = "<group>"; };
+		D1536A0A195951780033BC15 /* PCMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMSettingsViewController.m; sourceTree = "<group>"; };
+		D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMSettingsViewController.xib; sourceTree = "<group>"; };
+		D1536A0E195953170033BC15 /* TRYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYLoginViewController.h; sourceTree = "<group>"; };
+		D1536A0F195953170033BC15 /* TRYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYLoginViewController.m; sourceTree = "<group>"; };
+		D1536A10195953170033BC15 /* TRYLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYLoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +99,15 @@
 		D15369C0195950DE0033BC15 = {
 			isa = PBXGroup;
 			children = (
+				D1536A09195951780033BC15 /* PCMSettingsViewController.h */,
+				D1536A0E195953170033BC15 /* TRYLoginViewController.h */,
+				D1536A0F195953170033BC15 /* TRYLoginViewController.m */,
+				D1536A10195953170033BC15 /* TRYLoginViewController.xib */,
+				D1536A0A195951780033BC15 /* PCMSettingsViewController.m */,
+				D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */,
+				D1536A011959511D0033BC15 /* TRYHomeViewController.h */,
+				D1536A021959511D0033BC15 /* TRYHomeViewController.m */,
+				D1536A031959511D0033BC15 /* TRYHomeViewController.xib */,
 				D15369D4195950DE0033BC15 /* LoginTabbedApp */,
 				D15369F1195950DE0033BC15 /* LoginTabbedAppTests */,
 				D15369CB195950DE0033BC15 /* Frameworks */,
@@ -229,7 +253,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */,
 				D15369D9195950DE0033BC15 /* InfoPlist.strings in Resources */,
+				D1536A0D195951780033BC15 /* PCMSettingsViewController.xib in Resources */,
+				D1536A12195953170033BC15 /* TRYLoginViewController.xib in Resources */,
 				D15369E4195950DE0033BC15 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +277,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D15369E2195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld in Sources */,
+				D1536A0C195951780033BC15 /* PCMSettingsViewController.m in Sources */,
+				D1536A041959511D0033BC15 /* TRYHomeViewController.m in Sources */,
 				D15369DF195950DE0033BC15 /* TRYAppDelegate.m in Sources */,
+				D1536A11195953170033BC15 /* TRYLoginViewController.m in Sources */,
 				D15369DB195950DE0033BC15 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

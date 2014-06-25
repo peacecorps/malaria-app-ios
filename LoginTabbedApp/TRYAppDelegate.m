@@ -10,6 +10,7 @@
 #import "TRYHomeViewController.h"
 #import "PCMSettingsViewController.h"
 #import "TRYLoginViewController.h"
+#import "TRYPageViewController.h"
 
 @implementation TRYAppDelegate
 
@@ -24,11 +25,15 @@
     //init the view controllers for the tabs, Home and settings
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //Home controller
-    TRYHomeViewController *homeVC = [[TRYHomeViewController alloc]init];
+    //TRYHomeViewController *homeVC = [[TRYHomeViewController alloc]init];
+    //homeVC.tabBarItem.title = @"Home";
+    
+    TRYPageViewController *homeVC = [[TRYPageViewController alloc] init];
     homeVC.tabBarItem.title = @"Home";
+
     //Settings controller
     PCMSettingsViewController *settingsVC = [[PCMSettingsViewController alloc]init];
-    settingsVC.tabBarItem.title = @"Settings";
+    settingsVC.tabBarItem.title = @"Info Hub";
     
     //init the UITabBarController
     

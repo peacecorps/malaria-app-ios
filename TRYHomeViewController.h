@@ -10,4 +10,8 @@
 
 @interface TRYHomeViewController : UIViewController
 
+@property (assign, nonatomic) NSInteger index;
+@property (strong, nonatomic) IBOutlet UILabel *screenNumber;
+
+
 @end

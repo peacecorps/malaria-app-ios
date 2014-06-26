@@ -39,12 +39,12 @@
 }
 
 - (IBAction)setupScreenAction:(id)sender {
-    TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    TRYLoginViewController *login = [[TRYLoginViewController alloc] init];
+   // TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+   TRYLoginViewController *loginVC = [[TRYLoginViewController alloc] init];
     
-    [appDelegate.window setRootViewController:login];
-    
-
+    //[appDelegate.window setRootViewController:login];
+    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+ [self.view.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
     
 }
 @end

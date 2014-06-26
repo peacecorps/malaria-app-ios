@@ -38,10 +38,10 @@
 
 
 - (IBAction)signInAction:(id)sender {
-    TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    //TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     
-    [appDelegate.window setRootViewController:appDelegate.tabBarController];
-    
+    //[appDelegate.window setRootViewController:appDelegate.tabBarController];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 
 }
 @end

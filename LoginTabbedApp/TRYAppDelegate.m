@@ -46,11 +46,12 @@
     //Add the login view controller as the root controller of the app window
     TRYLoginViewController *loginVC = [[TRYLoginViewController alloc]init];
     //[self.window setRootViewController:loginVC];
-    [self.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
+    
    
     // Override point for customization after application launch.
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [self.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
     return YES;
 }
 

@@ -101,21 +101,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D15369C0195950DE0033BC15 = {
+		D151E7F6195C91D30034CEF0 /* Tab1-Home */ = {
 			isa = PBXGroup;
 			children = (
 				D1536A13195ACC910033BC15 /* TRYPageViewController.h */,
 				D1536A14195ACC910033BC15 /* TRYPageViewController.m */,
 				D1536A15195ACC910033BC15 /* TRYPageViewController.xib */,
-				D1536A0E195953170033BC15 /* TRYLoginViewController.h */,
-				D1536A0F195953170033BC15 /* TRYLoginViewController.m */,
-				D1536A10195953170033BC15 /* TRYLoginViewController.xib */,
-				D1536A09195951780033BC15 /* PCMSettingsViewController.h */,
-				D1536A0A195951780033BC15 /* PCMSettingsViewController.m */,
-				D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */,
 				D1536A011959511D0033BC15 /* TRYHomeViewController.h */,
 				D1536A021959511D0033BC15 /* TRYHomeViewController.m */,
 				D1536A031959511D0033BC15 /* TRYHomeViewController.xib */,
+			);
+			name = "Tab1-Home";
+			sourceTree = "<group>";
+		};
+		D151E7F7195C91E70034CEF0 /* SetUpScreen */ = {
+			isa = PBXGroup;
+			children = (
+				D1536A0E195953170033BC15 /* TRYLoginViewController.h */,
+				D1536A0F195953170033BC15 /* TRYLoginViewController.m */,
+				D1536A10195953170033BC15 /* TRYLoginViewController.xib */,
+			);
+			name = SetUpScreen;
+			sourceTree = "<group>";
+		};
+		D151E7F8195C91FC0034CEF0 /* Tab2-InfoHub */ = {
+			isa = PBXGroup;
+			children = (
+				D1536A09195951780033BC15 /* PCMSettingsViewController.h */,
+				D1536A0A195951780033BC15 /* PCMSettingsViewController.m */,
+				D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */,
+			);
+			name = "Tab2-InfoHub";
+			sourceTree = "<group>";
+		};
+		D15369C0195950DE0033BC15 = {
+			isa = PBXGroup;
+			children = (
+				D151E7F6195C91D30034CEF0 /* Tab1-Home */,
+				D151E7F7195C91E70034CEF0 /* SetUpScreen */,
+				D151E7F8195C91FC0034CEF0 /* Tab2-InfoHub */,
 				D15369D4195950DE0033BC15 /* LoginTabbedApp */,
 				D15369F1195950DE0033BC15 /* LoginTabbedAppTests */,
 				D15369CB195950DE0033BC15 /* Frameworks */,

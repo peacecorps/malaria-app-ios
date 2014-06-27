@@ -8,10 +8,10 @@
 
 #import "TRYHomeViewController.h"
 #import "TRYAppdelegate.h"
-#import "TRYSetupViewController.h"
+#import "TRYSetupScreenViewController.h"
 
 @interface TRYHomeViewController ()
-- (IBAction)setupScreenAction:(id)sender;
+//- (IBAction)setupScreenAction:(id)sender;
 
 @end
 
@@ -40,7 +40,7 @@
 
 - (IBAction)setupScreenAction:(id)sender {
    // TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-   TRYSetupViewController *loginVC = [[TRYSetupViewController alloc] init];
+   TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
     
     //[appDelegate.window setRootViewController:login];
     //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];

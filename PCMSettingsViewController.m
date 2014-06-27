@@ -7,6 +7,8 @@
 //
 
 #import "PCMSettingsViewController.h"
+#define kOFFSET_FOR_KEYBOARD 80.0
+
 
 
 @interface PCMSettingsViewController ()

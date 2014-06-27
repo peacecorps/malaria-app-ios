@@ -26,10 +26,10 @@
 		D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A031959511D0033BC15 /* TRYHomeViewController.xib */; };
 		D1536A0C195951780033BC15 /* PCMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A0A195951780033BC15 /* PCMSettingsViewController.m */; };
 		D1536A0D195951780033BC15 /* PCMSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */; };
-		D1536A11195953170033BC15 /* TRYSetupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A0F195953170033BC15 /* TRYSetupViewController.m */; };
-		D1536A12195953170033BC15 /* TRYSetupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A10195953170033BC15 /* TRYSetupViewController.xib */; };
 		D1536A16195ACC910033BC15 /* TRYPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1536A14195ACC910033BC15 /* TRYPageViewController.m */; };
 		D1536A17195ACC910033BC15 /* TRYPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1536A15195ACC910033BC15 /* TRYPageViewController.xib */; };
+		D1C979DD195D6C30008B39B8 /* TRYSetupScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */; };
+		D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,12 +67,12 @@
 		D1536A09195951780033BC15 /* PCMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCMSettingsViewController.h; sourceTree = "<group>"; };
 		D1536A0A195951780033BC15 /* PCMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCMSettingsViewController.m; sourceTree = "<group>"; };
 		D1536A0B195951780033BC15 /* PCMSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PCMSettingsViewController.xib; sourceTree = "<group>"; };
-		D1536A0E195953170033BC15 /* TRYSetupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYSetupViewController.h; sourceTree = "<group>"; };
-		D1536A0F195953170033BC15 /* TRYSetupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYSetupViewController.m; sourceTree = "<group>"; };
-		D1536A10195953170033BC15 /* TRYSetupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYSetupViewController.xib; sourceTree = "<group>"; };
 		D1536A13195ACC910033BC15 /* TRYPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYPageViewController.h; sourceTree = "<group>"; };
 		D1536A14195ACC910033BC15 /* TRYPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYPageViewController.m; sourceTree = "<group>"; };
 		D1536A15195ACC910033BC15 /* TRYPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYPageViewController.xib; sourceTree = "<group>"; };
+		D1C979DA195D6C30008B39B8 /* TRYSetupScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYSetupScreenViewController.h; sourceTree = "<group>"; };
+		D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYSetupScreenViewController.m; sourceTree = "<group>"; };
+		D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYSetupScreenViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,9 +117,9 @@
 		D151E7F7195C91E70034CEF0 /* SetUpScreen */ = {
 			isa = PBXGroup;
 			children = (
-				D1536A0E195953170033BC15 /* TRYSetupViewController.h */,
-				D1536A0F195953170033BC15 /* TRYSetupViewController.m */,
-				D1536A10195953170033BC15 /* TRYSetupViewController.xib */,
+				D1C979DA195D6C30008B39B8 /* TRYSetupScreenViewController.h */,
+				D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */,
+				D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */,
 			);
 			name = SetUpScreen;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 				D15369D9195950DE0033BC15 /* InfoPlist.strings in Resources */,
 				D1536A0D195951780033BC15 /* PCMSettingsViewController.xib in Resources */,
 				D1536A17195ACC910033BC15 /* TRYPageViewController.xib in Resources */,
-				D1536A12195953170033BC15 /* TRYSetupViewController.xib in Resources */,
+				D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */,
 				D15369E4195950DE0033BC15 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,12 +309,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C979DD195D6C30008B39B8 /* TRYSetupScreenViewController.m in Sources */,
 				D15369E2195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld in Sources */,
 				D1536A0C195951780033BC15 /* PCMSettingsViewController.m in Sources */,
 				D1536A041959511D0033BC15 /* TRYHomeViewController.m in Sources */,
 				D1536A16195ACC910033BC15 /* TRYPageViewController.m in Sources */,
 				D15369DF195950DE0033BC15 /* TRYAppDelegate.m in Sources */,
-				D1536A11195953170033BC15 /* TRYSetupViewController.m in Sources */,
 				D15369DB195950DE0033BC15 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

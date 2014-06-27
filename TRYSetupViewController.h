@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TRYSetupViewController : UIViewController
+@interface TRYSetupViewController :UIViewController
+
+
 
 @end

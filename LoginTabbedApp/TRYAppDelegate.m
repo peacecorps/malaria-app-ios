@@ -9,7 +9,7 @@
 #import "TRYAppDelegate.h"
 #import "TRYHomeViewController.h"
 #import "PCMSettingsViewController.h"
-#import "TRYSetupViewController.h"
+#import "TRYSetupScreenViewController.h"
 #import "TRYPageViewController.h"
 
 @implementation TRYAppDelegate
@@ -44,7 +44,7 @@
     [self.window setRootViewController:self.tabBarController];
     
     //Add the login view controller as the root controller of the app window
-    TRYSetupViewController *setupVC = [[TRYSetupViewController alloc]init];
+    TRYSetupScreenViewController *setupVC = [[TRYSetupScreenViewController alloc]init];
     //[self.window setRootViewController:loginVC];
     
    

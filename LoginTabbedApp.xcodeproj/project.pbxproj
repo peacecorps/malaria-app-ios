@@ -35,6 +35,7 @@
 		D16A8421195D701600613D35 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A841A195D701600613D35 /* logo.png */; };
 		D16A8422195D701600613D35 /* tab_home.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A841B195D701600613D35 /* tab_home.png */; };
 		D16A8423195D701600613D35 /* tab_infohub.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A841C195D701600613D35 /* tab_infohub.png */; };
+		D16A8426195D977D00613D35 /* medicine.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A8425195D977D00613D35 /* medicine.png */; };
 		D1C979DD195D6C30008B39B8 /* TRYSetupScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */; };
 		D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		D16A841A195D701600613D35 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		D16A841B195D701600613D35 /* tab_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_home.png; sourceTree = "<group>"; };
 		D16A841C195D701600613D35 /* tab_infohub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_infohub.png; sourceTree = "<group>"; };
+		D16A8425195D977D00613D35 /* medicine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = medicine.png; sourceTree = "<group>"; };
 		D1C979DA195D6C30008B39B8 /* TRYSetupScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYSetupScreenViewController.h; sourceTree = "<group>"; };
 		D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYSetupScreenViewController.m; sourceTree = "<group>"; };
 		D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYSetupScreenViewController.xib; sourceTree = "<group>"; };
@@ -151,13 +153,7 @@
 		D15369C0195950DE0033BC15 = {
 			isa = PBXGroup;
 			children = (
-				D16A8416195D701600613D35 /* background.png */,
-				D16A8417195D701600613D35 /* button_no.png */,
-				D16A8418195D701600613D35 /* button_settings.png */,
-				D16A8419195D701600613D35 /* button_yes.png */,
-				D16A841A195D701600613D35 /* logo.png */,
-				D16A841B195D701600613D35 /* tab_home.png */,
-				D16A841C195D701600613D35 /* tab_infohub.png */,
+				D16A8424195D93D400613D35 /* images */,
 				D151E7F6195C91D30034CEF0 /* Tab1-Home */,
 				D151E7F7195C91E70034CEF0 /* SetUpScreen */,
 				D151E7F8195C91FC0034CEF0 /* Tab2-InfoHub */,
@@ -228,6 +224,21 @@
 				D15369F4195950DE0033BC15 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D16A8424195D93D400613D35 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				D16A8425195D977D00613D35 /* medicine.png */,
+				D16A8416195D701600613D35 /* background.png */,
+				D16A8417195D701600613D35 /* button_no.png */,
+				D16A8418195D701600613D35 /* button_settings.png */,
+				D16A8419195D701600613D35 /* button_yes.png */,
+				D16A841A195D701600613D35 /* logo.png */,
+				D16A841B195D701600613D35 /* tab_home.png */,
+				D16A841C195D701600613D35 /* tab_infohub.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +320,7 @@
 				D16A841E195D701600613D35 /* button_no.png in Resources */,
 				D16A8423195D701600613D35 /* tab_infohub.png in Resources */,
 				D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */,
+				D16A8426195D977D00613D35 /* medicine.png in Resources */,
 				D16A8421195D701600613D35 /* logo.png in Resources */,
 				D15369D9195950DE0033BC15 /* InfoPlist.strings in Resources */,
 				D16A841D195D701600613D35 /* background.png in Resources */,

@@ -60,7 +60,7 @@
             UIPageControl *pageControl = (UIPageControl *)subview;
             pageControl.pageIndicatorTintColor = [UIColor blackColor];
             pageControl.currentPageIndicatorTintColor = [UIColor greenColor];
-            //pageControl.backgroundColor = [UIColor blueColor];
+            pageControl.backgroundColor = [[UIColor blueColor] colorWithAlphaComponent:0.0f];
         }
     }
 

@@ -186,9 +186,7 @@
     }
     
     
-    
     isMedThere = [medicines containsObject: _txt.text];
-    
     
     //If both the text fields are filled with non-nil correct values, done button is enabled
     if(![_txt.text isEqualToString:@""] && ![_time.text isEqualToString:@""] && isMedThere)

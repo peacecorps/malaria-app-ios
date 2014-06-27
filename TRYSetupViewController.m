@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Shruti Gupta. All rights reserved.
 //
 
-#import "TRYLoginViewController.h"
+#import "TRYSetupViewController.h"
 #import "TRYAppDelegate.h"
 
-@interface TRYLoginViewController ()
+@interface TRYSetupViewController ()
 
 @end
 
-@implementation TRYLoginViewController
+@implementation TRYSetupViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

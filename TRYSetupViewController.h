@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TRYLoginViewController : UIViewController
+@interface TRYSetupViewController : UIViewController
 
 @end

@@ -9,7 +9,7 @@
 #import "TRYAppDelegate.h"
 #import "TRYHomeViewController.h"
 #import "PCMSettingsViewController.h"
-#import "TRYLoginViewController.h"
+#import "TRYSetupViewController.h"
 #import "TRYPageViewController.h"
 
 @implementation TRYAppDelegate
@@ -44,14 +44,14 @@
     [self.window setRootViewController:self.tabBarController];
     
     //Add the login view controller as the root controller of the app window
-    TRYLoginViewController *loginVC = [[TRYLoginViewController alloc]init];
+    TRYSetupViewController *setupVC = [[TRYSetupViewController alloc]init];
     //[self.window setRootViewController:loginVC];
     
    
     // Override point for customization after application launch.
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
+    [self.window.rootViewController presentViewController:setupVC animated:YES completion:nil];
     return YES;
 }
 

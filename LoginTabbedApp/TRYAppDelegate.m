@@ -44,14 +44,45 @@
     [self.window setRootViewController:self.tabBarController];
     
     //Add the login view controller as the root controller of the app window
-    TRYSetupScreenViewController *setupVC = [[TRYSetupScreenViewController alloc]init];
+    
     //[self.window setRootViewController:loginVC];
     
    
     // Override point for customization after application launch.
     //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [self.window.rootViewController presentViewController:setupVC animated:YES completion:nil];
+    
+    
+    
+    
+    
+    
+    
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"hasSetUp"]) {
+        // first time in
+        // create the set up view controller
+        
+        // present set up vc
+        TRYSetupScreenViewController *setupVC = [[TRYSetupScreenViewController alloc]init];
+        [self.window.rootViewController presentViewController:setupVC animated:NO completion:nil];
+    }
+    
+   /* else {
+        // has set up
+        // present log in (are we requiring users to login?)
+        //Add the login view controller as the root controller of the app window
+        TRYLoginViewController *loginVC = [[TRYLoginViewController alloc]init];
+        [self.window.rootViewController presentViewController:loginVC animated:NO completion:nil];
+    }*/
+   
+    
+    
+    
+    
+    
+    
+    
+    //[self.window.rootViewController presentViewController:setupVC animated:YES completion:nil];
     return YES;
 }
 

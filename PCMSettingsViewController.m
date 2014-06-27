@@ -30,7 +30,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-}
+    
+    //Set the background image
+    }
 
 - (void)didReceiveMemoryWarning
 {

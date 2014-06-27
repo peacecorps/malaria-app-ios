@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface TRYSetupScreenViewController : UIViewController
+{
+    NSArray *medicines;
+    UIDatePicker *datePicker;
+    NSDate *currentTime;
+    NSString *medName;
+    NSUserDefaults *prefs;
+    NSDate *startDay;
+    
+}
 
 @end

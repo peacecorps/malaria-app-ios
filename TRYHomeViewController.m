@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     
-    [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     
     
@@ -39,7 +39,7 @@
     _background.frame = self.view.bounds;
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
-
+    
     
     //Medicine not taken. No button clicked yet
     medTaken = 0;
@@ -48,6 +48,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     self->medName = [prefs stringForKey:@"medicineName"];
+   // NSLog(self->medName);
     
     medicineName.text = self->medName;
     
@@ -55,15 +56,31 @@
     NSDate *startDay = [prefs objectForKey:@"startDay"];
     
     
+    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
+    //NSString *x = [dateFormat stringFromDate:startDay];
+    //NSLog(x);
+    
+    
+    
     //self->reminderDate = startDay;
     
     self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
+    
+    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
+    //NSString *x = [dateFormat stringFromDate:startDay];
+    //NSLog(x);
+
     self->frequency = [self determineMedFrequency:medName.lowercaseString];
+    
+   
     
     if(self->frequency == 1)
     {
         //daily
-        [self updateLabel:[NSDate date]];
+        
+        [self updateLabel: self->reminderDate];
         
     }
     
@@ -81,6 +98,7 @@
     
     //[[NSUserDefaults standardUserDefaults] setObject:rDate1 forKey:@"reminderTime"];
     //[[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"startDay"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
     
 }
 
@@ -88,17 +106,25 @@
 -(void) updateLabel:(NSDate*) argDate
 
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    if([prefs objectForKey:@"reminderTimeFinal"])
-    {
-        self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
-    }
-    
-    
-    
-    NSLog(@"Inside update Label");
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    
+    remindDate.text = [dateFormat stringFromDate:reminderDate];
+    
+
+   /* NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *x = [prefs stringForKey:@"reminderTimeFinal"];
+   if(![x isEqualToString:@"shruti"])
+    {
+        NSLog(@"1");
+        self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
+    }*/
+    
+    
+    
+   // NSLog(@"Inside update Label");
+  //  NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEEE"];
     //NSLog([dateFormat  stringFromDate:startDay]);
     remindDay.text = [dateFormat  stringFromDate:argDate ];
@@ -116,9 +142,9 @@
     remindDay.text = [dateFormat  stringFromDate:self->reminderDate ];
     
     // NSString *x = [dateFormat stringFromDate:startDay];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+  //  [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
-    remindDate.text = [dateFormat stringFromDate:reminderDate];
+   // remindDate.text = [dateFormat stringFromDate:reminderDate];
     
     [[NSUserDefaults standardUserDefaults] setObject:reminderDate forKey:@"reminderTimeFinal"];
     
@@ -162,7 +188,7 @@
     if([remDate compare:today] == NSOrderedAscending)
     {
         remindDay.textColor = [UIColor redColor];
-        NSLog(@"missed");
+       // NSLog(@"missed");
     }
     //do not change
     
@@ -173,7 +199,7 @@
 -(IBAction)medTakenYES:(id)sender
 {
     medTaken = 1;
-    NSLog(@"medTaken",medTaken);
+    //NSLog(@"medTaken",medTaken);
     
     
     self->rDate1 = [self getrDate:frequency];
@@ -208,7 +234,7 @@
     {
         //daily
         //get next date
-        NSLog(@"shruti");
+        //NSLog(@"shruti");
         self->reminderDate = [self->reminderDate dateByAddingTimeInterval:+1*24*60*60];
     }
     
@@ -240,6 +266,16 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     self.screenNumber.text = [NSString stringWithFormat:@"Screen #%d", self.index];
+    
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *x = [prefs stringForKey:@"reminderTimeFinal"];
+    /*if(![x isEqualToString:@"shruti"])
+    {
+        NSLog(@"1");
+        self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
+    }*/
+    
     
 }
 

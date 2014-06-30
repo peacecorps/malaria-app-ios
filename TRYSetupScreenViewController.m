@@ -74,6 +74,8 @@
         [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
         _time.text = currentTimeString;
+        NSLog(@"Inside 1st if");
+
         [_done setEnabled:YES];
     }
     
@@ -191,6 +193,8 @@
     //If both the text fields are filled with non-nil correct values, done button is enabled
     if(![_txt.text isEqualToString:@""] && ![_time.text isEqualToString:@""] && isMedThere)
     {
+        NSLog(@"Inside 2nd if");
+
         [_done setEnabled:YES];
     }
     
@@ -231,6 +235,8 @@
     if(![_txt.text isEqualToString:@""] && ![_time.text isEqualToString:@""])
     {
         //[timeWarning setHidden:YES];
+        NSLog(@"Inside 3rd if");
+
         [_done setEnabled:YES];
         //[timeWarning setHidden:YES];
     }
@@ -381,7 +387,7 @@
     //NSDate *startDay = [self->prefs objectForKey:@"startDay"];
     NSLog(@"shruti");
     NSLog(self->medName);
-    if(![self->medName isEqualToString:@""])
+    if(![self->medName isEqualToString:@""]&& self->startDay)
     {
         NSLog(@"Inside if statement");
         _txt.text = self->medName;
@@ -390,6 +396,8 @@
         NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
         
         _time.text = currentTimeString;
+        NSLog(@"Inside 4 if");
+
         [_done setEnabled:YES];
     }
 }

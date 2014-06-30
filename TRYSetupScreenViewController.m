@@ -161,6 +161,7 @@
         NSLog(@"No medication entered");
         [_medWarning setHidden:NO];
         [_medWarning setText:@"Medication not entered"];
+        _txt.text = @"Doxycycline";
     }
     
     

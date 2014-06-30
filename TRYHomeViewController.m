@@ -42,7 +42,7 @@
     
     
     //Medicine not taken. No button clicked yet
-    medTaken = 0;
+   /* medTaken = 0;
     
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -98,7 +98,7 @@
     
     //[[NSUserDefaults standardUserDefaults] setObject:rDate1 forKey:@"reminderTime"];
     //[[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"startDay"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];*/
     
 }
 
@@ -113,13 +113,13 @@
     remindDate.text = [dateFormat stringFromDate:reminderDate];
     
 
-   /* NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+   NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSString *x = [prefs stringForKey:@"reminderTimeFinal"];
    if(![x isEqualToString:@"shruti"])
     {
         NSLog(@"1");
         self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
-    }*/
+    }
     
     
     
@@ -268,13 +268,69 @@
     self.screenNumber.text = [NSString stringWithFormat:@"Screen #%d", self.index];
     
     
+   
+    
+    
+    
+    medTaken = 0;
+    
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *x = [prefs stringForKey:@"reminderTimeFinal"];
-    /*if(![x isEqualToString:@"shruti"])
+    
+    self->medName = [prefs stringForKey:@"medicineName"];
+    // NSLog(self->medName);
+    
+    medicineName.text = self->medName;
+    
+    
+    NSDate *startDay = [prefs objectForKey:@"startDay"];
+    
+    
+    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
+    //NSString *x = [dateFormat stringFromDate:startDay];
+    //NSLog(x);
+    
+    
+    
+    //self->reminderDate = startDay;
+    
+    self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
+    
+    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
+    //NSString *x = [dateFormat stringFromDate:startDay];
+    //NSLog(x);
+    
+    self->frequency = [self determineMedFrequency:medName.lowercaseString];
+    
+    
+    
+    if(self->frequency == 1)
     {
-        NSLog(@"1");
-        self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
-    }*/
+        //daily
+        
+        [self updateLabel: self->reminderDate];
+        
+    }
+    
+    //Function to update label with arguments reminderdate
+    else
+    {
+        
+        [self updateLabel:self->reminderDate];
+        
+        
+        
+        [self changeLabelColor:reminderDate givenFrequency:frequency];
+    }
+    
+    
+    //[[NSUserDefaults standardUserDefaults] setObject:rDate1 forKey:@"reminderTime"];
+    //[[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"startDay"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
+    
+
     
     
 }

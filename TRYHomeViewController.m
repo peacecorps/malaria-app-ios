@@ -40,10 +40,11 @@
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
     
+    medTaken = 0;
+
     
     //Medicine not taken. No button clicked yet
-   /* medTaken = 0;
-    
+   /*
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
@@ -119,6 +120,7 @@
     {
         NSLog(@"1");
         self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
+       // x = @"gupta";
     }
     
     
@@ -142,9 +144,9 @@
     remindDay.text = [dateFormat  stringFromDate:self->reminderDate ];
     
     // NSString *x = [dateFormat stringFromDate:startDay];
-  //  [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
-   // remindDate.text = [dateFormat stringFromDate:reminderDate];
+    remindDate.text = [dateFormat stringFromDate:reminderDate];
     
     [[NSUserDefaults standardUserDefaults] setObject:reminderDate forKey:@"reminderTimeFinal"];
     
@@ -272,7 +274,7 @@
     
     
     
-    medTaken = 0;
+    
     
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

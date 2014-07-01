@@ -225,7 +225,7 @@
         self->currentTime = [NSDate date];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"hh:mm";
+        dateFormatter.dateFormat = @"hh:mm a";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         [_time setText:[dateFormatter stringFromDate:self->currentTime]];
         

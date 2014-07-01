@@ -30,26 +30,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //medicine missed till now
     
-    
-    // Do any additional setup after loading the view from its nib.
-    
+    NSLog(@"viewDidLoad");
     
     _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     _background.frame = self.view.bounds;
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
     
-    medTaken = 0;
+    
 
-    
-    //Medicine not taken. No button clicked yet
-   /*
-    
+    self->medTaken = 0;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
     self->medName = [prefs stringForKey:@"medicineName"];
-   // NSLog(self->medName);
+    // NSLog(self->medName);
     
     medicineName.text = self->medName;
     
@@ -57,50 +52,15 @@
     NSDate *startDay = [prefs objectForKey:@"startDay"];
     
     
-    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-    //NSString *x = [dateFormat stringFromDate:startDay];
-    //NSLog(x);
-    
     
     
     //self->reminderDate = startDay;
     
     self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
+    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
     
-    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-    //NSString *x = [dateFormat stringFromDate:startDay];
-    //NSLog(x);
 
-    self->frequency = [self determineMedFrequency:medName.lowercaseString];
-    
    
-    
-    if(self->frequency == 1)
-    {
-        //daily
-        
-        [self updateLabel: self->reminderDate];
-        
-    }
-    
-    //Function to update label with arguments reminderdate
-    else
-    {
-        
-        [self updateLabel:self->reminderDate];
-        
-        
-        
-        [self changeLabelColor:reminderDate givenFrequency:frequency];
-    }
-    
-    
-    //[[NSUserDefaults standardUserDefaults] setObject:rDate1 forKey:@"reminderTime"];
-    //[[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"startDay"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];*/
-    
 }
 
 
@@ -108,9 +68,7 @@
 
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    
     remindDate.text = [dateFormat stringFromDate:reminderDate];
     
 
@@ -125,8 +83,6 @@
     
     
     
-   // NSLog(@"Inside update Label");
-  //  NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEEE"];
     //NSLog([dateFormat  stringFromDate:startDay]);
     remindDay.text = [dateFormat  stringFromDate:argDate ];
@@ -213,7 +169,7 @@
 
 -(IBAction)medTakenNO:(id)sender
 {
-    medTaken = 2;
+    self->medTaken = 2;
     
     self->rDate1 = [self getrDate:frequency];
     [self changeLabelColor:self->rDate1 givenFrequency:self->frequency];
@@ -232,11 +188,11 @@
     NSDate *today = [NSDate date];
     
     //&& [rDate compare:today] == NSOrderedDescending
-    if(mfrequency == 1 && ([self->reminderDate compare:today] == NSOrderedAscending||[self->reminderDate compare:today]==NSOrderedSame)&&(medTaken == 1||medTaken == 2))
+    if(mfrequency == 1 && ([self->reminderDate compare:today] == NSOrderedAscending||[self->reminderDate compare:today]==NSOrderedSame)&&(self->medTaken == 1||self->medTaken == 2))
     {
         //daily
         //get next date
-        //NSLog(@"shruti");
+        
         self->reminderDate = [self->reminderDate dateByAddingTimeInterval:+1*24*60*60];
     }
     
@@ -245,7 +201,7 @@
         //weekly
         //today>=rDate or medicine has been taken
         
-        if(medTaken == 2)
+        if(self->medTaken == 2)
         {
             //log
             self->reminderDate = [self->reminderDate dateByAddingTimeInterval:+7*24*60*60];
@@ -253,7 +209,7 @@
         }
         
         
-        else if([self->reminderDate compare:today] == NSOrderedDescending||[self->reminderDate compare:today] == NSOrderedSame||medTaken==1)
+        else if([self->reminderDate compare:today] == NSOrderedDescending||[self->reminderDate compare:today] == NSOrderedSame||self->medTaken==1)
         {
             self->reminderDate = [self->reminderDate dateByAddingTimeInterval:+7*24*60*60];
         }
@@ -265,87 +221,58 @@
     return self->reminderDate;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    self.screenNumber.text = [NSString stringWithFormat:@"Screen #%d", self.index];
-    
-    
-   
-    
-    
-    
-    
-    
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    self->medName = [prefs stringForKey:@"medicineName"];
-    // NSLog(self->medName);
-    
-    medicineName.text = self->medName;
-    
-    
-    NSDate *startDay = [prefs objectForKey:@"startDay"];
-    
-    
-    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-    //NSString *x = [dateFormat stringFromDate:startDay];
-    //NSLog(x);
-    
-    
-    
-    //self->reminderDate = startDay;
-    
-    self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
-    
-    //NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //[dateFormat setDateFormat:@"dd/MM/yyyy"];
-    //NSString *x = [dateFormat stringFromDate:startDay];
-    //NSLog(x);
-    
-    self->frequency = [self determineMedFrequency:medName.lowercaseString];
-    
-    
-    
-    if(self->frequency == 1)
-    {
-        //daily
-        
-        [self updateLabel: self->reminderDate];
-        
-    }
-    
-    //Function to update label with arguments reminderdate
-    else
-    {
-        
-        [self updateLabel:self->reminderDate];
-        
-        
-        
-        [self changeLabelColor:reminderDate givenFrequency:frequency];
-    }
-    
-    
-    //[[NSUserDefaults standardUserDefaults] setObject:rDate1 forKey:@"reminderTime"];
-    //[[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"startDay"];
-    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
-    
 
+-(void) todo
+{
+self.screenNumber.text = [NSString stringWithFormat:@"Screen #%d", self.index];
+
+_background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+_background.frame = self.view.bounds;
+[[self view] addSubview:_background];
+[_background.superview sendSubviewToBack:_background];
+
+self->frequency = [self determineMedFrequency:medName.lowercaseString];
+
+
+
+if(self->frequency == 1)
+{
+    //daily
+    [self updateLabel: self->reminderDate];
+    
+}
+
+//Function to update label with arguments reminderdate
+else
+{
+    
+    [self updateLabel:self->reminderDate];
+    
+    
+    
+    [self changeLabelColor:reminderDate givenFrequency:frequency];
+}
+
+
+}
+
+
+
+- (void)viewDidAppear:(BOOL)animated
+
+{
+    [super viewDidAppear:(BOOL)animated];
+    NSLog(@"viewDidAppear");
+
+    [self todo];
+   
     
     
 }
 
 -(IBAction)settings:(id)sender
 {
-   // PCMSetupScreenViewController  *setupVC = [[PCMSetupScreenViewController alloc] init];
-    
-    
-    // [self presentModalViewController:tPT1VC animated:YES];
-    
-   // [self.navigationController pushViewController:setupVC animated:YES];
-     TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
+    TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
     [self.view.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
     
 }

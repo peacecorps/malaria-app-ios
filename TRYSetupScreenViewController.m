@@ -14,8 +14,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *iTake;
 @property (strong, nonatomic) IBOutlet UILabel *remindAt;
 @property (strong, nonatomic) IBOutlet UILabel *ifForgot;
-@property (strong, nonatomic) IBOutlet UITextField *txt;
-@property (strong, nonatomic) IBOutlet UITextField *time;
+@property (strong, nonatomic) IBOutlet UITextField *medField;
+@property (strong, nonatomic) IBOutlet UITextField *timeField;
 @property (strong, nonatomic) IBOutlet UILabel *medWarning;
 @property (strong, nonatomic) IBOutlet UILabel *timeWarning;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
@@ -24,11 +24,23 @@
 - (IBAction)doneButtonAction:(id)sender;
 
 
+
+
+
+
+
+
 @end
 
 
 
+
+
 @implementation TRYSetupScreenViewController
+
+
+
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,13 +79,13 @@
     if(![self->medName isEqualToString:@""]&& self->startDay)
     {
         //Text field with medicine
-        _txt.text = self->medName;
+        _medField.text = self->medName;
         
         //Text fiels with time
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
-        _time.text = currentTimeString;
+        _timeField.text = currentTimeString;
         NSLog(@"Inside 1st if");
 
         [_done setEnabled:YES];
@@ -93,7 +105,7 @@
     medPicker.delegate = self;
     medPicker.dataSource = self;
     [medPicker setShowsSelectionIndicator:YES];
-    _txt.inputView = medPicker;
+    _medField.inputView = medPicker;
     
     
     //Create done button in UIPickerView
@@ -108,14 +120,14 @@
     [barItems addObject:doneBtn];
     
     [myPickerToolbar setItems:barItems animated:YES];
-    _txt.inputAccessoryView = myPickerToolbar;
+    _medField.inputAccessoryView = myPickerToolbar;
     
     
     //Code for the date picker
     
     self->datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     self->datePicker.datePickerMode = UIDatePickerModeTime;
-    _time.inputView = datePicker;
+    _timeField.inputView = datePicker;
     [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
@@ -133,7 +145,7 @@
     [barItems1 addObject:doneBtn1];
     
     [myDatePickerToolbar setItems:barItems1 animated:YES];
-    _time.inputAccessoryView = myDatePickerToolbar;
+    _timeField.inputAccessoryView = myDatePickerToolbar;
     
     
 
@@ -147,7 +159,7 @@
     [dateFormatter setDateFormat:@"hh:mm a"];
     self->currentTime = self->datePicker.date;
     NSString *currentTimeString = [dateFormatter stringFromDate:currentTime];
-    _time.text = currentTimeString;
+    _timeField.text = currentTimeString;
     
 }
 
@@ -156,20 +168,20 @@
 -(void)pickerDoneClicked
 {
     //If the medicine is not entered, warning label is highlighted
-    if([_txt.text  isEqual: @""])
+    if([_medField.text  isEqual: @""])
     {
         NSLog(@"No medication entered");
         [_medWarning setHidden:NO];
         [_medWarning setText:@"Medication not entered"];
-        _txt.text = @"Doxycycline";
+        _medField.text = @"Doxycycline";
     }
     
     
-    BOOL isMedThere = [medicines containsObject: _txt.text];
+    BOOL isMedThere = [medicines containsObject: _medField.text];
     
     
     //If a wrong medication is entered, warning label is highlighted
-    if(![_txt.text isEqualToString:@""] && !isMedThere )
+    if(![_medField.text isEqualToString:@""] && !isMedThere )
     {
         [_medWarning setHidden:NO];
         [_medWarning setText:@"Wrong Medication entered"];
@@ -178,28 +190,28 @@
     }
     
     
-    isMedThere = [medicines containsObject: _txt.text];
+    isMedThere = [medicines containsObject: _medField.text];
     
     
     //Medicine entered is not empty string, and is also present in the array
-    if(![_txt.text isEqualToString:@""] && isMedThere )
+    if(![_medField.text isEqualToString:@""] && isMedThere )
     {
         [_medWarning setHidden:YES];
         
     }
     
     
-    isMedThere = [medicines containsObject: _txt.text];
+    isMedThere = [medicines containsObject: _medField.text];
     
     //If both the text fields are filled with non-nil correct values, done button is enabled
-    if(![_txt.text isEqualToString:@""] && ![_time.text isEqualToString:@""] && isMedThere)
+    if(![_medField.text isEqualToString:@""] && ![_timeField.text isEqualToString:@""] && isMedThere)
     {
         NSLog(@"Inside 2nd if");
 
         [_done setEnabled:YES];
     }
     
-    [_txt resignFirstResponder];
+    [_medField resignFirstResponder];
     
     
 }
@@ -213,7 +225,7 @@
     
     
     
-    if([_time.text isEqual: @""])
+    if([_timeField.text isEqual: @""])
     {
         
         
@@ -227,13 +239,13 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"hh:mm a";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        [_time setText:[dateFormatter stringFromDate:self->currentTime]];
+        [_timeField setText:[dateFormatter stringFromDate:self->currentTime]];
         
         
     }
-    [_time resignFirstResponder];
+    [_timeField resignFirstResponder];
     
-    if(![_txt.text isEqualToString:@""] && ![_time.text isEqualToString:@""])
+    if(![_medField.text isEqualToString:@""] && ![_timeField.text isEqualToString:@""])
     {
         //[timeWarning setHidden:YES];
         NSLog(@"Inside 3rd if");
@@ -261,7 +273,7 @@
 
 -(void)pickerView:(UIPickerView*)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    _txt.text = (NSString*)[medicines objectAtIndex:row];
+    _medField.text = (NSString*)[medicines objectAtIndex:row];
     
 }
 
@@ -272,8 +284,8 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEEE"];
     
-    NSString *medicine = _txt.text;
-    NSString *remindTime = _time.text;
+    NSString *medicine = _medField.text;
+    NSString *remindTime = _timeField.text;
     self->startDay = [date dateByAddingTimeInterval:0];
     [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
     [[NSUserDefaults standardUserDefaults] setObject:remindTime forKey:@"reminderTime"];
@@ -372,55 +384,28 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     
-    //Set the background image
-    
-    //[super viewDidLoad];
-    NSLog(@"Inside view DidAppear");
     
     _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     _background.frame = self.view.bounds;
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
     
-    //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    //self->medName = [self->prefs stringForKey:@"medicineName"];
-    //NSDate *startDay = [self->prefs objectForKey:@"startDay"];
-    NSLog(@"shruti");
-    NSLog(self->medName);
     if(![self->medName isEqualToString:@""]&& self->startDay)
     {
-        NSLog(@"Inside if statement");
-        _txt.text = self->medName;
+       
+        _medField.text = self->medName;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
         
-        _time.text = currentTimeString;
-        NSLog(@"Inside 4 if");
+        _timeField.text = currentTimeString;
+        
 
         [_done setEnabled:YES];
     }
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*- (IBAction)signInAction:(id)sender {
-    //TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
-    //[appDelegate.window setRootViewController:appDelegate.tabBarController];
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-}*/
-
-/*- (IBAction)doneButtonAction:(id)sender:(id)sender {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-
-}*/
 @end

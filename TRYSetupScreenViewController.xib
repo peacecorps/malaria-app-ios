@@ -11,12 +11,12 @@
                 <outlet property="done" destination="ciI-e1-hAE" id="GNN-Tc-OLb"/>
                 <outlet property="iTake" destination="5od-MC-XW6" id="g8V-XI-dtl"/>
                 <outlet property="ifForgot" destination="sm2-no-rgF" id="Oyf-Wv-2Xq"/>
+                <outlet property="medField" destination="Xpz-67-vb1" id="5Cm-s5-clU"/>
                 <outlet property="medWarning" destination="OmW-0W-7XE" id="f3k-Uq-Ck9"/>
                 <outlet property="remindAt" destination="8av-p3-Q2q" id="f9O-vJ-0fb"/>
                 <outlet property="setUp" destination="keq-PW-XVP" id="JsB-m5-Iez"/>
-                <outlet property="time" destination="KYr-PJ-cU2" id="x49-aa-6z4"/>
+                <outlet property="timeField" destination="KYr-PJ-cU2" id="CpG-p7-cSv"/>
                 <outlet property="timeWarning" destination="qNm-vy-Yxj" id="rve-gj-q2R"/>
-                <outlet property="txt" destination="Xpz-67-vb1" id="5sT-j6-KTR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

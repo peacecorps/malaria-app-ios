@@ -39,28 +39,29 @@
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(handleEnteredBackground)
+                                                 name: UIApplicationDidBecomeActiveNotification
+                                               object: nil];
 
-    self->medTaken = 0;
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    self->medName = [prefs stringForKey:@"medicineName"];
-    // NSLog(self->medName);
-    
-    medicineName.text = self->medName;
-    
-    
-    NSDate *startDay = [prefs objectForKey:@"startDay"];
-    
-    
-    
-    
-    //self->reminderDate = startDay;
-    
-    self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
-    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
+
     
 
    
+}
+
+
+-(void)handleEnteredBackground
+{
+    NSLog(@"%s",__FUNCTION__);
+    [self todo];
+}
+
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 
@@ -69,7 +70,7 @@
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    remindDate.text = [dateFormat stringFromDate:reminderDate];
+    remindDate.text = [dateFormat stringFromDate:argDate];
     
 
    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -77,7 +78,7 @@
    if(![x isEqualToString:@"shruti"])
     {
         NSLog(@"1");
-        self->reminderDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
+        argDate = [(NSDate*)[prefs objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0 ];
        // x = @"gupta";
     }
     
@@ -94,17 +95,17 @@
     
     
     
-    self->reminderDate = [[self getrDate:frequency] dateByAddingTimeInterval:0];
+    argDate = [[self getrDate:frequency] dateByAddingTimeInterval:0];
     [dateFormat setDateFormat:@"EEEE"];
     //NSLog([dateFormat  stringFromDate:startDay]);
-    remindDay.text = [dateFormat  stringFromDate:self->reminderDate ];
+    remindDay.text = [dateFormat  stringFromDate:argDate ];
     
     // NSString *x = [dateFormat stringFromDate:startDay];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
-    remindDate.text = [dateFormat stringFromDate:reminderDate];
+    remindDate.text = [dateFormat stringFromDate:argDate];
     
-    [[NSUserDefaults standardUserDefaults] setObject:reminderDate forKey:@"reminderTimeFinal"];
+    [[NSUserDefaults standardUserDefaults] setObject:argDate forKey:@"reminderTimeFinal"];
     
     
     
@@ -224,6 +225,26 @@
 
 -(void) todo
 {
+    
+    
+    self->medTaken = 0;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    self->medName = [prefs stringForKey:@"medicineName"];
+    // NSLog(self->medName);
+    
+    medicineName.text = self->medName;
+    
+    
+    NSDate *startDay = [prefs objectForKey:@"startDay"];
+    
+    
+    
+    
+    //self->reminderDate = startDay;
+    
+    self->reminderDate = [[NSDate alloc] initWithTimeInterval:0 sinceDate:startDay];
+    [[NSUserDefaults standardUserDefaults] setObject:@"shruti" forKey:@"reminderTimeFinal"];
+    
 self.screenNumber.text = [NSString stringWithFormat:@"Screen #%d", self.index];
 
 _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];

@@ -34,13 +34,14 @@
 
 
 
-
-
 @implementation TRYSetupScreenViewController
 
 
 
 
+
+NSString *const prefReminderTime1 = @"reminderTimeFinal";
+NSString *const prefReminderTime2 = @"reminderTimeFinal1";
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -71,8 +72,8 @@
     
     
     self->prefs = [NSUserDefaults standardUserDefaults];
-    self->medName = [prefs stringForKey:@"medicineName"];
-    self->startDay = [prefs objectForKey:@"startDay"];
+    self->medName = [self->prefs stringForKey:@"medicineName"];
+    self->startDay = [self->prefs objectForKey:@"startDay"];
     
     //If the user has already filled in the details, they are populated in the textfields
     
@@ -288,10 +289,22 @@
     NSString *remindTime = _timeField.text;
     self->startDay = [date dateByAddingTimeInterval:0];
     [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
+
+    
+    //Store reminder time only once
+    if(![self->prefs boolForKey:@"hasSetUp"])
+    {
     [[NSUserDefaults standardUserDefaults] setObject:remindTime forKey:@"reminderTime"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime1];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime2];
+    }
+    
+    
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"startDay"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
+ 
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];

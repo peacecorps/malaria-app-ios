@@ -104,7 +104,7 @@
 
 - (TRYHomeViewController *)viewControllerAtIndex:(NSUInteger)index {
     
-    TRYHomeViewController *childViewController = [[TRYHomeViewController alloc] initWithNibName:@"TRYHomeViewController" bundle:nil];
+    TRYHomeViewController *childViewController = [[TRYHomeViewController alloc] initWithNibName:nil bundle:nil];
     childViewController.index = index;
     
     return childViewController;

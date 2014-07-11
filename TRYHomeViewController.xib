@@ -7,10 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TRYHomeViewController">
             <connections>
                 <outlet property="background" destination="8pi-FT-ntI" id="UKM-pt-6nP"/>
-                <outlet property="medNo" destination="ZaK-0x-Wg4" id="fi1-mw-pUo"/>
-                <outlet property="medYes" destination="ipN-DO-HxM" id="yIB-K6-LPG"/>
-                <outlet property="remindDate" destination="vaD-RR-ZKb" id="Z9k-Tp-KZH"/>
-                <outlet property="remindDay" destination="a13-eX-jKL" id="eFc-Ll-cSZ"/>
+                <outlet property="buttonNo" destination="ZaK-0x-Wg4" id="eNm-l1-lXQ"/>
+                <outlet property="buttonYes" destination="ipN-DO-HxM" id="OCn-h4-hfA"/>
+                <outlet property="labelDate" destination="vaD-RR-ZKb" id="cTM-eC-odl"/>
+                <outlet property="labelDay" destination="a13-eX-jKL" id="z7K-yn-Tny"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +26,6 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="settings:" destination="-1" eventType="touchUpInside" id="4Mx-p4-dts"/>
                         <action selector="setupScreenAction:" destination="-1" eventType="touchUpInside" id="VZ2-op-yp7"/>
                     </connections>
                 </button>
@@ -50,7 +49,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="medTakenNO:" destination="-1" eventType="touchUpInside" id="KFl-0C-5f3"/>
+                        <action selector="medNoAction:" destination="-1" eventType="touchUpInside" id="JEO-OP-Nh9"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipN-DO-HxM">
@@ -60,7 +59,7 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="medTakenYES:" destination="-1" eventType="touchUpInside" id="hhb-sO-oUQ"/>
+                        <action selector="medYesAction:" destination="-1" eventType="touchUpInside" id="PF6-zB-eFG"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7I-3g-WJm">

@@ -71,12 +71,11 @@ NSString *const prefMedicine = @"medicineName";
         [self.window.rootViewController presentViewController:setupVC animated:NO completion:nil];
     }
     
-   /* else {
+  /*  else {
         // has set up
         // present log in (are we requiring users to login?)
         //Add the login view controller as the root controller of the app window
-        TRYLoginViewController *loginVC = [[TRYLoginViewController alloc]init];
-        [self.window.rootViewController presentViewController:loginVC animated:NO completion:nil];
+        
     }*/
    
     

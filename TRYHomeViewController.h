@@ -10,24 +10,13 @@
 
 @interface TRYHomeViewController : UIViewController
 {
-IBOutlet UIButton *medYes;
-IBOutlet UIButton *medNo;
-IBOutlet UILabel *remindDay;
-IBOutlet UILabel *remindDate;
-IBOutlet UILabel *medicineName;
+
 //medTaken = 0 no action = 1 taken = 2 not taken
 NSInteger medTaken ;
 NSInteger frequency;
-NSDate *rDate;
-NSDate *rDate1;
-NSDate *reminderDate;
+
 NSString *medName;
 }
-
--(NSInteger) determineMedFrequency:(NSString*) mName;
--(void) changeLabelColor:(NSDate*) rDate
-          givenFrequency:(NSInteger) frequency;
-
 @property (assign, nonatomic) NSInteger index;
 @property (strong, nonatomic) IBOutlet UILabel *screenNumber;
 

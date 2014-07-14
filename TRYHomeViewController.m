@@ -11,7 +11,6 @@
 #import "TRYSetupScreenViewController.h"
 
 @interface TRYHomeViewController ()
-//- (IBAction)setupScreenAction:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *labelDay;
 @property (strong, nonatomic) IBOutlet UILabel *labelDate;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
@@ -32,18 +31,17 @@
 
 @implementation TRYHomeViewController
 
+NSString *const prefReminderTime1 = @"reminderTimeFinal";
+NSString *const prefReminderTime2 = @"reminderTimeFinal1";
+NSString *const prefmedLastTaken = @"medLastTaken";
+NSString *const prefhasSetUp = @"hasSetUp";
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
     _flag =0;
-    //[self performSelector:@selector(callAfterSixtySecond:) withObject:nil afterDelay:2.0];
-
-    
-    
-    
-    
-}
+    }
 
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -57,7 +55,7 @@
 -(void) updation
 {
     _preferences = [NSUserDefaults standardUserDefaults];
-    BOOL hasSetUp = [_preferences boolForKey:@"hasSetUp"];
+    BOOL hasSetUp = [_preferences boolForKey:prefhasSetUp];
     
     
     if(hasSetUp)
@@ -67,9 +65,9 @@
         //Update saved date if required
 
         //Initially saved Date = date when setup screen was created
-         _savedDate = [(NSDate*)[_preferences objectForKey:@"reminderTimeFinal"] dateByAddingTimeInterval:0];
+         _savedDate = [(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
         
-        _nextReminderDate =[(NSDate*)[_preferences objectForKey:@"reminderTimeFinal1"] dateByAddingTimeInterval:0];
+        _nextReminderDate =[(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd/MM/yyyy"];
@@ -94,7 +92,7 @@
             
            // _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
             
-            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
+            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             
@@ -108,7 +106,7 @@
             if(_flag == 0)
             {
             _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
+            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
             [[NSUserDefaults standardUserDefaults] synchronize];
             }
             
@@ -134,14 +132,14 @@
                 _flag = 1;
                 _nextReminderDate = [NSDate date];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
+                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
                 
                 _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 
                 _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
-                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
+                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
+                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 
@@ -156,8 +154,8 @@
                 
                 //_nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
-                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
+                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
+                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
             }
@@ -178,7 +176,7 @@
         [dateFormat setDateFormat:@"EEEE"];
         _labelDay.text = [dateFormat stringFromDate:_savedDate];
         
-        [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
+        [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
         [[NSUserDefaults standardUserDefaults] synchronize];
         //get next date
         
@@ -251,12 +249,12 @@
 -(NSDate*)getNextReminderDate
 {
   
-    _nextReminderDate= [(NSDate*)[_preferences objectForKey:@"reminderTimeFinal1"] dateByAddingTimeInterval:0];
+    _nextReminderDate= [(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
     
     
     _nextReminderDate = [_nextReminderDate dateByAddingTimeInterval:+1*24*60*60];
     
-    [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
+    [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     return _nextReminderDate ;
@@ -281,10 +279,10 @@
 - (IBAction)medYesAction:(id)sender {
     
     _savedDate = _nextReminderDate;
-    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
+    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefmedLastTaken];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
     

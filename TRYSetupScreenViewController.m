@@ -298,15 +298,9 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime1];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime2];
     }
-    
-    
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"startDay"];
-    
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
- 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
 }

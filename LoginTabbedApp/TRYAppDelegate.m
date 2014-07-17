@@ -8,9 +8,10 @@
 
 #import "TRYAppDelegate.h"
 #import "TRYHomeViewController.h"
-#import "PCMSettingsViewController.h"
+
 #import "TRYSetupScreenViewController.h"
 #import "TRYPageViewController.h"
+#import "TRYAnalyticsIViewController.h"
 
 @implementation TRYAppDelegate
 
@@ -36,7 +37,7 @@ NSString *const prefMedicine = @"medicineName";
     homeVC.tabBarItem.title = @"Home";
 
     //Settings controller
-    PCMSettingsViewController *settingsVC = [[PCMSettingsViewController alloc]init];
+    TRYAnalyticsIViewController *settingsVC = [[TRYAnalyticsIViewController alloc]init];
     settingsVC.tabBarItem.title = @"Info Hub";
     
     //init the UITabBarController
@@ -211,5 +212,30 @@ NSString *const prefMedicine = @"medicineName";
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        
+
+    }
+    else
+    {
+       /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"Yes"
+                                              otherButtonTitles:nil];
+        [alert show];*/
+    }
+    
+    
+}
+
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "TRYHomeViewController.h"
-#import "TRYAppdelegate.h"
 #import "TRYSetupScreenViewController.h"
 
 @interface TRYHomeViewController ()
@@ -41,7 +40,9 @@ NSString *const prefhasSetUp = @"hasSetUp";
     [super viewDidLoad];
     
     _flag =0;
-    }
+    
+    
+        }
 
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -282,7 +283,7 @@ NSString *const prefhasSetUp = @"hasSetUp";
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefmedLastTaken];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
     
@@ -291,8 +292,24 @@ NSString *const prefhasSetUp = @"hasSetUp";
     
     [dateFormat setDateFormat:@"EEEE"];
     _labelDay.text = [dateFormat stringFromDate:_savedDate];
+    
+    
     [_buttonYes setEnabled:NO];
     [_buttonNo setEnabled:NO];
+    
+    NSDate *currentTime = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:@"reminderTime"];
+    currentTime = [currentTime dateByAddingTimeInterval:+1*24*60*60];
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = currentTime;
+    localNotification.alertBody = @"Time to take your medicine";
+    localNotification.alertAction = @"Show me the item";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"remiderTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
     
     
 }

@@ -36,14 +36,6 @@
     
     self.pageController.dataSource = self;
     
-    //CGRect screenRect = [[UIScreen mainScreen] bounds];
-    //CGFloat screenWidth = screenRect.size.width;
-    //CGFloat screenHeight = screenRect.size.height;
-    
-    
-    //CGRect x = CGRectMake(0,-screenHeight + 100 , 100, screenWidth);
-    //[[self.pageController view] setFrame:x];
-    
     TRYHomeViewController *initialViewController = [self viewControllerAtIndex:0];
     
     NSArray *viewControllers = [NSArray arrayWithObject:initialViewController];

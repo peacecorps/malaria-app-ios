@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TRYSetupScreenViewController : UIViewController
+@interface TRYSetupScreenViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 {
     NSArray *medicines;
     UIDatePicker *datePicker;

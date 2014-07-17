@@ -35,13 +35,8 @@
 
 
 @implementation TRYSetupScreenViewController
-
-
-
-
-
-NSString *const prefReminderTime1 = @"reminderTimeFinal";
-NSString *const prefReminderTime2 = @"reminderTimeFinal1";
+NSString *const prefReminderTimeSetup = @"reminderTimeFinal";
+NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,6 +51,10 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
+
     
     //Setting the background using an image view
     
@@ -159,8 +158,10 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
     self->currentTime = self->datePicker.date;
-    NSString *currentTimeString = [dateFormatter stringFromDate:currentTime];
+    NSString *currentTimeString = [dateFormatter stringFromDate:self->currentTime];
     _timeField.text = currentTimeString;
+    
+    
     
 }
 
@@ -224,8 +225,6 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
     NSLog(@"Done Clicked");
     
     
-    
-    
     if([_timeField.text isEqual: @""])
     {
         
@@ -254,6 +253,8 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
         [_done setEnabled:YES];
         //[timeWarning setHidden:YES];
     }
+    
+    
     
 }
 
@@ -294,14 +295,25 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
     //Store reminder time only once
     if(![self->prefs boolForKey:@"hasSetUp"])
     {
-    [[NSUserDefaults standardUserDefaults] setObject:remindTime forKey:@"reminderTime"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime1];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTime2];
+    [[NSUserDefaults standardUserDefaults] setObject:self->currentTime forKey:@"reminderTime"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2    ];
     }
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = self->currentTime;
+    localNotification.alertBody = @"Time to take your medicine";
+    localNotification.alertAction = @"Show me the item";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    
+    
     
 }
 

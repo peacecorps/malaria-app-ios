@@ -35,6 +35,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM"];
     [_labelMedLastTaken setText:[dateFormat stringFromDate:dateMedLastTaken]];
+   // [_labelDosesMissing setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"dosesInARow"]];
     
     
 }

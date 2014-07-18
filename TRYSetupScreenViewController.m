@@ -298,19 +298,20 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
     [[NSUserDefaults standardUserDefaults] setObject:self->currentTime forKey:@"reminderTime"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2    ];
+        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = self->currentTime;
+        localNotification.alertBody = @"Time to take your medicine";
+        localNotification.alertAction = @"Show me the item";
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
     }
     [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = self->currentTime;
-    localNotification.alertBody = @"Time to take your medicine";
-    localNotification.alertAction = @"Show me the item";
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     
     

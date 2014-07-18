@@ -34,6 +34,9 @@ NSString *const prefReminderTime1 = @"reminderTimeFinal";
 NSString *const prefReminderTime2 = @"reminderTimeFinal1";
 NSString *const prefmedLastTaken = @"medLastTaken";
 NSString *const prefhasSetUp = @"hasSetUp";
+NSString *const prefDosesInARow = @"dosesInARow";
+
+NSInteger dosesInARow=0;
 
 -(void)viewDidLoad
 {
@@ -141,6 +144,7 @@ NSString *const prefhasSetUp = @"hasSetUp";
                 
                 [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
                 [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
+                [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 
@@ -279,6 +283,9 @@ NSString *const prefhasSetUp = @"hasSetUp";
 
 - (IBAction)medYesAction:(id)sender {
     
+    //dosesInARow = (NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:prefDosesInARow];
+    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow+1 forKey:prefDosesInARow];
+    dosesInARow+=1;
     _savedDate = _nextReminderDate;
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
     [[NSUserDefaults standardUserDefaults] synchronize];

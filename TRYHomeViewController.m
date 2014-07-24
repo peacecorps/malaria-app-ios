@@ -27,6 +27,7 @@
 @property NSInteger takenCount;
 @property NSInteger notTakenCount;
 @property NSInteger flag;
+@property NSTimer *timer;
 @end
 
 @implementation TRYHomeViewController
@@ -36,23 +37,20 @@
     [super viewDidLoad];
     
     _flag =0;
+    //[self performSelector:@selector(callAfterSixtySecond:) withObject:nil afterDelay:2.0];
+
     
     
     
     
 }
-
-
-
-    
-
 
 
 - (void) viewWillAppear:(BOOL)animated{
-    
-    [self updation];
-    
+     [self updation];
+  
 }
+
 
 
 

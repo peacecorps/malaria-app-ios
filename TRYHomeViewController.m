@@ -26,7 +26,7 @@
 @property NSInteger missedCount;
 @property NSInteger takenCount;
 @property NSInteger notTakenCount;
-
+@property NSInteger flag;
 @end
 
 @implementation TRYHomeViewController
@@ -35,8 +35,17 @@
 {
     [super viewDidLoad];
     
+    _flag =0;
+    
+    
+    
     
 }
+
+
+
+    
+
 
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -95,13 +104,18 @@
        
         else if(dateCompare == 0)
         {
-            
             [_buttonYes setEnabled:YES];
             [_buttonNo setEnabled:YES];
+            
+            if(_flag == 0)
+            {
             _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
             [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            }
             
+            else if(_flag==1 )
+                _flag=0;
         }
         
         //today > saved date
@@ -119,6 +133,7 @@
             //today > nextDate => missed count = (today - nextDate), nextdate = today, saved date = next date
             if(dateCompareNext == 1)
             {
+                _flag = 1;
                 _nextReminderDate = [NSDate date];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
@@ -136,10 +151,12 @@
             
             else if(dateCompareNext == 0)
             {
+                [_buttonYes setEnabled:YES];
+                [_buttonNo setEnabled:YES];
                 
-                _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
+                //_savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 
-                _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
+                //_nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
                 [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];

@@ -69,7 +69,7 @@ NSInteger dosesInARow=0;
         //Update saved date if required
 
         //Initially saved Date = date when setup screen was created
-         _savedDate = [(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
+         _savedDate = [(NSDate*)[_preferences objectForKey:prefReminderTime1] dateByAddingTimeInterval:0];
         
         _nextReminderDate =[(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
         
@@ -301,8 +301,6 @@ NSInteger dosesInARow=0;
     _labelDay.text = [dateFormat stringFromDate:_savedDate];
     
     
-    [_buttonYes setEnabled:NO];
-    [_buttonNo setEnabled:NO];
     
     NSDate *currentTime = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:@"reminderTime"];
     currentTime = [currentTime dateByAddingTimeInterval:+1*24*60*60];
@@ -316,6 +314,8 @@ NSInteger dosesInARow=0;
     [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"remiderTime"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    [_buttonYes setEnabled:NO];
+    [_buttonNo setEnabled:NO];
     
     
     

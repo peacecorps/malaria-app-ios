@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D129C56B19799493005B4D08 /* TRYAnalyticsScreenIIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D129C56919799493005B4D08 /* TRYAnalyticsScreenIIViewController.m */; };
+		D129C56C19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D129C56A19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib */; };
 		D15369CD195950DE0033BC15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369CC195950DE0033BC15 /* Foundation.framework */; };
 		D15369CF195950DE0033BC15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369CE195950DE0033BC15 /* CoreGraphics.framework */; };
 		D15369D1195950DE0033BC15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369D0195950DE0033BC15 /* UIKit.framework */; };
@@ -51,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D129C56819799493005B4D08 /* TRYAnalyticsScreenIIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYAnalyticsScreenIIViewController.h; sourceTree = "<group>"; };
+		D129C56919799493005B4D08 /* TRYAnalyticsScreenIIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYAnalyticsScreenIIViewController.m; sourceTree = "<group>"; };
+		D129C56A19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYAnalyticsScreenIIViewController.xib; sourceTree = "<group>"; };
 		D15369C9195950DE0033BC15 /* LoginTabbedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginTabbedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15369CC195950DE0033BC15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D15369CE195950DE0033BC15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +122,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D129C5661979622A005B4D08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D129C56719799478005B4D08 /* Analytics Screen II */ = {
+			isa = PBXGroup;
+			children = (
+				D129C56819799493005B4D08 /* TRYAnalyticsScreenIIViewController.h */,
+				D129C56919799493005B4D08 /* TRYAnalyticsScreenIIViewController.m */,
+				D129C56A19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib */,
+			);
+			name = "Analytics Screen II";
+			sourceTree = "<group>";
+		};
 		D151E7F6195C91D30034CEF0 /* Tab1-Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +172,9 @@
 		D15369C0195950DE0033BC15 = {
 			isa = PBXGroup;
 			children = (
-				D1CD752119782028008C4643 /* Analytics Screen */,
+				D129C56719799478005B4D08 /* Analytics Screen II */,
+				D129C5661979622A005B4D08 /* Model */,
+				D1CD752119782028008C4643 /* Analytics Screen I */,
 				D16A8424195D93D400613D35 /* images */,
 				D151E7F6195C91D30034CEF0 /* Tab1-Home */,
 				D151E7F7195C91E70034CEF0 /* SetUpScreen */,
@@ -239,14 +263,14 @@
 			name = images;
 			sourceTree = "<group>";
 		};
-		D1CD752119782028008C4643 /* Analytics Screen */ = {
+		D1CD752119782028008C4643 /* Analytics Screen I */ = {
 			isa = PBXGroup;
 			children = (
 				D1CD752219782177008C4643 /* TRYAnalyticsIViewController.h */,
 				D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */,
 				D1CD752419782177008C4643 /* TRYAnalyticsIViewController.xib */,
 			);
-			name = "Analytics Screen";
+			name = "Analytics Screen I";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +359,7 @@
 				D16A841F195D701600613D35 /* button_settings.png in Resources */,
 				D16A8422195D701600613D35 /* tab_home.png in Resources */,
 				D1536A17195ACC910033BC15 /* TRYPageViewController.xib in Resources */,
+				D129C56C19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib in Resources */,
 				D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */,
 				D15369E4195950DE0033BC15 /* Images.xcassets in Resources */,
 				D16A8420195D701600613D35 /* button_yes.png in Resources */,
@@ -364,6 +389,7 @@
 				D1536A16195ACC910033BC15 /* TRYPageViewController.m in Sources */,
 				D15369DF195950DE0033BC15 /* TRYAppDelegate.m in Sources */,
 				D15369DB195950DE0033BC15 /* main.m in Sources */,
+				D129C56B19799493005B4D08 /* TRYAnalyticsScreenIIViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

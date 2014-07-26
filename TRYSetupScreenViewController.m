@@ -288,16 +288,18 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
     
     NSString *medicine = _medField.text;
     NSString *remindTime = _timeField.text;
-    self->startDay = [date dateByAddingTimeInterval:0];
-    [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
+     [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
 
     
     //Store reminder time only once
     if(![self->prefs boolForKey:@"hasSetUp"])
     {
+    self->startDay = [date dateByAddingTimeInterval:0];
     [[NSUserDefaults standardUserDefaults] setObject:self->currentTime forKey:@"reminderTime"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2    ];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2];
+    [[NSUserDefaults standardUserDefaults] setObject:self->startDay forKey:@"startDay"];
+        
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = self->currentTime;
         localNotification.alertBody = @"Time to take your medicine";
@@ -307,7 +309,6 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
         
     }
-    [[NSUserDefaults standardUserDefaults] setObject:date forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];

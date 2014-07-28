@@ -85,7 +85,7 @@
             [dateFormat setDateFormat:@"EEEE"];
             _labelDay.text = [dateFormat stringFromDate:_savedDate];
             
-            _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
+           // _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
             
             [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -96,18 +96,12 @@
         else if(dateCompare == 0)
         {
             
-            
-            _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-            
-           // _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
-           // [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
             [_buttonYes setEnabled:YES];
             [_buttonNo setEnabled:YES];
-
+            _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
+            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
         }
         
         //today > saved date
@@ -126,6 +120,8 @@
             if(dateCompareNext == 1)
             {
                 _nextReminderDate = [NSDate date];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
                 
                 _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 
@@ -239,7 +235,7 @@
 
 -(NSDate*)getNextReminderDate
 {
-   // NSLog(@"shruti");
+  
     _nextReminderDate= [(NSDate*)[_preferences objectForKey:@"reminderTimeFinal1"] dateByAddingTimeInterval:0];
     
     
@@ -252,22 +248,13 @@
 }
 
 - (IBAction)setupScreenAction:(id)sender {
-   // TRYAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-   TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
-    
-    //[appDelegate.window setRootViewController:login];
-    //[self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
- [self.view.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
+  
+    TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
+    [self.view.window.rootViewController presentViewController:loginVC animated:YES completion:nil];
     
 }
 - (IBAction)medNoAction:(id)sender {
-    
-   // _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-    //[[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
-    //_savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
-    //[[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
-    //[[NSUserDefaults standardUserDefaults] synchronize];
-    
+   
     
     [self updation];
     
@@ -278,20 +265,21 @@
 
 - (IBAction)medYesAction:(id)sender {
     
-   // NSLog(@"shruti");
-   /* _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-    [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:@"reminderTimeFinal1"];
-    _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
-    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
-    [[NSUserDefaults standardUserDefaults] synchronize];*/
     _savedDate = _nextReminderDate;
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:@"reminderTimeFinal"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
     
+    _labelDate.text = [dateFormat stringFromDate:_savedDate];
     
-    [self updation];
     
+    [dateFormat setDateFormat:@"EEEE"];
+    _labelDay.text = [dateFormat stringFromDate:_savedDate];
+    [_buttonYes setEnabled:NO];
+    [_buttonNo setEnabled:NO];
     
     
 }

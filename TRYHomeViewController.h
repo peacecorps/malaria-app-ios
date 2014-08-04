@@ -10,8 +10,9 @@
 
 @interface TRYHomeViewController : UIViewController
 {
-
+   
 }
+@property (strong, nonatomic) IBOutlet UILabel *labelDay;
 
 
 @end

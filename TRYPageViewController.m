@@ -12,8 +12,6 @@
 #import "TRYAnalyticsScreenIIViewController.h"
 
 @interface TRYPageViewController () <UIPageViewControllerDataSource>
-
-@property (nonatomic, copy) NSArray *pageViewControllers;
 @property (nonatomic) NSUInteger pageIndex;
 
 @end
@@ -25,13 +23,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         TRYHomeViewController *initialViewController = [[TRYHomeViewController alloc] init];
-        //UIViewController *vc2 = [[UIViewController alloc] init];
-        //vc2.view.backgroundColor = [UIColor greenColor];
-         //UIViewController *vc3 = [[UIViewController alloc] init];
-        //vc3.view.backgroundColor = [UIColor blueColor];
         TRYAnalyticsIViewController *vc2 = [[TRYAnalyticsIViewController alloc ]init];
         TRYAnalyticsScreenIIViewController *vc3 = [[TRYAnalyticsScreenIIViewController alloc ]init];
-        
         self.pageViewControllers = @[initialViewController, vc2, vc3];
         self.pageIndex = 0;
     }
@@ -41,12 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    
-    // Do any additional setup after loading the view from its nib.
-    //self.view.backgroundColor = [UIColor blackColor];
-    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+      self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
     

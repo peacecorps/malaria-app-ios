@@ -12,6 +12,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelMedLastTaken;
 @property (strong, nonatomic) IBOutlet UILabel *labelDosesMissing;
 @property (strong, nonatomic) IBOutlet UILabel *labelAdherence;
+@property(strong,nonatomic)NSUserDefaults *preferences;
 
 @end
 
@@ -40,10 +41,9 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM"];
     [_labelMedLastTaken setText:[dateFormat stringFromDate:dateMedLastTaken]];
-    NSInteger dosesMissing =(NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:@"dosesInARow"];
-    NSString *number = [[NSString alloc] initWithFormat:@"%d", dosesMissing];
-
-    [_labelDosesMissing setText:number];
+    NSInteger dosesInARow1 =[_preferences integerForKey:@"dosesInARow"];
+    NSString *tempString = [NSString stringWithFormat:@"%d%", dosesInARow1];
+    [_labelDosesMissing setText:tempString];
     
 
 }

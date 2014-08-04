@@ -20,7 +20,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 
-
+TRYPageViewController *homeVC;
 NSString *const prefMedicine = @"medicineName";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -33,7 +33,7 @@ NSString *const prefMedicine = @"medicineName";
     //TRYHomeViewController *homeVC = [[TRYHomeViewController alloc]init];
     //homeVC.tabBarItem.title = @"Home";
     
-    TRYPageViewController *homeVC = [[TRYPageViewController alloc] init];
+    homeVC = [[TRYPageViewController alloc] init];
     homeVC.tabBarItem.title = @"Home";
 
     //Settings controller
@@ -236,6 +236,7 @@ NSString *const prefMedicine = @"medicineName";
     
     
 }
+
 
 
 @end

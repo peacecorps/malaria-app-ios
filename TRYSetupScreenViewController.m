@@ -307,6 +307,7 @@ NSDate *startDay;
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2];
     [[NSUserDefaults standardUserDefaults] setObject:startDay forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"dosesInARow"];
+    [[NSUserDefaults standardUserDefaults] setInteger:[self determineMedFrequency] forKey:@"medFrequency"];
 
         
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
@@ -326,6 +327,19 @@ NSDate *startDay;
     
     
     
+}
+-(NSInteger) determineMedFrequency
+{
+    NSString *mName = (NSString*)[prefs stringForKey:@"medicineName"];
+    mName = mName.lowercaseString;
+    if([mName isEqual:@"malarone"]||[mName isEqual:@"doxycycline"])
+    {
+        //1 = daily
+        return 1;
+    }
+    else
+        //7 = weekly
+        return 7;
 }
 
 

@@ -10,6 +10,9 @@
 
 @interface TRYPageViewController : UIViewController<UIPageViewControllerDataSource>
 @property (strong, nonatomic) UIPageViewController *pageController;
+
+@property (strong,nonatomic) NSArray *pageViewControllers;
+
 @end
 
 

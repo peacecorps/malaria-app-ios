@@ -26,6 +26,9 @@
 @property NSInteger notTakenCount;
 @property NSInteger flag;
 @property NSTimer *timer;
+@property (assign, nonatomic) NSInteger index;
+@property (strong, nonatomic) IBOutlet UILabel *screenNumber;
+
 @end
 
 @implementation TRYHomeViewController
@@ -35,8 +38,12 @@ NSString *const prefReminderTime2 = @"reminderTimeFinal1";
 NSString *const prefmedLastTaken = @"medLastTaken";
 NSString *const prefhasSetUp = @"hasSetUp";
 NSString *const prefDosesInARow = @"dosesInARow";
-
+NSInteger medTaken ;
+NSInteger frequency;
+//medTaken = 0 no action = 1 taken = 2 not taken
+NSString *medName;
 NSInteger dosesInARow=0;
+bool visited = false;
 
 -(void)viewDidLoad
 {
@@ -93,22 +100,21 @@ NSInteger dosesInARow=0;
             
             [dateFormat setDateFormat:@"EEEE"];
             _labelDay.text = [dateFormat stringFromDate:_savedDate];
-            
-           // _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-            
             [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             
         }
+        //if today == saved date
        
         else if(dateCompare == 0)
         {
             [_buttonYes setEnabled:YES];
             [_buttonNo setEnabled:YES];
             
-            if(_flag == 0)
+            if(_flag == 0 && !visited)
             {
+                visited = true;
             _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
             [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -128,11 +134,15 @@ NSInteger dosesInARow=0;
 
             dateCompareNext = [self compareDates:[NSDate date] :_nextReminderDate];
             
-            //today < nextDate not possible for weekly
+            //today < nextDate not possible for daily
             
             //today > nextDate => missed count = (today - nextDate), nextdate = today, saved date = next date
             if(dateCompareNext == 1)
             {
+                visited = false;
+                dosesInARow = (NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:prefDosesInARow];
+                [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
+                
                 _flag = 1;
                 _nextReminderDate = [NSDate date];
                 
@@ -169,9 +179,6 @@ NSInteger dosesInARow=0;
             
         }
         //today == saved date => alarm
-        
-       
-        
         [dateFormat setDateFormat:@"dd/MM/yyyy"];
         
         
@@ -255,10 +262,7 @@ NSInteger dosesInARow=0;
 {
   
     _nextReminderDate= [(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
-    
-    
     _nextReminderDate = [_nextReminderDate dateByAddingTimeInterval:+1*24*60*60];
-    
     [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -272,20 +276,18 @@ NSInteger dosesInARow=0;
     
 }
 - (IBAction)medNoAction:(id)sender {
-   
-    
     [self updation];
+    dosesInARow = (NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:prefDosesInARow];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
     
-
-}
-
-
-
+  }
 - (IBAction)medYesAction:(id)sender {
     
-    //dosesInARow = (NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:prefDosesInARow];
-    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow+1 forKey:prefDosesInARow];
+    visited = false;
+    dosesInARow = (NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:prefDosesInARow];
     dosesInARow+=1;
+    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    
     _savedDate = _nextReminderDate;
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
     [[NSUserDefaults standardUserDefaults] synchronize];

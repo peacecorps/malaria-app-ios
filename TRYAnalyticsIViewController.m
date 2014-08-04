@@ -31,14 +31,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+
     NSDate *dateMedLastTaken = (NSDate*) [[NSUserDefaults standardUserDefaults] valueForKey:@"medLastTaken"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM"];
     [_labelMedLastTaken setText:[dateFormat stringFromDate:dateMedLastTaken]];
-   // [_labelDosesMissing setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"dosesInARow"]];
+    NSInteger dosesMissing =(NSInteger)[[NSUserDefaults standardUserDefaults] valueForKey:@"dosesInARow"];
+    NSString *number = [[NSString alloc] initWithFormat:@"%d", dosesMissing];
+
+    [_labelDosesMissing setText:number];
     
-    
+
 }
+
 
 - (void)didReceiveMemoryWarning
 {

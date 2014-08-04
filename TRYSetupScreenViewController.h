@@ -10,12 +10,7 @@
 
 @interface TRYSetupScreenViewController : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 {
-    NSArray *medicines;
-    UIDatePicker *datePicker;
-    NSDate *currentTime;
-    NSString *medName;
-    NSUserDefaults *prefs;
-    NSDate *startDay;
+    
     
 }
 

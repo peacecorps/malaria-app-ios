@@ -11,14 +11,7 @@
 @interface TRYHomeViewController : UIViewController
 {
 
-//medTaken = 0 no action = 1 taken = 2 not taken
-NSInteger medTaken ;
-NSInteger frequency;
-
-NSString *medName;
 }
-@property (assign, nonatomic) NSInteger index;
-@property (strong, nonatomic) IBOutlet UILabel *screenNumber;
 
 
 @end

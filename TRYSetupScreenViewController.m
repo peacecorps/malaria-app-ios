@@ -37,6 +37,13 @@
 @implementation TRYSetupScreenViewController
 NSString *const prefReminderTimeSetup = @"reminderTimeFinal";
 NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
+NSArray *medicines;
+UIDatePicker *datePicker;
+NSDate *currentTime;
+NSString *medName;
+NSUserDefaults *prefs;
+NSDate *startDay;
+
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -70,21 +77,21 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
     //Getting the details entered by the user: medicine Name, and setUp time, saved in NSUserDefaults
     
     
-    self->prefs = [NSUserDefaults standardUserDefaults];
-    self->medName = [self->prefs stringForKey:@"medicineName"];
-    self->startDay = [self->prefs objectForKey:@"startDay"];
+    prefs = [NSUserDefaults standardUserDefaults];
+    medName = [prefs stringForKey:@"medicineName"];
+    startDay = [prefs objectForKey:@"startDay"];
     
     //If the user has already filled in the details, they are populated in the textfields
     
-    if(![self->medName isEqualToString:@""]&& self->startDay)
+    if(![medName isEqualToString:@""]&& startDay)
     {
         //Text field with medicine
-        _medField.text = self->medName;
+        _medField.text = medName;
         
         //Text fiels with time
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
-        NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
+        NSString *currentTimeString = [dateFormatter stringFromDate:startDay];
         _timeField.text = currentTimeString;
         NSLog(@"Inside 1st if");
 
@@ -125,8 +132,8 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
     
     //Code for the date picker
     
-    self->datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    self->datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    datePicker.datePickerMode = UIDatePickerModeTime;
     _timeField.inputView = datePicker;
     [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -157,8 +164,8 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
-    self->currentTime = self->datePicker.date;
-    NSString *currentTimeString = [dateFormatter stringFromDate:self->currentTime];
+    currentTime = datePicker.date;
+    NSString *currentTimeString = [dateFormatter stringFromDate:currentTime];
     _timeField.text = currentTimeString;
     
     
@@ -234,12 +241,12 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
         [_timeWarning setText:@"Continuing with current time"];
         
         
-        self->currentTime = [NSDate date];
+        currentTime = [NSDate date];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         dateFormatter.dateFormat = @"hh:mm a";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        [_timeField setText:[dateFormatter stringFromDate:self->currentTime]];
+        [_timeField setText:[dateFormatter stringFromDate:currentTime]];
         
         
     }
@@ -292,16 +299,18 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
 
     
     //Store reminder time only once
-    if(![self->prefs boolForKey:@"hasSetUp"])
+    if(![prefs boolForKey:@"hasSetUp"])
     {
-    self->startDay = [date dateByAddingTimeInterval:0];
-    [[NSUserDefaults standardUserDefaults] setObject:self->currentTime forKey:@"reminderTime"];
+    startDay = [date dateByAddingTimeInterval:0];
+    [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"reminderTime"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefReminderTimeSetup2];
-    [[NSUserDefaults standardUserDefaults] setObject:self->startDay forKey:@"startDay"];
+    [[NSUserDefaults standardUserDefaults] setObject:startDay forKey:@"startDay"];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"dosesInARow"];
+
         
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = self->currentTime;
+        localNotification.fireDate = currentTime;
         localNotification.alertBody = @"Time to take your medicine";
         localNotification.alertAction = @"Show me the item";
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
@@ -412,13 +421,13 @@ NSString *const prefReminderTimeSetup2 = @"reminderTimeFinal1";
     [_background.superview sendSubviewToBack:_background];
     
     
-    if(![self->medName isEqualToString:@""]&& self->startDay)
+    if(![medName isEqualToString:@""]&& startDay)
     {
        
-        _medField.text = self->medName;
+        _medField.text = medName;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
-        NSString *currentTimeString = [dateFormatter stringFromDate:self->startDay];
+        NSString *currentTimeString = [dateFormatter stringFromDate:startDay];
         
         _timeField.text = currentTimeString;
         

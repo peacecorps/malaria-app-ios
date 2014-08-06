@@ -51,19 +51,17 @@ bool dateChanged = false;
     [super viewDidLoad];
     
     _flag =0;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onSignificantTimeChange:)
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
     
-   
-    
-        }
+          }
 
 
 - (void) viewWillAppear:(BOOL)animated{
      [self updation];
+    
   
 }
 
@@ -192,9 +190,6 @@ bool dateChanged = false;
                 [_buttonNo setEnabled:YES];
                 
                 bool weekly = [_preferences integerForKey:@"medFrequency"] == (NSInteger)7;
-                bool daily =  [_preferences integerForKey:@"medFrequency"] == (NSInteger)1;
-                
-                
                 //_savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 
                 //_nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
@@ -208,17 +203,9 @@ bool dateChanged = false;
                     _savedDate = _nextReminderDate;
                     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                   
                     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
-                    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-                    
-                    
-                    _labelDate.text = [dateFormat stringFromDate:_savedDate];
-                    
-                    
-                    [dateFormat setDateFormat:@"EEEE"];
-                    _labelDay.text = [dateFormat stringFromDate:_savedDate];
-                    
+                    [self changeLabel];
                     dateChanged = false;
                     
                     
@@ -230,15 +217,7 @@ bool dateChanged = false;
             
         }
         //today == saved date => alarm
-        [dateFormat setDateFormat:@"dd/MM/yyyy"];
-        
-        
-        _labelDate.text = [dateFormat stringFromDate:_savedDate];
-        
-        
-        [dateFormat setDateFormat:@"EEEE"];
-        _labelDay.text = [dateFormat stringFromDate:_savedDate];
-        
+        [self changeLabel];
         [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
         [[NSUserDefaults standardUserDefaults] synchronize];
         //get next date
@@ -252,66 +231,10 @@ bool dateChanged = false;
 }
 
 
--(NSInteger) compareDates:(NSDate*)date1
-                         :(NSDate*)date2
-{
-    
-    //date1<date2 = -1 ; date1 == date2 = 0 ; date1 > date2 = 1
-    NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date1];
-    
-    NSInteger day1 = [components1 day];
-    NSInteger month1 = [components1 month];
-    NSInteger year1 = [components1 year];
-    
-    
-    NSDateComponents *components2 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date2];
-    
-    NSInteger day2 = [components2 day];
-    NSInteger month2 = [components2 month];
-    NSInteger year2 = [components2 year];
-    
-    if(year1 < year2)
-    
-        return -1;
-        
-    else if(year1 > year2)
-            return 1;
-        
-            else
-            {
-                //year1 = year2
-                
-                if(month1 < month2)
-                    return -1;
-                
-                else if(month1 > month2)
-                        return 1;
-                
-                else
-                {
-                    //year1 = year2 && month1 = month2
-                    
-                    if(day1 < day2)
-                        return -1;
-                    
-                    else if(day1 > day2)
-                        return 1;
-                    
-                    else
-                        
-                        return 0;
-                }
-            }
-    
-    
-    return 0;
-    
-    
-}
 
 -(NSDate*)getNextReminderDate
 {
-    NSInteger x = [_preferences integerForKey:@"medFrequency"];
+   
     bool weekly = [_preferences integerForKey:@"medFrequency"] == (NSInteger)7;
     bool daily =  [_preferences integerForKey:@"medFrequency"] == (NSInteger)1;
     _nextReminderDate= [(NSDate*)[_preferences objectForKey:prefReminderTime2] dateByAddingTimeInterval:0];
@@ -343,26 +266,9 @@ bool dateChanged = false;
     visited = false;
     dosesInARow = (NSInteger)[_preferences integerForKey:prefDosesInARow];
     dosesInARow=dosesInARow+1;
-    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
-    
     _savedDate = _nextReminderDate;
-    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    
-    
-    _labelDate.text = [dateFormat stringFromDate:_savedDate];
-    
-    
-    [dateFormat setDateFormat:@"EEEE"];
-    _labelDay.text = [dateFormat stringFromDate:_savedDate];
-    
-    
+    [self changeLabel];
     [self createNotification];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
     [_buttonYes setEnabled:NO];
     [_buttonNo setEnabled:NO];
     _labelDay.textColor = [UIColor blackColor];
@@ -386,6 +292,83 @@ bool dateChanged = false;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     [[NSUserDefaults standardUserDefaults] setObject:currentTime forKey:@"remiderTime"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void) changeLabel
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    _labelDate.text = [dateFormat stringFromDate:_savedDate];
+    [dateFormat setDateFormat:@"EEEE"];
+    _labelDay.text = [dateFormat stringFromDate:_savedDate];
+    
+    
+}
+
+-(void) syncUserDefaults
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+}
+-(NSInteger) compareDates:(NSDate*)date1
+                         :(NSDate*)date2
+{
+    
+    //date1<date2 = -1 ; date1 == date2 = 0 ; date1 > date2 = 1
+    NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date1];
+    
+    NSInteger day1 = [components1 day];
+    NSInteger month1 = [components1 month];
+    NSInteger year1 = [components1 year];
+    
+    
+    NSDateComponents *components2 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date2];
+    
+    NSInteger day2 = [components2 day];
+    NSInteger month2 = [components2 month];
+    NSInteger year2 = [components2 year];
+    
+    if(year1 < year2)
+        
+        return -1;
+    
+    else if(year1 > year2)
+        return 1;
+    
+    else
+    {
+        //year1 = year2
+        
+        if(month1 < month2)
+            return -1;
+        
+        else if(month1 > month2)
+            return 1;
+        
+        else
+        {
+            //year1 = year2 && month1 = month2
+            
+            if(day1 < day2)
+                return -1;
+            
+            else if(day1 > day2)
+                return 1;
+            
+            else
+                
+                return 0;
+        }
+    }
+    
+    
+    return 0;
+    
+    
 }
 
 

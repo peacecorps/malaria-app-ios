@@ -294,7 +294,7 @@ NSDate *startDay;
     [dateFormat setDateFormat:@"EEEE"];
     
     NSString *medicine = _medField.text;
-    NSString *remindTime = _timeField.text;
+   
      [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
 
     

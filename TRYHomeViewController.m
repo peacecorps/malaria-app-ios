@@ -45,11 +45,17 @@ NSString *medName;
 NSInteger dosesInARow=0;
 bool visited = false;
 bool dateChanged = false;
+NSDate *medLastTaken;
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    _background.frame = self.view.bounds;
+    [[self view] addSubview:_background];
+    [_background.superview sendSubviewToBack:_background];
     
+
     _flag =0;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onSignificantTimeChange:)
@@ -105,9 +111,7 @@ bool dateChanged = false;
             
             [dateFormat setDateFormat:@"EEEE"];
             _labelDay.text = [dateFormat stringFromDate:_savedDate];
-            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
+            [self syncUserDefaults];
             
         }
         //if today == saved date
@@ -121,8 +125,7 @@ bool dateChanged = false;
             {
             visited = true;
             _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
-            [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self syncUserDefaults];
             }
             
             else if(_flag==1 )
@@ -162,8 +165,7 @@ bool dateChanged = false;
                 _nextReminderDate = [NSDate date];
                 
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-                
+                [self syncUserDefaults];
                     }
                 if (weekly) {
                     _labelDay.textColor = [UIColor redColor];
@@ -173,11 +175,8 @@ bool dateChanged = false;
                 _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 
                 _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
+               [self syncUserDefaults];  //[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-                //[[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
-                [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 
             }
@@ -194,17 +193,12 @@ bool dateChanged = false;
                 
                 //_nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-                [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
+               [self syncUserDefaults];
                 if(dateChanged && weekly )
                 {
+                    medLastTaken = [NSDate date];
                     _savedDate = _nextReminderDate;
-                    [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                   
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
+                    [self syncUserDefaults];
                     [self changeLabel];
                     dateChanged = false;
                     
@@ -218,9 +212,7 @@ bool dateChanged = false;
         }
         //today == saved date => alarm
         [self changeLabel];
-        [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //get next date
+       [self syncUserDefaults]; //get next date
         
        
         [dateFormat setDateFormat:@"dd/MM/yyyy"];
@@ -243,9 +235,7 @@ bool dateChanged = false;
     if (weekly)
         _nextReminderDate = [_nextReminderDate dateByAddingTimeInterval:+7*24*60*60];
     
-    [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    [self syncUserDefaults];
     return _nextReminderDate ;
 }
 
@@ -257,18 +247,22 @@ bool dateChanged = false;
 }
 - (IBAction)medNoAction:(id)sender {
     [self updation];
-    dosesInARow = (NSInteger)[_preferences integerForKey:prefDosesInARow];
-    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
-    
+    dosesInARow = 0;
+    [self syncUserDefaults];
   }
 - (IBAction)medYesAction:(id)sender {
     
     visited = false;
     dosesInARow = (NSInteger)[_preferences integerForKey:prefDosesInARow];
     dosesInARow=dosesInARow+1;
+    
+    
     _savedDate = _nextReminderDate;
+    medLastTaken = [NSDate date];
+   [self syncUserDefaults];
     [self changeLabel];
     [self createNotification];
+    
     [_buttonYes setEnabled:NO];
     [_buttonNo setEnabled:NO];
     _labelDay.textColor = [UIColor blackColor];
@@ -307,10 +301,11 @@ bool dateChanged = false;
 
 -(void) syncUserDefaults
 {
-    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:prefmedLastTaken];
+    [[NSUserDefaults standardUserDefaults] setObject:medLastTaken forKey:prefmedLastTaken];
+    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

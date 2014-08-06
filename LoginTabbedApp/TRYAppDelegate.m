@@ -11,7 +11,7 @@
 
 #import "TRYSetupScreenViewController.h"
 #import "TRYPageViewController.h"
-#import "TRYAnalyticsIViewController.h"
+#import "TRYInfoHubViewController.h"
 
 @implementation TRYAppDelegate
 
@@ -29,15 +29,12 @@ NSString *const prefMedicine = @"medicineName";
     
     //init the view controllers for the tabs, Home and settings
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //Home controller
-    //TRYHomeViewController *homeVC = [[TRYHomeViewController alloc]init];
-    //homeVC.tabBarItem.title = @"Home";
     
     homeVC = [[TRYPageViewController alloc] init];
     homeVC.tabBarItem.title = @"Home";
 
     //Settings controller
-    TRYAnalyticsIViewController *settingsVC = [[TRYAnalyticsIViewController alloc]init];
+    TRYInfoHubViewController *settingsVC = [[TRYInfoHubViewController alloc]init];
     settingsVC.tabBarItem.title = @"Info Hub";
     
     //init the UITabBarController
@@ -48,20 +45,7 @@ NSString *const prefMedicine = @"medicineName";
     //Add the tab bar controller to the window
     [self.window setRootViewController:self.tabBarController];
     
-    //Add the login view controller as the root controller of the app window
-    
-    //[self.window setRootViewController:loginVC];
-    
-   
-    // Override point for customization after application launch.
-    //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    
-    
-    
-    
-    
     
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"hasSetUp"]) {
         // first time in

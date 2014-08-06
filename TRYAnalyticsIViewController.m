@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *labelDosesMissing;
 @property (strong, nonatomic) IBOutlet UILabel *labelAdherence;
 @property(strong,nonatomic)NSUserDefaults *preferences;
+@property (strong, nonatomic) IBOutlet UIImageView *background;
 
 @end
 
@@ -31,7 +32,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    _background.frame = self.view.bounds;
+    [[self view] addSubview:_background];
+    [_background.superview sendSubviewToBack:_background];
     
+
     
 }
 

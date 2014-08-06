@@ -13,6 +13,7 @@
 
 @interface TRYPageViewController () <UIPageViewControllerDataSource>
 @property (nonatomic) NSUInteger pageIndex;
+@property (strong, nonatomic) IBOutlet UIImageView *background;
 
 @end
 
@@ -34,6 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
+    _background.frame = self.view.bounds;
+    [[self view] addSubview:_background];
+    [_background.superview sendSubviewToBack:_background];
       self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];

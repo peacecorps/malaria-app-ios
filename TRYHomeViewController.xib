@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TRYHomeViewController">
             <connections>
-                <outlet property="background" destination="8pi-FT-ntI" id="UKM-pt-6nP"/>
+                <outlet property="background" destination="8pi-FT-ntI" id="YOP-ca-o2o"/>
                 <outlet property="buttonNo" destination="ZaK-0x-Wg4" id="eNm-l1-lXQ"/>
                 <outlet property="buttonYes" destination="ipN-DO-HxM" id="OCn-h4-hfA"/>
                 <outlet property="labelDate" destination="vaD-RR-ZKb" id="cTM-eC-odl"/>

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TRYAnalyticsIViewController">
             <connections>
+                <outlet property="background" destination="YzU-rt-XUH" id="H6T-Qa-raF"/>
                 <outlet property="labelAdherence" destination="aRm-k8-V3k" id="HVE-v2-uDM"/>
                 <outlet property="labelDosesMissing" destination="0hv-iw-829" id="k2F-OJ-7vt"/>
                 <outlet property="labelMedLastTaken" destination="n4b-hL-Xzf" id="ho9-T8-Ehf"/>
@@ -77,6 +78,10 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YzU-rt-XUH">
+                    <rect key="frame" x="0.0" y="391" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

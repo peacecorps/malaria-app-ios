@@ -44,7 +44,7 @@ NSInteger medTaken ;
 NSInteger frequency;
 //medTaken = 0 no action = 1 taken = -1 not taken
 NSString *medName;
-NSInteger dosesInARow=0;
+NSInteger   dosesInARow=0;
 bool visited = false;
 bool dateChanged = false;
 NSDate *medLastTaken;
@@ -53,15 +53,6 @@ int const STATUS_TAKEN = 1;
 int const STATUS_MISSED = 0;
 int const STATUS_NOT_TAKEN = -1;
 
--(id)init
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onSignificantTimeChange:)
-                                                 name:UIApplicationSignificantTimeChangeNotification
-                                               object:nil];
-   // currentModelObject = (TRYModel*)[_preferences objectForKey:@"firstModelObject"];
-    return self;
-}
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,16 +62,20 @@ int const STATUS_NOT_TAKEN = -1;
     [_background.superview sendSubviewToBack:_background];
     _flag =0;
    
-     }
+}
 
 
 - (void) viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onSignificantTimeChange:)
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
+    
      [self updation];
 }
 
 - (void)onSignificantTimeChange:(NSNotification *)notification {
-    NSLog(@"Date changed");
-    _labelDate.text = @"Date changed";
+    [_labelDate setText:@"Date changed"];
     dateChanged = true;
     [self updation];
 }
@@ -106,9 +101,9 @@ int const STATUS_NOT_TAKEN = -1;
             [_buttonYes setEnabled:NO];
             [_buttonNo setEnabled:NO];
             [dateFormat setDateFormat:@"dd/MM/yyyy"];
-            _labelDate.text = [dateFormat stringFromDate:_savedDate];
+            [_labelDate setText:[dateFormat stringFromDate:_savedDate]];
             [dateFormat setDateFormat:@"EEEE"];
-            _labelDay.text = [dateFormat stringFromDate:_savedDate];
+            [_labelDay setText:[dateFormat stringFromDate:_savedDate]];
             [self syncUserDefaults];
             
         }
@@ -138,7 +133,7 @@ int const STATUS_NOT_TAKEN = -1;
             //today < nextDate for weekly => missed count = missed count + 1, change color of label to red
             if (dateCompareNext == -1) {
                 if ((NSInteger)[_preferences integerForKey:@"medFrequency"] == 7) {
-                   _labelDay.textColor = [UIColor redColor];
+                    [_labelDay setTextColor:[UIColor redColor]];
                 }
             }
             
@@ -155,7 +150,7 @@ int const STATUS_NOT_TAKEN = -1;
                 [self syncUserDefaults];
                     }
                 if (weekly) {
-                    _labelDay.textColor = [UIColor redColor];
+                    [_labelDay setTextColor:[UIColor redColor]];
                 }
                 _savedDate = (NSDate*)[_nextReminderDate dateByAddingTimeInterval:0];
                 _nextReminderDate = (NSDate*)[[self getNextReminderDate] dateByAddingTimeInterval:0];
@@ -164,29 +159,21 @@ int const STATUS_NOT_TAKEN = -1;
             
             else if(dateCompareNext == 0)
             {
-                _labelDay.textColor = [UIColor blackColor];
+                [_labelDay setTextColor:[UIColor blackColor]];
                 [_buttonYes setEnabled:YES];
                 [_buttonNo setEnabled:YES];
-               
-                
-                    medLastTaken = [NSDate date];
-                    _savedDate = _nextReminderDate;
-                    [self syncUserDefaults];
-                    [self changeLabel];
-                    dateChanged = false;
-                
-                
-            }
+                medLastTaken = [NSDate date];
+                _savedDate = _nextReminderDate;
+                [self syncUserDefaults];
+                [self changeLabel];
+                dateChanged = false;
+             }
           }
         //today == saved date => alarm
         [self changeLabel];
         [self syncUserDefaults];
         }
 }
-
-
-
-
 - (IBAction)setupScreenAction:(id)sender {
   
     TRYSetupScreenViewController *loginVC = [[TRYSetupScreenViewController alloc] init];
@@ -194,10 +181,7 @@ int const STATUS_NOT_TAKEN = -1;
     
 }
 - (IBAction)medNoAction:(id)sender {
-    NSLog(@"shrutu");
-
-NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
-        [currentModelObject setMedStatus:STATUS_NOT_TAKEN];
+    [currentModelObject setMedStatus:STATUS_NOT_TAKEN];
   }
 - (IBAction)medYesAction:(id)sender {
     
@@ -207,15 +191,13 @@ NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
     _savedDate = _nextReminderDate;
     medLastTaken = [NSDate date];
    [self syncUserDefaults];
-    [currentModelObject setMedStatus:STATUS_TAKEN];
-    [self changeLabel];
-    [self createNotification];
-    
-    [_buttonYes setEnabled:NO];
-    [_buttonNo setEnabled:NO];
-    _labelDay.textColor = [UIColor blackColor];
-    
-    
+   [currentModelObject setMedStatus:STATUS_TAKEN];
+   [self changeLabel];
+   [self createNotification];
+   [_buttonYes setEnabled:NO];
+   [_buttonNo setEnabled:NO];
+   [_labelDay setTextColor:[UIColor blackColor]];
+ 
 }
 
 -(void) createNotification
@@ -223,7 +205,6 @@ NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
     
     NSDate *currentTime = (NSDate*)[[NSUserDefaults standardUserDefaults] valueForKey:@"reminderTime"];
     currentTime = [currentTime dateByAddingTimeInterval:+1*24*60*60];
-    
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = currentTime;
     localNotification.alertBody = @"Time to take your medicine";
@@ -239,9 +220,9 @@ NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
     NSString *oldDateLabel = [_labelDate text];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    _labelDate.text = [dateFormat stringFromDate:_savedDate];
+    [_labelDate setText:[dateFormat stringFromDate:_savedDate]];
     [dateFormat setDateFormat:@"EEEE"];
-    _labelDay.text = [dateFormat stringFromDate:_savedDate];
+    [_labelDay setText:[dateFormat stringFromDate:_savedDate]];
     NSString *newDateLabel = [_labelDate text];
     if(![oldDateLabel isEqualToString:newDateLabel])
     {
@@ -259,7 +240,6 @@ NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
         _nextReminderDate = [_nextReminderDate dateByAddingTimeInterval:+1*24*60*60];
     if (weekly)
         _nextReminderDate = [_nextReminderDate dateByAddingTimeInterval:+7*24*60*60];
-    
     [self syncUserDefaults];
     return _nextReminderDate ;
 }
@@ -292,41 +272,28 @@ NSLog(@"%d",[[[TRYItemStore sharedStore] allItems] count]);
     NSInteger year2 = [components2 year];
     
     if(year1 < year2)
-        
         return -1;
-    
     else if(year1 > year2)
         return 1;
-    
     else
     {
         //year1 = year2
-        
         if(month1 < month2)
             return -1;
-        
         else if(month1 > month2)
             return 1;
-        
         else
         {
             //year1 = year2 && month1 = month2
-            
             if(day1 < day2)
                 return -1;
-            
             else if(day1 > day2)
                 return 1;
-            
             else
-                
                 return 0;
         }
     }
-    
-    
     return 0;
-    
     
 }
 

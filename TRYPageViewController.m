@@ -14,6 +14,7 @@
 @interface TRYPageViewController () <UIPageViewControllerDataSource>
 @property (nonatomic) NSUInteger pageIndex;
 @property (strong, nonatomic) IBOutlet UIImageView *background;
+@property (strong, nonatomic) UIPageViewController *pageController;
 
 @end
 
@@ -26,8 +27,8 @@
         TRYHomeViewController *initialViewController = [[TRYHomeViewController alloc] init];
         TRYAnalyticsIViewController *vc2 = [[TRYAnalyticsIViewController alloc ]init];
         TRYAnalyticsScreenIIViewController *vc3 = [[TRYAnalyticsScreenIIViewController alloc ]init];
-        self.pageViewControllers = @[initialViewController, vc2, vc3];
-        self.pageIndex = 0;
+        [self setPageViewControllers:@[initialViewController, vc2, vc3]];
+        [self setPageIndex:0];
     }
     return self;
 }
@@ -43,7 +44,7 @@
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
     
-    self.pageController.dataSource = self;
+    [self.pageController setDataSource:self];
     NSArray *viewControllers = @[self.pageViewControllers[0]];
     [self.pageController setViewControllers:viewControllers
                                   direction:UIPageViewControllerNavigationDirectionForward
@@ -63,12 +64,6 @@
         }
     }
 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

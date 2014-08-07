@@ -46,9 +46,8 @@ NSString *const takeMed = @"takeMed";
 {
      self = [super init];
     
-    // Did the superclass's designated initializer succeed?
     if (self) {
-        // Give the instance variables initial values
+       
         _medDate = medDate;
         _medStatus = medStatus;
         _takeMed = takeMedicine;

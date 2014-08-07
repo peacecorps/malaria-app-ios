@@ -25,16 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *done;
 - (IBAction)doneButtonAction:(id)sender;
 
-
-
-
-
-
-
-
 @end
-
-
 
 @implementation TRYSetupScreenViewController
 NSString *const prefReminderTimeSetup = @"reminderTimeFinal";
@@ -61,67 +52,42 @@ TRYModel *xyz;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
-    
-
-    
-    //Setting the background using an image view
-    
     _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     _background.frame = self.view.bounds;
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
     
-    //Setting the background of the view that has all the labels, and textfields
     
     _collect.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
-    
-    //Getting the details entered by the user: medicine Name, and setUp time, saved in NSUserDefaults
-    
-    
     prefs = [NSUserDefaults standardUserDefaults];
     medName = [prefs stringForKey:@"medicineName"];
     startDay = [prefs objectForKey:@"startDay"];
     
-    //If the user has already filled in the details, they are populated in the textfields
     
     if(![medName isEqualToString:@""]&& startDay)
     {
-        //Text field with medicine
-        _medField.text = medName;
-        
-        //Text fiels with time
+        [_medField setText:medName];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *currentTimeString = [dateFormatter stringFromDate:startDay];
-        _timeField.text = currentTimeString;
-        NSLog(@"Inside 1st if");
-
+        [_timeField setText:currentTimeString];
         [_done setEnabled:YES];
     }
-    
-    
-    
-    
-    
-    
-    
-    
+  
     //Code for the medicines Picker
     
     medicines = [NSArray arrayWithObjects:@"Doxycycline",@"Malarone",@"Mefloquine", nil];
     UIPickerView *medPicker = [[UIPickerView alloc]initWithFrame:CGRectZero];
-    medPicker.delegate = self;
-    medPicker.dataSource = self;
+    [medPicker setDelegate:self];
+    [medPicker setDataSource:self];
     [medPicker setShowsSelectionIndicator:YES];
-    _medField.inputView = medPicker;
+    [_medField setInputView:medPicker];
     
     
     //Create done button in UIPickerView
     
     UIToolbar* myPickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 56)];
-    myPickerToolbar.barStyle = UIBarStyleBlackOpaque;
+    [myPickerToolbar setBarStyle:UIBarStyleBlackOpaque];
     [myPickerToolbar sizeToFit];
     NSMutableArray *barItems = [[NSMutableArray alloc] init];
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
@@ -130,14 +96,14 @@ TRYModel *xyz;
     [barItems addObject:doneBtn];
     
     [myPickerToolbar setItems:barItems animated:YES];
-    _medField.inputAccessoryView = myPickerToolbar;
+    [_medField setInputAccessoryView:myPickerToolbar];
     
     
     //Code for the date picker
     
     datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    datePicker.datePickerMode = UIDatePickerModeTime;
-    _timeField.inputView = datePicker;
+    [datePicker setDatePickerMode:UIDatePickerModeTime];
+    [_timeField setInputView:datePicker];
     [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
@@ -146,7 +112,7 @@ TRYModel *xyz;
     //Done Button in Date Picker
     
     UIToolbar* myDatePickerToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 56)];
-    myDatePickerToolbar.barStyle = UIBarStyleBlackTranslucent;
+    [myDatePickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
     [myDatePickerToolbar sizeToFit];
     NSMutableArray *barItems1 = [[NSMutableArray alloc] init];
     UIBarButtonItem *flexSpace1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
@@ -155,13 +121,9 @@ TRYModel *xyz;
     [barItems1 addObject:doneBtn1];
     
     [myDatePickerToolbar setItems:barItems1 animated:YES];
-    _timeField.inputAccessoryView = myDatePickerToolbar;
-    
-    
+    [_timeField setInputAccessoryView:myDatePickerToolbar];
+  }
 
-}
-
-//Method to get the date selected on the date picker
 
 - (void)dateChanged:(id)sender
 {
@@ -169,57 +131,36 @@ TRYModel *xyz;
     [dateFormatter setDateFormat:@"hh:mm a"];
     currentTime = datePicker.date;
     NSString *currentTimeString = [dateFormatter stringFromDate:currentTime];
-    _timeField.text = currentTimeString;
-    
-    
-    
+    [_timeField setText:currentTimeString];
 }
 
-//Done Button Function for medicine picker
 
 -(void)pickerDoneClicked
 {
-    //If the medicine is not entered, warning label is highlighted
     if([_medField.text  isEqual: @""])
     {
-        NSLog(@"No medication entered");
         [_medWarning setHidden:NO];
         [_medWarning setText:@"Medication not entered"];
-        _medField.text = @"Doxycycline";
+        [_medField setText:@"Doxycycline"];
     }
     
     
     BOOL isMedThere = [medicines containsObject: _medField.text];
-    
-    
-    //If a wrong medication is entered, warning label is highlighted
     if(![_medField.text isEqualToString:@""] && !isMedThere )
     {
         [_medWarning setHidden:NO];
         [_medWarning setText:@"Wrong Medication entered"];
-        
-        
-    }
-    
-    
+      }
     isMedThere = [medicines containsObject: _medField.text];
-    
-    
-    //Medicine entered is not empty string, and is also present in the array
     if(![_medField.text isEqualToString:@""] && isMedThere )
     {
         [_medWarning setHidden:YES];
         
     }
+     isMedThere = [medicines containsObject: _medField.text];
     
-    
-    isMedThere = [medicines containsObject: _medField.text];
-    
-    //If both the text fields are filled with non-nil correct values, done button is enabled
     if(![_medField.text isEqualToString:@""] && ![_timeField.text isEqualToString:@""] && isMedThere)
     {
-        NSLog(@"Inside 2nd if");
-
         [_done setEnabled:YES];
     }
     
@@ -227,19 +168,10 @@ TRYModel *xyz;
     
     
 }
-
-
-
 -(void)datePickerDoneClicked
 {
-    NSLog(@"Done Clicked");
-    
-    
     if([_timeField.text isEqual: @""])
     {
-        
-        
-        
         [_timeWarning setHidden:NO];
         [_timeWarning setText:@"Continuing with current time"];
         
@@ -247,7 +179,7 @@ TRYModel *xyz;
         currentTime = [NSDate date];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"hh:mm a";
+        [dateFormatter setDateFormat:@"hh:mm a"];
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         [_timeField setText:[dateFormatter stringFromDate:currentTime]];
         
@@ -257,14 +189,8 @@ TRYModel *xyz;
     
     if(![_medField.text isEqualToString:@""] && ![_timeField.text isEqualToString:@""])
     {
-        //[timeWarning setHidden:YES];
-        NSLog(@"Inside 3rd if");
-
         [_done setEnabled:YES];
-        //[timeWarning setHidden:YES];
     }
-    
-    
     
 }
 
@@ -285,7 +211,7 @@ TRYModel *xyz;
 
 -(void)pickerView:(UIPickerView*)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    _medField.text = (NSString*)[medicines objectAtIndex:row];
+    [_medField setText:(NSString*)[medicines objectAtIndex:row]] ;
     
 }
 
@@ -299,9 +225,7 @@ TRYModel *xyz;
     NSString *medicine = _medField.text;
    
      [[NSUserDefaults standardUserDefaults] setObject:medicine forKey:@"medicineName"];
-
-    
-    //Store reminder time only once
+  //Store reminder time only once
     if(![prefs boolForKey:@"hasSetUp"])
     {
     startDay = [date dateByAddingTimeInterval:0];
@@ -311,8 +235,6 @@ TRYModel *xyz;
     [[NSUserDefaults standardUserDefaults] setObject:startDay forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"dosesInARow"];
     [[NSUserDefaults standardUserDefaults] setInteger:[self determineMedFrequency] forKey:@"medFrequency"];
-    //TRYModel *xyz = [[TRYItemStore sharedStore]createItem:[NSDate date]];
-    //[[NSUserDefaults standardUserDefaults] setObject:xyz forKey:@"firstModelObject"];
         
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = currentTime;
@@ -326,10 +248,6 @@ TRYModel *xyz;
     [[NSUserDefaults standardUserDefaults] setBool:YES  forKey:@"hasSetUp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    
-    
-    
-    
     
 }
 -(NSInteger) determineMedFrequency
@@ -422,22 +340,16 @@ TRYModel *xyz;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
-     
-     
-                                                  object:nil];
+                                                    object:nil];
 }
-
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     
     _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
     _background.frame = self.view.bounds;
     [[self view] addSubview:_background];
     [_background.superview sendSubviewToBack:_background];
-    
     
     if(![medName isEqualToString:@""]&& startDay)
     {
@@ -446,9 +358,7 @@ TRYModel *xyz;
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"hh:mm a"];
         NSString *currentTimeString = [dateFormatter stringFromDate:startDay];
-        
         _timeField.text = currentTimeString;
-        
 
         [_done setEnabled:YES];
     }

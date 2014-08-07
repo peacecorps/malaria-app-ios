@@ -53,6 +53,20 @@ int const STATUS_TAKEN = 1;
 int const STATUS_MISSED = 0;
 int const STATUS_NOT_TAKEN = -1;
 
+-(id)init
+{
+    self = [super init];
+    if (!self) return nil;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onSignificantTimeChange:)
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
+    
+    
+    return self;
+}
+
 -(void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,14 +80,11 @@ int const STATUS_NOT_TAKEN = -1;
 
 
 - (void) viewWillAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onSignificantTimeChange:)
-                                                 name:UIApplicationSignificantTimeChangeNotification
-                                               object:nil];
     
+    [super viewDidAppear:true];
      [self updation];
 }
-- (void) viewWillDisappear:(BOOL)animated{
+- (void) dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];

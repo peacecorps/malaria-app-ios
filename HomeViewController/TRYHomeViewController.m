@@ -62,9 +62,7 @@ int const STATUS_NOT_TAKEN = -1;
                                              selector:@selector(onSignificantTimeChange:)
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
-    
-    
-    return self;
+     return self;
 }
 
 -(void)viewDidLoad
@@ -77,8 +75,6 @@ int const STATUS_NOT_TAKEN = -1;
     _flag =0;
    
 }
-
-
 - (void) viewWillAppear:(BOOL)animated{
     
     [super viewDidAppear:true];
@@ -88,11 +84,7 @@ int const STATUS_NOT_TAKEN = -1;
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                  name:UIApplicationSignificantTimeChangeNotification
                                                object:nil];
-    
-    
 }
-
-
 -(void) updation
 {
     _preferences = [NSUserDefaults standardUserDefaults];
@@ -313,7 +305,6 @@ int const STATUS_NOT_TAKEN = -1;
         }
     }
     return 0;
-    
 }
 
 

@@ -294,7 +294,6 @@ TRYModel *xyz;
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
     CGRect rect = self.view.frame;
     if (movedUp)
     {

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:LoginTabbedApp.xcodeproj">
+      location = "self:MalariaiOS.xcodeproj">
    </FileRef>
 </Workspace>

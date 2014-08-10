@@ -67,22 +67,22 @@
 		D14A2C681992062400B5AC09 /* TRYInfoHubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYInfoHubViewController.xib; sourceTree = "<group>"; };
 		D14A2C6C19920BED00B5AC09 /* info_hub_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_hub_title.png; sourceTree = "<group>"; };
 		D14A2C6E19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_info_hub_peace_corps_policy.png; sourceTree = "<group>"; };
-		D15369C9195950DE0033BC15 /* LoginTabbedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginTabbedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15369C9195950DE0033BC15 /* MalariaiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MalariaiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15369CC195950DE0033BC15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D15369CE195950DE0033BC15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D15369D0195950DE0033BC15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D15369D2195950DE0033BC15 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D15369D6195950DE0033BC15 /* LoginTabbedApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginTabbedApp-Info.plist"; sourceTree = "<group>"; };
+		D15369D6195950DE0033BC15 /* MalariaiOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOS-Info.plist"; sourceTree = "<group>"; };
 		D15369D8195950DE0033BC15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D15369DA195950DE0033BC15 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D15369DC195950DE0033BC15 /* LoginTabbedApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoginTabbedApp-Prefix.pch"; sourceTree = "<group>"; };
+		D15369DC195950DE0033BC15 /* MalariaiOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MalariaiOS-Prefix.pch"; sourceTree = "<group>"; };
 		D15369DD195950DE0033BC15 /* TRYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRYAppDelegate.h; sourceTree = "<group>"; };
 		D15369DE195950DE0033BC15 /* TRYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRYAppDelegate.m; sourceTree = "<group>"; };
 		D15369E1195950DE0033BC15 /* LoginTabbedApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginTabbedApp.xcdatamodel; sourceTree = "<group>"; };
 		D15369E3195950DE0033BC15 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D15369E9195950DE0033BC15 /* LoginTabbedAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginTabbedAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalariaiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15369EA195950DE0033BC15 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		D15369F3195950DE0033BC15 /* LoginTabbedAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoginTabbedAppTests-Info.plist"; sourceTree = "<group>"; };
+		D15369F3195950DE0033BC15 /* MalariaiOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOSTests-Info.plist"; sourceTree = "<group>"; };
 		D15369F5195950DE0033BC15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D15369F7195950DE0033BC15 /* LoginTabbedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTabbedAppTests.m; sourceTree = "<group>"; };
 		D1536A011959511D0033BC15 /* TRYHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYHomeViewController.h; sourceTree = "<group>"; };
@@ -209,8 +209,8 @@
 				D151E7F6195C91D30034CEF0 /* Tab1-Home */,
 				D151E7F7195C91E70034CEF0 /* SetUpScreen */,
 				D151E7F8195C91FC0034CEF0 /* Tab2-InfoHub */,
-				D15369D4195950DE0033BC15 /* LoginTabbedApp */,
-				D15369F1195950DE0033BC15 /* LoginTabbedAppTests */,
+				D15369D4195950DE0033BC15 /* MalariaiOS */,
+				D15369F1195950DE0033BC15 /* MalariaiOSTests */,
 				D15369CB195950DE0033BC15 /* Frameworks */,
 				D15369CA195950DE0033BC15 /* Products */,
 			);
@@ -219,8 +219,8 @@
 		D15369CA195950DE0033BC15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D15369C9195950DE0033BC15 /* LoginTabbedApp.app */,
-				D15369E9195950DE0033BC15 /* LoginTabbedAppTests.xctest */,
+				D15369C9195950DE0033BC15 /* MalariaiOS.app */,
+				D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -237,7 +237,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D15369D4195950DE0033BC15 /* LoginTabbedApp */ = {
+		D15369D4195950DE0033BC15 /* MalariaiOS */ = {
 			isa = PBXGroup;
 			children = (
 				D15369DD195950DE0033BC15 /* TRYAppDelegate.h */,
@@ -246,33 +246,35 @@
 				D15369E0195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld */,
 				D15369D5195950DE0033BC15 /* Supporting Files */,
 			);
+			name = MalariaiOS;
 			path = LoginTabbedApp;
 			sourceTree = "<group>";
 		};
 		D15369D5195950DE0033BC15 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D15369D6195950DE0033BC15 /* LoginTabbedApp-Info.plist */,
+				D15369D6195950DE0033BC15 /* MalariaiOS-Info.plist */,
 				D15369D7195950DE0033BC15 /* InfoPlist.strings */,
 				D15369DA195950DE0033BC15 /* main.m */,
-				D15369DC195950DE0033BC15 /* LoginTabbedApp-Prefix.pch */,
+				D15369DC195950DE0033BC15 /* MalariaiOS-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D15369F1195950DE0033BC15 /* LoginTabbedAppTests */ = {
+		D15369F1195950DE0033BC15 /* MalariaiOSTests */ = {
 			isa = PBXGroup;
 			children = (
 				D15369F7195950DE0033BC15 /* LoginTabbedAppTests.m */,
 				D15369F2195950DE0033BC15 /* Supporting Files */,
 			);
+			name = MalariaiOSTests;
 			path = LoginTabbedAppTests;
 			sourceTree = "<group>";
 		};
 		D15369F2195950DE0033BC15 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D15369F3195950DE0033BC15 /* LoginTabbedAppTests-Info.plist */,
+				D15369F3195950DE0033BC15 /* MalariaiOSTests-Info.plist */,
 				D15369F4195950DE0033BC15 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -308,9 +310,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D15369C8195950DE0033BC15 /* LoginTabbedApp */ = {
+		D15369C8195950DE0033BC15 /* MalariaiOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "LoginTabbedApp" */;
+			buildConfigurationList = D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOS" */;
 			buildPhases = (
 				D15369C5195950DE0033BC15 /* Sources */,
 				D15369C6195950DE0033BC15 /* Frameworks */,
@@ -320,14 +322,14 @@
 			);
 			dependencies = (
 			);
-			name = LoginTabbedApp;
+			name = MalariaiOS;
 			productName = LoginTabbedApp;
-			productReference = D15369C9195950DE0033BC15 /* LoginTabbedApp.app */;
+			productReference = D15369C9195950DE0033BC15 /* MalariaiOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D15369E8195950DE0033BC15 /* LoginTabbedAppTests */ = {
+		D15369E8195950DE0033BC15 /* MalariaiOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "LoginTabbedAppTests" */;
+			buildConfigurationList = D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSTests" */;
 			buildPhases = (
 				D15369E5195950DE0033BC15 /* Sources */,
 				D15369E6195950DE0033BC15 /* Frameworks */,
@@ -338,9 +340,9 @@
 			dependencies = (
 				D15369F0195950DE0033BC15 /* PBXTargetDependency */,
 			);
-			name = LoginTabbedAppTests;
+			name = MalariaiOSTests;
 			productName = LoginTabbedAppTests;
-			productReference = D15369E9195950DE0033BC15 /* LoginTabbedAppTests.xctest */;
+			productReference = D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -358,7 +360,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "LoginTabbedApp" */;
+			buildConfigurationList = D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -370,8 +372,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D15369C8195950DE0033BC15 /* LoginTabbedApp */,
-				D15369E8195950DE0033BC15 /* LoginTabbedAppTests */,
+				D15369C8195950DE0033BC15 /* MalariaiOS */,
+				D15369E8195950DE0033BC15 /* MalariaiOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -444,7 +446,7 @@
 /* Begin PBXTargetDependency section */
 		D15369F0195950DE0033BC15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D15369C8195950DE0033BC15 /* LoginTabbedApp */;
+			target = D15369C8195950DE0033BC15 /* MalariaiOS */;
 			targetProxy = D15369EF195950DE0033BC15 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -545,9 +547,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoginTabbedApp/LoginTabbedApp-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedApp/LoginTabbedApp-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "LoginTabbedApp/MalariaiOS-Prefix.pch";
+				INFOPLIST_FILE = "LoginTabbedApp/MalariaiOS-Info.plist";
+				PRODUCT_NAME = MalariaiOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -558,9 +560,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoginTabbedApp/LoginTabbedApp-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedApp/LoginTabbedApp-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "LoginTabbedApp/MalariaiOS-Prefix.pch";
+				INFOPLIST_FILE = "LoginTabbedApp/MalariaiOS-Info.plist";
+				PRODUCT_NAME = MalariaiOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -580,8 +582,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "LoginTabbedAppTests/LoginTabbedAppTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSTests-Info.plist";
+				PRODUCT_NAME = MalariaiOSTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -598,8 +600,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LoginTabbedApp/LoginTabbedApp-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedAppTests/LoginTabbedAppTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSTests-Info.plist";
+				PRODUCT_NAME = MalariaiOSTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -608,7 +610,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "LoginTabbedApp" */ = {
+		D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369F9195950DE0033BC15 /* Debug */,
@@ -617,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "LoginTabbedApp" */ = {
+		D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369FC195950DE0033BC15 /* Debug */,
@@ -626,7 +628,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "LoginTabbedAppTests" */ = {
+		D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369FF195950DE0033BC15 /* Debug */,

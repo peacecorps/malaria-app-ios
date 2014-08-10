@@ -9,14 +9,14 @@
 #import "TRYModel.h"
 NSString *const medDate = @"medDate";
 NSString *const medStatus = @"medStatus";
-NSString *const takeMed = @"takeMed";
+
 
 @implementation TRYModel
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:self.medDate forKey:medDate];
     [aCoder encodeInteger:self.medStatus forKey:medStatus];
-    [aCoder encodeBool:self.takeMed forKey:takeMed];
+    
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -25,7 +25,7 @@ NSString *const takeMed = @"takeMed";
     if (self) {
         _medDate = [aDecoder decodeObjectForKey:medDate];
         _medStatus = [aDecoder decodeIntForKey:medStatus];
-        _takeMed = [aDecoder decodeBoolForKey:takeMed];
+        
           }
     return self;
 }
@@ -37,12 +37,12 @@ NSString *const takeMed = @"takeMed";
 {
     return [self initWithDate:date
                        status:0
-                         takeMedicine:false];
+                         ];
 }
 
 - (instancetype)initWithDate:(NSDate *)medDate
                       status:(int)medStatus
-                takeMedicine:(bool)takeMedicine
+
 {
      self = [super init];
     
@@ -50,7 +50,7 @@ NSString *const takeMed = @"takeMed";
        
         _medDate = medDate;
         _medStatus = medStatus;
-        _takeMed = takeMedicine;
+       
         
 }
     return self;
@@ -62,7 +62,7 @@ NSString *const takeMed = @"takeMed";
     
     TRYModel *newItem = [[TRYModel alloc] initWithDate:medDate
                                             status: 2
-                                      takeMedicine: true];
+                                      ];
     return newItem;
 }
 
@@ -85,15 +85,6 @@ NSString *const takeMed = @"takeMed";
     return _medStatus;
 }
 
-- (void)setTakeMed:(bool)takeMed
-{
-    _takeMed = takeMed;
-}
-
-- (BOOL)getTakeMed
-{
-    return _takeMed;
-}
 
 
 @end

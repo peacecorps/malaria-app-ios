@@ -13,5 +13,8 @@
 }
 @property (strong, nonatomic) IBOutlet UILabel *labelDay;
 -(void)updation;
+-(NSInteger) compareDates:(NSDate*)date1
+                         :(NSDate*)date2;
+
 
 @end

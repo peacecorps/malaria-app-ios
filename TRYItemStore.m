@@ -8,6 +8,7 @@
 
 #import "TRYItemStore.h"
 #import "TRYModel.h"
+#import "TRYHomeViewController.h"
 @interface TRYItemStore ()
 
 @property (nonatomic) NSMutableArray *privateItems;
@@ -66,6 +67,14 @@
                         
 {
     //TO-DO: First check if the data is already saved, if not then add it, else update the existing value
+    
+    //Check if data is already there:
+    TRYHomeViewController *home = [[TRYHomeViewController alloc]init];
+    for(TRYModel *item in self.privateItems)
+    {
+        if([home compareDates:medDate :item.medDate] == 0 )
+            return item;
+    }
     TRYModel *item = [TRYModel randomItem:medDate];
     [self.privateItems addObject:item];
     return item;

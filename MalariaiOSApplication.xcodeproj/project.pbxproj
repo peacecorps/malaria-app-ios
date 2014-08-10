@@ -17,11 +17,6 @@
 		D15369CF195950DE0033BC15 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369CE195950DE0033BC15 /* CoreGraphics.framework */; };
 		D15369D1195950DE0033BC15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369D0195950DE0033BC15 /* UIKit.framework */; };
 		D15369D3195950DE0033BC15 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369D2195950DE0033BC15 /* CoreData.framework */; };
-		D15369D9195950DE0033BC15 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D15369D7195950DE0033BC15 /* InfoPlist.strings */; };
-		D15369DB195950DE0033BC15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D15369DA195950DE0033BC15 /* main.m */; };
-		D15369DF195950DE0033BC15 /* TRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D15369DE195950DE0033BC15 /* TRYAppDelegate.m */; };
-		D15369E2195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D15369E0195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld */; };
-		D15369E4195950DE0033BC15 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D15369E3195950DE0033BC15 /* Images.xcassets */; };
 		D15369EB195950DE0033BC15 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369EA195950DE0033BC15 /* XCTest.framework */; };
 		D15369EC195950DE0033BC15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369CC195950DE0033BC15 /* Foundation.framework */; };
 		D15369ED195950DE0033BC15 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D15369D0195950DE0033BC15 /* UIKit.framework */; };
@@ -46,6 +41,9 @@
 		D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */; };
 		D1CD752519782177008C4643 /* TRYAnalyticsIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */; };
 		D1CD752619782177008C4643 /* TRYAnalyticsIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CD752419782177008C4643 /* TRYAnalyticsIViewController.xib */; };
+		D1FDE60D1997B04200F5CB86 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE60B1997B04200F5CB86 /* main.m */; };
+		D1FDE60E1997B04200F5CB86 /* TRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE60C1997B04200F5CB86 /* TRYAppDelegate.m */; };
+		D1FDE6121997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE6101997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,22 +65,14 @@
 		D14A2C681992062400B5AC09 /* TRYInfoHubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYInfoHubViewController.xib; sourceTree = "<group>"; };
 		D14A2C6C19920BED00B5AC09 /* info_hub_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = info_hub_title.png; sourceTree = "<group>"; };
 		D14A2C6E19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_info_hub_peace_corps_policy.png; sourceTree = "<group>"; };
-		D15369C9195950DE0033BC15 /* MalariaiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MalariaiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15369C9195950DE0033BC15 /* MalariaiOSApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MalariaiOSApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15369CC195950DE0033BC15 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D15369CE195950DE0033BC15 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D15369D0195950DE0033BC15 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D15369D2195950DE0033BC15 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D15369D6195950DE0033BC15 /* MalariaiOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOS-Info.plist"; sourceTree = "<group>"; };
-		D15369D8195950DE0033BC15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D15369DA195950DE0033BC15 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D15369DC195950DE0033BC15 /* MalariaiOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MalariaiOS-Prefix.pch"; sourceTree = "<group>"; };
-		D15369DD195950DE0033BC15 /* TRYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TRYAppDelegate.h; sourceTree = "<group>"; };
-		D15369DE195950DE0033BC15 /* TRYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TRYAppDelegate.m; sourceTree = "<group>"; };
-		D15369E1195950DE0033BC15 /* LoginTabbedApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginTabbedApp.xcdatamodel; sourceTree = "<group>"; };
-		D15369E3195950DE0033BC15 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalariaiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D15369E9195950DE0033BC15 /* MalariaiOSApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalariaiOSApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D15369EA195950DE0033BC15 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		D15369F3195950DE0033BC15 /* MalariaiOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOSTests-Info.plist"; sourceTree = "<group>"; };
+		D15369F3195950DE0033BC15 /* MalariaiOSApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MalariaiOSApplicationTests-Info.plist"; sourceTree = "<group>"; };
 		D15369F5195950DE0033BC15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D15369F7195950DE0033BC15 /* LoginTabbedAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginTabbedAppTests.m; sourceTree = "<group>"; };
 		D1536A011959511D0033BC15 /* TRYHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYHomeViewController.h; sourceTree = "<group>"; };
@@ -109,6 +99,11 @@
 		D1CD752219782177008C4643 /* TRYAnalyticsIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYAnalyticsIViewController.h; sourceTree = "<group>"; };
 		D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYAnalyticsIViewController.m; sourceTree = "<group>"; };
 		D1CD752419782177008C4643 /* TRYAnalyticsIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYAnalyticsIViewController.xib; sourceTree = "<group>"; };
+		D1FDE60B1997B04200F5CB86 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MalariaiOSApplication/main.m; sourceTree = SOURCE_ROOT; };
+		D1FDE60C1997B04200F5CB86 /* TRYAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TRYAppDelegate.m; path = MalariaiOSApplication/TRYAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		D1FDE60F1997B05900F5CB86 /* TRYAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TRYAppDelegate.h; path = MalariaiOSApplication/TRYAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		D1FDE6111997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MalariaiOSApplication.xcdatamodel; sourceTree = "<group>"; };
+		D1FDE61A1997B0DA00F5CB86 /* MalariaiOSApplication.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MalariaiOSApplication.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,8 +214,8 @@
 		D15369CA195950DE0033BC15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D15369C9195950DE0033BC15 /* MalariaiOS.app */,
-				D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */,
+				D15369C9195950DE0033BC15 /* MalariaiOSApplication.app */,
+				D15369E9195950DE0033BC15 /* MalariaiOSApplicationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,10 +235,11 @@
 		D15369D4195950DE0033BC15 /* MalariaiOS */ = {
 			isa = PBXGroup;
 			children = (
-				D15369DD195950DE0033BC15 /* TRYAppDelegate.h */,
-				D15369DE195950DE0033BC15 /* TRYAppDelegate.m */,
-				D15369E3195950DE0033BC15 /* Images.xcassets */,
-				D15369E0195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld */,
+				D1FDE6131997B0DA00F5CB86 /* en.lproj */,
+				D1FDE6191997B0DA00F5CB86 /* MalariaiOSApplication.xcdatamodeld */,
+				D1FDE60F1997B05900F5CB86 /* TRYAppDelegate.h */,
+				D1FDE6101997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld */,
+				D1FDE60C1997B04200F5CB86 /* TRYAppDelegate.m */,
 				D15369D5195950DE0033BC15 /* Supporting Files */,
 			);
 			name = MalariaiOS;
@@ -253,10 +249,7 @@
 		D15369D5195950DE0033BC15 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D15369D6195950DE0033BC15 /* MalariaiOS-Info.plist */,
-				D15369D7195950DE0033BC15 /* InfoPlist.strings */,
-				D15369DA195950DE0033BC15 /* main.m */,
-				D15369DC195950DE0033BC15 /* MalariaiOS-Prefix.pch */,
+				D1FDE60B1997B04200F5CB86 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -274,7 +267,7 @@
 		D15369F2195950DE0033BC15 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D15369F3195950DE0033BC15 /* MalariaiOSTests-Info.plist */,
+				D15369F3195950DE0033BC15 /* MalariaiOSApplicationTests-Info.plist */,
 				D15369F4195950DE0033BC15 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -307,12 +300,20 @@
 			name = "Analytics Screen I";
 			sourceTree = "<group>";
 		};
+		D1FDE6131997B0DA00F5CB86 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = en.lproj;
+			path = ../MalariaiOSApplication/en.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D15369C8195950DE0033BC15 /* MalariaiOS */ = {
+		D15369C8195950DE0033BC15 /* MalariaiOSApplication */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOS" */;
+			buildConfigurationList = D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSApplication" */;
 			buildPhases = (
 				D15369C5195950DE0033BC15 /* Sources */,
 				D15369C6195950DE0033BC15 /* Frameworks */,
@@ -322,14 +323,14 @@
 			);
 			dependencies = (
 			);
-			name = MalariaiOS;
+			name = MalariaiOSApplication;
 			productName = LoginTabbedApp;
-			productReference = D15369C9195950DE0033BC15 /* MalariaiOS.app */;
+			productReference = D15369C9195950DE0033BC15 /* MalariaiOSApplication.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D15369E8195950DE0033BC15 /* MalariaiOSTests */ = {
+		D15369E8195950DE0033BC15 /* MalariaiOSApplicationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSTests" */;
+			buildConfigurationList = D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSApplicationTests" */;
 			buildPhases = (
 				D15369E5195950DE0033BC15 /* Sources */,
 				D15369E6195950DE0033BC15 /* Frameworks */,
@@ -340,9 +341,9 @@
 			dependencies = (
 				D15369F0195950DE0033BC15 /* PBXTargetDependency */,
 			);
-			name = MalariaiOSTests;
+			name = MalariaiOSApplicationTests;
 			productName = LoginTabbedAppTests;
-			productReference = D15369E9195950DE0033BC15 /* MalariaiOSTests.xctest */;
+			productReference = D15369E9195950DE0033BC15 /* MalariaiOSApplicationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -360,7 +361,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOS" */;
+			buildConfigurationList = D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOSApplication" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -372,8 +373,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D15369C8195950DE0033BC15 /* MalariaiOS */,
-				D15369E8195950DE0033BC15 /* MalariaiOSTests */,
+				D15369C8195950DE0033BC15 /* MalariaiOSApplication */,
+				D15369E8195950DE0033BC15 /* MalariaiOSApplicationTests */,
 			);
 		};
 /* End PBXProject section */
@@ -389,7 +390,6 @@
 				D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */,
 				D16A8426195D977D00613D35 /* medicine.png in Resources */,
 				D16A8421195D701600613D35 /* logo.png in Resources */,
-				D15369D9195950DE0033BC15 /* InfoPlist.strings in Resources */,
 				D14A2C6A1992062400B5AC09 /* TRYInfoHubViewController.xib in Resources */,
 				D16A841D195D701600613D35 /* background.png in Resources */,
 				D16A841F195D701600613D35 /* button_settings.png in Resources */,
@@ -398,7 +398,6 @@
 				D129C56C19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib in Resources */,
 				D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */,
 				D14A2C6F19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png in Resources */,
-				D15369E4195950DE0033BC15 /* Images.xcassets in Resources */,
 				D16A8420195D701600613D35 /* button_yes.png in Resources */,
 				D1CD752619782177008C4643 /* TRYAnalyticsIViewController.xib in Resources */,
 			);
@@ -420,15 +419,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1C979DD195D6C30008B39B8 /* TRYSetupScreenViewController.m in Sources */,
-				D15369E2195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld in Sources */,
 				D14A2C691992062400B5AC09 /* TRYInfoHubViewController.m in Sources */,
+				D1FDE6121997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld in Sources */,
 				D1536A041959511D0033BC15 /* TRYHomeViewController.m in Sources */,
 				D1CD752519782177008C4643 /* TRYAnalyticsIViewController.m in Sources */,
+				D1FDE60E1997B04200F5CB86 /* TRYAppDelegate.m in Sources */,
 				D180DECA1992286200F494BA /* TRYItemStore.m in Sources */,
 				D1536A16195ACC910033BC15 /* TRYPageViewController.m in Sources */,
-				D15369DF195950DE0033BC15 /* TRYAppDelegate.m in Sources */,
-				D15369DB195950DE0033BC15 /* main.m in Sources */,
 				D129C56B19799493005B4D08 /* TRYAnalyticsScreenIIViewController.m in Sources */,
+				D1FDE60D1997B04200F5CB86 /* main.m in Sources */,
 				D180DEC719921BA500F494BA /* TRYModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,20 +445,12 @@
 /* Begin PBXTargetDependency section */
 		D15369F0195950DE0033BC15 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D15369C8195950DE0033BC15 /* MalariaiOS */;
+			target = D15369C8195950DE0033BC15 /* MalariaiOSApplication */;
 			targetProxy = D15369EF195950DE0033BC15 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D15369D7195950DE0033BC15 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D15369D8195950DE0033BC15 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		D15369F4195950DE0033BC15 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -547,9 +538,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoginTabbedApp/MalariaiOS-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedApp/MalariaiOS-Info.plist";
-				PRODUCT_NAME = MalariaiOS;
+				GCC_PREFIX_HEADER = "MalariaiOSApplication/MalariaiOSApplication-Prefix.pch";
+				INFOPLIST_FILE = "MalariaiOSApplication/MalariaiOSApplication-Info.plist";
+				PRODUCT_NAME = MalariaiOSApplication;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -560,9 +551,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LoginTabbedApp/MalariaiOS-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedApp/MalariaiOS-Info.plist";
-				PRODUCT_NAME = MalariaiOS;
+				GCC_PREFIX_HEADER = "MalariaiOSApplication/MalariaiOSApplication-Prefix.pch";
+				INFOPLIST_FILE = "MalariaiOSApplication/MalariaiOSApplication-Info.plist";
+				PRODUCT_NAME = MalariaiOSApplication;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -582,8 +573,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSTests-Info.plist";
-				PRODUCT_NAME = MalariaiOSTests;
+				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSApplicationTests-Info.plist";
+				PRODUCT_NAME = MalariaiOSApplicationTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -600,8 +591,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LoginTabbedApp/LoginTabbedApp-Prefix.pch";
-				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSTests-Info.plist";
-				PRODUCT_NAME = MalariaiOSTests;
+				INFOPLIST_FILE = "LoginTabbedAppTests/MalariaiOSApplicationTests-Info.plist";
+				PRODUCT_NAME = MalariaiOSApplicationTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -610,7 +601,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOS" */ = {
+		D15369C4195950DE0033BC15 /* Build configuration list for PBXProject "MalariaiOSApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369F9195950DE0033BC15 /* Debug */,
@@ -619,7 +610,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOS" */ = {
+		D15369FB195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSApplication" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369FC195950DE0033BC15 /* Debug */,
@@ -628,7 +619,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSTests" */ = {
+		D15369FE195950DE0033BC15 /* Build configuration list for PBXNativeTarget "MalariaiOSApplicationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D15369FF195950DE0033BC15 /* Debug */,
@@ -640,13 +631,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		D15369E0195950DE0033BC15 /* LoginTabbedApp.xcdatamodeld */ = {
+		D1FDE6101997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				D15369E1195950DE0033BC15 /* LoginTabbedApp.xcdatamodel */,
+				D1FDE6111997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodel */,
 			);
-			currentVersion = D15369E1195950DE0033BC15 /* LoginTabbedApp.xcdatamodel */;
-			path = LoginTabbedApp.xcdatamodeld;
+			currentVersion = D1FDE6111997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodel */;
+			name = MalariaiOSApplication.xcdatamodeld;
+			path = ../MalariaiOSApplication/MalariaiOSApplication.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		D1FDE6191997B0DA00F5CB86 /* MalariaiOSApplication.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D1FDE61A1997B0DA00F5CB86 /* MalariaiOSApplication.xcdatamodel */,
+			);
+			currentVersion = D1FDE61A1997B0DA00F5CB86 /* MalariaiOSApplication.xcdatamodel */;
+			name = MalariaiOSApplication.xcdatamodeld;
+			path = ../MalariaiOSApplication/MalariaiOSApplication.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

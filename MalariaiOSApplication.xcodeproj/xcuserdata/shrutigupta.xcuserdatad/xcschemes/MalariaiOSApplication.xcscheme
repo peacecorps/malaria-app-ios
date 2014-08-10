@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D15369C8195950DE0033BC15"
-               BuildableName = "LoginTabbedApp.app"
-               BlueprintName = "MalariaiOS"
-               ReferencedContainer = "container:MalariaiOS.xcodeproj">
+               BuildableName = "MalariaiOSApplication.app"
+               BlueprintName = "MalariaiOSApplication"
+               ReferencedContainer = "container:MalariaiOSApplication.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D15369E8195950DE0033BC15"
-               BuildableName = "LoginTabbedAppTests.xctest"
-               BlueprintName = "MalariaiOSTests"
-               ReferencedContainer = "container:MalariaiOS.xcodeproj">
+               BuildableName = "MalariaiOSApplicationTests.xctest"
+               BlueprintName = "MalariaiOSApplicationTests"
+               ReferencedContainer = "container:MalariaiOSApplication.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D15369C8195950DE0033BC15"
-            BuildableName = "LoginTabbedApp.app"
-            BlueprintName = "MalariaiOS"
-            ReferencedContainer = "container:MalariaiOS.xcodeproj">
+            BuildableName = "MalariaiOSApplication.app"
+            BlueprintName = "MalariaiOSApplication"
+            ReferencedContainer = "container:MalariaiOSApplication.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D15369C8195950DE0033BC15"
-            BuildableName = "LoginTabbedApp.app"
-            BlueprintName = "MalariaiOS"
-            ReferencedContainer = "container:MalariaiOS.xcodeproj">
+            BuildableName = "MalariaiOSApplication.app"
+            BlueprintName = "MalariaiOSApplication"
+            ReferencedContainer = "container:MalariaiOSApplication.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D15369C8195950DE0033BC15"
-            BuildableName = "LoginTabbedApp.app"
-            BlueprintName = "MalariaiOS"
-            ReferencedContainer = "container:MalariaiOS.xcodeproj">
+            BuildableName = "MalariaiOSApplication.app"
+            BlueprintName = "MalariaiOSApplication"
+            ReferencedContainer = "container:MalariaiOSApplication.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -73,12 +73,14 @@ int const STATUS_NOT_TAKEN = -1;
     
      [self updation];
 }
-
-- (void)onSignificantTimeChange:(NSNotification *)notification {
-    [_labelDate setText:@"Date changed"];
-    dateChanged = true;
-    [self updation];
+- (void) viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                 name:UIApplicationSignificantTimeChangeNotification
+                                               object:nil];
+    
+    
 }
+
 
 -(void) updation
 {
@@ -230,6 +232,12 @@ int const STATUS_NOT_TAKEN = -1;
         currentModelObject = [[TRYItemStore sharedStore]createItem:_savedDate];
     }
 }
+- (void)onSignificantTimeChange:(NSNotification *)notification {
+    [_labelDate setText:@"Date changed"];
+    dateChanged = true;
+    [self updation];
+}
+
     -(NSDate*)getNextReminderDate
 {
     

@@ -28,11 +28,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    _background.frame = self.view.bounds;
-    [[self view] addSubview:_background];
-    [_background.superview sendSubviewToBack:_background];
-    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1.png"]]; 
 }
 
 

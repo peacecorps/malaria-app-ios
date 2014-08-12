@@ -36,11 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    _background.frame = self.view.bounds;
-    [[self view] addSubview:_background];
-    [_background.superview sendSubviewToBack:_background];
-      self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
+    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1.png"]];
+    self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
     

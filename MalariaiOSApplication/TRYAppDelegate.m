@@ -33,10 +33,12 @@ NSString *const prefMedicine = @"medicineName";
     
     homeVC = [[TRYPageViewController alloc] init];
     homeVC.tabBarItem.title = @"Home";
+    homeVC.tabBarItem.image = [UIImage imageNamed:@"tab_home.png"];
 
     //Settings controller
     TRYInfoHubViewController *settingsVC = [[TRYInfoHubViewController alloc]init];
     settingsVC.tabBarItem.title = @"Info Hub";
+    settingsVC.tabBarItem.image = [UIImage imageNamed:@"tab_infohub.png"];
     
     //init the UITabBarController
     

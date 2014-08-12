@@ -9,7 +9,7 @@
 #import "TRYSetupScreenViewController.h"
 #import "TRYModel.h"
 #import "TRYItemStore.h"
-#define kOFFSET_FOR_KEYBOARD 80.0
+#define kOFFSET_FOR_KEYBOARD 100.0
 
 @interface TRYSetupScreenViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *setUp;
@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *timeField;
 @property (strong, nonatomic) IBOutlet UILabel *medWarning;
 @property (strong, nonatomic) IBOutlet UILabel *timeWarning;
-@property (strong, nonatomic) IBOutlet UIImageView *background;
 @property (strong, nonatomic) IBOutlet UIView *collect;
 @property (strong, nonatomic) IBOutlet UIButton *done;
 - (IBAction)doneButtonAction:(id)sender;
@@ -52,13 +51,12 @@ TRYModel *xyz;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    _background.frame = self.view.bounds;
-    [[self view] addSubview:_background];
-    [_background.superview sendSubviewToBack:_background];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1.png"]];
+    _collect.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1.png"]];
     
+    _collect.layer.borderColor = [UIColor brownColor].CGColor;
+    _collect.layer.borderWidth = 3.0f;
     
-    _collect.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]];
     prefs = [NSUserDefaults standardUserDefaults];
     medName = [prefs stringForKey:@"medicineName"];
     startDay = [prefs objectForKey:@"startDay"];
@@ -344,12 +342,6 @@ TRYModel *xyz;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
-    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    _background.frame = self.view.bounds;
-    [[self view] addSubview:_background];
-    [_background.superview sendSubviewToBack:_background];
-    
     if(![medName isEqualToString:@""]&& startDay)
     {
        

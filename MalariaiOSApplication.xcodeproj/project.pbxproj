@@ -41,6 +41,11 @@
 		D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */; };
 		D1CD752519782177008C4643 /* TRYAnalyticsIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */; };
 		D1CD752619782177008C4643 /* TRYAnalyticsIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1CD752419782177008C4643 /* TRYAnalyticsIViewController.xib */; };
+		D1F9ADD71999DCB2007727EE /* tab_info.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F9ADD61999DCB2007727EE /* tab_info.png */; };
+		D1F9ADD91999DD41007727EE /* peace_corps_info.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F9ADD81999DD41007727EE /* peace_corps_info.png */; };
+		D1F9ADDB1999DE10007727EE /* background1.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F9ADDA1999DE10007727EE /* background1.png */; };
+		D1F9ADDD1999E121007727EE /* slider_max.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F9ADDC1999E121007727EE /* slider_max.png */; };
+		D1F9ADDF1999E1C7007727EE /* slider_min.png in Resources */ = {isa = PBXBuildFile; fileRef = D1F9ADDE1999E1C7007727EE /* slider_min.png */; };
 		D1FDE60D1997B04200F5CB86 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE60B1997B04200F5CB86 /* main.m */; };
 		D1FDE60E1997B04200F5CB86 /* TRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE60C1997B04200F5CB86 /* TRYAppDelegate.m */; };
 		D1FDE6121997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D1FDE6101997B09E00F5CB86 /* MalariaiOSApplication.xcdatamodeld */; };
@@ -99,6 +104,11 @@
 		D1CD752219782177008C4643 /* TRYAnalyticsIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYAnalyticsIViewController.h; sourceTree = "<group>"; };
 		D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYAnalyticsIViewController.m; sourceTree = "<group>"; };
 		D1CD752419782177008C4643 /* TRYAnalyticsIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYAnalyticsIViewController.xib; sourceTree = "<group>"; };
+		D1F9ADD61999DCB2007727EE /* tab_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_info.png; path = "../../GSoC-2014/tab_info.png"; sourceTree = "<group>"; };
+		D1F9ADD81999DD41007727EE /* peace_corps_info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peace_corps_info.png; path = "../../GSoC-2014/peace_corps_info.png"; sourceTree = "<group>"; };
+		D1F9ADDA1999DE10007727EE /* background1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background1.png; path = "../../GSoC-2014/background1.png"; sourceTree = "<group>"; };
+		D1F9ADDC1999E121007727EE /* slider_max.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider_max.png; path = "../../GSoC-2014/slider_max.png"; sourceTree = "<group>"; };
+		D1F9ADDE1999E1C7007727EE /* slider_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slider_min.png; path = "../../GSoC-2014/slider_min.png"; sourceTree = "<group>"; };
 		D1FDE60B1997B04200F5CB86 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MalariaiOSApplication/main.m; sourceTree = SOURCE_ROOT; };
 		D1FDE60C1997B04200F5CB86 /* TRYAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TRYAppDelegate.m; path = MalariaiOSApplication/TRYAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		D1FDE60F1997B05900F5CB86 /* TRYAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TRYAppDelegate.h; path = MalariaiOSApplication/TRYAppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -276,13 +286,18 @@
 		D16A8424195D93D400613D35 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D1F9ADDE1999E1C7007727EE /* slider_min.png */,
+				D1F9ADDC1999E121007727EE /* slider_max.png */,
+				D1F9ADD61999DCB2007727EE /* tab_info.png */,
 				D14A2C6E19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png */,
 				D14A2C6C19920BED00B5AC09 /* info_hub_title.png */,
 				D16A8425195D977D00613D35 /* medicine.png */,
 				D16A8416195D701600613D35 /* background.png */,
 				D16A8417195D701600613D35 /* button_no.png */,
 				D16A8418195D701600613D35 /* button_settings.png */,
+				D1F9ADDA1999DE10007727EE /* background1.png */,
 				D16A8419195D701600613D35 /* button_yes.png */,
+				D1F9ADD81999DD41007727EE /* peace_corps_info.png */,
 				D16A841A195D701600613D35 /* logo.png */,
 				D16A841B195D701600613D35 /* tab_home.png */,
 				D16A841C195D701600613D35 /* tab_infohub.png */,
@@ -385,19 +400,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				D14A2C6D19920BED00B5AC09 /* info_hub_title.png in Resources */,
+				D1F9ADDB1999DE10007727EE /* background1.png in Resources */,
 				D16A841E195D701600613D35 /* button_no.png in Resources */,
 				D16A8423195D701600613D35 /* tab_infohub.png in Resources */,
 				D1536A051959511D0033BC15 /* TRYHomeViewController.xib in Resources */,
 				D16A8426195D977D00613D35 /* medicine.png in Resources */,
 				D16A8421195D701600613D35 /* logo.png in Resources */,
 				D14A2C6A1992062400B5AC09 /* TRYInfoHubViewController.xib in Resources */,
+				D1F9ADD71999DCB2007727EE /* tab_info.png in Resources */,
 				D16A841D195D701600613D35 /* background.png in Resources */,
 				D16A841F195D701600613D35 /* button_settings.png in Resources */,
 				D16A8422195D701600613D35 /* tab_home.png in Resources */,
 				D1536A17195ACC910033BC15 /* TRYPageViewController.xib in Resources */,
+				D1F9ADDD1999E121007727EE /* slider_max.png in Resources */,
+				D1F9ADD91999DD41007727EE /* peace_corps_info.png in Resources */,
 				D129C56C19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib in Resources */,
 				D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */,
 				D14A2C6F19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png in Resources */,
+				D1F9ADDF1999E1C7007727EE /* slider_min.png in Resources */,
 				D16A8420195D701600613D35 /* button_yes.png in Resources */,
 				D1CD752619782177008C4643 /* TRYAnalyticsIViewController.xib in Resources */,
 			);

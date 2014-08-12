@@ -68,16 +68,13 @@ int const STATUS_NOT_TAKEN = -1;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    _background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background.png"]];
-    _background.frame = self.view.bounds;
-    [[self view] addSubview:_background];
-    [_background.superview sendSubviewToBack:_background];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background1.png"]];
     _flag =0;
    
 }
 - (void) viewWillAppear:(BOOL)animated{
     
-    [super viewDidAppear:true];
+    [super viewWillAppear:true];
      [self updation];
 }
 - (void) dealloc{
@@ -195,6 +192,8 @@ int const STATUS_NOT_TAKEN = -1;
     dosesInARow=dosesInARow+1;
     _savedDate = _nextReminderDate;
     medLastTaken = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:medLastTaken forKey:prefmedLastTaken];
+    [[NSUserDefaults standardUserDefaults] synchronize];
    [self syncUserDefaults];
    [currentModelObject setMedStatus:STATUS_TAKEN];
    [self changeLabel];
@@ -265,7 +264,7 @@ int const STATUS_NOT_TAKEN = -1;
 {
     [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
-    [[NSUserDefaults standardUserDefaults] setObject:medLastTaken forKey:prefmedLastTaken];
+    
     [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

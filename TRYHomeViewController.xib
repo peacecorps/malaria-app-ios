@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TRYHomeViewController">
             <connections>
-                <outlet property="background" destination="8pi-FT-ntI" id="YOP-ca-o2o"/>
                 <outlet property="buttonNo" destination="ZaK-0x-Wg4" id="eNm-l1-lXQ"/>
                 <outlet property="buttonYes" destination="ipN-DO-HxM" id="OCn-h4-hfA"/>
                 <outlet property="labelDate" destination="vaD-RR-ZKb" id="cTM-eC-odl"/>
@@ -69,10 +68,6 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pi-FT-ntI">
-                    <rect key="frame" x="0.0" y="397" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

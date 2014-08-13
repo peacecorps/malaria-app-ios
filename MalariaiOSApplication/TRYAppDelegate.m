@@ -45,6 +45,11 @@ NSString *const prefMedicine = @"medicineName";
     self.tabBarController = [[UITabBarController alloc]init];
     self.tabBarController.viewControllers = @[homeVC,settingsVC];
     
+    UIImage *tabBackground = [[UIImage imageNamed:@"background1.png"]
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [[UITabBar appearance] setBackgroundImage:tabBackground];
+
+    
     //Add the tab bar controller to the window
     [self.window setRootViewController:self.tabBarController];
     

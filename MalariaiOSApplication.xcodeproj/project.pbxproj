@@ -37,6 +37,9 @@
 		D16A8426195D977D00613D35 /* medicine.png in Resources */ = {isa = PBXBuildFile; fileRef = D16A8425195D977D00613D35 /* medicine.png */; };
 		D180DEC719921BA500F494BA /* TRYModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D180DEC619921BA500F494BA /* TRYModel.m */; };
 		D180DECA1992286200F494BA /* TRYItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D180DEC91992286200F494BA /* TRYItemStore.m */; };
+		D1AB6823199AA99600970026 /* adherence.png in Resources */ = {isa = PBXBuildFile; fileRef = D1AB6820199AA99600970026 /* adherence.png */; };
+		D1AB6824199AA99600970026 /* dosesInARow.png in Resources */ = {isa = PBXBuildFile; fileRef = D1AB6821199AA99600970026 /* dosesInARow.png */; };
+		D1AB6825199AA99600970026 /* medLastTaken.png in Resources */ = {isa = PBXBuildFile; fileRef = D1AB6822199AA99600970026 /* medLastTaken.png */; };
 		D1C979DD195D6C30008B39B8 /* TRYSetupScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */; };
 		D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */; };
 		D1CD752519782177008C4643 /* TRYAnalyticsIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CD752319782177008C4643 /* TRYAnalyticsIViewController.m */; };
@@ -98,6 +101,9 @@
 		D180DEC619921BA500F494BA /* TRYModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYModel.m; sourceTree = "<group>"; };
 		D180DEC81992286200F494BA /* TRYItemStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYItemStore.h; sourceTree = "<group>"; };
 		D180DEC91992286200F494BA /* TRYItemStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYItemStore.m; sourceTree = "<group>"; };
+		D1AB6820199AA99600970026 /* adherence.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = adherence.png; path = "../../GSoC-2014/adherence.png"; sourceTree = "<group>"; };
+		D1AB6821199AA99600970026 /* dosesInARow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dosesInARow.png; path = "../../GSoC-2014/dosesInARow.png"; sourceTree = "<group>"; };
+		D1AB6822199AA99600970026 /* medLastTaken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = medLastTaken.png; path = "../../GSoC-2014/medLastTaken.png"; sourceTree = "<group>"; };
 		D1C979DA195D6C30008B39B8 /* TRYSetupScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRYSetupScreenViewController.h; sourceTree = "<group>"; };
 		D1C979DB195D6C30008B39B8 /* TRYSetupScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TRYSetupScreenViewController.m; sourceTree = "<group>"; };
 		D1C979DC195D6C30008B39B8 /* TRYSetupScreenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TRYSetupScreenViewController.xib; sourceTree = "<group>"; };
@@ -286,6 +292,9 @@
 		D16A8424195D93D400613D35 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D1AB6820199AA99600970026 /* adherence.png */,
+				D1AB6821199AA99600970026 /* dosesInARow.png */,
+				D1AB6822199AA99600970026 /* medLastTaken.png */,
 				D1F9ADDE1999E1C7007727EE /* slider_min.png */,
 				D1F9ADDC1999E121007727EE /* slider_max.png */,
 				D1F9ADD61999DCB2007727EE /* tab_info.png */,
@@ -415,11 +424,14 @@
 				D1F9ADDD1999E121007727EE /* slider_max.png in Resources */,
 				D1F9ADD91999DD41007727EE /* peace_corps_info.png in Resources */,
 				D129C56C19799493005B4D08 /* TRYAnalyticsScreenIIViewController.xib in Resources */,
+				D1AB6825199AA99600970026 /* medLastTaken.png in Resources */,
 				D1C979DE195D6C30008B39B8 /* TRYSetupScreenViewController.xib in Resources */,
 				D14A2C6F19920D4C00B5AC09 /* button_info_hub_peace_corps_policy.png in Resources */,
 				D1F9ADDF1999E1C7007727EE /* slider_min.png in Resources */,
+				D1AB6823199AA99600970026 /* adherence.png in Resources */,
 				D16A8420195D701600613D35 /* button_yes.png in Resources */,
 				D1CD752619782177008C4643 /* TRYAnalyticsIViewController.xib in Resources */,
+				D1AB6824199AA99600970026 /* dosesInARow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

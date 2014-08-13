@@ -136,13 +136,18 @@ int const STATUS_NOT_TAKEN = -1;
             if (dateCompareNext == -1) {
                 if ((NSInteger)[_preferences integerForKey:@"medFrequency"] == 7) {
                     [_labelDay setTextColor:[UIColor redColor]];
+                    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
                 }
             }
             
             //today > nextDate => missed count = (today - nextDate), nextdate = today, saved date = next date
             if(dateCompareNext == 1)
             {
-               
+                
+                [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 visited = false;
                 _flag = 1;
                 bool weekly = [_preferences integerForKey:@"medFrequency"] == (NSInteger)7;
@@ -161,6 +166,8 @@ int const STATUS_NOT_TAKEN = -1;
             
             else if(dateCompareNext == 0)
             {
+                [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 [_labelDay setTextColor:[UIColor blackColor]];
                 [_buttonYes setEnabled:YES];
                 [_buttonNo setEnabled:YES];
@@ -184,12 +191,17 @@ int const STATUS_NOT_TAKEN = -1;
 }
 - (IBAction)medNoAction:(id)sender {
     [currentModelObject setMedStatus:STATUS_NOT_TAKEN];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:prefDosesInARow];
+    
   }
 - (IBAction)medYesAction:(id)sender {
     
     visited = false;
     dosesInARow = (NSInteger)[_preferences integerForKey:prefDosesInARow];
     dosesInARow=dosesInARow+1;
+    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     _savedDate = _nextReminderDate;
     medLastTaken = [NSDate date];
     [[NSUserDefaults standardUserDefaults] setObject:medLastTaken forKey:prefmedLastTaken];
@@ -265,7 +277,7 @@ int const STATUS_NOT_TAKEN = -1;
     [[NSUserDefaults standardUserDefaults] setObject:_nextReminderDate forKey:prefReminderTime2];
     [[NSUserDefaults standardUserDefaults] setObject:_savedDate forKey:prefReminderTime1];
     
-    [[NSUserDefaults standardUserDefaults] setInteger:dosesInARow forKey:prefDosesInARow];
+    
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

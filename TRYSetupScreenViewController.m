@@ -7,6 +7,8 @@
 //
 
 #import "TRYSetupScreenViewController.h"
+#import "TRYModel.h"
+#import "TRYItemStore.h"
 #define kOFFSET_FOR_KEYBOARD 80.0
 
 @interface TRYSetupScreenViewController ()
@@ -43,6 +45,7 @@ NSDate *currentTime;
 NSString *medName;
 NSUserDefaults *prefs;
 NSDate *startDay;
+TRYModel *xyz;
 
 
 
@@ -308,7 +311,8 @@ NSDate *startDay;
     [[NSUserDefaults standardUserDefaults] setObject:startDay forKey:@"startDay"];
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"dosesInARow"];
     [[NSUserDefaults standardUserDefaults] setInteger:[self determineMedFrequency] forKey:@"medFrequency"];
-
+    //TRYModel *xyz = [[TRYItemStore sharedStore]createItem:[NSDate date]];
+    //[[NSUserDefaults standardUserDefaults] setObject:xyz forKey:@"firstModelObject"];
         
         UILocalNotification* localNotification = [[UILocalNotification alloc] init];
         localNotification.fireDate = currentTime;

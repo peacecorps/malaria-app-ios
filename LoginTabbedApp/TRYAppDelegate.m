@@ -12,6 +12,7 @@
 #import "TRYSetupScreenViewController.h"
 #import "TRYPageViewController.h"
 #import "TRYInfoHubViewController.h"
+#import "TRYItemStore.h"
 
 @implementation TRYAppDelegate
 
@@ -82,7 +83,24 @@ NSString *const prefMedicine = @"medicineName";
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+    BOOL success = [[TRYItemStore sharedStore] saveChanges];
+    if (success) {
+        NSLog(@"Saved all of the BNRItems");
+        int count = [[[TRYItemStore sharedStore] allItems] count];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"dd/MM/yyyy"];
+        NSArray *x  = [[TRYItemStore sharedStore]allItems];
+        for (int i = 0; i < count; i++) {
+            TRYModel *y = x[i];
+            NSString *dateString = [dateFormat stringFromDate:[y medDate]];
+            NSLog(dateString,nil);
+            NSLog([NSString stringWithFormat:@"%d", y.getMedStatus],nil);
+        }
+
+    }
+    else {
+        NSLog(@"Could not save any of the BNRItems");}
+         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 

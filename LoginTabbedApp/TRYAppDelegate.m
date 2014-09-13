@@ -55,22 +55,6 @@ NSString *const prefMedicine = @"medicineName";
         TRYSetupScreenViewController *setupVC = [[TRYSetupScreenViewController alloc]init];
         [self.window.rootViewController presentViewController:setupVC animated:NO completion:nil];
     }
-    
-  /*  else {
-        // has set up
-        // present log in (are we requiring users to login?)
-        //Add the login view controller as the root controller of the app window
-        
-    }*/
-   
-    
-    
-    
-    
-    
-    
-    
-    //[self.window.rootViewController presentViewController:setupVC animated:YES completion:nil];
     return YES;
 }
 
@@ -84,7 +68,7 @@ NSString *const prefMedicine = @"medicineName";
 {
     BOOL success = [[TRYItemStore sharedStore] saveChanges];
     if (success) {
-        NSLog(@"Saved all of the BNRItems");
+        NSLog(@"Saved all of the Items");
         int count = [[[TRYItemStore sharedStore] allItems] count];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"dd/MM/yyyy"];
@@ -98,7 +82,7 @@ NSString *const prefMedicine = @"medicineName";
 
     }
     else {
-        NSLog(@"Could not save any of the BNRItems");}
+        NSLog(@"Could not save any of the Items");}
          // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -157,6 +141,8 @@ NSString *const prefMedicine = @"medicineName";
     
     
 }
+
+
 
 
 

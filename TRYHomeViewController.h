@@ -12,6 +12,6 @@
 {   
 }
 @property (strong, nonatomic) IBOutlet UILabel *labelDay;
-
+-(void)updation;
 
 @end

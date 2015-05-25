@@ -1,12 +1,5 @@
-//
-//  ExistingViewControllers.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 25/05/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
+import UIKit
 
 enum ExistingViewControllers : String{
     //setup screen when the application launches for the first time
@@ -16,8 +9,17 @@ enum ExistingViewControllers : String{
     case PagesManagerViewController = "PagesManagerViewController"
     
     //first button
-    case DidTakePillViewController = "DidTakePillViewController"
+    case DidTakePillViewController = "DidTakePillsViewController"
     
+    //second button
+    case PillsStatsViewController = "PillsStatsViewController"
+
     //third button
     case InfoViewController = "InfoViewController"
+    
+    
+    func instanciateViewController() -> UIViewController{
+        var value = rawValue
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(value) as! UIViewController
+    }
 }

@@ -20,6 +20,7 @@
 		2022D5211B137DDD00FDF2D3 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5201B137DDD00FDF2D3 /* PillsStatsViewController.swift */; };
 		2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */; };
 		2022D5291B13BC4900FDF2D3 /* PageManagerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */; };
+		2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		2022D5201B137DDD00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageManagerContentViewController.swift; sourceTree = "<group>"; };
+		2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				200EE48D1B1343A50087FB24 /* Main.storyboard */,
 				200EE4921B1343A50087FB24 /* LaunchScreen.xib */,
 				200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */,
+				2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */,
 			);
 			path = "malaria-ios";
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* PillsStatsViewController.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
+				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
 				2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */,
 				200EE4AD1B1347290087FB24 /* Logger.swift in Sources */,

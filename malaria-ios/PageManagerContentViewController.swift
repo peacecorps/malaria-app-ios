@@ -10,5 +10,4 @@ public class PageManagerContentViewController : UIViewController{
             changeIndicatorHandler(pageIndex!)
         }
     }
-
 }

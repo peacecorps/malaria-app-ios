@@ -1,18 +1,9 @@
-//
-//  PagesManagerViewController.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 25/05/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    private var _controllerEnum: ControllerEnum = ControllerEnum()
+    private var _controllerEnum: PagesEnum = PagesEnum()
     
-    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var mediceButton: UIButton!
     @IBOutlet weak var planTripButton: UIButton!
@@ -20,11 +11,13 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     
     var pageViewController : UIPageViewController!
     
-    private var _dict: [UIViewController: ControllerEnum] = [:]
+    private var _dict: [UIViewController: PagesEnum] = [:]
     private let _storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
@@ -41,26 +34,51 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         view.addSubview(pageViewController!.view)
         pageViewController!.didMoveToParentViewController(self)
         
-        
-        pageControl.numberOfPages = ControllerEnum.allValues.count
-        
-        
-        //setViewControllers([getController(_controllerEnum)!], direction: .Forward, animated: false, completion: nil)
+        setupPageControl()
     }
     
-    // UIPaveViewController and UIPageViewControllerDataSource protocols
+    private func setupPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = UIColor.yellowColor()
+        appearance.currentPageIndicatorTintColor = UIColor.redColor()
+        appearance.backgroundColor = UIColor.clearColor()
+    }
+    
+    @IBAction func homeButtonHandler(){
+        logger("pressed home button")
+        GoToPage(PagesEnum.Home)
+    }
+    
+    @IBAction func tripButtonHandler(){
+        logger("pressed trip button")
+        GoToPage(PagesEnum.Transport)
+    }
+    
+    @IBAction func infoButtonHandler(){
+        logger("pressed info button")
+        GoToPage(PagesEnum.Info)
+    }
+    
+    @IBAction func settingsButtonHandler(){
+        logger("pressed settings button")
+    }
+    
+    private func GoToPage(index : PagesEnum){
+        let page = getController(index)!
+        //FIXME: Must be Reverse if index < currentIndex
+        pageViewController!.setViewControllers([page], direction: .Forward, animated: true, completion: nil)
+    }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return ControllerEnum.allValues.count
+        return PagesEnum.allValues.count
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        //pageControl.currentPage = _controllerEnum.rawValue
-        return 0//_controllerEnum.rawValue
+        return _controllerEnum.rawValue
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        return getController(_dict[viewController]!.prevIndex())
+        return getController(_dict[viewController]!.previousIndex())
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
@@ -69,20 +87,20 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     
     
     func updateCurrentViewHandler(toIndex: Int){
-        pageControl.currentPage = toIndex
+        logger("Update buttons to translucent")
     }
     
     // *** PRIVATE METHODS
-    private func getController(value: ControllerEnum) -> UIViewController? {
+    private func getController(value: PagesEnum) -> UIViewController? {
         var vc: PageManagerContentViewController?
         
         switch value {
-            case .Meds:
-                vc = _storyboard.instantiateViewControllerWithIdentifier("DidTakePillsViewController") as! DidTakePillsViewController
+            case .Home:
+                vc = ExistingViewControllers.DidTakePillViewController.instanciateViewController() as! DidTakePillsViewController
             case .Transport:
-                vc = _storyboard.instantiateViewControllerWithIdentifier("PillsStatsViewController") as! PillsStatsViewController
+                vc = ExistingViewControllers.PillsStatsViewController.instanciateViewController() as! PillsStatsViewController
             case .Info:
-                vc = _storyboard.instantiateViewControllerWithIdentifier("InfoViewController") as! InfoViewController
+                vc = ExistingViewControllers.InfoViewController.instanciateViewController() as! InfoViewController
             default: return nil
         }
         
@@ -95,22 +113,22 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
 }
 
-private enum ControllerEnum: Int {
-    static let allValues = [Meds, Transport, Info]
+private enum PagesEnum: Int {
+    static let allValues = [Home, Transport, Info]
     
-    case Nil = -1, Meds, Transport, Info
+    case Nil = -1, Home, Transport, Info
     
     init() {
-        self = .Meds
+        self = .Home
     }
     
-    func prevIndex() -> ControllerEnum {
-        return ControllerEnum(rawValue: rawValue-1)!
+    func previousIndex() -> PagesEnum {
+        return PagesEnum(rawValue: rawValue-1)!
     }
     
-    func nextIndex() -> ControllerEnum {
+    func nextIndex() -> PagesEnum {
         var value = rawValue+1
-        if value > ControllerEnum.allValues.count-1 { value = Nil.rawValue }
-        return ControllerEnum(rawValue: value)!
+        if value > PagesEnum.allValues.count-1 { value = Nil.rawValue }
+        return PagesEnum(rawValue: value)!
     }
 }

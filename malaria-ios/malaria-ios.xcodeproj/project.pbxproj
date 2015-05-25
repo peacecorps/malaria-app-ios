@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
+		200EE48C1B1343A50087FB24 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE48B1B1343A50087FB24 /* ViewController.swift */; };
+		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
+		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
+		200EE4A01B1343A60087FB24 /* malaria_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* malaria_iosTests.swift */; };
+		200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */; };
+		200EE4AD1B1347290087FB24 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AC1B1347290087FB24 /* Logger.swift */; };
+		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
+		200EE4B11B134C020087FB24 /* ExistingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		200EE49A1B1343A60087FB24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 200EE47C1B1343A50087FB24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 200EE4831B1343A50087FB24;
+			remoteInfo = "malaria-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		200EE4841B1343A50087FB24 /* malaria-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "malaria-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		200EE4881B1343A50087FB24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		200EE4891B1343A50087FB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		200EE48B1B1343A50087FB24 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		200EE48E1B1343A50087FB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		200EE4931B1343A50087FB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		200EE4991B1343A60087FB24 /* malaria-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "malaria-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		200EE49E1B1343A60087FB24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		200EE49F1B1343A60087FB24 /* malaria_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = malaria_iosTests.swift; sourceTree = "<group>"; };
+		200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
+		200EE4AC1B1347290087FB24 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
+		200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewControllers.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		200EE4811B1343A50087FB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		200EE4961B1343A60087FB24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		200EE47B1B1343A50087FB24 = {
+			isa = PBXGroup;
+			children = (
+				200EE4861B1343A50087FB24 /* malaria-ios */,
+				200EE49C1B1343A60087FB24 /* malaria-iosTests */,
+				200EE4851B1343A50087FB24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		200EE4851B1343A50087FB24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				200EE4841B1343A50087FB24 /* malaria-ios.app */,
+				200EE4991B1343A60087FB24 /* malaria-iosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		200EE4861B1343A50087FB24 /* malaria-ios */ = {
+			isa = PBXGroup;
+			children = (
+				200EE4A91B1346DA0087FB24 /* Managers */,
+				200EE4891B1343A50087FB24 /* AppDelegate.swift */,
+				200EE48B1B1343A50087FB24 /* ViewController.swift */,
+				200EE48D1B1343A50087FB24 /* Main.storyboard */,
+				200EE4921B1343A50087FB24 /* LaunchScreen.xib */,
+				200EE4871B1343A50087FB24 /* Supporting Files */,
+				200EE4AC1B1347290087FB24 /* Logger.swift */,
+				200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */,
+				200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */,
+			);
+			path = "malaria-ios";
+			sourceTree = "<group>";
+		};
+		200EE4871B1343A50087FB24 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				200EE4881B1343A50087FB24 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		200EE49C1B1343A60087FB24 /* malaria-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				200EE49F1B1343A60087FB24 /* malaria_iosTests.swift */,
+				200EE49D1B1343A60087FB24 /* Supporting Files */,
+			);
+			path = "malaria-iosTests";
+			sourceTree = "<group>";
+		};
+		200EE49D1B1343A60087FB24 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				200EE49E1B1343A60087FB24 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		200EE4A91B1346DA0087FB24 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		200EE4831B1343A50087FB24 /* malaria-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200EE4A31B1343A60087FB24 /* Build configuration list for PBXNativeTarget "malaria-ios" */;
+			buildPhases = (
+				200EE4801B1343A50087FB24 /* Sources */,
+				200EE4811B1343A50087FB24 /* Frameworks */,
+				200EE4821B1343A50087FB24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "malaria-ios";
+			productName = "malaria-ios";
+			productReference = 200EE4841B1343A50087FB24 /* malaria-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		200EE4981B1343A60087FB24 /* malaria-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 200EE4A61B1343A60087FB24 /* Build configuration list for PBXNativeTarget "malaria-iosTests" */;
+			buildPhases = (
+				200EE4951B1343A60087FB24 /* Sources */,
+				200EE4961B1343A60087FB24 /* Frameworks */,
+				200EE4971B1343A60087FB24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				200EE49B1B1343A60087FB24 /* PBXTargetDependency */,
+			);
+			name = "malaria-iosTests";
+			productName = "malaria-iosTests";
+			productReference = 200EE4991B1343A60087FB24 /* malaria-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		200EE47C1B1343A50087FB24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Bruno Henriques";
+				TargetAttributes = {
+					200EE4831B1343A50087FB24 = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = A9972S5PQC;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
+					200EE4981B1343A60087FB24 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = 200EE4831B1343A50087FB24;
+					};
+				};
+			};
+			buildConfigurationList = 200EE47F1B1343A50087FB24 /* Build configuration list for PBXProject "malaria-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 200EE47B1B1343A50087FB24;
+			productRefGroup = 200EE4851B1343A50087FB24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				200EE4831B1343A50087FB24 /* malaria-ios */,
+				200EE4981B1343A60087FB24 /* malaria-iosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		200EE4821B1343A50087FB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */,
+				200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */,
+				200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		200EE4971B1343A60087FB24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		200EE4801B1343A50087FB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
+				200EE4B11B134C020087FB24 /* ExistingViewControllers.swift in Sources */,
+				200EE48C1B1343A50087FB24 /* ViewController.swift in Sources */,
+				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
+				200EE4AD1B1347290087FB24 /* Logger.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		200EE4951B1343A60087FB24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200EE4A01B1343A60087FB24 /* malaria_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		200EE49B1B1343A60087FB24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 200EE4831B1343A50087FB24 /* malaria-ios */;
+			targetProxy = 200EE49A1B1343A60087FB24 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		200EE48D1B1343A50087FB24 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				200EE48E1B1343A50087FB24 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		200EE4921B1343A50087FB24 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				200EE4931B1343A50087FB24 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		200EE4A11B1343A60087FB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		200EE4A21B1343A60087FB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		200EE4A41B1343A60087FB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "malaria-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		200EE4A51B1343A60087FB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "malaria-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		200EE4A71B1343A60087FB24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "malaria-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/malaria-ios.app/malaria-ios";
+			};
+			name = Debug;
+		};
+		200EE4A81B1343A60087FB24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "malaria-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/malaria-ios.app/malaria-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		200EE47F1B1343A50087FB24 /* Build configuration list for PBXProject "malaria-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				200EE4A11B1343A60087FB24 /* Debug */,
+				200EE4A21B1343A60087FB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200EE4A31B1343A60087FB24 /* Build configuration list for PBXNativeTarget "malaria-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				200EE4A41B1343A60087FB24 /* Debug */,
+				200EE4A51B1343A60087FB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		200EE4A61B1343A60087FB24 /* Build configuration list for PBXNativeTarget "malaria-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				200EE4A71B1343A60087FB24 /* Debug */,
+				200EE4A81B1343A60087FB24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 200EE47C1B1343A50087FB24 /* Project object */;
+}

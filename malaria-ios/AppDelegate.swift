@@ -18,13 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let controllerID: String = UserSettingsManager.getBool(.IsFirstLaunch) ? ExistingViewControllers.DidTakePillViewController.rawValue : ExistingViewControllers.SetupScreenViewController.rawValue
+        let controllerID: String = UserSettingsManager.getBool(.IsFirstLaunch) ? ExistingViewControllers.PagesManagerViewController.rawValue : ExistingViewControllers.SetupScreenViewController.rawValue
         
         if let c = storyboard.instantiateViewControllerWithIdentifier(controllerID) as? UIViewController {
             window!.rootViewController = c
         }
         
-        UserSettingsManager.setBool(.IsFirstLaunch, true)
+        //UserSettingsManager.setBool(.IsFirstLaunch, true)
         
         window!.makeKeyAndVisible()
         return true

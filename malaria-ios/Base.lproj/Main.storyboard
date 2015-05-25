@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--SetupViewController-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="SetupScreenViewController" title="SetupViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Setup" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DTV-gR-nfe">
+                                <rect key="frame" x="269" y="106" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C3n-d2-tA1">
+                                <rect key="frame" x="189" y="241" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mZO-lX-blt">
+                                <rect key="frame" x="269" y="241" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-157" y="626"/>
+        </scene>
+        <!--Pages Manager View Controller-->
+        <scene sceneID="Ji7-20-kdB">
+            <objects>
+                <viewController storyboardIdentifier="PagesManagerViewController" id="pTL-oN-1jj" customClass="PagesManagerViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bkd-UF-Ljz"/>
+                        <viewControllerLayoutGuide type="bottom" id="HXn-IC-fFp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sfN-kw-TLB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wya-3D-qTm">
+                                <rect key="frame" x="281" y="496" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.49511873722076416" green="0.27667197585105896" blue="0.27412080764770508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.27080079913139343" green="0.49457651376724243" blue="0.2683931291103363" alpha="0.64044654187817263" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1A-w1-iW2">
+                                <rect key="frame" x="142" y="536" width="33" height="30"/>
+                                <color key="backgroundColor" red="0.40683650970458984" green="0.8497428297996521" blue="0.40147954225540161" alpha="0.64044654187817263" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhX-3f-oo4">
+                                <rect key="frame" x="285" y="536" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.40683650970458984" green="0.8497428297996521" blue="0.40147954225540161" alpha="0.64044654187817263" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Trip">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tmz-TU-HgK">
+                                <rect key="frame" x="414" y="536" width="30" height="30"/>
+                                <color key="backgroundColor" red="0.40683650970458984" green="0.8497428297996521" blue="0.40147954225540161" alpha="0.64044654187817263" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Info">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vn-rf-IV5">
+                                <rect key="frame" x="505" y="28" width="57" height="30"/>
+                                <state key="normal" title="Settings">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Vn-rf-IV5" firstAttribute="top" secondItem="Bkd-UF-Ljz" secondAttribute="bottom" constant="8" symbolic="YES" id="1Ac-Wv-Lcu"/>
+                            <constraint firstItem="wya-3D-qTm" firstAttribute="centerX" secondItem="HhX-3f-oo4" secondAttribute="centerX" id="KNK-MV-mg5"/>
+                            <constraint firstItem="p1A-w1-iW2" firstAttribute="baseline" secondItem="HhX-3f-oo4" secondAttribute="baseline" id="RBy-h0-uL8"/>
+                            <constraint firstItem="p1A-w1-iW2" firstAttribute="leading" secondItem="sfN-kw-TLB" secondAttribute="leading" constant="142" id="Wzc-SK-6Y7"/>
+                            <constraint firstItem="HhX-3f-oo4" firstAttribute="top" secondItem="wya-3D-qTm" secondAttribute="bottom" constant="3" id="cHs-Xq-8E6"/>
+                            <constraint firstItem="HXn-IC-fFp" firstAttribute="top" secondItem="p1A-w1-iW2" secondAttribute="bottom" constant="34" id="jhy-cr-Biq"/>
+                            <constraint firstItem="Tmz-TU-HgK" firstAttribute="leading" secondItem="HhX-3f-oo4" secondAttribute="trailing" constant="99" id="lZI-Ia-seo"/>
+                            <constraint firstItem="wya-3D-qTm" firstAttribute="centerX" secondItem="sfN-kw-TLB" secondAttribute="centerX" id="tuw-9P-uvV"/>
+                            <constraint firstItem="Tmz-TU-HgK" firstAttribute="baseline" secondItem="HhX-3f-oo4" secondAttribute="baseline" id="ugP-ur-p83"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7Vn-rf-IV5" secondAttribute="trailing" constant="22" id="zqx-wi-v49"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="infoButton" destination="Tmz-TU-HgK" id="WTX-8F-bhG"/>
+                        <outlet property="mediceButton" destination="p1A-w1-iW2" id="Q5H-7C-pQQ"/>
+                        <outlet property="pageControl" destination="wya-3D-qTm" id="zoJ-2A-sdf"/>
+                        <outlet property="planTripButton" destination="HhX-3f-oo4" id="OcR-hK-jB9"/>
+                        <outlet property="settingsButton" destination="7Vn-rf-IV5" id="hVg-6d-vQA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QRi-ww-BAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="521" y="626"/>
+        </scene>
+        <!--Pills Stats View Controller-->
+        <scene sceneID="1vZ-Gc-bZV">
+            <objects>
+                <viewController storyboardIdentifier="PillsStatsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tfu-De-jly" customClass="PillsStatsViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rSy-qF-w1R"/>
+                        <viewControllerLayoutGuide type="bottom" id="YfD-20-f2C"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="N3B-hm-fmj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j81-TV-e8N">
+                                <rect key="frame" x="297" y="242" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3gc-pA-khu">
+                                <rect key="frame" x="230" y="332" width="118" height="31"/>
+                            </slider>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dcx-hV-LDr">
+                                <rect key="frame" x="151" y="122" width="51" height="31"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="paa-QJ-WqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169" y="1979"/>
+        </scene>
+        <!--InfoViewController-->
+        <scene sceneID="Xg0-QI-oL1">
+            <objects>
+                <viewController storyboardIdentifier="InfoViewController" title="InfoViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AEr-UD-FmB" customClass="InfoViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TrH-bS-kYo"/>
+                        <viewControllerLayoutGuide type="bottom" id="0An-jE-SLQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3tE-Jb-60j">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qN-lQ-961">
+                                <rect key="frame" x="67" y="136" width="135" height="30"/>
+                                <state key="normal" title="Peace Corps Policy">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LMu-TY-ijm">
+                                <rect key="frame" x="376" y="136" width="195" height="30"/>
+                                <state key="normal" title="Effectiveness againstmalaria">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCh-7R-SfB">
+                                <rect key="frame" x="67" y="267" width="225" height="30"/>
+                                <state key="normal" title="Percentage of PCV's side effects">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H7d-Kk-WSz">
+                                <rect key="frame" x="371" y="267" width="179" height="30"/>
+                                <state key="normal" title="Volunteer adherence rates">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwx-xy-U2W">
+                                <rect key="frame" x="67" y="402" width="199" height="30"/>
+                                <state key="normal" title="Side effects reported by PCV">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Reo-x2-wkJ">
+                                <rect key="frame" x="361" y="402" width="210" height="30"/>
+                                <state key="normal" title="Non-PCV reported side effects">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVu-0D-fxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159" y="1311"/>
+        </scene>
+        <!--DidTakePillViewController-->
+        <scene sceneID="d7k-e3-lH1">
+            <objects>
+                <viewController storyboardIdentifier="DidTakePillsViewController" title="DidTakePillViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mCc-8O-j0k" customClass="DidTakePillsViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qua-5N-EKE"/>
+                        <viewControllerLayoutGuide type="bottom" id="3di-Yf-fne"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Q3l-HS-qU8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monday" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0oD-LH-n4q">
+                                <rect key="frame" x="273" y="90" width="63" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-Ag-yLF">
+                                <rect key="frame" x="168" y="285" width="44" height="30"/>
+                                <color key="backgroundColor" red="0.72301417589187622" green="0.1608700156211853" blue="0.14606565237045288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="No pill">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5KA-rr-QLb">
+                                <rect key="frame" x="377" y="285" width="49" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Yes Pill">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Let-Dl-swa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169" y="1311"/>
+        </scene>
+    </scenes>
+</document>

@@ -64,9 +64,15 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
     
     private func GoToPage(index : PagesEnum){
+        if _controllerEnum == index{
+            return
+        }
+        
+        let reverse = _controllerEnum.rawValue > index.rawValue
+        
+        _controllerEnum = index
         let page = getController(index)!
-        //FIXME: Must be Reverse if index < currentIndex
-        pageViewController!.setViewControllers([page], direction: .Forward, animated: true, completion: nil)
+        pageViewController!.setViewControllers([page], direction: reverse ? .Reverse : .Forward, animated: true, completion: nil)
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
@@ -87,6 +93,8 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     
     
     func updateCurrentViewHandler(toIndex: Int){
+        _controllerEnum = PagesEnum(rawValue: toIndex)!
+        //_controllerEnum = toIndex
         logger("Update buttons to translucent")
     }
     
@@ -113,7 +121,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
 }
 
-private enum PagesEnum: Int {
+enum PagesEnum: Int {
     static let allValues = [Home, Transport, Info]
     
     case Nil = -1, Home, Transport, Info

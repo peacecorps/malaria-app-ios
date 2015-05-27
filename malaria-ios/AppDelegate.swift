@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 25/05/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
@@ -15,17 +7,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //registering for notifications
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        
+        
+        //setting up initial screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        
-        if UserSettingsManager.getBool(.IsFirstLaunch){
-            window!.rootViewController = ExistingViewControllers.SetupScreenViewController.instanciateViewController()
+        if UserSettingsManager.getBool(.DidConfiguredMedicineNotification){
+            window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
         }else{
-            window!.rootViewController = ExistingViewControllers.PagesManagerViewController.instanciateViewController()
+            window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
         }
         
         window!.makeKeyAndVisible()
+        
         return true
     }
 
@@ -49,6 +47,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        logger("did receive local notification")
     }
 
 

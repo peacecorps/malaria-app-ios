@@ -14,13 +14,15 @@
 		200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */; };
 		200EE4AD1B1347290087FB24 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AC1B1347290087FB24 /* Logger.swift */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
-		200EE4B11B134C020087FB24 /* ExistingViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */; };
+		200EE4B11B134C020087FB24 /* ExistingViewsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */; };
 		2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */; };
 		2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */; };
 		2022D5211B137DDD00FDF2D3 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5201B137DDD00FDF2D3 /* PillsStatsViewController.swift */; };
 		2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */; };
 		2022D5291B13BC4900FDF2D3 /* PageManagerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */; };
 		2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */; };
+		2022D52D1B15AFA200FDF2D3 /* PillReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */; };
+		2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5351B16044E00FDF2D3 /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,13 +47,15 @@
 		200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
 		200EE4AC1B1347290087FB24 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
-		200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewControllers.swift; sourceTree = "<group>"; };
+		200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewsControllers.swift; sourceTree = "<group>"; };
 		2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesManagerViewController.swift; sourceTree = "<group>"; };
 		2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidTakePillsViewController.swift; sourceTree = "<group>"; };
 		2022D5201B137DDD00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageManagerContentViewController.swift; sourceTree = "<group>"; };
 		2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
+		2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillReminderNotification.swift; sourceTree = "<group>"; };
+		2022D5351B16044E00FDF2D3 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,14 +98,13 @@
 			isa = PBXGroup;
 			children = (
 				200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */,
-				200EE4871B1343A50087FB24 /* Supporting Files */,
-				200EE4A91B1346DA0087FB24 /* Managers */,
-				2022D5261B13BAC400FDF2D3 /* PagesManagerContent */,
 				200EE4891B1343A50087FB24 /* AppDelegate.swift */,
 				200EE48D1B1343A50087FB24 /* Main.storyboard */,
 				200EE4921B1343A50087FB24 /* LaunchScreen.xib */,
-				200EE4B01B134C020087FB24 /* ExistingViewControllers.swift */,
-				2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */,
+				200EE4871B1343A50087FB24 /* Supporting Files */,
+				200EE4A91B1346DA0087FB24 /* Managers */,
+				2022D5341B15FF2100FDF2D3 /* SetupScreen */,
+				2022D5261B13BAC400FDF2D3 /* PagesManagerContent */,
 			);
 			path = "malaria-ios";
 			sourceTree = "<group>";
@@ -136,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
+				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
+				2022D5351B16044E00FDF2D3 /* UserSettings.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -158,6 +163,15 @@
 				2022D5201B137DDD00FDF2D3 /* PillsStatsViewController.swift */,
 			);
 			name = Content;
+			sourceTree = "<group>";
+		};
+		2022D5341B15FF2100FDF2D3 /* SetupScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */,
+				2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */,
+			);
+			name = SetupScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,10 +281,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
+				2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */,
 				2022D5291B13BC4900FDF2D3 /* PageManagerContentViewController.swift in Sources */,
-				200EE4B11B134C020087FB24 /* ExistingViewControllers.swift in Sources */,
+				200EE4B11B134C020087FB24 /* ExistingViewsControllers.swift in Sources */,
 				2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* PillsStatsViewController.swift in Sources */,
+				2022D52D1B15AFA200FDF2D3 /* PillReminderNotification.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,

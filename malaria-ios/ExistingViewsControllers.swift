@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-enum ExistingViewControllers : String{
+enum ExistingViewsControllers : String{
     //setup screen when the application launches for the first time
     case SetupScreenViewController = "SetupScreenViewController"
     

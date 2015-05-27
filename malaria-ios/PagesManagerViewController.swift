@@ -26,7 +26,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
         
         //put it relative to the settings button
-        pageViewController!.view.frame = CGRectMake(0, 50, view.frame.size.width, view.frame.size.height - 50 - 50) //pageControl.frame.size.height);
+        pageViewController!.view.frame = CGRectMake(0, 50, view.frame.size.width, view.frame.size.height - 50 - 50)
         
         //add pageViewController
         pageViewController.willMoveToParentViewController(self)
@@ -60,7 +60,12 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
     
     @IBAction func settingsButtonHandler(){
-        logger("pressed settings button")
+        
+        presentViewController(
+            ExistingViewsControllers.SetupScreenViewController.instanciateViewController(),
+            animated: true,
+            completion: nil
+        )
     }
     
     private func GoToPage(index : PagesEnum){
@@ -68,11 +73,11 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             return
         }
         
-        let reverse = _controllerEnum.rawValue > index.rawValue
+        let isPreviousPage = _controllerEnum.rawValue > index.rawValue
         
         _controllerEnum = index
         let page = getController(index)!
-        pageViewController!.setViewControllers([page], direction: reverse ? .Reverse : .Forward, animated: true, completion: nil)
+        pageViewController!.setViewControllers([page], direction: isPreviousPage ? .Reverse : .Forward, animated: true, completion: nil)
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
@@ -104,11 +109,11 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         switch value {
             case .Home:
-                vc = ExistingViewControllers.DidTakePillViewController.instanciateViewController() as! DidTakePillsViewController
+                vc = ExistingViewsControllers.DidTakePillViewController.instanciateViewController() as! DidTakePillsViewController
             case .Transport:
-                vc = ExistingViewControllers.PillsStatsViewController.instanciateViewController() as! PillsStatsViewController
+                vc = ExistingViewsControllers.PillsStatsViewController.instanciateViewController() as! PillsStatsViewController
             case .Info:
-                vc = ExistingViewControllers.InfoViewController.instanciateViewController() as! InfoViewController
+                vc = ExistingViewsControllers.InfoViewController.instanciateViewController() as! InfoViewController
             default: return nil
         }
         

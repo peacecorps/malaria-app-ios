@@ -1,11 +1,3 @@
-//
-//  malaria_iosTests.swift
-//  malaria-iosTests
-//
-//  Created by Bruno Henriques on 25/05/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import UIKit
 import XCTest
 
@@ -21,8 +13,9 @@ class malaria_iosTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testUserSettingsManager() {
         // This is an example of a functional test case.
+        println("running here wtf?!")
         XCTAssert(true, "Pass")
     }
     
@@ -32,5 +25,4 @@ class malaria_iosTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
 }

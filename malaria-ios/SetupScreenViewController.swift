@@ -4,7 +4,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var reminderTime: UITextField!
     @IBOutlet weak var medicineName: UITextField!
     
-    var pills : [String] = [Pill.Doxycycline.rawValue, Pill.Malarone.rawValue, Pill.Mefloquine.rawValue];
+    private var pills : [String] = [Pill.Doxycycline.rawValue, Pill.Malarone.rawValue, Pill.Mefloquine.rawValue];
     
     var pillReminderNotificationTime = NSDate()
     let DoneButtonWidth: CGFloat = 100.0
@@ -47,22 +47,25 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
             return;
         }
         
-        //update userDefaults
-        UserSettingsManager.setObject(UserSetting.ReminderTime, pillReminderNotificationTime)
-        UserSettingsManager.setObject(UserSetting.MedicineName, medicineName.text)
-        
         //setup notifications
         getAppDelegate().pillsManager.registerPill(Pill(rawValue: medicineName.text)!, fireTime: pillReminderNotificationTime)
         
-        //updated flag to avoid going to this page again after each app restart
-        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicineNotification, true)
-        
         //show next view
-        presentViewController(
-            ExistingViewsControllers.PagesManagerViewController.instanciateViewController(),
-            animated: true,
-            completion: nil
-        )
+        if(UserSettingsManager.getBool(UserSetting.DidConfiguredMedicineNotification)){
+            dismissViewControllerAnimated(true, completion: nil)
+        }else{
+            var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
+            presentViewController(
+                view,
+                animated: true,
+                completion: nil
+            )
+        }
+        
+        //update userDefaults
+        UserSettingsManager.setObject(UserSetting.ReminderTime, pillReminderNotificationTime)
+        UserSettingsManager.setObject(UserSetting.MedicineName, medicineName.text)
+        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicineNotification, true)
     }
     
     private func getStoredReminderTime() -> NSDate{

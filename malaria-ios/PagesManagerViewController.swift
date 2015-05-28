@@ -10,10 +10,10 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     //can be home, trip or info, by default is Home
     var type: PageType = PageType()
     
-    //if HomePage
-    var pageViewController : UIPageViewController!
-    private var _controllerEnum: HomePagesEnum?
-    private var _dict: [UIViewController: HomePagesEnum]? = [:]
+    //TakeMedicine, DailyStats or Stats
+    private var homePageEnum: HomePage = HomePage()
+    private var pageViewController : UIPageViewController!
+    private var _dict: [UIViewController: HomePage] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,12 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         switch type{
         case .Home:
-            //initialize controll variables
-            _controllerEnum = HomePagesEnum()
-            _dict = [UIViewController: HomePagesEnum]()
-
             
             pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
             pageViewController!.dataSource = self
             
             
-            let defaultPage = getController(_controllerEnum!)!
+            let defaultPage = getController(homePageEnum)!
             pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
             
             //put it relative to the settings button
@@ -88,11 +84,10 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
     
     @IBAction func settingsButtonHandler(){
-        presentViewController(
-            ExistingViewsControllers.SetupScreenViewController.instanciateViewController(),
-            animated: true,
-            completion: nil
-        )
+        //fix delay
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("showSetupScreen", sender: nil)
+        }
     }
     
     private func changePageManagerContent(view: PagesManagerViewController, typePage: PageType){
@@ -106,22 +101,22 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return HomePagesEnum.allValues.count
+        return HomePage.allValues.count
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return _controllerEnum!.rawValue
+        return homePageEnum.rawValue
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        return getController(_dict![viewController]!.previousIndex())
+        return getController(_dict[viewController]!.previousIndex())
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        return getController(_dict![viewController]!.nextIndex())
+        return getController(_dict[viewController]!.nextIndex())
     }
     
-    private func getController(value: HomePagesEnum) -> UIViewController? {
+    private func getController(value: HomePage) -> UIViewController? {
         var vc: UIViewController?
         
         switch value {
@@ -137,7 +132,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         //initialize views here if needed
         
         // store relative enum to view controller
-        _dict![vc!] = value
+        _dict[vc!] = value
         return vc!
     }
 }
@@ -149,7 +144,7 @@ enum PageType: Int{
     }
 }
 
-enum HomePagesEnum: Int {
+enum HomePage: Int {
     static let allValues = [DailyPill, DailyStates, Stats]
     
     case Nil = -1, DailyPill, DailyStates, Stats
@@ -158,13 +153,13 @@ enum HomePagesEnum: Int {
         self = .DailyPill
     }
     
-    func previousIndex() -> HomePagesEnum {
-        return HomePagesEnum(rawValue: rawValue-1)!
+    func previousIndex() -> HomePage {
+        return HomePage(rawValue: rawValue-1)!
     }
     
-    func nextIndex() -> HomePagesEnum {
+    func nextIndex() -> HomePage {
         var value = rawValue+1
-        if value > HomePagesEnum.allValues.count-1 { value = Nil.rawValue }
-        return HomePagesEnum(rawValue: value)!
+        if value > HomePage.allValues.count-1 { value = Nil.rawValue }
+        return HomePage(rawValue: value)!
     }
 }

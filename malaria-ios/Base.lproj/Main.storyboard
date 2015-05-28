@@ -414,6 +414,7 @@
                         <outlet property="mediceButton" destination="p1A-w1-iW2" id="Q5H-7C-pQQ"/>
                         <outlet property="planTripButton" destination="HhX-3f-oo4" id="OcR-hK-jB9"/>
                         <outlet property="settingsButton" destination="7Vn-rf-IV5" id="hVg-6d-vQA"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showSetupScreen" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="5bE-Vo-Emd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRi-ww-BAc" userLabel="First Responder" sceneMemberID="firstResponder"/>

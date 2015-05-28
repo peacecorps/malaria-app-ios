@@ -1,5 +1,7 @@
 import Foundation
 
+
+//Manage NSUserDefaults
 class UserSettingsManager{
     
     class func setBool(key: UserSetting, _ value: Bool){
@@ -11,7 +13,7 @@ class UserSettingsManager{
     }
     
     class func setObject(key: UserSetting, _ value: AnyObject){
-        logger("Saving \(key)")
+        logger("Saving \(key.rawValue)")
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: key.rawValue)
     }
     

@@ -128,6 +128,9 @@
                                         <include reference="SlA-Wt-SbW"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="medicineEditingBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="cnW-sL-8mK"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="10:00 am" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYR-ux-kkO">
                                 <rect key="frame" x="68" y="164" width="405" height="30"/>

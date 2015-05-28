@@ -10,16 +10,17 @@ enum ExistingViewsControllers : String{
     
     //first button
     case DidTakePillViewController = "DidTakePillsViewController"
-    
-    //second button
+    case DailyStatsViewController = "DailyStatsViewController"
     case PillsStatsViewController = "PillsStatsViewController"
 
+    //second button
+    case PlanTripViewController = "PlanTripViewController"
+    
     //third button
     case InfoViewController = "InfoViewController"
     
-    
     func instanciateViewController() -> UIViewController{
-        var value = rawValue
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(value) as! UIViewController
+        var id = rawValue
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id) as! UIViewController
     }
 }

@@ -1,10 +1,10 @@
 import Foundation
 import UIKit
 
-class PillsStatsViewController : UIViewController {
+class PlanTripViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logger("loaded pills stats")
+        logger("loaded PlanTripViewController")
     }
 }

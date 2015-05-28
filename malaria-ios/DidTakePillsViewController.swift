@@ -1,6 +1,6 @@
 import UIKit
 
-class DidTakePillsViewController: PageManagerContentViewController {
+class DidTakePillsViewController: UIViewController {
     
     //next pill day
     @IBOutlet weak var weekDay: UILabel!

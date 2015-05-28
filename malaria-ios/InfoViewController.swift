@@ -1,6 +1,6 @@
 import UIKit
 
-class InfoViewController: PageManagerContentViewController {
+class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

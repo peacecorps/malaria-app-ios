@@ -21,8 +21,9 @@
 		2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */; };
 		2022D5291B13BC4900FDF2D3 /* PageManagerContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */; };
 		2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */; };
-		2022D52D1B15AFA200FDF2D3 /* PillReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */; };
 		2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5351B16044E00FDF2D3 /* UserSettings.swift */; };
+		2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
+		2022D53A1B174E9300FDF2D3 /* PillNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +55,9 @@
 		2022D5221B13AB1E00FDF2D3 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		2022D5281B13BC4900FDF2D3 /* PageManagerContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageManagerContentViewController.swift; sourceTree = "<group>"; };
 		2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
-		2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillReminderNotification.swift; sourceTree = "<group>"; };
 		2022D5351B16044E00FDF2D3 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		2022D5371B17468B00FDF2D3 /* Utilitary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilitary.swift; sourceTree = "<group>"; };
+		2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillNotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			children = (
 				200EE4881B1343A50087FB24 /* Info.plist */,
 				200EE4AC1B1347290087FB24 /* Logger.swift */,
+				2022D5371B17468B00FDF2D3 /* Utilitary.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -138,9 +141,10 @@
 		200EE4A91B1346DA0087FB24 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2022D5351B16044E00FDF2D3 /* UserSettings.swift */,
 				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
 				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
-				2022D5351B16044E00FDF2D3 /* UserSettings.swift */,
+				2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -168,7 +172,6 @@
 		2022D5341B15FF2100FDF2D3 /* SetupScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2022D52C1B15AFA200FDF2D3 /* PillReminderNotification.swift */,
 				2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */,
 			);
 			name = SetupScreen;
@@ -280,16 +283,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */,
 				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
 				2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */,
 				2022D5291B13BC4900FDF2D3 /* PageManagerContentViewController.swift in Sources */,
 				200EE4B11B134C020087FB24 /* ExistingViewsControllers.swift in Sources */,
 				2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* PillsStatsViewController.swift in Sources */,
-				2022D52D1B15AFA200FDF2D3 /* PillReminderNotification.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
+				2022D53A1B174E9300FDF2D3 /* PillNotificationManager.swift in Sources */,
 				2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */,
 				200EE4AD1B1347290087FB24 /* Logger.swift in Sources */,
 			);

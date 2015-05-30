@@ -7,11 +7,15 @@ enum Pill : String{
     case Mefloquine = "Mefloquine"
     
     func repeatInterval() -> NSCalendarUnit{
-        if self == Pill.Mefloquine {
-            return NSCalendarUnit.CalendarUnitWeekday
-        }
-        
-        return NSCalendarUnit.CalendarUnitDay
+        return self == Pill.Mefloquine ? NSCalendarUnit.CalendarUnitWeekday : NSCalendarUnit.CalendarUnitDay
+    }
+    
+    func repeatIntervalString() -> String{
+        return self == Pill.Mefloquine ? "Weekly" : "Daily"
+    }
+    
+    func toString() -> String{
+        return "\(self.rawValue) (\(self.repeatIntervalString()))"
     }
 }
 

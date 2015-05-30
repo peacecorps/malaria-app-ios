@@ -88,7 +88,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!
     {
-        return pills[row];
+        return Pill(rawValue: pills[row])!.toString();
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)

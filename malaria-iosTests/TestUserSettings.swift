@@ -13,7 +13,7 @@ class TestUserSettings: XCTestCase {
         super.tearDown()
     }
     
-    func testUserSettingsManager() {
+    func testGetSet() {
         //dont forget to reset iOS Simulator
         XCTAssertEqual(false, UserSettingsManager.getBool(UserSetting.DidConfiguredMedicineNotification))
         UserSettingsManager.setBool(UserSetting.DidConfiguredMedicineNotification, true)
@@ -34,5 +34,24 @@ class TestUserSettings: XCTestCase {
         XCTAssertEqual("Vicodin", UserSettingsManager.getObject(UserSetting.MedicineName) as! String)
         UserSettingsManager.setObject(UserSetting.MedicineName, "Nop")
         XCTAssertEqual("Nop", UserSettingsManager.getObject(UserSetting.MedicineName) as! String)
+    }
+    
+    
+    func testClear(){
+        //add element if there is isn't one
+        let medicine = UserSettingsManager.getObject(UserSetting.MedicineName) as! String?
+        if let m = medicine{
+            //do nothing
+        }else{
+            UserSettingsManager.setObject(UserSetting.MedicineName, "Vicodin")
+        }
+        
+        UserSettingsManager.clear()
+        
+        let m2 =  UserSettingsManager.getObject(UserSetting.MedicineName) as! String?
+        if let m = medicine{
+            XCTFail("Should not exist since we had cleared UserDefault")
+        }
+
     }
 }

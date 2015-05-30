@@ -1,6 +1,9 @@
 import Foundation
 
 enum UserSetting: String{
+    static let allValues = [DidConfiguredMedicineNotification, ReminderTime, MedicineName, MedicineLastTake, DosesInARow, AdherenceToMedicine]
+    
+    
     //launchScreenFlag
     case DidConfiguredMedicineNotification = "DidConfiguredMedicineNotification"
     

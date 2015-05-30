@@ -13,11 +13,17 @@ class UserSettingsManager{
     }
     
     class func setObject(key: UserSetting, _ value: AnyObject){
-        logger("Saving \(key.rawValue)")
+        //logger("Saving \(key.rawValue)")
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: key.rawValue)
     }
     
     class func getObject(key: UserSetting) -> AnyObject?{
         return NSUserDefaults.standardUserDefaults().objectForKey(key.rawValue)
+    }
+    
+    class func clear(){
+        for setting in UserSetting.allValues{
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(setting.rawValue)
+        }
     }
 }

@@ -6,6 +6,7 @@ class UserSettingsManager{
     
     class func setBool(key: UserSetting, _ value: Bool){
         NSUserDefaults.standardUserDefaults().setBool(value, forKey: key.rawValue)
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     class func getBool(key: UserSetting) -> Bool{
@@ -14,6 +15,7 @@ class UserSettingsManager{
     
     class func setInt(key: UserSetting, _ value: Int){
         NSUserDefaults.standardUserDefaults().setInteger(value, forKey: key.rawValue)
+                NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     class func getInt(key: UserSetting) -> Int{
@@ -23,6 +25,8 @@ class UserSettingsManager{
     class func setObject(key: UserSetting, _ value: AnyObject){
         //logger("Saving \(key.rawValue)")
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: key.rawValue)
+        
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     class func getObject(key: UserSetting) -> AnyObject?{
@@ -33,5 +37,9 @@ class UserSettingsManager{
         for setting in UserSetting.allValues{
             NSUserDefaults.standardUserDefaults().removeObjectForKey(setting.rawValue)
         }
+    }
+    
+    class func syncronize(){
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 }

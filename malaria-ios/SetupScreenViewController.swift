@@ -62,9 +62,15 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
             )
         }
         
-        //update userDefaults
+        //register notification time
         UserSettingsManager.setObject(UserSetting.ReminderTime, pillReminderNotificationTime)
+        
+        //count beggining
         UserSettingsManager.setObject(UserSetting.MedicineStartTime, pillReminderNotificationTime)
+        
+        //last pill taken
+        UserSettingsManager.setObject(UserSetting.MedicineLastRegistry, pillReminderNotificationTime)
+        
         UserSettingsManager.setObject(UserSetting.MedicineName, medicineName.text)
         UserSettingsManager.setBool(UserSetting.DidConfiguredMedicineNotification, true)
     }

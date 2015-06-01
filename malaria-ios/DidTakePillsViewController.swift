@@ -26,6 +26,8 @@ class DidTakePillsViewController: UIViewController {
         let currentDate = NSDate()
         UserSettingsManager.setObject(UserSetting.MedicineLastRegistry, currentDate)
         UserSettingsManager.setInt(UserSetting.DosesInARow, UserSettingsManager.getInt(UserSetting.DosesInARow)+1)
+        
+        logger("DosesInRow: \(UserSetting.DosesInARow, UserSettingsManager.getInt(UserSetting.DosesInARow))")
     }
     
     override func viewDidLoad() {

@@ -10,29 +10,23 @@ class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var tookMedicineBtn: UIButton!
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        
-        /*TODO - DO NOTHING IF THIS DAY WAS REGISTERED*/
-        
         logger("didNotTookMedicineBtnHandler")
         
-        let currentDate = NSDate()
-        UserSettingsManager.setObject(UserSetting.MedicineLastRegistry, currentDate)
-        
-        UserSettingsManager.setInt(UserSetting.DosesInARow, 0)
+        getAppDelegate().pillsManager.updatePillTracker(false)
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         logger("tookMedicineBtnHandler")
-        let currentDate = NSDate()
-        UserSettingsManager.setObject(UserSetting.MedicineLastRegistry, currentDate)
-        UserSettingsManager.setInt(UserSetting.DosesInARow, UserSettingsManager.getInt(UserSetting.DosesInARow)+1)
-        
-        logger("DosesInRow: \(UserSetting.DosesInARow, UserSettingsManager.getInt(UserSetting.DosesInARow))")
+        getAppDelegate().pillsManager.updatePillTracker(true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         logger("loaded didTakePills")
+        
+        let didTookPill = getAppDelegate().pillsManager.didTookPill(NSDate())
+        
+        didNotTookMedicineBtn.enabled = didTookPill
+        tookMedicineBtn.enabled = didTookPill
     }
 }
-

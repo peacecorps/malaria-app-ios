@@ -22,11 +22,15 @@
 		2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */; };
 		2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5351B16044E00FDF2D3 /* UserSettings.swift */; };
 		2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
-		2022D53A1B174E9300FDF2D3 /* PillNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */; };
+		2022D53A1B174E9300FDF2D3 /* PillManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5391B174E9300FDF2D3 /* PillManager.swift */; };
 		2022D53C1B17602C00FDF2D3 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */; };
 		2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */; };
 		203DED011B19B0420004ACF5 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */; };
 		203DED021B19B0620004ACF5 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5351B16044E00FDF2D3 /* UserSettings.swift */; };
+		203DED061B1CC43C0004ACF5 /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203DED051B1CC43C0004ACF5 /* ExtensionDate.swift */; };
+		203DED081B1CC5460004ACF5 /* TestDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203DED071B1CC5460004ACF5 /* TestDateExtensions.swift */; };
+		203DED0A1B1CC73E0004ACF5 /* Pill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203DED091B1CC73E0004ACF5 /* Pill.swift */; };
+		203DED0B1B1CCB270004ACF5 /* Pill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203DED091B1CC73E0004ACF5 /* Pill.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,9 +63,12 @@
 		2022D52A1B13C92100FDF2D3 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
 		2022D5351B16044E00FDF2D3 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2022D5371B17468B00FDF2D3 /* Utilitary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilitary.swift; sourceTree = "<group>"; };
-		2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillNotificationManager.swift; sourceTree = "<group>"; };
+		2022D5391B174E9300FDF2D3 /* PillManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillManager.swift; sourceTree = "<group>"; };
 		2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
+		203DED051B1CC43C0004ACF5 /* ExtensionDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
+		203DED071B1CC5460004ACF5 /* TestDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDateExtensions.swift; sourceTree = "<group>"; };
+		203DED091B1CC73E0004ACF5 /* Pill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pill.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +128,7 @@
 				200EE4881B1343A50087FB24 /* Info.plist */,
 				200EE4AC1B1347290087FB24 /* Logger.swift */,
 				2022D5371B17468B00FDF2D3 /* Utilitary.swift */,
+				203DED051B1CC43C0004ACF5 /* ExtensionDate.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -128,8 +136,9 @@
 		200EE49C1B1343A60087FB24 /* malaria-iosTests */ = {
 			isa = PBXGroup;
 			children = (
-				200EE49F1B1343A60087FB24 /* TestUserSettings.swift */,
 				200EE49D1B1343A60087FB24 /* Supporting Files */,
+				200EE49F1B1343A60087FB24 /* TestUserSettings.swift */,
+				203DED071B1CC5460004ACF5 /* TestDateExtensions.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -148,7 +157,8 @@
 				2022D5351B16044E00FDF2D3 /* UserSettings.swift */,
 				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
 				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
-				2022D5391B174E9300FDF2D3 /* PillNotificationManager.swift */,
+				2022D5391B174E9300FDF2D3 /* PillManager.swift */,
+				203DED091B1CC73E0004ACF5 /* Pill.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -302,13 +312,15 @@
 				2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */,
 				2022D5361B16044E00FDF2D3 /* UserSettings.swift in Sources */,
 				200EE4B11B134C020087FB24 /* ExistingViewsControllers.swift in Sources */,
+				203DED0A1B1CC73E0004ACF5 /* Pill.swift in Sources */,
 				2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
-				2022D53A1B174E9300FDF2D3 /* PillNotificationManager.swift in Sources */,
+				2022D53A1B174E9300FDF2D3 /* PillManager.swift in Sources */,
 				2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */,
+				203DED061B1CC43C0004ACF5 /* ExtensionDate.swift in Sources */,
 				200EE4AD1B1347290087FB24 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,7 +330,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				200EE4A01B1343A60087FB24 /* TestUserSettings.swift in Sources */,
+				203DED081B1CC5460004ACF5 /* TestDateExtensions.swift in Sources */,
 				203DED021B19B0620004ACF5 /* UserSettings.swift in Sources */,
+				203DED0B1B1CCB270004ACF5 /* Pill.swift in Sources */,
 				203DED011B19B0420004ACF5 /* UserSettingsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

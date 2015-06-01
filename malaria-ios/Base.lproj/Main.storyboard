@@ -1766,7 +1766,7 @@
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="LxU-Oq-XlZ"/>
-                                        <include reference="jPN-td-N3r"/>
+                                        <exclude reference="jPN-td-N3r"/>
                                         <include reference="uux-rV-eue"/>
                                     </mask>
                                 </variation>

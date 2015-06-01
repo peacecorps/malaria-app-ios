@@ -11,6 +11,8 @@ enum UserSetting: String{
     case MedicineStartTime = "MedicineStartTime"
     case ReminderTime = "ReminderTime"
     case MedicineName = "MedicineName"
+    case DosesTaken = "DosesTaken"
+    
     
     //for statistic measures
     case MedicineLastRegistry = "MedicineLastRegistry"

@@ -36,7 +36,6 @@ class TestUserSettings: XCTestCase {
         XCTAssertEqual("Nop", UserSettingsManager.getObject(UserSetting.MedicineName) as! String)
     }
     
-    
     func testClear(){
         //add element if there is isn't one
         let medicine = UserSettingsManager.getObject(UserSetting.MedicineName) as! String?

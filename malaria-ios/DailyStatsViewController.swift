@@ -13,17 +13,13 @@ class DailyStatsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM"
+        medicineLastTaken.text = dateFormatter.stringFromDate(getAppDelegate().pillsManager.lastPillDateRegistry())
         
-        let lastDatePill = UserSettingsManager.getObject(UserSetting.MedicineLastRegistry) as! NSDate
-        
-        medicineLastTaken.text = dateFormatter.stringFromDate(lastDatePill)
-        DosesInARow.text = "\(UserSettingsManager.getInt(UserSetting.DosesInARow))"
-        
-        //set adherence as totalTaken / DesiredTotal
-        //DesiredTotal must be a computer properity based on type of pill (weekly/daily)
-        
+        DosesInARow.text = "\(getAppDelegate().pillsManager.currentPillStreak())"
+        Adherence.text = "\(getAppDelegate().pillsManager.currentPillAdherence())"
     }
 }
 

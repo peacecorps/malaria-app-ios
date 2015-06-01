@@ -3,7 +3,7 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "tab_home.png"
+      "filename" : "HomeButton1x.png"
     },
     {
       "idiom" : "universal",
@@ -13,7 +13,7 @@
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "tab_home-2.png"
+      "filename" : "HomeButton3x.png"
     }
   ],
   "info" : {

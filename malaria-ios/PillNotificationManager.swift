@@ -23,6 +23,8 @@ class PillNotificationManager{
     let PillReminderCategory = "PillReminder"
     
     func registerPill(pill: Pill, fireTime: NSDate){
+        unregister()
+        
         let notification: UILocalNotification = createNotification(pill.rawValue, fireDate: fireTime, frequency: pill.repeatInterval())
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
@@ -38,6 +40,20 @@ class PillNotificationManager{
             }
         }
     }
+    
+    func getFireDate() -> NSDate?{
+        for event in UIApplication.sharedApplication().scheduledLocalNotifications {
+            
+            var notification = event as! UILocalNotification
+            
+            if notification.category == PillReminderCategory{
+                return notification.fireDate
+            }
+        }
+        
+        return nil
+    }
+    
 
     private func createNotification(medicine: String, fireDate: NSDate, frequency: NSCalendarUnit) -> UILocalNotification{
         var localNotification = UILocalNotification()

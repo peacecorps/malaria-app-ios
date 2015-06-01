@@ -12,6 +12,14 @@ class UserSettingsManager{
         return NSUserDefaults.standardUserDefaults().boolForKey(key.rawValue) ?? false
     }
     
+    class func setInt(key: UserSetting, _ value: Int){
+        NSUserDefaults.standardUserDefaults().setInteger(value, forKey: key.rawValue)
+    }
+    
+    class func getInt(key: UserSetting) -> Int{
+        return NSUserDefaults.standardUserDefaults().integerForKey(key.rawValue) ?? 0
+    }
+    
     class func setObject(key: UserSetting, _ value: AnyObject){
         //logger("Saving \(key.rawValue)")
         NSUserDefaults.standardUserDefaults().setObject(value, forKey: key.rawValue)

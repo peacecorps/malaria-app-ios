@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "tab_infohub.png"
+      "filename" : "InfoHubIcon1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "tab_infohub-1.png"
+      "filename" : "InfoHubIcon2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "tab_infohub-2.png"
+      "filename" : "InfoHubIcon3x.png"
     }
   ],
   "info" : {

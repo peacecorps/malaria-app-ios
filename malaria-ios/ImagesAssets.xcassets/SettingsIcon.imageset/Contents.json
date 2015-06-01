@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "button_settings.png"
+      "filename" : "SettingsIcon1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "button_settings-1.png"
+      "filename" : "SettingsIcon2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "button_settings-2.png"
+      "filename" : "SettingsIcon3x.png"
     }
   ],
   "info" : {

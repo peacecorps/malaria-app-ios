@@ -10,16 +10,5 @@ class DailyStatsViewController: UIViewController {
         super.viewDidLoad()
         logger("loaded pills daily stats")
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM"
-        medicineLastTaken.text = dateFormatter.stringFromDate(getAppDelegate().pillsManager.lastPillDateRegistry())
-        
-        DosesInARow.text = "\(getAppDelegate().pillsManager.currentPillStreak())"
-        Adherence.text = "\(getAppDelegate().pillsManager.currentPillAdherence())"
-    }
 }
 

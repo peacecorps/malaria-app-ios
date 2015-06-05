@@ -4,7 +4,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var reminderTime: UITextField!
     @IBOutlet weak var medicineName: UITextField!
     
-    private var pills : [String] = [Pill.Doxycycline.rawValue, Pill.Malarone.rawValue, Pill.Mefloquine.rawValue];
+    //private var pills : [String] = [Pill.Doxycycline.rawValue, Pill.Malarone.rawValue, Pill.Mefloquine.rawValue];
     
     var pillReminderNotificationTime = NSDate()
     let DoneButtonWidth: CGFloat = 100.0
@@ -12,17 +12,19 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     let TimePickerHeight: CGFloat = 200.0
     let InputMedicineHeight: CGFloat = 200.0
     
-    let DismissTimePickerBtnTitle = "Done"
+    let DismissTimePickerBtnTitle = "Set"
+    let BackgroundImageId = "background"
     
     private var picker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
         
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        
+        //generate medicineName Value Picker View
         medicineName.inputView = generateInputMedicineView()
         
+        //generate medicineName Value Picker View
         pillReminderNotificationTime = getStoredReminderTime()
         reminderTime.inputView = generateInputTimeView(pillReminderNotificationTime)
         
@@ -31,7 +33,15 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func medicineEditingBegin(sender: AnyObject) {
         picker.reloadAllComponents()
-        picker.selectRow(find(pills, getStoredMedicineName())!, inComponent: 0, animated: false)
+        
+        var index = 0
+        if let currentPill = getAppDelegate().medsManager.getCurrentPill(),
+            let pillIndex = find(Medicine.Pill.allValues, currentPill){
+                
+                index = pillIndex
+        }
+        
+        picker.selectRow(index, inComponent: 0, animated: false)
     }
     
     private func refreshPage(){
@@ -43,15 +53,8 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     }
     
     @IBAction func doneButtonHandler(){
-        if(medicineName.text == ""){
-            return;
-        }
-        
-        //setup notifications
-        getAppDelegate().pillsManager.registerPill(Pill(rawValue: medicineName.text)!, fireTime: pillReminderNotificationTime)
-        
         //show next view
-        if(UserSettingsManager.getBool(UserSetting.DidConfiguredMedicineNotification)){
+        if(UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine)){
             dismissViewControllerAnimated(true, completion: nil)
         }else{
             var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
@@ -62,27 +65,30 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
             )
         }
         
-        //register notification time
-        UserSettingsManager.setObject(UserSetting.ReminderTime, pillReminderNotificationTime)
-        
-        //count beggining
-        UserSettingsManager.setObject(UserSetting.MedicineStartTime, pillReminderNotificationTime)
-        
-        //last pill taken
-        UserSettingsManager.setObject(UserSetting.MedicineLastRegistry, pillReminderNotificationTime)
-        
-        UserSettingsManager.setObject(UserSetting.MedicineName, medicineName.text)
-        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicineNotification, true)
+        //setup notifications
+        getAppDelegate().medsManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
     }
     
     private func getStoredReminderTime() -> NSDate{
-        return UserSettingsManager.getObject(UserSetting.ReminderTime) as? NSDate ?? NSDate()
+        let reminder: NSDate? = getAppDelegate().medsManager.medicationFireDate()
+        
+        if let r = reminder{
+            return r
+        }
+        
+        return NSDate()
     }
     
     private func getStoredMedicineName() -> String{
-        return UserSettingsManager.getObject(UserSetting.MedicineName) as? String ?? pills[0]
+        let pill: Medicine.Pill? = getAppDelegate().medsManager.getCurrentPill()
+        
+        if let p = pill{
+            return p.name()
+        }
+        
+        return Medicine.Pill.allValues[0].name()
     }
-
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int
     {
         return 1;
@@ -90,22 +96,24 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
     {
-        return pills.count;
+        return Medicine.Pill.allValues.count;
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String!
     {
-        return Pill(rawValue: pills[row])!.toString();
+        let pill = Medicine.Pill.allValues[row]
+        
+        return pill.name() + " (" + (pill.isWeekly() ? "Weekly" : "Daily") + ")"
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        self.medicineName.text = self.pills[row];
+        self.medicineName.text = Medicine.Pill.allValues[row].name();
     }
     
     //create the view for input time
     private func generateInputTimeView(startDate: NSDate) -> UIView{
-    
+        
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, TimePickerHeight + DoneButtonHeight))
         
         var datePickerView = UIDatePicker(frame: CGRectMake(0, DoneButtonHeight, 0, 0))
@@ -121,13 +129,11 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     
     //create the view for input medicine view
     private func generateInputMedicineView() -> UIView{
-        
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, InputMedicineHeight + DoneButtonHeight))
         
         picker = UIPickerView()
         picker.delegate   = self
         picker.dataSource = self
-
         
         inputView.addSubview(picker) // add date picker to UIView
         inputView.addSubview(generateDoneButtonView("doneChoosingMedicineButton:")) // add Button to UIView
@@ -161,5 +167,5 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         pillReminderNotificationTime = sender.date
         refreshPage()
     }
-
+    
 }

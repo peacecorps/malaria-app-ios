@@ -10,7 +10,7 @@ enum ExistingViewsControllers : String{
     
     //first button
     case DidTakePillViewController = "DidTakePillsViewController"
-    case DailyStatsViewController = "DailyStatsViewController"
+    case DailyStatsTableViewController = "DailyStatsTableViewController"
     case PillsStatsViewController = "PillsStatsViewController"
 
     //second button
@@ -18,6 +18,9 @@ enum ExistingViewsControllers : String{
     
     //third button
     case InfoViewController = "InfoViewController"
+    
+    case DebugViewController = "DebugViewController"
+    
     
     func instanciateViewController() -> UIViewController{
         var id = rawValue

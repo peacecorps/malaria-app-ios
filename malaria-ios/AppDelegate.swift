@@ -3,8 +3,12 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    lazy var cds: CoreDataStore =   { return CoreDataStore()  }()
+    lazy var cdh: CoreDataHelper =  { return CoreDataHelper() }()
+    
+    let medsManager = MedicineManager()
+
     var window: UIWindow?
-    let pillsManager = PillManager()
     
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -18,8 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        if UserSettingsManager.getBool(.DidConfiguredMedicineNotification){
-            window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
+        if UserSettingsManager.getBool(.DidConfiguredMedicine){
+            window!.rootViewController = ExistingViewsControllers.DebugViewController.instanciateViewController()
+            /* window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() */
         }else{
             window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
         }

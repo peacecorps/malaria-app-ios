@@ -1,0 +1,68 @@
+import Foundation
+import UIKit
+
+class DebugViewController : UIViewController{
+    
+    @IBOutlet weak var dayWeek: UILabel!
+    @IBOutlet weak var fullDate: UILabel!
+    @IBOutlet weak var medicineLastTaken: UILabel!
+    @IBOutlet weak var dosesInRow: UILabel!
+    @IBOutlet weak var monthAdherence: UILabel!
+    @IBOutlet weak var adherence: UILabel!
+    @IBOutlet weak var graphViewStartDate: UITextField!
+    @IBOutlet weak var graphViewEndDate: UITextField!
+    @IBOutlet weak var graphAdherence: UILabel!
+    
+    @IBAction func SettingsBtnHandler(sender: AnyObject) {
+        //fix delay
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("showSetupScreen", sender: nil)
+        }
+    }
+    
+    @IBAction func noBtnHandler(sender: AnyObject) {
+        logger("Pressed No")
+        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: false)
+        viewDidLoad()
+    }
+    
+    @IBAction func yesBtnHandler(sender: AnyObject) {
+        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: true)
+        logger("Pressed Yes")
+        viewDidLoad()
+    }
+    
+    @IBAction func updateAdherence(sender: AnyObject) {
+        graphAdherence.text = "here"
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
+        let didTookPill = getAppDelegate().medsManager.didTookPill(NSDate())
+        
+        /*
+        didNotTookMedicineBtn.enabled = !didTookPill
+        tookMedicineBtn.enabled = !didTookPill
+        */
+        
+        
+        
+        let lastPillDate: NSDate? = getAppDelegate().medsManager.lastPillDateRegistry()
+        
+        if let d = lastPillDate{
+            var dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd/MM"
+            medicineLastTaken.text = dateFormatter.stringFromDate(d)
+        }else{
+            medicineLastTaken.text = " -- "
+        }
+        
+        
+        dosesInRow.text = "\(getAppDelegate().medsManager.currentStreak())"
+        adherence.text = "\(100*getAppDelegate().medsManager.currentPillAdherence())%"
+    }
+
+}

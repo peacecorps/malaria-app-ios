@@ -15,13 +15,14 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     private var pageViewController : UIPageViewController!
     private var _dict: [UIViewController: HomePage] = [:]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         
-        let contentFrame: CGRect = CGRectMake(0, 50, view.frame.size.width, view.frame.size.height - 50 - 50)
+        let contentFrame: CGRect = CGRectMake(0, settingsButton.frame.origin.y + settingsButton.frame.height+10, view.frame.size.width, view.frame.size.height - 170)
         var contentView: UIViewController?
         
         switch type{
@@ -39,8 +40,8 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             
             
             let appearance = UIPageControl.appearance()
-            appearance.pageIndicatorTintColor = UIColor.yellowColor()
-            appearance.currentPageIndicatorTintColor = UIColor.redColor()
+            appearance.pageIndicatorTintColor = UIColor.grayColor()
+            appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
             appearance.backgroundColor = UIColor.clearColor()
             
 
@@ -58,14 +59,17 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         }
         
         //add pretended view to the hierarchy
+        
+        /*
         if let pretendedView = contentView{
+            pretendedView.view.backgroundColor = UIColor.redColor()
             pretendedView.willMoveToParentViewController(self)
             addChildViewController(pretendedView)
             view.addSubview(pretendedView.view)
             pretendedView.didMoveToParentViewController(self)
         }else{
             logger("Couldn't load pageManagerContent")
-        }
+        }*/
     }
     
     @IBAction func homeButtonHandler(){
@@ -123,7 +127,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             case .DailyPill:
                 vc = ExistingViewsControllers.DidTakePillViewController.instanciateViewController() as! DidTakePillsViewController
             case .DailyStates:
-                vc = ExistingViewsControllers.DailyStatsViewController.instanciateViewController() as! DailyStatsViewController
+                vc = ExistingViewsControllers.DailyStatsTableViewController.instanciateViewController() as! DailyStatsTableViewController
             case .Stats:
                 vc = ExistingViewsControllers.PillsStatsViewController.instanciateViewController() as! PillsStatsViewController
             default: return nil

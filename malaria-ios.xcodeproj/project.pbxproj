@@ -150,30 +150,15 @@
 		200EE4861B1343A50087FB24 /* malaria-ios */ = {
 			isa = PBXGroup;
 			children = (
-				20EA06C91B22349D00D6840E /* bridging_header.h */,
 				200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */,
-				20EA06CA1B2234A700D6840E /* CoreDataHelper.swift */,
-				20EA06CB1B2234A700D6840E /* CoreDataStore.swift */,
 				200EE4891B1343A50087FB24 /* AppDelegate.swift */,
-				20EA06C71B22348D00D6840E /* Array.swift */,
-				20EA06CE1B2234B900D6840E /* Int.swift */,
-				20EA06D01B2234DA00D6840E /* Medicine.swift */,
-				20EA06D11B2234DA00D6840E /* MedicineExtension.swift */,
-				20EA06D21B2234DA00D6840E /* MedicineManager.swift */,
-				20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */,
-				20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */,
 				20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */,
-				20EA06D61B2234DA00D6840E /* NSSet.swift */,
-				20EA06DD1B22352100D6840E /* NSDate.swift */,
 				200EE48D1B1343A50087FB24 /* Main.storyboard */,
-				20EA06DF1B22352F00D6840E /* Registry.swift */,
-				20EA06E01B22352F00D6840E /* RegistryExtension.swift */,
 				200EE4921B1343A50087FB24 /* LaunchScreen.xib */,
 				200EE4871B1343A50087FB24 /* Supporting Files */,
+				20EA06E71B224C8900D6840E /* NSManagedObjects */,
 				200EE4A91B1346DA0087FB24 /* Managers */,
-				2022D5341B15FF2100FDF2D3 /* SetupScreen */,
-				2022D5261B13BAC400FDF2D3 /* PagesManagerContent */,
-				20E796AC1B22167F007CE022 /* DebugViewController.swift */,
+				20EA06EA1B22534C00D6840E /* ViewControllers */,
 			);
 			path = "malaria-ios";
 			sourceTree = "<group>";
@@ -181,6 +166,9 @@
 		200EE4871B1343A50087FB24 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				20EA06E91B224CD400D6840E /* CoreData */,
+				20EA06E81B224CBF00D6840E /* Extensions */,
+				20EA06C91B22349D00D6840E /* bridging_header.h */,
 				200EE4881B1343A50087FB24 /* Info.plist */,
 				200EE4AC1B1347290087FB24 /* Logger.swift */,
 				2022D5371B17468B00FDF2D3 /* Utilitary.swift */,
@@ -208,6 +196,9 @@
 		200EE4A91B1346DA0087FB24 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				20EA06D21B2234DA00D6840E /* MedicineManager.swift */,
+				20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */,
+				20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */,
 				2022D5351B16044E00FDF2D3 /* UserSettings.swift */,
 				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
 				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
@@ -251,6 +242,47 @@
 				20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */,
 			);
 			name = Pills;
+			sourceTree = "<group>";
+		};
+		20EA06E71B224C8900D6840E /* NSManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				20EA06D01B2234DA00D6840E /* Medicine.swift */,
+				20EA06D11B2234DA00D6840E /* MedicineExtension.swift */,
+				20EA06DF1B22352F00D6840E /* Registry.swift */,
+				20EA06E01B22352F00D6840E /* RegistryExtension.swift */,
+			);
+			name = NSManagedObjects;
+			sourceTree = "<group>";
+		};
+		20EA06E81B224CBF00D6840E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				20EA06C71B22348D00D6840E /* Array.swift */,
+				20EA06CE1B2234B900D6840E /* Int.swift */,
+				20EA06D61B2234DA00D6840E /* NSSet.swift */,
+				20EA06DD1B22352100D6840E /* NSDate.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		20EA06E91B224CD400D6840E /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				20EA06CA1B2234A700D6840E /* CoreDataHelper.swift */,
+				20EA06CB1B2234A700D6840E /* CoreDataStore.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		20EA06EA1B22534C00D6840E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				20E796AC1B22167F007CE022 /* DebugViewController.swift */,
+				2022D5341B15FF2100FDF2D3 /* SetupScreen */,
+				2022D5261B13BAC400FDF2D3 /* PagesManagerContent */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		AA880063F36C1C345CA2312B /* Frameworks */ = {

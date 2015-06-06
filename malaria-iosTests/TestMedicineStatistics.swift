@@ -97,4 +97,14 @@ class TestMedicineStatistics: XCTestCase {
         let expectedAdherenceFilter = Float(m!.numberPillsTaken(registries: filter))/Float(m!.numberSupposedPills(registries: filter))
         XCTAssertEqual(expectedAdherenceFilter, m!.pillAdherence(registries: filter))
     }
+    
+    func testTookMedicine(){
+        //given a date, check if took medicine or not. Used in DidTookPillViewController. It takes into account if the pill is weekly or not
+    
+    }
+    
+    func testShouldReshedulePillReminder(){
+        //only applicable to weekly pills
+        /* If the user fails to take their medication mid-way through a week, and a full 7 days goes by without the medication being recorded, on DayX+7 the system will start again and allow the user to enter new data for that week. So if the user is supposed to take medications on Mondays, and next Monday arrives with no data entry, the day and date at the top will go back to black text, and the system will now record data for that new week and consider the previous week a missed week.*/
+    }
 }

@@ -4,6 +4,7 @@ class MedicineManager{
     static let sharedInstance = MedicineManager()
     
     func setup(medicine : Medicine.Pill, fireDate: NSDate){
+        MedicineNotificationManager.sharedInstance.unsheduleNotification()
         
         logger("Storing new medicine")
         MedicineRegistry.sharedInstance.registerNewMedicine(medicine)

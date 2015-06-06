@@ -47,9 +47,54 @@ class TestMedicineStatistics: XCTestCase {
         XCTAssertEqual(0, m!.pillStreak())
     }
     
-    func testAdherence(){
+    func testSupposedPills(){
+        XCTAssertEqual(10, m!.numberSupposedPills())
         
+        //add one pill
+        mr!.addRegistry(d1 + 1.day, tookMedicine: false)
+        XCTAssertEqual(11, m!.numberSupposedPills())
+        
+        //miss one pill
+        mr!.addRegistry(d1 + 2.day, tookMedicine: false)
+        XCTAssertEqual(12, m!.numberSupposedPills())
+        
+        //miss one pill in the past
+        mr!.addRegistry(d1 - 5.day, tookMedicine: false)
+        XCTAssertEqual(3, m!.numberSupposedPills(registries: mr!.getRegistriesInBetween(d1 - 6.day, date2: d1 - 4.day)))
     }
-
-
+    
+    func testPillsTaken(){
+        XCTAssertEqual(10, m!.numberPillsTaken())
+        XCTAssertEqual(6, m!.numberPillsTaken(registries: mr!.getRegistriesInBetween(d1, date2: d1 - 5.day)))
+        
+        //add one pill
+        mr!.addRegistry(d1 + 1.day, tookMedicine: true)
+        XCTAssertEqual(11, m!.numberPillsTaken())
+        
+        //miss one pill
+        mr!.addRegistry(d1 + 2.day, tookMedicine: false)
+        XCTAssertEqual(11, m!.numberPillsTaken())
+        
+        //miss one pill in the past
+        mr!.addRegistry(d1 - 5.day, tookMedicine: false)
+        XCTAssertEqual(2, m!.numberPillsTaken(registries: mr!.getRegistriesInBetween(d1 - 6.day, date2: d1 - 4.day)))
+    }
+    
+    func testAdherence(){
+        XCTAssertEqual(1, m!.pillAdherence())
+        
+        //add one pill
+        mr!.addRegistry(d1 + 1.day, tookMedicine: true)
+        XCTAssertEqual(1, m!.pillAdherence())
+        
+        //miss one pill
+        mr!.addRegistry(d1 + 2.day, tookMedicine: false)
+        XCTAssertEqual(Float(m!.numberPillsTaken())/Float(m!.numberSupposedPills()), m!.pillAdherence())
+        
+        //miss one pill in the past
+        mr!.addRegistry(d1 - 5.day, tookMedicine: false)
+        let filter = mr!.getRegistriesInBetween(d1 - 6.day, date2: d1 - 4.day)
+        let expectedAdherenceFilter = Float(m!.numberPillsTaken(registries: filter))/Float(m!.numberSupposedPills(registries: filter))
+        XCTAssertEqual(expectedAdherenceFilter, m!.pillAdherence(registries: filter))
+    }
 }

@@ -58,7 +58,6 @@ class MedicineManager{
         let sortOldestEntryFirst = registries.sorted({$0.date < $1.date})
         
         for r in sortOldestEntryFirst{
-            logger(r.date.formatWith("dd-MM-yyyy") + "took? \(r.tookMedicine)")
             if r.tookMedicine{
                 result += 1
             }else{

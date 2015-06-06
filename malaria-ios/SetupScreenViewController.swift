@@ -73,7 +73,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     }
     
     private func getStoredReminderTime() -> NSDate{
-        let reminder: NSDate? = MedicineManager.sharedInstance.medicationFireDate()
+        let reminder: NSDate? = MedicineNotificationManager.sharedInstance.getFireDate()
         
         if let r = reminder{
             return r

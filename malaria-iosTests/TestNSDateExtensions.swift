@@ -61,8 +61,6 @@ class TestNSDateExtensions: XCTestCase {
     func testSameDate() {
         let d1 = NSDate()
         let d2 = d1 + 7.day - 7.day
-        
-        // This is an example of a functional test case.
         XCTAssertEqual(true, NSDate.areDatesSameDay(d1, dateTwo: d2))
     }
     

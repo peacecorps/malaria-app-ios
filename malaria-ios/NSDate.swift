@@ -1,24 +1,17 @@
 import Foundation
 
-
-public func <=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.timeIntervalSince1970 <= rhs.timeIntervalSince1970
+public func <(a: NSDate, b: NSDate) -> Bool {
+    return a.compare(b) == NSComparisonResult.OrderedAscending
 }
 
-public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.timeIntervalSince1970 >= rhs.timeIntervalSince1970
-}
-public func >(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.timeIntervalSince1970 > rhs.timeIntervalSince1970
+public func >(a: NSDate, b: NSDate) -> Bool {
+    return a.compare(b) == NSComparisonResult.OrderedDescending
 }
 
-public func <(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.timeIntervalSince1970 < rhs.timeIntervalSince1970
+public func ==(a: NSDate, b: NSDate) -> Bool {
+    return a === b || a.compare(b) == NSComparisonResult.OrderedSame
 }
 
-public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs.timeIntervalSince1970 == rhs.timeIntervalSince1970
-}
 
 extension NSDate : Comparable {}
 

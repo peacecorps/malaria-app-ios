@@ -2,6 +2,10 @@ import Foundation
 import UIKit
 
 class MedicineNotificationManager{
+    static let sharedInstance = MedicineNotificationManager()
+    
+    
+    
     let PillReminderCategory = "PillReminder"
     
     func scheduleNotification(medicine: Medicine.Pill, fireTime: NSDate){

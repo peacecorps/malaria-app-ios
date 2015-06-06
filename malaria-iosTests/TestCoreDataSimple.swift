@@ -2,14 +2,16 @@ import UIKit
 import XCTest
 import malaria_ios
 
-class TestCoreData: XCTestCase {
+class TestCoreDataSimple: XCTestCase {
 
     var m: MedicineManager?
+    var mr: MedicineRegistry?
     
     override func setUp() {
         super.setUp()
         m = MedicineManager.sharedInstance
-        if m == nil {
+        mr = MedicineRegistry.sharedInstance
+        if m == nil || mr == nil{
             XCTFail("Fail initializing")
         }
         
@@ -17,15 +19,15 @@ class TestCoreData: XCTestCase {
     }
     
     override func tearDown() {
-        //add method to clear CoreData
-        m!.clearCoreData()
-        
         super.tearDown()
+        
+        //add method to clear CoreData
+        mr!.clearCoreData()
     }
 
     func testSetup(){
         //getting
-        let medicine: Medicine? = m!.getCurrentMedicine()
+        let medicine: Medicine? = mr!.getRegisteredMedicine()
         
         if let m = medicine{
             m.print()
@@ -38,51 +40,52 @@ class TestCoreData: XCTestCase {
         }
     }
     
+    func testClearCoreData(){
+        let m1: Medicine? = mr!.getRegisteredMedicine()
+        XCTAssertEqual(true, m1 != nil)
+        
+        let previousCount = m1!.registries.count
+        
+        mr!.clearCoreData()
+        
+        let m2: Medicine? = mr!.getRegisteredMedicine()
+        XCTAssertEqual(true, m2 == nil)
+    }
+    
     func testInsertion() {
         
         let d1 = NSDate()
-        m!.updatePillTracker(d1, tookPill: true)
+        mr!.addRegistry(d1, tookMedicine: true)
+        XCTAssertEqual(d1, mr!.getRegistries()![0].date)
         
         let d2 = d1 + 7.day
-        m!.updatePillTracker(d2, tookPill: false)
+        mr!.addRegistry(d2, tookMedicine: false)
+        XCTAssertEqual(d2, mr!.getRegistries()![0].date)
         
         let d3 = d2 + 7.day
-        m!.updatePillTracker(d3, tookPill: true)
+        mr!.addRegistry(d3, tookMedicine: true)
+        XCTAssertEqual(d3, mr!.getRegistries()![0].date)
         
-        logger("-----")
-        logger(d1.formatWith("dd-MM-yyyy"))
-        logger(d2.formatWith("dd-MM-yyyy"))
-        logger(d3.formatWith("dd-MM-yyyy"))
-        logger("-----")
-        
-        //getting
-        let medicine: Medicine? = m!.getCurrentMedicine()
-        if let med = medicine{
-            med.print()
-            
-            let array: [Registry] = med.registries.convertToArray()
+        let registries: [Registry]? = mr!.getRegistries()
+        if let array = registries{
             if(array.count != 3){
                 XCTFail("Error registering pills")
             }
             
             let r1: Registry = array[0]
-            
             XCTAssertEqual(r1.date, d3)
             XCTAssertEqual(r1.tookMedicine, true)
             
             
             let r2: Registry = array[1]
-            
             XCTAssertEqual(r2.date, d2)
             XCTAssertEqual(r2.tookMedicine, false)
             
             let r3: Registry = array[2]
-            
             XCTAssertEqual(r3.date, d1)
             XCTAssertEqual(r3.tookMedicine, true)
         }else{
             XCTFail("Error inserting registries pills")
         }
     }
-
 }

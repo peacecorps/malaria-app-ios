@@ -42,13 +42,13 @@ extension Medicine{
     
     func print(){
         logger(self.name)
-        logger("Is weekly? \(self.isWeekly())")
-        logger("currentStreal: \(self.currentStreak)")
+        logger("   Is weekly? \(self.isWeekly())")
+        logger("   currentStreak: \(self.currentStreak)")
         
         let registries: [Registry] = self.registries.convertToArray()
-        logger("Number of registries \(self.registries.count)")
+        logger("   Number of registries \(self.registries.count)")
         for reg in registries{
-            logger(reg.date.formatWith("dd/MM") + " did took? \(reg.tookMedicine)")
+            logger("        " + reg.date.formatWith("dd/MM/yyyy") + " did took? \(reg.tookMedicine)")
         }
     
     }

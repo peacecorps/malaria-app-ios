@@ -56,15 +56,15 @@ class TestCoreDataSimple: XCTestCase {
         
         let d1 = NSDate()
         mr!.addRegistry(d1, tookMedicine: true)
-        XCTAssertEqual(d1, mr!.getRegistries()![0].date)
+        XCTAssertEqual(d1, mr!.getRegistries()[0].date)
         
         let d2 = d1 + 7.day
         mr!.addRegistry(d2, tookMedicine: false)
-        XCTAssertEqual(d2, mr!.getRegistries()![0].date)
+        XCTAssertEqual(d2, mr!.getRegistries()[0].date)
         
         let d3 = d2 + 7.day
         mr!.addRegistry(d3, tookMedicine: true)
-        XCTAssertEqual(d3, mr!.getRegistries()![0].date)
+        XCTAssertEqual(d3, mr!.getRegistries()[0].date)
         
         let registries: [Registry]? = mr!.getRegistries()
         if let array = registries{

@@ -58,16 +58,12 @@ class MedicineRegistry {
             }
             
             if(!found){
-                logger("Inserting new entry for that date")
+                //logger("Inserting new entry for that date")
                 var registry = Registry(context: context)
                 registry.date = date
                 registry.tookMedicine = tookMedicine
                 
                 registries.append(registry)
-                
-                //registries.sort({$0.date > $1.date})
-                //registries = registries.sorted({$0.date > $1.date})
-                
                 m.registries = NSSet(array: registries)
             }
             
@@ -96,26 +92,25 @@ class MedicineRegistry {
         return nil
     }
     
-    func getRegistries() -> [Registry]?{
+    func getRegistries() -> [Registry]{
         if let m = getRegisteredMedicine(){
             return m.registries.convertToArray().sorted({$0.date > $1.date})
         }
         
-        return nil
+        return []
+    }
+    
+    func getRegistriesInBetween(date1: NSDate, date2: NSDate) -> [Registry]{
+        let filteredArray = getRegistries()
+        return filteredArray.filter({ $0.date >= date1 && $0.date <= date2 })
     }
     
     func findRegistry(date: NSDate) -> Registry?{
-        let filteredArray = getRegistries()
-        if let array = filteredArray{
-            array.filter({NSDate.areDatesSameDay($0.date, dateTwo: date)})
-            
-            if array.count > 1{
-                logger("Error: Found too many entries with same date")
-            }
-            
-            return array.count > 0 ? array[0] : nil
+        let filteredArray = getRegistries().filter({ NSDate.areDatesSameDay($0.date, dateTwo: date) })
+        if filteredArray.count > 1{
+            logger("Error: Found too many entries with same date")
         }
         
-        return nil
+        return filteredArray.count > 0 ? filteredArray[0] : nil
     }
 }

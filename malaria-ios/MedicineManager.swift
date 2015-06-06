@@ -26,11 +26,7 @@ class MedicineManager{
     }
     
     func numberOfSupposedPills(now: NSDate)-> Int{
-        if let r = MedicineRegistry.sharedInstance.getRegistries(){
-            return r.count
-        }
-        
-        return 0
+        return MedicineRegistry.sharedInstance.getRegistries().count
     }
     
     func currentPillAdherence() -> Float{
@@ -53,11 +49,9 @@ class MedicineManager{
     }
     
     func lastPillDateRegistry() -> NSDate?{
-        if let registries = MedicineRegistry.sharedInstance.getRegistries(){
-            return registries.count > 0 ? registries[0].date : nil
-        }
+        let registries = MedicineRegistry.sharedInstance.getRegistries()
         
-        return nil
+        return registries.count > 0 ? registries[0].date : nil
     }
     
     func currentStreak()-> Int{
@@ -71,11 +65,12 @@ class MedicineManager{
     func numberDosesTaken()-> Int{
         var count = 0
         
-        if let registries = MedicineRegistry.sharedInstance.getRegistries(){
-            for r in registries{
-                if (r.tookMedicine){
-                    count++
-                }
+        let registries = MedicineRegistry.sharedInstance.getRegistries()
+        
+        
+        for r in registries{
+            if (r.tookMedicine){
+                count++
             }
         }
         

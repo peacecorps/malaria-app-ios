@@ -11,19 +11,19 @@ class DidTakePillsViewController: UIViewController {
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         logger("didNotTookMedicineBtnHandler")
         
-        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: false)
+        MedicineManager.sharedInstance.updatePillTracker(NSDate(), tookPill: false)
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         logger("tookMedicineBtnHandler")
-        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: true)
+        MedicineManager.sharedInstance.updatePillTracker(NSDate(), tookPill: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         logger("loaded didTakePills")
         
-        let didTookPill = getAppDelegate().medsManager.didTookPill(NSDate())
+        let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
      
         /*
         didNotTookMedicineBtn.enabled = !didTookPill

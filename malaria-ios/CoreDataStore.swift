@@ -2,9 +2,12 @@ import Foundation
 import CoreData
 
 class CoreDataStore: NSObject{
+    static let sharedInstance = CoreDataStore()
+    
     
     let storeName = "Model"
     let storeFilename = "malaria-ios.sqlite"
+    
     
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)

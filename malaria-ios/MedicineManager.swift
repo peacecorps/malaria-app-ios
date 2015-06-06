@@ -1,8 +1,12 @@
 import Foundation
 
 class MedicineManager{
+    static let sharedInstance = MedicineManager()
+    
     let medRegistry = MedicineRegistry()
     let notificationManager = MedicineNotificationManager()
+    
+    
     
     func setup(medicine : Medicine.Pill, fireDate: NSDate){
         

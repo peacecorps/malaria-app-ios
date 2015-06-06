@@ -1,13 +1,15 @@
 import Foundation
 
 class CoreDataHelper: NSObject {
+    static let sharedInstance = CoreDataHelper()
     
     let store: CoreDataStore!
     
     override init(){
-        store = getAppDelegate().cds
+        store = CoreDataStore.sharedInstance
         super.init()
     }
+    
     
     lazy var backgroundContext: NSManagedObjectContext? = {
         let coordinator = self.store.persistentStoreCoordinator?.persistentStoreCoordinator

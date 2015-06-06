@@ -35,7 +35,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         picker.reloadAllComponents()
         
         var index = 0
-        if let currentPill = getAppDelegate().medsManager.getCurrentPill(),
+        if let currentPill = MedicineManager.sharedInstance.getCurrentPill(),
             let pillIndex = find(Medicine.Pill.allValues, currentPill){
                 
                 index = pillIndex
@@ -66,11 +66,11 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         }
         
         //setup notifications
-        getAppDelegate().medsManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
+        MedicineManager.sharedInstance.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
     }
     
     private func getStoredReminderTime() -> NSDate{
-        let reminder: NSDate? = getAppDelegate().medsManager.medicationFireDate()
+        let reminder: NSDate? = MedicineManager.sharedInstance.medicationFireDate()
         
         if let r = reminder{
             return r
@@ -80,7 +80,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     }
     
     private func getStoredMedicineName() -> String{
-        let pill: Medicine.Pill? = getAppDelegate().medsManager.getCurrentPill()
+        let pill: Medicine.Pill? = MedicineManager.sharedInstance.getCurrentPill()
         
         if let p = pill{
             return p.name()

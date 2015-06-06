@@ -4,7 +4,7 @@ import Foundation
 class MedicineRegistry {
     
     func registerNewMedicine(med: Medicine.Pill){
-        let context = getAppDelegate().cdh.backgroundContext!
+        let context = CoreDataHelper.sharedInstance.backgroundContext!
         
         let currentMedicine: Medicine? = getRegisteredMedicine()
         if let m = currentMedicine{
@@ -24,11 +24,11 @@ class MedicineRegistry {
         medicine.name = med.rawValue
         medicine.weekly = med.isWeekly()
         
-        getAppDelegate().cdh.saveContext()
+        CoreDataHelper.sharedInstance.saveContext()
     }
     
     func addRegistry(date: NSDate, tookMedicine: Bool){
-        let context = getAppDelegate().cdh.backgroundContext!
+        let context = CoreDataHelper.sharedInstance.backgroundContext!
         
         //check if there is already a registry
         if let m = getRegisteredMedicine(){
@@ -67,13 +67,13 @@ class MedicineRegistry {
                 m.currentStreak = 0
             }
             
-            getAppDelegate().cdh.saveContext() //backgroundContext!.saveToPersistentStore(nil)
+            CoreDataHelper.sharedInstance.saveContext()
         }
     }
     
     func getRegisteredMedicine() -> Medicine?{
         let fetchRequest = NSFetchRequest(entityName: "Medicine")
-        let context = getAppDelegate().cdh.backgroundContext!
+        let context = CoreDataHelper.sharedInstance.backgroundContext!
         if let fetchResults = context.executeFetchRequest(fetchRequest, error: nil) as? [Medicine] {
         
             if !fetchResults.isEmpty {

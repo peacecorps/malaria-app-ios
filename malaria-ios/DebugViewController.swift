@@ -22,12 +22,12 @@ class DebugViewController : UIViewController{
     
     @IBAction func noBtnHandler(sender: AnyObject) {
         logger("Pressed No")
-        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: false)
+        MedicineManager.sharedInstance.updatePillTracker(NSDate(), tookPill: false)
         viewDidLoad()
     }
     
     @IBAction func yesBtnHandler(sender: AnyObject) {
-        getAppDelegate().medsManager.updatePillTracker(NSDate(), tookPill: true)
+        MedicineManager.sharedInstance.updatePillTracker(NSDate(), tookPill: true)
         logger("Pressed Yes")
         viewDidLoad()
     }
@@ -41,7 +41,7 @@ class DebugViewController : UIViewController{
         
         
         
-        let didTookPill = getAppDelegate().medsManager.didTookPill(NSDate())
+        let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
         
         /*
         didNotTookMedicineBtn.enabled = !didTookPill
@@ -50,7 +50,7 @@ class DebugViewController : UIViewController{
         
         
         
-        let lastPillDate: NSDate? = getAppDelegate().medsManager.lastPillDateRegistry()
+        let lastPillDate: NSDate? = MedicineManager.sharedInstance.lastPillDateRegistry()
         
         if let d = lastPillDate{
             var dateFormatter = NSDateFormatter()
@@ -61,8 +61,8 @@ class DebugViewController : UIViewController{
         }
         
         
-        dosesInRow.text = "\(getAppDelegate().medsManager.currentStreak())"
-        adherence.text = "\(100*getAppDelegate().medsManager.currentPillAdherence())%"
+        dosesInRow.text = "\(MedicineManager.sharedInstance.currentStreak())"
+        adherence.text = "\(100*MedicineManager.sharedInstance.currentPillAdherence())%"
     }
 
 }

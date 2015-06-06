@@ -3,14 +3,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    lazy var cds: CoreDataStore =   { return CoreDataStore()  }()
-    lazy var cdh: CoreDataHelper =  { return CoreDataHelper() }()
-    
-    let medsManager = MedicineManager()
-
     var window: UIWindow?
     
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //registering for notifications

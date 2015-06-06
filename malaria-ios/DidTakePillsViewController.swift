@@ -23,7 +23,7 @@ class DidTakePillsViewController: UIViewController {
         super.viewDidLoad()
         logger("loaded didTakePills")
         
-        let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
+        //let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
      
         /*
         didNotTookMedicineBtn.enabled = !didTookPill

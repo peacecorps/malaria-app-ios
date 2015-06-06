@@ -41,7 +41,7 @@ class DebugViewController : UIViewController{
         
         
         
-        let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
+        //let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
         
         /*
         didNotTookMedicineBtn.enabled = !didTookPill
@@ -60,9 +60,10 @@ class DebugViewController : UIViewController{
             medicineLastTaken.text = " -- "
         }
         
-        
+        /*
         dosesInRow.text = "\(MedicineManager.sharedInstance.currentStreak())"
         adherence.text = "\(100*MedicineManager.sharedInstance.currentPillAdherence())%"
+        */
     }
 
 }

@@ -92,16 +92,23 @@ class MedicineRegistry {
         return nil
     }
     
-    func getRegistries() -> [Registry]{
+    func getRegistries(mostRecentFirst: Bool = true) -> [Registry]{
         if let m = getRegisteredMedicine(){
-            return m.registries.convertToArray().sorted({$0.date > $1.date})
+            let array : [Registry] = m.registries.convertToArray()
+            
+            return mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
         }
         
         return []
     }
     
-    func getRegistriesInBetween(date1: NSDate, date2: NSDate) -> [Registry]{
-        let filteredArray = getRegistries()
+    func getRegistriesInBetween(date1: NSDate, date2: NSDate, mostRecentFirst: Bool = true) -> [Registry]{
+        let filteredArray = getRegistries(mostRecentFirst: mostRecentFirst)
+        
+        if date2 <= date1 {
+            return filteredArray.filter({ $0.date >= date2 && $0.date <= date1 })
+        }
+        
         return filteredArray.filter({ $0.date >= date1 && $0.date <= date2 })
     }
     

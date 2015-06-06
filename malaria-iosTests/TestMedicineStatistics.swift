@@ -34,7 +34,17 @@ class TestMedicineStatistics: XCTestCase {
     }
     
     func testPillStreak(){
+        XCTAssertEqual(10, m!.pillStreak())
+        XCTAssertEqual(6, m!.pillStreak(registries: mr!.getRegistriesInBetween(d1, date2: d1 - 5.day)))
     
+        //miss one pill
+        mr!.addRegistry(d1 - 5.day, tookMedicine: false)
+        XCTAssertEqual(0, m!.pillStreak(registries: mr!.getRegistriesInBetween(d1 - 9.day, date2: d1 - 5.day)))
+        XCTAssertEqual(5, m!.pillStreak(registries: mr!.getRegistriesInBetween(d1, date2: d1 - 5.day)))
+        
+        //did not took a pill more recently
+        mr!.addRegistry(d1 + 1.day, tookMedicine: false)
+        XCTAssertEqual(0, m!.pillStreak())
     }
     
     func testAdherence(){

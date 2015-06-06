@@ -54,14 +54,38 @@ class TestMedicineRegistries: XCTestCase {
         XCTAssertEqual(r3.date, d1 - 5.day)
         XCTAssertEqual(r3.tookMedicine, true)
         
+        
+        //flip the dates, should reproduce the same results
+        let entriesFlipped = mr!.getRegistriesInBetween(d1 - 3.day, date2: d1 - 5.day)
+        
+        if entriesFlipped.count == 0 {
+            XCTFail("No element found")
+            return
+        }
+        
+        let r1f = entriesFlipped[0]
+        XCTAssertEqual(r1f.date, d1 - 3.day)
+        XCTAssertEqual(r1f.tookMedicine, true)
+        
+        let r2f = entriesFlipped[1]
+        XCTAssertEqual(r2f.date, d1 - 4.day)
+        XCTAssertEqual(r2f.tookMedicine, false)
+        
+        let r3f = entriesFlipped[2]
+        XCTAssertEqual(r3f.date, d1 - 5.day)
+        XCTAssertEqual(r3f.tookMedicine, true)
+        
+        
         //check interval without entries
         XCTAssertEqual(0, mr!.getRegistriesInBetween(d1 - 30.day,  date2: d1 - 25.day).count)
         
         //check interval big enough to fit every entry
-        
         let entries2 = mr!.getRegistriesInBetween(d1 - 50.day, date2: d1 + 50.day)
         XCTAssertEqual(mr!.getRegistries().count, entries2.count)
         
+        //single registry
+        let entries3 = mr!.getRegistriesInBetween(d1 - 4.day, date2: d1 - 4.day)
+        XCTAssertEqual(1, entries3.count)
     }
     
     func testFindEntry(){

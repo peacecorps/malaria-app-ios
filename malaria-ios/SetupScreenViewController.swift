@@ -35,10 +35,11 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         picker.reloadAllComponents()
         
         var index = 0
-        if let currentPill = MedicineManager.sharedInstance.getCurrentPill(),
-            let pillIndex = find(Medicine.Pill.allValues, currentPill){
-                
-                index = pillIndex
+        
+        let currentMedicine = MedicineRegistry.sharedInstance.getRegisteredMedicine()
+        
+        if let m = currentMedicine{
+            index = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: m.name)!) ?? 0
         }
         
         picker.selectRow(index, inComponent: 0, animated: false)
@@ -83,10 +84,9 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     }
     
     private func getStoredMedicineName() -> String{
-        let pill: Medicine.Pill? = MedicineManager.sharedInstance.getCurrentPill()
-        
-        if let p = pill{
-            return p.name()
+        let currentMedicine = MedicineRegistry.sharedInstance.getRegisteredMedicine()
+        if let m = currentMedicine{
+            return m.name
         }
         
         return Medicine.Pill.allValues[0].name()

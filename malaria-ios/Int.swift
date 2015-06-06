@@ -15,17 +15,24 @@ extension Int{
 }
 
 public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-    return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options:.WrapComponents)!
+    
+    var components = NSDateComponents()
+    
+    components.setValue(tuple.value, forComponent: tuple.unit);
+    
+    return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
 }
 
 public func - (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-    return NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: (-tuple.value), toDate: date, options:.WrapComponents)!
+    var components = NSDateComponents()
+    components.setValue(-(tuple.value), forComponent: tuple.unit);
+    return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
 }
 
 public func += (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
-    date =  NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: tuple.value, toDate: date, options:.WrapComponents)!
+    date = date + tuple
 }
 
 public func -= (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
-    date =  NSCalendar.currentCalendar().dateByAddingUnit(tuple.unit, value: -tuple.value, toDate: date, options:.WrapComponents)!
+    date = date - tuple
 }

@@ -1,21 +1,40 @@
 import Foundation
 
 
-public func <(x: NSDate, y: NSDate) -> Bool {
-    return x.compare(y) == .OrderedAscending
+public func <=(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.timeIntervalSince1970 <= rhs.timeIntervalSince1970
 }
 
-public func >(x: NSDate, y: NSDate) -> Bool {
-    return x.compare(y) == .OrderedDescending
+public func >=(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.timeIntervalSince1970 >= rhs.timeIntervalSince1970
+}
+public func >(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.timeIntervalSince1970 > rhs.timeIntervalSince1970
+}
+
+public func <(lhs: NSDate, rhs: NSDate) -> Bool {
+    return lhs.timeIntervalSince1970 < rhs.timeIntervalSince1970
 }
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
-    return lhs === rhs || lhs.compare(rhs) == .OrderedSame
+    return lhs.timeIntervalSince1970 == rhs.timeIntervalSince1970
 }
 
 extension NSDate : Comparable {}
 
 extension NSDate{
+    
+    class func from(year: Int, month: Int, day: Int) -> NSDate {
+        var c = NSDateComponents()
+        c.year = year
+        c.month = month
+        c.day = day
+        
+        var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)
+        var date = gregorian!.dateFromComponents(c)
+        return date!
+    }
+    
     func formatWith(format: String) -> String{
         let formatter = NSDateFormatter()
         formatter.dateFormat = format

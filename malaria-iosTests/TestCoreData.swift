@@ -49,6 +49,11 @@ class TestCoreData: XCTestCase {
         let d3 = d2 + 7.day
         m!.updatePillTracker(d3, tookPill: true)
         
+        logger("-----")
+        logger(d1.formatWith("dd-MM-yyyy"))
+        logger(d2.formatWith("dd-MM-yyyy"))
+        logger(d3.formatWith("dd-MM-yyyy"))
+        logger("-----")
         
         //getting
         let medicine: Medicine? = m!.getCurrentMedicine()

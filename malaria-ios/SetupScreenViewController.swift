@@ -57,7 +57,10 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         if(UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine)){
             dismissViewControllerAnimated(true, completion: nil)
         }else{
-            var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
+            
+            
+            //var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
+            var view = ExistingViewsControllers.DebugViewController.instanciateViewController() as! DebugViewController
             presentViewController(
                 view,
                 animated: true,

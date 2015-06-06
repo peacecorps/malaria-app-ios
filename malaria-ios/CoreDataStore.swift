@@ -15,8 +15,40 @@ class CoreDataStore: NSObject{
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
+        // Get module name
+        var moduleName: String = "malaria_ios"
+        let environment = NSProcessInfo.processInfo().environment as! [String : AnyObject]
+        let isTest = (environment["XCInjectBundle"] as? String)?.pathExtension == "xctest"
+        if isTest { logger("@@@In test environment@@@"); moduleName = "malaria_iosTests" }
+        
+        // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!
-        let model = NSManagedObjectModel(contentsOfURL: modelURL)!
+        var model = NSManagedObjectModel(contentsOfURL: modelURL)!
+        
+        // Create entity copies
+        var newEntities = [NSEntityDescription]()
+        for (_, entity) in enumerate(model.entities) {
+            let newEntity = entity.copy() as! NSEntityDescription
+            newEntity.managedObjectClassName = "\(moduleName).\(entity.managedObjectClassName)"
+            newEntities.append(newEntity)
+        }
+        
+        // Set correct subentities
+        for (_, entity) in enumerate(newEntities) {
+            var newSubEntities = [NSEntityDescription]()
+            for subEntity in entity.subentities! {
+                for (_, entity) in enumerate(newEntities) {
+                    if subEntity.name == entity.name {
+                        newSubEntities.append(entity)
+                    }
+                }
+            }
+            entity.subentities = newSubEntities
+        }
+        
+        // Set model
+        model = NSManagedObjectModel()
+        model.entities = newEntities
         
         return model
         }()

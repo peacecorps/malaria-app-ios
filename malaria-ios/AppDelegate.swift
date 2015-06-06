@@ -17,9 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if UserSettingsManager.getBool(.DidConfiguredMedicine){
+            logger("Loading debug view controller")
+            //change to PagesManagerViewController when apropriate
             window!.rootViewController = ExistingViewsControllers.DebugViewController.instanciateViewController()
-            /* window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() */
+            
+
         }else{
+            logger("Loading first setup view controller")
             window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
         }
         

@@ -23,13 +23,14 @@ class MedicineManager{
     
     func updatePillTracker(date: NSDate, tookPill: Bool){
         medRegistry.addRegistry(date, tookMedicine: tookPill)
-        
-        getCurrentMedicine()
-        
     }
     
     func medicationFireDate() -> NSDate?{
         return notificationManager.getFireDate()
+    }
+    
+    func clearCoreData(){
+        medRegistry.clearCoreData()
     }
     
     func didTookPill(currentDate: NSDate) -> Bool{

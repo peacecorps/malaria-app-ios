@@ -19,12 +19,21 @@ class MedicineRegistry {
             return
         }
         
-        var medicine = NSEntityDescription.insertNewObjectForEntityForName("Medicine", inManagedObjectContext: context) as! Medicine
-        
+        let medicine = Medicine(context: context)
         medicine.name = med.rawValue
         medicine.weekly = med.isWeekly()
         
         CoreDataHelper.sharedInstance.saveContext()
+    }
+    
+    func clearCoreData(){
+        if let m = getRegisteredMedicine(){
+            let context = CoreDataHelper.sharedInstance.backgroundContext!
+            context.deleteObject(m)
+            CoreDataHelper.sharedInstance.saveContext()
+        }else{
+            logger("Nothing to delete")
+        }
     }
     
     func addRegistry(date: NSDate, tookMedicine: Bool){
@@ -51,7 +60,7 @@ class MedicineRegistry {
             
             if(!found){
                 //logger("Inserting new entry for that date")
-                var registry = NSEntityDescription.insertNewObjectForEntityForName("Registry", inManagedObjectContext: context) as! Registry
+                var registry = Registry(context: context)
                 registry.date = date
                 registry.tookMedicine = tookMedicine
                 
@@ -68,6 +77,8 @@ class MedicineRegistry {
             }
             
             CoreDataHelper.sharedInstance.saveContext()
+        }else{
+            logger("Error! addRegistry method failed because there is no registered Medicine")
         }
     }
     

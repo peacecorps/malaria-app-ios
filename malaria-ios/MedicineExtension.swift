@@ -22,6 +22,12 @@ extension Medicine{
         }
     }
     
+    
+    convenience init(context: NSManagedObjectContext) {
+        let entityDescription = NSEntityDescription.entityForName("Medicine", inManagedObjectContext: context)!
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+    }
+    
     class func PillTypeFromString(type: String) -> Pill?{
         return Medicine.Pill(rawValue: type)
     }

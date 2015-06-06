@@ -9,7 +9,7 @@
     <entity name="Registry" representedClassName="Registry" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="tookMedicine" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
+        <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
     <elements>
         <element name="Medicine" positionX="-63" positionY="-18" width="128" height="103"/>

@@ -512,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-384" y="534.75"/>
+            <point key="canvasLocation" x="-933" y="606.75"/>
         </scene>
         <!--Pages Manager View Controller-->
         <scene sceneID="Ji7-20-kdB">
@@ -528,7 +528,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vn-rf-IV5">
                                 <rect key="frame" x="536" y="28" width="26" height="27"/>
-                                <state key="normal" image="2402772E-CC82-44DC-94F5-2D2AD2188CCE">
+                                <state key="normal" image="909E8338-E175-4126-96D3-C47C0C35D320">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -751,7 +751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRi-ww-BAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="525" y="576"/>
+            <point key="canvasLocation" x="-150" y="606.75"/>
         </scene>
         <!--Debug View Controller-->
         <scene sceneID="kf1-01-tg2">
@@ -1447,7 +1447,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRw-k4-fdc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="444" y="-91.5"/>
+            <point key="canvasLocation" x="-933" y="-144"/>
         </scene>
         <!--Daily Stats Table View Controller-->
         <scene sceneID="14g-4K-WZb">
@@ -2009,7 +2009,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D78-8W-i0n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="841.5" y="1317"/>
+            <point key="canvasLocation" x="490.5" y="1285.5"/>
         </scene>
         <!--Pills Stats View Controller-->
         <scene sceneID="cpp-oz-tBt">
@@ -2196,7 +2196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pr1-rR-YPI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1501.5" y="1317"/>
+            <point key="canvasLocation" x="1147.5" y="1285.5"/>
         </scene>
         <!--Plan Trip View Controller-->
         <scene sceneID="RXV-3X-kxf">
@@ -2674,7 +2674,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IN1-DY-ave" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="2190"/>
+            <point key="canvasLocation" x="-150" y="1932"/>
         </scene>
         <!--InfoViewController-->
         <scene sceneID="Xg0-QI-oL1">
@@ -2847,7 +2847,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVu-0D-fxQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="2597.25"/>
+            <point key="canvasLocation" x="-150" y="2571.75"/>
         </scene>
         <!--DidTakePillViewController-->
         <scene sceneID="d7k-e3-lH1">
@@ -3070,63 +3070,63 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Let-Dl-swa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="1312.5"/>
+            <point key="canvasLocation" x="-150" y="1285.5"/>
         </scene>
     </scenes>
     <resources>
-        <image name="2402772E-CC82-44DC-94F5-2D2AD2188CCE" width="26" height="27">
+        <image name="909E8338-E175-4126-96D3-C47C0C35D320" width="26" height="27">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
 DBIAwAAAgAKACtISCRMVWk5TLm9iamVjdHOhFIADgAnSEgkXGqIYGYAEgAWACBAA0h0JHh9fEBROU1RJ
-RkZSZXByZXNlbnRhdGlvboAGgAdPERgGTU0AKgAACwD///8A////AP///wD///8A////AP///wD///8A
-////AP///wD///8AfFtQQHxbUIB8W1CAfFtQgHxbUIB8W1CA////AP///wD///8A////AP///wD///8A
-////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wB8W1Dg
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Aw////AP///wD///8A////AP///wD///8A////AP///wD///8A
-////AP///wD///8A////AP///wB8W1AwfFtQMP///wD///8AfFtQQHxbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUHD///8A////AHxbUEB8W1AQ////AP///wD///8A////AP///wD///8A////AP///wD///8A
-fFtQMHxbUPB8W1D/fFtQoHxbUFB8W1DgfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ4HxbUGB8W1CQ
-fFtQ/3xbUPB8W1Aw////AP///wD///8A////AP///wD///8A////AHxbUDB8W1DwfFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUPB8W1BQ
-////AP///wD///8A////AP///wB8W1AwfFtQ8HxbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Bg////AP///wD///8A
-////AHxbUPB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUPD///8A////AP///wD///8AfFtQoHxbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1DgfFtQcHxbUEB8W1BAfFtQcHxbUMB8W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQgP///wD///8A////AP///wB8W1AwfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQcP///wD///8A////AP///wD///8A////AHxbUEB8W1DwfFtQ/3xbUP98W1D/fFtQ/3xbUPD///8A
-////AP///wD///8A////AHxbUGB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUGD///8A////AP///wD///8A
-////AP///wD///8A////AHxbUDB8W1DwfFtQ/3xbUP98W1D/fFtQ/3xbUCD///8A////AHxbUFB8W1Cg
-fFtQ8HxbUP98W1D/fFtQ/3xbUP98W1Cg////AP///wD///8A////AP///wD///8A////AP///wD///8A
-////AHxbUHB8W1D/fFtQ/3xbUP98W1D/fFtQ0HxbUHB8W1AwfFtQwHxbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUDD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8AfFtQEHxbUPB8W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1DAfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/////AP///wD///8A
-////AP///wD///8A////AP///wD///8A////AP///wD///8AfFtQwHxbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUMD///8A////AP///wD///8A////AP///wD///8A
-////AP///wD///8A////AP///wB8W1CwfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQwHxbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/////wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A
-////AHxbUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1DAfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQMP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wB8W1AQfFtQ8HxbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUGB8W1DQfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Cw////AP///wD///8A
-////AP///wD///8A////AP///wD///8A////AHxbUHB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUOB8W1Cw
-////AP///wB8W1BgfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Bg////AP///wD///8A////AP///wD///8A
-////AP///wB8W1AwfFtQ8HxbUP98W1D/fFtQ/3xbUP98W1Bg////AP///wD///8A////AHxbUCB8W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Bw////AP///wD///8A////AP///wD///8AfFtQQHxbUPB8W1D/
-fFtQ/3xbUP98W1D/fFtQ/////wD///8A////AP///wD///8AfFtQcHxbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1DgfFtQgHxbUEB8W1BAfFtQcHxbUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQYP///wD///8A////AP///wB8W1DQfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Dw////AP///wD///8A
-////AHxbUGB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUGD///8A////AP///wD///8A////AHxbUGB8W1D/
+RkZSZXByZXNlbnRhdGlvboAGgAdPERgGTU0AKgAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAfFxQQHxcUIB8XFCAfFxQgHxcUIB8XFCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8W1Dg
+fFtQ/3xbUP98W1D/fFtQ/3xbUP96WlAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAB6WlAwelpQMAAAAAAAAAAAfFxQQHxbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3tbUHAAAAAAAAAAAHxcUECAYFAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+elpQMHxbUPB8W1D/fFtQoHxcUFB8W1DgfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ4H1aUGB8WlCQ
+fFtQ/3xbUPB6WlAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHpaUDB8W1DwfFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUPB8XFBQ
+AAAAAAAAAAAAAAAAAAAAAAAAAAB6WlAwfFtQ8HxbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP99WlBgAAAAAAAAAAAAAAAA
+AAAAAHxbUPB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUPAAAAAAAAAAAAAAAAAAAAAAfFtQoHxbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1Dge1tQcHxcUEB8XFBAe1tQcHxcUMB8W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFxQgAAAAAAAAAAAAAAAAAAAAAB6WlAwfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+e1tQcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHxcUEB8W1DwfFtQ/3xbUP98W1D/fFtQ/3xbUPAAAAAA
+AAAAAAAAAAAAAAAAAAAAAH1aUGB8W1D/fFtQ/3xbUP98W1D/fFtQ/31aUGAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAHpaUDB8W1DwfFtQ/3xbUP98W1D/fFtQ/4BYUCAAAAAAAAAAAHxcUFB8W1Cg
+fFtQ8HxbUP98W1D/fFtQ/3xbUP98W1CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAHtbUHB8W1D/fFtQ/3xbUP98W1D/fFtQ0HtbUHB6WlAwfFxQwHxbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3paUDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgGBQEHxbUPB8W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98XFDAfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/AAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfFxQwHxbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xcUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xcUMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAB9W1CwfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFxQwHxbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAHxcUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98XFDAfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+elpQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAYFAQfFtQ8HxbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/31aUGB8W1DQfFtQ/3xbUP98W1D/fFtQ/3xbUP99W1CwAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHtbUHB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUOB9W1Cw
+AAAAAAAAAAB9WlBgfFtQ/3xbUP98W1D/fFtQ/3xbUP99WlBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAB6WlAwfFtQ8HxbUP98W1D/fFtQ/3xbUP99WlBgAAAAAAAAAAAAAAAAAAAAAIBYUCB8W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP97W1BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfFxQQHxbUPB8W1D/
+fFtQ/3xbUP98W1D/fFtQ/wAAAAAAAAAAAAAAAAAAAAAAAAAAe1tQcHxbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1DgfFxQgHxcUEB8XFBAe1tQcHxcUMB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+fVpQYAAAAAAAAAAAAAAAAAAAAAB8W1DQfFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1DwAAAAAAAAAAAAAAAA
+AAAAAH1aUGB8W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/31aUGAAAAAAAAAAAAAAAAAAAAAAAAAAAH1aUGB8W1D/
 fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1Bg////AP///wD///8A////AP///wD///8A////AHxbUGB8W1D/fFtQ/3xbUPB8W1Cw
-fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1DAfFtQsHxbUP98W1D/fFtQYP///wD///8A
-////AP///wD///8A////AP///wD///8A////AHxbUGB8W1CAfFtQEP///wB8W1BgfFtQ/3xbUP98W1D/
-fFtQ/3xbUP98W1D/fFtQUP///wD///8AfFtQgHxbUGD///8A////AP///wD///8A////AP///wD///8A
-////AP///wD///8A////AP///wD///8A////AP///wB8W1DgfFtQ/3xbUP98W1D/fFtQ/3xbUPD///8A
-////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A
-////AP///wD///8A////AHxbUCB8W1BAfFtQQHxbUEB8W1BAfFtQMP///wD///8A////AP///wD///8A
-////AP///wD///8A////AP///wAADgEAAAMAAAABABoAAAEBAAMAAAABABsAAAECAAMAAAAEAAALrgED
+fFtQ/3xbUP99WlBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH1aUGB8W1D/fFtQ/3xbUPB9W1Cw
+fFtQ/3xbUP98W1D/fFtQ/3xbUP98W1D/fFtQ/3xbUP98XFDAfVtQsHxbUP98W1D/fVpQYAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH1aUGB8XFCAgGBQEAAAAAB9WlBgfFtQ/3xbUP98W1D/
+fFtQ/3xbUP98W1D/fFxQUAAAAAAAAAAAfFxQgH1aUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8W1DgfFtQ/3xbUP98W1D/fFtQ/3xbUPAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAIBYUCB8XFBAfFxQQHxcUEB8XFBAelpQMAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAADgEAAAMAAAABABoAAAEBAAMAAAABABsAAAECAAMAAAAEAAALrgED
 AAMAAAABAAEAAAEGAAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEW
 AAMAAAABABsAAAEXAAQAAAABAAAK+AEcAAMAAAABAAEAAAFSAAMAAAABAAIAAAFTAAMAAAAEAAALtodz
 AAcAAAxIAAALvgAAAAAACAAIAAgACAABAAEAAQABAAAMSExpbm8CEAAAbW50clJHQiBYWVogB84AAgAJ
@@ -3210,6 +3210,6 @@ AAAAAAAAAAAAAAAAAAAZsg
         <image name="Yes" width="105" height="104"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ehl-e5-eKe"/>
+        <segue reference="5bE-Vo-Emd"/>
     </inferredMetricsTieBreakers>
 </document>

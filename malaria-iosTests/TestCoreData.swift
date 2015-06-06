@@ -9,20 +9,36 @@ class TestCoreData: XCTestCase {
     override func setUp() {
         super.setUp()
         m = MedicineManager.sharedInstance
-        if let instance = m { }else{
-            XCTFail("Failing initializing")
+        if m == nil {
+            XCTFail("Fail initializing")
         }
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        m!.setup(Medicine.Pill.Malarone, fireDate: NSDate())
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        //add method to clear CoreData
+        m!.clearCoreData()
+        
         super.tearDown()
     }
 
-    func testInsertion() {
+    func testSetup(){
+        //getting
+        let medicine: Medicine? = m!.getCurrentMedicine()
         
-        m!.setup(Medicine.Pill.Malarone, fireDate: NSDate())
+        if let m = medicine{
+            m.print()
+            XCTAssertEqual(m.name, Medicine.Pill.Malarone.name())
+            XCTAssertEqual(m.weekly, false)
+            XCTAssertEqual(m.currentStreak, 0)
+            XCTAssertEqual(0, m.registries.count)
+        }else{
+            XCTFail("Error setting up medicine")
+        }
+    }
+    
+    func testInsertion() {
         
         let d1 = NSDate()
         m!.updatePillTracker(d1, tookPill: true)
@@ -37,22 +53,30 @@ class TestCoreData: XCTestCase {
         //getting
         let medicine: Medicine? = m!.getCurrentMedicine()
         if let med = medicine{
-            if(med.registries.count != 3){
+            med.print()
+            
+            let array: [Registry] = med.registries.convertToArray()
+            if(array.count != 3){
                 XCTFail("Error registering pills")
             }
-            med.print()
+            
+            let r1: Registry = array[0]
+            
+            XCTAssertEqual(r1.date, d3)
+            XCTAssertEqual(r1.tookMedicine, true)
+            
+            
+            let r2: Registry = array[1]
+            
+            XCTAssertEqual(r2.date, d2)
+            XCTAssertEqual(r2.tookMedicine, false)
+            
+            let r3: Registry = array[2]
+            
+            XCTAssertEqual(r3.date, d1)
+            XCTAssertEqual(r3.tookMedicine, true)
         }else{
-            XCTFail("Error registering pills")
-        }
-        
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+            XCTFail("Error inserting registries pills")
         }
     }
 

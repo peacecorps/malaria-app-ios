@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-@objc(Medicine)
 class Medicine: NSManagedObject {
 
     @NSManaged var name: String

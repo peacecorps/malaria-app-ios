@@ -36,7 +36,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         
         var index = 0
         
-        let currentMedicine = MedicineRegistry.sharedInstance.getRegisteredMedicine()
+        let currentMedicine = MedicineRegistry.sharedInstance.getCurrentMedicine()
         
         if let m = currentMedicine{
             index = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: m.name)!) ?? 0
@@ -84,7 +84,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     }
     
     private func getStoredMedicineName() -> String{
-        let currentMedicine = MedicineRegistry.sharedInstance.getRegisteredMedicine()
+        let currentMedicine: Medicine? = MedicineRegistry.sharedInstance.getCurrentMedicine()
         if let m = currentMedicine{
             return m.name
         }

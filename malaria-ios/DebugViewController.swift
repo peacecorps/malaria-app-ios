@@ -22,12 +22,12 @@ class DebugViewController : UIViewController{
     
     @IBAction func noBtnHandler(sender: AnyObject) {
         logger("Pressed No")
-        MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
+        //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
         viewDidLoad()
     }
     
     @IBAction func yesBtnHandler(sender: AnyObject) {
-        MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
+        //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
         logger("Pressed Yes")
         viewDidLoad()
     }
@@ -49,7 +49,7 @@ class DebugViewController : UIViewController{
         */
         
         
-        
+        /*
         let lastPillDate: NSDate? = MedicineManager.sharedInstance.lastPillDateRegistry()
         
         if let d = lastPillDate{
@@ -59,6 +59,7 @@ class DebugViewController : UIViewController{
         }else{
             medicineLastTaken.text = " -- "
         }
+        */
         
         /*
         dosesInRow.text = "\(MedicineManager.sharedInstance.currentStreak())"

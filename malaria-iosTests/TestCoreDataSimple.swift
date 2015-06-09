@@ -6,6 +6,8 @@ class TestCoreDataSimple: XCTestCase {
 
     var m: MedicineManager?
     var mr: MedicineRegistry?
+    let currentPill = Medicine.Pill.Malarone
+    
     
     override func setUp() {
         super.setUp()
@@ -15,7 +17,7 @@ class TestCoreDataSimple: XCTestCase {
             XCTFail("Fail initializing")
         }
         
-        m!.setup(Medicine.Pill.Malarone, fireDate: NSDate())
+        m!.setup(currentPill, fireDate: NSDate())
     }
     
     override func tearDown() {
@@ -27,7 +29,7 @@ class TestCoreDataSimple: XCTestCase {
 
     func testSetup(){
         //getting
-        let medicine: Medicine? = mr!.getRegisteredMedicine()
+        let medicine: Medicine? = mr!.getCurrentMedicine()
         
         if let m = medicine{
             m.print()
@@ -41,32 +43,29 @@ class TestCoreDataSimple: XCTestCase {
     }
     
     func testClearCoreData(){
-        let m1: Medicine? = mr!.getRegisteredMedicine()
-        XCTAssertEqual(true, m1 != nil)
-        
-        let previousCount = m1!.registries.count
+        let medicines = mr!.getRegisteredMedicines()
+        XCTAssertEqual(true, medicines.count == 1)
         
         mr!.clearCoreData()
         
-        let m2: Medicine? = mr!.getRegisteredMedicine()
-        XCTAssertEqual(true, m2 == nil)
+        let medicines2 = mr!.getRegisteredMedicines()
+        XCTAssertEqual(true, medicines2.count == 0)
     }
     
     func testInsertion() {
-        
         let d1 = NSDate()
-        mr!.addRegistry(d1, tookMedicine: true)
-        XCTAssertEqual(d1, mr!.getRegistries()[0].date)
+        mr!.addRegistry(currentPill, date: d1, tookMedicine: true)
+        XCTAssertEqual(d1, mr!.getRegistries(currentPill)[0].date)
         
         let d2 = d1 + 7.day
-        mr!.addRegistry(d2, tookMedicine: false)
-        XCTAssertEqual(d2, mr!.getRegistries()[0].date)
+        mr!.addRegistry(currentPill, date: d2, tookMedicine: false)
+        XCTAssertEqual(d2, mr!.getRegistries(currentPill)[0].date)
         
         let d3 = d2 + 7.day
-        mr!.addRegistry(d3, tookMedicine: true)
-        XCTAssertEqual(d3, mr!.getRegistries()[0].date)
+        mr!.addRegistry(currentPill, date: d3, tookMedicine: true)
+        XCTAssertEqual(d3, mr!.getRegistries(currentPill)[0].date)
         
-        let registries: [Registry]? = mr!.getRegistries()
+        let registries: [Registry]? = mr!.getRegistries(currentPill)
         if let array = registries{
             if(array.count != 3){
                 XCTFail("Error registering pills")

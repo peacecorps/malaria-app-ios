@@ -17,6 +17,14 @@ extension NSDate : Comparable {}
 
 extension NSDate{
     
+    class func lateDate() -> NSDate{
+        return NSDate.from(1971, month: 1, day: 1)
+    }
+    
+    class func earliestDate() -> NSDate{
+        return NSDate.from(2050, month: 1, day: 1)
+    }
+    
     class func from(year: Int, month: Int, day: Int) -> NSDate {
         var c = NSDateComponents()
         c.year = year

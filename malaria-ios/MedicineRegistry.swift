@@ -2,24 +2,31 @@ import Foundation
 
 
 class MedicineRegistry {
+    //singleton
     static let sharedInstance = MedicineRegistry()
 
     
+    func clearCoreData(){
+        let context = CoreDataHelper.sharedInstance.backgroundContext!
+        for m in getRegisteredMedicines(){
+            context.deleteObject(m)
+        }
+        CoreDataHelper.sharedInstance.saveContext()
+    }
     
-    func registerNewMedicine(med: Medicine.Pill){
+    /*
+    *   Medicine queries and setters
+    *
+    */
+    
+    func registerNewMedicine(med: Medicine.Pill) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
-        let currentMedicine: Medicine? = getRegisteredMedicine()
-        if let m = currentMedicine{
+        let registed: Medicine? = findMedicine(med)
+        if let m = registed{
+            logger("Already registered \(m.name), returning")
             
-            if(m.name != med.name()){
-                logger("Changing Medicine, deleting old")
-                context.deleteObject(m)
-            }else{
-                logger("Already registered \(m.name), returning")
-            }
-            
-            return
+            return false
         }
         
         let medicine = Medicine(context: context)
@@ -27,23 +34,53 @@ class MedicineRegistry {
         medicine.weekly = med.isWeekly()
         
         CoreDataHelper.sharedInstance.saveContext()
+        
+        return true
     }
     
-    func clearCoreData(){
-        if let m = getRegisteredMedicine(){
-            let context = CoreDataHelper.sharedInstance.backgroundContext!
-            context.deleteObject(m)
+    func getCurrentMedicine() -> Medicine?{
+        let medicines: [Medicine] = getRegisteredMedicines()
+        let result = medicines.filter({logger($0.description); return $0.isCurrent == true})
+        return result.count == 0 ? nil : result[0]
+    }
+    
+    func getRegisteredMedicines() -> [Medicine]{
+        let fetchRequest = NSFetchRequest(entityName: "Medicine")
+        let context = CoreDataHelper.sharedInstance.backgroundContext!
+        let result: [Medicine] = context.executeFetchRequest(fetchRequest, error: nil) as! [Medicine]
+        
+        logger("NUMBER OF MEDICINES: \(result.count)")
+        return result
+    }
+    
+    func setCurrentPill(med: Medicine.Pill){
+        if let m = findMedicine(med){
+            getRegisteredMedicines().map({$0.isCurrent = false})
+            m.isCurrent = true
             CoreDataHelper.sharedInstance.saveContext()
         }else{
-            logger("Nothing to delete")
+            logger("pill not found!")
         }
+     }
+    
+    func findMedicine(med: Medicine.Pill) -> Medicine?{
+        let registedMedicine : [Medicine] = getRegisteredMedicines()
+        let filter = registedMedicine.filter({$0.name == med.rawValue})
+        
+        return filter.count == 0 ? nil : filter[0]
     }
     
-    func addRegistry(date: NSDate, tookMedicine: Bool){
+    
+    /*
+    *   Registries queries and setters
+    *
+    */
+    
+    func addRegistry(pill: Medicine.Pill, date: NSDate, tookMedicine: Bool) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
         //check if there is already a registry
-        if let m = getRegisteredMedicine(){
+        if let m = findMedicine(pill){
             var registries : [Registry] = m.registries.convertToArray()
             
             //check if there is already an entry
@@ -51,7 +88,7 @@ class MedicineRegistry {
             for r in registries{
                 
                 if (NSDate.areDatesSameDay(date, dateTwo: r.date)){
-                    logger("Fount entry same date")
+                    logger("Found entry same date")
                     r.tookMedicine = tookMedicine
                     found = true
                 }
@@ -74,46 +111,32 @@ class MedicineRegistry {
             }
             
             CoreDataHelper.sharedInstance.saveContext()
-        }else{
-            logger("Error! addRegistry method failed because there is no registered Medicine")
-        }
-    }
-    
-    func getRegisteredMedicine() -> Medicine?{
-        let fetchRequest = NSFetchRequest(entityName: "Medicine")
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        if let fetchResults = context.executeFetchRequest(fetchRequest, error: nil) as? [Medicine] {
-        
-            if !fetchResults.isEmpty {
-                return fetchResults[0]
-            }
         }
         
-        return nil
+        logger("Error! addRegistry method failed because there is no registered Medicine")
+        return false
     }
     
-    func getRegistries(mostRecentFirst: Bool = true) -> [Registry]{
-        if let m = getRegisteredMedicine(){
-            let array : [Registry] = m.registries.convertToArray()
+    func getRegistries(pill: Medicine.Pill, date1: NSDate = NSDate.lateDate(), date2: NSDate = NSDate.earliestDate(), mostRecentFirst: Bool = true) -> [Registry]{
+        
+        if let m = findMedicine(pill){
+            var array : [Registry] = m.registries.convertToArray()
             
-            return mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
+            //sort entries chronologically
+            let registries = mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
+            
+            if date2 <= date1 {
+                return registries.filter({ $0.date >= date2 && $0.date <= date1 })
+            }
+            
+            return registries.filter({ $0.date >= date1 && $0.date <= date2 })
         }
-        
+    
         return []
     }
     
-    func getRegistriesInBetween(date1: NSDate, date2: NSDate, mostRecentFirst: Bool = true) -> [Registry]{
-        let filteredArray = getRegistries(mostRecentFirst: mostRecentFirst)
-        
-        if date2 <= date1 {
-            return filteredArray.filter({ $0.date >= date2 && $0.date <= date1 })
-        }
-        
-        return filteredArray.filter({ $0.date >= date1 && $0.date <= date2 })
-    }
-    
-    func findRegistry(date: NSDate) -> Registry?{
-        let filteredArray = getRegistries().filter({ NSDate.areDatesSameDay($0.date, dateTwo: date) })
+    func findRegistry(pill: Medicine.Pill, date: NSDate) -> Registry?{
+        let filteredArray = getRegistries(pill).filter({ NSDate.areDatesSameDay($0.date, dateTwo: date) })
         if filteredArray.count > 1{
             logger("Error: Found too many entries with same date")
         }

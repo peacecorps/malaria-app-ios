@@ -11,12 +11,12 @@ class DidTakePillsViewController: UIViewController {
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         logger("didNotTookMedicineBtnHandler")
         
-        MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
+        //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         logger("tookMedicineBtnHandler")
-        MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
+        //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
     }
     
     override func viewDidLoad() {

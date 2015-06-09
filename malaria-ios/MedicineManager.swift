@@ -8,6 +8,9 @@ class MedicineManager{
         
         logger("Storing new medicine")
         MedicineRegistry.sharedInstance.registerNewMedicine(medicine)
+        MedicineRegistry.sharedInstance.setCurrentPill(medicine)
+        
+        
         
         logger("Setting up notification")
         MedicineNotificationManager.sharedInstance.scheduleNotification(medicine, fireTime: fireDate)
@@ -16,8 +19,8 @@ class MedicineManager{
         UserSettingsManager.syncronize()
     }
     
-    func didTookPill(currentDate: NSDate = NSDate()) -> Bool{
-        if let previous = lastPillDateRegistry(), let m = MedicineRegistry.sharedInstance.getRegisteredMedicine(){
+    func didTookPill(med: Medicine.Pill, currentDate: NSDate = NSDate()) -> Bool{
+        if let previous = mostRecentEntry(med), let m = MedicineRegistry.sharedInstance.findMedicine(med){
             return
                 m.isDaily() && NSDate.areDatesSameDay(currentDate, dateTwo: previous) ||
                 m.isWeekly() && NSDate.areDatesSameWeek(currentDate, dateTwo: previous)
@@ -26,7 +29,7 @@ class MedicineManager{
         return false
     }
     
-    func numberPillsTaken(registries: [Registry] = MedicineRegistry.sharedInstance.getRegistries()) -> Int{
+    func numberPillsTaken(registries: [Registry]) -> Int{
         var count = 0
         for r in registries{
             if (r.tookMedicine){
@@ -37,23 +40,23 @@ class MedicineManager{
         return count
     }
     
-    func numberSupposedPills(registries: [Registry] = MedicineRegistry.sharedInstance.getRegistries()) -> Int{
+    func numberSupposedPills(registries: [Registry]) -> Int{
         return registries.count
     }
     
     
-    func pillAdherence(registries: [Registry] = MedicineRegistry.sharedInstance.getRegistries()) -> Float{
-        let supposedPills = numberSupposedPills(registries: registries)
+    func pillAdherence(registries: [Registry]) -> Float{
+        let supposedPills = numberSupposedPills(registries)
         if(supposedPills == 0){
             return 1.0
         }
         
-        let pillsTaken = numberPillsTaken(registries: registries)
+        let pillsTaken = numberPillsTaken(registries)
         
         return Float(pillsTaken)/(Float(supposedPills))
     }
     
-    func pillStreak(registries: [Registry] = MedicineRegistry.sharedInstance.getRegistries(mostRecentFirst: false)) -> Int{
+    func pillStreak(registries: [Registry]) -> Int{
         var result = 0
         
         let sortOldestEntryFirst = registries.sorted({$0.date < $1.date})
@@ -69,10 +72,9 @@ class MedicineManager{
         return result
     }
     
-    func lastPillDateRegistry() -> NSDate?{
-        let registries = MedicineRegistry.sharedInstance.getRegistries()
+    func mostRecentEntry(med: Medicine.Pill) -> NSDate?{
+        let registries = MedicineRegistry.sharedInstance.getRegistries(med)
         
         return registries.count > 0 ? registries[0].date : nil
     }
-    
 }

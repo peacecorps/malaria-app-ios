@@ -12,7 +12,7 @@ class MedicineNotificationManager{
         unsheduleNotification()
         
         let notification: UILocalNotification = createNotification(medicine.name(), fireDate: fireTime)
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        //UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     func unsheduleNotification(){

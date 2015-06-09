@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Bruno Henriques. All rights reserved.
 //
 
-import Cocoa
 import XCTest
 
 class TestNotifications: XCTestCase {

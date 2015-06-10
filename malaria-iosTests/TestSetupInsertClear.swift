@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 import malaria_ios
 
-class TestCoreDataSimple: XCTestCase {
+class TestSetupInsertClear: XCTestCase {
 
     var m: MedicineManager?
     var mr: MedicineRegistry?

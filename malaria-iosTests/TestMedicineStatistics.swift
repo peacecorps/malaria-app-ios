@@ -17,8 +17,6 @@ class TestMedicineStatistics: XCTestCase {
         
         m!.setup(currentPill, fireDate: NSDate())
         
-        currentPill
-        
         mr!.addRegistry(currentPill, date: d1, tookMedicine: true)
         mr!.addRegistry(currentPill, date: d1 - 1.day, tookMedicine: true)
         mr!.addRegistry(currentPill, date: d1 - 2.day, tookMedicine: true)

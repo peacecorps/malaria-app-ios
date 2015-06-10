@@ -19,15 +19,6 @@ class MedicineManager{
         UserSettingsManager.syncronize()
     }
     
-    func didTookPill(med: Medicine.Pill, currentDate: NSDate = NSDate()) -> Bool{
-        if let previous = mostRecentEntry(med), let m = MedicineRegistry.sharedInstance.findMedicine(med){
-            return
-                m.isDaily() && NSDate.areDatesSameDay(currentDate, dateTwo: previous) ||
-                m.isWeekly() && NSDate.areDatesSameWeek(currentDate, dateTwo: previous)
-        }
-        
-        return false
-    }
     
     func numberPillsTaken(registries: [Registry]) -> Int{
         var count = 0
@@ -72,9 +63,5 @@ class MedicineManager{
         return result
     }
     
-    func mostRecentEntry(med: Medicine.Pill) -> NSDate?{
-        let registries = MedicineRegistry.sharedInstance.getRegistries(med)
-        
-        return registries.count > 0 ? registries[0].date : nil
-    }
+
 }

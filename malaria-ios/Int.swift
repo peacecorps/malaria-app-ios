@@ -5,6 +5,10 @@ extension Int{
         return (self, NSCalendarUnit.CalendarUnitDay)
     }
     
+    var week: (Int, NSCalendarUnit) {
+        return (self * 7, NSCalendarUnit.CalendarUnitDay)
+    }
+    
     var month: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitMonth)
     }

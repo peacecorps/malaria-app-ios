@@ -39,7 +39,7 @@
 		20EA06E11B22352F00D6840E /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DF1B22352F00D6840E /* Registry.swift */; };
 		20EA06E21B22352F00D6840E /* RegistryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06E01B22352F00D6840E /* RegistryExtension.swift */; };
 		20EA06E41B2235CC00D6840E /* MedicineNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */; };
-		20EA06EE1B2267A000D6840E /* TestCoreDataSimple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestCoreDataSimple.swift */; };
+		20EA06EE1B2267A000D6840E /* TestSetupInsertClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */; };
 		20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D21B2234DA00D6840E /* MedicineManager.swift */; };
 		20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */; };
 		20EA06F51B22695A00D6840E /* MedicineRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */; };
@@ -60,6 +60,7 @@
 		20EE2E421B27962500948240 /* TestMedicineRegistries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */; };
 		20EE2E431B27962500948240 /* TestMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */; };
 		20EE2E441B27962500948240 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
+		20EE2E461B28AC7900948240 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		55CFA11FB55E62B3D9080C1F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
 		EA1429FEE81C2725CC070B7F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -114,11 +115,12 @@
 		20EA06DF1B22352F00D6840E /* Registry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registry.swift; sourceTree = "<group>"; };
 		20EA06E01B22352F00D6840E /* RegistryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistryExtension.swift; sourceTree = "<group>"; };
 		20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineNotificationManager.swift; sourceTree = "<group>"; };
-		20EA06ED1B2267A000D6840E /* TestCoreDataSimple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCoreDataSimple.swift; sourceTree = "<group>"; };
+		20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetupInsertClear.swift; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
 		20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineRegistries.swift; sourceTree = "<group>"; };
 		20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineStatistics.swift; sourceTree = "<group>"; };
 		20EA070C1B23AD9F00D6840E /* TestNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotifications.swift; sourceTree = "<group>"; };
+		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
 		9E33F16395B264FC90D037CE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,11 +207,12 @@
 			children = (
 				200EE49D1B1343A60087FB24 /* Supporting Files */,
 				200EE49F1B1343A60087FB24 /* TestUserSettings.swift */,
-				20EA06ED1B2267A000D6840E /* TestCoreDataSimple.swift */,
+				20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */,
 				20EA07061B23258900D6840E /* TestNSDateExtensions.swift */,
 				20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */,
 				20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */,
 				20EA070C1B23AD9F00D6840E /* TestNotifications.swift */,
+				20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -532,7 +535,7 @@
 				20EA07021B226D9100D6840E /* CoreDataStore.swift in Sources */,
 				20EA06F81B2269E800D6840E /* Array.swift in Sources */,
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,
-				20EA06EE1B2267A000D6840E /* TestCoreDataSimple.swift in Sources */,
+				20EA06EE1B2267A000D6840E /* TestSetupInsertClear.swift in Sources */,
 				20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */,
 				20EE2E431B27962500948240 /* TestMedicineStatistics.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
@@ -545,6 +548,7 @@
 				20EA06FF1B226A3B00D6840E /* RegistryExtension.swift in Sources */,
 				200EE4A01B1343A60087FB24 /* TestUserSettings.swift in Sources */,
 				20EA06F91B2269E800D6840E /* Int.swift in Sources */,
+				20EE2E461B28AC7900948240 /* TestTimedInsertions.swift in Sources */,
 				20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */,
 				20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */,
 				20EA07071B23258900D6840E /* TestNSDateExtensions.swift in Sources */,

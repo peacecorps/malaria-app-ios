@@ -70,14 +70,37 @@ class MedicineRegistry {
         return filter.count == 0 ? nil : filter[0]
     }
     
+    func tookPill(med: Medicine.Pill, currentDate: NSDate = NSDate()) -> Bool{
+        if let previous = mostRecentEntry(med),
+           let m = MedicineRegistry.sharedInstance.findMedicine(med){
+            return
+                m.isDaily() && NSDate.areDatesSameDay(currentDate, dateTwo: previous) ||
+                m.isWeekly() && NSDate.areDatesSameWeek(currentDate, dateTwo: previous)
+        }
+        
+        return false
+    }
+    
+    
     
     /*
     *   Registries queries and setters
     *
     */
     
+    func mostRecentEntry(med: Medicine.Pill) -> NSDate?{
+        let registries = MedicineRegistry.sharedInstance.getRegistries(med)
+        
+        return registries.count > 0 ? registries[0].date : nil
+    }
+    
     func addRegistry(pill: Medicine.Pill, date: NSDate, tookMedicine: Bool) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
+        
+        if tookPill(pill, currentDate: date){
+            logger("Already took the pill in that day. Aborting")
+            return false
+        }
         
         //check if there is already a registry
         if let m = findMedicine(pill){
@@ -111,6 +134,8 @@ class MedicineRegistry {
             }
             
             CoreDataHelper.sharedInstance.saveContext()
+            
+            return true
         }
         
         logger("Error! addRegistry method failed because there is no registered Medicine")

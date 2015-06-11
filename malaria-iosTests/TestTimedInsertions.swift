@@ -47,6 +47,13 @@ class TestTimedInsertions: XCTestCase {
         XCTAssertEqual(1, mr!.getRegistries(weekly).count)
         XCTAssertTrue(mr!.addRegistry(weekly, date: d1 + 1.week, tookMedicine: false))
         XCTAssertEqual(2, mr!.getRegistries(weekly).count)
-        
     }
+    
+    func testDailyModifyPastEntry(){
+        XCTAssertTrue(mr!.addRegistry(weekly, date: d1, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(weekly, date: d1, tookMedicine: true, modifyEntry: true))
+        XCTAssertEqual(1, mr!.getRegistries(weekly).count)
+        XCTAssertTrue(mr!.getRegistries(weekly)[0].tookMedicine)
+    }
+    
 }

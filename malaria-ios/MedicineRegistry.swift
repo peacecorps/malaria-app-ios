@@ -49,7 +49,6 @@ class MedicineRegistry {
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         let result: [Medicine] = context.executeFetchRequest(fetchRequest, error: nil) as! [Medicine]
         
-        logger("NUMBER OF MEDICINES: \(result.count)")
         return result
     }
     
@@ -70,16 +69,7 @@ class MedicineRegistry {
         return filter.count == 0 ? nil : filter[0]
     }
     
-    func tookPill(med: Medicine.Pill, currentDate: NSDate = NSDate()) -> Bool{
-        if let previous = mostRecentEntry(med),
-           let m = MedicineRegistry.sharedInstance.findMedicine(med){
-            return
-                m.isDaily() && NSDate.areDatesSameDay(currentDate, dateTwo: previous) ||
-                m.isWeekly() && NSDate.areDatesSameWeek(currentDate, dateTwo: previous)
-        }
-        
-        return false
-    }
+
     
     
     
@@ -88,17 +78,35 @@ class MedicineRegistry {
     *
     */
     
+    func alreadyRegistered(med: Medicine.Pill, at: NSDate) -> Bool{
+        if let m = MedicineRegistry.sharedInstance.findMedicine(med){
+            
+            if m.isDaily(){
+                return getRegistries(med, date1: at, date2: at).count != 0
+            }else{
+                let registries = getRegistries(med, date1: at - 8.day, date2: at + 8.day)
+                for r in registries{
+                    if NSDate.areDatesSameWeek(at, dateTwo: r.date){
+                        return true
+                    }
+                }
+            }
+        }
+        
+        return false
+    }
+    
     func mostRecentEntry(med: Medicine.Pill) -> NSDate?{
         let registries = MedicineRegistry.sharedInstance.getRegistries(med)
         
         return registries.count > 0 ? registries[0].date : nil
     }
     
-    func addRegistry(pill: Medicine.Pill, date: NSDate, tookMedicine: Bool) -> Bool{
+    func addRegistry(pill: Medicine.Pill, date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
-        if tookPill(pill, currentDate: date){
-            logger("Already took the pill in that day. Aborting")
+        if !modifyEntry && alreadyRegistered(pill, at: date){
+            logger("Already registered the pill in that pill/week. Aborting")
             return false
         }
         

@@ -163,7 +163,7 @@ class MedicineRegistry {
     }
     
     func findRegistry(pill: Medicine.Pill, date: NSDate) -> Registry?{
-        let filteredArray = getRegistries(pill).filter({ NSDate.areDatesSameDay($0.date, dateTwo: date) })
+        let filteredArray = getRegistries(pill, date1: date, date2: date)
         if filteredArray.count > 1{
             logger("Error: Found too many entries with same date")
         }

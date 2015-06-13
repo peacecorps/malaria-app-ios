@@ -37,10 +37,10 @@ class TestMedicineRegistries: XCTestCase {
     }
     
     func testFindEntriesInBetween(){
-        let entries = mr!.getRegistries(currentPill, date1:d1 - 5.day, date2: d1 - 3.day)
+        let entries = mr!.getRegistries(currentPill, date1: d1 - 5.day, date2: d1 - 3.day)
         
-        if entries.count == 0 {
-            XCTFail("No element found")
+        if entries.count != 3 {
+            XCTFail("Incorrect number of elements")
             return
         }
         

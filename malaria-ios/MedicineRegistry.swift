@@ -40,7 +40,8 @@ class MedicineRegistry {
     
     func getCurrentMedicine() -> Medicine?{
         let medicines: [Medicine] = getRegisteredMedicines()
-        let result = medicines.filter({logger($0.description); return $0.isCurrent == true})
+        let result = medicines.filter({ return $0.isCurrent == true})
+        
         return result.count == 0 ? nil : result[0]
     }
     
@@ -68,8 +69,6 @@ class MedicineRegistry {
         
         return filter.count == 0 ? nil : filter[0]
     }
-    
-
     
     
     
@@ -112,25 +111,17 @@ class MedicineRegistry {
         
         //check if there is already a registry
         if let m = findMedicine(pill){
-            var registries : [Registry] = m.registries.convertToArray()
+            var registry : Registry? = findRegistry(pill, date: date)
             
-            //check if there is already an entry
-            var found: Bool = false
-            for r in registries{
-                
-                if (NSDate.areDatesSameDay(date, dateTwo: r.date)){
-                    logger("Found entry same date")
-                    r.tookMedicine = tookMedicine
-                    found = true
-                }
-            }
-            
-            if(!found){
-                //logger("Inserting new entry for that date")
+            if let r = registry{
+                logger("Found entry same date.")
+                r.tookMedicine = tookMedicine
+            }else{
                 var registry = Registry(context: context)
                 registry.date = date
                 registry.tookMedicine = tookMedicine
                 
+                var registries: [Registry] = m.registries.convertToArray()
                 registries.append(registry)
                 m.registries = NSSet(array: registries)
             }
@@ -158,11 +149,14 @@ class MedicineRegistry {
             //sort entries chronologically
             let registries = mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
             
-            if date2 <= date1 {
-                return registries.filter({ $0.date >= date2 && $0.date <= date1 })
+            
+            if NSDate.areDatesSameDay(date1, dateTwo: date2){
+                return registries.filter({NSDate.areDatesSameDay($0.date, dateTwo: date1)})
+            }else if date2 < date1 {
+                return registries.filter({$0.date >= date2 && $0.date <= date1})
             }
             
-            return registries.filter({ $0.date >= date1 && $0.date <= date2 })
+            return registries.filter({$0.date >= date1 && $0.date <= date2})
         }
     
         return []

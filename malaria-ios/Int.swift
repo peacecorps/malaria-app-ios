@@ -16,6 +16,18 @@ extension Int{
     var year: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitYear)
     }
+    
+    var minute: (Int, NSCalendarUnit) {
+        return (self, NSCalendarUnit.CalendarUnitMinute)
+    }
+    
+    var second: (Int, NSCalendarUnit) {
+        return (self, NSCalendarUnit.CalendarUnitSecond)
+    }
+    
+    var hour: (Int, NSCalendarUnit) {
+        return (self, NSCalendarUnit.CalendarUnitHour)
+    }
 }
 
 public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {

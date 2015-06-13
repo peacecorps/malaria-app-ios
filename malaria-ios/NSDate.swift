@@ -30,6 +30,8 @@ extension NSDate{
         c.year = year
         c.month = month
         c.day = day
+        c.hour = 0
+        c.minute = 0
         
         var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)
         var date = gregorian!.dateFromComponents(c)

@@ -34,7 +34,6 @@ class TestSetupInsertClear: XCTestCase {
         if let m = medicine{
             XCTAssertEqual(m.name, Medicine.Pill.Malarone.name())
             XCTAssertEqual(m.weekly, false)
-            XCTAssertEqual(m.currentStreak, 0)
             XCTAssertEqual(0, m.registries.count)
         }else{
             XCTFail("Error setting up medicine")

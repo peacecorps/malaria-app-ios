@@ -43,7 +43,6 @@ extension Medicine{
     func print(){
         logger(self.name)
         logger("   Is weekly? \(self.isWeekly())")
-        logger("   currentStreak: \(self.currentStreak)")
         
         let registries: [Registry] = self.registries.convertToArray()
         logger("   Number of registries \(self.registries.count)")

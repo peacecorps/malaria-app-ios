@@ -126,12 +126,6 @@ class MedicineRegistry {
                 m.registries = NSSet(array: registries)
             }
             
-            if(tookMedicine){
-                m.currentStreak += 1
-            }else {
-                m.currentStreak = 0
-            }
-            
             CoreDataHelper.sharedInstance.saveContext()
             
             return true

@@ -6,13 +6,13 @@ class MedicineManager{
     func setup(medicine : Medicine.Pill, fireDate: NSDate){
         MedicineNotificationManager.sharedInstance.unsheduleNotification()
         
-        logger("Storing new medicine")
+        Logger.Info("Storing new medicine")
         MedicineRegistry.sharedInstance.registerNewMedicine(medicine)
         MedicineRegistry.sharedInstance.setCurrentPill(medicine)
         
         
         
-        logger("Setting up notification")
+        Logger.Info("Setting up notification")
         MedicineNotificationManager.sharedInstance.scheduleNotification(medicine, fireTime: fireDate)
         
         UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, true)

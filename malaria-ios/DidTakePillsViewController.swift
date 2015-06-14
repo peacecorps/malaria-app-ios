@@ -9,19 +9,19 @@ class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var tookMedicineBtn: UIButton!
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        logger("didNotTookMedicineBtnHandler")
+        Logger.Info("didNotTookMedicineBtnHandler")
         
         //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
-        logger("tookMedicineBtnHandler")
+        Logger.Info("tookMedicineBtnHandler")
         //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logger("loaded didTakePills")
+        Logger.Info("loaded didTakePills")
         
         //let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
      

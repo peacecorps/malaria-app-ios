@@ -8,9 +8,7 @@ class MedicineRegistry {
     
     func clearCoreData(){
         let context = CoreDataHelper.sharedInstance.backgroundContext!
-        for m in getRegisteredMedicines(){
-            context.deleteObject(m)
-        }
+        getRegisteredMedicines().map({$0.deleteFromContext(context)})
         CoreDataHelper.sharedInstance.saveContext()
     }
     
@@ -24,7 +22,7 @@ class MedicineRegistry {
         
         let registed: Medicine? = findMedicine(med)
         if let m = registed{
-            logger("Already registered \(m.name), returning")
+            Logger.Warn("Already registered \(m.name), returning")
             
             return false
         }
@@ -59,7 +57,7 @@ class MedicineRegistry {
             m.isCurrent = true
             CoreDataHelper.sharedInstance.saveContext()
         }else{
-            logger("pill not found!")
+            Logger.Error("pill not found!")
         }
      }
     
@@ -105,7 +103,7 @@ class MedicineRegistry {
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
         if !modifyEntry && alreadyRegistered(pill, at: date){
-            logger("Already registered the pill in that pill/week. Aborting")
+            Logger.Warn("Already registered the pill in that pill/week. Aborting")
             return false
         }
         
@@ -114,7 +112,7 @@ class MedicineRegistry {
             var registry : Registry? = findRegistry(pill, date: date)
             
             if let r = registry{
-                logger("Found entry same date.")
+                Logger.Info("Found entry same date. Modifying entry")
                 r.tookMedicine = tookMedicine
             }else{
                 var registry = Registry(context: context)
@@ -131,7 +129,7 @@ class MedicineRegistry {
             return true
         }
         
-        logger("Error! addRegistry method failed because there is no registered Medicine")
+        Logger.Error("addRegistry method failed because there is no registered Medicine")
         return false
     }
     
@@ -159,7 +157,7 @@ class MedicineRegistry {
     func findRegistry(pill: Medicine.Pill, date: NSDate) -> Registry?{
         let filteredArray = getRegistries(pill, date1: date, date2: date)
         if filteredArray.count > 1{
-            logger("Error: Found too many entries with same date")
+            Logger.Error("Error: Found too many entries with same date")
         }
         
         return filteredArray.count > 0 ? filteredArray[0] : nil

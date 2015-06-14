@@ -61,6 +61,14 @@
 		20EE2E431B27962500948240 /* TestMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */; };
 		20EE2E441B27962500948240 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
 		20EE2E461B28AC7900948240 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
+		20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
+		20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
+		20FDC5431B2DA45700313C72 /* PrivateEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5421B2DA45700313C72 /* PrivateEndpoint.swift */; };
+		20FDC5451B2DA51700313C72 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
+		20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5471B2DA76000313C72 /* UserSetting.swift */; };
+		20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5471B2DA76000313C72 /* UserSetting.swift */; };
+		20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
+		20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
 		55CFA11FB55E62B3D9080C1F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
 		EA1429FEE81C2725CC070B7F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -121,6 +129,12 @@
 		20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineStatistics.swift; sourceTree = "<group>"; };
 		20EA070C1B23AD9F00D6840E /* TestNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotifications.swift; sourceTree = "<group>"; };
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
+		20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
+		20FDC5401B2DA2FD00313C72 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		20FDC5421B2DA45700313C72 /* PrivateEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateEndpoint.swift; sourceTree = "<group>"; };
+		20FDC5441B2DA51700313C72 /* Endpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		20FDC5471B2DA76000313C72 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
+		20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		9E33F16395B264FC90D037CE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +196,8 @@
 				200EE48D1B1343A50087FB24 /* Main.storyboard */,
 				200EE4921B1343A50087FB24 /* LaunchScreen.xib */,
 				200EE4871B1343A50087FB24 /* Supporting Files */,
+				20FDC5461B2DA72100313C72 /* Information */,
+				20FDC53F1B2DA2E500313C72 /* Endpoints */,
 				20EA06E71B224C8900D6840E /* NSManagedObjects */,
 				200EE4A91B1346DA0087FB24 /* Managers */,
 				20EA06EA1B22534C00D6840E /* ViewControllers */,
@@ -228,11 +244,11 @@
 		200EE4A91B1346DA0087FB24 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
+				20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */,
 				20EA06D21B2234DA00D6840E /* MedicineManager.swift */,
 				20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */,
 				20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */,
-				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
-				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -293,6 +309,7 @@
 				20EA06CE1B2234B900D6840E /* Int.swift */,
 				20EA06D61B2234DA00D6840E /* NSSet.swift */,
 				20EA06DD1B22352100D6840E /* NSDate.swift */,
+				20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +331,25 @@
 				2022D5261B13BAC400FDF2D3 /* PagesManagerContent */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		20FDC53F1B2DA2E500313C72 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				20FDC5401B2DA2FD00313C72 /* Endpoint.swift */,
+				20FDC5421B2DA45700313C72 /* PrivateEndpoint.swift */,
+			);
+			name = Endpoints;
+			sourceTree = "<group>";
+		};
+		20FDC5461B2DA72100313C72 /* Information */ = {
+			isa = PBXGroup;
+			children = (
+				20FDC5441B2DA51700313C72 /* Endpoints.swift */,
+				200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */,
+				20FDC5471B2DA76000313C72 /* UserSetting.swift */,
+			);
+			name = Information;
 			sourceTree = "<group>";
 		};
 		AA880063F36C1C345CA2312B /* Frameworks */ = {
@@ -501,11 +537,13 @@
 				2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */,
 				20EA06E41B2235CC00D6840E /* MedicineNotificationManager.swift in Sources */,
 				2022D53C1B17602C00FDF2D3 /* PillsStatsViewController.swift in Sources */,
+				20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */,
 				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
 				20EA06C81B22348D00D6840E /* Array.swift in Sources */,
 				20EA06DE1B22352100D6840E /* NSDate.swift in Sources */,
 				2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */,
 				20EA06D81B2234DA00D6840E /* MedicineExtension.swift in Sources */,
+				20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */,
 				20EA06CC1B2234A700D6840E /* CoreDataHelper.swift in Sources */,
 				20EA06DA1B2234DA00D6840E /* MedicineRegistry.swift in Sources */,
 				20EA06E11B22352F00D6840E /* Registry.swift in Sources */,
@@ -516,14 +554,18 @@
 				20EA06CD1B2234A700D6840E /* CoreDataStore.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
+				20FDC5431B2DA45700313C72 /* PrivateEndpoint.swift in Sources */,
 				20EA06D91B2234DA00D6840E /* MedicineManager.swift in Sources */,
 				20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */,
 				20EA06DC1B2234DA00D6840E /* NSSet.swift in Sources */,
+				20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */,
+				20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
 				20E796AB1B1F72A5007CE022 /* DailyStatsTableViewController.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
 				2022D5231B13AB1E00FDF2D3 /* InfoViewController.swift in Sources */,
+				20FDC5451B2DA51700313C72 /* Endpoints.swift in Sources */,
 				200EE4AD1B1347290087FB24 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,6 +583,8 @@
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
 				20EE2E421B27962500948240 /* TestMedicineRegistries.swift in Sources */,
 				20EE2E441B27962500948240 /* TestNotifications.swift in Sources */,
+				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
+				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
 				20EA06F51B22695A00D6840E /* MedicineRegistry.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,
 				20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */,

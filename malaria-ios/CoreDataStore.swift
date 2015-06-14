@@ -19,7 +19,7 @@ class CoreDataStore: NSObject{
         var moduleName: String = "malaria_ios"
         let environment = NSProcessInfo.processInfo().environment as! [String : AnyObject]
         let isTest = (environment["XCInjectBundle"] as? String)?.pathExtension == "xctest"
-        if isTest { logger("@@@In test environment@@@"); moduleName = "malaria_iosTests" }
+        if isTest { moduleName = "malaria_iosTests" }
         
         // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!
@@ -75,7 +75,7 @@ class CoreDataStore: NSObject{
                 dict[NSLocalizedFailureReasonErrorKey] = failureReason
                 dict[NSUnderlyingErrorKey] = error
                 error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
-                logger("Unresolved error \(error), \(error!.userInfo)")
+                Logger.Error("Unresolved error \(error), \(error!.userInfo)")
                 abort()
         }
         

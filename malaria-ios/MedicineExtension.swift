@@ -2,6 +2,12 @@ import Foundation
 
 extension Medicine{
     
+    convenience init(context: NSManagedObjectContext) {
+        let entityName = getSimpleClassName(self.dynamicType)
+        let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)!
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+    }
+    
     enum Pill : String{
         static let allValues = [Pill.Doxycycline, Pill.Malarone, Pill.Mefloquine]
         
@@ -22,12 +28,6 @@ extension Medicine{
         }
     }
     
-    
-    convenience init(context: NSManagedObjectContext) {
-        let entityDescription = NSEntityDescription.entityForName("Medicine", inManagedObjectContext: context)!
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
-    }
-    
     class func PillTypeFromString(type: String) -> Pill?{
         return Medicine.Pill(rawValue: type)
     }
@@ -41,14 +41,13 @@ extension Medicine{
     }
     
     func print(){
-        logger(self.name)
-        logger("   Is weekly? \(self.isWeekly())")
+        Logger.Info(self.name)
+        Logger.Info("   Is weekly? \(self.isWeekly())")
         
         let registries: [Registry] = self.registries.convertToArray()
-        logger("   Number of registries \(self.registries.count)")
+        Logger.Info("   Number of registries \(self.registries.count)")
         for reg in registries{
-            logger("        " + reg.date.formatWith("dd/MM/yyyy") + " did took? \(reg.tookMedicine)")
+            Logger.Info("        " + reg.date.formatWith("dd/MM/yyyy") + " did took? \(reg.tookMedicine)")
         }
-    
     }
 }

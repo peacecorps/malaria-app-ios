@@ -21,14 +21,14 @@ class DebugViewController : UIViewController{
     }
     
     @IBAction func noBtnHandler(sender: AnyObject) {
-        logger("Pressed No")
+        Logger.Info("Pressed No")
         //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: false)
         viewDidLoad()
     }
     
     @IBAction func yesBtnHandler(sender: AnyObject) {
         //MedicineRegistry.sharedInstance.addRegistry(NSDate(), tookMedicine: true)
-        logger("Pressed Yes")
+        Logger.Info("Pressed Yes")
         viewDidLoad()
     }
     

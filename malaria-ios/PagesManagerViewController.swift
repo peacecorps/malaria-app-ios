@@ -68,7 +68,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             view.addSubview(pretendedView.view)
             pretendedView.didMoveToParentViewController(self)
         }else{
-            logger("Couldn't load pageManagerContent")
+            Logger.Error("Couldn't load pageManagerContent")
         }
     }
     

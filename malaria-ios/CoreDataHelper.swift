@@ -24,7 +24,7 @@ class CoreDataHelper: NSObject {
     func saveContext (context: NSManagedObjectContext) {
         var error: NSError?
         if context.hasChanges && !context.save(&error) {
-            logger("Unresolved error \(error), \(error!.userInfo)")
+            Logger.Error("Unresolved error \(error), \(error!.userInfo)")
             abort()
         }
     }

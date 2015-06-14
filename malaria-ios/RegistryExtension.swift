@@ -8,7 +8,8 @@ extension Registry : Equatable{ }
 
 extension Registry {
     convenience init(context: NSManagedObjectContext) {
-        let entityDescription = NSEntityDescription.entityForName("Registry", inManagedObjectContext: context)!
+        let entityName = getSimpleClassName(self.dynamicType)
+        let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)!
         self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
     }
 }

@@ -5,6 +5,6 @@ class PlanTripViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logger("loaded PlanTripViewController")
+        Logger.Info("loaded PlanTripViewController")
     }
 }

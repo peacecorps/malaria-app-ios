@@ -4,6 +4,6 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        logger("loaded infoViewController")
+        Logger.Info("loaded infoViewController")
     }
 }

@@ -60,7 +60,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         //add pretended view to the hierarchy
         
-        /*
+        
         if let pretendedView = contentView{
             pretendedView.view.backgroundColor = UIColor.redColor()
             pretendedView.willMoveToParentViewController(self)
@@ -69,7 +69,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             pretendedView.didMoveToParentViewController(self)
         }else{
             logger("Couldn't load pageManagerContent")
-        }*/
+        }
     }
     
     @IBAction func homeButtonHandler(){

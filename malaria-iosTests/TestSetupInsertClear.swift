@@ -23,7 +23,6 @@ class TestSetupInsertClear: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
-        //add method to clear CoreData
         mr!.clearCoreData()
     }
 

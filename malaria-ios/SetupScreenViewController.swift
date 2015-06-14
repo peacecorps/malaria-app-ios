@@ -60,8 +60,8 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         }else{
             
             
-            //var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
-            var view = ExistingViewsControllers.DebugViewController.instanciateViewController() as! DebugViewController
+            var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
+            //var view = ExistingViewsControllers.DebugViewController.instanciateViewController() as! DebugViewController
             presentViewController(
                 view,
                 animated: true,

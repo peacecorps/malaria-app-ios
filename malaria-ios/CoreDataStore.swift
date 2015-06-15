@@ -87,8 +87,7 @@ class CoreDataStore: NSObject{
     
     
     lazy var objectManager: RKObjectManager? = {
-        
-        let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: "base_url"))
+        let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.toString()))
         objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
         
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true

@@ -7,8 +7,6 @@ class Endpoint{
     var mapping: RKEntityMapping { get { fatalError("getMapping not implemented")} }
     
     func clearFromDatabase() {
-        
-        let appDel = (UIApplication.sharedApplication().delegate as! AppDelegate)
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
         let fetch = NSFetchRequest(entityName: entityName)

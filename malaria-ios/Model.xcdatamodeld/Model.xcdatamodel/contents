@@ -11,8 +11,12 @@
         <attribute name="tookMedicine" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
+    <entity name="Root" representedClassName="Root" syncable="YES">
+        <attribute name="users" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Medicine" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
+        <element name="Root" positionX="-162" positionY="254" width="128" height="58"/>
     </elements>
 </model>

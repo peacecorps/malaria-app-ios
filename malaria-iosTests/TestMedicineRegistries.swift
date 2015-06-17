@@ -125,6 +125,11 @@ class TestMedicineRegistries: XCTestCase {
         XCTAssertFalse(mr!.alreadyRegistered(currentPill, at: d1 + 1.day))
     }
     
+    func testFailAddEntryInFuture(){
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: NSDate(), tookMedicine: true))
+        XCTAssertFalse(mr!.addRegistry(currentPill, date: NSDate() + 1.day, tookMedicine: true))
+    }
+    
     func testModifyEntry(){
         //modify entry and check if the number of elements did not change
         let lastCount = mr!.getRegistries(currentPill).count

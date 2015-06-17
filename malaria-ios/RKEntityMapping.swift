@@ -4,7 +4,7 @@ import UIKit
 extension RKEntityMapping{
     
     //simplifies general cases of mapping by providing array of atributes (with same name as the name of the variables), and a array of that maps relationships
-    func mapAtributesAndRelationships(name: String, attributes: [String], relationships: [String: RKEntityMapping] = [:]) -> RKEntityMapping{
+    class func mapAtributesAndRelationships(name: String, attributes: [String], relationships: [String: RKEntityMapping] = [:]) -> RKEntityMapping{
         let managedObjectStore: RKManagedObjectStore = CoreDataStore.sharedInstance.persistentStoreCoordinator!
         
         let rootMap = RKEntityMapping(forEntityForName: name, inManagedObjectStore: managedObjectStore)

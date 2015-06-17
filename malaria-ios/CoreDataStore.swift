@@ -90,6 +90,8 @@ class CoreDataStore: NSObject{
         let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.toString()))
         objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
         
+        objectManager.HTTPClient.setAuthorizationHeaderWithUsername("TestUser", password: "password")        
+
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return objectManager
         }()

@@ -44,7 +44,7 @@ class TestMedicineStatistics: XCTestCase {
         XCTAssertEqual(5, m!.pillStreak(mr!.getRegistries(currentPill, date1: d1, date2: d1 - 5.day)))
         
         //did not took a pill more recently
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 1.day, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1, tookMedicine: false, modifyEntry: true))
         XCTAssertEqual(0, m!.pillStreak(mr!.getRegistries(currentPill)))
     }
     
@@ -52,11 +52,11 @@ class TestMedicineStatistics: XCTestCase {
         XCTAssertEqual(10, m!.numberSupposedPills(mr!.getRegistries(currentPill)))
         
         //add one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 1.day, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 10.day, tookMedicine: false))
         XCTAssertEqual(11, m!.numberSupposedPills(mr!.getRegistries(currentPill)))
         
         //miss one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 2.day, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 11.day, tookMedicine: false))
         XCTAssertEqual(12, m!.numberSupposedPills(mr!.getRegistries(currentPill)))
         
         //miss one pill in the past
@@ -69,11 +69,11 @@ class TestMedicineStatistics: XCTestCase {
         XCTAssertEqual(6, m!.numberPillsTaken(mr!.getRegistries(currentPill, date1: d1, date2: d1 - 5.day)))
         
         //add one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 1.day, tookMedicine: true))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 11.day, tookMedicine: true))
         XCTAssertEqual(11, m!.numberPillsTaken(mr!.getRegistries(currentPill)))
         
         //miss one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 2.day, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 10.day, tookMedicine: false))
         XCTAssertEqual(11, m!.numberPillsTaken(mr!.getRegistries(currentPill)))
         
         //miss one pill in the past
@@ -85,11 +85,11 @@ class TestMedicineStatistics: XCTestCase {
         XCTAssertEqual(1, m!.pillAdherence(mr!.getRegistries(currentPill)))
         
         //add one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 1.day, tookMedicine: true))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 11.day, tookMedicine: true))
         XCTAssertEqual(1, m!.pillAdherence(mr!.getRegistries(currentPill)))
         
         //miss one pill
-        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 + 2.day, tookMedicine: false))
+        XCTAssertTrue(mr!.addRegistry(currentPill, date: d1 - 10.day, tookMedicine: false))
         let currentRegistries = mr!.getRegistries(currentPill)
         XCTAssertEqual(Float(m!.numberPillsTaken(currentRegistries))/Float(m!.numberSupposedPills(currentRegistries)), m!.pillAdherence(currentRegistries))
         

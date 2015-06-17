@@ -25,6 +25,8 @@
 		2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */; };
 		202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
 		202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
+		202F2EB21B30EB45001CDCC5 /* RootEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */; };
+		202F2EB41B30ED0A001CDCC5 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB31B30ED0A001CDCC5 /* Root.swift */; };
 		20E796AB1B1F72A5007CE022 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */; };
 		20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AC1B22167F007CE022 /* DebugViewController.swift */; };
 		20EA06C81B22348D00D6840E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
@@ -108,6 +110,8 @@
 		2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
 		202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKEntityMapping.swift; sourceTree = "<group>"; };
+		202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootEndpoint.swift; sourceTree = "<group>"; };
+		202F2EB31B30ED0A001CDCC5 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
 		20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		20E796AC1B22167F007CE022 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		20EA06C71B22348D00D6840E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -295,6 +299,7 @@
 		20EA06E71B224C8900D6840E /* NSManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
+				202F2EB31B30ED0A001CDCC5 /* Root.swift */,
 				20EA06D01B2234DA00D6840E /* Medicine.swift */,
 				20EA06D11B2234DA00D6840E /* MedicineExtension.swift */,
 				20EA06DF1B22352F00D6840E /* Registry.swift */,
@@ -339,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				20FDC5401B2DA2FD00313C72 /* Endpoint.swift */,
+				202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -539,10 +545,12 @@
 				20EA06E41B2235CC00D6840E /* MedicineNotificationManager.swift in Sources */,
 				2022D53C1B17602C00FDF2D3 /* PillsStatsViewController.swift in Sources */,
 				20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */,
+				202F2EB41B30ED0A001CDCC5 /* Root.swift in Sources */,
 				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
 				20EA06C81B22348D00D6840E /* Array.swift in Sources */,
 				20EA06DE1B22352100D6840E /* NSDate.swift in Sources */,
 				2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */,
+				202F2EB21B30EB45001CDCC5 /* RootEndpoint.swift in Sources */,
 				20EA06D81B2234DA00D6840E /* MedicineExtension.swift in Sources */,
 				20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */,
 				20EA06CC1B2234A700D6840E /* CoreDataHelper.swift in Sources */,

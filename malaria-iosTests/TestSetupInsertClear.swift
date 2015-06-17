@@ -50,15 +50,15 @@ class TestSetupInsertClear: XCTestCase {
     }
     
     func testInsertion() {
-        let d1 = NSDate()
+        let d1 = NSDate() - 7.day
         XCTAssertTrue(mr!.addRegistry(currentPill, date: d1, tookMedicine: true))
         XCTAssertEqual(d1, mr!.getRegistries(currentPill)[0].date)
         
-        let d2 = d1 + 7.day
+        let d2 = d1 + 1.day
         XCTAssertTrue(mr!.addRegistry(currentPill, date: d2, tookMedicine: false))
         XCTAssertEqual(d2, mr!.getRegistries(currentPill)[0].date)
         
-        let d3 = d2 + 7.day
+        let d3 = d2 + 1.day
         XCTAssertTrue(mr!.addRegistry(currentPill, date: d3, tookMedicine: true))
         XCTAssertEqual(d3, mr!.getRegistries(currentPill)[0].date)
         

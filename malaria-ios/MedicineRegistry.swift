@@ -102,6 +102,11 @@ class MedicineRegistry {
     func addRegistry(pill: Medicine.Pill, date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
+        if date > NSDate() {
+            Logger.Error("Cannot change entries in the future")
+            return false
+        }
+        
         if !modifyEntry && alreadyRegistered(pill, at: date){
             Logger.Warn("Already registered the pill in that pill/week. Aborting")
             return false

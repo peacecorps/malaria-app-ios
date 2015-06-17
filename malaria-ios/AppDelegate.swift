@@ -11,18 +11,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
         application.registerUserNotificationSettings(settings)
         
+        Logger.Info("Syncing everthing")
+        //SyncManager.sharedInstance.syncAll()
+        Logger.Info("END")
+
+        
         
         //setting up initial screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if UserSettingsManager.getBool(.DidConfiguredMedicine){
-            window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
+            //window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
         }else{
-            window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
+            //window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
         }
         
-        window!.makeKeyAndVisible()
+        //window!.makeKeyAndVisible()
         
         return true
     }

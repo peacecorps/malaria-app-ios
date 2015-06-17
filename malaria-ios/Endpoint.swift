@@ -1,6 +1,5 @@
 class Endpoint{
     
-    let authenticationDic = ["systerspcweb" : "systerspcweb"]
     func parameters() -> [String: String] { return ["format": "json"] }
     
     var entityName: String { get { fatalError("getEntityName not implemented")} }

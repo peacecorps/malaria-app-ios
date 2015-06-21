@@ -4,8 +4,6 @@ import UIKit
 class MedicineNotificationManager{
     static let sharedInstance = MedicineNotificationManager()
     
-    
-    
     let PillReminderCategory = "PillReminder"
     
     func scheduleNotification(medicine: Medicine.Pill, fireTime: NSDate){
@@ -40,9 +38,22 @@ class MedicineNotificationManager{
         return nil
     }
     
-    func reshedule() -> NSDate{
-        //Empty for now but should generate smart notifications
-        return NSDate()
+    
+/*
+    If the user fails to take their medication mid-way through a week, and a full 7 days goes by without the medication being recorded, on DayX+7 the system will start again and allow the user to enter new data for that week. So if the user is supposed to take medications on Mondays, and next Monday arrives with no data entry, the day and date at the top will go back to black text, and the system will now record data for that new week and consider the previous week a missed week.
+*/
+
+    func reshedule(medicine: Medicine) -> NSDate?{
+        
+        if var currentDate = getFireDate(){
+            
+            
+            currentDate += medicine.isDaily() ? 1.day : 7.day
+            return currentDate
+        }
+        
+        Logger.Error("Error: there should be already a fire date")
+        return nil
     }
     
 

@@ -2,64 +2,71 @@ import XCTest
 
 class TestTimedInsertions: XCTestCase {
     
-    var m: MedicineManager?
-    var mr: MedicineRegistry?
-    var d1 = NSDate.from(2015, month: 5, day: 8) //monday
-    let weekly = Medicine.Pill.Mefloquine
-    let daily = Medicine.Pill.Malarone
     
+    let m: MedicineManager = MedicineManager.sharedInstance
+    
+    var d1 = NSDate.from(2015, month: 5, day: 8) //monday
+    let weeklyPill = Medicine.Pill.Mefloquine
+    let dailyPill = Medicine.Pill.Malarone
+    
+    var daily: Medicine!
+    var weekly: Medicine!
     
     override func setUp() {
         super.setUp()
 
-        m = MedicineManager.sharedInstance
-        mr = MedicineRegistry.sharedInstance
-        if m == nil || mr == nil{
-            XCTFail("Fail initializing")
+        m.registerNewMedicine(weeklyPill)
+        m.registerNewMedicine(dailyPill)
+        
+        if let m1 = m.findMedicine(dailyPill),
+           let m2 = m.findMedicine(weeklyPill){
+            daily = m1
+            weekly = m2
+        }else{
+            XCTFail("Fail initializing:")
         }
         
-        mr!.registerNewMedicine(weekly)
-        mr!.registerNewMedicine(daily)
     }
     
     override func tearDown() {
         super.tearDown()
-        mr!.clearCoreData()
+        m.clearCoreData()
     }
 
     func testDailyInsert(){
-        XCTAssertTrue(mr!.addRegistry(daily, date: d1, tookMedicine: false))
-        XCTAssertFalse(mr!.addRegistry(daily, date: d1, tookMedicine: false))
         
-        XCTAssertEqual(1, mr!.getRegistries(daily).count)
+        XCTAssertTrue(daily.registriesManager.addRegistry(d1, tookMedicine: false))
+        XCTAssertFalse(daily.registriesManager.addRegistry(d1, tookMedicine: false))
+        
+        XCTAssertEqual(1, daily.registriesManager.getRegistries().count)
         
         
-        XCTAssertTrue(mr!.addRegistry(daily, date: d1 - 1.day, tookMedicine: false))
-        XCTAssertTrue(mr!.addRegistry(daily, date: d1 + 1.day, tookMedicine: false))
+        XCTAssertTrue(daily.registriesManager.addRegistry(d1 - 1.day, tookMedicine: false))
+        XCTAssertTrue(daily.registriesManager.addRegistry(d1 + 1.day, tookMedicine: false))
         
-        XCTAssertEqual(3, mr!.getRegistries(daily).count)
+        XCTAssertEqual(3, daily.registriesManager.getRegistries().count)
         
     }
     
     func testWeeklyInsert(){
-        XCTAssertTrue(mr!.addRegistry(weekly, date: d1, tookMedicine: false))
-        XCTAssertFalse(mr!.addRegistry(weekly, date: d1 + 1.day, tookMedicine: false))
-        XCTAssertEqual(1, mr!.getRegistries(weekly).count)
-        XCTAssertTrue(mr!.addRegistry(weekly, date: d1 + 1.week, tookMedicine: false))
-        XCTAssertEqual(2, mr!.getRegistries(weekly).count)
+        XCTAssertTrue(weekly.registriesManager.addRegistry(d1, tookMedicine: false))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 1.day, tookMedicine: false))
+        XCTAssertEqual(1, weekly.registriesManager.getRegistries().count)
+        XCTAssertTrue(weekly.registriesManager.addRegistry(d1 + 1.week, tookMedicine: false))
+        XCTAssertEqual(2, weekly.registriesManager.getRegistries().count)
     }
     
     func testDailyModifyPastEntry(){
-        XCTAssertTrue(mr!.addRegistry(weekly, date: d1, tookMedicine: false))
-        XCTAssertTrue(mr!.addRegistry(weekly, date: d1, tookMedicine: true, modifyEntry: true))
-        XCTAssertEqual(1, mr!.getRegistries(weekly).count)
-        XCTAssertTrue(mr!.getRegistries(weekly)[0].tookMedicine)
+        XCTAssertTrue(weekly.registriesManager.addRegistry(d1, tookMedicine: false))
+        XCTAssertTrue(weekly.registriesManager.addRegistry(d1, tookMedicine: true, modifyEntry: true))
+        XCTAssertEqual(1, weekly.registriesManager.getRegistries().count)
+        XCTAssertTrue(weekly.registriesManager.getRegistries()[0].tookMedicine)
     }
     
     func testDifferentTimes(){
-        XCTAssertTrue(mr!.addRegistry(daily, date: d1, tookMedicine: false))
+        XCTAssertTrue(daily.registriesManager.addRegistry(d1, tookMedicine: false))
         let b = d1 + 1.minute
-        XCTAssertEqual(1, mr!.getRegistries(daily, date1: b, date2: b).count)
+        XCTAssertEqual(1, daily.registriesManager.getRegistries(date1: b, date2: b).count)
     }
     
 }

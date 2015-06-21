@@ -7,15 +7,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        //registering for notifications
-        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        
-        Logger.Info("Syncing everthing")
-        //SyncManager.sharedInstance.syncAll()
-        Logger.Info("END")
+        RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.value);
+        RKlcl_configure_by_name("RestKit/ObjectMapping", RKlcl_vTrace.value);
 
         
+        //registering for notifications
+        
+        if !inTestEnvironment(){
+            let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        //debug purposes
+        if !inTestEnvironment(){
+            Logger.Info("Syncing everthing")
+            SyncManager.sharedInstance.syncAll()
+            Logger.Info("END")
+        }
         
         //setting up initial screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

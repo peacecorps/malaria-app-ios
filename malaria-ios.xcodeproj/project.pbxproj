@@ -15,6 +15,10 @@
 		200EE4AD1B1347290087FB24 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AC1B1347290087FB24 /* Logger.swift */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
 		200EE4B11B134C020087FB24 /* ExistingViewsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */; };
+		201A0B5F1B363D3D00E5D628 /* MedicineStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */; };
+		201A0B601B363D3D00E5D628 /* MedicineStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */; };
+		201A0B621B363DBD00E5D628 /* RegistriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B611B363DBD00E5D628 /* RegistriesManager.swift */; };
+		201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B611B363DBD00E5D628 /* RegistriesManager.swift */; };
 		2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */; };
 		2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */; };
 		2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */; };
@@ -36,7 +40,6 @@
 		20EA06D71B2234DA00D6840E /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D01B2234DA00D6840E /* Medicine.swift */; };
 		20EA06D81B2234DA00D6840E /* MedicineExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D11B2234DA00D6840E /* MedicineExtension.swift */; };
 		20EA06D91B2234DA00D6840E /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D21B2234DA00D6840E /* MedicineManager.swift */; };
-		20EA06DA1B2234DA00D6840E /* MedicineRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EA06DC1B2234DA00D6840E /* NSSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D61B2234DA00D6840E /* NSSet.swift */; };
 		20EA06DE1B22352100D6840E /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
@@ -46,7 +49,6 @@
 		20EA06EE1B2267A000D6840E /* TestSetupInsertClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */; };
 		20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D21B2234DA00D6840E /* MedicineManager.swift */; };
 		20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */; };
-		20EA06F51B22695A00D6840E /* MedicineRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */; };
 		20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */; };
 		20EA06F81B2269E800D6840E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
 		20EA06F91B2269E800D6840E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
@@ -101,6 +103,8 @@
 		200EE4AC1B1347290087FB24 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewsControllers.swift; sourceTree = "<group>"; };
+		201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineStats.swift; sourceTree = "<group>"; };
+		201A0B611B363DBD00E5D628 /* RegistriesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistriesManager.swift; sourceTree = "<group>"; };
 		2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesManagerViewController.swift; sourceTree = "<group>"; };
 		2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidTakePillsViewController.swift; sourceTree = "<group>"; };
 		2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsViewController.swift; sourceTree = "<group>"; };
@@ -122,7 +126,6 @@
 		20EA06D01B2234DA00D6840E /* Medicine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
 		20EA06D11B2234DA00D6840E /* MedicineExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineExtension.swift; sourceTree = "<group>"; };
 		20EA06D21B2234DA00D6840E /* MedicineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineManager.swift; sourceTree = "<group>"; };
-		20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineRegistry.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20EA06D61B2234DA00D6840E /* NSSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSSet.swift; sourceTree = "<group>"; };
 		20EA06DD1B22352100D6840E /* NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDate.swift; sourceTree = "<group>"; };
@@ -252,8 +255,9 @@
 				200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */,
 				20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */,
 				20EA06D21B2234DA00D6840E /* MedicineManager.swift */,
-				20EA06D31B2234DA00D6840E /* MedicineRegistry.swift */,
 				20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */,
+				201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */,
+				201A0B611B363DBD00E5D628 /* RegistriesManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -540,6 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201A0B621B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
 				20EA06E21B22352F00D6840E /* RegistryExtension.swift in Sources */,
 				2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */,
 				20EA06E41B2235CC00D6840E /* MedicineNotificationManager.swift in Sources */,
@@ -554,7 +559,6 @@
 				20EA06D81B2234DA00D6840E /* MedicineExtension.swift in Sources */,
 				20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */,
 				20EA06CC1B2234A700D6840E /* CoreDataHelper.swift in Sources */,
-				20EA06DA1B2234DA00D6840E /* MedicineRegistry.swift in Sources */,
 				20EA06E11B22352F00D6840E /* Registry.swift in Sources */,
 				20EA06D71B2234DA00D6840E /* Medicine.swift in Sources */,
 				20EA06CF1B2234B900D6840E /* Int.swift in Sources */,
@@ -568,6 +572,7 @@
 				202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */,
 				20EA06DC1B2234DA00D6840E /* NSSet.swift in Sources */,
 				20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */,
+				201A0B5F1B363D3D00E5D628 /* MedicineStats.swift in Sources */,
 				20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
@@ -583,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201A0B601B363D3D00E5D628 /* MedicineStats.swift in Sources */,
 				20EA07021B226D9100D6840E /* CoreDataStore.swift in Sources */,
 				20EA06F81B2269E800D6840E /* Array.swift in Sources */,
 				202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */,
@@ -595,7 +601,7 @@
 				20EE2E441B27962500948240 /* TestNotifications.swift in Sources */,
 				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
 				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
-				20EA06F51B22695A00D6840E /* MedicineRegistry.swift in Sources */,
+				201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,
 				20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */,
 				20EA07001B226C1200D6840E /* Logger.swift in Sources */,

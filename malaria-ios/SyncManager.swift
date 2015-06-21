@@ -13,9 +13,11 @@ class SyncManager {
     }
     
     private func remoteFetch(endpoint: Endpoint){
+        
         //TODO: Check internet connection before doing request
         let cds = CoreDataStore.sharedInstance
         let cdh = CoreDataHelper.sharedInstance
+        
         
         var requestUrl = cds.objectManager!.requestWithObject(
             nil,
@@ -23,31 +25,14 @@ class SyncManager {
             path: endpoint.path,
             parameters: endpoint.parameters())
         
-        /*
-        // set up the base64-encoded credentials
-        let username = "TestUser"
-        let password = "password"
-        let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
-        Logger.Warn("---> \(base64LoginString)")
-        requestUrl.addValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
-        */
-        
-        Logger.Warn("HEREEEE")
-        let dic = requestUrl.allHTTPHeaderFields
-        println(dic)
-        Logger.Warn("FINISHED HERE")
-        
-        var request = cds.objectManager!.managedObjectRequestOperationWithRequest(
-            requestUrl,
-            managedObjectContext: cdh.backgroundContext,
+        cds.objectManager!.getObjectsAtPath(
+            endpoint.path,
+            parameters: endpoint.parameters(),
             success:
             {
                 (RKObjectRequestOperation, RKMappingResult) -> Void in
                 
                 println(RKObjectRequestOperation.description)
-                
                 Logger.Info("Success");
             },
             failure: {
@@ -57,8 +42,6 @@ class SyncManager {
                 println(RKObjectRequestOperation.HTTPRequestOperation.description)
                 
             })
-        
-        request.start()
     }
     
     private func registerMapping(endpoint: Endpoint) {

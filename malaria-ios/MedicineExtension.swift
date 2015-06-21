@@ -1,10 +1,14 @@
 import Foundation
 
 extension Medicine{
+    var stats: MedicineStats {get { return MedicineStats(medicine: self) }}
+    var registriesManager: RegistriesManager { get {return RegistriesManager(medicine: self) }}
     
     convenience init(context: NSManagedObjectContext) {
         let entityName = getSimpleClassName(self.dynamicType)
         let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)!
+        
+        
         self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
     }
     

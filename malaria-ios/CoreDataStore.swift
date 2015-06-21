@@ -17,9 +17,7 @@ class CoreDataStore: NSObject{
     lazy var managedObjectModel: NSManagedObjectModel = {
         // Get module name
         var moduleName: String = "malaria_ios"
-        let environment = NSProcessInfo.processInfo().environment as! [String : AnyObject]
-        let isTest = (environment["XCInjectBundle"] as? String)?.pathExtension == "xctest"
-        if isTest { moduleName = "malaria_iosTests" }
+        if inTestEnvironment() { moduleName = "malaria_iosTests" }
         
         // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!
@@ -90,8 +88,20 @@ class CoreDataStore: NSObject{
         let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.toString()))
         objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
         
-        objectManager.HTTPClient.setAuthorizationHeaderWithUsername("TestUser", password: "password")        
-
+        let username = "TestUser"
+        let password = "password"
+        
+        objectManager.HTTPClient.setAuthorizationHeaderWithUsername(username, password: password)
+        objectManager.HTTPClient.setDefaultHeader("whatIWantForChristmas", value: "You")
+       
+        // set up the base64-encoded credentials
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
+        objectManager.HTTPClient.setDefaultHeader("CuteHeader", value: "Basic \(base64LoginString)")
+        
+        objectManager.HTTPClient.allowsInvalidSSLCertificate = true
+        
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return objectManager
         }()

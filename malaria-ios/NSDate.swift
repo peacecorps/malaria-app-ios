@@ -17,11 +17,11 @@ extension NSDate : Comparable {}
 
 extension NSDate{
     
-    class func lateDate() -> NSDate{
+    static var lateDate: NSDate {
         return NSDate.from(1971, month: 1, day: 1)
     }
     
-    class func earliestDate() -> NSDate{
+    static var earliestDate: NSDate{
         return NSDate.from(2050, month: 1, day: 1)
     }
     

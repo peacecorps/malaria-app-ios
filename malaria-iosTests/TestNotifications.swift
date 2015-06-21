@@ -19,7 +19,7 @@ class TestNotifications: XCTestCase {
     }
     
     func testNotificationTime(){
-    
+        
     }
     
     func testNotificationDampening(){

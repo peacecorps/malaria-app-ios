@@ -9,6 +9,7 @@ extension RKEntityMapping{
         
         let rootMap = RKEntityMapping(forEntityForName: name, inManagedObjectStore: managedObjectStore)
         
+        
         for childKey in attributes{
             let attMap = RKAttributeMapping(fromKeyPath: childKey, toKeyPath: childKey)
             rootMap.addPropertyMapping(attMap)

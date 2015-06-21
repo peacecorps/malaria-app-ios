@@ -55,6 +55,8 @@ class CoreDataStore: NSObject{
         var coordinator = RKManagedObjectStore(managedObjectModel: self.managedObjectModel)
         self.objectManager!.managedObjectStore = coordinator
         
+        Logger.Info("HERE")
+        
         coordinator.createPersistentStoreCoordinator()
         
         var storePath: NSString = RKApplicationDataDirectory().stringByAppendingPathComponent(self.storeFilename)

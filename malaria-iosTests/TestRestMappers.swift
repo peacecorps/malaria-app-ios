@@ -18,6 +18,7 @@ class TestRestMappers: XCTestCase {
         let mapping = rootEndpoint.mapping
         
         let test = RKMappingTest(forMapping: mapping, sourceObject: parsedJson, destinationObject: nil)
+        test.managedObjectContext = CoreDataHelper.sharedInstance.backgroundContext
         
         test.addExpectation(RKPropertyMappingTestExpectation(sourceKeyPath: "users", destinationKeyPath: "users"))
         

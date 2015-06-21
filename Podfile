@@ -4,6 +4,7 @@ xcodeproj 'malaria-ios.xcodeproj'
 platform :ios, '8.0'
 link_with 'malaria-ios', 'malaria-iosTests'
 
+pod "RestKit/Testing", "~> 0.20.0"
 pod "RestKit", "~> 0.20.0"
 
 

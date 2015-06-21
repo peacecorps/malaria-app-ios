@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FACFDCE608B500FBB5C37973"
+               BlueprintIdentifier = "08D309FAECBEBD9B46D6A65D"
                BuildableName = "libPods-malaria-iosTests-TransitionKit.a"
                BlueprintName = "Pods-malaria-iosTests-TransitionKit"
                ReferencedContainer = "container:Pods.xcodeproj">

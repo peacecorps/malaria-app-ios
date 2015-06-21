@@ -15,11 +15,13 @@ PODS:
   - RestKit/ObjectMapping (0.20.3)
   - RestKit/Support (0.20.3):
     - TransitionKit (= 1.1.1)
+  - RestKit/Testing (0.20.3)
   - SOCKit (1.1)
   - TransitionKit (1.1.1)
 
 DEPENDENCIES:
   - RestKit (~> 0.20.0)
+  - RestKit/Testing (~> 0.20.0)
 
 SPEC CHECKSUMS:
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018

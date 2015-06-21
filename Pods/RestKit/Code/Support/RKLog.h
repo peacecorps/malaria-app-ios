@@ -27,6 +27,30 @@
 #import "lcl_RK.h"
 
 /**
+ * Protocol which classes can implement to determine how RestKit log messages actually get handled.
+ * There is a single "current" logging class installed, which all log messages will flow
+ * through.
+ */
+@protocol RKLogging
+
++ (void)logWithComponent:(_RKlcl_component_t)component
+                   level:(_RKlcl_level_t)level
+                    path:(const char *)file
+                    line:(uint32_t)line
+                function:(const char *)function
+                  format:(NSString *)format, ... NS_FORMAT_FUNCTION(6, 7);
+
+@end
+
+/**
+ * Functions to get and set the current RKLogging class.
+ */
+Class <RKLogging> RKGetLoggingClass(void);
+void RKSetLoggingClass(Class <RKLogging> loggingClass);
+
+
+
+/**
  RKLogComponent defines the active component within any given portion of RestKit
 
  By default, messages will log to the base 'RestKit' log component. All other components
@@ -204,6 +228,7 @@ void RKLogConfigureFromEnvironment(void);
  */
 void RKLogValidationError(NSError *error);
 
+#ifdef _COREDATADEFINES_H
 /**
  Logs extensive information an NSError generated as the result of a
  failed Core Data interaction, such as the execution of a fetch request
@@ -214,6 +239,7 @@ void RKLogValidationError(NSError *error);
  at invocation time.
  */
 void RKLogCoreDataError(NSError *error);
+#endif
 
 /**
  Logs the value of an NSUInteger as a binary string. Useful when

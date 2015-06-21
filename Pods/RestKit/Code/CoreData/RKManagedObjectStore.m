@@ -65,12 +65,12 @@ static NSSet *RKSetOfManagedObjectIDsFromManagedObjectContextDidSaveNotification
 @property (nonatomic, weak) NSManagedObjectContext *mergeContext;
 @property (nonatomic, strong) NSSet *objectIDsFromChildDidSaveNotification;
 
-- (id)initWithObservedContext:(NSManagedObjectContext *)observedContext mergeContext:(NSManagedObjectContext *)mergeContext;
+- (instancetype)initWithObservedContext:(NSManagedObjectContext *)observedContext mergeContext:(NSManagedObjectContext *)mergeContext NS_DESIGNATED_INITIALIZER;
 @end
 
 @implementation RKManagedObjectContextChangeMergingObserver
 
-- (id)initWithObservedContext:(NSManagedObjectContext *)observedContext mergeContext:(NSManagedObjectContext *)mergeContext
+- (instancetype)initWithObservedContext:(NSManagedObjectContext *)observedContext mergeContext:(NSManagedObjectContext *)mergeContext
 {
     if (! observedContext) [NSException raise:NSInvalidArgumentException format:@"observedContext cannot be `nil`."];
     if (! mergeContext) [NSException raise:NSInvalidArgumentException format:@"mergeContext cannot be `nil`."];
@@ -140,7 +140,7 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
     }
 }
 
-- (id)initWithManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
+- (instancetype)initWithManagedObjectModel:(NSManagedObjectModel *)managedObjectModel
 {
     self = [super init];
     if (self) {
@@ -156,7 +156,7 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
     return self;
 }
 
-- (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
+- (instancetype)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
     self = [self initWithManagedObjectModel:persistentStoreCoordinator.managedObjectModel];
     if (self) {
@@ -166,7 +166,7 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
     return self;
 }
 
-- (id)init
+- (instancetype)init
 {
     NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
     return [self initWithManagedObjectModel:managedObjectModel];
@@ -207,7 +207,7 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
     NSDictionary *options = nil;
     if (nilOrOptions) {
         NSMutableDictionary *mutableOptions = [nilOrOptions mutableCopy];
-        [mutableOptions setObject:(seedPath ?: [NSNull null]) forKey:RKSQLitePersistentStoreSeedDatabasePathOption];
+        mutableOptions[RKSQLitePersistentStoreSeedDatabasePathOption] = (seedPath ?: [NSNull null]);
         options = mutableOptions;
     } else {
         options = @{ RKSQLitePersistentStoreSeedDatabasePathOption: (seedPath ?: [NSNull null]),
@@ -225,7 +225,14 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
     if (! persistentStore) return nil;
     if (! [self.persistentStoreCoordinator removePersistentStore:persistentStore error:error]) return nil;
 
-    NSDictionary *seedOptions = @{ RKSQLitePersistentStoreSeedDatabasePathOption: (seedPath ?: [NSNull null]) };
+    NSDictionary *seedOptions = nil;
+    if (nilOrOptions) {
+        NSMutableDictionary *mutableOptions = [nilOrOptions mutableCopy];
+        mutableOptions[RKSQLitePersistentStoreSeedDatabasePathOption] = (seedPath ?: [NSNull null]);
+        seedOptions = mutableOptions;
+    } else {
+        seedOptions = @{ RKSQLitePersistentStoreSeedDatabasePathOption: (seedPath ?: [NSNull null]) };
+    }
     persistentStore = [self.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nilOrConfigurationName URL:storeURL options:seedOptions error:error];
     if (! persistentStore) return nil;
     
@@ -245,8 +252,24 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
 
             return NO;
         }
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[seedPath stringByAppendingString:@"-shm"]]) {
+            if (![[NSFileManager defaultManager] copyItemAtPath:[seedPath stringByAppendingString:@"-shm"] toPath:[storePath stringByAppendingString:@"-shm"] error:&localError]) {
+                RKLogError(@"Failed to copy seed database (SHM) from path '%@' to path '%@': %@", seedPath, storePath, [localError localizedDescription]);
+                if (error) *error = localError;
+                
+                return NO;
+            }
+        }
+        if ([[NSFileManager defaultManager] fileExistsAtPath:[seedPath stringByAppendingString:@"-wal"]]) {
+            if (![[NSFileManager defaultManager] copyItemAtPath:[seedPath stringByAppendingString:@"-wal"] toPath:[storePath stringByAppendingString:@"-wal"] error:&localError]) {
+                RKLogError(@"Failed to copy seed database (WAL) from path '%@' to path '%@': %@", seedPath, storePath, [localError localizedDescription]);
+                if (error) *error = localError;
+                
+                return NO;
+            }
+        }
     }
-
+    
     return YES;
 }
 
@@ -312,8 +335,12 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
 
 - (BOOL)resetPersistentStores:(NSError **)error
 {
-    [self.mainQueueManagedObjectContext reset];
-    [self.persistentStoreManagedObjectContext reset];
+    [self.mainQueueManagedObjectContext performBlockAndWait:^{
+        [self.mainQueueManagedObjectContext reset];
+    }];
+    [self.persistentStoreManagedObjectContext performBlockAndWait:^{
+        [self.persistentStoreManagedObjectContext reset];
+    }];
     
     NSError *localError;
     for (NSPersistentStore *persistentStore in self.persistentStoreCoordinator.persistentStores) {
@@ -342,28 +369,53 @@ static char RKManagedObjectContextChangeMergingObserverAssociationKey;
                         RKLogWarning(@"Found external support item for store at path that is not a directory: %@", [supportDirectoryFileURL path]);
                     }
                 }
+
+                // Check for and remove -shm and -wal files
+                for (NSString *suffix in @[ @"-shm", @"-wal" ]) {
+                    NSString *supportFileName = [[URL lastPathComponent] stringByAppendingString:suffix];
+                    NSURL *supportFileURL = [NSURL URLWithString:supportFileName relativeToURL:[URL URLByDeletingLastPathComponent]];
+                    if ([[NSFileManager defaultManager] fileExistsAtPath:[supportFileURL path]]) {
+                        if (! [[NSFileManager defaultManager] removeItemAtURL:supportFileURL error:&localError]) {
+                            RKLogError(@"Failed to remove support file at URL %@: %@", supportFileURL, localError);
+                            if (error) *error = localError;
+                            return NO;
+                        }
+                    }
+                }
             } else {
                 RKLogDebug(@"Skipped removal of persistent store file: URL for persistent store is not a file URL. (%@)", URL);
             }
 
-            // Reclone the persistent store from the seed path if necessary
+            NSPersistentStore *newStore;
             if ([persistentStore.type isEqualToString:NSSQLiteStoreType]) {
+                // Seed path for reclone the persistent store from the seed path if necessary
                 NSString *seedPath = [persistentStore.options valueForKey:RKSQLitePersistentStoreSeedDatabasePathOption];
-                if (seedPath && ![seedPath isEqual:[NSNull null]]) {
-                    success = [self copySeedDatabaseIfNecessaryFromPath:seedPath toPath:[persistentStore.URL path] error:&localError];
-                    if (! success) {
-                        RKLogError(@"Failed reset of SQLite persistent store: Failed to copy seed database.");
-                        if (error) *error = localError;
-                        return NO;
-                    }
+                if ([seedPath isEqual:[NSNull null]]) {
+                    seedPath = nil;
                 }
+                
+                // Add a new store with the same options, except RKSQLitePersistentStoreSeedDatabasePathOption option
+                // that is not expected in this method.
+                NSMutableDictionary *mutableOptions = [persistentStore.options mutableCopy];
+                [mutableOptions removeObjectForKey:RKSQLitePersistentStoreSeedDatabasePathOption];
+                mutableOptions = [mutableOptions count] > 0 ? mutableOptions : nil;
+                // This method is only for NSSQLiteStoreType
+                newStore = [self addSQLitePersistentStoreAtPath:[persistentStore.URL path]
+                                         fromSeedDatabaseAtPath:seedPath
+                                              withConfiguration:persistentStore.configurationName
+                                                        options:mutableOptions
+                                                          error:&localError];
             }
-
-            // Add a new store with the same options
-            NSPersistentStore *newStore = [self.persistentStoreCoordinator addPersistentStoreWithType:persistentStore.type
-                                                                                        configuration:persistentStore.configurationName
-                                                                                                  URL:persistentStore.URL
-                                                                                              options:persistentStore.options error:&localError];
+            else {
+                // Add a new store with the same options
+                newStore = [self.persistentStoreCoordinator addPersistentStoreWithType:persistentStore.type
+                                                                         configuration:persistentStore.configurationName
+                                                                                   URL:persistentStore.URL
+                                                                               options:persistentStore.options error:&localError];
+                
+            }
+            
+            
             if (! newStore) {
                 if (error) *error = localError;
                 return NO;

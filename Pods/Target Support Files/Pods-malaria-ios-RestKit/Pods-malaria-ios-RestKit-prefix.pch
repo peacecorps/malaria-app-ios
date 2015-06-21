@@ -3,9 +3,9 @@
 #endif
 
 #import "Pods-malaria-ios-environment.h"
-#ifdef __OBJC__
-#import <CoreData/CoreData.h>
-#endif /* __OBJC__*/
+#if __has_include("RKCoreData.h")
+    #import <CoreData/CoreData.h>
+#endif
 #import <Availability.h>
 
 #define _AFNETWORKING_PIN_SSL_CERTIFICATES_

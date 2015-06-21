@@ -19,7 +19,17 @@
 		201A0B601B363D3D00E5D628 /* MedicineStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */; };
 		201A0B621B363DBD00E5D628 /* RegistriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B611B363DBD00E5D628 /* RegistriesManager.swift */; };
 		201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B611B363DBD00E5D628 /* RegistriesManager.swift */; };
-		201A0B651B36D68A00E5D628 /* ApiFixture in Resources */ = {isa = PBXBuildFile; fileRef = 201A0B641B36D68A00E5D628 /* ApiFixture */; };
+		201A0B651B36D68A00E5D628 /* api.json in Resources */ = {isa = PBXBuildFile; fileRef = 201A0B641B36D68A00E5D628 /* api.json */; };
+		201A0B681B36D9C900E5D628 /* TestRestMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B671B36D9C900E5D628 /* TestRestMappers.swift */; };
+		201A0B691B36DA5B00E5D628 /* RootEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */; };
+		201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
+		201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
+		201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
+		201A0B6F1B36DB7100E5D628 /* NSSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D61B2234DA00D6840E /* NSSet.swift */; };
+		201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
+		201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
+		201A0B721B36DB7100E5D628 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
+		201A0B731B36DBA100E5D628 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB31B30ED0A001CDCC5 /* Root.swift */; };
 		2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */; };
 		2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */; };
 		2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */; };
@@ -51,10 +61,6 @@
 		20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D21B2234DA00D6840E /* MedicineManager.swift */; };
 		20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06E31B2235CC00D6840E /* MedicineNotificationManager.swift */; };
 		20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4AA1B1347010087FB24 /* UserSettingsManager.swift */; };
-		20EA06F81B2269E800D6840E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
-		20EA06F91B2269E800D6840E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
-		20EA06FA1B2269E800D6840E /* NSSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D61B2234DA00D6840E /* NSSet.swift */; };
-		20EA06FB1B2269E800D6840E /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
 		20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D01B2234DA00D6840E /* Medicine.swift */; };
 		20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D11B2234DA00D6840E /* MedicineExtension.swift */; };
 		20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DF1B22352F00D6840E /* Registry.swift */; };
@@ -76,7 +82,9 @@
 		20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
 		20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
 		55CFA11FB55E62B3D9080C1F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
+		A80CC125FE5E5B9D9C85D067 /* libPods-malaria-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A775FBEC2E2F3AE7705A3F7 /* libPods-malaria-ios.a */; };
 		EA1429FEE81C2725CC070B7F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10449E745AA86D61B4194C9C /* libPods.a */; };
+		F3A937CF2AA4C3A17D07F218 /* libPods-malaria-iosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A12F218107888ECDFA6118 /* libPods-malaria-iosTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +114,8 @@
 		200EE4B01B134C020087FB24 /* ExistingViewsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewsControllers.swift; sourceTree = "<group>"; };
 		201A0B5E1B363D3D00E5D628 /* MedicineStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineStats.swift; sourceTree = "<group>"; };
 		201A0B611B363DBD00E5D628 /* RegistriesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistriesManager.swift; sourceTree = "<group>"; };
-		201A0B641B36D68A00E5D628 /* ApiFixture */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ApiFixture; sourceTree = "<group>"; };
+		201A0B641B36D68A00E5D628 /* api.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = api.json; sourceTree = "<group>"; };
+		201A0B671B36D9C900E5D628 /* TestRestMappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRestMappers.swift; sourceTree = "<group>"; };
 		2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesManagerViewController.swift; sourceTree = "<group>"; };
 		2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidTakePillsViewController.swift; sourceTree = "<group>"; };
 		2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +154,8 @@
 		20FDC5441B2DA51700313C72 /* Endpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		20FDC5471B2DA76000313C72 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
+		27A12F218107888ECDFA6118 /* libPods-malaria-iosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-malaria-iosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A775FBEC2E2F3AE7705A3F7 /* libPods-malaria-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-malaria-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E33F16395B264FC90D037CE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA1429FEE81C2725CC070B7F /* libPods.a in Frameworks */,
+				A80CC125FE5E5B9D9C85D067 /* libPods-malaria-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55CFA11FB55E62B3D9080C1F /* libPods.a in Frameworks */,
+				F3A937CF2AA4C3A17D07F218 /* libPods-malaria-iosTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +252,7 @@
 				20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */,
 				20EA070C1B23AD9F00D6840E /* TestNotifications.swift */,
 				20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */,
-				201A0B641B36D68A00E5D628 /* ApiFixture */,
+				201A0B671B36D9C900E5D628 /* TestRestMappers.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -247,6 +260,7 @@
 		200EE49D1B1343A60087FB24 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				201A0B661B36D8F900E5D628 /* Fixtures */,
 				200EE49E1B1343A60087FB24 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -263,6 +277,14 @@
 				201A0B611B363DBD00E5D628 /* RegistriesManager.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		201A0B661B36D8F900E5D628 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				201A0B641B36D68A00E5D628 /* api.json */,
+			);
+			name = Fixtures;
 			sourceTree = "<group>";
 		};
 		2022D5261B13BAC400FDF2D3 /* PagesManagerContent */ = {
@@ -370,6 +392,8 @@
 			isa = PBXGroup;
 			children = (
 				10449E745AA86D61B4194C9C /* libPods.a */,
+				27A12F218107888ECDFA6118 /* libPods-malaria-iosTests.a */,
+				4A775FBEC2E2F3AE7705A3F7 /* libPods-malaria-ios.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -474,7 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				201A0B651B36D68A00E5D628 /* ApiFixture in Resources */,
+				201A0B651B36D68A00E5D628 /* api.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,31 +618,37 @@
 			files = (
 				201A0B601B363D3D00E5D628 /* MedicineStats.swift in Sources */,
 				20EA07021B226D9100D6840E /* CoreDataStore.swift in Sources */,
-				20EA06F81B2269E800D6840E /* Array.swift in Sources */,
 				202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */,
+				201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */,
+				201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */,
+				201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */,
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,
 				20EA06EE1B2267A000D6840E /* TestSetupInsertClear.swift in Sources */,
 				20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */,
 				20EE2E431B27962500948240 /* TestMedicineStatistics.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
+				201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */,
+				201A0B691B36DA5B00E5D628 /* RootEndpoint.swift in Sources */,
 				20EE2E421B27962500948240 /* TestMedicineRegistries.swift in Sources */,
 				20EE2E441B27962500948240 /* TestNotifications.swift in Sources */,
+				201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */,
 				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
+				201A0B731B36DBA100E5D628 /* Root.swift in Sources */,
 				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
 				201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,
 				20EA06F41B22695A00D6840E /* MedicineNotificationManager.swift in Sources */,
 				20EA07001B226C1200D6840E /* Logger.swift in Sources */,
+				201A0B721B36DB7100E5D628 /* RKEntityMapping.swift in Sources */,
+				201A0B6F1B36DB7100E5D628 /* NSSet.swift in Sources */,
 				20EA06FF1B226A3B00D6840E /* RegistryExtension.swift in Sources */,
 				200EE4A01B1343A60087FB24 /* TestUserSettings.swift in Sources */,
-				20EA06F91B2269E800D6840E /* Int.swift in Sources */,
 				20EE2E461B28AC7900948240 /* TestTimedInsertions.swift in Sources */,
 				20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */,
 				20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */,
 				20EA07071B23258900D6840E /* TestNSDateExtensions.swift in Sources */,
-				20EA06FB1B2269E800D6840E /* NSDate.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
-				20EA06FA1B2269E800D6840E /* NSSet.swift in Sources */,
+				201A0B681B36D9C900E5D628 /* TestRestMappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

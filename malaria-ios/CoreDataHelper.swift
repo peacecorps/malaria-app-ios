@@ -16,6 +16,7 @@ class CoreDataHelper: NSObject {
         if coordinator == nil {
             return nil
         }
+        
         var backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         backgroundContext.persistentStoreCoordinator = coordinator
         return backgroundContext

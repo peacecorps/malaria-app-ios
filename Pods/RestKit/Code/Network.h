@@ -25,3 +25,10 @@
 #import "RKResponseDescriptor.h"
 #import "RKObjectManager.h"
 #import "RKHTTPUtilities.h"
+#import "RKObjectRequestOperation.h"
+#import "RKObjectParameterization.h"
+#import "RKPathMatcher.h"
+
+#ifdef _COREDATADEFINES_H
+#import "RKManagedObjectRequestOperation.h"
+#endif

@@ -54,26 +54,28 @@ class CoreDataStore: NSObject{
     lazy var persistentStoreCoordinator: RKManagedObjectStore? = {
         var coordinator = RKManagedObjectStore(managedObjectModel: self.managedObjectModel)
         self.objectManager!.managedObjectStore = coordinator
+        
         coordinator.createPersistentStoreCoordinator()
         
         var storePath: NSString = RKApplicationDataDirectory().stringByAppendingPathComponent(self.storeFilename)
-        
-        var error: NSError? = nil
-        var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator.addSQLitePersistentStoreAtPath(storePath as String, fromSeedDatabaseAtPath: nil, withConfiguration: nil,
+    
+        var e: NSError?
+        coordinator.addSQLitePersistentStoreAtPath(storePath as String, fromSeedDatabaseAtPath: nil, withConfiguration: nil,
             options: [
                 NSInferMappingModelAutomaticallyOption: true,
                 NSMigratePersistentStoresAutomaticallyOption: true
-            ], error: nil) == nil {
-                
+            ], error: &e)
+            
+        if(e != nil){
+                var error: NSError? = nil
                 coordinator = nil
                 // Report any error we got.
                 let dict = NSMutableDictionary()
                 dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-                dict[NSLocalizedFailureReasonErrorKey] = failureReason
+                dict[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
                 dict[NSUnderlyingErrorKey] = error
                 error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
-                Logger.Error("Unresolved error \(error), \(error!.userInfo)")
+                Logger.Error("Serious error \(error), \(error!.userInfo)")
                 abort()
         }
         

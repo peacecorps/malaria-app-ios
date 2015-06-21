@@ -4,7 +4,7 @@ class SyncManager {
     
     init(){
         Logger.Info("Registering")
-        endpoints.append(RootEndpoint())
+        endpoints.append(ApiEndpoint())
         endpoints.map({ self.registerMapping($0) })
     }
     

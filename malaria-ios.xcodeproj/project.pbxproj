@@ -20,7 +20,7 @@
 		201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B611B363DBD00E5D628 /* RegistriesManager.swift */; };
 		201A0B651B36D68A00E5D628 /* api.json in Resources */ = {isa = PBXBuildFile; fileRef = 201A0B641B36D68A00E5D628 /* api.json */; };
 		201A0B681B36D9C900E5D628 /* TestRestMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B671B36D9C900E5D628 /* TestRestMappers.swift */; };
-		201A0B691B36DA5B00E5D628 /* RootEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */; };
+		201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */; };
 		201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
 		201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
 		201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
@@ -28,7 +28,8 @@
 		201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
 		201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
 		201A0B721B36DB7100E5D628 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
-		201A0B731B36DBA100E5D628 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB31B30ED0A001CDCC5 /* Root.swift */; };
+		201A0B781B37513C00E5D628 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B771B37513C00E5D628 /* Api.swift */; };
+		201A0B791B37513C00E5D628 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B771B37513C00E5D628 /* Api.swift */; };
 		2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */; };
 		2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */; };
 		2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */; };
@@ -39,8 +40,7 @@
 		2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */; };
 		202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
 		202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
-		202F2EB21B30EB45001CDCC5 /* RootEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */; };
-		202F2EB41B30ED0A001CDCC5 /* Root.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB31B30ED0A001CDCC5 /* Root.swift */; };
+		202F2EB21B30EB45001CDCC5 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */; };
 		20E796AB1B1F72A5007CE022 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */; };
 		20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AC1B22167F007CE022 /* DebugViewController.swift */; };
 		20EA06C81B22348D00D6840E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
@@ -109,6 +109,7 @@
 		201A0B611B363DBD00E5D628 /* RegistriesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistriesManager.swift; sourceTree = "<group>"; };
 		201A0B641B36D68A00E5D628 /* api.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = api.json; sourceTree = "<group>"; };
 		201A0B671B36D9C900E5D628 /* TestRestMappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRestMappers.swift; sourceTree = "<group>"; };
+		201A0B771B37513C00E5D628 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		2022D51C1B13589E00FDF2D3 /* PagesManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesManagerViewController.swift; sourceTree = "<group>"; };
 		2022D51E1B137D5B00FDF2D3 /* DidTakePillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidTakePillsViewController.swift; sourceTree = "<group>"; };
 		2022D5201B137DDD00FDF2D3 /* DailyStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsViewController.swift; sourceTree = "<group>"; };
@@ -118,8 +119,7 @@
 		2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
 		202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKEntityMapping.swift; sourceTree = "<group>"; };
-		202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootEndpoint.swift; sourceTree = "<group>"; };
-		202F2EB31B30ED0A001CDCC5 /* Root.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Root.swift; sourceTree = "<group>"; };
+		202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
 		20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		20E796AC1B22167F007CE022 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
 		20EA06C71B22348D00D6840E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -237,6 +237,7 @@
 		200EE49C1B1343A60087FB24 /* malaria-iosTests */ = {
 			isa = PBXGroup;
 			children = (
+				201A0B661B36D8F900E5D628 /* Fixtures */,
 				200EE49D1B1343A60087FB24 /* Supporting Files */,
 				200EE49F1B1343A60087FB24 /* TestUserSettings.swift */,
 				20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */,
@@ -253,7 +254,6 @@
 		200EE49D1B1343A60087FB24 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				201A0B661B36D8F900E5D628 /* Fixtures */,
 				200EE49E1B1343A60087FB24 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -321,7 +321,7 @@
 		20EA06E71B224C8900D6840E /* NSManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				202F2EB31B30ED0A001CDCC5 /* Root.swift */,
+				201A0B771B37513C00E5D628 /* Api.swift */,
 				20EA06D01B2234DA00D6840E /* Medicine.swift */,
 				20EA06D11B2234DA00D6840E /* MedicineExtension.swift */,
 				20EA06DF1B22352F00D6840E /* Registry.swift */,
@@ -366,7 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				20FDC5401B2DA2FD00313C72 /* Endpoint.swift */,
-				202F2EB11B30EB45001CDCC5 /* RootEndpoint.swift */,
+				202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */,
 			);
 			name = Endpoints;
 			sourceTree = "<group>";
@@ -571,12 +571,11 @@
 				20EA06E41B2235CC00D6840E /* MedicineNotificationManager.swift in Sources */,
 				2022D53C1B17602C00FDF2D3 /* PillsStatsViewController.swift in Sources */,
 				20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */,
-				202F2EB41B30ED0A001CDCC5 /* Root.swift in Sources */,
 				200EE4AB1B1347010087FB24 /* UserSettingsManager.swift in Sources */,
 				20EA06C81B22348D00D6840E /* Array.swift in Sources */,
 				20EA06DE1B22352100D6840E /* NSDate.swift in Sources */,
 				2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */,
-				202F2EB21B30EB45001CDCC5 /* RootEndpoint.swift in Sources */,
+				202F2EB21B30EB45001CDCC5 /* ApiEndpoint.swift in Sources */,
 				20EA06D81B2234DA00D6840E /* MedicineExtension.swift in Sources */,
 				20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */,
 				20EA06CC1B2234A700D6840E /* CoreDataHelper.swift in Sources */,
@@ -587,6 +586,7 @@
 				2022D51D1B13589E00FDF2D3 /* PagesManagerViewController.swift in Sources */,
 				20EA06CD1B2234A700D6840E /* CoreDataStore.swift in Sources */,
 				2022D5211B137DDD00FDF2D3 /* DailyStatsViewController.swift in Sources */,
+				201A0B781B37513C00E5D628 /* Api.swift in Sources */,
 				2022D51F1B137D5B00FDF2D3 /* DidTakePillsViewController.swift in Sources */,
 				20EA06D91B2234DA00D6840E /* MedicineManager.swift in Sources */,
 				20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */,
@@ -615,14 +615,14 @@
 				201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */,
 				201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */,
 				201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */,
+				201A0B791B37513C00E5D628 /* Api.swift in Sources */,
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,
 				20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
 				201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */,
-				201A0B691B36DA5B00E5D628 /* RootEndpoint.swift in Sources */,
+				201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */,
 				201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */,
 				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
-				201A0B731B36DBA100E5D628 /* Root.swift in Sources */,
 				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
 				201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,

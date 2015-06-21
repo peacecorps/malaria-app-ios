@@ -3,8 +3,6 @@ import XCTest
 
 class TestRestMappers: XCTestCase {
 
-    let rootEndpoint = RootEndpoint()
-    
     override func setUp() {
         super.setUp()
         
@@ -12,15 +10,39 @@ class TestRestMappers: XCTestCase {
         RKTestFixture.setFixtureBundle(testTargetBundle)
     }
 
-    func testRootEndpointMapper() {
-        let parsedJson: AnyObject? = RKTestFixture.parsedObjectWithContentsOfFixture("api.json")
-        
-        let mapping = rootEndpoint.mapping
+    func createMappingDirectAttributeMapTest(mapping: RKEntityMapping, sourceJson: String, attrs: [String]) -> RKMappingTest{
+        let parsedJson: AnyObject? = RKTestFixture.parsedObjectWithContentsOfFixture(sourceJson)
         
         let test = RKMappingTest(forMapping: mapping, sourceObject: parsedJson, destinationObject: nil)
         test.managedObjectContext = CoreDataHelper.sharedInstance.backgroundContext
         
-        test.addExpectation(RKPropertyMappingTestExpectation(sourceKeyPath: "users", destinationKeyPath: "users"))
+        attrs.map({test.addExpectation(RKPropertyMappingTestExpectation(sourceKeyPath: $0, destinationKeyPath: $0))})
+        
+        return test
+    }
+    
+    
+    func testApiEndpointMapper() {
+        
+        let attributes = [
+            "users",
+            "posts",
+            "revposts",
+            "regions" ,
+            "sectors",
+            "ptposts",
+            "projects",
+            "goals",
+            "objectives",
+            "indicators",
+            "outputs",
+            "outcomes",
+            "activity",
+            "measurement",
+            "cohort",
+            "volunteer"
+        ]
+        let test = createMappingDirectAttributeMapTest(ApiEndpoint().mapping, sourceJson: "api.json", attrs: attributes)
         
         XCTAssertTrue(test.evaluate)
     }

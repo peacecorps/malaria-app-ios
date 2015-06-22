@@ -1,37 +1,26 @@
 import Foundation
 import UIKit
 
-class NotificationsManager{
+class MedicineNotificationsManager : NotificationManager{
+    override var category: String { get{ return "PillReminder"} }
+
     var medicine: Medicine!
     
     init(medicine: Medicine){
         self.medicine = medicine
     }
     
-    
-    let PillReminderCategory = "PillReminder"
-    
     func scheduleNotification(fireTime: NSDate){
         unsheduleNotification()
         
-        let notification: UILocalNotification = createNotification(fireTime)
-        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let notification: UILocalNotification = createNotification(fireTime, alertBody: "hello", alertAction: "double")
+        super.scheduleNotification(notification)
         
         medicine.notificationTime = fireTime
     }
     
-    func unsheduleNotification(){
-        for event in UIApplication.sharedApplication().scheduledLocalNotifications {
-            
-            var notification = event as! UILocalNotification
-            
-            if notification.category == PillReminderCategory{
-                UIApplication.sharedApplication().cancelLocalNotification(notification)
-                break;
-            }
-        }
-        
-        medicine.notificationTime = nil
+    override func unsheduleNotification(){
+        super.unsheduleNotification()
         CoreDataHelper.sharedInstance.saveContext()
     }
 
@@ -46,20 +35,6 @@ class NotificationsManager{
         }
     }
     
-
-    //returns the number of supposed pills should have been taken
-    private func createNotification(fireDate: NSDate) -> UILocalNotification{
-        var localNotification = UILocalNotification()
-        localNotification.fireDate = fireDate
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        localNotification.alertAction = "Did you took the pill?"
-        localNotification.alertBody = "\(medicine.name): Take me take me!"
-        localNotification.alertAction = "Open"
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.category = PillReminderCategory
-        
-        return localNotification
-    }
     
     /*
     If the user fails to take their medication mid-way through a week, and a full 7 days goes by without the medication being recorded, on DayX+7 the system will start again and allow the user to enter new data for that week. So if the user is supposed to take medications on Mondays, and next Monday arrives with no data entry, the day and date at the top will go back to black text, and the system will now record data for that new week and consider the previous week a missed week.

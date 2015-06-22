@@ -21,6 +21,11 @@
     <entity name="CollectionPosts" representedClassName="PRODUCT_MODULE_NAME.CollectionPosts" syncable="YES">
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
     </entity>
+    <entity name="Item" representedClassName="PRODUCT_MODULE_NAME.Item" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="associated_with" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="items" inverseEntity="Trip" syncable="YES"/>
+    </entity>
     <entity name="Medicine" representedClassName="Medicine" syncable="YES">
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -45,11 +50,20 @@
         <attribute name="tookMedicine" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
+    <entity name="Trip" representedClassName="PRODUCT_MODULE_NAME.Trip" syncable="YES">
+        <attribute name="cashToBring" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
-        <element name="Api" positionX="-162" positionY="254" width="128" height="283"/>
+        <element name="Api" positionX="-180" positionY="401" width="128" height="283"/>
         <element name="CollectionPosts" positionX="-0" positionY="435" width="128" height="58"/>
+        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Post" positionX="198" positionY="360" width="128" height="193"/>
+        <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
+        <element name="Trip" positionX="-389" positionY="122" width="128" height="118"/>
+        <element name="Item" positionX="-198" positionY="155" width="128" height="88"/>
     </elements>
 </model>

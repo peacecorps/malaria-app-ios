@@ -18,12 +18,12 @@
         <attribute name="users" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="volunteer" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="CollectionPosts" representedClassName="PRODUCT_MODULE_NAME.CollectionPosts" syncable="YES">
+    <entity name="CollectionPosts" representedClassName="CollectionPosts" syncable="YES">
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
     </entity>
-    <entity name="Item" representedClassName="PRODUCT_MODULE_NAME.Item" syncable="YES">
+    <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="associated_with" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="items" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <entity name="Medicine" representedClassName="Medicine" syncable="YES">
@@ -33,12 +33,12 @@
         <attribute name="weekly" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="registries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Registry" inverseName="medicine" inverseEntity="Registry" syncable="YES"/>
     </entity>
-    <entity name="Post" representedClassName="PRODUCT_MODULE_NAME.Post" syncable="YES">
+    <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_change" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="owner_rev" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="owner_rev_post" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_rev" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_rev_post" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="post_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title_change" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -50,8 +50,8 @@
         <attribute name="tookMedicine" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
-    <entity name="Trip" representedClassName="PRODUCT_MODULE_NAME.Trip" syncable="YES">
-        <attribute name="cashToBring" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    <entity name="Trip" representedClassName="Trip" syncable="YES">
+        <attribute name="cashToBring" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>

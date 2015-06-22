@@ -79,5 +79,17 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 6.day))
         XCTAssertFalse(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 7.day))
     }
+    
+    func testDaysBetween(){
+        
+        let d1 = NSDate()
+        let d2 = d1 + 3.day
+        XCTAssertEqual(NSDate.numberDaysBetween(d1, date2: d2), 3)
+        XCTAssertEqual(NSDate.numberDaysBetween(d2, date2: d1), -3)
+        
+        let d3 = d1 + 1.week
+        XCTAssertEqual(NSDate.numberDaysBetween(d1, date2: d3), 7)
+    }
+    
 
 }

@@ -5,7 +5,7 @@ class TestTimedInsertions: XCTestCase {
     
     let m: MedicineManager = MedicineManager.sharedInstance
     
-    var d1 = NSDate.from(2015, month: 5, day: 8) //monday
+    let d1 = NSDate.from(2015, month: 5, day: 8) //monday
     let weeklyPill = Medicine.Pill.Mefloquine
     let dailyPill = Medicine.Pill.Malarone
     
@@ -68,5 +68,4 @@ class TestTimedInsertions: XCTestCase {
         let b = d1 + 1.minute
         XCTAssertEqual(1, daily.registriesManager.getRegistries(date1: b, date2: b).count)
     }
-    
 }

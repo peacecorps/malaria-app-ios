@@ -3,7 +3,7 @@ import UIKit
 
 class ApiEndpoint : Endpoint{
     override var entityName: String { get { return "Api" } }
-    override var path: String { get { return Endpoints.Api.toString() } }
+    override var path: String { get { return Endpoints.Api.path() } }
     override var mapping: RKEntityMapping {
         get {
             
@@ -26,7 +26,7 @@ class ApiEndpoint : Endpoint{
                 "volunteer"
             ]
             
-            var mapping = RKEntityMapping.mapAtributesAndRelationships(entityName, attributes: attributes)
+            var mapping = RKEntityMapping.mapDirectAtributesAndRelationships(entityName, attributes: attributes)
             return mapping
         }}
 

@@ -58,9 +58,6 @@ class RegistriesManager{
         
         CoreDataHelper.sharedInstance.saveContext()
         
-        //update current notification
-        //MedicineNotificationManager.sharedInstance.reshedule(self)
-        
         return true
         
     }

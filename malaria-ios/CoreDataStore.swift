@@ -89,7 +89,7 @@ class CoreDataStore: NSObject{
     
     
     lazy var objectManager: RKObjectManager? = {
-        let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.toString()))
+        let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.rawValue))
         objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
         
         let username = "TestUser"

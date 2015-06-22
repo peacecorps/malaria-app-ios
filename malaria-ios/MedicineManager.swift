@@ -4,14 +4,20 @@ class MedicineManager{
     static let sharedInstance = MedicineManager()
     
     func setup(medicine : Medicine.Pill, fireDate: NSDate){
-        MedicineNotificationManager.sharedInstance.unsheduleNotification()
+        
+        //unregister previous medicines
+        if let currentMed = getCurrentMedicine(){
+            currentMed.notificationManager.unsheduleNotification()
+        }
         
         Logger.Info("Storing new medicine")
         registerNewMedicine(medicine)
         setCurrentPill(medicine)
         
         Logger.Info("Setting up notification")
-        MedicineNotificationManager.sharedInstance.scheduleNotification(medicine, fireTime: fireDate)
+        let newMed = getCurrentMedicine()!
+        
+        newMed.notificationManager.scheduleNotification(fireDate)
 
         UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, true)
         UserSettingsManager.syncronize()
@@ -75,7 +81,12 @@ class MedicineManager{
     
     func setCurrentPill(med: Medicine.Pill){
         if let m = findMedicine(med){
-            getRegisteredMedicines().map({$0.isCurrent = false})
+            
+            for med in getRegisteredMedicines(){
+                med.notificationManager.unsheduleNotification()
+                med.isCurrent = false
+            }
+            
             m.isCurrent = true
             CoreDataHelper.sharedInstance.saveContext()
         }else{
@@ -89,4 +100,5 @@ class MedicineManager{
         
         return filter.count == 0 ? nil : filter[0]
     }
+    
 }

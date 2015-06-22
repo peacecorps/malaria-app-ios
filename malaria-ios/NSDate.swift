@@ -18,11 +18,11 @@ extension NSDate : Comparable {}
 extension NSDate{
     
     static var lateDate: NSDate {
-        return NSDate.from(1971, month: 1, day: 1)
+        return NSDate(timeIntervalSince1970: 0)
     }
     
     static var earliestDate: NSDate{
-        return NSDate.from(2050, month: 1, day: 1)
+        return NSDate(timeIntervalSince1970: Double.infinity)
     }
     
     class func from(year: Int, month: Int, day: Int) -> NSDate {
@@ -42,6 +42,19 @@ extension NSDate{
         let formatter = NSDateFormatter()
         formatter.dateFormat = format
         return formatter.stringFromDate(self)
+    }
+    
+    class func numberDaysBetween(date1: NSDate, date2: NSDate) -> Int{
+        var calendar: NSCalendar = NSCalendar.currentCalendar()
+        
+        // Replace the hour (time) of both dates with 00:00 to take into account different timezones
+        let d1 = calendar.startOfDayForDate(date1)
+        let d2 = calendar.startOfDayForDate(date2)
+        
+        let flags = NSCalendarUnit.CalendarUnitDay
+        let components = calendar.components(flags, fromDate: d1, toDate: d2, options: nil)
+        
+        return components.day
     }
     
     class func areDatesSameDay(dateOne: NSDate, dateTwo: NSDate) -> Bool {

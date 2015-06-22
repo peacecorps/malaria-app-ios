@@ -7,5 +7,5 @@ class Medicine: NSManagedObject {
     @NSManaged var isCurrent: Bool
     @NSManaged var weekly: Bool
     @NSManaged var registries: NSSet
-
+    @NSManaged var notificationTime: NSDate?
 }

@@ -18,11 +18,27 @@
         <attribute name="users" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="volunteer" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="CollectionPosts" representedClassName="PRODUCT_MODULE_NAME.CollectionPosts" syncable="YES">
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
+    </entity>
     <entity name="Medicine" representedClassName="Medicine" syncable="YES">
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="notificationTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="weekly" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="registries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Registry" inverseName="medicine" inverseEntity="Registry" syncable="YES"/>
+    </entity>
+    <entity name="Post" representedClassName="PRODUCT_MODULE_NAME.Post" syncable="YES">
+        <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="description_change" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_rev" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner_rev_post" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title_change" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contained_in" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CollectionPosts" inverseName="posts" inverseEntity="CollectionPosts" syncable="YES"/>
     </entity>
     <entity name="Registry" representedClassName="Registry" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -30,8 +46,10 @@
         <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
         <element name="Api" positionX="-162" positionY="254" width="128" height="283"/>
+        <element name="CollectionPosts" positionX="-0" positionY="435" width="128" height="58"/>
+        <element name="Post" positionX="198" positionY="360" width="128" height="193"/>
     </elements>
 </model>

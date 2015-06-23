@@ -20,8 +20,4 @@ class TestUserSettings: XCTestCase {
         UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, false)
         XCTAssertEqual(false, UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine))
     }
-    
-    func testClear(){
-        
-    }
 }

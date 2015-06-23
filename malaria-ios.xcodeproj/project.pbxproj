@@ -76,7 +76,7 @@
 		202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
 		202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
 		202F2EB21B30EB45001CDCC5 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */; };
-		20C20FED1B39CDF8007A7414 /* TestMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */; };
+		20C20FF91B39DC72007A7414 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
 		20E6DC261B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
 		20E6DC271B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
 		20E6DC2B1B388F310003B777 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC2A1B388F310003B777 /* Trip.swift */; };
@@ -184,6 +184,7 @@
 		2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
 		202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKEntityMapping.swift; sourceTree = "<group>"; };
 		202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
+		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20E6DC251B388DF40003B777 /* TripExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripExtension.swift; sourceTree = "<group>"; };
 		20E6DC2A1B388F310003B777 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		20E6DC2D1B388F320003B777 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -211,7 +212,7 @@
 		20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetupInsertClear.swift; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
 		20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineRegistries.swift; sourceTree = "<group>"; };
-		20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineStatistics.swift; sourceTree = "<group>"; };
+		20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDailyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20EA070C1B23AD9F00D6840E /* TestNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotifications.swift; sourceTree = "<group>"; };
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
 		20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
@@ -304,7 +305,8 @@
 				20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */,
 				20EA07061B23258900D6840E /* TestNSDateExtensions.swift */,
 				20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */,
-				20EA070A1B2394EB00D6840E /* TestMedicineStatistics.swift */,
+				20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */,
+				20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */,
 				20EA070C1B23AD9F00D6840E /* TestNotifications.swift */,
 				20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */,
 				201A0B671B36D9C900E5D628 /* TestRestMappers.swift */,
@@ -771,11 +773,11 @@
 				20EA07021B226D9100D6840E /* CoreDataStore.swift in Sources */,
 				202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */,
 				201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */,
+				20C20FF91B39DC72007A7414 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				20E6DC321B3893FC0003B777 /* TripsManager.swift in Sources */,
 				201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */,
 				201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */,
 				20E6DC461B3969EB0003B777 /* ItemsManager.swift in Sources */,
-				20C20FED1B39CDF8007A7414 /* TestMedicineStatistics.swift in Sources */,
 				201A0B791B37513C00E5D628 /* Api.swift in Sources */,
 				20E6DC4C1B3979570003B777 /* ItemExtension.swift in Sources */,
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,

@@ -3,6 +3,10 @@ import Foundation
 
 class TestNSDateExtensions: XCTestCase {
     
+    func testCreation(){
+        XCTAssertEqual("2015-01-01", NSDate.from(2015, month: 1, day: 1).formatWith("yyyy-MM-dd"))
+    }
+    
     func testGreaterThan() {
         
         let a = NSDate.from(2015, month: 1, day: 1)
@@ -71,6 +75,7 @@ class TestNSDateExtensions: XCTestCase {
         d1 += NSCalendar.currentCalendar().firstWeekday.day
         
         XCTAssertFalse(NSDate.areDatesSameWeek(d1, dateTwo: d1 - 1.day))
+        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1))
         XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 1.day))
         XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 2.day))
         XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 3.day))

@@ -5,7 +5,7 @@ class TestTimedInsertions: XCTestCase {
     
     let m: MedicineManager = MedicineManager.sharedInstance
     
-    let d1 = NSDate.from(2015, month: 5, day: 8) //monday
+    let d1 = NSDate.from(2015, month: 6, day: 6) + NSCalendar.currentCalendar().firstWeekday.day //start of the week
     let weeklyPill = Medicine.Pill.Mefloquine
     let dailyPill = Medicine.Pill.Malarone
     
@@ -50,9 +50,14 @@ class TestTimedInsertions: XCTestCase {
     
     func testWeeklyInsert(){
         XCTAssertTrue(weekly.registriesManager.addRegistry(d1, tookMedicine: false))
-        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 1.day, tookMedicine: false))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 1.day, tookMedicine: true))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 2.day, tookMedicine: true))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 3.day, tookMedicine: true))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 4.day, tookMedicine: true))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 5.day, tookMedicine: true))
+        XCTAssertFalse(weekly.registriesManager.addRegistry(d1 + 6.day, tookMedicine: true))
         XCTAssertEqual(1, weekly.registriesManager.getRegistries().count)
-        XCTAssertTrue(weekly.registriesManager.addRegistry(d1 + 1.week, tookMedicine: false))
+        XCTAssertTrue(weekly.registriesManager.addRegistry(d1 + 1.week, tookMedicine: true))
         XCTAssertEqual(2, weekly.registriesManager.getRegistries().count)
     }
     

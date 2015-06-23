@@ -55,7 +55,7 @@
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
         <element name="Api" positionX="-180" positionY="401" width="128" height="283"/>

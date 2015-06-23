@@ -1,11 +1,11 @@
 import Foundation
-import CoreData
 
 extension Item{
+    func add(number: Int){
+        self.number += number
+    }
     
-    convenience init(context: NSManagedObjectContext) {
-        let entityName = getSimpleClassName(self.dynamicType)
-        let entityDescription = NSEntityDescription.entityForName(entityName, inManagedObjectContext: context)!
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: context)
+    func remove(number: Int){
+        self.number = max(self.number - number, 0)
     }
 }

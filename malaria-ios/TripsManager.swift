@@ -9,21 +9,19 @@ class TripsManager{
         let result: [Trip] = context.executeFetchRequest(fetchRequest, error: nil) as! [Trip]
         
         
-        Logger.Info("---> \(result.count)")
         if result.count == 0{
             return nil
         }else if result.count > 1 {
             Logger.Warn("Multiple trips found, error")
         }
         
-        Logger.Info("Returning...")
         return result[0]
     }
     
     func clearCoreData(){
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         if let t = getTrip(){
-            t.deleteFromContext(context)
+            t.deleteFromContext()
         }
         
         CoreDataHelper.sharedInstance.saveContext()
@@ -36,8 +34,8 @@ class TripsManager{
             return nil
         }
         
-        let trip = Trip(context: CoreDataHelper.sharedInstance.backgroundContext!)
-       
+        let trip = Trip.create(Trip.self)
+        
         trip.location = location
         trip.medicine = medicine.name()
         trip.cashToBring = cashToBring
@@ -47,5 +45,4 @@ class TripsManager{
         
         return trip
     }
-
 }

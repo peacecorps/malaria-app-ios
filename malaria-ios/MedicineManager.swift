@@ -24,8 +24,7 @@ class MedicineManager{
     }
     
     func clearCoreData(){
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        getRegisteredMedicines().map({$0.deleteFromContext(context)})
+        getRegisteredMedicines().map({$0.deleteFromContext()})
         CoreDataHelper.sharedInstance.saveContext()
     }
     
@@ -35,8 +34,6 @@ class MedicineManager{
     */
     
     func registerNewMedicine(med: Medicine.Pill) -> Bool{
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        
         let registed: Medicine? = findMedicine(med)
         if let m = registed{
             Logger.Warn("Already registered \(m.name), returning")
@@ -44,8 +41,8 @@ class MedicineManager{
             return false
         }
         
-        let medicine = Medicine(context: context)
-        medicine.name = med.rawValue
+        let medicine = Medicine.create(Medicine.self)
+        medicine.name = med.name()
         medicine.weekly = med.isWeekly()
         
         CoreDataHelper.sharedInstance.saveContext()

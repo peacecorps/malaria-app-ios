@@ -10,11 +10,7 @@ class CoreDataHelper: NSObject {
         super.init()
     }
     
-    
     lazy var backgroundContext: NSManagedObjectContext? = {
-        
-        
-        Logger.Info("HERREEEE")
         let coordinator = self.store.persistentStoreCoordinator?.persistentStoreCoordinator
         if coordinator == nil {
             return nil

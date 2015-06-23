@@ -26,6 +26,11 @@ class RegistriesManager{
         let registries = getRegistries()
         return registries.count > 0 ? registries[0].date : nil
     }
+    
+    func oldestEntry() -> NSDate?{
+        let registries = getRegistries(mostRecentFirst: false)
+        return registries.count > 0 ? registries[0].date : nil
+    }
 
     func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
@@ -63,13 +68,16 @@ class RegistriesManager{
     func getRegistries(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate, mostRecentFirst: Bool = true) -> [Registry]{
         var array : [Registry] = medicine.registries.convertToArray()
         
+        //make sure that date2 is always after date1
+        if date1 > date2 {
+            return getRegistries(date1: date2, date2: date1, mostRecentFirst: mostRecentFirst)
+        }
+        
         //sort entries chronologically
         let registries = mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
         
         if NSDate.areDatesSameDay(date1, dateTwo: date2){
             return registries.filter({NSDate.areDatesSameDay($0.date, dateTwo: date1)})
-        }else if date2 < date1 {
-            return registries.filter({$0.date >= date2 && $0.date <= date1})
         }
         
         return registries.filter({$0.date >= date1 && $0.date <= date2})

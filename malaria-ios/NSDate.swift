@@ -44,18 +44,7 @@ extension NSDate{
         return formatter.stringFromDate(self)
     }
     
-    class func numberDaysBetween(date1: NSDate, date2: NSDate) -> Int{
-        var calendar: NSCalendar = NSCalendar.currentCalendar()
-        
-        // Replace the hour (time) of both dates with 00:00 to take into account different timezones
-        let d1 = calendar.startOfDayForDate(date1)
-        let d2 = calendar.startOfDayForDate(date2)
-        
-        let flags = NSCalendarUnit.CalendarUnitDay
-        let components = calendar.components(flags, fromDate: d1, toDate: d2, options: nil)
-        
-        return components.day
-    }
+    
     
     class func areDatesSameDay(dateOne: NSDate, dateTwo: NSDate) -> Bool {
         var calender = NSCalendar.currentCalendar()
@@ -77,4 +66,17 @@ extension NSDate{
         
         return weekOfYear1 == weekOfYear2 && year1 == year2
     }
+}
+
+public func - (toDate: NSDate, fromDate: NSDate) -> NSDateComponents {
+    var calendar: NSCalendar = NSCalendar.currentCalendar()
+    
+    // Replace the hour (time) of both dates with 00:00 to take into account different timezones
+    let toDateNormalized = calendar.startOfDayForDate(toDate)
+    let fromDateNormalized = calendar.startOfDayForDate(fromDate)
+    
+    let flags = NSCalendarUnit.CalendarUnitDay
+    let components = calendar.components(flags, fromDate: fromDateNormalized, toDate: toDateNormalized, options: nil)
+    
+    return components
 }

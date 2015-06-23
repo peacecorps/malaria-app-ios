@@ -34,76 +34,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-malaria-ios-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios-ISO8601DateFormatterValueTransformer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios-RKValueTransformers.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios-RestKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios-SOCKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios-TransitionKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-ios.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-ISO8601DateFormatterValueTransformer.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-RKValueTransformers.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-RestKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-SOCKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests-TransitionKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-malaria-iosTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,107 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05B1C72315C92C9E0665F098</key>
+		<key>1F6BDB7EFECB91F59ED2DB0A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0F7851C3DE7B8768B995666E</key>
+		<key>53600FEE3283D16314650FFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1060F401DD95DED920DE0850</key>
+		<key>6C32678017184DD186359BCB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19433859503CC36E731E3E65</key>
+		<key>7D23CB7D4128AED68829E6BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A30DD32CC42783E8BA9214D</key>
+		<key>81692B3A3F400E1B88B2825E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>36A9D01A5BD159EAF043026F</key>
+		<key>E1732BD7CF6FB6EE64AE1179</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3CB88E514D2ED4BCB3C2DD73</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>467E31724B15F9319B86E1B7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4F2C22F8AC7EAB0CEE543CAE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4F3AC1163FA3B49BC88B4A86</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>51EEBBEDF274CF2840DEACA9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6D6AD2BF7D449A204F8C5044</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>78EBCB43DE4D6B92F6A1CCD7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8782F99A82C9BD17B8F2FD86</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8F2D5ACC417174F3AE7DB396</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>96F3637F8B7B1A9548D28C2E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B2D9EB68282FC176D8562709</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C18CF881F132D5598B317245</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C5D90D56C8375F8442D8D1AC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D62535720DBC61259697D23A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E1C16B39286F97C78757AE05</key>
+		<key>E95A18B05E65FA5CB7C777A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>

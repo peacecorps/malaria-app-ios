@@ -19,11 +19,36 @@ class MedicineStats{
     }
     
     func numberSupposedPills(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Int{
-        return medicine.registriesManager.getRegistries(date1: date1, date2: date2).count
+        
+        if (medicine.registriesManager.getRegistries(date1: date1, date2: date2).count == 0){
+            return 0
+        }
+        
+        if date1 > date2 {
+            return numberSupposedPills(date1: date2, date2: date1)
+        }
+        
+        
+        var d1: NSDate = date1
+        if NSDate.areDatesSameDay(d1, dateTwo: NSDate.lateDate) {
+            d1 = medicine.registriesManager.oldestEntry()!
+        }
+        
+        var d2: NSDate = date2
+        if NSDate.areDatesSameDay(d2, dateTwo: NSDate.earliestDate) {
+            d2 = medicine.registriesManager.mostRecentEntry()!
+        }
+        
+        //+1 to include d1
+        let numDays = (d2 - d1).day + 1
+        
+        return  medicine.isDaily() ?  numDays : Int(floor(Float(numDays)/7))
     }
     
     func pillAdherence(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Float{
         let supposedPills = numberSupposedPills(date1: date1, date2: date2)
+        Logger.Info("@@@ \(supposedPills)")
+        
         if(supposedPills == 0){
             return 1.0
         }

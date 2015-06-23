@@ -35,9 +35,9 @@ class TestNotifications: XCTestCase {
     }
     
     func testShoudResetNotificationTime(){
-        XCTAssertFalse(mdDaily.notificationManager.checkIfShouldReset(d1 + 1.day))
-        XCTAssertFalse(mdDaily.notificationManager.checkIfShouldReset(d1 + 7.day))
-        XCTAssertTrue(mdDaily.notificationManager.checkIfShouldReset(d1 + 8.day))
+        XCTAssertFalse(mdDaily.notificationManager.checkIfShouldReset(currentDate: d1 + 1.day))
+        XCTAssertFalse(mdDaily.notificationManager.checkIfShouldReset(currentDate: d1 + 7.day))
+        XCTAssertTrue(mdDaily.notificationManager.checkIfShouldReset(currentDate: d1 + 8.day))
     }
     
     func testNotificationTime(){

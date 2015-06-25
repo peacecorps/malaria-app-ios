@@ -16,7 +16,7 @@ class ItemsManager{
         self.trip = trip
     }
     
-    func addItem(name: String, quantity: Int){
+    func addItem(name: String, quantity: Int64){
         if let i = findItem(name){
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
@@ -40,7 +40,7 @@ class ItemsManager{
     }
     
     
-    func removeItem(name: String, quantity: Int = Int.max){
+    func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
             
             i.remove(quantity)

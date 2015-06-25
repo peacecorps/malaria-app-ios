@@ -3,15 +3,8 @@ import Foundation
 class CoreDataHelper: NSObject {
     static let sharedInstance = CoreDataHelper()
     
-    let store: CoreDataStore!
-    
-    override init(){
-        store = CoreDataStore.sharedInstance
-        super.init()
-    }
-    
     lazy var backgroundContext: NSManagedObjectContext? = {
-        let coordinator = self.store.persistentStoreCoordinator?.persistentStoreCoordinator
+        let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
             return nil
         }

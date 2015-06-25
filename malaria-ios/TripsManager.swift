@@ -27,7 +27,7 @@ class TripsManager{
         CoreDataHelper.sharedInstance.saveContext()
     }
     
-    func createTrip(location: String, medicine: Medicine.Pill, cashToBring: Int, reminderDate: NSDate) -> Trip?{
+    func createTrip(location: String, medicine: Medicine.Pill, cashToBring: Int64, reminderDate: NSDate) -> Trip?{
         
         if let t = getTrip(){
             Logger.Error("Already created a trip, please delete previous one")

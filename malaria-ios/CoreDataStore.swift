@@ -8,7 +8,6 @@ class CoreDataStore: NSObject{
     let storeName = "Model"
     let storeFilename = "malaria-ios.sqlite"
     
-    
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] as! NSURL
@@ -51,16 +50,35 @@ class CoreDataStore: NSObject{
         return model
         }()
     
-    lazy var persistentStoreCoordinator: RKManagedObjectStore? = {
-        var coordinator = RKManagedObjectStore(managedObjectModel: self.managedObjectModel)
-        self.objectManager!.managedObjectStore = coordinator
-        
-        coordinator.createPersistentStoreCoordinator()
-        
-        var storePath: NSString = RKApplicationDataDirectory().stringByAppendingPathComponent(self.storeFilename)
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
     
-        var e: NSError?
-        coordinator.addSQLitePersistentStoreAtPath(storePath as String, fromSeedDatabaseAtPath: nil, withConfiguration: nil,
+        var error: NSError?
+        
+        if coordinator!.addPersistentStoreWithType(
+            NSSQLiteStoreType,
+            configuration: nil,
+            URL: url,
+            options: [
+                NSInferMappingModelAutomaticallyOption: true,
+                NSMigratePersistentStoresAutomaticallyOption: true
+            ], error: &error) == nil {
+            coordinator = nil
+            // Report any error we got.
+            let dict = NSMutableDictionary()
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
+            dict[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
+            dict[NSUnderlyingErrorKey] = error
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog("Unresolved error \(error), \(error!.userInfo)")
+            abort()
+        }
+        
+        
+        /*coordinator.addSQLitePersistentStoreAtPath(storePath as String, fromSeedDatabaseAtPath: nil, withConfiguration: nil,
             options: [
                 NSInferMappingModelAutomaticallyOption: true,
                 NSMigratePersistentStoresAutomaticallyOption: true
@@ -81,30 +99,7 @@ class CoreDataStore: NSObject{
         
         coordinator.createManagedObjectContexts()
         coordinator.managedObjectCache = RKInMemoryManagedObjectCache(managedObjectContext: coordinator.persistentStoreManagedObjectContext)
-        
+        */
         return coordinator
-        }()
-    
-    
-    lazy var objectManager: RKObjectManager? = {
-        let objectManager: RKObjectManager = RKObjectManager(baseURL: NSURL(string: Endpoints.BaseUrl.rawValue))
-        objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
-        
-        let username = "TestUser"
-        let password = "password"
-        
-        objectManager.HTTPClient.setAuthorizationHeaderWithUsername(username, password: password)
-        objectManager.HTTPClient.setDefaultHeader("whatIWantForChristmas", value: "You")
-       
-        // set up the base64-encoded credentials
-        let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
-        objectManager.HTTPClient.setDefaultHeader("CuteHeader", value: "Basic \(base64LoginString)")
-        
-        objectManager.HTTPClient.allowsInvalidSSLCertificate = true
-        
-        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
-        return objectManager
         }()
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C8EC00569FE604833382644 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -26,7 +27,6 @@
 		201A0B6F1B36DB7100E5D628 /* NSSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D61B2234DA00D6840E /* NSSet.swift */; };
 		201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
 		201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
-		201A0B721B36DB7100E5D628 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
 		201A0B781B37513C00E5D628 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B771B37513C00E5D628 /* Api.swift */; };
 		201A0B791B37513C00E5D628 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201A0B771B37513C00E5D628 /* Api.swift */; };
 		201A0B7B1B37529E00E5D628 /* posts.json in Resources */ = {isa = PBXBuildFile; fileRef = 201A0B7A1B37529E00E5D628 /* posts.json */; };
@@ -71,12 +71,17 @@
 		2022D5381B17468B00FDF2D3 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
 		2022D53C1B17602C00FDF2D3 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */; };
 		2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */; };
-		202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */; };
 		202F2EB01B2F9BFD001CDCC5 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
 		202F2EB21B30EB45001CDCC5 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */; };
 		20936AA01B3B2BF8003B3E05 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
+		20936AA11B3BF9EE003B3E05 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
+		20936AA21B3BF9EE003B3E05 /* TestSetupInsertClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */; };
+		20936AA31B3BF9EE003B3E05 /* TestMedicineRegistries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */; };
+		20936AA41B3BF9EE003B3E05 /* TestDailyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */; };
+		20936AA51B3BF9EE003B3E05 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
+		20936AA61B3BF9EE003B3E05 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
+		20936AA71B3BF9EE003B3E05 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20C20FF91B39DC72007A7414 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
-		20C20FFE1B3AC8FF007A7414 /* TestRestMappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FFD1B3AC8FF007A7414 /* TestRestMappers.swift */; };
 		20C210001B3AD2E3007A7414 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FFF1B3AD2E3007A7414 /* Post.swift */; };
 		20C210011B3AD3A2007A7414 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FFF1B3AD2E3007A7414 /* Post.swift */; };
 		20E6DC261B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
@@ -126,8 +131,8 @@
 		20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5471B2DA76000313C72 /* UserSetting.swift */; };
 		20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */; };
 		20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2022D5371B17468B00FDF2D3 /* Utilitary.swift */; };
-		5258A14277AFC3B571DB91E0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 728C3837D976DCAC02BF89C2 /* libPods.a */; };
-		DA368DB49306EBE445C14D0B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 728C3837D976DCAC02BF89C2 /* libPods.a */; };
+		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,10 +187,8 @@
 		2022D5371B17468B00FDF2D3 /* Utilitary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilitary.swift; sourceTree = "<group>"; };
 		2022D53B1B17602C00FDF2D3 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		2022D53E1B1762DB00FDF2D3 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
-		202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RKEntityMapping.swift; sourceTree = "<group>"; };
 		202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
-		20C20FFD1B3AC8FF007A7414 /* TestRestMappers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestRestMappers.swift; sourceTree = "<group>"; };
 		20C20FFF1B3AD2E3007A7414 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		20E6DC251B388DF40003B777 /* TripExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripExtension.swift; sourceTree = "<group>"; };
 		20E6DC2A1B388F310003B777 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -223,8 +226,8 @@
 		20FDC5471B2DA76000313C72 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		67AE5C8ADFA45BFBD2B8F09D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		728C3837D976DCAC02BF89C2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4DE863BDDB7DAB1E7ED688C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BE51359F71142430EEFFC50A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA368DB49306EBE445C14D0B /* libPods.a in Frameworks */,
+				2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +243,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5258A14277AFC3B571DB91E0 /* libPods.a in Frameworks */,
+				5258A14277AFC3B571DB91E0 /* (null) in Frameworks */,
+				1C8EC00569FE604833382644 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +316,6 @@
 				20EA070C1B23AD9F00D6840E /* TestNotifications.swift */,
 				20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */,
 				20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */,
-				20C20FFD1B3AC8FF007A7414 /* TestRestMappers.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -452,7 +455,6 @@
 				20EA06D61B2234DA00D6840E /* NSSet.swift */,
 				20EA06DD1B22352100D6840E /* NSDate.swift */,
 				20FDC54A1B2DAC9A00313C72 /* NSManagedObject.swift */,
-				202F2EAE1B2F9B36001CDCC5 /* RKEntityMapping.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -508,7 +510,7 @@
 		C53F0C2A2C26B2BD2949012D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				728C3837D976DCAC02BF89C2 /* libPods.a */,
+				BE51359F71142430EEFFC50A /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -525,6 +527,7 @@
 				200EE4811B1343A50087FB24 /* Frameworks */,
 				200EE4821B1343A50087FB24 /* Resources */,
 				0D9675A334F7BCCEE80D5913 /* Copy Pods Resources */,
+				1DFC206682541934F004F48F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -544,6 +547,7 @@
 				200EE4961B1343A60087FB24 /* Frameworks */,
 				200EE4971B1343A60087FB24 /* Resources */,
 				3A937F1C28D6D25205AE486A /* Copy Pods Resources */,
+				752D60E0C6822B0161E4331C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -665,6 +669,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		1DFC206682541934F004F48F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3A937F1C28D6D25205AE486A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -678,6 +697,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		752D60E0C6822B0161E4331C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AAA0F3003C4D5AF55F749680 /* Check Pods Manifest.lock */ = {
@@ -748,7 +782,6 @@
 				20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */,
 				20E6DC2E1B388F320003B777 /* Item.swift in Sources */,
 				20E6DC311B3893FC0003B777 /* TripsManager.swift in Sources */,
-				202F2EAF1B2F9B36001CDCC5 /* RKEntityMapping.swift in Sources */,
 				20EA06DC1B2234DA00D6840E /* NSSet.swift in Sources */,
 				20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */,
 				201A0B5F1B363D3D00E5D628 /* MedicineStats.swift in Sources */,
@@ -785,28 +818,33 @@
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,
 				20EA06F31B22695A00D6840E /* MedicineManager.swift in Sources */,
 				20C210011B3AD3A2007A7414 /* Post.swift in Sources */,
+				20936AA51B3BF9EE003B3E05 /* TestNotifications.swift in Sources */,
+				20936AA21B3BF9EE003B3E05 /* TestSetupInsertClear.swift in Sources */,
 				20E6DC381B38AAF30003B777 /* MedicineNotificationsManager.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
 				201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */,
 				201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */,
 				201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */,
-				20C20FFE1B3AC8FF007A7414 /* TestRestMappers.swift in Sources */,
 				20936AA01B3B2BF8003B3E05 /* TestNSDateExtensions.swift in Sources */,
 				20E6DC351B38A7A30003B777 /* NotificationManager.swift in Sources */,
 				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
 				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
+				20936AA31B3BF9EE003B3E05 /* TestMedicineRegistries.swift in Sources */,
 				20E6DC2F1B388F320003B777 /* Item.swift in Sources */,
 				201A0BAF1B37695D00E5D628 /* CollectionPosts.swift in Sources */,
 				201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
+				20936AA61B3BF9EE003B3E05 /* TestTimedInsertions.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,
 				20EA06F41B22695A00D6840E /* TripNotificationsManager.swift in Sources */,
 				20EA07001B226C1200D6840E /* Logger.swift in Sources */,
-				201A0B721B36DB7100E5D628 /* RKEntityMapping.swift in Sources */,
 				201A0B6F1B36DB7100E5D628 /* NSSet.swift in Sources */,
+				20936AA41B3BF9EE003B3E05 /* TestDailyMedicineStatistics.swift in Sources */,
 				20E6DC271B388DF40003B777 /* TripExtension.swift in Sources */,
+				20936AA11B3BF9EE003B3E05 /* TestUserSettings.swift in Sources */,
 				20E6DC2C1B388F310003B777 /* Trip.swift in Sources */,
 				20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */,
 				20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */,
+				20936AA71B3BF9EE003B3E05 /* TestPlanTrip.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
 				201A0BA91B37565B00E5D628 /* PostsEndpoint.swift in Sources */,
 			);

@@ -35,13 +35,10 @@
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="description_change" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="owner_rev" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="owner_rev_post" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="post_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="title_change" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="updated_at" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="contained_in" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CollectionPosts" inverseName="posts" inverseEntity="CollectionPosts" syncable="YES"/>
     </entity>
@@ -60,10 +57,10 @@
     <elements>
         <element name="Api" positionX="-180" positionY="401" width="128" height="283"/>
         <element name="CollectionPosts" positionX="-0" positionY="435" width="128" height="58"/>
+        <element name="Item" positionX="-198" positionY="155" width="128" height="88"/>
         <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Post" positionX="198" positionY="360" width="128" height="193"/>
+        <element name="Post" positionX="198" positionY="360" width="128" height="150"/>
         <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
         <element name="Trip" positionX="-389" positionY="122" width="128" height="118"/>
-        <element name="Item" positionX="-198" positionY="155" width="128" height="88"/>
     </elements>
 </model>

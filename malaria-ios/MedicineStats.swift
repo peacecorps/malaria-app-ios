@@ -7,7 +7,7 @@ class MedicineStats{
         self.medicine = medicine
     }
     
-    func numberPillsTaken(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Int{
+    func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var count = 0
         for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2){
             if (r.tookMedicine){
@@ -18,7 +18,7 @@ class MedicineStats{
         return count
     }
     
-    func numberSupposedPills(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Int{
+    func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         
         if (medicine.registriesManager.getRegistries(date1: date1, date2: date2).count == 0){
             return 0
@@ -30,12 +30,12 @@ class MedicineStats{
         
         
         var d1: NSDate = date1
-        if NSDate.areDatesSameDay(d1, dateTwo: NSDate.lateDate) {
+        if NSDate.areDatesSameDay(d1, dateTwo: NSDate.min) {
             d1 = medicine.registriesManager.oldestEntry()!
         }
         
         var d2: NSDate = date2
-        if NSDate.areDatesSameDay(d2, dateTwo: NSDate.earliestDate) {
+        if NSDate.areDatesSameDay(d2, dateTwo: NSDate.max) {
             d2 = medicine.registriesManager.mostRecentEntry()!
         }
         
@@ -47,9 +47,8 @@ class MedicineStats{
         return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
     }
     
-    func pillAdherence(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Float{
+    func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Float{
         let supposedPills = numberSupposedPills(date1: date1, date2: date2)
-        Logger.Info("@@@ \(supposedPills)")
         
         if(supposedPills == 0){
             return 1.0
@@ -60,7 +59,7 @@ class MedicineStats{
         return Float(pillsTaken)/(Float(supposedPills))
     }
     
-    func pillStreak(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate) -> Int{
+    func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var result = 0
         
         let isDaily = medicine.isDaily()

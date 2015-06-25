@@ -2,14 +2,14 @@ import UIKit
 import XCTest
 
 class TestRestMappers: XCTestCase {
-
+    
     override func setUp() {
         super.setUp()
         
         let testTargetBundle = NSBundle(identifier: "anita-borg.malaria-iosTests")
         RKTestFixture.setFixtureBundle(testTargetBundle)
     }
-
+    
     func createMappingDirectAttributeMapTest(mapping: RKEntityMapping, sourceJson: String, attrs: [String]) -> RKMappingTest{
         let parsedJson: AnyObject? = RKTestFixture.parsedObjectWithContentsOfFixture(sourceJson)
         
@@ -47,13 +47,46 @@ class TestRestMappers: XCTestCase {
         XCTAssertTrue(test.evaluate)
     }
     
+    
+    //https://stackoverflow.com/questions/25307039/restkit-how-can-i-test-nested-relationship-data-by-fixture
     func testPostsEndpointMapper(){
         
-        //requires relationship mapping
+        //define mapping
+        let postMapping = RKEntityMapping.mapAtributesAndRelationships("Post", attributes: ["created" : "created_at"], relationships: [:])
+        let entityMapping = RKEntityMapping.mapAtributesAndRelationships("CollectionPosts", attributes: [:], relationships: ["result" : postMapping])
+        
+        //create expectations
+        let parsedJson: AnyObject? = RKTestFixture.parsedObjectWithContentsOfFixture("posts.json")
+        let mappingTest = RKMappingTest(mapping: entityMapping, sourceObject: parsedJson, destinationObject: nil)
+        mappingTest.managedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!
         
         
-        //let entityMapping: RKEntityMapping = RKEntityMapping.mapAtributesAndRelationships("Post", attributes: ["attrs"], relationships: [:])
-                
+       
+        /// Configure expectation objects
+        let post = Post.create(Post.self)
+        post.owner = 1
+        post.title = "title1"
+        post.post_description = "post1"
+        post.created_at = "2015-06-07T23:55:16.956057Z"
+        post.updated_at = "2015-06-07T23:55:16.956098Z"
+        post.id = 1
+        
+        let post2 = Post.create(Post.self)
+        post2.owner = 2
+        post2.title = "title2"
+        post2.post_description = "post2"
+        post2.created_at = "2015-06-07T23:55:40.684510Z"
+        post2.updated_at = "2015-06-07T23:55:40.684589Z"
+        post2.id = 2
+        
+        let set = NSOrderedSet(array: [post, post2])
+        
+        let expectation1 = RKPropertyMappingTestExpectation(sourceKeyPath: "results", destinationKeyPath: "results")
+        mappingTest.addExpectation(expectation1)
+        mappingTest.verify()
+
+        
+        
         /*
         RKManagedObjectStore *managedObjectStore = [RKTestFactory managedObjectStore];
         RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Article" inManagedObjectStore:managedObjectStore];
@@ -67,8 +100,15 @@ class TestRestMappers: XCTestCase {
         // Add a connection from our Article's list of `categoryIDs` to all Category objects with a matching `categoryID`
         [entityMapping addConnectionForRelationship:@"categories" connectedBy:@{ @"categoryIDs": @"categoryID" }];
         
+        
+        
         NSDictionary *articleRepresentation = @{ @"id": @(1234), @"title": @"The Title", @"category_ids": @[ @(1), @(2), @(3), @(4) ] };
         RKMappingTest *mappingTest = [RKMappingTest testForMapping:entityMapping sourceObject:articleRepresentation destinationObject:nil];
+        
+        DONE
+        
+        
+
         
         // Configure Core Data
         mappingTest.managedObjectContext = managedObjectStore.persistentStoreManagedObjectContext;
@@ -95,6 +135,6 @@ class TestRestMappers: XCTestCase {
         
         BOOL success = [mappingTest evaluate];
         STAssertTrue(success, @"Expected connection to be satisfied, but was not.") */
-    
+        
     }
 }

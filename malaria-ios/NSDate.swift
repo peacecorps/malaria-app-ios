@@ -17,11 +17,11 @@ extension NSDate : Comparable {}
 
 extension NSDate{
     
-    static var lateDate: NSDate {
+    static var min: NSDate {
         return NSDate(timeIntervalSince1970: 0)
     }
     
-    static var earliestDate: NSDate{
+    static var max: NSDate{
         return NSDate(timeIntervalSince1970: Double.infinity)
     }
     
@@ -75,8 +75,8 @@ public func - (toDate: NSDate, fromDate: NSDate) -> NSDateComponents {
     let toDateNormalized = calendar.startOfDayForDate(toDate)
     let fromDateNormalized = calendar.startOfDayForDate(fromDate)
     
-    let flags = NSCalendarUnit.CalendarUnitDay
-    let components = calendar.components(flags, fromDate: fromDateNormalized, toDate: toDateNormalized, options: nil)
+
+    let components = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: fromDateNormalized, toDate: toDateNormalized, options: nil)
     
     return components
 }

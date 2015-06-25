@@ -86,7 +86,6 @@ class TestNSDateExtensions: XCTestCase {
     }
     
     func testDaysBetween(){
-        
         let d1 = NSDate()
         
         //d2 is more recent

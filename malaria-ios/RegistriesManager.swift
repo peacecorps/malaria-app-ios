@@ -65,7 +65,7 @@ class RegistriesManager{
         
     }
 
-    func getRegistries(date1: NSDate = NSDate.lateDate, date2: NSDate = NSDate.earliestDate, mostRecentFirst: Bool = true) -> [Registry]{
+    func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true) -> [Registry]{
         var array : [Registry] = medicine.registries.convertToArray()
         
         //make sure that date2 is always after date1

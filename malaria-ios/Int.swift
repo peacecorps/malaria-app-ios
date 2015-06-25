@@ -31,9 +31,7 @@ extension Int{
 }
 
 public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-    
     var components = NSDateComponents()
-    
     components.setValue(tuple.value, forComponent: tuple.unit);
     
     return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!

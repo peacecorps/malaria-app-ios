@@ -45,15 +45,7 @@ class SyncManager {
                     Logger.Info("Connect at \(endpoint.path)")
                     
                     if let obj = endpoint.retrieveJSONObject(JSON(json!)){
-                        if (save){
-                            CoreDataHelper.sharedInstance.saveContext()
-                        }
-                        
                         Logger.Info(Api.retrieve(Api.self).count)
-                        if Api.retrieve(Api.self).count > 0 {
-                            Logger.Info("Parsed \(endpoint.path)")
-                        }
-                    
                     }else {
                         Logger.Error("Error parsing \(endpoint.path)")
                     }

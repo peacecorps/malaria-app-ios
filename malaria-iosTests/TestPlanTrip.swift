@@ -6,7 +6,7 @@ class TestPlanTrip: XCTestCase {
     
     let location = "Heaven"
     let currentPill = Medicine.Pill.Malarone
-    let cashToBring = 10
+    let cashToBring: Int64 = 10
     let d1 = NSDate.from(2015, month: 5, day: 8) //monday
     var trip: Trip!
     

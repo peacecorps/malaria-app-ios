@@ -12,7 +12,7 @@ import CoreData
 class Item: NSManagedObject {
 
     @NSManaged var name: String
-    @NSManaged var number: Int
+    @NSManaged var number: Int64
     @NSManaged var associated_with: Trip
 
 }

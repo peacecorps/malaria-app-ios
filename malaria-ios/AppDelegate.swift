@@ -7,9 +7,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        RKlcl_configure_by_name("RestKit/Network", RKlcl_vTrace.value);
-        RKlcl_configure_by_name("RestKit/ObjectMapping", RKlcl_vTrace.value);
-
         
         //registering for notifications
         

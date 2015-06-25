@@ -4,7 +4,7 @@ class Endpoint{
     
     var entityName: String { get { fatalError("getEntityName not implemented")} }
     var path: String { get { fatalError("getEndpoint not implemented")} }
-    var mapping: RKEntityMapping { get { fatalError("getMapping not implemented")} }
+    //var mapping: RKEntityMapping { get { fatalError("getMapping not implemented")} }
     
     func clearFromDatabase() {
         let context = CoreDataHelper.sharedInstance.backgroundContext!

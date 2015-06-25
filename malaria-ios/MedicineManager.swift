@@ -24,7 +24,7 @@ class MedicineManager{
     }
     
     func clearCoreData(){
-        getRegisteredMedicines().map({$0.deleteFromContext()})
+        Medicine.clear(Medicine.self)
         CoreDataHelper.sharedInstance.saveContext()
     }
     
@@ -69,11 +69,7 @@ class MedicineManager{
     }
     
     func getRegisteredMedicines() -> [Medicine]{
-        let fetchRequest = NSFetchRequest(entityName: "Medicine")
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        let result: [Medicine] = context.executeFetchRequest(fetchRequest, error: nil) as! [Medicine]
-        
-        return result
+        return Medicine.retrieve(Medicine.self)
     }
     
     func setCurrentPill(med: Medicine.Pill){

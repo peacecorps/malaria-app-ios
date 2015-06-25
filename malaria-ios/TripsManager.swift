@@ -4,11 +4,7 @@ class TripsManager{
     static let sharedInstance = TripsManager()
 
     func getTrip() -> Trip?{
-        let fetchRequest = NSFetchRequest(entityName: "Trip")
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        let result: [Trip] = context.executeFetchRequest(fetchRequest, error: nil) as! [Trip]
-        
-        
+        let result = Trip.retrieve(Trip.self)
         if result.count == 0{
             return nil
         }else if result.count > 1 {
@@ -19,11 +15,7 @@ class TripsManager{
     }
     
     func clearCoreData(){
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        if let t = getTrip(){
-            t.deleteFromContext()
-        }
-        
+        Trip.clear(Trip.self)
         CoreDataHelper.sharedInstance.saveContext()
     }
     

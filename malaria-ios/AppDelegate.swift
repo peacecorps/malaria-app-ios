@@ -10,13 +10,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //registering for notifications
         
-        if !inTestEnvironment(){
+        if !inTestEnvironment{
             let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
         //debug purposes
-        if !inTestEnvironment(){
+        if !inTestEnvironment{
             Logger.Info("Syncing everthing")
             SyncManager.sharedInstance.syncAll()
             Logger.Info("END")

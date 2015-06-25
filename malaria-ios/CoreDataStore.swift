@@ -15,8 +15,7 @@ class CoreDataStore: NSObject{
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // Get module name
-        var moduleName: String = "malaria_ios"
-        if inTestEnvironment() { moduleName = "malaria_iosTests" }
+        var moduleName: String = inTestEnvironment ? "malaria_iosTests" : "malaria_ios"
         
         // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!

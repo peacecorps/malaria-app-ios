@@ -3,56 +3,59 @@ import SwiftyJSON
 
 class SyncManager {
     static let sharedInstance = SyncManager()
-    var endpoints: [Endpoint] = []
+    
+    let user = "TestUser"
+    let password = "password"
     
     init(){
-        Logger.Info("Registering")
-        endpoints.append(ApiEndpoint())
-        endpoints.map({ self.registerMapping($0) })
-    }
-    
-    func syncAll(){
-        endpoints.map({self.remoteFetch($0)})
-    }
-    
-    private func remoteFetch(endpoint: Endpoint){
-        
-        //TODO: Check internet connection before doing request
-        let cds = CoreDataStore.sharedInstance
-        let cdh = CoreDataHelper.sharedInstance
-        
-        let user = "TestUser"
-        let password = "password"
-        
         // set up the base64-encoded credentials
         let loginString = NSString(format: "%@:%@", user, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
+    }
+    
+    var endpoints: [Endpoint] = [
+        ApiEndpoint()
+    ]
+    
+    func sync(endpoint: Endpoint, save: Bool = false){
+        endpoint.clearFromDatabase()
+        remoteFetch(endpoint)
         
-        Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters())
+        if (save){
+            CoreDataHelper.sharedInstance.saveContext()
+        }
+    }
+    
+    func syncAll(){
+        endpoints.map({ self.sync($0) })
+        CoreDataHelper.sharedInstance.saveContext()
+    }
+    
+    private func remoteFetch(endpoint: Endpoint, save: Bool = false){
+        //TODO: Check internet connection before doing request
+        
+        Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters)
             .responseJSON { (req, res, json, error) in
-                println(json)
-                println(error)
-                
                 if(error != nil) {
-                    NSLog("Error: \(error)")
-                    println(req)
-                    println(res)
+                    Logger.Error("Error at \(endpoint.path)): \(error)")
                 }
                 else {
-                    NSLog("Success: \(endpoint.path)")
-                    var error: NSError?
-                    endpoint.retrieveJSONObject(JSON(json!))
+                    Logger.Info("Connect at \(endpoint.path)")
                     
-                    CoreDataHelper.sharedInstance.saveContext()
+                    if let obj = endpoint.retrieveJSONObject(JSON(json!)){
+                        if (save){
+                            CoreDataHelper.sharedInstance.saveContext()
+                        }
+                        
+                        Logger.Info(Api.retrieve(Api.self).count)
+                        if Api.retrieve(Api.self).count > 0 {
+                            Logger.Info("Parsed \(endpoint.path)")
+                        }
                     
-                    if Api.retrieve(Api.self).count > 0 {
-                        Logger.Info("SUCESSS")
-                    }
-                    
-                    if let e = error{
-                        Logger.Error("Bad parse")
+                    }else {
+                        Logger.Error("Error parsing \(endpoint.path)")
                     }
                 }
         }

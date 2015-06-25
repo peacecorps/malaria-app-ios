@@ -4,7 +4,6 @@ import CoreData
 class CoreDataStore: NSObject{
     static let sharedInstance = CoreDataStore()
     
-    
     let storeName = "Model"
     let storeFilename = "malaria-ios.sqlite"
     
@@ -54,7 +53,6 @@ class CoreDataStore: NSObject{
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
     
         var error: NSError?
-        
         if coordinator!.addPersistentStoreWithType(
             NSSQLiteStoreType,
             configuration: nil,
@@ -75,30 +73,7 @@ class CoreDataStore: NSObject{
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
         }
-        
-        
-        /*coordinator.addSQLitePersistentStoreAtPath(storePath as String, fromSeedDatabaseAtPath: nil, withConfiguration: nil,
-            options: [
-                NSInferMappingModelAutomaticallyOption: true,
-                NSMigratePersistentStoresAutomaticallyOption: true
-            ], error: &e)
-            
-        if(e != nil){
-                var error: NSError? = nil
-                coordinator = nil
-                // Report any error we got.
-                let dict = NSMutableDictionary()
-                dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-                dict[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
-                dict[NSUnderlyingErrorKey] = error
-                error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
-                Logger.Error("Serious error \(error), \(error!.userInfo)")
-                abort()
-        }
-        
-        coordinator.createManagedObjectContexts()
-        coordinator.managedObjectCache = RKInMemoryManagedObjectCache(managedObjectContext: coordinator.persistentStoreManagedObjectContext)
-        */
+
         return coordinator
         }()
 }

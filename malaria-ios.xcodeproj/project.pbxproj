@@ -22,7 +22,6 @@
 		201A0B651B36D68A00E5D628 /* api.json in Resources */ = {isa = PBXBuildFile; fileRef = 201A0B641B36D68A00E5D628 /* api.json */; };
 		201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F2EB11B30EB45001CDCC5 /* ApiEndpoint.swift */; };
 		201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
-		201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
 		201A0B6E1B36DB7100E5D628 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
 		201A0B6F1B36DB7100E5D628 /* NSSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D61B2234DA00D6840E /* NSSet.swift */; };
 		201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06DD1B22352100D6840E /* NSDate.swift */; };
@@ -103,7 +102,6 @@
 		20E6DC4C1B3979570003B777 /* ItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC4A1B3979570003B777 /* ItemExtension.swift */; };
 		20E796AB1B1F72A5007CE022 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */; };
 		20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E796AC1B22167F007CE022 /* DebugViewController.swift */; };
-		20EA06C81B22348D00D6840E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06C71B22348D00D6840E /* Array.swift */; };
 		20EA06CC1B2234A700D6840E /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CA1B2234A700D6840E /* CoreDataHelper.swift */; };
 		20EA06CD1B2234A700D6840E /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CB1B2234A700D6840E /* CoreDataStore.swift */; };
 		20EA06CF1B2234B900D6840E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06CE1B2234B900D6840E /* Int.swift */; };
@@ -203,7 +201,6 @@
 		20E6DC4A1B3979570003B777 /* ItemExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemExtension.swift; sourceTree = "<group>"; };
 		20E796AA1B1F72A5007CE022 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		20E796AC1B22167F007CE022 /* DebugViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
-		20EA06C71B22348D00D6840E /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		20EA06C91B22349D00D6840E /* bridging_header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bridging_header.h; sourceTree = "<group>"; };
 		20EA06CA1B2234A700D6840E /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		20EA06CB1B2234A700D6840E /* CoreDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
@@ -453,7 +450,6 @@
 		20EA06E81B224CBF00D6840E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				20EA06C71B22348D00D6840E /* Array.swift */,
 				20EA06CE1B2234B900D6840E /* Int.swift */,
 				20EA06D61B2234DA00D6840E /* NSSet.swift */,
 				20EA06DD1B22352100D6840E /* NSDate.swift */,
@@ -763,7 +759,6 @@
 				20C210001B3AD2E3007A7414 /* Post.swift in Sources */,
 				20E6DC371B38AAF30003B777 /* MedicineNotificationsManager.swift in Sources */,
 				20936AA91B3C037E003B3E05 /* Alamofire-SwiftyJson.swift in Sources */,
-				20EA06C81B22348D00D6840E /* Array.swift in Sources */,
 				20EA06DE1B22352100D6840E /* NSDate.swift in Sources */,
 				2022D53F1B1762DB00FDF2D3 /* PlanTripViewController.swift in Sources */,
 				202F2EB21B30EB45001CDCC5 /* ApiEndpoint.swift in Sources */,
@@ -826,7 +821,6 @@
 				20936AA21B3BF9EE003B3E05 /* TestSetupInsertClear.swift in Sources */,
 				20E6DC381B38AAF30003B777 /* MedicineNotificationsManager.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
-				201A0B6D1B36DB7100E5D628 /* Array.swift in Sources */,
 				201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */,
 				201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */,
 				20936AA01B3B2BF8003B3E05 /* TestNSDateExtensions.swift in Sources */,

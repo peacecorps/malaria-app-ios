@@ -19,7 +19,6 @@ class MedicineStats{
     }
     
     func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
-        
         if (medicine.registriesManager.getRegistries(date1: date1, date2: date2).count == 0){
             return 0
         }

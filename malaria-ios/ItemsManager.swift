@@ -33,12 +33,10 @@ class ItemsManager{
     
     func findItem(name: String) -> Item?{
         var currentItems = getItems()
-        
         currentItems = currentItems.filter({$0.name.lowercaseString == name.lowercaseString})
         
         return currentItems.count == 0 ? nil : currentItems[0]
     }
-    
     
     func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){

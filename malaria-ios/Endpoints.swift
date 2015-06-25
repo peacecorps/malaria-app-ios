@@ -22,11 +22,12 @@ enum Endpoints : String{
     
     func path() -> String{
         
-        if (self == Endpoints.Api){
+        if self == BaseUrl {
             return self.rawValue
+        }else if self == Api {
+            return BaseUrl.rawValue + Api.rawValue
         }
         
-        // eg. BaseUrl/api/posts
-        return "\(Endpoints.Api.rawValue)/\(self.rawValue)"
+        return BaseUrl.rawValue + Api.rawValue + "/" + self.rawValue
     }
 }

@@ -20,7 +20,6 @@ class SyncManager {
         let cds = CoreDataStore.sharedInstance
         let cdh = CoreDataHelper.sharedInstance
         
-
         let user = "TestUser"
         let password = "password"
         
@@ -57,7 +56,6 @@ class SyncManager {
                     //var json = JSON(json!)
                 }
         }
-        
     }
     
     private func registerMapping(endpoint: Endpoint) {

@@ -16,7 +16,8 @@ class SyncManager {
     }
     
     var endpoints: [Endpoint] = [
-        ApiEndpoint()
+        PostsEndpoint()
+        //ApiEndpoint()
     ]
     
     func sync(endpoint: Endpoint, save: Bool = false){
@@ -45,17 +46,11 @@ class SyncManager {
                     Logger.Info("Connect at \(endpoint.path)")
                     
                     if let obj = endpoint.retrieveJSONObject(JSON(json!)){
-                        Logger.Info(Api.retrieve(Api.self).count)
+                        Logger.Info(CollectionPosts.retrieve(CollectionPosts.self))
                     }else {
                         Logger.Error("Error parsing \(endpoint.path)")
                     }
                 }
-        }
+            }
     }
-    
-    private func registerMapping(endpoint: Endpoint) {
-    }
-    
-    
-    
 }

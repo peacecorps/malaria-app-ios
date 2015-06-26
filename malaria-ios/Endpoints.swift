@@ -7,7 +7,7 @@ enum Endpoints : String{
     case Posts = "posts"
     case Revposts = "revposts"
     case Regions = "regions"
-    case Sectors = "ectors"
+    case Sectors = "sectors"
     case Ptposts = "ptposts"
     case Projects = "projects"
     case Volunteer = "volunteer"

@@ -1,5 +1,5 @@
 //
-//  CollectionPosts.swift
+//  Sectors.swift
 //  malaria-ios
 //
 //  Created by Bruno Henriques on 26/06/15.
@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-class CollectionPosts: NSManagedObject {
+class Sectors: CollectionPosts {
 
-    @NSManaged var posts: NSMutableSet
 
 }

@@ -1,5 +1,5 @@
 //
-//  CollectionPosts.swift
+//  Objectives.swift
 //  malaria-ios
 //
 //  Created by Bruno Henriques on 26/06/15.
@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-class CollectionPosts: NSManagedObject {
+class Objectives: CollectionPosts {
 
-    @NSManaged var posts: NSMutableSet
 
 }

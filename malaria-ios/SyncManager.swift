@@ -15,23 +15,44 @@ class SyncManager {
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
     }
     
-    var endpoints: [Endpoint] = [
-        PostsEndpoint()
-        //ApiEndpoint()
+    var endpoints: [String : Endpoint] = [
+        Endpoints.Api.path() : ApiEndpoint(),
+        Endpoints.Posts.path() : PostsEndpoint(),
+        Endpoints.Regions.path() : RegionsEndpoint(),
+        Endpoints.Volunteer.path() : VolunteersEndpoint(),
+        Endpoints.Sectors.path() : SectorsEndpoint(),
+        Endpoints.Projects.path() : ProjectsEndpoint(),
+        Endpoints.Ptposts.path() : PtPostsEndpoint(),
+        Endpoints.Goals.path() : GoalsEndpoint(),
+        Endpoints.Indicators.path() : IndicatorsEndpoint(),
+        Endpoints.Activity.path() : ActivitiesEndpoint(),
+        Endpoints.Cohort.path() : CohortsEndpoint(),
+        Endpoints.Outcomes.path() : OutcomesEndpoint(),
+        Endpoints.Objectives.path() : ObjectivesEndpoint(),
+        Endpoints.Measurement.path() : MeasurementsEndpoint(),
+        Endpoints.Revposts.path() : RevPostsEndpoint()
     ]
     
-    func sync(endpoint: Endpoint, save: Bool = false){
-        endpoint.clearFromDatabase()
-        remoteFetch(endpoint)
-        
-        if (save){
-            CoreDataHelper.sharedInstance.saveContext()
+    func sync(path: String, save: Bool = false){
+        if let endpoint = endpoints[path]{
+            endpoint.clearFromDatabase()
+            remoteFetch(endpoint)
+            
+            if (save){
+                CoreDataHelper.sharedInstance.saveContext()
+            }
+        }else{
+            Logger.Error("Bad path provided to sync")
         }
     }
     
     func syncAll(){
-        endpoints.map({ self.sync($0) })
+        for (path, endpoint) in endpoints{
+            sync(path)
+        }
+        
         CoreDataHelper.sharedInstance.saveContext()
+        Logger.Info("Sync complete")
     }
     
     private func remoteFetch(endpoint: Endpoint, save: Bool = false){
@@ -40,14 +61,12 @@ class SyncManager {
         Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters)
             .responseJSON { (req, res, json, error) in
                 if(error != nil) {
-                    Logger.Error("Error at \(endpoint.path)): \(error)")
+                    Logger.Error("Error at \(endpoint.path)): \(error!)")
                 }
                 else {
-                    Logger.Info("Connect at \(endpoint.path)")
+                    Logger.Info("Connected to \(endpoint.path)")
                     
-                    if let obj = endpoint.retrieveJSONObject(JSON(json!)){
-                        Logger.Info(CollectionPosts.retrieve(CollectionPosts.self))
-                    }else {
+                    if endpoint.retrieveJSONObject(JSON(json!)) == nil{
                         Logger.Error("Error parsing \(endpoint.path)")
                     }
                 }

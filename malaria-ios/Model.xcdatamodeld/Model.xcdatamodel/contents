@@ -43,6 +43,7 @@
     </entity>
     <entity name="Objectives" representedClassName="Objectives" parentEntity="CollectionPosts" syncable="YES"/>
     <entity name="Outcomes" representedClassName="Outcomes" parentEntity="CollectionPosts" syncable="YES"/>
+    <entity name="Outputs" representedClassName="Outputs" parentEntity="CollectionPosts" syncable="YES"/>
     <entity name="Post" representedClassName="Post" syncable="YES">
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -83,28 +84,29 @@
     </entity>
     <entity name="Volunteers" representedClassName="Volunteers" parentEntity="CollectionPosts" syncable="YES"/>
     <elements>
+        <element name="Activities" positionX="-317" positionY="657" width="128" height="43"/>
         <element name="Api" positionX="-495" positionY="207" width="128" height="283"/>
+        <element name="Cohorts" positionX="-317" positionY="596" width="128" height="43"/>
         <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="58"/>
-        <element name="Item" positionX="-207" positionY="11" width="128" height="88"/>
-        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Post" positionX="-101" positionY="201" width="128" height="150"/>
-        <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
-        <element name="Trip" positionX="-396" positionY="-18" width="128" height="118"/>
-        <element name="Posts" positionX="-315" positionY="434" width="128" height="43"/>
         <element name="CollectionRevPosts" positionX="63" positionY="209" width="128" height="43"/>
+        <element name="Goals" positionX="-317" positionY="774" width="128" height="43"/>
+        <element name="Indicators" positionX="-317" positionY="720" width="128" height="43"/>
+        <element name="Item" positionX="-207" positionY="11" width="128" height="88"/>
+        <element name="Measurements" positionX="-171" positionY="594" width="128" height="43"/>
+        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Objectives" positionX="-173" positionY="720" width="128" height="43"/>
+        <element name="Outcomes" positionX="-173" positionY="657" width="128" height="43"/>
+        <element name="Post" positionX="-101" positionY="201" width="128" height="150"/>
+        <element name="Posts" positionX="-315" positionY="434" width="128" height="43"/>
+        <element name="Projects" positionX="-315" positionY="540" width="128" height="43"/>
+        <element name="PtPosts" positionX="-171" positionY="486" width="128" height="43"/>
+        <element name="Regions" positionX="-171" positionY="434" width="128" height="43"/>
+        <element name="Registry" positionX="214" positionY="15" width="128" height="88"/>
         <element name="RevPost" positionX="234" positionY="209" width="128" height="178"/>
         <element name="RevPosts" positionX="61" positionY="432" width="128" height="43"/>
-        <element name="Regions" positionX="-171" positionY="434" width="128" height="43"/>
         <element name="Sectors" positionX="-315" positionY="486" width="128" height="43"/>
-        <element name="PtPosts" positionX="-171" positionY="486" width="128" height="43"/>
-        <element name="Projects" positionX="-315" positionY="540" width="128" height="43"/>
+        <element name="Trip" positionX="-396" positionY="-18" width="128" height="118"/>
         <element name="Volunteers" positionX="-171" positionY="540" width="128" height="43"/>
-        <element name="Cohorts" positionX="-317" positionY="596" width="128" height="43"/>
-        <element name="Measurements" positionX="-171" positionY="594" width="128" height="43"/>
-        <element name="Activities" positionX="-317" positionY="657" width="128" height="43"/>
-        <element name="Outcomes" positionX="-173" positionY="657" width="128" height="43"/>
-        <element name="Indicators" positionX="-317" positionY="720" width="128" height="43"/>
-        <element name="Objectives" positionX="-173" positionY="720" width="128" height="43"/>
-        <element name="Goals" positionX="-317" positionY="774" width="128" height="43"/>
+        <element name="Outputs" positionX="-173" positionY="776" width="128" height="43"/>
     </elements>
 </model>

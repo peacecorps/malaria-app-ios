@@ -30,7 +30,8 @@ class SyncManager {
         Endpoints.Outcomes.path() : OutcomesEndpoint(),
         Endpoints.Objectives.path() : ObjectivesEndpoint(),
         Endpoints.Measurement.path() : MeasurementsEndpoint(),
-        Endpoints.Revposts.path() : RevPostsEndpoint()
+        Endpoints.Revposts.path() : RevPostsEndpoint(),
+        Endpoints.Outputs.path() : OutputsEndpoint()
     ]
     
     func sync(path: String, save: Bool = false){

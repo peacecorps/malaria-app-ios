@@ -33,6 +33,7 @@ class ApiEndpoint : Endpoint{
                 api.ptposts = ptposts
                 api.projects = projects
                 api.goals = goals
+                api.outcomes = outcomes
                 api.objectives = objectives
                 api.indicators = indicators
                 api.outputs = outputs

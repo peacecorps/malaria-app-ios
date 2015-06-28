@@ -82,8 +82,6 @@
 		200C72AF1B40368600998100 /* TripsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C723C1B40368600998100 /* TripsManager.swift */; };
 		200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C723D1B40368600998100 /* UserSettingsManager.swift */; };
 		200C72B11B40368600998100 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C723D1B40368600998100 /* UserSettingsManager.swift */; };
-		200C72B21B40368600998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C723F1B40368600998100 /* Cohorts.swift */; };
-		200C72B31B40368600998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C723F1B40368600998100 /* Cohorts.swift */; };
 		200C72B41B40368600998100 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72401B40368600998100 /* Item.swift */; };
 		200C72B51B40368600998100 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72401B40368600998100 /* Item.swift */; };
 		200C72B61B40368600998100 /* ItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72411B40368600998100 /* ItemExtension.swift */; };
@@ -176,6 +174,8 @@
 		200C73101B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73431B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
 		200C73441B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
+		200C73491B403AD700998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C73481B403AD700998100 /* Cohorts.swift */; };
+		200C734A1B403AD700998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C73481B403AD700998100 /* Cohorts.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -230,7 +230,6 @@
 		200C723B1B40368600998100 /* TripNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripNotificationsManager.swift; sourceTree = "<group>"; };
 		200C723C1B40368600998100 /* TripsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsManager.swift; sourceTree = "<group>"; };
 		200C723D1B40368600998100 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsManager.swift; sourceTree = "<group>"; };
-		200C723F1B40368600998100 /* Cohorts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cohorts.swift; sourceTree = "<group>"; };
 		200C72401B40368600998100 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		200C72411B40368600998100 /* ItemExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemExtension.swift; sourceTree = "<group>"; };
 		200C72421B40368600998100 /* Medicine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
@@ -277,6 +276,7 @@
 		200C72711B40368600998100 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
 		200C730E1B40370500998100 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ViewControllers/Info.plist; sourceTree = "<group>"; };
 		200C73421B40392A00998100 /* ApiExamples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ApiExamples; sourceTree = "<group>"; };
+		200C73481B403AD700998100 /* Cohorts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cohorts.swift; sourceTree = "<group>"; };
 		200EE4841B1343A50087FB24 /* malaria-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "malaria-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200EE4891B1343A50087FB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200EE48E1B1343A50087FB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -325,7 +325,6 @@
 		200C72181B40368600998100 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				200C72191B40368600998100 /* Abstract */,
 				200C721A1B40368600998100 /* ActivitiesEndpoint.swift */,
 				200C721B1B40368600998100 /* ApiEndpoint.swift */,
 				200C721C1B40368600998100 /* CohortsEndpoint.swift */,
@@ -347,13 +346,6 @@
 				200C722C1B40368600998100 /* VolunteersEndpoint.swift */,
 			);
 			path = Endpoints;
-			sourceTree = "<group>";
-		};
-		200C72191B40368600998100 /* Abstract */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Abstract;
 			sourceTree = "<group>";
 		};
 		200C722D1B40368600998100 /* Information */ = {
@@ -402,13 +394,12 @@
 		200C723E1B40368600998100 /* NSManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
-				200C723F1B40368600998100 /* Cohorts.swift */,
+				200C72451B40368600998100 /* RestAPI */,
 				200C72401B40368600998100 /* Item.swift */,
 				200C72411B40368600998100 /* ItemExtension.swift */,
 				200C72421B40368600998100 /* Medicine.swift */,
 				200C72431B40368600998100 /* MedicineExtension.swift */,
 				200C72441B40368600998100 /* Registry.swift */,
-				200C72451B40368600998100 /* RestAPI */,
 				200C725A1B40368600998100 /* Trip.swift */,
 				200C725B1B40368600998100 /* TripExtension.swift */,
 			);
@@ -418,6 +409,7 @@
 		200C72451B40368600998100 /* RestAPI */ = {
 			isa = PBXGroup;
 			children = (
+				200C73481B403AD700998100 /* Cohorts.swift */,
 				200C72461B40368600998100 /* Activities.swift */,
 				200C72471B40368600998100 /* Api.swift */,
 				200C72481B40368600998100 /* CollectionPosts.swift */,
@@ -784,7 +776,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				200C72A21B40368600998100 /* MedicineStats.swift in Sources */,
-				200C72B21B40368600998100 /* Cohorts.swift in Sources */,
 				200C72FE1B40368600998100 /* DailyStatsViewController.swift in Sources */,
 				200C72DA1B40368600998100 /* Regions.swift in Sources */,
 				200C73041B40368600998100 /* InfoViewController.swift in Sources */,
@@ -842,6 +833,7 @@
 				200C72F41B40368600998100 /* NSSet.swift in Sources */,
 				200C728C1B40368600998100 /* ProjectsEndpoint.swift in Sources */,
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,
+				200C73491B403AD700998100 /* Cohorts.swift in Sources */,
 				200C72901B40368600998100 /* RegionsEndpoint.swift in Sources */,
 				200C72941B40368600998100 /* SectorsEndpoint.swift in Sources */,
 				200C72B41B40368600998100 /* Item.swift in Sources */,
@@ -895,6 +887,7 @@
 				200C72D11B40368600998100 /* Outputs.swift in Sources */,
 				200C729B1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
 				200C72931B40368600998100 /* RevPostsEndpoint.swift in Sources */,
+				200C734A1B403AD700998100 /* Cohorts.swift in Sources */,
 				200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C71F51B40146500998100 /* TestUserSettings.swift in Sources */,
 				200C728F1B40368600998100 /* PtPostsEndpoint.swift in Sources */,
@@ -915,7 +908,6 @@
 				200C727B1B40368600998100 /* CollectionRevPostsEndpoint.swift in Sources */,
 				200C72871B40368600998100 /* OutcomesEndpoint.swift in Sources */,
 				200C727F1B40368600998100 /* GoalsEndpoint.swift in Sources */,
-				200C72B31B40368600998100 /* Cohorts.swift in Sources */,
 				200C71FB1B40146500998100 /* TestNotifications.swift in Sources */,
 				200C72951B40368600998100 /* SectorsEndpoint.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,

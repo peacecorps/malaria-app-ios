@@ -151,5 +151,10 @@ class TestMedicineRegistries: XCTestCase {
         XCTAssertEqual(true, r.tookMedicine)
         XCTAssertEqual(true, NSDate.areDatesSameDay(r.date, dateTwo: d1 - 4.day))
     }
-
+    
+    func testCascadeDelete(){
+        XCTAssertEqual(Registry.retrieve(Registry.self).count, 10)
+        Medicine.clear(Medicine.self)
+        XCTAssertEqual(Registry.retrieve(Registry.self).count, 0)
+    }
 }

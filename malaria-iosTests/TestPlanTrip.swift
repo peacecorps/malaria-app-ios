@@ -134,4 +134,13 @@ class TestPlanTrip: XCTestCase {
             XCTFail("item was not removed despite")
         }
     }
+    
+    func testCascadeDelete(){
+        trip.itemsManager.addItem("lantern", quantity: 6)
+        trip.itemsManager.addItem("medalion", quantity: 2)
+        
+        XCTAssertEqual(Item.retrieve(Item.self).count, 2)
+        Trip.clear(Trip.self)
+        XCTAssertEqual(Item.retrieve(Item.self).count, 0)
+    }
 }

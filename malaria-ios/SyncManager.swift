@@ -34,6 +34,12 @@ class SyncManager {
         EndpointType.Outputs.path() : OutputsEndpoint()
     ]
     
+    /// Syncs a specific endpoint
+    ///
+    /// :param: `String`: full path
+    /// :param: `Bool`: Save context after success
+    /// :param: `((url: String, error: NSError?)->())?`: failure Handler (default nil)
+    /// :param: `((url: String, object: NSManagedObject)->())?`: success Handler (default nil)
     func sync(path: String, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
         
         func expandedSuccessHandler(url: String, object: NSManagedObject){
@@ -57,6 +63,11 @@ class SyncManager {
         }
     }
     
+    /// Syncs every endpoint
+    ///
+    /// Runs the specified completition handler after syncing every endpoint.
+    ///
+    /// :param: `(()->())?`: completition handler (default nil)
     func syncAll(completitionHandler: (()->())? = nil){
         var count = endpoints.count
         func successHandler(url: String, object: NSManagedObject){

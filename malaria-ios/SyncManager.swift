@@ -57,13 +57,21 @@ class SyncManager {
         }
     }
     
-    func syncAll(){
-        for (path, endpoint) in endpoints{
-            sync(path)
+    func syncAll(completitionHandler: (()->())? = nil){
+        var count = endpoints.count
+        func successHandler(url: String, object: NSManagedObject){
+            CoreDataHelper.sharedInstance.saveContext()
+            
+            count--
+            if(count == 0){
+                Logger.Info("Sync complete")
+                completitionHandler?()
+            }
         }
         
-        CoreDataHelper.sharedInstance.saveContext()
-        Logger.Info("Sync complete")
+        for (path, endpoint) in endpoints{
+            sync(path, successHandler: successHandler)
+        }
     }
     
     private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
@@ -77,14 +85,10 @@ class SyncManager {
                     Logger.Info("Connected to \(endpoint.path)")
                     endpoint.clearFromDatabase()
                     if let objectMapped = endpoint.retrieveJSONObject(JSON(json!)){
-                        if let success = successHandler{
-                            success(url: endpoint.path, object: objectMapped)
-                        }
+                        successHandler?(url: endpoint.path, object: objectMapped)
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")
-                        if let failure = failureHandler{
-                            failure(url: endpoint.path, error: error!)
-                        }
+                        failureHandler?(url: endpoint.path, error: error!)
                     }
                 }
             }

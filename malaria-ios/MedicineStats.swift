@@ -39,7 +39,7 @@ class MedicineStats{
         }
         
         //+1 to include d1
-        let numDays = (d2 - d1).day + 1
+        let numDays = (d2 - d1) + 1
         
         return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
     }

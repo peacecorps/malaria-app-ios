@@ -90,11 +90,11 @@ class TestNSDateExtensions: XCTestCase {
         
         //d2 is more recent
         let d2 = d1 + 3.day
-        XCTAssertEqual((d2 - d1).day, 3)
-        XCTAssertEqual((d1 - d2).day, -3)
+        XCTAssertEqual((d2 - d1), 3)
+        XCTAssertEqual((d1 - d2), -3)
         
         let d3 = d1 + 1.week
-        XCTAssertEqual((d3 - d1).day, 7)
+        XCTAssertEqual((d3 - d1), 7)
     }
     
 

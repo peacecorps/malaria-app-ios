@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1C8EC00569FE604833382644 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		200C71E11B3FF24300998100 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
+		200C71E21B3FF24400998100 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -136,7 +138,6 @@
 		20503CCE1B3DBDEF00ED490A /* OutcomesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CCC1B3DBDEF00ED490A /* OutcomesEndpoint.swift */; };
 		20503CD01B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CCF1B3DBDF900ED490A /* ObjectivesEndpoint.swift */; };
 		20503CD11B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CCF1B3DBDF900ED490A /* ObjectivesEndpoint.swift */; };
-		20503CD41B3F4A6300ED490A /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
 		20936AA91B3C037E003B3E05 /* Alamofire-SwiftyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20936AA81B3C037E003B3E05 /* Alamofire-SwiftyJson.swift */; };
 		20E6DC261B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
 		20E6DC271B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
@@ -182,7 +183,6 @@
 		20F9945A1B3F639300925FA1 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F994591B3F639300925FA1 /* OutputsEndpoint.swift */; };
 		20F9945B1B3F639300925FA1 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F994591B3F639300925FA1 /* OutputsEndpoint.swift */; };
 		20F994691B3F7AC700925FA1 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
-		20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
 		20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
 		20FDC5451B2DA51700313C72 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
 		20FDC5481B2DA76000313C72 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5471B2DA76000313C72 /* UserSetting.swift */; };
@@ -937,6 +937,7 @@
 				20EA06D91B2234DA00D6840E /* MedicineManager.swift in Sources */,
 				20503CA61B3DBD0F00ED490A /* PtPosts.swift in Sources */,
 				201A0BA81B37565B00E5D628 /* PostsEndpoint.swift in Sources */,
+				200C71E21B3FF24400998100 /* SyncManager.swift in Sources */,
 				20503CD01B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */,
 				20503C941B3DBD0E00ED490A /* Outcomes.swift in Sources */,
 				20E796AD1B22167F007CE022 /* DebugViewController.swift in Sources */,
@@ -946,7 +947,6 @@
 				20FDC54B1B2DAC9A00313C72 /* NSManagedObject.swift in Sources */,
 				20503C7B1B3DAC5A00ED490A /* RevPost.swift in Sources */,
 				201A0B5F1B363D3D00E5D628 /* MedicineStats.swift in Sources */,
-				20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */,
 				20503CC71B3DBDD800ED490A /* ActivitiesEndpoint.swift in Sources */,
 				2022D52B1B13C92100FDF2D3 /* SetupScreenViewController.swift in Sources */,
 				20503CBB1B3DBDB500ED490A /* PtPostsEndpoint.swift in Sources */,
@@ -1005,6 +1005,7 @@
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
 				20503CA11B3DBD0F00ED490A /* Measurements.swift in Sources */,
 				20503CAA1B3DBD0F00ED490A /* Projects.swift in Sources */,
+				200C71E11B3FF24300998100 /* SyncManager.swift in Sources */,
 				201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */,
 				20503C7C1B3DAC5A00ED490A /* RevPost.swift in Sources */,
 				20503CB31B3DBD9100ED490A /* VolunteersEndpoint.swift in Sources */,
@@ -1032,7 +1033,6 @@
 				20503CAD1B3DBD0F00ED490A /* Sectors.swift in Sources */,
 				20E6DC2C1B388F310003B777 /* Trip.swift in Sources */,
 				20503CBF1B3DBDBC00ED490A /* GoalsEndpoint.swift in Sources */,
-				20503CD41B3F4A6300ED490A /* SyncManager.swift in Sources */,
 				20503CD11B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */,
 				20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */,
 				20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */,

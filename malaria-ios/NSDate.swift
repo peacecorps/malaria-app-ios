@@ -68,7 +68,7 @@ extension NSDate{
     }
 }
 
-public func - (toDate: NSDate, fromDate: NSDate) -> NSDateComponents {
+public func - (toDate: NSDate, fromDate: NSDate) -> Int {
     var calendar: NSCalendar = NSCalendar.currentCalendar()
     
     // Replace the hour (time) of both dates with 00:00 to take into account different timezones
@@ -78,5 +78,5 @@ public func - (toDate: NSDate, fromDate: NSDate) -> NSDateComponents {
 
     let components = calendar.components(NSCalendarUnit.CalendarUnitDay, fromDate: fromDateNormalized, toDate: toDateNormalized, options: nil)
     
-    return components
+    return components.day
 }

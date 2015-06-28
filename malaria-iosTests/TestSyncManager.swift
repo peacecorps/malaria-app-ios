@@ -37,9 +37,11 @@ class TestSyncManager: XCTestCase {
         
         sm.sync(path, save: true, failureHandler: failureHandler, successHandler: successHandler)
         
+        var done: Bool = false
+        
         waitForExpectationsWithTimeout(10, handler: { error in
             if let error = error {
-                Logger.Error("Error: \(error.localizedDescription)")
+                XCTFail("\(error.localizedDescription)")
             }
             
             if !self.failureCalled && !self.successCalled{
@@ -51,7 +53,53 @@ class TestSyncManager: XCTestCase {
                 XCTAssertEqual(t.retrieve(t.self).count, 1)
             }
             
+            done = true
         })
+        
+        if(!done){
+            XCTFail("Expectation not called!")
+        }
+        
+    }
+    
+    func testSyncAll(){
+        expectation = expectationWithDescription("syncall")
+        
+        func completition(){
+            expectation!.fulfill()
+        }
+        
+        sm.syncAll(completitionHandler: completition)
+        
+        var done: Bool = false
+        
+        waitForExpectationsWithTimeout(15, handler: { error in
+            if let error = error {
+                XCTFail("\(error.localizedDescription)")
+            }
+            
+            XCTAssertEqual(Api.retrieve(Api.self).count, 1)
+            XCTAssertEqual(Posts.retrieve(Posts.self).count, 1)
+            XCTAssertEqual(RevPosts.retrieve(RevPosts.self).count, 1)
+            XCTAssertEqual(Regions.retrieve(Regions.self).count, 1)
+            XCTAssertEqual(Sectors.retrieve(Sectors.self).count, 1)
+            XCTAssertEqual(PtPosts.retrieve(PtPosts.self).count, 1)
+            XCTAssertEqual(Projects.retrieve(Projects.self).count, 1)
+            XCTAssertEqual(Cohorts.retrieve(Cohorts.self).count, 1)
+            XCTAssertEqual(Measurements.retrieve(Measurements.self).count, 1)
+            XCTAssertEqual(Activities.retrieve(Activities.self).count, 1)
+            XCTAssertEqual(Outcomes.retrieve(Outcomes.self).count, 1)
+            XCTAssertEqual(Outputs.retrieve(Outputs.self).count, 1)
+            XCTAssertEqual(Indicators.retrieve(Indicators.self).count, 1)
+            XCTAssertEqual(Objectives.retrieve(Objectives.self).count, 1)
+            XCTAssertEqual(Goals.retrieve(Goals.self).count, 1)
+            
+            done = true
+        })
+
+        if(!done){
+            XCTFail("Expectation not called!")
+        }
     }
     
     func testBadUrl(){

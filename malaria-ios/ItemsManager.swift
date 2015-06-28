@@ -1,11 +1,3 @@
-//
-//  ItemsManager.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 23/06/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
 
 class ItemsManager{
@@ -16,6 +8,11 @@ class ItemsManager{
         self.trip = trip
     }
     
+    
+    /// add a new item to the trip
+    ///
+    /// :param: `String`: name of the item
+    /// :param: `Int64`: quantity
     func addItem(name: String, quantity: Int64){
         if let i = findItem(name){
             Logger.Info("Updating quantity for an existing item")
@@ -31,6 +28,10 @@ class ItemsManager{
         CoreDataHelper.sharedInstance.saveContext()
     }
     
+    /// Returns an item from the trip if exists
+    ///
+    /// :param: `String`: name of the item
+    /// :returns: `Item?`:
     func findItem(name: String) -> Item?{
         var currentItems = getItems()
         currentItems = currentItems.filter({$0.name.lowercaseString == name.lowercaseString})
@@ -38,6 +39,12 @@ class ItemsManager{
         return currentItems.count == 0 ? nil : currentItems[0]
     }
     
+    /// Removes a item from the trip
+    ///
+    /// If quantity is specified, it only removes the specified number
+    ///
+    /// :param: `String`: name of the item
+    /// :param: `Int64` optional: quantity
     func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
             
@@ -54,6 +61,10 @@ class ItemsManager{
         Logger.Error("Item not found")
     }
     
+    
+    /// Returns all items from the trip
+    ///
+    /// :returns: `[Item]`: Array of items
     func getItems() -> [Item]{
         return trip.items.convertToArray()
     }

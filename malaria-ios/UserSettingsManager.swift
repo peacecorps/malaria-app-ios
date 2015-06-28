@@ -31,4 +31,10 @@ class UserSettingsManager{
     class func syncronize(){
         NSUserDefaults.standardUserDefaults().synchronize()
     }
+    
+    class func clear(){
+        for setting in UserSetting.allValues{
+            NSUserDefaults.standardUserDefaults().removeObjectForKey(setting.rawValue)
+        }
+    }
 }

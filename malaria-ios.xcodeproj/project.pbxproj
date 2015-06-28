@@ -14,7 +14,16 @@
 		200C71EF1B400C3B00998100 /* Sectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C71ED1B400C3B00998100 /* Sectors.swift */; };
 		200C71F11B400C3C00998100 /* Sector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C71F01B400C3C00998100 /* Sector.swift */; };
 		200C71F21B400C3C00998100 /* Sector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C71F01B400C3C00998100 /* Sector.swift */; };
-		200C71F41B40102D00998100 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
+		200C71F51B40146500998100 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
+		200C71F61B40146500998100 /* TestSetupInsertClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */; };
+		200C71F71B40146500998100 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
+		200C71F81B40146500998100 /* TestMedicineRegistries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */; };
+		200C71F91B40146500998100 /* TestDailyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */; };
+		200C71FA1B40146500998100 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
+		200C71FB1B40146500998100 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
+		200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
+		200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
+		200C71FE1B40146500998100 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -989,6 +998,8 @@
 				20503CC51B3DBDCF00ED490A /* IndicatorsEndpoint.swift in Sources */,
 				20503C851B3DAF1500ED490A /* RegionsEndpoint.swift in Sources */,
 				20E6DC321B3893FC0003B777 /* TripsManager.swift in Sources */,
+				200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */,
+				200C71F61B40146500998100 /* TestSetupInsertClear.swift in Sources */,
 				201A0B701B36DB7100E5D628 /* NSDate.swift in Sources */,
 				201A0B6A1B36DB5300E5D628 /* Endpoint.swift in Sources */,
 				20E6DC461B3969EB0003B777 /* ItemsManager.swift in Sources */,
@@ -996,7 +1007,6 @@
 				201A0B791B37513C00E5D628 /* Api.swift in Sources */,
 				20E6DC4C1B3979570003B777 /* ItemExtension.swift in Sources */,
 				20503CC81B3DBDD800ED490A /* ActivitiesEndpoint.swift in Sources */,
-				200C71F41B40102D00998100 /* TestSyncManager.swift in Sources */,
 				20EA06FC1B226A3B00D6840E /* Medicine.swift in Sources */,
 				20503CB61B3DBD9D00ED490A /* SectorsEndpoint.swift in Sources */,
 				20503CCE1B3DBDEF00ED490A /* OutcomesEndpoint.swift in Sources */,
@@ -1006,16 +1016,21 @@
 				20E6DC381B38AAF30003B777 /* MedicineNotificationsManager.swift in Sources */,
 				20EA07011B226D8C00D6840E /* CoreDataHelper.swift in Sources */,
 				20503CA11B3DBD0F00ED490A /* Measurements.swift in Sources */,
+				200C71F81B40146500998100 /* TestMedicineRegistries.swift in Sources */,
+				200C71FA1B40146500998100 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				20503CAA1B3DBD0F00ED490A /* Projects.swift in Sources */,
 				200C71E11B3FF24300998100 /* SyncManager.swift in Sources */,
 				201A0B691B36DA5B00E5D628 /* ApiEndpoint.swift in Sources */,
 				20503C7C1B3DAC5A00ED490A /* RevPost.swift in Sources */,
+				200C71FE1B40146500998100 /* TestMapping.swift in Sources */,
 				20503CB31B3DBD9100ED490A /* VolunteersEndpoint.swift in Sources */,
 				201A0B711B36DB7100E5D628 /* NSManagedObject.swift in Sources */,
 				20503C751B3DAA2900ED490A /* CollectionPosts.swift in Sources */,
 				20E6DC351B38A7A30003B777 /* NotificationManager.swift in Sources */,
 				20FDC54C1B2DAFBD00313C72 /* Utilitary.swift in Sources */,
+				200C71F51B40146500998100 /* TestUserSettings.swift in Sources */,
 				20503CB91B3DBDA900ED490A /* ProjectsEndpoint.swift in Sources */,
+				200C71F71B40146500998100 /* TestNSDateExtensions.swift in Sources */,
 				20503C761B3DAA2900ED490A /* Posts.swift in Sources */,
 				20FDC5491B2DAAE200313C72 /* UserSetting.swift in Sources */,
 				20E6DC2F1B388F320003B777 /* Item.swift in Sources */,
@@ -1032,10 +1047,13 @@
 				200C71EF1B400C3B00998100 /* Sectors.swift in Sources */,
 				20F994581B3F635E00925FA1 /* Outputs.swift in Sources */,
 				20E6DC271B388DF40003B777 /* TripExtension.swift in Sources */,
+				200C71F91B40146500998100 /* TestDailyMedicineStatistics.swift in Sources */,
+				200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */,
 				20E6DC2C1B388F310003B777 /* Trip.swift in Sources */,
 				20503CBF1B3DBDBC00ED490A /* GoalsEndpoint.swift in Sources */,
 				20503CD11B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */,
 				20EA06FE1B226A3B00D6840E /* Registry.swift in Sources */,
+				200C71FB1B40146500998100 /* TestNotifications.swift in Sources */,
 				200C71F21B400C3C00998100 /* Sector.swift in Sources */,
 				20EA06F71B22695A00D6840E /* UserSettingsManager.swift in Sources */,
 				20503C9E1B3DBD0F00ED490A /* Indicators.swift in Sources */,

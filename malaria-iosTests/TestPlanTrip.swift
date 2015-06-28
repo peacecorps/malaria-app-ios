@@ -13,12 +13,7 @@ class TestPlanTrip: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        if let t = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1){
-            trip = t
-        }else{
-            XCTFail("Setup failed")
-        }
+        trip = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1)
     }
     
     override func tearDown() {
@@ -33,6 +28,29 @@ class TestPlanTrip: XCTestCase {
             XCTAssertEqual(t.medicine, currentPill.name())
             XCTAssertEqual(t.cashToBring, cashToBring)
             XCTAssertEqual(t.reminderDate, d1)
+        }else{
+            XCTFail("Trip wasn't created")
+        }
+    }
+    
+    func testCreateAnotherTrip(){
+        let location2 = "Alabama"
+        let pill2 = Medicine.Pill.Mefloquine
+        let cash: Int64 = 9000
+        let reminderDate2 = d1 + 10.day
+        
+        trip = tManager.createTrip(location2, medicine: pill2, cashToBring: cash, reminderDate: reminderDate2)
+        
+        XCTAssertEqual(trip.location, location2)
+        XCTAssertEqual(trip.medicine, pill2.name())
+        XCTAssertEqual(trip.cashToBring, cash)
+        XCTAssertEqual(trip.reminderDate, reminderDate2)
+        
+        if let t = tManager.getTrip(){
+            XCTAssertEqual(t.location, location2)
+            XCTAssertEqual(t.medicine, pill2.name())
+            XCTAssertEqual(t.cashToBring, cash)
+            XCTAssertEqual(t.reminderDate, reminderDate2)
         }else{
             XCTFail("Trip wasn't created")
         }

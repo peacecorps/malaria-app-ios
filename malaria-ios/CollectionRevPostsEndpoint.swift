@@ -2,6 +2,7 @@ import Foundation
 import SwiftyJSON
 
 class CollectionRevPostsEndpoint : Endpoint{
+    /// subCollectionClassType: Specify the subclass of CollectionRevPosts
     var subCollectionsRevPostsType: CollectionRevPosts.Type { get { fatalError("Please specify collection type") } }
     
     override func retrieveJSONObject(data: JSON) -> NSManagedObject?{
@@ -23,6 +24,13 @@ class CollectionRevPostsEndpoint : Endpoint{
         return nil
     }
     
+    /// Parses RevPosts
+    ///
+    /// If parse fails at any instance, it will be return nil
+    /// Every intermediary object created will be deleted
+    ///
+    /// :param: `[JSON]`: array of revPosts to be parsed
+    /// :returns: `[RevPost]`: array of revPosts or nil if parse failed
     func getRevPosts(data: [JSON]) -> [RevPost]?{
         var result: [RevPost] = []
         
@@ -49,6 +57,12 @@ class CollectionRevPostsEndpoint : Endpoint{
                     result.append(post)
             }else{
                 Logger.Error("Error parsing post")
+                
+                //delete
+                for r in result{
+                    r.deleteFromContext()
+                }
+                
                 return nil
             }
         }

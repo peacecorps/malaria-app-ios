@@ -24,6 +24,13 @@ class SectorsEndpoint : Endpoint{
         return nil
     }
     
+    /// Parses sectors
+    ///
+    /// If parse fails at any instance, it will be return nil
+    /// Every intermediary object created will be deleted
+    ///
+    /// :param: `[JSON]`: array of sectors to be parsed
+    /// :returns: `[Post]`: array of sectors or nil if parse failed
     func getSectors(data: [JSON]) -> [Sector]?{
         var result: [Sector] = []
         
@@ -42,6 +49,12 @@ class SectorsEndpoint : Endpoint{
                     result.append(sector)
             }else{
                 Logger.Error("Error parsing post")
+                
+                //delete
+                for r in result{
+                    r.deleteFromContext()
+                }
+                
                 return nil
             }
         }

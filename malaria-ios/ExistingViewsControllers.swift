@@ -11,7 +11,7 @@ enum ExistingViewsControllers : String{
     case InfoViewController = "InfoViewController"
     case DebugViewController = "DebugViewController"
     
-    
+    /// instanciate the view controller from the storyboard "Main"
     func instanciateViewController() -> UIViewController{
         var id = rawValue
         return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id) as! UIViewController

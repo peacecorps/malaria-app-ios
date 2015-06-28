@@ -4,8 +4,12 @@ import UIKit
 class NotificationManager{
 
     var category: String { get{ fatalError("No category provided")} }
-
-    func scheduleNotification(notification: UILocalNotification){
+    var alertBody: String { get{ fatalError("No alertBody provided")} }
+    var alertAction: String { get{ fatalError("No alertAction provided")} }
+    
+    func scheduleNotification(fireTime: NSDate){
+        unsheduleNotification()
+        let notification: UILocalNotification = createNotification(fireTime)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
@@ -22,7 +26,7 @@ class NotificationManager{
     }
     
     //returns the number of supposed pills should have been taken
-    func createNotification(fireDate: NSDate, alertBody: String, alertAction: String) -> UILocalNotification{
+    func createNotification(fireDate: NSDate) -> UILocalNotification{
         var localNotification = UILocalNotification()
         localNotification.fireDate = fireDate
         localNotification.soundName = UILocalNotificationDefaultSoundName;

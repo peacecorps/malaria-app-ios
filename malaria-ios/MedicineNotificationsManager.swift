@@ -2,25 +2,29 @@ import Foundation
 import UIKit
 
 class MedicineNotificationsManager : NotificationManager{
-    override var category: String { get{ return "PillReminder"} }
-
+    override var category: String { get{ return "PillReminder" } }
+    override var alertBody: String { get{ return "Medicine" } }
+    override var alertAction: String { get{ return "Yeah. I know"} }
+    
     var medicine: Medicine!
     
     init(medicine: Medicine){
         self.medicine = medicine
     }
     
-    func scheduleNotification(fireTime: NSDate){
-        unsheduleNotification()
+    override func scheduleNotification(fireTime: NSDate){
+        super.scheduleNotification(fireTime)
         
-        let notification: UILocalNotification = createNotification(fireTime, alertBody: "hello", alertAction: "double")
-        super.scheduleNotification(notification)
-        
-        medicine.notificationTime = fireTime
+        if(medicine.notificationTime != fireTime){
+            medicine.notificationTime = fireTime
+            CoreDataHelper.sharedInstance.saveContext()
+        }
     }
     
     override func unsheduleNotification(){
         super.unsheduleNotification()
+        
+        medicine.notificationTime = nil
         CoreDataHelper.sharedInstance.saveContext()
     }
 

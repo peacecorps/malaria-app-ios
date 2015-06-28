@@ -14,7 +14,6 @@ class TestNotifications: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        
         m.setup(currentPill, fireDate: d1) //current pill is daily
         m.registerNewMedicine(weeklyPill)
         
@@ -63,7 +62,7 @@ class TestNotifications: XCTestCase {
     }
     
     func testNotificationDampening(){
-        
+        //todo when there is more information
     }
 
 }

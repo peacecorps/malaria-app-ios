@@ -27,7 +27,7 @@ class TestSyncManager: XCTestCase {
         expectation!.fulfill()
     }
     
-    func failureHandler(url: String, error: NSError){
+    func failureHandler(url: String, error: NSError?){
         failureCalled = true
         expectation!.fulfill()
     }
@@ -39,7 +39,7 @@ class TestSyncManager: XCTestCase {
         
         var done: Bool = false
         
-        waitForExpectationsWithTimeout(10, handler: { error in
+        waitForExpectationsWithTimeout(15, handler: { error in
             if let error = error {
                 XCTFail("\(error.localizedDescription)")
             }
@@ -59,7 +59,6 @@ class TestSyncManager: XCTestCase {
         if(!done){
             XCTFail("Expectation not called!")
         }
-        
     }
     
     func testSyncAll(){
@@ -73,7 +72,7 @@ class TestSyncManager: XCTestCase {
         
         var done: Bool = false
         
-        waitForExpectationsWithTimeout(15, handler: { error in
+        waitForExpectationsWithTimeout(60, handler: { error in
             if let error = error {
                 XCTFail("\(error.localizedDescription)")
             }
@@ -107,66 +106,66 @@ class TestSyncManager: XCTestCase {
     }
     
     func testApi(){
-        genericTest(Endpoints.Api.path(), type: Api.self)
+        genericTest(EndpointType.Api.path(), type: Api.self)
     }
     
     func testPosts(){
-        genericTest(Endpoints.Posts.path(), type: Posts.self)
+        genericTest(EndpointType.Posts.path(), type: Posts.self)
     }
     
     func testRevPosts(){
-        genericTest(Endpoints.Revposts.path(), type: RevPosts.self)
+        genericTest(EndpointType.Revposts.path(), type: RevPosts.self)
     }
     
     func testRegions(){
-        genericTest(Endpoints.Regions.path(), type: Regions.self)
+        genericTest(EndpointType.Regions.path(), type: Regions.self)
     }
     
     func testSectors(){
-        genericTest(Endpoints.Sectors.path(), type: Sectors.self)
+        genericTest(EndpointType.Sectors.path(), type: Sectors.self)
     }
     
     func testPtPosts(){
-        genericTest(Endpoints.Ptposts.path(), type: PtPosts.self)
+        genericTest(EndpointType.Ptposts.path(), type: PtPosts.self)
     }
     
     func testProjects(){
-        genericTest(Endpoints.Projects.path(), type: Projects.self)
+        genericTest(EndpointType.Projects.path(), type: Projects.self)
     }
     
     func testVolunteer(){
-        genericTest(Endpoints.Volunteer.path(), type: Volunteers.self)
+        genericTest(EndpointType.Volunteer.path(), type: Volunteers.self)
     }
     
     func testCohort(){
-        genericTest(Endpoints.Cohort.path(), type: Cohorts.self)
+        genericTest(EndpointType.Cohort.path(), type: Cohorts.self)
     }
     
     func testMeasurement(){
-        genericTest(Endpoints.Measurement.path(), type: Measurements.self)
+        genericTest(EndpointType.Measurement.path(), type: Measurements.self)
     }
     
     func testActivity(){
-        genericTest(Endpoints.Activity.path(), type: Activities.self)
+        genericTest(EndpointType.Activity.path(), type: Activities.self)
     }
     
     func testOutcomes(){
-        genericTest(Endpoints.Outcomes.path(), type: Outcomes.self)
+        genericTest(EndpointType.Outcomes.path(), type: Outcomes.self)
     }
     
     func testOutputs(){
-        genericTest(Endpoints.Outputs.path(), type: Outputs.self)
+        genericTest(EndpointType.Outputs.path(), type: Outputs.self)
     }
     
     func testIndicators(){
-        genericTest(Endpoints.Indicators.path(), type: Indicators.self)
+        genericTest(EndpointType.Indicators.path(), type: Indicators.self)
     }
     
     func testObjectives(){
-        genericTest(Endpoints.Objectives.path(), type: Objectives.self)
+        genericTest(EndpointType.Objectives.path(), type: Objectives.self)
     }
     
     func testGoals(){
-        genericTest(Endpoints.Goals.path(), type: Goals.self)
+        genericTest(EndpointType.Goals.path(), type: Goals.self)
     }
 }

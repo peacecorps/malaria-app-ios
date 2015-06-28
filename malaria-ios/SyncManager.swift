@@ -16,25 +16,25 @@ class SyncManager {
     }
     
     var endpoints: [String : Endpoint] = [
-        Endpoints.Api.path() : ApiEndpoint(),
-        Endpoints.Posts.path() : PostsEndpoint(),
-        Endpoints.Regions.path() : RegionsEndpoint(),
-        Endpoints.Volunteer.path() : VolunteersEndpoint(),
-        Endpoints.Sectors.path() : SectorsEndpoint(),
-        Endpoints.Projects.path() : ProjectsEndpoint(),
-        Endpoints.Ptposts.path() : PtPostsEndpoint(),
-        Endpoints.Goals.path() : GoalsEndpoint(),
-        Endpoints.Indicators.path() : IndicatorsEndpoint(),
-        Endpoints.Activity.path() : ActivitiesEndpoint(),
-        Endpoints.Cohort.path() : CohortsEndpoint(),
-        Endpoints.Outcomes.path() : OutcomesEndpoint(),
-        Endpoints.Objectives.path() : ObjectivesEndpoint(),
-        Endpoints.Measurement.path() : MeasurementsEndpoint(),
-        Endpoints.Revposts.path() : RevPostsEndpoint(),
-        Endpoints.Outputs.path() : OutputsEndpoint()
+        EndpointType.Api.path() : ApiEndpoint(),
+        EndpointType.Posts.path() : PostsEndpoint(),
+        EndpointType.Regions.path() : RegionsEndpoint(),
+        EndpointType.Volunteer.path() : VolunteersEndpoint(),
+        EndpointType.Sectors.path() : SectorsEndpoint(),
+        EndpointType.Projects.path() : ProjectsEndpoint(),
+        EndpointType.Ptposts.path() : PtPostsEndpoint(),
+        EndpointType.Goals.path() : GoalsEndpoint(),
+        EndpointType.Indicators.path() : IndicatorsEndpoint(),
+        EndpointType.Activity.path() : ActivitiesEndpoint(),
+        EndpointType.Cohort.path() : CohortsEndpoint(),
+        EndpointType.Outcomes.path() : OutcomesEndpoint(),
+        EndpointType.Objectives.path() : ObjectivesEndpoint(),
+        EndpointType.Measurement.path() : MeasurementsEndpoint(),
+        EndpointType.Revposts.path() : RevPostsEndpoint(),
+        EndpointType.Outputs.path() : OutputsEndpoint()
     ]
     
-    func sync(path: String, save: Bool = false, failureHandler: ((url: String, error: NSError)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
+    func sync(path: String, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
         
         func expandedSuccessHandler(url: String, object: NSManagedObject){
             if let success = successHandler{
@@ -52,7 +52,7 @@ class SyncManager {
         }else{
             Logger.Error("Bad path provided to sync")
             if let failure = failureHandler{
-                failure(url: path, error: NSError())
+                failure(url: path, error: nil)
             }
         }
     }
@@ -74,12 +74,13 @@ class SyncManager {
         }
     }
     
-    private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
+    private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
         
         Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters)
             .responseJSON { (req, res, json, error) in
                 if(error != nil) {
                     Logger.Error("Error at \(endpoint.path)): \(error!)")
+                    failureHandler?(url: endpoint.path, error: nil)
                 }
                 else {
                     Logger.Info("Connected to \(endpoint.path)")
@@ -88,7 +89,7 @@ class SyncManager {
                         successHandler?(url: endpoint.path, object: objectMapped)
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")
-                        failureHandler?(url: endpoint.path, error: error!)
+                        failureHandler?(url: endpoint.path, error: nil)
                     }
                 }
             }

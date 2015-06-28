@@ -1,8 +1,6 @@
 import XCTest
 
 class TestTimedInsertions: XCTestCase {
-    
-    
     let m: MedicineManager = MedicineManager.sharedInstance
     
     let d1 = NSDate.from(2015, month: 6, day: 6) + NSCalendar.currentCalendar().firstWeekday.day //start of the week

@@ -7,32 +7,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
         //registering for notifications
-        
         if !inTestEnvironment{
             let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
-        //debug purposes
-        if !inTestEnvironment{
-            Logger.Info("Syncing everthing")
-            SyncManager.sharedInstance.syncAll()
-            Logger.Info("END")
-        }
         
         //setting up initial screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        if UserSettingsManager.getBool(.DidConfiguredMedicine){
-            //window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
-        }else{
-            //window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
+        if !inTestEnvironment{
+            if UserSettingsManager.getBool(.DidConfiguredMedicine){
+                window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
+            }else{
+                window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
+            }
         }
         
-        //window!.makeKeyAndVisible()
+        window!.makeKeyAndVisible()
         
         return true
     }

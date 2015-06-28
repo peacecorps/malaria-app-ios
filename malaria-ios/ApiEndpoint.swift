@@ -3,7 +3,7 @@ import UIKit
 import SwiftyJSON
 
 class ApiEndpoint : Endpoint{
-    override var path: String { get { return Endpoints.Api.path() } }
+    override var path: String { get { return EndpointType.Api.path() } }
     
     override func retrieveJSONObject(data: JSON) -> NSManagedObject?{
         if  let users = data["users"].string,

@@ -1,23 +1,13 @@
 {
-    "count": 2,
+    "count": 1,
     "next": null,
     "previous": null,
     "results": [
                 {
-                "owner": 1,
-                "title_post": "title1",
-                "description_post": "post1",
-                "created": "2015-06-07T23:55:16.956057Z",
-                "updated": "2015-06-07T23:55:16.956098Z",
+                "sector_name": "Community Economic Development",
+                "sector_desc": "Working towards that",
+                "sector_code": "CED",
                 "id": 1
-                },
-                {
-                "owner": 2,
-                "title_post": "title2",
-                "description_post": "post2",
-                "created": "2015-06-07T23:55:40.684510Z",
-                "updated": "2015-06-07T23:55:40.684589Z",
-                "id": 2
                 }
                 ]
 }

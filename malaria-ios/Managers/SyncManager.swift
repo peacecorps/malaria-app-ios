@@ -16,22 +16,7 @@ class SyncManager {
     }
     
     var endpoints: [String : Endpoint] = [
-        EndpointType.Api.path() : ApiEndpoint(),
         EndpointType.Posts.path() : PostsEndpoint(),
-        EndpointType.Regions.path() : RegionsEndpoint(),
-        EndpointType.Volunteer.path() : VolunteersEndpoint(),
-        EndpointType.Sectors.path() : SectorsEndpoint(),
-        EndpointType.Projects.path() : ProjectsEndpoint(),
-        EndpointType.Ptposts.path() : PtPostsEndpoint(),
-        EndpointType.Goals.path() : GoalsEndpoint(),
-        EndpointType.Indicators.path() : IndicatorsEndpoint(),
-        EndpointType.Activity.path() : ActivitiesEndpoint(),
-        EndpointType.Cohort.path() : CohortsEndpoint(),
-        EndpointType.Outcomes.path() : OutcomesEndpoint(),
-        EndpointType.Objectives.path() : ObjectivesEndpoint(),
-        EndpointType.Measurement.path() : MeasurementsEndpoint(),
-        EndpointType.Revposts.path() : RevPostsEndpoint(),
-        EndpointType.Outputs.path() : OutputsEndpoint()
     ]
     
     /// Syncs a specific endpoint

@@ -18,44 +18,12 @@
 		200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		200C71FE1B40146500998100 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
-		200C72721B40368600998100 /* ActivitiesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721A1B40368600998100 /* ActivitiesEndpoint.swift */; };
-		200C72731B40368600998100 /* ActivitiesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721A1B40368600998100 /* ActivitiesEndpoint.swift */; };
-		200C72741B40368600998100 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721B1B40368600998100 /* ApiEndpoint.swift */; };
-		200C72751B40368600998100 /* ApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721B1B40368600998100 /* ApiEndpoint.swift */; };
-		200C72761B40368600998100 /* CohortsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721C1B40368600998100 /* CohortsEndpoint.swift */; };
-		200C72771B40368600998100 /* CohortsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721C1B40368600998100 /* CohortsEndpoint.swift */; };
 		200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */; };
 		200C72791B40368600998100 /* CollectionPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */; };
-		200C727A1B40368600998100 /* CollectionRevPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721E1B40368600998100 /* CollectionRevPostsEndpoint.swift */; };
-		200C727B1B40368600998100 /* CollectionRevPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721E1B40368600998100 /* CollectionRevPostsEndpoint.swift */; };
 		200C727C1B40368600998100 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721F1B40368600998100 /* Endpoint.swift */; };
 		200C727D1B40368600998100 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721F1B40368600998100 /* Endpoint.swift */; };
-		200C727E1B40368600998100 /* GoalsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72201B40368600998100 /* GoalsEndpoint.swift */; };
-		200C727F1B40368600998100 /* GoalsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72201B40368600998100 /* GoalsEndpoint.swift */; };
-		200C72801B40368600998100 /* IndicatorsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72211B40368600998100 /* IndicatorsEndpoint.swift */; };
-		200C72811B40368600998100 /* IndicatorsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72211B40368600998100 /* IndicatorsEndpoint.swift */; };
-		200C72821B40368600998100 /* MeasurementsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72221B40368600998100 /* MeasurementsEndpoint.swift */; };
-		200C72831B40368600998100 /* MeasurementsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72221B40368600998100 /* MeasurementsEndpoint.swift */; };
-		200C72841B40368600998100 /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72231B40368600998100 /* ObjectivesEndpoint.swift */; };
-		200C72851B40368600998100 /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72231B40368600998100 /* ObjectivesEndpoint.swift */; };
-		200C72861B40368600998100 /* OutcomesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72241B40368600998100 /* OutcomesEndpoint.swift */; };
-		200C72871B40368600998100 /* OutcomesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72241B40368600998100 /* OutcomesEndpoint.swift */; };
-		200C72881B40368600998100 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72251B40368600998100 /* OutputsEndpoint.swift */; };
-		200C72891B40368600998100 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72251B40368600998100 /* OutputsEndpoint.swift */; };
 		200C728A1B40368600998100 /* PostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72261B40368600998100 /* PostsEndpoint.swift */; };
 		200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72261B40368600998100 /* PostsEndpoint.swift */; };
-		200C728C1B40368600998100 /* ProjectsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72271B40368600998100 /* ProjectsEndpoint.swift */; };
-		200C728D1B40368600998100 /* ProjectsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72271B40368600998100 /* ProjectsEndpoint.swift */; };
-		200C728E1B40368600998100 /* PtPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72281B40368600998100 /* PtPostsEndpoint.swift */; };
-		200C728F1B40368600998100 /* PtPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72281B40368600998100 /* PtPostsEndpoint.swift */; };
-		200C72901B40368600998100 /* RegionsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72291B40368600998100 /* RegionsEndpoint.swift */; };
-		200C72911B40368600998100 /* RegionsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72291B40368600998100 /* RegionsEndpoint.swift */; };
-		200C72921B40368600998100 /* RevPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722A1B40368600998100 /* RevPostsEndpoint.swift */; };
-		200C72931B40368600998100 /* RevPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722A1B40368600998100 /* RevPostsEndpoint.swift */; };
-		200C72941B40368600998100 /* SectorsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722B1B40368600998100 /* SectorsEndpoint.swift */; };
-		200C72951B40368600998100 /* SectorsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722B1B40368600998100 /* SectorsEndpoint.swift */; };
-		200C72961B40368600998100 /* VolunteersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722C1B40368600998100 /* VolunteersEndpoint.swift */; };
-		200C72971B40368600998100 /* VolunteersEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722C1B40368600998100 /* VolunteersEndpoint.swift */; };
 		200C72981B40368600998100 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722E1B40368600998100 /* EndpointType.swift */; };
 		200C72991B40368600998100 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722E1B40368600998100 /* EndpointType.swift */; };
 		200C729A1B40368600998100 /* ExistingViewsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722F1B40368600998100 /* ExistingViewsControllers.swift */; };
@@ -92,46 +60,12 @@
 		200C72BB1B40368600998100 /* MedicineExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72431B40368600998100 /* MedicineExtension.swift */; };
 		200C72BC1B40368600998100 /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72441B40368600998100 /* Registry.swift */; };
 		200C72BD1B40368600998100 /* Registry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72441B40368600998100 /* Registry.swift */; };
-		200C72BE1B40368600998100 /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72461B40368600998100 /* Activities.swift */; };
-		200C72BF1B40368600998100 /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72461B40368600998100 /* Activities.swift */; };
-		200C72C01B40368600998100 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72471B40368600998100 /* Api.swift */; };
-		200C72C11B40368600998100 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72471B40368600998100 /* Api.swift */; };
 		200C72C21B40368600998100 /* CollectionPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72481B40368600998100 /* CollectionPosts.swift */; };
 		200C72C31B40368600998100 /* CollectionPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72481B40368600998100 /* CollectionPosts.swift */; };
-		200C72C41B40368600998100 /* CollectionRevPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72491B40368600998100 /* CollectionRevPosts.swift */; };
-		200C72C51B40368600998100 /* CollectionRevPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72491B40368600998100 /* CollectionRevPosts.swift */; };
-		200C72C61B40368600998100 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724A1B40368600998100 /* Goals.swift */; };
-		200C72C71B40368600998100 /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724A1B40368600998100 /* Goals.swift */; };
-		200C72C81B40368600998100 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724B1B40368600998100 /* Indicators.swift */; };
-		200C72C91B40368600998100 /* Indicators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724B1B40368600998100 /* Indicators.swift */; };
-		200C72CA1B40368600998100 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724C1B40368600998100 /* Measurements.swift */; };
-		200C72CB1B40368600998100 /* Measurements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724C1B40368600998100 /* Measurements.swift */; };
-		200C72CC1B40368600998100 /* Objectives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724D1B40368600998100 /* Objectives.swift */; };
-		200C72CD1B40368600998100 /* Objectives.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724D1B40368600998100 /* Objectives.swift */; };
-		200C72CE1B40368600998100 /* Outcomes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724E1B40368600998100 /* Outcomes.swift */; };
-		200C72CF1B40368600998100 /* Outcomes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724E1B40368600998100 /* Outcomes.swift */; };
-		200C72D01B40368600998100 /* Outputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724F1B40368600998100 /* Outputs.swift */; };
-		200C72D11B40368600998100 /* Outputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C724F1B40368600998100 /* Outputs.swift */; };
 		200C72D21B40368600998100 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72501B40368600998100 /* Post.swift */; };
 		200C72D31B40368600998100 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72501B40368600998100 /* Post.swift */; };
 		200C72D41B40368600998100 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72511B40368600998100 /* Posts.swift */; };
 		200C72D51B40368600998100 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72511B40368600998100 /* Posts.swift */; };
-		200C72D61B40368600998100 /* Projects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72521B40368600998100 /* Projects.swift */; };
-		200C72D71B40368600998100 /* Projects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72521B40368600998100 /* Projects.swift */; };
-		200C72D81B40368600998100 /* PtPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72531B40368600998100 /* PtPosts.swift */; };
-		200C72D91B40368600998100 /* PtPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72531B40368600998100 /* PtPosts.swift */; };
-		200C72DA1B40368600998100 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72541B40368600998100 /* Regions.swift */; };
-		200C72DB1B40368600998100 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72541B40368600998100 /* Regions.swift */; };
-		200C72DC1B40368600998100 /* RevPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72551B40368600998100 /* RevPost.swift */; };
-		200C72DD1B40368600998100 /* RevPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72551B40368600998100 /* RevPost.swift */; };
-		200C72DE1B40368600998100 /* RevPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72561B40368600998100 /* RevPosts.swift */; };
-		200C72DF1B40368600998100 /* RevPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72561B40368600998100 /* RevPosts.swift */; };
-		200C72E01B40368600998100 /* Sector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72571B40368600998100 /* Sector.swift */; };
-		200C72E11B40368600998100 /* Sector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72571B40368600998100 /* Sector.swift */; };
-		200C72E21B40368600998100 /* Sectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72581B40368600998100 /* Sectors.swift */; };
-		200C72E31B40368600998100 /* Sectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72581B40368600998100 /* Sectors.swift */; };
-		200C72E41B40368600998100 /* Volunteers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72591B40368600998100 /* Volunteers.swift */; };
-		200C72E51B40368600998100 /* Volunteers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72591B40368600998100 /* Volunteers.swift */; };
 		200C72E61B40368600998100 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C725A1B40368600998100 /* Trip.swift */; };
 		200C72E71B40368600998100 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C725A1B40368600998100 /* Trip.swift */; };
 		200C72E81B40368600998100 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C725B1B40368600998100 /* TripExtension.swift */; };
@@ -174,8 +108,7 @@
 		200C73101B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73431B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
 		200C73441B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
-		200C73491B403AD700998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C73481B403AD700998100 /* Cohorts.swift */; };
-		200C734A1B403AD700998100 /* Cohorts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C73481B403AD700998100 /* Cohorts.swift */; };
+		200C734B1B4042FA00998100 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -198,25 +131,9 @@
 
 /* Begin PBXFileReference section */
 		200C71FF1B40348C00998100 /* bridging_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridging_header.h; sourceTree = "<group>"; };
-		200C721A1B40368600998100 /* ActivitiesEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesEndpoint.swift; sourceTree = "<group>"; };
-		200C721B1B40368600998100 /* ApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEndpoint.swift; sourceTree = "<group>"; };
-		200C721C1B40368600998100 /* CohortsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CohortsEndpoint.swift; sourceTree = "<group>"; };
 		200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionPostsEndpoint.swift; sourceTree = "<group>"; };
-		200C721E1B40368600998100 /* CollectionRevPostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRevPostsEndpoint.swift; sourceTree = "<group>"; };
 		200C721F1B40368600998100 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		200C72201B40368600998100 /* GoalsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsEndpoint.swift; sourceTree = "<group>"; };
-		200C72211B40368600998100 /* IndicatorsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorsEndpoint.swift; sourceTree = "<group>"; };
-		200C72221B40368600998100 /* MeasurementsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementsEndpoint.swift; sourceTree = "<group>"; };
-		200C72231B40368600998100 /* ObjectivesEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectivesEndpoint.swift; sourceTree = "<group>"; };
-		200C72241B40368600998100 /* OutcomesEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutcomesEndpoint.swift; sourceTree = "<group>"; };
-		200C72251B40368600998100 /* OutputsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputsEndpoint.swift; sourceTree = "<group>"; };
 		200C72261B40368600998100 /* PostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsEndpoint.swift; sourceTree = "<group>"; };
-		200C72271B40368600998100 /* ProjectsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsEndpoint.swift; sourceTree = "<group>"; };
-		200C72281B40368600998100 /* PtPostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PtPostsEndpoint.swift; sourceTree = "<group>"; };
-		200C72291B40368600998100 /* RegionsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionsEndpoint.swift; sourceTree = "<group>"; };
-		200C722A1B40368600998100 /* RevPostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevPostsEndpoint.swift; sourceTree = "<group>"; };
-		200C722B1B40368600998100 /* SectorsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectorsEndpoint.swift; sourceTree = "<group>"; };
-		200C722C1B40368600998100 /* VolunteersEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteersEndpoint.swift; sourceTree = "<group>"; };
 		200C722E1B40368600998100 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		200C722F1B40368600998100 /* ExistingViewsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewsControllers.swift; sourceTree = "<group>"; };
 		200C72301B40368600998100 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
@@ -235,26 +152,9 @@
 		200C72421B40368600998100 /* Medicine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medicine.swift; sourceTree = "<group>"; };
 		200C72431B40368600998100 /* MedicineExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineExtension.swift; sourceTree = "<group>"; };
 		200C72441B40368600998100 /* Registry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registry.swift; sourceTree = "<group>"; };
-		200C72461B40368600998100 /* Activities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
-		200C72471B40368600998100 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		200C72481B40368600998100 /* CollectionPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionPosts.swift; sourceTree = "<group>"; };
-		200C72491B40368600998100 /* CollectionRevPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRevPosts.swift; sourceTree = "<group>"; };
-		200C724A1B40368600998100 /* Goals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
-		200C724B1B40368600998100 /* Indicators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Indicators.swift; sourceTree = "<group>"; };
-		200C724C1B40368600998100 /* Measurements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measurements.swift; sourceTree = "<group>"; };
-		200C724D1B40368600998100 /* Objectives.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objectives.swift; sourceTree = "<group>"; };
-		200C724E1B40368600998100 /* Outcomes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outcomes.swift; sourceTree = "<group>"; };
-		200C724F1B40368600998100 /* Outputs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outputs.swift; sourceTree = "<group>"; };
 		200C72501B40368600998100 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		200C72511B40368600998100 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
-		200C72521B40368600998100 /* Projects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Projects.swift; sourceTree = "<group>"; };
-		200C72531B40368600998100 /* PtPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PtPosts.swift; sourceTree = "<group>"; };
-		200C72541B40368600998100 /* Regions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regions.swift; sourceTree = "<group>"; };
-		200C72551B40368600998100 /* RevPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevPost.swift; sourceTree = "<group>"; };
-		200C72561B40368600998100 /* RevPosts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevPosts.swift; sourceTree = "<group>"; };
-		200C72571B40368600998100 /* Sector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sector.swift; sourceTree = "<group>"; };
-		200C72581B40368600998100 /* Sectors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sectors.swift; sourceTree = "<group>"; };
-		200C72591B40368600998100 /* Volunteers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Volunteers.swift; sourceTree = "<group>"; };
 		200C725A1B40368600998100 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		200C725B1B40368600998100 /* TripExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripExtension.swift; sourceTree = "<group>"; };
 		200C725E1B40368600998100 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -276,7 +176,6 @@
 		200C72711B40368600998100 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
 		200C730E1B40370500998100 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ViewControllers/Info.plist; sourceTree = "<group>"; };
 		200C73421B40392A00998100 /* ApiExamples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ApiExamples; sourceTree = "<group>"; };
-		200C73481B403AD700998100 /* Cohorts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cohorts.swift; sourceTree = "<group>"; };
 		200EE4841B1343A50087FB24 /* malaria-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "malaria-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200EE4891B1343A50087FB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200EE48E1B1343A50087FB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -325,25 +224,9 @@
 		200C72181B40368600998100 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				200C721A1B40368600998100 /* ActivitiesEndpoint.swift */,
-				200C721B1B40368600998100 /* ApiEndpoint.swift */,
-				200C721C1B40368600998100 /* CohortsEndpoint.swift */,
 				200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */,
-				200C721E1B40368600998100 /* CollectionRevPostsEndpoint.swift */,
 				200C721F1B40368600998100 /* Endpoint.swift */,
-				200C72201B40368600998100 /* GoalsEndpoint.swift */,
-				200C72211B40368600998100 /* IndicatorsEndpoint.swift */,
-				200C72221B40368600998100 /* MeasurementsEndpoint.swift */,
-				200C72231B40368600998100 /* ObjectivesEndpoint.swift */,
-				200C72241B40368600998100 /* OutcomesEndpoint.swift */,
-				200C72251B40368600998100 /* OutputsEndpoint.swift */,
 				200C72261B40368600998100 /* PostsEndpoint.swift */,
-				200C72271B40368600998100 /* ProjectsEndpoint.swift */,
-				200C72281B40368600998100 /* PtPostsEndpoint.swift */,
-				200C72291B40368600998100 /* RegionsEndpoint.swift */,
-				200C722A1B40368600998100 /* RevPostsEndpoint.swift */,
-				200C722B1B40368600998100 /* SectorsEndpoint.swift */,
-				200C722C1B40368600998100 /* VolunteersEndpoint.swift */,
 			);
 			path = Endpoints;
 			sourceTree = "<group>";
@@ -361,10 +244,10 @@
 		200C72311B40368600998100 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				200C72391B40368600998100 /* TripHelpers */,
 				200C72321B40368600998100 /* MedicineHelpers */,
 				200C72371B40368600998100 /* NotificationManager.swift */,
 				200C72381B40368600998100 /* SyncManager.swift */,
-				200C72391B40368600998100 /* TripHelpers */,
 				200C723D1B40368600998100 /* UserSettingsManager.swift */,
 			);
 			path = Managers;
@@ -409,27 +292,9 @@
 		200C72451B40368600998100 /* RestAPI */ = {
 			isa = PBXGroup;
 			children = (
-				200C73481B403AD700998100 /* Cohorts.swift */,
-				200C72461B40368600998100 /* Activities.swift */,
-				200C72471B40368600998100 /* Api.swift */,
 				200C72481B40368600998100 /* CollectionPosts.swift */,
-				200C72491B40368600998100 /* CollectionRevPosts.swift */,
-				200C724A1B40368600998100 /* Goals.swift */,
-				200C724B1B40368600998100 /* Indicators.swift */,
-				200C724C1B40368600998100 /* Measurements.swift */,
-				200C724D1B40368600998100 /* Objectives.swift */,
-				200C724E1B40368600998100 /* Outcomes.swift */,
-				200C724F1B40368600998100 /* Outputs.swift */,
 				200C72501B40368600998100 /* Post.swift */,
 				200C72511B40368600998100 /* Posts.swift */,
-				200C72521B40368600998100 /* Projects.swift */,
-				200C72531B40368600998100 /* PtPosts.swift */,
-				200C72541B40368600998100 /* Regions.swift */,
-				200C72551B40368600998100 /* RevPost.swift */,
-				200C72561B40368600998100 /* RevPosts.swift */,
-				200C72571B40368600998100 /* Sector.swift */,
-				200C72581B40368600998100 /* Sectors.swift */,
-				200C72591B40368600998100 /* Volunteers.swift */,
 			);
 			path = RestAPI;
 			sourceTree = "<group>";
@@ -777,83 +642,49 @@
 			files = (
 				200C72A21B40368600998100 /* MedicineStats.swift in Sources */,
 				200C72FE1B40368600998100 /* DailyStatsViewController.swift in Sources */,
-				200C72DA1B40368600998100 /* Regions.swift in Sources */,
 				200C73041B40368600998100 /* InfoViewController.swift in Sources */,
-				200C727A1B40368600998100 /* CollectionRevPostsEndpoint.swift in Sources */,
 				200C72AE1B40368600998100 /* TripsManager.swift in Sources */,
-				200C72721B40368600998100 /* ActivitiesEndpoint.swift in Sources */,
-				200C72C61B40368600998100 /* Goals.swift in Sources */,
-				200C72C41B40368600998100 /* CollectionRevPosts.swift in Sources */,
 				200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
 				200C727C1B40368600998100 /* Endpoint.swift in Sources */,
 				200C72F21B40368600998100 /* NSManagedObject.swift in Sources */,
-				200C72881B40368600998100 /* OutputsEndpoint.swift in Sources */,
-				200C72E01B40368600998100 /* Sector.swift in Sources */,
 				200C73081B40368600998100 /* PillsStatsViewController.swift in Sources */,
 				200C72A81B40368600998100 /* SyncManager.swift in Sources */,
-				200C72861B40368600998100 /* OutcomesEndpoint.swift in Sources */,
-				200C728E1B40368600998100 /* PtPostsEndpoint.swift in Sources */,
 				200C73061B40368600998100 /* PagesManagerViewController.swift in Sources */,
 				200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
-				200C72C01B40368600998100 /* Api.swift in Sources */,
-				200C72DE1B40368600998100 /* RevPosts.swift in Sources */,
 				200C72FA1B40368600998100 /* Utilitary.swift in Sources */,
-				200C72821B40368600998100 /* MeasurementsEndpoint.swift in Sources */,
 				200C72FC1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72981B40368600998100 /* EndpointType.swift in Sources */,
 				200C729C1B40368600998100 /* UserSetting.swift in Sources */,
 				200C72AC1B40368600998100 /* TripNotificationsManager.swift in Sources */,
 				200C72F01B40368600998100 /* NSDate.swift in Sources */,
-				200C72921B40368600998100 /* RevPostsEndpoint.swift in Sources */,
-				200C72CA1B40368600998100 /* Measurements.swift in Sources */,
 				200C72EA1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				200C72D21B40368600998100 /* Post.swift in Sources */,
-				200C72961B40368600998100 /* VolunteersEndpoint.swift in Sources */,
 				200C72EE1B40368600998100 /* Int.swift in Sources */,
 				200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
-				200C72CE1B40368600998100 /* Outcomes.swift in Sources */,
-				200C72801B40368600998100 /* IndicatorsEndpoint.swift in Sources */,
-				200C72DC1B40368600998100 /* RevPost.swift in Sources */,
-				200C72E41B40368600998100 /* Volunteers.swift in Sources */,
 				200C728A1B40368600998100 /* PostsEndpoint.swift in Sources */,
-				200C72CC1B40368600998100 /* Objectives.swift in Sources */,
-				200C72841B40368600998100 /* ObjectivesEndpoint.swift in Sources */,
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
-				200C72C81B40368600998100 /* Indicators.swift in Sources */,
-				200C727E1B40368600998100 /* GoalsEndpoint.swift in Sources */,
 				200C72D41B40368600998100 /* Posts.swift in Sources */,
 				200C729A1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
 				200C72B61B40368600998100 /* ItemExtension.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
 				200C72BC1B40368600998100 /* Registry.swift in Sources */,
-				200C72BE1B40368600998100 /* Activities.swift in Sources */,
 				200C72F41B40368600998100 /* NSSet.swift in Sources */,
-				200C728C1B40368600998100 /* ProjectsEndpoint.swift in Sources */,
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,
-				200C73491B403AD700998100 /* Cohorts.swift in Sources */,
-				200C72901B40368600998100 /* RegionsEndpoint.swift in Sources */,
-				200C72941B40368600998100 /* SectorsEndpoint.swift in Sources */,
 				200C72B41B40368600998100 /* Item.swift in Sources */,
 				200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */,
-				200C72E21B40368600998100 /* Sectors.swift in Sources */,
 				200C72F81B40368600998100 /* Logger.swift in Sources */,
-				200C72761B40368600998100 /* CohortsEndpoint.swift in Sources */,
 				200C73001B40368600998100 /* DebugViewController.swift in Sources */,
 				200C72E61B40368600998100 /* Trip.swift in Sources */,
 				200C72BA1B40368600998100 /* MedicineExtension.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
-				200C72D81B40368600998100 /* PtPosts.swift in Sources */,
 				200C72AA1B40368600998100 /* ItemsManager.swift in Sources */,
-				200C72D61B40368600998100 /* Projects.swift in Sources */,
-				200C72D01B40368600998100 /* Outputs.swift in Sources */,
 				200C729E1B40368600998100 /* MedicineManager.swift in Sources */,
 				200C72A61B40368600998100 /* NotificationManager.swift in Sources */,
 				200C72EC1B40368600998100 /* CoreDataStore.swift in Sources */,
-				200C72741B40368600998100 /* ApiEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,93 +693,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */,
-				200C72891B40368600998100 /* OutputsEndpoint.swift in Sources */,
 				200C71F61B40146500998100 /* TestSetupInsertClear.swift in Sources */,
-				200C72E11B40368600998100 /* Sector.swift in Sources */,
 				200C71F81B40146500998100 /* TestMedicineRegistries.swift in Sources */,
-				200C72CF1B40368600998100 /* Outcomes.swift in Sources */,
 				200C72E91B40368600998100 /* TripExtension.swift in Sources */,
-				200C72751B40368600998100 /* ApiEndpoint.swift in Sources */,
 				200C71FA1B40146500998100 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				200C729D1B40368600998100 /* UserSetting.swift in Sources */,
 				200C73051B40368600998100 /* InfoViewController.swift in Sources */,
-				200C72E51B40368600998100 /* Volunteers.swift in Sources */,
 				200C72ED1B40368600998100 /* CoreDataStore.swift in Sources */,
 				200C71FE1B40146500998100 /* TestMapping.swift in Sources */,
-				200C72C91B40368600998100 /* Indicators.swift in Sources */,
 				200C72FB1B40368600998100 /* Utilitary.swift in Sources */,
 				200C72991B40368600998100 /* EndpointType.swift in Sources */,
-				200C72851B40368600998100 /* ObjectivesEndpoint.swift in Sources */,
 				200C730D1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				200C72B51B40368600998100 /* Item.swift in Sources */,
+				200C734B1B4042FA00998100 /* TestSyncManager.swift in Sources */,
 				200C72AD1B40368600998100 /* TripNotificationsManager.swift in Sources */,
-				200C72DD1B40368600998100 /* RevPost.swift in Sources */,
 				200C72EF1B40368600998100 /* Int.swift in Sources */,
-				200C72D11B40368600998100 /* Outputs.swift in Sources */,
 				200C729B1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
-				200C72931B40368600998100 /* RevPostsEndpoint.swift in Sources */,
-				200C734A1B403AD700998100 /* Cohorts.swift in Sources */,
 				200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C71F51B40146500998100 /* TestUserSettings.swift in Sources */,
-				200C728F1B40368600998100 /* PtPostsEndpoint.swift in Sources */,
 				200C71F71B40146500998100 /* TestNSDateExtensions.swift in Sources */,
 				200C72B71B40368600998100 /* ItemExtension.swift in Sources */,
 				200C72FF1B40368600998100 /* DailyStatsViewController.swift in Sources */,
-				200C72811B40368600998100 /* IndicatorsEndpoint.swift in Sources */,
 				200C71F91B40146500998100 /* TestDailyMedicineStatistics.swift in Sources */,
 				200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */,
-				200C72CB1B40368600998100 /* Measurements.swift in Sources */,
-				200C72771B40368600998100 /* CohortsEndpoint.swift in Sources */,
 				200C730B1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				200C72AF1B40368600998100 /* TripsManager.swift in Sources */,
 				200C73071B40368600998100 /* PagesManagerViewController.swift in Sources */,
-				200C72CD1B40368600998100 /* Objectives.swift in Sources */,
 				200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */,
-				200C72731B40368600998100 /* ActivitiesEndpoint.swift in Sources */,
-				200C727B1B40368600998100 /* CollectionRevPostsEndpoint.swift in Sources */,
-				200C72871B40368600998100 /* OutcomesEndpoint.swift in Sources */,
-				200C727F1B40368600998100 /* GoalsEndpoint.swift in Sources */,
 				200C71FB1B40146500998100 /* TestNotifications.swift in Sources */,
-				200C72951B40368600998100 /* SectorsEndpoint.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
 				200C72F51B40368600998100 /* NSSet.swift in Sources */,
 				200C72E71B40368600998100 /* Trip.swift in Sources */,
 				200C72EB1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				200C72FD1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72A91B40368600998100 /* SyncManager.swift in Sources */,
-				200C72D91B40368600998100 /* PtPosts.swift in Sources */,
 				200C72A31B40368600998100 /* MedicineStats.swift in Sources */,
 				200C72D31B40368600998100 /* Post.swift in Sources */,
 				200C72F31B40368600998100 /* NSManagedObject.swift in Sources */,
 				200C73011B40368600998100 /* DebugViewController.swift in Sources */,
 				200C72B91B40368600998100 /* Medicine.swift in Sources */,
 				200C727D1B40368600998100 /* Endpoint.swift in Sources */,
-				200C72911B40368600998100 /* RegionsEndpoint.swift in Sources */,
 				200C72B11B40368600998100 /* UserSettingsManager.swift in Sources */,
 				200C72BD1B40368600998100 /* Registry.swift in Sources */,
 				200C73091B40368600998100 /* PillsStatsViewController.swift in Sources */,
-				200C72C11B40368600998100 /* Api.swift in Sources */,
 				200C72A51B40368600998100 /* RegistriesManager.swift in Sources */,
 				200C72D51B40368600998100 /* Posts.swift in Sources */,
-				200C728D1B40368600998100 /* ProjectsEndpoint.swift in Sources */,
-				200C72971B40368600998100 /* VolunteersEndpoint.swift in Sources */,
 				200C72F91B40368600998100 /* Logger.swift in Sources */,
 				200C72AB1B40368600998100 /* ItemsManager.swift in Sources */,
 				200C729F1B40368600998100 /* MedicineManager.swift in Sources */,
-				200C72E31B40368600998100 /* Sectors.swift in Sources */,
 				200C72A71B40368600998100 /* NotificationManager.swift in Sources */,
 				200C72791B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				200C72F11B40368600998100 /* NSDate.swift in Sources */,
-				200C72C51B40368600998100 /* CollectionRevPosts.swift in Sources */,
-				200C72D71B40368600998100 /* Projects.swift in Sources */,
 				200C72BB1B40368600998100 /* MedicineExtension.swift in Sources */,
 				200C72A11B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
-				200C72C71B40368600998100 /* Goals.swift in Sources */,
-				200C72DF1B40368600998100 /* RevPosts.swift in Sources */,
 				200C72C31B40368600998100 /* CollectionPosts.swift in Sources */,
-				200C72BF1B40368600998100 /* Activities.swift in Sources */,
-				200C72831B40368600998100 /* MeasurementsEndpoint.swift in Sources */,
-				200C72DB1B40368600998100 /* Regions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@ class TestNotifications: XCTestCase {
         m.registerNewMedicine(weeklyPill)
         
         if let medi = m.getCurrentMedicine(),
-           let medi2 = m.findMedicine(weeklyPill){
+           let medi2 = m.getMedicine(weeklyPill){
             mdDaily = medi
             mdWeekly = medi2
         }else{

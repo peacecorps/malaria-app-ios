@@ -7,12 +7,18 @@ class NotificationManager{
     var alertBody: String { get{ fatalError("No alertBody provided")} }
     var alertAction: String { get{ fatalError("No alertAction provided")} }
     
+    /// Schedule a notification at the fireTime given by argument
+    ///
+    /// All previous notifications will be unsheduled
+    ///
+    /// :param: `NSDate`: fireTime
     func scheduleNotification(fireTime: NSDate){
         unsheduleNotification()
         let notification: UILocalNotification = createNotification(fireTime)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
+    /// Unschedule all notifications
     func unsheduleNotification(){
         for event in UIApplication.sharedApplication().scheduledLocalNotifications {
             
@@ -25,7 +31,9 @@ class NotificationManager{
         }
     }
     
-    //returns the number of supposed pills should have been taken
+    /// Creates a notification
+    ///
+    /// :param: `NSDate`: fireTime
     func createNotification(fireDate: NSDate) -> UILocalNotification{
         var localNotification = UILocalNotification()
         localNotification.fireDate = fireDate

@@ -15,7 +15,7 @@ class TestMedicineRegistries: XCTestCase {
         
         m.setup(currentPill, fireDate: NSDate())
         
-        if let medi = m.findMedicine(currentPill){
+        if let medi = m.getMedicine(currentPill){
             md = medi
         }else{
             XCTFail("Fail initializing:")
@@ -107,7 +107,7 @@ class TestMedicineRegistries: XCTestCase {
         m.registerNewMedicine(weeklyPill)
 
         var weekly: Medicine!
-        if let w = m.findMedicine(weeklyPill){
+        if let w = m.getMedicine(weeklyPill){
             weekly = w
         }else{
             XCTFail("Failure registering weekly pill")

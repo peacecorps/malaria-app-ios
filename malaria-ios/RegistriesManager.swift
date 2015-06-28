@@ -7,6 +7,10 @@ class RegistriesManager{
         self.medicine = medicine
     }
 
+    /// Check if the pill was already taken in that day if daily pill or in that week if weekly pill
+    ///
+    /// :param: `NSDate`: the date
+    /// :returns: `Bool`: True if there already a entry in that day/week
     func alreadyRegistered(at: NSDate) -> Bool{
         if medicine.isDaily(){
             return getRegistries(date1: at, date2: at).count != 0
@@ -22,16 +26,32 @@ class RegistriesManager{
         return false
     }
 
+    /// Returns the most recent entry for that pill if there is
+    ///
+    /// :returns: `NSDate?`
     func mostRecentEntry() -> NSDate?{
         let registries = getRegistries()
         return registries.count > 0 ? registries[0].date : nil
     }
     
+    /// Returns the oldest entry for that pill if there is
+    ///
+    /// :returns: `NSDate?`
     func oldestEntry() -> NSDate?{
         let registries = getRegistries(mostRecentFirst: false)
         return registries.count > 0 ? registries[0].date : nil
     }
 
+    /// Adds a new entry for that pill
+    ///
+    /// It will return false if trying to add entries in the future
+    /// If modify flag is set to false, It will return false it there is
+    /// already an entry in that day if daily pill or in that week if weekly pill
+    ///
+    /// :param: `NSDate`: the date of the entry
+    /// :param: `Bool`: if the user took medicine
+    /// :param: `Bool` optional: overwrite previous entry (by default is false)
+    /// :returns: `Bool`: true if success, false if not
     func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         let context = CoreDataHelper.sharedInstance.backgroundContext!
         
@@ -65,6 +85,12 @@ class RegistriesManager{
         
     }
 
+    /// Returns entries between the two specified dates
+    ///
+    /// :param: `NSDate`: date1
+    /// :param: `NSDate`: date2
+    /// :param: `Bool` optional: if first element of result should be the most recent entry. (by default is true)
+    /// :returns: `[Registry]`
     func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true) -> [Registry]{
         var array : [Registry] = medicine.registries.convertToArray()
         
@@ -83,6 +109,10 @@ class RegistriesManager{
         return registries.filter({$0.date >= date1 && $0.date <= date2})
     }
 
+    /// Returns entry in the specified date if exists
+    ///
+    /// :param: `NSDate`: date
+    /// :returns: `Registry?`
     func findRegistry(date: NSDate) -> Registry?{
         let filteredArray = getRegistries(date1: date, date2: date)
         if filteredArray.count > 1{

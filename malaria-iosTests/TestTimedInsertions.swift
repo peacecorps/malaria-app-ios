@@ -16,8 +16,8 @@ class TestTimedInsertions: XCTestCase {
         m.registerNewMedicine(weeklyPill)
         m.registerNewMedicine(dailyPill)
         
-        if let m1 = m.findMedicine(dailyPill),
-           let m2 = m.findMedicine(weeklyPill){
+        if let m1 = m.getMedicine(dailyPill),
+           let m2 = m.getMedicine(weeklyPill){
             daily = m1
             weekly = m2
         }else{

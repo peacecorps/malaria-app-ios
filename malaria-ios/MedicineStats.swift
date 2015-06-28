@@ -7,6 +7,11 @@ class MedicineStats{
         self.medicine = medicine
     }
     
+    /// Returns the number of pills taken between two dates
+    ///
+    /// :param: `NSDate optional`: first date (by default is NSDate.min)
+    /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :returns: `Int`: Number of pills
     func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var count = 0
         for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2){
@@ -18,6 +23,11 @@ class MedicineStats{
         return count
     }
     
+    /// Returns the number of pills that the user should have taken between two dates
+    ///
+    /// :param: `NSDate optional`: first date (by default is NSDate.min)
+    /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :returns: `Int`: Number of supposed pills
     func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         if (medicine.registriesManager.getRegistries(date1: date1, date2: date2).count == 0){
             return 0
@@ -26,7 +36,6 @@ class MedicineStats{
         if date1 > date2 {
             return numberSupposedPills(date1: date2, date2: date1)
         }
-        
         
         var d1: NSDate = date1
         if NSDate.areDatesSameDay(d1, dateTwo: NSDate.min) {
@@ -44,6 +53,13 @@ class MedicineStats{
         return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
     }
     
+    /// Returns the number of pills that the user should have taken between two dates
+    ///
+    //// Adherence = numberPillsTaken/SupposedPills
+    ///
+    /// :param: `NSDate optional`: first date (by default is NSDate.min)
+    /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :returns: `Float`: Pill adherence
     func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Float{
         let supposedPills = numberSupposedPills(date1: date1, date2: date2)
         
@@ -56,6 +72,13 @@ class MedicineStats{
         return Float(pillsTaken)/(Float(supposedPills))
     }
     
+    /// Returns the current Pill Streak of the user.
+    ///
+    /// If the user misses a day, the streak will be reset to 0
+    ///
+    /// :param: `NSDate optional`: first date (by default is NSDate.min)
+    /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :returns: `Int`: Pill streak
     func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var result = 0
         

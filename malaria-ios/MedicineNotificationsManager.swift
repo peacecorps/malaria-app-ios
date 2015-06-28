@@ -39,6 +39,10 @@ class MedicineNotificationsManager : NotificationManager{
         }
     }
     
+    /// Checks if a week went by without a entry
+    ///
+    /// :param: `NSDate optional`: Current date. (by default is the most current one)
+    /// :returns: `Bool`: true if should, false if not
     func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
         if let mostRecent = medicine.registriesManager.mostRecentEntry(){
             //get ellaped days

@@ -12,7 +12,7 @@ class TestSetupInsertClear: XCTestCase {
         super.setUp()
         
         m.setup(currentPill, fireDate: NSDate())
-        if let medi = m.findMedicine(currentPill){
+        if let medi = m.getMedicine(currentPill){
             md = medi
         }else{
             XCTFail("Fail initializing:")

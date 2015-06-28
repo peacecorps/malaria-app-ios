@@ -14,7 +14,7 @@ class TestDailyMedicineStatistics: XCTestCase {
         
         m.setup(currentPill, fireDate: d1)
         
-        if let medi = m.findMedicine(currentPill){
+        if let medi = m.getMedicine(currentPill){
             md = medi
         }else{
             XCTFail("Fail initializing:")

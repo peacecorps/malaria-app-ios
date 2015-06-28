@@ -2,6 +2,7 @@ import XCTest
 import SwiftyJSON
 
 class TestMapping: XCTestCase {
+    let jsonFolder = "ApiExamples"
     
     var endpoints: [String : Endpoint] = [
         EndpointType.Api.path() : ApiEndpoint(),
@@ -29,7 +30,8 @@ class TestMapping: XCTestCase {
     }
     
     func getJSON(fileName: String) -> JSON{
-        let path = NSBundle(forClass: TestMapping.self).pathForResource(fileName, ofType: "json")
+        let path = NSBundle(forClass: TestMapping.self).pathForResource(fileName, ofType: "json", inDirectory: jsonFolder)
+        
         if let jsonData = NSData(contentsOfFile:path!) {
             return JSON(data: jsonData, options: NSJSONReadingOptions.AllowFragments, error: nil)
         }else{

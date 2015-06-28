@@ -41,8 +41,6 @@ class MedicineStats{
         //+1 to include d1
         let numDays = (d2 - d1).day + 1
         
-        Logger.Info("--> \(numDays)")
-        
         return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
     }
     
@@ -63,22 +61,20 @@ class MedicineStats{
         
         let isDaily = medicine.isDaily()
         var previousDate: NSDate?
-        for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2, mostRecentFirst: false){
-            
+        for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2, mostRecentFirst: true){
             //check for missing entries
             if let previousD = previousDate{
-                if isDaily && !NSDate.areDatesSameDay(previousD + 1.day, dateTwo: r.date){
-                    result = 0
-                }else if !isDaily && !NSDate.areDatesSameWeek(previousD + 7.day, dateTwo: r.date){
-                    result = 0
+                if (isDaily && !NSDate.areDatesSameDay(previousD - 1.day, dateTwo: r.date)) ||
+                    (!isDaily && !NSDate.areDatesSameWeek(previousD - 7.day, dateTwo: r.date))
+                {
+                    return result
                 }
             }
-            
             
             if r.tookMedicine{
                 result += 1
             }else{
-                result = 0
+                return result
             }
             
             previousDate = r.date

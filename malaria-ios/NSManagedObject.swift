@@ -8,12 +8,15 @@ extension NSManagedObject{
     
     class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!) -> T{
         let name = getSimpleClassName(entity)
+        //Logger.Info("Creating \(name)")
+        
         let entityDescription = NSEntityDescription.entityForName(name, inManagedObjectContext: context)!
         return NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! T
     }
     
     class func retrieve<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!) -> [T]{
         let name = getSimpleClassName(entity)
+        
         let fetchRequest = NSFetchRequest(entityName: name)
         return context.executeFetchRequest(fetchRequest, error: nil) as! [T]
     }

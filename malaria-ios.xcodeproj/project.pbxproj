@@ -137,7 +137,6 @@
 		20503CD01B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CCF1B3DBDF900ED490A /* ObjectivesEndpoint.swift */; };
 		20503CD11B3DBDF900ED490A /* ObjectivesEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CCF1B3DBDF900ED490A /* ObjectivesEndpoint.swift */; };
 		20503CD41B3F4A6300ED490A /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
-		20503CD51B3F4B1300ED490A /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
 		20936AA91B3C037E003B3E05 /* Alamofire-SwiftyJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20936AA81B3C037E003B3E05 /* Alamofire-SwiftyJson.swift */; };
 		20E6DC261B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
 		20E6DC271B388DF40003B777 /* TripExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC251B388DF40003B777 /* TripExtension.swift */; };
@@ -182,6 +181,7 @@
 		20F994581B3F635E00925FA1 /* Outputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F994561B3F635E00925FA1 /* Outputs.swift */; };
 		20F9945A1B3F639300925FA1 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F994591B3F639300925FA1 /* OutputsEndpoint.swift */; };
 		20F9945B1B3F639300925FA1 /* OutputsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F994591B3F639300925FA1 /* OutputsEndpoint.swift */; };
+		20F994691B3F7AC700925FA1 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		20FDC53E1B2DA1CF00313C72 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */; };
 		20FDC5411B2DA2FD00313C72 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5401B2DA2FD00313C72 /* Endpoint.swift */; };
 		20FDC5451B2DA51700313C72 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDC5441B2DA51700313C72 /* Endpoints.swift */; };
@@ -312,6 +312,7 @@
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
 		20F994561B3F635E00925FA1 /* Outputs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outputs.swift; sourceTree = "<group>"; };
 		20F994591B3F639300925FA1 /* OutputsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputsEndpoint.swift; sourceTree = "<group>"; };
+		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
 		20FDC53D1B2DA1CF00313C72 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		20FDC5401B2DA2FD00313C72 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		20FDC5441B2DA51700313C72 /* Endpoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
@@ -410,6 +411,7 @@
 				20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */,
 				20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */,
 				20503CD21B3F497200ED490A /* TestMapping.swift */,
+				20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -1017,9 +1019,9 @@
 				20503C791B3DAA6A00ED490A /* RevPostsEndpoint.swift in Sources */,
 				20503C8B1B3DB6E900ED490A /* CollectionPostsEndpoint.swift in Sources */,
 				20503C981B3DBD0E00ED490A /* Cohorts.swift in Sources */,
-				20503CD51B3F4B1300ED490A /* TestMapping.swift in Sources */,
 				20503CA71B3DBD0F00ED490A /* PtPosts.swift in Sources */,
 				201A0B631B363DBD00E5D628 /* RegistriesManager.swift in Sources */,
+				20F994691B3F7AC700925FA1 /* TestSyncManager.swift in Sources */,
 				20EA06FD1B226A3B00D6840E /* MedicineExtension.swift in Sources */,
 				20503CB01B3DBD0F00ED490A /* Volunteers.swift in Sources */,
 				20EA06F41B22695A00D6840E /* TripNotificationsManager.swift in Sources */,

@@ -34,16 +34,26 @@ class SyncManager {
         Endpoints.Outputs.path() : OutputsEndpoint()
     ]
     
-    func sync(path: String, save: Bool = false){
-        if let endpoint = endpoints[path]{
-            endpoint.clearFromDatabase()
-            remoteFetch(endpoint)
+    func sync(path: String, save: Bool = false, failureHandler: ((url: String, error: NSError)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
+        
+        func expandedSuccessHandler(url: String, object: NSManagedObject){
+            if let success = successHandler{
+                success(url: url, object: object)
+            }
             
             if (save){
+                Logger.Info("Saving to coreData")
                 CoreDataHelper.sharedInstance.saveContext()
             }
+        }
+        
+        if let endpoint = endpoints[path]{
+            remoteFetch(endpoint, failureHandler: failureHandler, successHandler: expandedSuccessHandler)
         }else{
             Logger.Error("Bad path provided to sync")
+            if let failure = failureHandler{
+                failure(url: path, error: NSError())
+            }
         }
     }
     
@@ -56,8 +66,7 @@ class SyncManager {
         Logger.Info("Sync complete")
     }
     
-    private func remoteFetch(endpoint: Endpoint, save: Bool = false){
-        //TODO: Check internet connection before doing request
+    private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
         
         Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters)
             .responseJSON { (req, res, json, error) in
@@ -66,9 +75,16 @@ class SyncManager {
                 }
                 else {
                     Logger.Info("Connected to \(endpoint.path)")
-                    
-                    if endpoint.retrieveJSONObject(JSON(json!)) == nil{
+                    endpoint.clearFromDatabase()
+                    if let objectMapped = endpoint.retrieveJSONObject(JSON(json!)){
+                        if let success = successHandler{
+                            success(url: endpoint.path, object: objectMapped)
+                        }
+                    }else{
                         Logger.Error("Error parsing \(endpoint.path)")
+                        if let failure = failureHandler{
+                            failure(url: endpoint.path, error: error!)
+                        }
                     }
                 }
             }

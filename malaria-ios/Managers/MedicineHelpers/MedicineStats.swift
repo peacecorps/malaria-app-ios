@@ -39,12 +39,12 @@ class MedicineStats{
         
         var d1: NSDate = date1
         if NSDate.areDatesSameDay(d1, dateTwo: NSDate.min) {
-            d1 = medicine.registriesManager.oldestEntry()!
+            d1 = medicine.registriesManager.oldestEntry()!.date
         }
         
         var d2: NSDate = date2
         if NSDate.areDatesSameDay(d2, dateTwo: NSDate.max) {
-            d2 = medicine.registriesManager.mostRecentEntry()!
+            d2 = medicine.registriesManager.mostRecentEntry()!.date
         }
         
         //+1 to include d1

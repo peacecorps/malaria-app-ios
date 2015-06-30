@@ -46,7 +46,7 @@ class MedicineNotificationsManager : NotificationManager{
     func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
         if let mostRecent = medicine.registriesManager.mostRecentEntry(){
             //get ellaped days
-            return (currentDate - mostRecent) > 7
+            return (currentDate - mostRecent.date) > 7
         }
         
         Logger.Warn("There is no registry yet registred")

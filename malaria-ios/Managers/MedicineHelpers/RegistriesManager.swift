@@ -35,18 +35,18 @@ class RegistriesManager{
 
     /// Returns the most recent entry for that pill if there is
     ///
-    /// :returns: `NSDate?`
-    func mostRecentEntry() -> NSDate?{
+    /// :returns: `Registry?`
+    func mostRecentEntry() -> Registry?{
         let registries = getRegistries()
-        return registries.count > 0 ? registries[0].date : nil
+        return registries.count > 0 ? registries[0] : nil
     }
     
     /// Returns the oldest entry for that pill if there is
     ///
-    /// :returns: `NSDate?`
-    func oldestEntry() -> NSDate?{
+    /// :returns: `Registry?`
+    func oldestEntry() -> Registry?{
         let registries = getRegistries(mostRecentFirst: false)
-        return registries.count > 0 ? registries[0].date : nil
+        return registries.count > 0 ? registries[0] : nil
     }
 
     /// Adds a new entry for that pill

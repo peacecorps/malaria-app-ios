@@ -10,15 +10,22 @@ class RegistriesManager{
     /// Check if the pill was already taken in that day if daily pill or in that week if weekly pill
     ///
     /// :param: `NSDate`: the date
-    /// :returns: `Bool`: True if there already a entry in that day/week
-    func alreadyRegistered(at: NSDate) -> Bool{
+    /// :returns: `Bool`: True if the user took a pill in that day or week
+    func tookMedicine(at: NSDate) -> Bool{
         if medicine.isDaily(){
-            return getRegistries(date1: at, date2: at).count != 0
+            
+            if let r = findRegistry(at){
+                return r.tookMedicine
+            }
+            return false
         }else{
             let registries = getRegistries(date1: at - 8.day, date2: at + 8.day)
+            
             for r in registries{
                 if NSDate.areDatesSameWeek(at, dateTwo: r.date){
-                    return true
+                    if (r.tookMedicine){
+                        return true
+                    }
                 }
             }
         }
@@ -60,8 +67,8 @@ class RegistriesManager{
             return false
         }
         
-        if !modifyEntry && alreadyRegistered(date){
-            Logger.Warn("Already registered the pill in that pill/week. Aborting")
+        if (tookMedicine && self.tookMedicine(date)){
+            Logger.Warn("Already took the pill in that pill/week. Aborting")
             return false
         }
         
@@ -69,6 +76,11 @@ class RegistriesManager{
         var registry : Registry? = findRegistry(date)
         
         if let r = registry{
+            if(!modifyEntry){
+                Logger.Info("Can't modify entry. Aborting")
+                return false
+            }
+            
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
         }else{

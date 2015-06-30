@@ -8,16 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1C8EC00569FE604833382644 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		200C71F51B40146500998100 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
-		200C71F61B40146500998100 /* TestSetupInsertClear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */; };
-		200C71F71B40146500998100 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
-		200C71F81B40146500998100 /* TestMedicineRegistries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */; };
-		200C71F91B40146500998100 /* TestDailyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */; };
-		200C71FA1B40146500998100 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
-		200C71FB1B40146500998100 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
-		200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
-		200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
-		200C71FE1B40146500998100 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
 		200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */; };
 		200C72791B40368600998100 /* CollectionPostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721D1B40368600998100 /* CollectionPostsEndpoint.swift */; };
 		200C727C1B40368600998100 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C721F1B40368600998100 /* Endpoint.swift */; };
@@ -108,11 +98,21 @@
 		200C73101B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73431B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
 		200C73441B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
-		200C734B1B4042FA00998100 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
+		208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
+		208A17AD1B42F605004DA5D0 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
+		208A17AE1B42F605004DA5D0 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
+		208A17AF1B42F605004DA5D0 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
+		208A17B01B42F605004DA5D0 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
+		208A17B11B42F605004DA5D0 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
+		208A17B21B42F605004DA5D0 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
+		208FE0891B42F37700C5F447 /* TestMedicineRegistries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */; };
+		208FE08A1B42F37700C5F447 /* TestDailyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */; };
+		208FE08B1B42F37700C5F447 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
+		208FE08C1B42F37700C5F447 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -185,10 +185,10 @@
 		200EE49F1B1343A60087FB24 /* TestUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserSettings.swift; sourceTree = "<group>"; };
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
+		208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineManager.swift; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetupInsertClear.swift; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
 		20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineRegistries.swift; sourceTree = "<group>"; };
 		20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDailyMedicineStatistics.swift; sourceTree = "<group>"; };
@@ -391,8 +391,8 @@
 			children = (
 				200C73421B40392A00998100 /* ApiExamples */,
 				200EE49D1B1343A60087FB24 /* Supporting Files */,
+				208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */,
 				200EE49F1B1343A60087FB24 /* TestUserSettings.swift */,
-				20EA06ED1B2267A000D6840E /* TestSetupInsertClear.swift */,
 				20EA07061B23258900D6840E /* TestNSDateExtensions.swift */,
 				20EA07081B237D4900D6840E /* TestMedicineRegistries.swift */,
 				20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */,
@@ -692,39 +692,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				200C71FC1B40146500998100 /* TestTimedInsertions.swift in Sources */,
-				200C71F61B40146500998100 /* TestSetupInsertClear.swift in Sources */,
-				200C71F81B40146500998100 /* TestMedicineRegistries.swift in Sources */,
 				200C72E91B40368600998100 /* TripExtension.swift in Sources */,
-				200C71FA1B40146500998100 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				200C729D1B40368600998100 /* UserSetting.swift in Sources */,
 				200C73051B40368600998100 /* InfoViewController.swift in Sources */,
 				200C72ED1B40368600998100 /* CoreDataStore.swift in Sources */,
-				200C71FE1B40146500998100 /* TestMapping.swift in Sources */,
 				200C72FB1B40368600998100 /* Utilitary.swift in Sources */,
+				208FE08C1B42F37700C5F447 /* TestTimedInsertions.swift in Sources */,
+				208FE08B1B42F37700C5F447 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				200C72991B40368600998100 /* EndpointType.swift in Sources */,
+				208FE08A1B42F37700C5F447 /* TestDailyMedicineStatistics.swift in Sources */,
 				200C730D1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				200C72B51B40368600998100 /* Item.swift in Sources */,
-				200C734B1B4042FA00998100 /* TestSyncManager.swift in Sources */,
 				200C72AD1B40368600998100 /* TripNotificationsManager.swift in Sources */,
 				200C72EF1B40368600998100 /* Int.swift in Sources */,
+				208A17B21B42F605004DA5D0 /* TestSyncManager.swift in Sources */,
 				200C729B1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
 				200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */,
-				200C71F51B40146500998100 /* TestUserSettings.swift in Sources */,
-				200C71F71B40146500998100 /* TestNSDateExtensions.swift in Sources */,
 				200C72B71B40368600998100 /* ItemExtension.swift in Sources */,
+				208A17AF1B42F605004DA5D0 /* TestNotifications.swift in Sources */,
 				200C72FF1B40368600998100 /* DailyStatsViewController.swift in Sources */,
-				200C71F91B40146500998100 /* TestDailyMedicineStatistics.swift in Sources */,
 				200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */,
 				200C730B1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				200C72AF1B40368600998100 /* TripsManager.swift in Sources */,
 				200C73071B40368600998100 /* PagesManagerViewController.swift in Sources */,
-				200C71FD1B40146500998100 /* TestPlanTrip.swift in Sources */,
-				200C71FB1B40146500998100 /* TestNotifications.swift in Sources */,
+				208A17B11B42F605004DA5D0 /* TestMapping.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
+				208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */,
 				200C72F51B40368600998100 /* NSSet.swift in Sources */,
 				200C72E71B40368600998100 /* Trip.swift in Sources */,
 				200C72EB1B40368600998100 /* CoreDataHelper.swift in Sources */,
+				208A17AE1B42F605004DA5D0 /* TestNSDateExtensions.swift in Sources */,
 				200C72FD1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72A91B40368600998100 /* SyncManager.swift in Sources */,
 				200C72A31B40368600998100 /* MedicineStats.swift in Sources */,
@@ -739,6 +736,9 @@
 				200C72A51B40368600998100 /* RegistriesManager.swift in Sources */,
 				200C72D51B40368600998100 /* Posts.swift in Sources */,
 				200C72F91B40368600998100 /* Logger.swift in Sources */,
+				208FE0891B42F37700C5F447 /* TestMedicineRegistries.swift in Sources */,
+				208A17B01B42F605004DA5D0 /* TestPlanTrip.swift in Sources */,
+				208A17AD1B42F605004DA5D0 /* TestUserSettings.swift in Sources */,
 				200C72AB1B40368600998100 /* ItemsManager.swift in Sources */,
 				200C729F1B40368600998100 /* MedicineManager.swift in Sources */,
 				200C72A71B40368600998100 /* NotificationManager.swift in Sources */,

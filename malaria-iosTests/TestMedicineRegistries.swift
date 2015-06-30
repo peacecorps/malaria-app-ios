@@ -119,20 +119,20 @@ class TestMedicineRegistries: XCTestCase {
         
         XCTAssertTrue(weekly.registriesManager.addRegistry(dStartWeek, tookMedicine: true))
 
-        XCTAssertFalse(weekly.registriesManager.alreadyRegistered(dStartWeek - 1.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 1.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 2.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 3.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 4.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 5.day))
-        XCTAssertTrue(weekly.registriesManager.alreadyRegistered(dStartWeek + 6.day))
-        XCTAssertFalse(weekly.registriesManager.alreadyRegistered(dStartWeek + 7.day))
+        XCTAssertFalse(weekly.registriesManager.tookMedicine(dStartWeek - 1.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 1.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 2.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 3.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 4.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 5.day))
+        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 6.day))
+        XCTAssertFalse(weekly.registriesManager.tookMedicine(dStartWeek + 7.day))
     }
     
     func testAlreadyRegisteredDailyPill(){
-        XCTAssertTrue(md.registriesManager.alreadyRegistered(d1))
-        XCTAssertTrue(md.registriesManager.alreadyRegistered(d1 - 1.day))
-        XCTAssertFalse(md.registriesManager.alreadyRegistered(d1 + 1.day))
+        XCTAssertTrue(md.registriesManager.tookMedicine(d1))
+        XCTAssertTrue(md.registriesManager.tookMedicine(d1 - 1.day))
+        XCTAssertFalse(md.registriesManager.tookMedicine(d1 + 1.day))
     }
     
     func testFailAddEntryInFuture(){
@@ -143,7 +143,7 @@ class TestMedicineRegistries: XCTestCase {
     func testModifyEntry(){
         //modify entry and check if the number of elements did not change
         let lastCount = md.registriesManager.getRegistries().count
-        XCTAssertTrue(md.registriesManager.addRegistry( d1 - 4.day, tookMedicine: true, modifyEntry: true))
+        XCTAssertTrue(md.registriesManager.addRegistry(d1 - 4.day, tookMedicine: true, modifyEntry: true))
         XCTAssertEqual(lastCount, md.registriesManager.getRegistries().count)
         
         //verify if modification was a success

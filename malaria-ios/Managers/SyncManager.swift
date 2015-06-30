@@ -72,7 +72,7 @@ class SyncManager {
     
     private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
         
-        Alamofire.request(.GET, endpoint.path, parameters: endpoint.parameters)
+        Alamofire.request(.GET, endpoint.path, parameters: ["format": "json"])
             .responseJSON { (req, res, json, error) in
                 if(error != nil) {
                     Logger.Error("Error at \(endpoint.path)): \(error!)")

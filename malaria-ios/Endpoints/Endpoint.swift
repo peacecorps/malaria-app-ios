@@ -1,15 +1,10 @@
 import SwiftyJSON
 
-class Endpoint{
-    /// default parameters for every request.
-    ///
-    /// :returns: `[String : String]`
-    var parameters: [String: String]    { get { return ["format": "json"]}}
-    
+protocol Endpoint{
     /// full url to the endpoint
     ///
     /// :returns: `String`
-    var path: String                    { get { fatalError("getEndpoint not implemented")} }
+    var path: String                    { get }
     
     /// Parses the json and retrieves a NSManagedObject
     ///
@@ -17,14 +12,10 @@ class Endpoint{
     /// therefore any deletion must be done explicitly.
     ///
     /// :returns: `NSManagedObject?`: The parsed object or nil if parse failed
-    func retrieveJSONObject(data: JSON) -> NSManagedObject?{
-        fatalError("getEntityName not implemented")
-    }
+    func retrieveJSONObject(data: JSON) -> NSManagedObject?
     
     /// Clear all NSManagedObjects used by the endpoint
-    func clearFromDatabase() {
-        fatalError("clearFromCoreData not implemented")
-    }
+    func clearFromDatabase()
 }
 
 

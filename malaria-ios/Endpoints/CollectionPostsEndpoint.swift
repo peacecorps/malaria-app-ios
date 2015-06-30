@@ -2,10 +2,11 @@ import Foundation
 import SwiftyJSON
 
 class CollectionPostsEndpoint : Endpoint{
+    var path: String { get { fatalError("Please specify path") } }
     /// subCollectionClassType: Specify the subclass of CollectionPosts
     var subCollectionsPostsType: CollectionPosts.Type { get { fatalError("Please specify collection type") } }
     
-    override func retrieveJSONObject(data: JSON) -> NSManagedObject?{
+    func retrieveJSONObject(data: JSON) -> NSManagedObject?{
         if let results = data["results"].array{
             let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self)
             
@@ -67,7 +68,7 @@ class CollectionPostsEndpoint : Endpoint{
         return result
     }
     
-    override func clearFromDatabase(){
+    func clearFromDatabase(){
         subCollectionsPostsType.clear(subCollectionsPostsType.self)
     }
     

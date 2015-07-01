@@ -10,6 +10,7 @@ enum ExistingViewsControllers : String{
     case PlanTripViewController = "PlanTripViewController"
     case InfoViewController = "InfoViewController"
     case DebugViewController = "DebugViewController"
+    case MenuTabBarController = "MenuTabBarController"
     
     /// instanciate the view controller from the storyboard "Main"
     func instanciateViewController() -> UIViewController{

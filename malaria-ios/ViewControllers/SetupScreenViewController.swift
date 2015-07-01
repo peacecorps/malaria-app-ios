@@ -55,12 +55,12 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func doneButtonHandler(){
         //show next view
-        if(UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine)){
+        if(UserSettingsManager.getDidConfiguredMedicine()){
             dismissViewControllerAnimated(true, completion: nil)
         }else{
             
-            
-            var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
+            var view = ExistingViewsControllers.MenuTabBarController.instanciateViewController() as! UITabBarController
+            //var view = ExistingViewsControllers.PagesManagerViewController.instanciateViewController() as! PagesManagerViewController
             //var view = ExistingViewsControllers.DebugViewController.instanciateViewController() as! DebugViewController
             presentViewController(
                 view,

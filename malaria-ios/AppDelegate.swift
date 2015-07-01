@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if !inTestEnvironment{
-            if UserSettingsManager.getBool(.DidConfiguredMedicine){
-                window!.rootViewController = ExistingViewsControllers.PagesManagerViewController.instanciateViewController()
+            if UserSettingsManager.getDidConfiguredMedicine(){
+                window!.rootViewController = ExistingViewsControllers.MenuTabBarController.instanciateViewController()
             }else{
                 window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
             }

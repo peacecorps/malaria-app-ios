@@ -2,19 +2,24 @@ import Foundation
 
 class UserSettingsManager{
     
-    /// Sets an UserSetting
-    /// :param: `UserSetting`: the setting to be changed
+    enum UserSetting: String{
+        static let allValues = [DidConfiguredMedicine]
+        
+        case DidConfiguredMedicine = "DidConfiguredMedicine"
+    }
+    
+    /// Sets DidConfiguredMedicine flag to the value given by argument
     /// :param: `Bool`: value
-    class func setBool(key: UserSetting, _ value: Bool){
-        NSUserDefaults.standardUserDefaults().setBool(value, forKey: key.rawValue)
+    class func setDidConfiguredMedicine(value: Bool){
+        NSUserDefaults.standardUserDefaults().setBool(value, forKey: UserSetting.DidConfiguredMedicine.rawValue)
     }
-
-    /// Gets an UserSetting value
-    /// :param: `UserSetting`: the setting to be changed
-    class func getBool(key: UserSetting) -> Bool{
-        return NSUserDefaults.standardUserDefaults().boolForKey(key.rawValue) ?? false
+    
+    /// Gets the value of the flag DidConfigureMedicine
+    /// :returns: The value of the flag DidConfigureMedicine
+    class func getDidConfiguredMedicine() -> Bool{
+        return NSUserDefaults.standardUserDefaults().boolForKey(UserSetting.DidConfiguredMedicine.rawValue) ?? false
     }
-
+    
     /// Syncronize standardUserDefaults
     class func syncronize(){
         NSUserDefaults.standardUserDefaults().synchronize()

@@ -14,10 +14,10 @@ class TestUserSettings: XCTestCase {
     
     func testGetSet() {
         //dont forget to reset iOS Simulator
-        XCTAssertEqual(false, UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine))
-        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, true)
-        XCTAssertEqual(true, UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine))
-        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, false)
-        XCTAssertEqual(false, UserSettingsManager.getBool(UserSetting.DidConfiguredMedicine))
+        XCTAssertEqual(false, UserSettingsManager.getDidConfiguredMedicine())
+        UserSettingsManager.setDidConfiguredMedicine(true)
+        XCTAssertEqual(true, UserSettingsManager.getDidConfiguredMedicine())
+        UserSettingsManager.setDidConfiguredMedicine(false)
+        XCTAssertEqual(false, UserSettingsManager.getDidConfiguredMedicine())
     }
 }

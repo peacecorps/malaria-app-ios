@@ -26,8 +26,7 @@ class MedicineManager{
         
         newMed.notificationManager.scheduleNotification(fireDate)
 
-        UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, true)
-        UserSettingsManager.syncronize()
+        //UserSettingsManager.setBool(UserSetting.DidConfiguredMedicine, true)
     }
     
     /// Clears instance of Medicines from the CoreData

@@ -2,6 +2,9 @@ import Foundation
 import UIKit
 
 class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    @IBOutlet weak var settingsBtn: UIImageView!
+    @IBOutlet weak var content: UIView!
+    
     
     //can be home, trip or info, by default is Home
     var type: PageType = PageType()
@@ -18,10 +21,12 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         
         var contentView: UIViewController?
+        let contentFrame: CGRect = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
         
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
-
+        pageViewController.view.frame = contentFrame
+        
         
         let defaultPage = getController(homePageEnum)!
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
@@ -37,7 +42,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         
         if let pretendedView = contentView{
-            pretendedView.view.backgroundColor = UIColor.redColor()
+            pretendedView.view.backgroundColor = UIColor.clearColor()
             pretendedView.willMoveToParentViewController(self)
             addChildViewController(pretendedView)
             view.addSubview(pretendedView.view)

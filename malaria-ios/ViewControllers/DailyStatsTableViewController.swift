@@ -42,6 +42,8 @@ class DailyStatsTableViewController : UIViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         statsTable.delegate = self
         statsTable.dataSource = self
+        
+        statsTable.backgroundColor = UIColor.clearColor()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

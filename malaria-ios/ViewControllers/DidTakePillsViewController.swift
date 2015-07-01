@@ -1,6 +1,10 @@
 import UIKit
 
 class DidTakePillsViewController: UIViewController {
+    @IBOutlet weak var dayOfTheWeekLbl: UILabel!
+    @IBOutlet weak var fullDateLbl: UILabel!
+    @IBOutlet weak var tookMedicineBtn: UIButton!
+    @IBOutlet weak var didNotTookMedicineBtn: UIButton!
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("didNotTookMedicineBtnHandler")
         
@@ -15,6 +19,11 @@ class DidTakePillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Logger.Info("loaded didTakePills")
+        
+        
+        let currentDay = NSDate()
+        dayOfTheWeekLbl.text = currentDay.formatWith("EEEE")
+        fullDateLbl.text = currentDay.formatWith("dd/MM/yyyy")
         
         //let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
      

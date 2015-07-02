@@ -20,7 +20,4 @@ extension UIStoryboard{
         return UIStoryboard(name: named, bundle: nil).instantiateViewControllerWithIdentifier(UIStoryboard.getSimpleClassName(viewControllerClass)) as! C
     }
     
-    class func instantiate (named: String = "Main", viewControllerName: String) -> UIViewController {
-        return UIStoryboard(name: named, bundle: nil).instantiateViewControllerWithIdentifier(viewControllerName) as! UIViewController
-    }
 }

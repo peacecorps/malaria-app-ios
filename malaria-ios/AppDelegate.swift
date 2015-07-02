@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !inTestEnvironment{
             if UserSettingsManager.getDidConfiguredMedicine(){
-                window!.rootViewController = UIStoryboard.instantiate(viewControllerName: "MenuTabBarController")
+                window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
             }else{
                 window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
             }

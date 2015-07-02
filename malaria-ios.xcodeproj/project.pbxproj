@@ -89,6 +89,8 @@
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
+		203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */; };
+		203F0B111B45B68800826E06 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B101B45B68700826E06 /* UIColor.swift */; };
 		205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */; };
 		205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A231B45616D00C94AA1 /* UIStoryboard.swift */; };
 		208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
@@ -168,6 +170,8 @@
 		200EE49E1B1343A60087FB24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		200EE49F1B1343A60087FB24 /* TestUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserSettings.swift; sourceTree = "<group>"; };
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
+		203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBarController.swift; sourceTree = "<group>"; };
+		203F0B101B45B68700826E06 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
 		205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoHubViewController.swift; sourceTree = "<group>"; };
 		205D5A231B45616D00C94AA1 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = ../../Managers/UIStoryboard.swift; sourceTree = "<group>"; };
@@ -311,6 +315,7 @@
 				200C72631B40368600998100 /* NSManagedObject.swift */,
 				205D5A231B45616D00C94AA1 /* UIStoryboard.swift */,
 				200C72641B40368600998100 /* NSSet.swift */,
+				203F0B101B45B68700826E06 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 				200C72701B40368600998100 /* PlanTripViewController.swift */,
 				200C72711B40368600998100 /* SetupScreenViewController.swift */,
 				205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */,
+				203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -648,9 +654,11 @@
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
 				205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */,
 				200C72D41B40368600998100 /* Posts.swift in Sources */,
+				203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */,
 				200C72B61B40368600998100 /* ItemExtension.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
+				203F0B111B45B68800826E06 /* UIColor.swift in Sources */,
 				200C72BC1B40368600998100 /* Registry.swift in Sources */,
 				200C72F41B40368600998100 /* NSSet.swift in Sources */,
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,

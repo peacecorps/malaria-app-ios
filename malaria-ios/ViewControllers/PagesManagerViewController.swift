@@ -30,8 +30,8 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.blueColor()
-        appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
+        appearance.pageIndicatorTintColor = UIColor.brownColor()
+        appearance.currentPageIndicatorTintColor = UIColor.blackColor()
         appearance.backgroundColor = UIColor.clearColor()
         
         //add pretended view to the hierarchy

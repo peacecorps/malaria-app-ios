@@ -2,7 +2,7 @@ import Foundation
 
 class UserSettingsManager{
     
-    enum UserSetting: String{
+    private enum UserSetting: String{
         static let allValues = [DidConfiguredMedicine]
         
         case DidConfiguredMedicine = "DidConfiguredMedicine"

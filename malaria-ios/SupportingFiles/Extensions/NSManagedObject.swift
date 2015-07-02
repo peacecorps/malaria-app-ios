@@ -24,6 +24,7 @@ extension NSManagedObject{
     /// :returns: `T`: A new NSManagedObject of the type given by argument
     class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!) -> T{
         let name = getSimpleClassName(entity)
+        Logger.Info("Creating \(name)")
         
         let entityDescription = NSEntityDescription.entityForName(name, inManagedObjectContext: context)!
         return NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! T

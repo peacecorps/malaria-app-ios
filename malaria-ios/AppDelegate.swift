@@ -13,16 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         
-        
         //setting up initial screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
         if !inTestEnvironment{
             if UserSettingsManager.getDidConfiguredMedicine(){
-                window!.rootViewController = ExistingViewsControllers.MenuTabBarController.instanciateViewController()
+                window!.rootViewController = UIStoryboard.instantiate(viewControllerName: "MenuTabBarController")
             }else{
-                window!.rootViewController = ExistingViewsControllers.SetupScreenViewController.instanciateViewController()
+                window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
             }
         }
         
@@ -54,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        Logger.Info("did receive local notification")
+        //Logger.Info("did receive local notification")
     }
 
 

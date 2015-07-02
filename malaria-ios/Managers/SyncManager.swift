@@ -23,28 +23,22 @@ class SyncManager {
     ///
     /// :param: `String`: full path
     /// :param: `Bool`: Save context after success
-    /// :param: `((url: String, error: NSError?)->())?`: failure Handler (default nil)
-    /// :param: `((url: String, object: NSManagedObject)->())?`: success Handler (default nil)
-    func sync(path: String, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
-        
-        func expandedSuccessHandler(url: String, object: NSManagedObject){
-            if let success = successHandler{
-                success(url: url, object: object)
-            }
+    /// :param: `((url: String, error: NSError?)->())?`: completition Handler (default nil)
+    func sync(path: String, save: Bool = false, completionHandler: ((url: String, error: NSError?)->())? = nil){
+        func expandedCompletionHandler(url: String, error: NSError?){
+            completionHandler?(url: url, error: error)
             
-            if (save){
+            if (error == nil && save){
                 Logger.Info("Saving to coreData")
                 CoreDataHelper.sharedInstance.saveContext()
             }
         }
         
         if let endpoint = endpoints[path]{
-            remoteFetch(endpoint, failureHandler: failureHandler, successHandler: expandedSuccessHandler)
+            remoteFetch(endpoint, completion: expandedCompletionHandler)
         }else{
             Logger.Error("Bad path provided to sync")
-            if let failure = failureHandler{
-                failure(url: path, error: nil)
-            }
+            completionHandler?(url: path, error: NSError(domain: "UNREACHABLE", code: 9999, userInfo: [:]))
         }
     }
     
@@ -55,39 +49,39 @@ class SyncManager {
     /// :param: `(()->())?`: completition handler (default nil)
     func syncAll(completitionHandler: (()->())? = nil){
         var count = endpoints.count
-        func successHandler(url: String, object: NSManagedObject){
-            CoreDataHelper.sharedInstance.saveContext()
-            
+        func completitionHandlerExpanded(url: String, error: NSError?){
             count--
             if(count == 0){
                 Logger.Info("Sync complete")
                 completitionHandler?()
             }
+            
+            Logger.Info("Saving to core data")
+            CoreDataHelper.sharedInstance.saveContext()
         }
         
         for (path, endpoint) in endpoints{
-            sync(path, successHandler: successHandler)
+            sync(path, completionHandler: completitionHandlerExpanded)
         }
     }
     
-    private func remoteFetch(endpoint: Endpoint, save: Bool = false, failureHandler: ((url: String, error: NSError?)->())? = nil, successHandler: ((url: String, object: NSManagedObject)->())? = nil){
-        
+    private func remoteFetch(endpoint: Endpoint, save: Bool = false, completion: ((url: String, error: NSError?)->())? = nil){
+        Logger.Info("Syncing: \(endpoint.path)")
         Alamofire.request(.GET, endpoint.path, parameters: ["format": "json"])
             .responseJSON { (req, res, json, error) in
-                if(error != nil) {
-                    Logger.Error("Error at \(endpoint.path)): \(error!)")
-                    failureHandler?(url: endpoint.path, error: nil)
-                }
-                else {
-                    Logger.Info("Connected to \(endpoint.path)")
+                
+                var resultError = error
+                if(error == nil) {
                     endpoint.clearFromDatabase()
                     if let objectMapped = endpoint.retrieveJSONObject(JSON(json!)){
-                        successHandler?(url: endpoint.path, object: objectMapped)
+                        Logger.Info("Success \(endpoint.path)")
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")
-                        failureHandler?(url: endpoint.path, error: nil)
+                        resultError = NSError(domain: "PARSE_ERROR", code: 9999, userInfo: [:])
                     }
                 }
+                
+                completion?(url: endpoint.path, error: resultError)
             }
     }
 }

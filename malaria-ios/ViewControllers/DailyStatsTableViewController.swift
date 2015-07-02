@@ -8,27 +8,26 @@ protocol Stat{
 }
 
 class Adherence : Stat{
-    var title : String { return "Adherence" }
+    var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
-    var attributeValue : String { return  "this"}
+    var attributeValue : String { return  "100%"}
 }
 
 class PillStreak : Stat{
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
-    var attributeValue : String { return  "10"}
+    var attributeValue : String { return  "999"}
 }
 
 class MedicineLastTaken : Stat{
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
-    var attributeValue : String { return  "3/6"}
+    var attributeValue : String { return  "12/12"}
 }
 
-class DailyStatsTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource{
+class DailyStatsTableViewController : UITableViewController{
     var listStats = [Stat]()
     
-    @IBOutlet weak var statsTable: UITableView!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -40,25 +39,22 @@ class DailyStatsTableViewController : UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        statsTable.delegate = self
-        statsTable.dataSource = self
-        
-        statsTable.backgroundColor = UIColor.clearColor()
+        view.backgroundColor = UIColor.clearColor()
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listStats.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 125.0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let stat = listStats[indexPath.row]
         
         let cell = tableView.dequeueReusableCellWithIdentifier("statCell") as! StateCell

@@ -10,14 +10,13 @@ class CollectionPostsEndpoint : Endpoint{
         if let results = data["results"].array{
             let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self)
             
-            if results.count == 0{
-                return collectionPosts
-            }
-            
             if let posts = getPosts(results){
+                Logger.Info("Adding posts to array")
+                println("----> \(posts.count)")
                 collectionPosts.posts.addObjectsFromArray(posts)
                 return collectionPosts
             }else{
+                collectionPosts.deleteFromContext()
                 Logger.Error("Error parsing results")
             }
         }

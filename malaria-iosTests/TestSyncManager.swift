@@ -5,14 +5,12 @@ class TestSyncManager: XCTestCase {
     let sm = SyncManager.sharedInstance
     
     var expectation: XCTestExpectation?
-    var successCalled = false
-    var failureCalled = false
+    var completionCalled = false
     
     override func setUp() {
         super.setUp()
         
-        successCalled = false
-        failureCalled = false
+        completionCalled = false
     }
     
     override func tearDown() {
@@ -22,20 +20,15 @@ class TestSyncManager: XCTestCase {
         }
     }
     
-    func successHandler(url: String, object: NSManagedObject){
-        successCalled = true
+    func completionHandler(url: String, error: NSError?){
+        completionCalled = true
         expectation!.fulfill()
     }
     
-    func failureHandler(url: String, error: NSError?){
-        failureCalled = true
-        expectation!.fulfill()
-    }
-    
-    func genericTest(path: String, type : NSManagedObject.Type?){
+    func genericTest(path: String, type : NSManagedObject.Type?, additionalTests: (()->())? = nil){
         expectation = expectationWithDescription("\(path)_callback")
         
-        sm.sync(path, save: true, failureHandler: failureHandler, successHandler: successHandler)
+        sm.sync(path, save: true, completionHandler: completionHandler)
         
         var done: Bool = false
         
@@ -44,14 +37,16 @@ class TestSyncManager: XCTestCase {
                 XCTFail("\(error.localizedDescription)")
             }
             
-            if !self.failureCalled && !self.successCalled{
-                XCTFail("Nor success nor failures callbacks were called")
+            if !self.completionCalled{
+                XCTFail("Completition handler wasn't called")
             }
             
             //assure only one object per endpoint
             if let t = type{
                 XCTAssertEqual(t.retrieve(t.self).count, 1)
             }
+            
+            additionalTests?()
             
             done = true
         })
@@ -64,14 +59,9 @@ class TestSyncManager: XCTestCase {
     func testSyncAll(){
         expectation = expectationWithDescription("syncall")
         
-        func completition(){
-            expectation!.fulfill()
-        }
         
-        sm.syncAll(completitionHandler: completition)
-        
+        sm.syncAll(completitionHandler: { Void in self.expectation!.fulfill() })
         var done: Bool = false
-        
         waitForExpectationsWithTimeout(60, handler: { error in
             if let error = error {
                 XCTFail("\(error.localizedDescription)")
@@ -92,6 +82,14 @@ class TestSyncManager: XCTestCase {
     }
     
     func testPosts(){
-        genericTest(EndpointType.Posts.path(), type: Posts.self)
+        func additionalTests(){
+            let endpointInfoArray = Posts.retrieve(Posts.self)
+            XCTAssertEqual(endpointInfoArray.count, 1)
+            XCTAssertNotEqual(Post.retrieve(Post.self).count, 0)
+            XCTAssertNotEqual(endpointInfoArray[0].posts.count, 0)
+            
+        }
+        
+        genericTest(EndpointType.Posts.path(), type: Posts.self, additionalTests: additionalTests)
     }
 }

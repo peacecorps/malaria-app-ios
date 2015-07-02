@@ -16,8 +16,6 @@
 		200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72261B40368600998100 /* PostsEndpoint.swift */; };
 		200C72981B40368600998100 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722E1B40368600998100 /* EndpointType.swift */; };
 		200C72991B40368600998100 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722E1B40368600998100 /* EndpointType.swift */; };
-		200C729A1B40368600998100 /* ExistingViewsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722F1B40368600998100 /* ExistingViewsControllers.swift */; };
-		200C729B1B40368600998100 /* ExistingViewsControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C722F1B40368600998100 /* ExistingViewsControllers.swift */; };
 		200C729E1B40368600998100 /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72331B40368600998100 /* MedicineManager.swift */; };
 		200C729F1B40368600998100 /* MedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72331B40368600998100 /* MedicineManager.swift */; };
 		200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72341B40368600998100 /* MedicineNotificationsManager.swift */; };
@@ -78,16 +76,11 @@
 		200C72FD1B40368600998100 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72691B40368600998100 /* DailyStatsTableViewController.swift */; };
 		200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726C1B40368600998100 /* DidTakePillsViewController.swift */; };
 		200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726C1B40368600998100 /* DidTakePillsViewController.swift */; };
-		200C73041B40368600998100 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726D1B40368600998100 /* InfoViewController.swift */; };
-		200C73051B40368600998100 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726D1B40368600998100 /* InfoViewController.swift */; };
 		200C73061B40368600998100 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726E1B40368600998100 /* PagesManagerViewController.swift */; };
-		200C73071B40368600998100 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726E1B40368600998100 /* PagesManagerViewController.swift */; };
 		200C73081B40368600998100 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726F1B40368600998100 /* PillsStatsViewController.swift */; };
 		200C73091B40368600998100 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726F1B40368600998100 /* PillsStatsViewController.swift */; };
 		200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72701B40368600998100 /* PlanTripViewController.swift */; };
-		200C730B1B40368600998100 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72701B40368600998100 /* PlanTripViewController.swift */; };
 		200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72711B40368600998100 /* SetupScreenViewController.swift */; };
-		200C730D1B40368600998100 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72711B40368600998100 /* SetupScreenViewController.swift */; };
 		200C730F1B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73101B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73431B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
@@ -96,6 +89,8 @@
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
+		205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */; };
+		205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A231B45616D00C94AA1 /* UIStoryboard.swift */; };
 		208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
 		208A17AD1B42F605004DA5D0 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
 		208A17AE1B42F605004DA5D0 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
@@ -129,7 +124,6 @@
 		200C721F1B40368600998100 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		200C72261B40368600998100 /* PostsEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsEndpoint.swift; sourceTree = "<group>"; };
 		200C722E1B40368600998100 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
-		200C722F1B40368600998100 /* ExistingViewsControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExistingViewsControllers.swift; sourceTree = "<group>"; };
 		200C72331B40368600998100 /* MedicineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineManager.swift; sourceTree = "<group>"; };
 		200C72341B40368600998100 /* MedicineNotificationsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineNotificationsManager.swift; sourceTree = "<group>"; };
 		200C72351B40368600998100 /* MedicineStats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicineStats.swift; sourceTree = "<group>"; };
@@ -160,7 +154,6 @@
 		200C72671B40368600998100 /* Utilitary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilitary.swift; sourceTree = "<group>"; };
 		200C72691B40368600998100 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		200C726C1B40368600998100 /* DidTakePillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidTakePillsViewController.swift; sourceTree = "<group>"; };
-		200C726D1B40368600998100 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		200C726E1B40368600998100 /* PagesManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesManagerViewController.swift; sourceTree = "<group>"; };
 		200C726F1B40368600998100 /* PillsStatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PillsStatsViewController.swift; sourceTree = "<group>"; };
 		200C72701B40368600998100 /* PlanTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTripViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +169,8 @@
 		200EE49F1B1343A60087FB24 /* TestUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserSettings.swift; sourceTree = "<group>"; };
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
+		205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoHubViewController.swift; sourceTree = "<group>"; };
+		205D5A231B45616D00C94AA1 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = ../../Managers/UIStoryboard.swift; sourceTree = "<group>"; };
 		208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineManager.swift; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
@@ -226,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				200C722E1B40368600998100 /* EndpointType.swift */,
-				200C722F1B40368600998100 /* ExistingViewsControllers.swift */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -315,6 +309,7 @@
 				200C72611B40368600998100 /* Int.swift */,
 				200C72621B40368600998100 /* NSDate.swift */,
 				200C72631B40368600998100 /* NSManagedObject.swift */,
+				205D5A231B45616D00C94AA1 /* UIStoryboard.swift */,
 				200C72641B40368600998100 /* NSSet.swift */,
 			);
 			path = Extensions;
@@ -325,11 +320,11 @@
 			children = (
 				200C72691B40368600998100 /* DailyStatsTableViewController.swift */,
 				200C726C1B40368600998100 /* DidTakePillsViewController.swift */,
-				200C726D1B40368600998100 /* InfoViewController.swift */,
 				200C726E1B40368600998100 /* PagesManagerViewController.swift */,
 				200C726F1B40368600998100 /* PillsStatsViewController.swift */,
 				200C72701B40368600998100 /* PlanTripViewController.swift */,
 				200C72711B40368600998100 /* SetupScreenViewController.swift */,
+				205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -629,7 +624,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				200C72A21B40368600998100 /* MedicineStats.swift in Sources */,
-				200C73041B40368600998100 /* InfoViewController.swift in Sources */,
 				200C72AE1B40368600998100 /* TripsManager.swift in Sources */,
 				200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
 				200C727C1B40368600998100 /* Endpoint.swift in Sources */,
@@ -649,10 +643,11 @@
 				200C72EE1B40368600998100 /* Int.swift in Sources */,
 				200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
+				205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */,
 				200C728A1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
+				205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */,
 				200C72D41B40368600998100 /* Posts.swift in Sources */,
-				200C729A1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
 				200C72B61B40368600998100 /* ItemExtension.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
@@ -678,26 +673,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				200C72E91B40368600998100 /* TripExtension.swift in Sources */,
-				200C73051B40368600998100 /* InfoViewController.swift in Sources */,
 				200C72ED1B40368600998100 /* CoreDataStore.swift in Sources */,
 				200C72FB1B40368600998100 /* Utilitary.swift in Sources */,
 				208FE08C1B42F37700C5F447 /* TestTimedInsertions.swift in Sources */,
 				208FE08B1B42F37700C5F447 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				200C72991B40368600998100 /* EndpointType.swift in Sources */,
 				208FE08A1B42F37700C5F447 /* TestDailyMedicineStatistics.swift in Sources */,
-				200C730D1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				200C72B51B40368600998100 /* Item.swift in Sources */,
 				200C72AD1B40368600998100 /* TripNotificationsManager.swift in Sources */,
 				200C72EF1B40368600998100 /* Int.swift in Sources */,
 				208A17B21B42F605004DA5D0 /* TestSyncManager.swift in Sources */,
-				200C729B1B40368600998100 /* ExistingViewsControllers.swift in Sources */,
 				200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C72B71B40368600998100 /* ItemExtension.swift in Sources */,
 				208A17AF1B42F605004DA5D0 /* TestNotifications.swift in Sources */,
 				200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */,
-				200C730B1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				200C72AF1B40368600998100 /* TripsManager.swift in Sources */,
-				200C73071B40368600998100 /* PagesManagerViewController.swift in Sources */,
 				208A17B11B42F605004DA5D0 /* TestMapping.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
 				208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */,

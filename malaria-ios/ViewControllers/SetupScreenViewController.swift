@@ -58,8 +58,7 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         if(UserSettingsManager.getDidConfiguredMedicine()){
             dismissViewControllerAnimated(true, completion: nil)
         }else{
-            
-            var view = ExistingViewsControllers.MenuTabBarController.instanciateViewController() as! UITabBarController
+            var view = UIStoryboard.instantiate(viewControllerName: "MenuTabBarController")
             presentViewController(
                 view,
                 animated: true,

@@ -58,23 +58,22 @@ class TestPlanTrip: XCTestCase {
     
     func testAddItems(){
         trip.itemsManager.addItem("lantern", quantity: 1)
+        XCTAssertEqual(trip.items.count, 1)
+        
         trip.itemsManager.addItem("Stress Ball", quantity: 2)
+        XCTAssertEqual(trip.items.count, 2)
         
         
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        if let lantern = trip.itemsManager.findItem("lantern"),
+                lanternUpper = trip.itemsManager.findItem("Lantern")
+        {
             XCTAssertEqual(lantern.number, 1)
         }else{
             XCTFail("findItem lantern not found")
         }
         
-        if let lantern = trip.itemsManager.findItem("Lantern"){
-            XCTAssertEqual(lantern.number, 1)
-        }else{
-            XCTFail("findItem must be case insensitive")
-        }
-        
-        if let lantern = trip.itemsManager.findItem("Stress Ball"){
-            XCTAssertEqual(lantern.number, 2)
+        if let streessBall = trip.itemsManager.findItem("Stress Ball"){
+            XCTAssertEqual(streessBall.number, 2)
         }
         
         //check case insensitive
@@ -91,6 +90,8 @@ class TestPlanTrip: XCTestCase {
             XCTFail("findItem lantern not found")
         }
         
+        XCTAssertEqual(trip.items.count, 1)
+        
         //add more 3 lanterns to the trip ( 3 + 1)
         trip.itemsManager.addItem("lantern", quantity: 3)
         
@@ -99,6 +100,8 @@ class TestPlanTrip: XCTestCase {
         }else{
             XCTFail("findItem lantern not found")
         }
+        
+        XCTAssertEqual(trip.items.count, 1)
     }
     
     func testRemoveItem(){
@@ -111,6 +114,8 @@ class TestPlanTrip: XCTestCase {
         }else{
             XCTFail("findItem lantern not found")
         }
+        
+        XCTAssertEqual(trip.items.count, 1)
         
         //test removing more elements that there is. The item must be removed
         trip.itemsManager.removeItem("lantern", quantity: 30)
@@ -128,11 +133,15 @@ class TestPlanTrip: XCTestCase {
             XCTFail("findItem lantern not found")
         }
         
+        XCTAssertEqual(trip.items.count, 1)
+        
         //removing again
         trip.itemsManager.removeItem("lantern")
         if let lantern = trip.itemsManager.findItem("lantern"){
             XCTFail("item was not removed despite")
         }
+        
+        XCTAssertEqual(trip.items.count, 0)
     }
     
     func testCascadeDelete(){

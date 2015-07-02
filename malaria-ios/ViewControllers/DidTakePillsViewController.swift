@@ -25,9 +25,9 @@ class DidTakePillsViewController: UIViewController {
         dayOfTheWeekLbl.text = currentDay.formatWith("EEEE")
         fullDateLbl.text = currentDay.formatWith("dd/MM/yyyy")
         
-        //let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
-     
+        
         /*
+        let didTookPill = MedicineManager.sharedInstance.didTookPill(NSDate())
         didNotTookMedicineBtn.enabled = !didTookPill
         tookMedicineBtn.enabled = !didTookPill
         */

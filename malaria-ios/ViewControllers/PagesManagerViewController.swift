@@ -2,7 +2,8 @@ import Foundation
 import UIKit
 
 class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    @IBOutlet weak var settingsBtn: UIImageView!
+    @IBOutlet weak var settingsBtn: UIButton!
+    
     @IBOutlet weak var content: UIView!
     
     
@@ -19,43 +20,32 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        
-        var contentView: UIViewController?
-        let contentFrame: CGRect = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
-        
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         pageViewController!.dataSource = self
-        pageViewController.view.frame = contentFrame
+        pageViewController.view.frame = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
         
         
         let defaultPage = getController(homePageEnum)!
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
         
-        contentView = pageViewController
         
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.grayColor()
+        appearance.pageIndicatorTintColor = UIColor.blueColor()
         appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
         appearance.backgroundColor = UIColor.clearColor()
         
         //add pretended view to the hierarchy
-        
-        
-        if let pretendedView = contentView{
-            pretendedView.view.backgroundColor = UIColor.clearColor()
-            pretendedView.willMoveToParentViewController(self)
-            addChildViewController(pretendedView)
-            view.addSubview(pretendedView.view)
-            pretendedView.didMoveToParentViewController(self)
-        }else{
-            Logger.Error("Couldn't load pageManagerContent")
-        }
+        pageViewController.view.backgroundColor = UIColor.clearColor()
+        pageViewController.willMoveToParentViewController(self)
+        addChildViewController(pageViewController)
+        view.addSubview(pageViewController.view)
+        pageViewController.didMoveToParentViewController(self)
     }
     
     @IBAction func settingsButtonHandler(){
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            self.performSegueWithIdentifier("showSetupScreen", sender: nil)
+            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
         }
     }
     
@@ -80,11 +70,11 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         switch value {
             case .DailyPill:
-                vc = ExistingViewsControllers.DidTakePillViewController.instanciateViewController() as! DidTakePillsViewController
+                vc = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self)
             case .DailyStates:
-                vc = ExistingViewsControllers.DailyStatsTableViewController.instanciateViewController() as! DailyStatsTableViewController
+                vc = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self)
             case .Stats:
-                vc = ExistingViewsControllers.PillsStatsViewController.instanciateViewController() as! PillsStatsViewController
+                vc = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self)
             default: return nil
         }
         

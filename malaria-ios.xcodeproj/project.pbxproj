@@ -73,12 +73,9 @@
 		200C72FA1B40368600998100 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72671B40368600998100 /* Utilitary.swift */; };
 		200C72FB1B40368600998100 /* Utilitary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72671B40368600998100 /* Utilitary.swift */; };
 		200C72FC1B40368600998100 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72691B40368600998100 /* DailyStatsTableViewController.swift */; };
-		200C72FD1B40368600998100 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72691B40368600998100 /* DailyStatsTableViewController.swift */; };
 		200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726C1B40368600998100 /* DidTakePillsViewController.swift */; };
-		200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726C1B40368600998100 /* DidTakePillsViewController.swift */; };
 		200C73061B40368600998100 /* PagesManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726E1B40368600998100 /* PagesManagerViewController.swift */; };
 		200C73081B40368600998100 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726F1B40368600998100 /* PillsStatsViewController.swift */; };
-		200C73091B40368600998100 /* PillsStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C726F1B40368600998100 /* PillsStatsViewController.swift */; };
 		200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72701B40368600998100 /* PlanTripViewController.swift */; };
 		200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200C72711B40368600998100 /* SetupScreenViewController.swift */; };
 		200C730F1B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
@@ -92,6 +89,10 @@
 		203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */; };
 		203F0B111B45B68800826E06 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B101B45B68700826E06 /* UIColor.swift */; };
 		203F0B141B466D2000826E06 /* PostDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B131B466D2000826E06 /* PostDetailedViewController.swift */; };
+		203F0B181B46B91500826E06 /* PickerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B171B46B91500826E06 /* PickerProvider.swift */; };
+		203F0B1A1B46C0BB00826E06 /* MedicinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B191B46C0BB00826E06 /* MedicinePickerView.swift */; };
+		203F0B1C1B46EB9E00826E06 /* UIPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B1B1B46EB9E00826E06 /* UIPickView.swift */; };
+		203F0B1E1B46EBC900826E06 /* TimePickerViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B1D1B46EBC900826E06 /* TimePickerViewer.swift */; };
 		205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */; };
 		205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A231B45616D00C94AA1 /* UIStoryboard.swift */; };
 		208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
@@ -174,6 +175,10 @@
 		203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBarController.swift; sourceTree = "<group>"; };
 		203F0B101B45B68700826E06 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		203F0B131B466D2000826E06 /* PostDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDetailedViewController.swift; path = Info/PostDetailedViewController.swift; sourceTree = "<group>"; };
+		203F0B171B46B91500826E06 /* PickerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerProvider.swift; sourceTree = "<group>"; };
+		203F0B191B46C0BB00826E06 /* MedicinePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MedicinePickerView.swift; sourceTree = "<group>"; };
+		203F0B1B1B46EB9E00826E06 /* UIPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPickView.swift; sourceTree = "<group>"; };
+		203F0B1D1B46EBC900826E06 /* TimePickerViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePickerViewer.swift; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
 		205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoHubViewController.swift; sourceTree = "<group>"; };
 		205D5A231B45616D00C94AA1 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = ../../Managers/UIStoryboard.swift; sourceTree = "<group>"; };
@@ -318,6 +323,7 @@
 				205D5A231B45616D00C94AA1 /* UIStoryboard.swift */,
 				200C72641B40368600998100 /* NSSet.swift */,
 				203F0B101B45B68700826E06 /* UIColor.swift */,
+				203F0B1B1B46EB9E00826E06 /* UIPickView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -331,6 +337,9 @@
 				205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */,
 				203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */,
 				203F0B131B466D2000826E06 /* PostDetailedViewController.swift */,
+				203F0B171B46B91500826E06 /* PickerProvider.swift */,
+				203F0B191B46C0BB00826E06 /* MedicinePickerView.swift */,
+				203F0B1D1B46EBC900826E06 /* TimePickerViewer.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -642,6 +651,7 @@
 			files = (
 				200C72A21B40368600998100 /* MedicineStats.swift in Sources */,
 				200C72AE1B40368600998100 /* TripsManager.swift in Sources */,
+				203F0B1A1B46C0BB00826E06 /* MedicinePickerView.swift in Sources */,
 				200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
 				200C727C1B40368600998100 /* Endpoint.swift in Sources */,
 				200C72F21B40368600998100 /* NSManagedObject.swift in Sources */,
@@ -666,8 +676,10 @@
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
 				205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */,
 				200C72D41B40368600998100 /* Posts.swift in Sources */,
+				203F0B1C1B46EB9E00826E06 /* UIPickView.swift in Sources */,
 				203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */,
 				200C72B61B40368600998100 /* ItemExtension.swift in Sources */,
+				203F0B1E1B46EBC900826E06 /* TimePickerViewer.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
 				203F0B111B45B68800826E06 /* UIColor.swift in Sources */,
@@ -677,6 +689,7 @@
 				200C72B41B40368600998100 /* Item.swift in Sources */,
 				200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */,
 				200C72F81B40368600998100 /* Logger.swift in Sources */,
+				203F0B181B46B91500826E06 /* PickerProvider.swift in Sources */,
 				200C72E61B40368600998100 /* Trip.swift in Sources */,
 				200C72BA1B40368600998100 /* MedicineExtension.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
@@ -706,7 +719,6 @@
 				200C728B1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C72B71B40368600998100 /* ItemExtension.swift in Sources */,
 				208A17AF1B42F605004DA5D0 /* TestNotifications.swift in Sources */,
-				200C73031B40368600998100 /* DidTakePillsViewController.swift in Sources */,
 				200C72AF1B40368600998100 /* TripsManager.swift in Sources */,
 				208A17B11B42F605004DA5D0 /* TestMapping.swift in Sources */,
 				20EA07031B226DB800D6840E /* Model.xcdatamodeld in Sources */,
@@ -715,7 +727,6 @@
 				200C72E71B40368600998100 /* Trip.swift in Sources */,
 				200C72EB1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				208A17AE1B42F605004DA5D0 /* TestNSDateExtensions.swift in Sources */,
-				200C72FD1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72A91B40368600998100 /* SyncManager.swift in Sources */,
 				200C72A31B40368600998100 /* MedicineStats.swift in Sources */,
 				200C72D31B40368600998100 /* Post.swift in Sources */,
@@ -724,7 +735,6 @@
 				200C727D1B40368600998100 /* Endpoint.swift in Sources */,
 				200C72B11B40368600998100 /* UserSettingsManager.swift in Sources */,
 				200C72BD1B40368600998100 /* Registry.swift in Sources */,
-				200C73091B40368600998100 /* PillsStatsViewController.swift in Sources */,
 				200C72A51B40368600998100 /* RegistriesManager.swift in Sources */,
 				200C72D51B40368600998100 /* Posts.swift in Sources */,
 				200C72F91B40368600998100 /* Logger.swift in Sources */,

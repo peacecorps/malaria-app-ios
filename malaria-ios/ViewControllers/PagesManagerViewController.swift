@@ -78,8 +78,6 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             default: return nil
         }
         
-        //initialize views here if needed
-        
         // store relative enum to view controller
         _dict[vc!] = value
         return vc!

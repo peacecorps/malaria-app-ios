@@ -4,9 +4,16 @@ import MapKit
 import CoreLocation
 
 
-class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
+class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, UIPickerViewDelegate, UIPickerViewDataSource{
     
-     let locationManager = CLLocationManager()
+    let DoneButtonWidth: CGFloat = 100.0
+    let DoneButtonHeight: CGFloat = 40.0
+    let InputMedicineHeight: CGFloat = 200.0
+    
+    
+    private var picker: UIPickerView!
+    
+    let locationManager = CLLocationManager()
     
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var parkingList: UITextField!
@@ -17,13 +24,11 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Logger.Info("loaded PlanTripViewController")
-        
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
     }
     
     @IBAction func generateTrip(sender: AnyObject) {
-    
+        Logger.Info("Saving trip")
     }
     
     
@@ -54,14 +59,12 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     func displayLocationInfo(placemark: CLPlacemark?) {
         //stop updating location to save battery life
         locationManager.stopUpdatingLocation()
-        
         location.text = placemark?.locality
     }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location " + error.localizedDescription)
     }
-    
     
     @IBAction func settingsBtnHandler(sender: AnyObject) {
         //fix delay

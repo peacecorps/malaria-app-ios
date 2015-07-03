@@ -718,9 +718,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="dayOfTheWeekLbl" destination="qdt-W4-PCn" id="yWp-Ib-je0"/>
-                        <outlet property="didNotTookMedicineBtn" destination="hK7-xC-LL2" id="4IB-mf-X4W"/>
+                        <outlet property="didNotTookPillBtn" destination="2J1-Pj-fe4" id="xag-MK-kPb"/>
                         <outlet property="fullDateLbl" destination="13E-q0-T4d" id="1dz-6p-zye"/>
-                        <outlet property="tookMedicineBtn" destination="2J1-Pj-fe4" id="8p6-Lc-FGO"/>
+                        <outlet property="tookPillBtn" destination="hK7-xC-LL2" id="KwO-kV-tYA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XGi-SJ-8kt" userLabel="First Responder" sceneMemberID="firstResponder"/>

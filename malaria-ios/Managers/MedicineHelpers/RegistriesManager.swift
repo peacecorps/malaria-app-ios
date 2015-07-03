@@ -12,25 +12,39 @@ class RegistriesManager{
     /// :param: `NSDate`: the date
     /// :returns: `Bool`: True if the user took a pill in that day or week
     func tookMedicine(at: NSDate) -> Bool{
-        if medicine.isDaily(){
-            
-            if let r = findRegistry(at){
-                return r.tookMedicine
-            }
-            return false
-        }else{
-            let registries = getRegistries(date1: at - 8.day, date2: at + 8.day)
-            
-            for r in registries{
-                if NSDate.areDatesSameWeek(at, dateTwo: r.date){
-                    if (r.tookMedicine){
-                        return true
-                    }
-                }
+    
+        for r in allRegistriesInPeriod(at){
+            if r.tookMedicine{
+                return true
             }
         }
         
         return false
+    }
+    
+    
+    /// Returns the list of entries that happens in that day or in that week (if daily or weekly pill)
+    ///
+    /// :param: `NSDate`: the date
+    /// :returns: `[Registry]` all the entries
+    func allRegistriesInPeriod(at: NSDate) -> [Registry] {
+        var result = [Registry]()
+        
+        if medicine.isDaily(){
+            if let r = findRegistry(at){
+                result.append(r)
+            }
+        }else if medicine.isWeekly(){
+            let registries = getRegistries(date1: at - 8.day, date2: at + 8.day)
+            
+            for r in registries{
+                if NSDate.areDatesSameWeek(at, dateTwo: r.date){
+                    result.append(r)
+                }
+            }
+        }
+        
+        return result
     }
 
     /// Returns the most recent entry for that pill if there is

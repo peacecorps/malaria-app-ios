@@ -10,32 +10,33 @@ protocol Stat{
 class Adherence : Stat{
     var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
-    var attributeValue : String { return  "100%"}
+    var attributeValue : String { return "\(100 * MedicineManager.sharedInstance.getCurrentMedicine()!.stats.pillAdherence())%"}
 }
 
 class PillStreak : Stat{
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
-    var attributeValue : String { return  "999"}
+    var attributeValue : String { return "\(MedicineManager.sharedInstance.getCurrentMedicine()!.stats.pillStreak())"}
 }
 
 class MedicineLastTaken : Stat{
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
-    var attributeValue : String { return  "12/12"}
+    var attributeValue : String {
+        if let mostRecentEntry = MedicineManager.sharedInstance.getCurrentMedicine()!.registriesManager.mostRecentEntry(){
+            return mostRecentEntry.date.formatWith("dd-MM")
+        }
+        
+        return "+oo"
+    }
 }
 
 class DailyStatsTableViewController : UITableViewController{
-    var listStats = [Stat]()
-    
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        listStats.append(MedicineLastTaken())
-        listStats.append(PillStreak())
-        listStats.append(Adherence())
-    }
+    let listStats: [Stat] = [
+        MedicineLastTaken(),
+        PillStreak(),
+        Adherence()
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +55,11 @@ class DailyStatsTableViewController : UITableViewController{
         return 125.0
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let stat = listStats[indexPath.row]
         
@@ -67,10 +73,7 @@ class DailyStatsTableViewController : UITableViewController{
 }
 
 class StateCell: UITableViewCell{
-
     @IBOutlet weak var statIcon: UIImageView!
     @IBOutlet weak var statLbl: UILabel!
     @IBOutlet weak var statValueLbl: UILabel!
-    
-
 }

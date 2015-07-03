@@ -20,11 +20,6 @@ class SetupScreenViewController : UIViewController{
         medicinePicker = MedicinePickerView(view: medicineName, selectCallback: {(object: String) in
             self.medicineName.text = object
         })
-        var index = 0
-        if let m = MedicineManager.sharedInstance.getCurrentMedicine(){
-            index = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: m.name)!) ?? 0
-        }
-        medicinePicker.selectRow(index, inComponent: 0, animated: false)
         medicineName.inputView = medicinePicker.generateInputView()
         
         //Setting up DatePickerView

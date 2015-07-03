@@ -26,6 +26,13 @@ class MedicinePickerView : UIPickerView{
         
         self.delegate = medicinePickerProvider
         self.dataSource = medicinePickerProvider
+        
+        var index = 0
+        if let m = MedicineManager.sharedInstance.getCurrentMedicine(){
+            index = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: m.name)!) ?? 0
+        }
+        
+        selectRow(index, inComponent: 0, animated: false)
     }
     
     

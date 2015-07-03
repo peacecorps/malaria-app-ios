@@ -35,7 +35,6 @@ class SetupScreenViewController : UIViewController, UIPickerViewDelegate, UIPick
         picker.reloadAllComponents()
         
         var index = 0
-        
         let currentMedicine = MedicineManager.sharedInstance.getCurrentMedicine()
         
         if let m = currentMedicine{

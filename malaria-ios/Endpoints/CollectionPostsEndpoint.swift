@@ -3,6 +3,7 @@ import SwiftyJSON
 
 class CollectionPostsEndpoint : Endpoint{
     var path: String { get { fatalError("Please specify path") } }
+    
     /// subCollectionClassType: Specify the subclass of CollectionPosts
     var subCollectionsPostsType: CollectionPosts.Type { get { fatalError("Please specify collection type") } }
     
@@ -11,9 +12,7 @@ class CollectionPostsEndpoint : Endpoint{
             let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self)
             
             if let posts = getPosts(results){
-                Logger.Info("Adding posts to array")
-                println("----> \(posts.count)")
-                collectionPosts.posts.addObjectsFromArray(posts)
+                collectionPosts.posts = NSMutableSet(array: posts)
                 return collectionPosts
             }else{
                 collectionPosts.deleteFromContext()

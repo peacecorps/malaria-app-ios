@@ -91,6 +91,7 @@
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
 		203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */; };
 		203F0B111B45B68800826E06 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B101B45B68700826E06 /* UIColor.swift */; };
+		203F0B141B466D2000826E06 /* PostDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B131B466D2000826E06 /* PostDetailedViewController.swift */; };
 		205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */; };
 		205D5A241B45616D00C94AA1 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D5A231B45616D00C94AA1 /* UIStoryboard.swift */; };
 		208A17AC1B42F605004DA5D0 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
@@ -172,6 +173,7 @@
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbedBarController.swift; sourceTree = "<group>"; };
 		203F0B101B45B68700826E06 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		203F0B131B466D2000826E06 /* PostDetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostDetailedViewController.swift; path = Info/PostDetailedViewController.swift; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
 		205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoHubViewController.swift; sourceTree = "<group>"; };
 		205D5A231B45616D00C94AA1 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = ../../Managers/UIStoryboard.swift; sourceTree = "<group>"; };
@@ -323,14 +325,12 @@
 		200C72681B40368600998100 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				200C72691B40368600998100 /* DailyStatsTableViewController.swift */,
-				200C726C1B40368600998100 /* DidTakePillsViewController.swift */,
-				200C726E1B40368600998100 /* PagesManagerViewController.swift */,
-				200C726F1B40368600998100 /* PillsStatsViewController.swift */,
+				203F0B121B466C7E00826E06 /* Home */,
 				200C72701B40368600998100 /* PlanTripViewController.swift */,
 				200C72711B40368600998100 /* SetupScreenViewController.swift */,
 				205D5A211B4558D500C94AA1 /* InfoHubViewController.swift */,
 				203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */,
+				203F0B131B466D2000826E06 /* PostDetailedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -401,6 +401,17 @@
 				200EE49E1B1343A60087FB24 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		203F0B121B466C7E00826E06 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				200C72691B40368600998100 /* DailyStatsTableViewController.swift */,
+				200C726C1B40368600998100 /* DidTakePillsViewController.swift */,
+				200C726E1B40368600998100 /* PagesManagerViewController.swift */,
+				200C726F1B40368600998100 /* PillsStatsViewController.swift */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 		C3160C97150C507D61AF9074 /* Pods */ = {
@@ -640,6 +651,7 @@
 				200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
 				200C72FA1B40368600998100 /* Utilitary.swift in Sources */,
+				203F0B141B466D2000826E06 /* PostDetailedViewController.swift in Sources */,
 				200C72FC1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72981B40368600998100 /* EndpointType.swift in Sources */,
 				200C72AC1B40368600998100 /* TripNotificationsManager.swift in Sources */,

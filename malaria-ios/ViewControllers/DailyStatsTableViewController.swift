@@ -34,7 +34,6 @@ class MedicineLastTaken : Stat{
         return result
     }
 }
-
 class DailyStatsTableViewController : UITableViewController{
     let listStats: [Stat] = [
         MedicineLastTaken(),

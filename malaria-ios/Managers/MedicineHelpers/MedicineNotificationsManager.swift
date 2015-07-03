@@ -32,6 +32,10 @@ class MedicineNotificationsManager : NotificationManager{
         if var nextTime = medicine.notificationTime{
             nextTime += medicine.isDaily() ? 1.day : 7.day
             medicine.notificationTime = nextTime
+            
+            Logger.Info("Resheduling to " + nextTime.formatWith("dd-MMMM-yyyy hh:mm"))
+            
+            return
         }
         
         if medicine.isCurrent{
@@ -39,17 +43,22 @@ class MedicineNotificationsManager : NotificationManager{
         }
     }
     
-    /// Checks if a week went by without a entry
+    /// Checks if a week went by without a entry (only valid for weekly pills)
     ///
     /// :param: `NSDate optional`: Current date. (by default is the most current one)
     /// :returns: `Bool`: true if should, false if not
     func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
-        if let mostRecent = medicine.registriesManager.mostRecentEntry(){
-            //get ellaped days
-            return (currentDate - mostRecent.date) > 7
+        if medicine.isDaily(){
+            Logger.Warn("checkIfShouldReset only valid for weekly pills")
+            return false
         }
         
-        Logger.Warn("There is no registry yet registred")
+        if let mostRecent = medicine.registriesManager.mostRecentEntry(){
+            //get ellaped days
+            return (currentDate - mostRecent.date) >= 7
+        }
+        
+        Logger.Warn("There are no entries yet. Returning false")
         return false
     }
 }

@@ -10,6 +10,22 @@ class SetupScreenViewController : UIViewController{
     var medicinePicker: MedicinePickerView!
     var timePickerview: TimePickerView!
     
+    
+    lazy var toolBar: UIToolbar! = {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace,target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("dismissInputView:"))
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        
+        return keyboardToolbar
+        }()
+    
+    func dismissInputView(sender: UITextField){
+        medicineName.endEditing(true)
+        reminderTime.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
@@ -17,10 +33,11 @@ class SetupScreenViewController : UIViewController{
         pillReminderNotificationTime = getStoredReminderTime()
         
         //Setting up medicinePickerView with default Value
-        medicinePicker = MedicinePickerView(view: medicineName, selectCallback: {(object: String) in
+        medicinePicker = MedicinePickerView(selectCallback: {(object: String) in
             self.medicineName.text = object
         })
         medicineName.inputView = medicinePicker.generateInputView()
+        medicineName.inputAccessoryView = toolBar
         
         //Setting up DatePickerView
         timePickerview = TimePickerView(view: reminderTime, selectCallback: {(date: NSDate) in
@@ -28,6 +45,7 @@ class SetupScreenViewController : UIViewController{
             self.refreshPage()
         })
         reminderTime.inputView = timePickerview.generateInputView(.Time, startDate: pillReminderNotificationTime)
+        reminderTime.inputAccessoryView = toolBar
         
         refreshPage()
     }

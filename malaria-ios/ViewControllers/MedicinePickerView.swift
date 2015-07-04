@@ -5,12 +5,8 @@ class MedicinePickerView : UIPickerView{
     var medicinePickerProvider: PickerProvider!
     var medicines = [String]()
     
-    var view: UIView!
-    
-    init(view: UIView, selectCallback: (object: String) -> ()){
+    init(selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
-        
-        self.view = view
         
         //Setting up medicine value picker
         var values = [String]()
@@ -33,11 +29,6 @@ class MedicinePickerView : UIPickerView{
         }
         
         selectRow(index, inComponent: 0, animated: false)
-    }
-    
-    
-    override func insertedInput() -> UIView {
-        return view
     }
     
     required init(coder aDecoder: NSCoder) {

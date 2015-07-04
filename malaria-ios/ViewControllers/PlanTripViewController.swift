@@ -5,14 +5,15 @@ import CoreLocation
 
 
 class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, UIPickerViewDelegate, UIPickerViewDataSource{
+    let locationManager = CLLocationManager()
+    
+    var pcLocationPicker: PCLocationPickerViewer!
     var medicinePicker: MedicinePickerView!
     var dayDatePickerview: TimePickerView!
     var monthDatePickerview: TimePickerView!
     var yearDatePickerview: TimePickerView!
     
     var tripReminderDate: NSDate!
-    
-    let locationManager = CLLocationManager()
     
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var parkingList: UITextField!
@@ -22,20 +23,46 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, U
     @IBOutlet weak var yearValuePicker: UITextField!
     @IBOutlet weak var cashToBring: UITextField!
     
-
+    
+    lazy var toolBar: UIToolbar! = {
+        let keyboardToolbar = UIToolbar()
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace,target: nil, action: nil)
+        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("dismissInputView:"))
+        keyboardToolbar.items = [flexBarButton, doneBarButton]
+        
+        return keyboardToolbar
+        }()
+    
+    func dismissInputView(sender: UITextField){
+        location.endEditing(true)
+        parkingList.endEditing(true)
+        medicationList.endEditing(true)
+        dayValuePicker.endEditing(true)
+        monthValuePicker.endEditing(true)
+        yearValuePicker.endEditing(true)
+        cashToBring.endEditing(true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         tripReminderDate = getStoredPlanTripNotificationDate()
         
+        pcLocationPicker = PCLocationPickerViewer(selectCallback: {(object: String) in
+            self.location.text = object
+        })
+        location.inputView = pcLocationPicker.generateInputView()
+        location.inputAccessoryView = toolBar
+        
         //Setting up medicinePickerView with default Value
-        medicinePicker = MedicinePickerView(view: medicationList, selectCallback: {(object: String) in
+        medicinePicker = MedicinePickerView(selectCallback: {(object: String) in
             self.medicationList.text = object
         })
         medicationList.inputView = medicinePicker.generateInputView()
-        
+        medicationList.inputAccessoryView = toolBar
         
         //Setting up dayDatePickerview
         dayDatePickerview = TimePickerView(view: dayValuePicker, selectCallback: {(date: NSDate) in
@@ -43,6 +70,8 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, U
             self.refresh()
         })
         dayValuePicker.inputView = dayDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
+        dayValuePicker.inputAccessoryView = toolBar
+        
         
         //Setting up monthDatePickerview
         monthDatePickerview = TimePickerView(view: monthValuePicker, selectCallback: {(date: NSDate) in
@@ -50,6 +79,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, U
             self.refresh()
         })
         monthValuePicker.inputView = monthDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
+        monthValuePicker.inputAccessoryView = toolBar
         
         //Setting up yearDatePickerview
         yearDatePickerview = TimePickerView(view: yearValuePicker, selectCallback: {(date: NSDate) in
@@ -57,6 +87,10 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, U
             self.refresh()
         })
         yearValuePicker.inputView = yearDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
+        yearValuePicker.inputAccessoryView = toolBar
+        
+        
+        cashToBring.inputAccessoryView = toolBar
         
         refresh()
     }
@@ -126,18 +160,15 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {//, U
             
             if placemarks.count > 0 {
                 let pm = placemarks[0] as! CLPlacemark
-                self.displayLocationInfo(pm)
+                //stop updating location to save battery life
+                self.locationManager.stopUpdatingLocation()
+                self.location.text = pm.locality
             } else {
                 println("Problem with the data received from geocoder")
             }
         })
     }
     
-    func displayLocationInfo(placemark: CLPlacemark?) {
-        //stop updating location to save battery life
-        locationManager.stopUpdatingLocation()
-        location.text = placemark?.locality
-    }
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location " + error.localizedDescription)

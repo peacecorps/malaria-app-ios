@@ -3,14 +3,8 @@ import UIKit
 
 class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     @IBOutlet weak var settingsBtn: UIButton!
-    
     @IBOutlet weak var content: UIView!
     
-    
-    //can be home, trip or info, by default is Home
-    var type: PageType = PageType()
-    
-    //TakeMedicine, DailyStats or Stats
     private var homePageEnum: HomePage = HomePage()
     private var pageViewController : UIPageViewController!
     private var _dict: [UIViewController: HomePage] = [:]
@@ -81,13 +75,6 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         // store relative enum to view controller
         _dict[vc!] = value
         return vc!
-    }
-}
-
-enum PageType: Int{
-    case Home, Trip, Info
-    init(){
-        self = .Home
     }
 }
 

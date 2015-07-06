@@ -12,7 +12,6 @@ class RegistriesManager{
     /// :param: `NSDate`: the date
     /// :returns: `Bool`: True if the user took a pill in that day or week
     func tookMedicine(at: NSDate) -> Bool{
-    
         for r in allRegistriesInPeriod(at){
             if r.tookMedicine{
                 return true

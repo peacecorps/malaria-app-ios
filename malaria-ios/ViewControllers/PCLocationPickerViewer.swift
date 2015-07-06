@@ -27,24 +27,34 @@ class PCLocationPickerViewer : UIPickerView{
         "Zambia"
     ]
     
+    var selectedValue: String!
+    
     init(selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
         
         pcLocationsPickerProvider = PickerProvider(
             selectedCall: {(component: Int, row: Int, object: String) in
-                selectCallback(object: self.locations[row])
+                let result = self.locations[row]
+                selectCallback(object: result)
+                self.selectedValue = result
             }, values: locations)
         
         self.delegate = pcLocationsPickerProvider
         self.dataSource = pcLocationsPickerProvider
         
-        
-        var index = 0
-        if let t = TripsManager.sharedInstance.getTrip(){
-            index = find(locations, t.location) ?? 0
+        let defaultLocation = defaultTripLocation()
+        if defaultLocation == ""{
+            selectRow(0, inComponent: 0, animated: false)
+            selectedValue = locations[0]
+        }else{
+            let row = find(locations, defaultLocation)!
+            selectRow(row, inComponent: 0, animated: false)
+            selectedValue = locations[row]
         }
-        
-        selectRow(index, inComponent: 0, animated: false)
+    }
+    
+    func defaultTripLocation() -> String {
+        return TripsManager.sharedInstance.getTrip()?.location ?? ""
     }
     
     required init(coder aDecoder: NSCoder) {

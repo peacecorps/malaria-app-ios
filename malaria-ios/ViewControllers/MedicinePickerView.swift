@@ -4,6 +4,7 @@ import UIKit
 class MedicinePickerView : UIPickerView{
     var medicinePickerProvider: PickerProvider!
     var medicines = [String]()
+    var selectedValue: String!
     
     init(selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
@@ -12,23 +13,37 @@ class MedicinePickerView : UIPickerView{
         var values = [String]()
         for m in Medicine.Pill.allValues {
             medicines.append(m.name())
-            values.append(m.name() + " (" + (m.isWeekly() ? "Weekly" : "Daily") + ")")
+            values.append(generateMedicineString(m))
         }
         
         medicinePickerProvider = PickerProvider(
             selectedCall: {(component: Int, row: Int, object: String) in
-                selectCallback(object: self.medicines[row])
+                let result = self.medicines[row]
+                selectCallback(object: result)
+                self.selectedValue = result
             }, values: values)
         
         self.delegate = medicinePickerProvider
         self.dataSource = medicinePickerProvider
         
-        var index = 0
-        if let m = MedicineManager.sharedInstance.getCurrentMedicine(){
-            index = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: m.name)!) ?? 0
-        }
         
-        selectRow(index, inComponent: 0, animated: false)
+        let defaultMedicineName = defaultMedicine()
+        if defaultMedicineName == ""{
+            selectRow(0, inComponent: 0, animated: false)
+            selectedValue = medicines[0]
+        }else{
+            let row = find(Medicine.Pill.allValues, Medicine.Pill(rawValue: defaultMedicineName)!)!
+            selectRow(row, inComponent: 0, animated: false)
+            selectedValue = medicines[row]
+        }
+    }
+    
+    func defaultMedicine() -> String{
+        return MedicineManager.sharedInstance.getCurrentMedicine()?.name ?? ""
+    }
+    
+    func generateMedicineString(medicine: Medicine.Pill) -> String{
+        return medicine.name() + " (" + (medicine.isWeekly() ? "Weekly" : "Daily") + ")"
     }
     
     required init(coder aDecoder: NSCoder) {

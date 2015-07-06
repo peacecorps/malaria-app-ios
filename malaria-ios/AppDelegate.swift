@@ -14,9 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //setting up initial screen
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        
         if !inTestEnvironment{
             if UserSettingsManager.getDidConfiguredMedicine(){
                 window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)

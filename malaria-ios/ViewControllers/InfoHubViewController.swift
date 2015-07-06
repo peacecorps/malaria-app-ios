@@ -20,9 +20,9 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         
         refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
@@ -43,6 +43,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         let info = Posts.retrieve(Posts.self)
         if info.count > 0{
             posts = info[0].posts.convertToArray()
+            posts.sort({$0.title < $1.title})
             collectionView.reloadData()
             return true
         }

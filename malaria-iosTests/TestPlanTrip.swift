@@ -45,12 +45,13 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.medicine, pill2.name())
         XCTAssertEqual(trip.cashToBring, cash)
         XCTAssertEqual(trip.reminderDate, reminderDate2)
-        
+        trip.itemsManager.addItem("Ball", quantity: 1)
         if let t = tManager.getTrip(){
             XCTAssertEqual(t.location, location2)
             XCTAssertEqual(t.medicine, pill2.name())
             XCTAssertEqual(t.cashToBring, cash)
             XCTAssertEqual(t.reminderDate, reminderDate2)
+            XCTAssertEqual(t.itemsManager.getItems().count, 1)
         }else{
             XCTFail("Trip wasn't created")
         }
@@ -64,7 +65,7 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 2)
         
         
-        if let lantern = trip.itemsManager.findItem("lantern"),
+        if let  lantern = trip.itemsManager.findItem("lantern"),
                 lanternUpper = trip.itemsManager.findItem("Lantern")
         {
             XCTAssertEqual(lantern.number, 1)
@@ -145,10 +146,11 @@ class TestPlanTrip: XCTestCase {
     }
     
     func testCascadeDelete(){
+        XCTAssertEqual(Item.retrieve(Item.self).count, 0)
         trip.itemsManager.addItem("lantern", quantity: 6)
         trip.itemsManager.addItem("medalion", quantity: 2)
-        
         XCTAssertEqual(Item.retrieve(Item.self).count, 2)
+        
         Trip.clear(Trip.self)
         XCTAssertEqual(Item.retrieve(Item.self).count, 0)
     }

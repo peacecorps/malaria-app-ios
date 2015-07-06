@@ -35,18 +35,22 @@ class TripsManager{
     /// :return: `Trip`: Instance of trip
     func createTrip(location: String, medicine: Medicine.Pill, cashToBring: Int64, reminderDate: NSDate) -> Trip{
         if let t = getTrip(){
+            Logger.Warn("Already created a trip: changing stored one")
             t.location = location
             t.medicine = medicine.name()
             t.cashToBring = cashToBring
             t.reminderDate = reminderDate
             
-            Logger.Warn("Already created a trip: changing stored one")
+            for i in t.itemsManager.getItems(){
+                Logger.Info("Deleting previous items")
+                i.deleteFromContext()
+            }
+            
             CoreDataHelper.sharedInstance.saveContext()
             return t
         }
         
         let trip = Trip.create(Trip.self)
-        
         trip.location = location
         trip.medicine = medicine.name()
         trip.cashToBring = cashToBring

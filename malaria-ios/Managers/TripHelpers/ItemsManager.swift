@@ -18,11 +18,14 @@ class ItemsManager{
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
         }else{
+            Logger.Info("Adding \(quantity) \(name)")
             var item = Item.create(Item.self)
             item.name = name
             item.number = quantity
             
-            trip.items.addObject(item)
+            var newArray = getItems()
+            newArray.append(item)
+            trip.items = NSMutableSet(array: newArray)
         }
         
         CoreDataHelper.sharedInstance.saveContext()

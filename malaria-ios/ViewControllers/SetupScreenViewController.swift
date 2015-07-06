@@ -42,17 +42,18 @@ class SetupScreenViewController : UIViewController{
         //Setting up DatePickerView
         timePickerview = TimePickerView(view: reminderTime, selectCallback: {(date: NSDate) in
             self.pillReminderNotificationTime = date
-            self.refreshPage()
+            self.refreshDate()
         })
         reminderTime.inputView = timePickerview.generateInputView(.Time, startDate: pillReminderNotificationTime)
         reminderTime.inputAccessoryView = toolBar
         
-        refreshPage()
+        medicineName.text = medicinePicker.selectedValue
+        
+        refreshDate()
     }
     
-    private func refreshPage(){
+    private func refreshDate(){
         reminderTime.text = pillReminderNotificationTime.formatWith("HH:mm a")
-        medicineName.text = getStoredMedicineName()
     }
     
     @IBAction func doneButtonHandler(){
@@ -72,14 +73,5 @@ class SetupScreenViewController : UIViewController{
     
     private func getStoredReminderTime() -> NSDate{
         return MedicineManager.sharedInstance.getCurrentMedicine()?.notificationTime ?? NSDate()
-    }
-    
-    private func getStoredMedicineName() -> String{
-        return MedicineManager.sharedInstance.getCurrentMedicine()?.name ?? medicinePicker.medicines[0]
-    }
-    
-    func timePickerValueChanged(date: NSDate){
-        pillReminderNotificationTime = date
-        refreshPage()
     }
 }

@@ -9,11 +9,19 @@ class TestPlanTrip: XCTestCase {
     let cashToBring: Int64 = 10
     let d1 = NSDate.from(2015, month: 5, day: 8) //monday
     var trip: Trip!
-    
+    var itemsManager: ItemsManager!
+    var currentContext: NSManagedObjectContext!
     
     override func setUp() {
         super.setUp()
+        
+        currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        
+        tManager.context = currentContext
         trip = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1)
+        
+        itemsManager = trip.itemsManager
+        itemsManager.context = currentContext
     }
     
     override func tearDown() {
@@ -45,47 +53,46 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.medicine, pill2.name())
         XCTAssertEqual(trip.cashToBring, cash)
         XCTAssertEqual(trip.reminderDate, reminderDate2)
-        trip.itemsManager.addItem("Ball", quantity: 1)
         if let t = tManager.getTrip(){
             XCTAssertEqual(t.location, location2)
             XCTAssertEqual(t.medicine, pill2.name())
             XCTAssertEqual(t.cashToBring, cash)
             XCTAssertEqual(t.reminderDate, reminderDate2)
-            XCTAssertEqual(t.itemsManager.getItems().count, 1)
         }else{
             XCTFail("Trip wasn't created")
         }
     }
     
+    
     func testAddItems(){
-        trip.itemsManager.addItem("lantern", quantity: 1)
+        itemsManager.addItem("lantern", quantity: 1)
         XCTAssertEqual(trip.items.count, 1)
         
-        trip.itemsManager.addItem("Stress Ball", quantity: 2)
+        itemsManager.addItem("Stress Ball", quantity: 2)
         XCTAssertEqual(trip.items.count, 2)
         
         
-        if let  lantern = trip.itemsManager.findItem("lantern"),
-                lanternUpper = trip.itemsManager.findItem("Lantern")
+        if let  lantern = itemsManager.findItem("lantern"),
+                lanternUpper = itemsManager.findItem("Lantern")
         {
             XCTAssertEqual(lantern.number, 1)
         }else{
             XCTFail("findItem lantern not found")
         }
         
-        if let streessBall = trip.itemsManager.findItem("Stress Ball"){
+        if let streessBall = itemsManager.findItem("Stress Ball"){
             XCTAssertEqual(streessBall.number, 2)
         }
         
         //check case insensitive
-        XCTAssertTrue(trip.itemsManager.getItems().count == 2)
+        XCTAssertTrue(itemsManager.getItems().count == 2)
     }
     
     
     func testAddQuantity(){
-        trip.itemsManager.addItem("lantern", quantity: 1)
+        itemsManager.addItem("lantern", quantity: 1)
         
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        if let lantern = itemsManager.findItem("lantern"){
             XCTAssertEqual(lantern.number, 1)
         }else{
             XCTFail("findItem lantern not found")
@@ -94,9 +101,9 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 1)
         
         //add more 3 lanterns to the trip ( 3 + 1)
-        trip.itemsManager.addItem("lantern", quantity: 3)
+        itemsManager.addItem("lantern", quantity: 3)
         
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        if let lantern = itemsManager.findItem("lantern"){
             XCTAssertEqual(lantern.number, 4)
         }else{
             XCTFail("findItem lantern not found")
@@ -107,10 +114,10 @@ class TestPlanTrip: XCTestCase {
     
     func testRemoveItem(){
         //test simple decrement
-        trip.itemsManager.addItem("lantern", quantity: 6)
-        trip.itemsManager.removeItem("lantern", quantity: 2)
+        itemsManager.addItem("lantern", quantity: 6)
+        itemsManager.removeItem("lantern", quantity: 2)
         
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        if let lantern = itemsManager.findItem("lantern"){
             XCTAssertEqual(lantern.number, 4)
         }else{
             XCTFail("findItem lantern not found")
@@ -119,16 +126,16 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 1)
         
         //test removing more elements that there is. The item must be removed
-        trip.itemsManager.removeItem("lantern", quantity: 30)
+        itemsManager.removeItem("lantern", quantity: 30)
         
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        if let lantern = itemsManager.findItem("lantern"){
             XCTFail("item was not removed despite")
         }
         
         
         //adding again
-        trip.itemsManager.addItem("lantern", quantity: 9)
-        if let lantern = trip.itemsManager.findItem("LANTERN"){
+        itemsManager.addItem("lantern", quantity: 9)
+        if let lantern = itemsManager.findItem("LANTERN"){
             XCTAssertEqual(lantern.number, 9)
         }else{
             XCTFail("findItem lantern not found")
@@ -137,8 +144,8 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 1)
         
         //removing again
-        trip.itemsManager.removeItem("lantern")
-        if let lantern = trip.itemsManager.findItem("lantern"){
+        itemsManager.removeItem("lantern")
+        if let lantern = itemsManager.findItem("lantern"){
             XCTFail("item was not removed despite")
         }
         
@@ -146,12 +153,14 @@ class TestPlanTrip: XCTestCase {
     }
     
     func testCascadeDelete(){
-        XCTAssertEqual(Item.retrieve(Item.self).count, 0)
-        trip.itemsManager.addItem("lantern", quantity: 6)
-        trip.itemsManager.addItem("medalion", quantity: 2)
-        XCTAssertEqual(Item.retrieve(Item.self).count, 2)
+        XCTAssertEqual(Item.retrieve(Item.self, context: currentContext).count, 0)
+        itemsManager.addItem("lantern", quantity: 6)
+        itemsManager.addItem("medalion", quantity: 2)
+        XCTAssertEqual(Item.retrieve(Item.self, context: currentContext).count, 2)
         
-        Trip.clear(Trip.self)
-        XCTAssertEqual(Item.retrieve(Item.self).count, 0)
+        Trip.clear(Trip.self, context: currentContext)
+        XCTAssertEqual(Item.retrieve(Item.self, context: currentContext).count, 0)
     }
+    
+    
 }

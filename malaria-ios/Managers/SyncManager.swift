@@ -1,13 +1,13 @@
 import Alamofire
 import SwiftyJSON
 
-class SyncManager {
+class SyncManager : Manager{
     static let sharedInstance = SyncManager()
     
     let user = "TestUser"
     let password = "password"
     
-    init(){
+    override init(){
         // set up the base64-encoded credentials
         let loginString = NSString(format: "%@:%@", user, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -30,7 +30,7 @@ class SyncManager {
             
             if (error == nil && save){
                 Logger.Info("Saving to coreData")
-                CoreDataHelper.sharedInstance.saveContext()
+                CoreDataHelper.sharedInstance.saveContext(self.context)
             }
         }
         
@@ -57,7 +57,7 @@ class SyncManager {
             }
             
             Logger.Info("Saving to core data")
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
         }
         
         for (path, endpoint) in endpoints{
@@ -72,8 +72,8 @@ class SyncManager {
                 
                 var resultError = error
                 if(error == nil) {
-                    endpoint.clearFromDatabase()
-                    if let objectMapped = endpoint.retrieveJSONObject(JSON(json!)){
+                    endpoint.clearFromDatabase(self.context)
+                    if let objectMapped = endpoint.retrieveJSONObject(JSON(json!), context: self.context){
                         Logger.Info("Success \(endpoint.path)")
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")

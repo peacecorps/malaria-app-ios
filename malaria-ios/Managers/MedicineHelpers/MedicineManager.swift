@@ -1,6 +1,6 @@
 import Foundation
 
-class MedicineManager{
+class MedicineManager : Manager{
     static let sharedInstance = MedicineManager()
     
     
@@ -14,7 +14,9 @@ class MedicineManager{
     func setup(medicine : Medicine.Pill, fireDate: NSDate){
         //unregister previous medicines
         if let currentMed = getCurrentMedicine(){
-            currentMed.notificationManager.unsheduleNotification()
+            let notifManager = currentMed.notificationManager
+            notifManager.context = self.context
+            notifManager.unsheduleNotification()
         }
         
         Logger.Info("Storing new medicine")
@@ -22,17 +24,17 @@ class MedicineManager{
         setCurrentPill(medicine)
         
         Logger.Info("Setting up notification")
-        let newMed = getCurrentMedicine()!
-        
-        newMed.notificationManager.scheduleNotification(fireDate)
+        let notifManager = getCurrentMedicine()!.notificationManager
+        notifManager.context = self.context
+        notifManager.scheduleNotification(fireDate)
 
         UserSettingsManager.setDidConfiguredMedicine(true)
     }
     
     /// Clears instance of Medicines from the CoreData
     func clearCoreData(){
-        Medicine.clear(Medicine.self)
-        CoreDataHelper.sharedInstance.saveContext()
+        Medicine.clear(Medicine.self, context: self.context)
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
 
@@ -48,11 +50,11 @@ class MedicineManager{
             return false
         }
         
-        let medicine = Medicine.create(Medicine.self)
+        let medicine = Medicine.create(Medicine.self, context: self.context)
         medicine.name = med.name()
         medicine.weekly = med.isWeekly()
         
-        CoreDataHelper.sharedInstance.saveContext()
+        CoreDataHelper.sharedInstance.saveContext(self.context)
         
         return true
     }
@@ -86,7 +88,7 @@ class MedicineManager{
     ///
     /// :returns: `[Medicine]`: All the medicines
     func getRegisteredMedicines() -> [Medicine]{
-        return Medicine.retrieve(Medicine.self)
+        return Medicine.retrieve(Medicine.self, context: self.context)
     }
     
     /// Sets the specified pill as default
@@ -95,12 +97,14 @@ class MedicineManager{
     func setCurrentPill(med: Medicine.Pill){
         if let m = getMedicine(med){
             for med in getRegisteredMedicines(){
-                med.notificationManager.unsheduleNotification()
+                let notifManager = med.notificationManager
+                notifManager.context = self.context
+                notifManager.unsheduleNotification()
                 med.isCurrent = false
             }
             
             m.isCurrent = true
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
         }else{
             Logger.Error("pill not found!")
         }

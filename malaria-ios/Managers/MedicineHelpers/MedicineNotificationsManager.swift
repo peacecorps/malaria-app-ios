@@ -17,7 +17,7 @@ class MedicineNotificationsManager : NotificationManager{
         
         if(medicine.notificationTime != fireTime){
             medicine.notificationTime = fireTime
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
         }
     }
     
@@ -25,7 +25,7 @@ class MedicineNotificationsManager : NotificationManager{
         super.unsheduleNotification()
         
         medicine.notificationTime = nil
-        CoreDataHelper.sharedInstance.saveContext()
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
 
     func reshedule(){

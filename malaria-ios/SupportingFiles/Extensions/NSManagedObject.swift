@@ -11,7 +11,7 @@ extension NSManagedObject{
     /// delete object from contect
     ///
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
-    public func deleteFromContext(context: NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!){
+    public func deleteFromContext(context: NSManagedObjectContext){
         context.deleteObject(self)
     }
     
@@ -22,7 +22,7 @@ extension NSManagedObject{
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `T`: A new NSManagedObject of the type given by argument
-    class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!) -> T{
+    class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
         let name = getSimpleClassName(entity)
         Logger.Info("Creating \(name)")
         
@@ -35,7 +35,7 @@ extension NSManagedObject{
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
-    class func retrieve<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!) -> [T]{
+    class func retrieve<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext) -> [T]{
         let name = getSimpleClassName(entity)
         
         let fetchRequest = NSFetchRequest(entityName: name)
@@ -46,7 +46,7 @@ extension NSManagedObject{
     ///
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
-    class func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext = CoreDataHelper.sharedInstance.backgroundContext!){
+    class func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext){
         let elements = entity.retrieve(entity, context: context)
         elements.map({context.deleteObject($0)})
     }

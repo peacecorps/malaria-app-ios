@@ -7,9 +7,13 @@ class TestSetupInsertClear: XCTestCase {
     let m: MedicineManager = MedicineManager.sharedInstance
     let currentPill = Medicine.Pill.Malarone
     
+    var currentContext: NSManagedObjectContext!
+    
     override func setUp() {
         super.setUp()
         
+        currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        m.context = currentContext
         m.setup(currentPill, fireDate: NSDate())
     }
     
@@ -51,12 +55,10 @@ class TestSetupInsertClear: XCTestCase {
     
     
     func testClearMedicines(){
-        let medicines = m.getRegisteredMedicines()
-        XCTAssertEqual(true, medicines.count == 1)
+        XCTAssertEqual(true, m.getRegisteredMedicines().count == 1)
         
         m.clearCoreData()
         
-        let medicines2 = m.getRegisteredMedicines()
-        XCTAssertEqual(true, medicines2.count == 0)
+        XCTAssertEqual(true, m.getRegisteredMedicines().count == 0)
     }
 }

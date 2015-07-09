@@ -6,9 +6,15 @@ class TestMapping: XCTestCase {
     
     var endpoints: [String : Endpoint] = SyncManager.sharedInstance.endpoints
     
+    var currentContext: NSManagedObjectContext!
+    override func setUp() {
+        super.setUp()
+        currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+    }
+    
     override func tearDown() {
         for(key, value) in endpoints{
-            value.clearFromDatabase()
+            value.clearFromDatabase(currentContext)
         }
     }
     
@@ -53,7 +59,7 @@ class TestMapping: XCTestCase {
     
     
     func testPosts(){
-        if let posts = endpoints[EndpointType.Posts.path()]!.retrieveJSONObject(getJSON("posts")) as? Posts{
+        if let posts = endpoints[EndpointType.Posts.path()]!.retrieveJSONObject(getJSON("posts"), context: self.currentContext) as? Posts{
             var results: [Post] = posts.posts.convertToArray()
             
             //objects retrived may be unsorted

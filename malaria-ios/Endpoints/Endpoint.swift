@@ -12,10 +12,10 @@ protocol Endpoint{
     /// therefore any deletion must be done explicitly.
     ///
     /// :returns: `NSManagedObject?`: The parsed object or nil if parse failed
-    func retrieveJSONObject(data: JSON) -> NSManagedObject?
+    func retrieveJSONObject(data: JSON, context: NSManagedObjectContext) -> NSManagedObject?
     
     /// Clear all NSManagedObjects used by the endpoint
-    func clearFromDatabase()
+    func clearFromDatabase(context: NSManagedObjectContext)
 }
 
 

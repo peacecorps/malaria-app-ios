@@ -9,10 +9,14 @@ class TestMedicineRegistries: XCTestCase {
     let currentPill = Medicine.Pill.Malarone
     var md: Medicine!
     
+    var currentContext: NSManagedObjectContext!
+    var registriesManager: RegistriesManager!
+    
     override func setUp() {
         super.setUp()
 
-        
+        currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        m.context = currentContext
         m.setup(currentPill, fireDate: NSDate())
         
         if let medi = m.getMedicine(currentPill){
@@ -21,16 +25,19 @@ class TestMedicineRegistries: XCTestCase {
             XCTFail("Fail initializing:")
         }
         
-        md.registriesManager.addRegistry(d1, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 1.day, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 2.day, tookMedicine: false)
-        md.registriesManager.addRegistry(d1 - 3.day, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 4.day, tookMedicine: false)
-        md.registriesManager.addRegistry(d1 - 5.day, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 6.day, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 7.day, tookMedicine: false)
-        md.registriesManager.addRegistry(d1 - 8.day, tookMedicine: true)
-        md.registriesManager.addRegistry(d1 - 9.day, tookMedicine: false)
+        registriesManager = md.registriesManager
+        registriesManager.context = currentContext
+        
+        registriesManager.addRegistry(d1, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 1.day, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 2.day, tookMedicine: false)
+        registriesManager.addRegistry(d1 - 3.day, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 4.day, tookMedicine: false)
+        registriesManager.addRegistry(d1 - 5.day, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 6.day, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 7.day, tookMedicine: false)
+        registriesManager.addRegistry(d1 - 8.day, tookMedicine: true)
+        registriesManager.addRegistry(d1 - 9.day, tookMedicine: false)
     }
     
     override func tearDown() {
@@ -39,7 +46,7 @@ class TestMedicineRegistries: XCTestCase {
     }
     
     func testFindEntriesInBetween(){
-        let entries = md.registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
+        let entries = registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
         
         if entries.count != 3 {
             XCTFail("Incorrect number of elements")
@@ -60,7 +67,7 @@ class TestMedicineRegistries: XCTestCase {
         
         
         //flip the dates, should reproduce the same results
-        let entriesFlipped = md.registriesManager.getRegistries(date1:d1 - 3.day, date2: d1 - 5.day)
+        let entriesFlipped = registriesManager.getRegistries(date1:d1 - 3.day, date2: d1 - 5.day)
         
         if entriesFlipped.count == 0 {
             XCTFail("No element found")
@@ -81,25 +88,25 @@ class TestMedicineRegistries: XCTestCase {
         
         
         //check interval without entries
-        XCTAssertEqual(0, md.registriesManager.getRegistries(date1:d1 - 30.day,  date2: d1 - 25.day).count)
+        XCTAssertEqual(0, registriesManager.getRegistries(date1:d1 - 30.day,  date2: d1 - 25.day).count)
         
         //check interval big enough to fit every entry
-        let entries2 = md.registriesManager.getRegistries(date1:d1 - 50.day, date2: d1 + 50.day)
-        XCTAssertEqual(md.registriesManager.getRegistries().count, entries2.count)
+        let entries2 = registriesManager.getRegistries(date1:d1 - 50.day, date2: d1 + 50.day)
+        XCTAssertEqual(registriesManager.getRegistries().count, entries2.count)
         
         //single registry
-        let entries3 = md.registriesManager.getRegistries(date1:d1 - 4.day, date2: d1 - 4.day)
+        let entries3 = registriesManager.getRegistries(date1:d1 - 4.day, date2: d1 - 4.day)
         XCTAssertEqual(1, entries3.count)
     }
     
     func testFindEntry(){
         //find existing entry
-        var r = md.registriesManager.findRegistry(d1 - 4.day)!
+        var r = registriesManager.findRegistry(d1 - 4.day)!
         XCTAssertEqual(r.date, d1 - 4.day)
         XCTAssertEqual(r.tookMedicine, false)
         
         //finding inexistent entry
-        XCTAssertEqual(true, md.registriesManager.findRegistry(d1 - 30.day) == nil)
+        XCTAssertEqual(true, registriesManager.findRegistry(d1 - 30.day) == nil)
     }
     
     func testAlreadyRegisteredWeeklyPill(){
@@ -114,47 +121,50 @@ class TestMedicineRegistries: XCTestCase {
         }
         
         
+        let weeklyRegistriesManager = weekly.registriesManager
+        weeklyRegistriesManager.context = currentContext
+        
         //Saturday = 0, Sunday = 1, etc
         var dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day
         
-        XCTAssertTrue(weekly.registriesManager.addRegistry(dStartWeek, tookMedicine: true))
+        XCTAssertTrue(weeklyRegistriesManager.addRegistry(dStartWeek, tookMedicine: true))
 
-        XCTAssertFalse(weekly.registriesManager.tookMedicine(dStartWeek - 1.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 1.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 2.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 3.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 4.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 5.day))
-        XCTAssertTrue(weekly.registriesManager.tookMedicine(dStartWeek + 6.day))
-        XCTAssertFalse(weekly.registriesManager.tookMedicine(dStartWeek + 7.day))
+        XCTAssertFalse(weeklyRegistriesManager.tookMedicine(dStartWeek - 1.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 1.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 2.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 3.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 4.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 5.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 6.day))
+        XCTAssertFalse(weeklyRegistriesManager.tookMedicine(dStartWeek + 7.day))
     }
     
     func testAlreadyRegisteredDailyPill(){
-        XCTAssertTrue(md.registriesManager.tookMedicine(d1))
-        XCTAssertTrue(md.registriesManager.tookMedicine(d1 - 1.day))
-        XCTAssertFalse(md.registriesManager.tookMedicine(d1 + 1.day))
+        XCTAssertTrue(registriesManager.tookMedicine(d1))
+        XCTAssertTrue(registriesManager.tookMedicine(d1 - 1.day))
+        XCTAssertFalse(registriesManager.tookMedicine(d1 + 1.day))
     }
     
     func testFailAddEntryInFuture(){
-        XCTAssertTrue(md.registriesManager.addRegistry( NSDate(), tookMedicine: true))
-        XCTAssertFalse(md.registriesManager.addRegistry( NSDate() + 1.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry( NSDate(), tookMedicine: true))
+        XCTAssertFalse(registriesManager.addRegistry( NSDate() + 1.day, tookMedicine: true))
     }
     
     func testModifyEntry(){
         //modify entry and check if the number of elements did not change
-        let lastCount = md.registriesManager.getRegistries().count
-        XCTAssertTrue(md.registriesManager.addRegistry(d1 - 4.day, tookMedicine: true, modifyEntry: true))
-        XCTAssertEqual(lastCount, md.registriesManager.getRegistries().count)
+        let lastCount = registriesManager.getRegistries().count
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 4.day, tookMedicine: true, modifyEntry: true))
+        XCTAssertEqual(lastCount, registriesManager.getRegistries().count)
         
         //verify if modification was a success
-        let r = md.registriesManager.findRegistry(d1 - 4.day)!
+        let r = registriesManager.findRegistry(d1 - 4.day)!
         XCTAssertEqual(true, r.tookMedicine)
         XCTAssertEqual(true, NSDate.areDatesSameDay(r.date, dateTwo: d1 - 4.day))
     }
     
     func testCascadeDelete(){
-        XCTAssertEqual(Registry.retrieve(Registry.self).count, 10)
-        Medicine.clear(Medicine.self)
-        XCTAssertEqual(Registry.retrieve(Registry.self).count, 0)
+        XCTAssertEqual(Registry.retrieve(Registry.self, context: currentContext).count, 10)
+        Medicine.clear(Medicine.self, context: currentContext)
+        XCTAssertEqual(Registry.retrieve(Registry.self, context: currentContext).count, 0)
     }
 }

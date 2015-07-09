@@ -18,7 +18,7 @@ class TripNotificationsManager : NotificationManager{
         
         if(trip.reminderDate != fireTime){
             trip.reminderDate = fireTime
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
         }
     }
 }

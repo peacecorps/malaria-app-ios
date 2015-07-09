@@ -1,6 +1,6 @@
 import Foundation
 
-class RegistriesManager{
+class RegistriesManager : Manager{
     var medicine: Medicine!
     
     init(medicine: Medicine){
@@ -73,8 +73,6 @@ class RegistriesManager{
     /// :param: `Bool` optional: overwrite previous entry (by default is false)
     /// :returns: `Bool`: true if success, false if not
     func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
-        let context = CoreDataHelper.sharedInstance.backgroundContext!
-        
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
             return false
@@ -97,14 +95,14 @@ class RegistriesManager{
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
         }else{
-            var registry = Registry.create(Registry.self)
+            var registry = Registry.create(Registry.self, context: self.context)
             registry.date = date
             registry.tookMedicine = tookMedicine
             
             medicine.registries.addObject(registry)
         }
         
-        CoreDataHelper.sharedInstance.saveContext()
+        CoreDataHelper.sharedInstance.saveContext(self.context)
         
         return true
         

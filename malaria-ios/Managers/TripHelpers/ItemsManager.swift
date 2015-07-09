@@ -1,13 +1,12 @@
 import Foundation
 
-class ItemsManager{
+class ItemsManager : Manager{
 
     var trip: Trip!
     
     init(trip: Trip){
         self.trip = trip
     }
-    
     
     /// add a new item to the trip
     ///
@@ -19,7 +18,7 @@ class ItemsManager{
             i.add(quantity)
         }else{
             Logger.Info("Adding \(quantity) \(name)")
-            var item = Item.create(Item.self)
+            var item = Item.create(Item.self, context: self.context)
             item.name = name
             item.number = quantity
             
@@ -28,7 +27,7 @@ class ItemsManager{
             trip.items = NSMutableSet(array: newArray)
         }
         
-        CoreDataHelper.sharedInstance.saveContext()
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
     /// Returns an item from the trip if exists
@@ -54,10 +53,10 @@ class ItemsManager{
             i.remove(quantity)
             if i.number == 0{
                 trip.items.removeObject(i)
-                i.deleteFromContext()
+                i.deleteFromContext(self.context)
             }
             
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
             return
         }
         

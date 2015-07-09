@@ -7,16 +7,20 @@ class TestSyncManager: XCTestCase {
     var expectation: XCTestExpectation?
     var completionCalled = false
     
+    
+    var currentContext: NSManagedObjectContext!
     override func setUp() {
         super.setUp()
         
         completionCalled = false
+        currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        sm.context = currentContext
     }
     
     override func tearDown() {
         super.tearDown()
         for (path, endpoint) in sm.endpoints{
-            endpoint.clearFromDatabase()
+            endpoint.clearFromDatabase(currentContext)
         }
     }
     
@@ -43,7 +47,7 @@ class TestSyncManager: XCTestCase {
             
             //assure only one object per endpoint
             if let t = type{
-                XCTAssertEqual(t.retrieve(t.self).count, 1)
+                XCTAssertEqual(t.retrieve(t.self, context: self.currentContext).count, 1)
             }
             
             additionalTests?()
@@ -67,7 +71,7 @@ class TestSyncManager: XCTestCase {
                 XCTFail("\(error.localizedDescription)")
             }
             
-            XCTAssertEqual(Posts.retrieve(Posts.self).count, 1)
+            XCTAssertEqual(Posts.retrieve(Posts.self, context: self.currentContext).count, 1)
             
             done = true
         })
@@ -83,9 +87,9 @@ class TestSyncManager: XCTestCase {
     
     func testPosts(){
         func additionalTests(){
-            let endpointInfoArray = Posts.retrieve(Posts.self)
+            let endpointInfoArray = Posts.retrieve(Posts.self, context: currentContext)
             XCTAssertEqual(endpointInfoArray.count, 1)
-            XCTAssertNotEqual(Post.retrieve(Post.self).count, 0)
+            XCTAssertNotEqual(Post.retrieve(Post.self, context: currentContext).count, 0)
             XCTAssertNotEqual(endpointInfoArray[0].posts.count, 0)
             
         }

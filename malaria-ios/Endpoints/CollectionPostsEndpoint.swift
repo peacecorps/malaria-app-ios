@@ -7,15 +7,15 @@ class CollectionPostsEndpoint : Endpoint{
     /// subCollectionClassType: Specify the subclass of CollectionPosts
     var subCollectionsPostsType: CollectionPosts.Type { get { fatalError("Please specify collection type") } }
     
-    func retrieveJSONObject(data: JSON) -> NSManagedObject?{
+    func retrieveJSONObject(data: JSON, context: NSManagedObjectContext) -> NSManagedObject?{
         if let results = data["results"].array{
-            let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self)
+            let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self, context: context)
             
-            if let posts = getPosts(results){
+            if let posts = getPosts(results, context: context){
                 collectionPosts.posts = NSMutableSet(array: posts)
                 return collectionPosts
             }else{
-                collectionPosts.deleteFromContext()
+                collectionPosts.deleteFromContext(context)
                 Logger.Error("Error parsing results")
             }
         }
@@ -30,7 +30,7 @@ class CollectionPostsEndpoint : Endpoint{
     ///
     /// :param: `[JSON]`: array of posts to be parsed
     /// :returns: `[Post]`: array of posts or nil if parse failed
-    func getPosts(data: [JSON]) -> [Post]?{
+    func getPosts(data: [JSON], context: NSManagedObjectContext) -> [Post]?{
         var result: [Post] = []
         
         for json in data{
@@ -41,7 +41,7 @@ class CollectionPostsEndpoint : Endpoint{
                 let updated = json["updated"].string,
                 let id = json["id"].int64{
                     
-                    let post = Post.create(Post.self)
+                    let post = Post.create(Post.self, context: context) //FIXME
                     
                     post.owner = owner
                     post.title = title
@@ -56,7 +56,7 @@ class CollectionPostsEndpoint : Endpoint{
                 
                 //delete
                 for r in result{
-                    r.deleteFromContext()
+                    r.deleteFromContext(context) //FIXME
                 }
                 
                 return nil
@@ -66,8 +66,8 @@ class CollectionPostsEndpoint : Endpoint{
         return result
     }
     
-    func clearFromDatabase(){
-        subCollectionsPostsType.clear(subCollectionsPostsType.self)
+    func clearFromDatabase(context: NSManagedObjectContext){
+        subCollectionsPostsType.clear(subCollectionsPostsType.self, context: context)
     }
     
 }

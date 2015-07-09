@@ -40,7 +40,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     
     func refresh() -> Bool{
         Logger.Info("Fetching from coreData")
-        let info = Posts.retrieve(Posts.self)
+        let info = Posts.retrieve(Posts.self, context: CoreDataHelper.sharedInstance.backgroundContext!)
         if info.count > 0{
             posts = info[0].posts.convertToArray()
             posts.sort({$0.title < $1.title})

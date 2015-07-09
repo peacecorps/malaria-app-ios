@@ -1,13 +1,13 @@
 import Foundation
 
-class TripsManager{
+class TripsManager : Manager{
     /// :returns: singleton
     static let sharedInstance = TripsManager()
 
     /// Returns the current trip if any
     /// :returns: Trip?
     func getTrip() -> Trip?{
-        let result = Trip.retrieve(Trip.self)
+        let result = Trip.retrieve(Trip.self, context: self.context)
         if result.count == 0{
             return nil
         }else if result.count > 1 {
@@ -19,8 +19,8 @@ class TripsManager{
     
     /// Clears any trip from coreData
     func clearCoreData(){
-        Trip.clear(Trip.self)
-        CoreDataHelper.sharedInstance.saveContext()
+        Trip.clear(Trip.self, context: self.context)
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
     /// Creates a trip.
@@ -43,20 +43,20 @@ class TripsManager{
             
             for i in t.itemsManager.getItems(){
                 Logger.Info("Deleting previous items")
-                i.deleteFromContext()
+                i.deleteFromContext(self.context)
             }
             
-            CoreDataHelper.sharedInstance.saveContext()
+            CoreDataHelper.sharedInstance.saveContext(self.context)
             return t
         }
         
-        let trip = Trip.create(Trip.self)
+        let trip = Trip.create(Trip.self, context: self.context)
         trip.location = location
         trip.medicine = medicine.name()
         trip.cashToBring = cashToBring
         trip.reminderDate = reminderDate
         
-        CoreDataHelper.sharedInstance.saveContext()
+        CoreDataHelper.sharedInstance.saveContext(self.context)
         
         return trip
     }

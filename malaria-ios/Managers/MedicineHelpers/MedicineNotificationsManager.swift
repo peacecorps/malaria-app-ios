@@ -6,7 +6,7 @@ class MedicineNotificationsManager : NotificationManager{
     override var alertBody: String { get{ return "Medicine" } }
     override var alertAction: String { get{ return "Yeah. I know"} }
     
-    var medicine: Medicine
+    let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine

@@ -25,14 +25,7 @@ class CollectionPostsEndpoint : Endpoint{
         return nil
     }
     
-    /// Parses posts
-    ///
-    /// If parse fails at any instance, it will be return nil
-    /// Every intermediary object created will be deleted
-    ///
-    /// :param: `[JSON]`: array of posts to be parsed
-    /// :returns: `[Post]`: array of posts or nil if parse failed
-    func getPosts(data: [JSON], context: NSManagedObjectContext) -> [Post]?{
+    private func getPosts(data: [JSON], context: NSManagedObjectContext) -> [Post]?{
         var result: [Post] = []
         
         for json in data{

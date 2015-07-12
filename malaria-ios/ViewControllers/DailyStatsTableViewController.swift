@@ -8,8 +8,8 @@ protocol Stat{
 }
 
 class Adherence : Stat{
-    var context: NSManagedObjectContext
-    var medicineManager: MedicineManager!
+    let context: NSManagedObjectContext
+    let medicineManager: MedicineManager
 
     init(context: NSManagedObjectContext){
         self.context = context
@@ -22,26 +22,28 @@ class Adherence : Stat{
 }
 
 class PillStreak : Stat{
-    var context: NSManagedObjectContext
-    var medicineManager: MedicineManager!
+    let context: NSManagedObjectContext
+    let medicineManager: MedicineManager
     
     init(context: NSManagedObjectContext){
         self.context = context
         medicineManager = MedicineManager(context: context)
     }
+    
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
     var attributeValue : String { return "\(medicineManager.getCurrentMedicine()!.stats(context).pillStreak())"}
 }
 
 class MedicineLastTaken : Stat{
-    var context: NSManagedObjectContext
-    var medicineManager: MedicineManager!
+    let context: NSManagedObjectContext
+    let medicineManager: MedicineManager
     
     init(context: NSManagedObjectContext){
         self.context = context
         medicineManager = MedicineManager(context: context)
     }
+    
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
     var attributeValue : String {        
@@ -57,9 +59,7 @@ class MedicineLastTaken : Stat{
 
 class DailyStatsTableViewController : UITableViewController{
     
-    
     var listStats: [Stat] = []
-    
     var viewContext: NSManagedObjectContext!
     
     override func viewDidLoad() {

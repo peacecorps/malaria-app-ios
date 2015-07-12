@@ -1,7 +1,7 @@
 import Foundation
 
 class MedicineStats : Manager{
-    var medicine: Medicine
+    let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine

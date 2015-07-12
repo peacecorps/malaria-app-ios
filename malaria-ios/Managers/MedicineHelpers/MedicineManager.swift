@@ -2,7 +2,7 @@ import Foundation
 
 class MedicineManager : Manager{
     
-    init(context: NSManagedObjectContext){
+    override init(context: NSManagedObjectContext){
         super.init(context: context)
     }
     

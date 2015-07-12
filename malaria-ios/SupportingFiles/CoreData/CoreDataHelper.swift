@@ -3,6 +3,7 @@ import Foundation
 class CoreDataHelper: NSObject {
     static let sharedInstance = CoreDataHelper()
     
+    
     func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {

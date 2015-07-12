@@ -6,7 +6,7 @@ class MedicinePickerView : UIPickerView{
     var medicines = [String]()
     var selectedValue = ""
     
-    var medicineManager: MedicineManager!
+    var medicineManager: MedicineManager
     
     init(context:NSManagedObjectContext, selectCallback: (object: String) -> ()){
         medicineManager = MedicineManager(context: context)

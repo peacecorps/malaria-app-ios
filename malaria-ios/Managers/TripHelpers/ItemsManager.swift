@@ -2,11 +2,11 @@ import Foundation
 
 class ItemsManager : Manager{
 
-    var trip: Trip!
+    let trip: Trip
     
     init(context: NSManagedObjectContext, trip: Trip){
-        super.init(context: context)
         self.trip = trip
+        super.init(context: context)
     }
     
     /// add a new item to the trip

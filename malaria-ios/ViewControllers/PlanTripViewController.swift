@@ -76,7 +76,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         location.inputAccessoryView = toolBar
         
         //Setting up medicinePickerView with default Value
-        medicinePicker = MedicinePickerViewTrip(context: viewContext,selectCallback: {(object: String) in
+        medicinePicker = MedicinePickerViewTrip(context: viewContext, selectCallback: {(object: String) in
             self.medicationList.text = object
         })
         medicationList.inputView = medicinePicker.generateInputView()

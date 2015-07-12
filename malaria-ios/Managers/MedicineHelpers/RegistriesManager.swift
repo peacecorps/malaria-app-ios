@@ -1,11 +1,11 @@
 import Foundation
 
 class RegistriesManager : Manager{
-    var medicine: Medicine!
+    let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){
-        super.init(context: context)
         self.medicine = medicine
+        super.init(context: context)
     }
 
     /// Check if the pill was already taken in that day if daily pill or in that week if weekly pill

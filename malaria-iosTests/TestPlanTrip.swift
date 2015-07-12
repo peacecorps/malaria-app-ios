@@ -17,9 +17,7 @@ class TestPlanTrip: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
-        tManager = TripsManager(context: currentContext)
-        
-        tManager.context = currentContext
+        tManager = TripsManager(context: currentContext)        
         trip = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1)
         
         itemsManager = trip.itemsManager(currentContext)

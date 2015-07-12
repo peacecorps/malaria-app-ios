@@ -8,12 +8,12 @@ class SyncManager : Manager{
     
     override init(context: NSManagedObjectContext!){
         super.init(context: context)
+        
         // set up the base64-encoded credentials
         let loginString = NSString(format: "%@:%@", user, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
         
-        Logger.Info("Setting up authorization header")
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
     }
     

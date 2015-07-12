@@ -44,15 +44,4 @@ extension Medicine{
     func isDaily() -> Bool{
         return !weekly
     }
-    
-    func print(){
-        Logger.Info(self.name)
-        Logger.Info("   Is weekly? \(self.isWeekly())")
-        
-        let registries: [Registry] = self.registries.convertToArray()
-        Logger.Info("   Number of registries \(self.registries.count)")
-        for reg in registries{
-            Logger.Info("        " + reg.date.formatWith("dd/MM/yyyy") + " did took? \(reg.tookMedicine)")
-        }
-    }
 }

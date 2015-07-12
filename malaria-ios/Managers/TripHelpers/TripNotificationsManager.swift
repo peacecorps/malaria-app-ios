@@ -6,12 +6,11 @@ class TripNotificationsManager : NotificationManager{
     override var alertBody: String { get{ fatalError("Trip")} }
     override var alertAction: String { get{ fatalError("Got it")} }
     
-    
-    var trip: Trip!
+    let trip: Trip
     
     init(context: NSManagedObjectContext, trip: Trip){
-        super.init(context: context)
         self.trip = trip
+        super.init(context: context)
     }
     
     override func scheduleNotification(fireTime: NSDate){

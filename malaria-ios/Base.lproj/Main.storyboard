@@ -23,14 +23,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Set Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yw-9C-uap">
                                 <rect key="frame" x="243" y="50" width="114.5" height="41.5"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="37"/>
-                                <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lb-hF-qks">
                                 <rect key="frame" x="274" y="494" width="52" height="41"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
                                 <state key="normal" title="DONE">
-                                    <color key="titleColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -53,7 +53,7 @@
                                             <constraint firstAttribute="height" constant="21" id="eXR-AI-Fpr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="medicine" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mFQ-E0-XrK">
@@ -70,7 +70,7 @@
                                             <constraint firstAttribute="height" constant="24" id="nRb-bz-1Rs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" text="10:00 am" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYR-ux-kkO">
@@ -84,7 +84,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Remind me at:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8of-jF-OFO">
                                         <rect key="frame" x="171" y="184" width="258" height="25.5"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -149,7 +149,7 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Adherence" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="120" translatesAutoresizingMaskIntoConstraints="NO" id="7cx-YS-JU5">
                                             <rect key="frame" x="110" y="32" width="370" height="87"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="17"/>
                                             <color key="textColor" red="0.35686274509999999" green="0.25098039220000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -225,7 +225,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4X-4X-2Rn">
-                                <rect key="frame" x="0.0" y="55" width="600" height="466"/>
+                                <rect key="frame" x="0.0" y="57" width="600" height="464"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pq0-mY-A6L">
@@ -248,7 +248,7 @@
                             <constraint firstItem="pq0-mY-A6L" firstAttribute="trailing" secondItem="gFR-P3-LjK" secondAttribute="trailingMargin" id="4s2-HO-k7N"/>
                             <constraint firstItem="S4X-4X-2Rn" firstAttribute="leading" secondItem="gFR-P3-LjK" secondAttribute="leading" id="YHJ-qB-EA7"/>
                             <constraint firstItem="pq0-mY-A6L" firstAttribute="top" secondItem="597-Lb-3cL" secondAttribute="bottom" constant="8" symbolic="YES" id="afK-66-otH"/>
-                            <constraint firstItem="S4X-4X-2Rn" firstAttribute="top" secondItem="pq0-mY-A6L" secondAttribute="bottom" id="qcQ-lt-pwk"/>
+                            <constraint firstItem="S4X-4X-2Rn" firstAttribute="top" secondItem="pq0-mY-A6L" secondAttribute="bottom" constant="2" id="qcQ-lt-pwk"/>
                             <constraint firstAttribute="trailing" secondItem="S4X-4X-2Rn" secondAttribute="trailing" id="uHP-CQ-m2C"/>
                         </constraints>
                     </view>
@@ -275,9 +275,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="plan My trip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vS7-WU-xrN">
-                                <rect key="frame" x="205" y="41" width="220.5" height="55"/>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="37"/>
-                                <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="211" y="41" width="209" height="55"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="35"/>
+                                <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aEx-jR-M42">
@@ -289,19 +289,19 @@
                                             <constraint firstAttribute="width" constant="117" id="UF4-Kd-laB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Packing List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oL5-9q-JdS">
                                         <rect key="frame" x="8" y="58" width="117" height="30"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Medication" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XA2-lN-yoK">
                                         <rect key="frame" x="8" y="108" width="117" height="30"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sfY-xl-1No">
@@ -340,7 +340,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Cash To Bring" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JRt-qB-1Ll">
                                         <rect key="frame" x="8" y="158" width="117" height="30"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Yc-zt-q7b">
@@ -353,7 +353,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Remind me on" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsv-66-dIF">
                                         <rect key="frame" x="8" y="208" width="117" height="30"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
-                                        <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="buv-20-bVO">
@@ -653,7 +653,7 @@
                                     <constraint firstAttribute="width" constant="189" id="rSj-tB-koV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="37"/>
-                                <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-ac-hcC">
@@ -774,7 +774,7 @@
                                     <constraint firstAttribute="height" constant="47" id="dV4-HF-hMm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="34"/>
-                                <color key="textColor" red="0.52610809950000004" green="0.24205560549999999" blue="0.108254065" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

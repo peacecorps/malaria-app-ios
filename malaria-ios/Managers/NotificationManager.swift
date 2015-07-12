@@ -18,12 +18,14 @@ class NotificationManager : Manager{
     /// :param: `NSDate`: fireTime
     func scheduleNotification(fireTime: NSDate){
         unsheduleNotification()
+        Logger.Info("Scheduling \(category) to \(fireTime)")
         let notification: UILocalNotification = createNotification(fireTime)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     /// Unschedule all notifications
     func unsheduleNotification(){
+        Logger.Info("Unsheduling previous \(category)")
         for event in UIApplication.sharedApplication().scheduledLocalNotifications {
             
             var notification = event as! UILocalNotification

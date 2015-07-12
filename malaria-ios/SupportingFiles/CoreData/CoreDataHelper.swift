@@ -1,6 +1,6 @@
 import Foundation
 
-class CoreDataHelper: NSObject {
+class CoreDataHelper {
     static let sharedInstance = CoreDataHelper()
     
     

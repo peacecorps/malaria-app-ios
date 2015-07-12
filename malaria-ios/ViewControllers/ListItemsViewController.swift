@@ -8,11 +8,25 @@ class ListItemsViewController : UIViewController, UITableViewDataSource, UITable
     var completitionHandler: ([String] -> ())!
     
     var listItems: [String : Bool] = [
-        "Paper" : false,
-        "Pen" : false,
-        "Glue" : false,
         "Toilet paper" : false,
-        "Toothbrush" : false
+        "Luggage Lock" : false,
+        "Flashlight" : false,
+        "Compass" : false,
+        "Whistle" : false,
+        "Sewing Kit" : false,
+        "Repair tape" : false,
+        "Deodorant" : false,
+        "Nail clipper" : false,
+        "Towels" : false,
+        "Tweezers" : false,
+        "Pen" : false,
+        "Notebook" : false,
+        "Map" : false,
+        "Passaport" : false,
+        "Travelling ticket" : false,
+        "Shaving blade" : false,
+        "Extra batteries" : false,
+        "Watch" : false,
     ]
     
     var sortedItems: [String] = []
@@ -88,7 +102,7 @@ class ListItemsViewController : UIViewController, UITableViewDataSource, UITable
         let isSelected: Bool = listItems[item]!
         cell.accessoryType = isSelected ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None
         cell.textLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 16.0)
-        cell.textLabel?.textColor = UIColor.fromHex(0x995024)
+        cell.textLabel?.textColor = UIColor.fromHex(0x6F5247)
         cell.textLabel?.text = item
         
         return cell

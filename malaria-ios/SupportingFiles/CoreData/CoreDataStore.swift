@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-class CoreDataStore: NSObject{
+class CoreDataStore{
     static let sharedInstance = CoreDataStore()
     
     let storeName = "Model"
@@ -51,7 +51,7 @@ class CoreDataStore: NSObject{
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
-    
+        
         var error: NSError?
         if coordinator!.addPersistentStoreWithType(
             NSSQLiteStoreType,

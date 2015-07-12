@@ -65,7 +65,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         if !refreshFromCoreData(){
             syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
                 if error != nil{
-                    var confirmAlert = UIAlertController(title: "No messages from Peace Corps", message: "", preferredStyle: .Alert)
+                    var confirmAlert = UIAlertController(title: "No available messages from Peace Corps", message: "", preferredStyle: .Alert)
                     confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
                     
                     var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))

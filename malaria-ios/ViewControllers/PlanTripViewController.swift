@@ -157,6 +157,18 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else{
             self.storeTrip()
+            
+            var confirmAlert = UIAlertController(title: "Current trip plan updated", message: "", preferredStyle: .Alert)
+            confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(confirmAlert, animated: true, completion: nil)
+            
+            // Delay the dismissal by 5 seconds
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                confirmAlert.dismissViewControllerAnimated(true, completion: nil)
+            })
+            
+            
         }
     }
     

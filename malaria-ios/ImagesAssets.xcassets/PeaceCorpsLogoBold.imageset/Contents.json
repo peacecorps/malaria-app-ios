@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "homebutton.png"
+      "filename" : "peaceCorpsBoldLogo.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "homebutton-1.png"
+      "filename" : "peaceCorpsBoldLogo-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "homebutton2x.png"
+      "filename" : "peaceCorpsBoldLogo-2.png"
     }
   ],
   "info" : {

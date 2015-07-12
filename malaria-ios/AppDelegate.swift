@@ -8,20 +8,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //registering for notifications
-        if !inTestEnvironment{
-            let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
-            application.registerUserNotificationSettings(settings)
-        }
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+        application.registerUserNotificationSettings(settings)
         
         //setting up initial screen
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if !inTestEnvironment{
-            if UserSettingsManager.getDidConfiguredMedicine(){
-                window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
-            }else{
-                window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
-            }
+        if UserSettingsManager.getDidConfiguredMedicine(){
+            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
+        }else{
+            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
         }
+        
         
         window!.makeKeyAndVisible()
         

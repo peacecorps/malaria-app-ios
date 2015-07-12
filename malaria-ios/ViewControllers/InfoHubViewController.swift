@@ -40,12 +40,12 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         
         syncManager.sync(EndpointType.Posts.path(), save: true,
             completionHandler: {Void in
-                self.refresh()
+                self.refreshFromCoreData()
                 self.refreshControl.endRefreshing()
         })
     }
     
-    func refresh() -> Bool{
+    func refreshFromCoreData() -> Bool{
         Logger.Info("Fetching from coreData")
         let info = Posts.retrieve(Posts.self, context: viewContext)
         if info.count > 0{
@@ -62,8 +62,20 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         super.viewWillAppear(animated)
         Logger.Info("infoViewController will appear")
         
-        if !refresh(){
-            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {Void in self.refresh()})
+        if !refreshFromCoreData(){
+            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
+                if error != nil{
+                    var confirmAlert = UIAlertController(title: "No messages from Peace Corps", message: "", preferredStyle: .Alert)
+                    confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    
+                    var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        self.presentViewController(confirmAlert, animated: true, completion: nil)
+                    })
+                    
+                }else{
+                    self.refreshFromCoreData()
+                }})
         }
     }
     

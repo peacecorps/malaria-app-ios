@@ -1,9 +1,17 @@
 import Foundation
 
 extension Medicine{
-    var stats: MedicineStats {get { return MedicineStats(medicine: self) }}
-    var registriesManager: RegistriesManager { get { return RegistriesManager(medicine: self) }}
-    var notificationManager: MedicineNotificationsManager { get { return MedicineNotificationsManager(medicine: self) }}
+    func stats(context: NSManagedObjectContext) -> MedicineStats {
+        return MedicineStats(context: context, medicine: self)
+    }
+    
+    func registriesManager(context: NSManagedObjectContext) -> RegistriesManager{
+        return RegistriesManager(context: context, medicine: self)
+    }
+    
+    func notificationManager(context: NSManagedObjectContext) -> MedicineNotificationsManager{
+        return MedicineNotificationsManager(context: context, medicine: self)
+    }
     
     enum Pill : String{
         static let allValues = [Pill.Doxycycline, Pill.Malarone, Pill.Mefloquine]

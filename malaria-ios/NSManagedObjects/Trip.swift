@@ -7,6 +7,6 @@ class Trip: NSManagedObject {
     @NSManaged var cashToBring: Int64
     @NSManaged var reminderDate: NSDate
     @NSManaged var location: String
-    @NSManaged var items: NSMutableSet
+    @NSManaged var items: NSSet
 
 }

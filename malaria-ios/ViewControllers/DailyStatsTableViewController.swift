@@ -8,42 +8,69 @@ protocol Stat{
 }
 
 class Adherence : Stat{
+    var context: NSManagedObjectContext
+    var medicineManager: MedicineManager!
+
+    init(context: NSManagedObjectContext){
+        self.context = context
+        medicineManager = MedicineManager(context: context)
+    }
+    
     var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
-    var attributeValue : String { return "\(100 * MedicineManager.sharedInstance.getCurrentMedicine()!.stats.pillAdherence())%"}
+    var attributeValue : String { return "\(100 * medicineManager.getCurrentMedicine()!.stats(context).pillAdherence())%"}
 }
 
 class PillStreak : Stat{
+    var context: NSManagedObjectContext
+    var medicineManager: MedicineManager!
+    
+    init(context: NSManagedObjectContext){
+        self.context = context
+        medicineManager = MedicineManager(context: context)
+    }
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
-    var attributeValue : String { return "\(MedicineManager.sharedInstance.getCurrentMedicine()!.stats.pillStreak())"}
+    var attributeValue : String { return "\(medicineManager.getCurrentMedicine()!.stats(context).pillStreak())"}
 }
 
 class MedicineLastTaken : Stat{
+    var context: NSManagedObjectContext
+    var medicineManager: MedicineManager!
+    
+    init(context: NSManagedObjectContext){
+        self.context = context
+        medicineManager = MedicineManager(context: context)
+    }
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
-    var attributeValue : String {
-        var result = "-/-"
-        
-        for r in MedicineManager.sharedInstance.getCurrentMedicine()!.registriesManager.getRegistries(mostRecentFirst: true){
+    var attributeValue : String {        
+        for r in medicineManager.getCurrentMedicine()!.registriesManager(context).getRegistries(mostRecentFirst: true){
             if r.tookMedicine{
-                result = r.date.formatWith("d/M")
+                return r.date.formatWith("d/M")
             }
         }
         
-        return result
+        return "-/-"
     }
 }
+
 class DailyStatsTableViewController : UITableViewController{
-    let listStats: [Stat] = [
-        MedicineLastTaken(),
-        PillStreak(),
-        Adherence()
-    ]
+    
+    
+    var listStats: [Stat] = []
+    
+    var viewContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clearColor()
+        
+        listStats = [
+            MedicineLastTaken(context: viewContext),
+            PillStreak(context: viewContext),
+            Adherence(context: viewContext)
+        ]
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

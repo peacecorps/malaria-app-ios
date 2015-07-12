@@ -4,9 +4,12 @@ import UIKit
 class MedicinePickerView : UIPickerView{
     var medicinePickerProvider: PickerProvider!
     var medicines = [String]()
-    var selectedValue: String!
+    var selectedValue = ""
     
-    init(selectCallback: (object: String) -> ()){
+    var medicineManager: MedicineManager!
+    
+    init(context:NSManagedObjectContext, selectCallback: (object: String) -> ()){
+        medicineManager = MedicineManager(context: context)
         super.init(frame: CGRectZero)
         
         //Setting up medicine value picker
@@ -39,7 +42,7 @@ class MedicinePickerView : UIPickerView{
     }
     
     func defaultMedicine() -> String{
-        return MedicineManager.sharedInstance.getCurrentMedicine()?.name ?? ""
+        return medicineManager.getCurrentMedicine()?.name ?? ""
     }
     
     func generateMedicineString(medicine: Medicine.Pill) -> String{

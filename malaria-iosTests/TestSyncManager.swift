@@ -2,7 +2,7 @@ import UIKit
 import XCTest
 
 class TestSyncManager: XCTestCase {
-    let sm = SyncManager.sharedInstance
+    var sm: SyncManager!
     
     var expectation: XCTestExpectation?
     var completionCalled = false
@@ -14,7 +14,7 @@ class TestSyncManager: XCTestCase {
         
         completionCalled = false
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
-        sm.context = currentContext
+        sm = SyncManager(context: currentContext)
     }
     
     override func tearDown() {

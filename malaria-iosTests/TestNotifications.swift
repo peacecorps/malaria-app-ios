@@ -1,7 +1,7 @@
 import XCTest
 
 class TestNotifications: XCTestCase {
-    let m = MedicineManager.sharedInstance
+    var m: MedicineManager!
     
     let d1 = NSDate.from(2015, month: 5, day: 8) //monday
     let currentPill = Medicine.Pill.Malarone //dailyPill
@@ -22,7 +22,7 @@ class TestNotifications: XCTestCase {
         super.setUp()
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
-        m.context = currentContext
+        m = MedicineManager(context: currentContext)
         m.setup(currentPill, fireDate: d1) //current pill is daily
         m.registerNewMedicine(weeklyPill)
         
@@ -34,17 +34,11 @@ class TestNotifications: XCTestCase {
             XCTFail("Fail initializing:")
         }
         
-        mdDailyregistriesManager = mdDaily.registriesManager
-        mdDailyregistriesManager.context = currentContext
+        mdDailyregistriesManager = mdDaily.registriesManager(currentContext)
+        mdWeeklyregistriesManager = mdWeekly.registriesManager(currentContext)
         
-        mdWeeklyregistriesManager = mdWeekly.registriesManager
-        mdWeeklyregistriesManager.context = currentContext
-        
-        mdDailyNotifManager = mdDaily.notificationManager
-        mdDailyNotifManager.context = currentContext
-        
-        mdWeeklyNotifManager = mdWeekly.notificationManager
-        mdWeeklyNotifManager.context = currentContext
+        mdDailyNotifManager = mdDaily.notificationManager(currentContext)
+        mdWeeklyNotifManager = mdWeekly.notificationManager(currentContext)
         
         XCTAssertTrue(mdDailyregistriesManager.addRegistry(d1, tookMedicine: true))
     }

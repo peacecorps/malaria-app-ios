@@ -2,7 +2,7 @@ import XCTest
 
 class TestMedicineRegistries: XCTestCase {
 
-    let m: MedicineManager = MedicineManager.sharedInstance
+    var m: MedicineManager!
     
     let d1 = NSDate.from(2015, month: 6, day: 13) //Saturday intentionally
     
@@ -16,7 +16,7 @@ class TestMedicineRegistries: XCTestCase {
         super.setUp()
 
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
-        m.context = currentContext
+        m = MedicineManager(context: currentContext)
         m.setup(currentPill, fireDate: NSDate())
         
         if let medi = m.getMedicine(currentPill){
@@ -25,8 +25,7 @@ class TestMedicineRegistries: XCTestCase {
             XCTFail("Fail initializing:")
         }
         
-        registriesManager = md.registriesManager
-        registriesManager.context = currentContext
+        registriesManager = md.registriesManager(currentContext)
         
         registriesManager.addRegistry(d1, tookMedicine: true)
         registriesManager.addRegistry(d1 - 1.day, tookMedicine: true)
@@ -121,8 +120,7 @@ class TestMedicineRegistries: XCTestCase {
         }
         
         
-        let weeklyRegistriesManager = weekly.registriesManager
-        weeklyRegistriesManager.context = currentContext
+        let weeklyRegistriesManager = weekly.registriesManager(currentContext)
         
         //Saturday = 0, Sunday = 1, etc
         var dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day

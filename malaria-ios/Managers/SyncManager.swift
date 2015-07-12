@@ -2,16 +2,18 @@ import Alamofire
 import SwiftyJSON
 
 class SyncManager : Manager{
-    static let sharedInstance = SyncManager()
     
     let user = "TestUser"
     let password = "password"
     
-    override init(){
+    override init(context: NSManagedObjectContext!){
+        super.init(context: context)
         // set up the base64-encoded credentials
         let loginString = NSString(format: "%@:%@", user, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
+        
+        Logger.Info("Setting up authorization header")
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
     }
     
@@ -28,7 +30,9 @@ class SyncManager : Manager{
         func expandedCompletionHandler(url: String, error: NSError?){
             completionHandler?(url: url, error: error)
             
-            if (error == nil && save){
+            if (error != nil){
+                Logger.Error(error!.localizedDescription)
+            }else if (error == nil && save){
                 Logger.Info("Saving to coreData")
                 CoreDataHelper.sharedInstance.saveContext(self.context)
             }

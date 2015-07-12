@@ -9,15 +9,24 @@ class DidTakePillsViewController: UIViewController {
     let MissedWeeklyPillTextColor = UIColor.redColor()
     let SeveralDaysRowMissedEntriesTextColor = UIColor.blackColor()
     
+    var medicineManager: MedicineManager!
+    
     var medicine: Medicine!
     
-    //optional in preparation for calendar view that will show this screen
+    //optional in preparation for calendar view that will show in this screen
     var currentDate: NSDate?
+    
+    var viewContext: NSManagedObjectContext!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        medicineManager = MedicineManager(context: viewContext)
+    }
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("didNotTookMedicineBtnHandler")
-        if (medicine.registriesManager.addRegistry(currentDate!, tookMedicine: false)){
-            medicine.notificationManager.reshedule()
+        if (medicine.registriesManager(viewContext).addRegistry(currentDate!, tookMedicine: false)){
+            medicine.notificationManager(viewContext).reshedule()
         }
         
         refreshScreen()
@@ -25,8 +34,8 @@ class DidTakePillsViewController: UIViewController {
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("tookMedicineBtnHandler")
-        if (medicine.registriesManager.addRegistry(currentDate!, tookMedicine: true)){
-            medicine.notificationManager.reshedule()
+        if (medicine.registriesManager(viewContext).addRegistry(currentDate!, tookMedicine: true)){
+            medicine.notificationManager(viewContext).reshedule()
         }
         
         refreshScreen()
@@ -34,7 +43,7 @@ class DidTakePillsViewController: UIViewController {
     
     func refreshScreen(){
         if medicine.isWeekly(){
-            if medicine.notificationManager.checkIfShouldReset(currentDate: currentDate!){
+            if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate!){
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 
@@ -42,17 +51,17 @@ class DidTakePillsViewController: UIViewController {
                 UserSettingsManager.setDidConfiguredMedicine(false)
             }else if !NSDate.areDatesSameDay(currentDate!, dateTwo: medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
-                        && !medicine.registriesManager.tookMedicine(currentDate!){
+                        && !medicine.registriesManager(viewContext).tookMedicine(currentDate!){
                             
                 dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
                 fullDateLbl.textColor = MissedWeeklyPillTextColor
             }
         }
         
-        if medicine.registriesManager.allRegistriesInPeriod(currentDate!).count == 0{
+        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate!).count == 0{
             return
         }else {
-            let activateCheckButton = medicine.registriesManager.tookMedicine(currentDate!)
+            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate!)
             
             didNotTookPillBtn.enabled = !activateCheckButton
             tookPillBtn.enabled = activateCheckButton
@@ -63,7 +72,7 @@ class DidTakePillsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         currentDate = currentDate ?? NSDate()
-        medicine = MedicineManager.sharedInstance.getCurrentMedicine()
+        medicine = medicineManager.getCurrentMedicine()
         
         dayOfTheWeekLbl.text = currentDate!.formatWith("EEEE")
         fullDateLbl.text = currentDate!.formatWith("dd/MM/yyyy")

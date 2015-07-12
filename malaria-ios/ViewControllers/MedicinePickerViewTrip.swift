@@ -2,13 +2,17 @@ import Foundation
 import UIKit
 
 class MedicinePickerViewTrip : MedicinePickerView{
+
+    var tripsManager: TripsManager!
     
-    override init(selectCallback: (object: String) -> ()){
-        super.init(selectCallback: selectCallback)
+    
+    override init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
+        tripsManager = TripsManager(context: context)
+        super.init(context: context, selectCallback: selectCallback)
     }
     
     override func defaultMedicine() -> String{
-        return TripsManager.sharedInstance.getTrip()?.medicine ?? ""
+        return tripsManager.getTrip()?.medicine ?? ""
     }
     
     

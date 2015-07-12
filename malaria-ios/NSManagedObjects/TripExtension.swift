@@ -2,6 +2,11 @@ import Foundation
 import CoreData
 
 extension Trip{
-    var itemsManager: ItemsManager { get { return ItemsManager(trip: self) }}
-    var notificationManager: TripNotificationsManager { get { return TripNotificationsManager(trip: self) }}
+    func itemsManager(context: NSManagedObjectContext) -> ItemsManager{
+        return ItemsManager(context: context, trip: self)
+    }
+    
+    func notificationManager(context: NSManagedObjectContext) -> TripNotificationsManager{
+        return TripNotificationsManager(context: context, trip: self)
+    }
 }

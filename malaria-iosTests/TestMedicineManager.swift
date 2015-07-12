@@ -4,7 +4,7 @@ import malaria_ios
 
 class TestSetupInsertClear: XCTestCase {
 
-    let m: MedicineManager = MedicineManager.sharedInstance
+    var m: MedicineManager!
     let currentPill = Medicine.Pill.Malarone
     
     var currentContext: NSManagedObjectContext!
@@ -13,13 +13,12 @@ class TestSetupInsertClear: XCTestCase {
         super.setUp()
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
-        m.context = currentContext
+        m = MedicineManager(context: currentContext)
         m.setup(currentPill, fireDate: NSDate())
     }
     
     override func tearDown() {
         super.tearDown()
-        
         m.clearCoreData()
     }
     

@@ -6,10 +6,11 @@ class MedicineNotificationsManager : NotificationManager{
     override var alertBody: String { get{ return "Medicine" } }
     override var alertAction: String { get{ return "Yeah. I know"} }
     
-    var medicine: Medicine!
+    var medicine: Medicine
     
-    init(medicine: Medicine){
+    init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
+        super.init(context: context)
     }
     
     override func scheduleNotification(fireTime: NSDate){
@@ -53,7 +54,7 @@ class MedicineNotificationsManager : NotificationManager{
             return false
         }
         
-        if let mostRecent = medicine.registriesManager.mostRecentEntry(){
+        if let mostRecent = medicine.registriesManager(context).mostRecentEntry(){
             //get ellaped days
             return (currentDate - mostRecent.date) >= 7
         }

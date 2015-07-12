@@ -4,7 +4,8 @@ class ItemsManager : Manager{
 
     var trip: Trip!
     
-    init(trip: Trip){
+    init(context: NSManagedObjectContext, trip: Trip){
+        super.init(context: context)
         self.trip = trip
     }
     
@@ -52,7 +53,9 @@ class ItemsManager : Manager{
             
             i.remove(quantity)
             if i.number == 0{
-                trip.items.removeObject(i)
+                var array: [Item] = trip.items.convertToArray()
+                array.removeAtIndex(find(array, i)!)
+                trip.items = NSSet(array: array)
                 i.deleteFromContext(self.context)
             }
             

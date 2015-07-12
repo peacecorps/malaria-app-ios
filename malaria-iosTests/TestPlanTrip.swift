@@ -2,7 +2,7 @@ import XCTest
 
 class TestPlanTrip: XCTestCase {
 
-    let tManager: TripsManager = TripsManager.sharedInstance
+    var tManager: TripsManager!
     
     let location = "Heaven"
     let currentPill = Medicine.Pill.Malarone
@@ -17,11 +17,12 @@ class TestPlanTrip: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
+        tManager = TripsManager(context: currentContext)
+        
         tManager.context = currentContext
         trip = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1)
         
-        itemsManager = trip.itemsManager
-        itemsManager.context = currentContext
+        itemsManager = trip.itemsManager(currentContext)
     }
     
     override func tearDown() {

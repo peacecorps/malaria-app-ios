@@ -10,6 +10,9 @@ class SetupScreenViewController : UIViewController{
     var medicinePicker: MedicinePickerView!
     var timePickerview: TimePickerView!
     
+    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    
+    var medicineManager: MedicineManager!
     
     lazy var toolBar: UIToolbar! = {
         let keyboardToolbar = UIToolbar()
@@ -30,10 +33,12 @@ class SetupScreenViewController : UIViewController{
         super.viewDidLoad()
         view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
         
+        medicineManager = MedicineManager(context: viewContext)
+        
         pillReminderNotificationTime = getStoredReminderTime()
         
         //Setting up medicinePickerView with default Value
-        medicinePicker = MedicinePickerView(selectCallback: {(object: String) in
+        medicinePicker = MedicinePickerView(context: viewContext, selectCallback: {(object: String) in
             self.medicineName.text = object
         })
         medicineName.inputView = medicinePicker.generateInputView()
@@ -68,10 +73,10 @@ class SetupScreenViewController : UIViewController{
             )
         }
         
-        MedicineManager.sharedInstance.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
+        medicineManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
     }
     
     private func getStoredReminderTime() -> NSDate{
-        return MedicineManager.sharedInstance.getCurrentMedicine()?.notificationTime ?? NSDate()
+        return medicineManager.getCurrentMedicine()?.notificationTime ?? NSDate()
     }
 }

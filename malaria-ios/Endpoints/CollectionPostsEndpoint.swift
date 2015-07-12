@@ -20,6 +20,8 @@ class CollectionPostsEndpoint : Endpoint{
             }
         }
         
+        Logger.Error("JSON is empty, error")
+        
         return nil
     }
     
@@ -41,7 +43,7 @@ class CollectionPostsEndpoint : Endpoint{
                 let updated = json["updated"].string,
                 let id = json["id"].int64{
                     
-                    let post = Post.create(Post.self, context: context) //FIXME
+                    let post = Post.create(Post.self, context: context)
                     
                     post.owner = owner
                     post.title = title
@@ -56,7 +58,7 @@ class CollectionPostsEndpoint : Endpoint{
                 
                 //delete
                 for r in result{
-                    r.deleteFromContext(context) //FIXME
+                    r.deleteFromContext(context)
                 }
                 
                 return nil

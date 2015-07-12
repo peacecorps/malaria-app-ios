@@ -4,12 +4,14 @@ import SwiftyJSON
 class TestMapping: XCTestCase {
     let jsonFolder = "ApiExamples"
     
-    var endpoints: [String : Endpoint] = SyncManager.sharedInstance.endpoints
+    var endpoints: [String : Endpoint] = [:]
     
     var currentContext: NSManagedObjectContext!
     override func setUp() {
         super.setUp()
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        
+        endpoints = SyncManager(context: currentContext).endpoints
     }
     
     override func tearDown() {

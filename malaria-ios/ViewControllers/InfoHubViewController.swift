@@ -17,8 +17,15 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     
     let refreshControl = UIRefreshControl()
     
+    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    
+    var syncManager: SyncManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        syncManager = SyncManager(context: viewContext)
+        
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         collectionView.delegate = self
@@ -31,7 +38,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     func pullRefreshHandler(){
         println("pull refresh")
         
-        SyncManager.sharedInstance.sync(EndpointType.Posts.path(), save: true,
+        syncManager.sync(EndpointType.Posts.path(), save: true,
             completionHandler: {Void in
                 self.refresh()
                 self.refreshControl.endRefreshing()
@@ -40,7 +47,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     
     func refresh() -> Bool{
         Logger.Info("Fetching from coreData")
-        let info = Posts.retrieve(Posts.self, context: CoreDataHelper.sharedInstance.backgroundContext!)
+        let info = Posts.retrieve(Posts.self, context: viewContext)
         if info.count > 0{
             posts = info[0].posts.convertToArray()
             posts.sort({$0.title < $1.title})
@@ -56,7 +63,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         Logger.Info("infoViewController will appear")
         
         if !refresh(){
-            SyncManager.sharedInstance.sync(EndpointType.Posts.path(), save: true, completionHandler: {Void in self.refresh()})
+            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {Void in self.refresh()})
         }
     }
     

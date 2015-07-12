@@ -29,8 +29,11 @@ class PCLocationPickerViewer : UIPickerView{
     
     var selectedValue: String!
     
-    init(selectCallback: (object: String) -> ()){
+    var tripsManager: TripsManager!
+    
+    init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
+        tripsManager = TripsManager(context: context)
         
         pcLocationsPickerProvider = PickerProvider(
             selectedCall: {(component: Int, row: Int, object: String) in
@@ -54,7 +57,7 @@ class PCLocationPickerViewer : UIPickerView{
     }
     
     func defaultTripLocation() -> String {
-        return TripsManager.sharedInstance.getTrip()?.location ?? ""
+        return tripsManager.getTrip()?.location ?? ""
     }
     
     required init(coder aDecoder: NSCoder) {

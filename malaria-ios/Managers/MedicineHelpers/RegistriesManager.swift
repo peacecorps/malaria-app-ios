@@ -3,7 +3,8 @@ import Foundation
 class RegistriesManager : Manager{
     var medicine: Medicine!
     
-    init(medicine: Medicine){
+    init(context: NSManagedObjectContext, medicine: Medicine){
+        super.init(context: context)
         self.medicine = medicine
     }
 
@@ -95,14 +96,16 @@ class RegistriesManager : Manager{
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
         }else{
-            var registry = Registry.create(Registry.self, context: self.context)
+            var registry = Registry.create(Registry.self, context: context)
             registry.date = date
             registry.tookMedicine = tookMedicine
             
-            medicine.registries.addObject(registry)
+            var newRegistries: [Registry] = medicine.registries.convertToArray()
+            newRegistries.append(registry)
+            medicine.registries = NSSet(array: newRegistries)
         }
         
-        CoreDataHelper.sharedInstance.saveContext(self.context)
+        CoreDataHelper.sharedInstance.saveContext(context)
         
         return true
         

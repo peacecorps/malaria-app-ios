@@ -2,6 +2,10 @@ import Foundation
 import UIKit
 
 class NotificationManager : Manager{
+    
+    override init(context: NSManagedObjectContext!){
+        super.init(context: context)
+    }
 
     var category: String { get{ fatalError("No category provided")} }
     var alertBody: String { get{ fatalError("No alertBody provided")} }

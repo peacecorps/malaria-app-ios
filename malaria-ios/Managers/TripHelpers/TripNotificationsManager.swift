@@ -9,7 +9,8 @@ class TripNotificationsManager : NotificationManager{
     
     var trip: Trip!
     
-    init(trip: Trip){
+    init(context: NSManagedObjectContext, trip: Trip){
+        super.init(context: context)
         self.trip = trip
     }
     

@@ -9,8 +9,9 @@
 import Foundation
 
 class Manager{
-    
-    init(){}
-    
     var context: NSManagedObjectContext!
+    
+    init(context: NSManagedObjectContext!){
+        self.context = context
+    }
 }

@@ -1,7 +1,7 @@
 import XCTest
 
 class TestTimedInsertions: XCTestCase {
-    let m: MedicineManager = MedicineManager.sharedInstance
+    var m: MedicineManager!
     
     let d1 = NSDate.from(2015, month: 6, day: 6) + NSCalendar.currentCalendar().firstWeekday.day //start of the week
     let weeklyPill = Medicine.Pill.Mefloquine
@@ -20,7 +20,7 @@ class TestTimedInsertions: XCTestCase {
         super.setUp()
 
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
-        m.context = currentContext
+        m = MedicineManager(context: currentContext)
         
         m.registerNewMedicine(weeklyPill)
         m.registerNewMedicine(dailyPill)
@@ -33,11 +33,8 @@ class TestTimedInsertions: XCTestCase {
             XCTFail("Fail initializing:")
         }
         
-        dailyRegistriesManager = daily.registriesManager
-        dailyRegistriesManager.context = currentContext
-        
-        weeklyRegistriesManager = weekly.registriesManager
-        weeklyRegistriesManager.context = currentContext
+        dailyRegistriesManager = daily.registriesManager(currentContext)        
+        weeklyRegistriesManager = weekly.registriesManager(currentContext)
         
         
     }

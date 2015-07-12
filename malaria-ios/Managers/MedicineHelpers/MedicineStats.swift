@@ -1,10 +1,11 @@
 import Foundation
 
-class MedicineStats{
-    var medicine: Medicine!
+class MedicineStats : Manager{
+    var medicine: Medicine
     
-    init(medicine: Medicine){
+    init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
+        super.init(context: context)
     }
     
     /// Returns the number of pills taken between two dates
@@ -14,7 +15,7 @@ class MedicineStats{
     /// :returns: `Int`: Number of pills
     func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var count = 0
-        for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2){
+        for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2){
             if (r.tookMedicine){
                 count++
             }
@@ -29,7 +30,7 @@ class MedicineStats{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Number of supposed pills
     func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
-        if (medicine.registriesManager.getRegistries(date1: date1, date2: date2).count == 0){
+        if (medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).count == 0){
             return 0
         }
         
@@ -39,12 +40,12 @@ class MedicineStats{
         
         var d1: NSDate = date1
         if NSDate.areDatesSameDay(d1, dateTwo: NSDate.min) {
-            d1 = medicine.registriesManager.oldestEntry()!.date
+            d1 = medicine.registriesManager(context).oldestEntry()!.date
         }
         
         var d2: NSDate = date2
         if NSDate.areDatesSameDay(d2, dateTwo: NSDate.max) {
-            d2 = medicine.registriesManager.mostRecentEntry()!.date
+            d2 = medicine.registriesManager(context).mostRecentEntry()!.date
         }
         
         //+1 to include d1
@@ -84,7 +85,7 @@ class MedicineStats{
         
         let isDaily = medicine.isDaily()
         var previousDate: NSDate?
-        for r in medicine.registriesManager.getRegistries(date1: date1, date2: date2, mostRecentFirst: true){
+        for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2, mostRecentFirst: true){
             //check for missing entries
             if let previousD = previousDate{
                 if (isDaily && !NSDate.areDatesSameDay(previousD - 1.day, dateTwo: r.date)) ||

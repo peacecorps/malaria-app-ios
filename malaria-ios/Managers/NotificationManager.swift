@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class NotificationManager : Manager{
+public class NotificationManager : Manager{
     
     override init(context: NSManagedObjectContext!){
         super.init(context: context)
@@ -16,7 +16,7 @@ class NotificationManager : Manager{
     /// All previous notifications will be unsheduled
     ///
     /// :param: `NSDate`: fireTime
-    func scheduleNotification(fireTime: NSDate){
+    public func scheduleNotification(fireTime: NSDate){
         unsheduleNotification()
         Logger.Info("Scheduling \(category) to \(fireTime)")
         let notification: UILocalNotification = createNotification(fireTime)
@@ -24,7 +24,7 @@ class NotificationManager : Manager{
     }
     
     /// Unschedule all notifications
-    func unsheduleNotification(){
+    public func unsheduleNotification(){
         Logger.Info("Unsheduling previous \(category)")
         for event in UIApplication.sharedApplication().scheduledLocalNotifications {
             
@@ -40,7 +40,7 @@ class NotificationManager : Manager{
     /// Creates a notification
     ///
     /// :param: `NSDate`: fireTime
-    func createNotification(fireDate: NSDate) -> UILocalNotification{
+    private func createNotification(fireDate: NSDate) -> UILocalNotification{
         var localNotification = UILocalNotification()
         localNotification.fireDate = fireDate
         localNotification.soundName = UILocalNotificationDefaultSoundName;

@@ -1,29 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Api" representedClassName="malaria_ios.Api" syncable="YES">
-        <attribute name="activity" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cohort" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="goals" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="indicators" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="measurement" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectives" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="outcomes" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="outputs" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="posts" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="projects" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="ptposts" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="regions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="revposts" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sectors" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="users" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="volunteer" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CollectionPosts" representedClassName="malaria_ios.CollectionPosts" isAbstract="YES" syncable="YES">
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="malaria_ios.Item" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="associated_with" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="items" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <entity name="Medicine" representedClassName="malaria_ios.Medicine" syncable="YES">
@@ -49,14 +31,13 @@
         <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
     </entity>
     <entity name="Trip" representedClassName="malaria_ios.Trip" syncable="YES">
-        <attribute name="cashToBring" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="cash" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reminderDate" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Api" positionX="-495" positionY="207" width="128" height="285"/>
         <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="60"/>
         <element name="Item" positionX="-207" positionY="11" width="128" height="90"/>
         <element name="Medicine" positionX="-63" positionY="-18" width="128" height="120"/>

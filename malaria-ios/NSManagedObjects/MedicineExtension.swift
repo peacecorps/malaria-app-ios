@@ -1,6 +1,6 @@
 import Foundation
 
-extension Medicine{
+public extension Medicine{
     func stats(context: NSManagedObjectContext) -> MedicineStats {
         return MedicineStats(context: context, medicine: self)
     }
@@ -28,7 +28,7 @@ extension Medicine{
             return self != Medicine.Pill.Mefloquine
         }
         
-        func name() -> String{
+        public func name() -> String{
             return self.rawValue
         }
     }

@@ -1,12 +1,12 @@
 import Foundation
 import CoreData
 
-class Trip: NSManagedObject {
+public class Trip: NSManagedObject {
 
-    @NSManaged var medicine: String
-    @NSManaged var cashToBring: Int64
-    @NSManaged var reminderDate: NSDate
-    @NSManaged var location: String
-    @NSManaged var items: NSSet
+    @NSManaged public var medicine: String
+    @NSManaged public var cash: Int64
+    @NSManaged public var reminderDate: NSDate
+    @NSManaged public var location: String
+    @NSManaged public var items: NSSet
 
 }

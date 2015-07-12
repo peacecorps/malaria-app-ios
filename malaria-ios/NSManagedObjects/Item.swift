@@ -9,10 +9,10 @@
 import Foundation
 import CoreData
 
-class Item: NSManagedObject {
+public class Item: NSManagedObject {
 
-    @NSManaged var name: String
-    @NSManaged var number: Int64
-    @NSManaged var associated_with: Trip
+    @NSManaged public var name: String
+    @NSManaged public var quantity: Int64
+    @NSManaged public var associated_with: Trip
 
 }

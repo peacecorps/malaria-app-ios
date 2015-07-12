@@ -1,5 +1,6 @@
 import XCTest
 import Foundation
+import malaria_ios
 
 class TestNSDateExtensions: XCTestCase {
     

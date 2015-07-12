@@ -1,5 +1,6 @@
 import UIKit
 import XCTest
+import malaria_ios
 
 class TestSyncManager: XCTestCase {
     var sm: SyncManager!

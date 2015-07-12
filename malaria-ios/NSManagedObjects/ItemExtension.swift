@@ -2,10 +2,10 @@ import Foundation
 
 extension Item{
     func add(number: Int64){
-        self.number += number
+        self.quantity += number
     }
     
     func remove(number: Int64){
-        self.number = max(self.number - number, 0)
+        self.quantity = max(self.quantity - number, 0)
     }
 }

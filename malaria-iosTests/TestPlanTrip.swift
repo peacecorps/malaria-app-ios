@@ -1,4 +1,5 @@
 import XCTest
+import malaria_ios
 
 class TestPlanTrip: XCTestCase {
 
@@ -18,7 +19,7 @@ class TestPlanTrip: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
         tManager = TripsManager(context: currentContext)        
-        trip = tManager.createTrip(location, medicine: currentPill, cashToBring: cashToBring, reminderDate: d1)
+        trip = tManager.createTrip(location, medicine: currentPill, cash: cashToBring, reminderDate: d1)
         
         itemsManager = trip.itemsManager(currentContext)
     }
@@ -33,7 +34,7 @@ class TestPlanTrip: XCTestCase {
             XCTAssertEqual(t, trip)
             XCTAssertEqual(t.location, location)
             XCTAssertEqual(t.medicine, currentPill.name())
-            XCTAssertEqual(t.cashToBring, cashToBring)
+            XCTAssertEqual(t.cash, cashToBring)
             XCTAssertEqual(t.reminderDate, d1)
         }else{
             XCTFail("Trip wasn't created")
@@ -46,16 +47,16 @@ class TestPlanTrip: XCTestCase {
         let cash: Int64 = 9000
         let reminderDate2 = d1 + 10.day
         
-        trip = tManager.createTrip(location2, medicine: pill2, cashToBring: cash, reminderDate: reminderDate2)
+        trip = tManager.createTrip(location2, medicine: pill2, cash: cash, reminderDate: reminderDate2)
         
         XCTAssertEqual(trip.location, location2)
         XCTAssertEqual(trip.medicine, pill2.name())
-        XCTAssertEqual(trip.cashToBring, cash)
+        XCTAssertEqual(trip.cash, cash)
         XCTAssertEqual(trip.reminderDate, reminderDate2)
         if let t = tManager.getTrip(){
             XCTAssertEqual(t.location, location2)
             XCTAssertEqual(t.medicine, pill2.name())
-            XCTAssertEqual(t.cashToBring, cash)
+            XCTAssertEqual(t.cash, cash)
             XCTAssertEqual(t.reminderDate, reminderDate2)
         }else{
             XCTFail("Trip wasn't created")
@@ -74,13 +75,13 @@ class TestPlanTrip: XCTestCase {
         if let  lantern = itemsManager.findItem("lantern"),
                 lanternUpper = itemsManager.findItem("Lantern")
         {
-            XCTAssertEqual(lantern.number, 1)
+            XCTAssertEqual(lantern.quantity, 1)
         }else{
             XCTFail("findItem lantern not found")
         }
         
         if let streessBall = itemsManager.findItem("Stress Ball"){
-            XCTAssertEqual(streessBall.number, 2)
+            XCTAssertEqual(streessBall.quantity, 2)
         }
         
         //check case insensitive
@@ -92,7 +93,7 @@ class TestPlanTrip: XCTestCase {
         itemsManager.addItem("lantern", quantity: 1)
         
         if let lantern = itemsManager.findItem("lantern"){
-            XCTAssertEqual(lantern.number, 1)
+            XCTAssertEqual(lantern.quantity, 1)
         }else{
             XCTFail("findItem lantern not found")
         }
@@ -103,7 +104,7 @@ class TestPlanTrip: XCTestCase {
         itemsManager.addItem("lantern", quantity: 3)
         
         if let lantern = itemsManager.findItem("lantern"){
-            XCTAssertEqual(lantern.number, 4)
+            XCTAssertEqual(lantern.quantity, 4)
         }else{
             XCTFail("findItem lantern not found")
         }
@@ -117,7 +118,7 @@ class TestPlanTrip: XCTestCase {
         itemsManager.removeItem("lantern", quantity: 2)
         
         if let lantern = itemsManager.findItem("lantern"){
-            XCTAssertEqual(lantern.number, 4)
+            XCTAssertEqual(lantern.quantity, 4)
         }else{
             XCTFail("findItem lantern not found")
         }
@@ -135,7 +136,7 @@ class TestPlanTrip: XCTestCase {
         //adding again
         itemsManager.addItem("lantern", quantity: 9)
         if let lantern = itemsManager.findItem("LANTERN"){
-            XCTAssertEqual(lantern.number, 9)
+            XCTAssertEqual(lantern.quantity, 9)
         }else{
             XCTFail("findItem lantern not found")
         }

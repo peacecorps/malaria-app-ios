@@ -1,6 +1,6 @@
 import Foundation
 
-enum EndpointType : String{
+public enum EndpointType : String{
     case BaseUrl = "http://pc-web-dev.systers.org/"
     
     case Api = "api"
@@ -24,7 +24,7 @@ enum EndpointType : String{
     /// if BaseUrl returns BaseUrl
     /// if Api returns Api
     /// else append BaseUrl/Api/Self
-    func path() -> String{
+    public func path() -> String{
         if self == BaseUrl {
             return self.rawValue
         }else if self == Api {

@@ -1,6 +1,6 @@
 import Foundation
 
-class ItemsManager : Manager{
+public class ItemsManager : Manager{
 
     let trip: Trip
     
@@ -13,7 +13,7 @@ class ItemsManager : Manager{
     ///
     /// :param: `String`: name of the item
     /// :param: `Int64`: quantity
-    func addItem(name: String, quantity: Int64){
+    public func addItem(name: String, quantity: Int64){
         if let i = findItem(name){
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
@@ -21,7 +21,7 @@ class ItemsManager : Manager{
             Logger.Info("Adding \(quantity) \(name)")
             var item = Item.create(Item.self, context: self.context)
             item.name = name
-            item.number = quantity
+            item.quantity = quantity
             
             var newArray = getItems()
             newArray.append(item)
@@ -35,7 +35,7 @@ class ItemsManager : Manager{
     ///
     /// :param: `String`: name of the item
     /// :returns: `Item?`:
-    func findItem(name: String) -> Item?{
+    public func findItem(name: String) -> Item?{
         var currentItems = getItems()
         currentItems = currentItems.filter({$0.name.lowercaseString == name.lowercaseString})
         
@@ -48,11 +48,11 @@ class ItemsManager : Manager{
     ///
     /// :param: `String`: name of the item
     /// :param: `Int64` optional: quantity
-    func removeItem(name: String, quantity: Int64 = Int64.max){
+    public func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
             
             i.remove(quantity)
-            if i.number == 0{
+            if i.quantity == 0{
                 var array: [Item] = trip.items.convertToArray()
                 array.removeAtIndex(find(array, i)!)
                 trip.items = NSSet(array: array)
@@ -70,7 +70,7 @@ class ItemsManager : Manager{
     /// Returns all items from the trip
     ///
     /// :returns: `[Item]`: Array of items
-    func getItems() -> [Item]{
+    public func getItems() -> [Item]{
         return trip.items.convertToArray()
     }
 }

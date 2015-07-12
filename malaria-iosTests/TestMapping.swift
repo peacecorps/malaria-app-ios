@@ -1,5 +1,6 @@
 import XCTest
 import SwiftyJSON
+import malaria_ios
 
 class TestMapping: XCTestCase {
     let jsonFolder = "ApiExamples"

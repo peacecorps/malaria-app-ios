@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class TripNotificationsManager : NotificationManager{
+public class TripNotificationsManager : NotificationManager{
     override var category: String { get{ return "TripReminder"} }
     override var alertBody: String { get{ fatalError("Trip")} }
     override var alertAction: String { get{ fatalError("Got it")} }
@@ -13,7 +13,7 @@ class TripNotificationsManager : NotificationManager{
         super.init(context: context)
     }
     
-    override func scheduleNotification(fireTime: NSDate){
+    public override func scheduleNotification(fireTime: NSDate){
         super.scheduleNotification(fireTime)
         
         if(trip.reminderDate != fireTime){

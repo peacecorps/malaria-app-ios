@@ -1,6 +1,6 @@
 import SwiftyJSON
 
-protocol Endpoint{
+public protocol Endpoint{
     /// full url to the endpoint
     ///
     /// :returns: `String`

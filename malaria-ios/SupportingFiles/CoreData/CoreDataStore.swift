@@ -1,8 +1,8 @@
 import Foundation
 import CoreData
 
-class CoreDataStore{
-    static let sharedInstance = CoreDataStore()
+public class CoreDataStore{
+    public static let sharedInstance = CoreDataStore()
     
     let storeName = "Model"
     let storeFilename = "malaria-ios.sqlite"
@@ -13,37 +13,9 @@ class CoreDataStore{
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
-        // Get module name
-        var moduleName: String = inTestEnvironment ? "malaria_iosTests" : "malaria_ios"
-        
         // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!
         var model = NSManagedObjectModel(contentsOfURL: modelURL)!
-        
-        // Create entity copies
-        var newEntities = [NSEntityDescription]()
-        for (_, entity) in enumerate(model.entities) {
-            let newEntity = entity.copy() as! NSEntityDescription
-            newEntity.managedObjectClassName = "\(moduleName).\(entity.managedObjectClassName)"
-            newEntities.append(newEntity)
-        }
-        
-        // Set correct subentities
-        for (_, entity) in enumerate(newEntities) {
-            var newSubEntities = [NSEntityDescription]()
-            for subEntity in entity.subentities! {
-                for (_, entity) in enumerate(newEntities) {
-                    if subEntity.name == entity.name {
-                        newSubEntities.append(entity)
-                    }
-                }
-            }
-            entity.subentities = newSubEntities
-        }
-        
-        // Set model
-        model = NSManagedObjectModel()
-        model.entities = newEntities
         
         return model
         }()

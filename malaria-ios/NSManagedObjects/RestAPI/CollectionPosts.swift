@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-class CollectionPosts: NSManagedObject {
+public class CollectionPosts: NSManagedObject {
 
-    @NSManaged var posts: NSMutableSet
+    @NSManaged public var posts: NSMutableSet
 
 }

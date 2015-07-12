@@ -15,7 +15,7 @@ public func ==(a: NSDate, b: NSDate) -> Bool {
 
 extension NSDate : Comparable {}
 
-extension NSDate{
+public extension NSDate{
     
     /// NSDate(timeIntervalSince1970: 0)
     static var min: NSDate {

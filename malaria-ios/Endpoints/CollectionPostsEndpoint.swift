@@ -1,13 +1,13 @@
 import Foundation
 import SwiftyJSON
 
-class CollectionPostsEndpoint : Endpoint{
-    var path: String { get { fatalError("Please specify path") } }
+public class CollectionPostsEndpoint : Endpoint{
+    public var path: String { get { fatalError("Please specify path") } }
     
     /// subCollectionClassType: Specify the subclass of CollectionPosts
     var subCollectionsPostsType: CollectionPosts.Type { get { fatalError("Please specify collection type") } }
     
-    func retrieveJSONObject(data: JSON, context: NSManagedObjectContext) -> NSManagedObject?{
+    public func retrieveJSONObject(data: JSON, context: NSManagedObjectContext) -> NSManagedObject?{
         if let results = data["results"].array{
             let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self, context: context)
             
@@ -61,7 +61,7 @@ class CollectionPostsEndpoint : Endpoint{
         return result
     }
     
-    func clearFromDatabase(context: NSManagedObjectContext){
+    public func clearFromDatabase(context: NSManagedObjectContext){
         subCollectionsPostsType.clear(subCollectionsPostsType.self, context: context)
     }
     

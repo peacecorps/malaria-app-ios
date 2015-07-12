@@ -4,7 +4,7 @@ extension String : Printable {
     public var description: String { get { return self }}
 }
 
-class Logger{
+public class Logger{
     
     /// Logs an Information message
     ///

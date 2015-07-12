@@ -1,11 +1,11 @@
 import Foundation
 import CoreData
 
-class Medicine: NSManagedObject {
+public class Medicine: NSManagedObject {
 
-    @NSManaged var name: String
-    @NSManaged var isCurrent: Bool
-    @NSManaged var weekly: Bool
-    @NSManaged var registries: NSSet
-    @NSManaged var notificationTime: NSDate?
+    @NSManaged public var name: String
+    @NSManaged public var isCurrent: Bool
+    @NSManaged public var weekly: Bool
+    @NSManaged public var registries: NSSet
+    @NSManaged public var notificationTime: NSDate?
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-extension NSSet {
+public extension NSSet {
     /// Converts the NSSet to a array
     
     /// :returns: `[T]`

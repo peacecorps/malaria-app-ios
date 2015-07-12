@@ -1,10 +1,10 @@
 import Foundation
 
-class CoreDataHelper {
-    static let sharedInstance = CoreDataHelper()
+public class CoreDataHelper {
+    public static let sharedInstance = CoreDataHelper()
     
     
-    func createBackgroundContext() -> NSManagedObjectContext?{
+    public func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
             return nil
@@ -15,7 +15,7 @@ class CoreDataHelper {
         return backgroundContext
     }
     
-    func saveContext (context: NSManagedObjectContext) {
+    public func saveContext (context: NSManagedObjectContext) {
         var error: NSError?
         if context.hasChanges && !context.save(&error) {
             Logger.Error("Unresolved error \(error), \(error!.userInfo)")

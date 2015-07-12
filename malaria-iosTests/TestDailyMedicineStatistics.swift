@@ -1,4 +1,5 @@
 import XCTest
+import malaria_ios
 
 class TestDailyMedicineStatistics: XCTestCase {
 

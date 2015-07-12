@@ -1,5 +1,7 @@
 import UIKit
 import XCTest
+import malaria_ios
+
 
 class TestUserSettings: XCTestCase {
     

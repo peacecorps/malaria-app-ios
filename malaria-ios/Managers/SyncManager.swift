@@ -1,12 +1,12 @@
 import Alamofire
 import SwiftyJSON
 
-class SyncManager : Manager{
+public class SyncManager : Manager{
     
     let user = "TestUser"
     let password = "password"
     
-    override init(context: NSManagedObjectContext!){
+    public override init(context: NSManagedObjectContext!){
         super.init(context: context)
         
         // set up the base64-encoded credentials
@@ -17,7 +17,7 @@ class SyncManager : Manager{
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
     }
     
-    var endpoints: [String : Endpoint] = [
+    public var endpoints: [String : Endpoint] = [
         EndpointType.Posts.path() : PostsEndpoint(),
     ]
     
@@ -26,7 +26,7 @@ class SyncManager : Manager{
     /// :param: `String`: full path
     /// :param: `Bool`: Save context after success
     /// :param: `((url: String, error: NSError?)->())?`: completition Handler (default nil)
-    func sync(path: String, save: Bool = false, completionHandler: ((url: String, error: NSError?)->())? = nil){
+    public func sync(path: String, save: Bool = false, completionHandler: ((url: String, error: NSError?)->())? = nil){
         func expandedCompletionHandler(url: String, error: NSError?){
             completionHandler?(url: url, error: error)
             
@@ -51,7 +51,7 @@ class SyncManager : Manager{
     /// Runs the specified completition handler after syncing every endpoint.
     ///
     /// :param: `(()->())?`: completition handler (default nil)
-    func syncAll(completitionHandler: (()->())? = nil){
+    public func syncAll(completitionHandler: (()->())? = nil){
         var count = endpoints.count
         func completitionHandlerExpanded(url: String, error: NSError?){
             count--

@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-extension Trip{
+public extension Trip{
     func itemsManager(context: NSManagedObjectContext) -> ItemsManager{
         return ItemsManager(context: context, trip: self)
     }

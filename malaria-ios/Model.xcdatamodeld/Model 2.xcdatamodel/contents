@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="2" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Api" representedClassName="malaria_ios.Api" syncable="YES">
         <attribute name="activity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cohort" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,6 +19,7 @@
         <attribute name="volunteer" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CollectionPosts" representedClassName="malaria_ios.CollectionPosts" isAbstract="YES" syncable="YES">
+        <attribute name="thisHere" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="malaria_ios.Item" syncable="YES">
@@ -30,6 +31,7 @@
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="notificationTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="thisAttr" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="weekly" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="registries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Registry" inverseName="medicine" inverseEntity="Registry" syncable="YES"/>
     </entity>
@@ -57,9 +59,9 @@
     </entity>
     <elements>
         <element name="Api" positionX="-495" positionY="207" width="128" height="285"/>
-        <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="60"/>
+        <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="75"/>
         <element name="Item" positionX="-207" positionY="11" width="128" height="90"/>
-        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Post" positionX="-101" positionY="201" width="128" height="150"/>
         <element name="Posts" positionX="-270" positionY="387" width="128" height="45"/>
         <element name="Registry" positionX="214" positionY="15" width="128" height="90"/>

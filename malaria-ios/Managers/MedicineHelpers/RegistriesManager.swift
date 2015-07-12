@@ -1,6 +1,6 @@
 import Foundation
 
-class RegistriesManager : Manager{
+public class RegistriesManager : Manager{
     let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){
@@ -12,7 +12,7 @@ class RegistriesManager : Manager{
     ///
     /// :param: `NSDate`: the date
     /// :returns: `Bool`: True if the user took a pill in that day or week
-    func tookMedicine(at: NSDate) -> Bool{
+    public func tookMedicine(at: NSDate) -> Bool{
         for r in allRegistriesInPeriod(at){
             if r.tookMedicine{
                 return true
@@ -27,7 +27,7 @@ class RegistriesManager : Manager{
     ///
     /// :param: `NSDate`: the date
     /// :returns: `[Registry]` all the entries
-    func allRegistriesInPeriod(at: NSDate) -> [Registry] {
+    public  func allRegistriesInPeriod(at: NSDate) -> [Registry] {
         var result = [Registry]()
         
         if medicine.isDaily(){
@@ -50,7 +50,7 @@ class RegistriesManager : Manager{
     /// Returns the most recent entry for that pill if there is
     ///
     /// :returns: `Registry?`
-    func mostRecentEntry() -> Registry?{
+    public func mostRecentEntry() -> Registry?{
         let registries = getRegistries()
         return registries.count > 0 ? registries[0] : nil
     }
@@ -58,7 +58,7 @@ class RegistriesManager : Manager{
     /// Returns the oldest entry for that pill if there is
     ///
     /// :returns: `Registry?`
-    func oldestEntry() -> Registry?{
+    public func oldestEntry() -> Registry?{
         let registries = getRegistries(mostRecentFirst: false)
         return registries.count > 0 ? registries[0] : nil
     }
@@ -73,7 +73,7 @@ class RegistriesManager : Manager{
     /// :param: `Bool`: if the user took medicine
     /// :param: `Bool` optional: overwrite previous entry (by default is false)
     /// :returns: `Bool`: true if success, false if not
-    func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
+    public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
             return false
@@ -117,7 +117,7 @@ class RegistriesManager : Manager{
     /// :param: `NSDate`: date2
     /// :param: `Bool` optional: if first element of result should be the most recent entry. (by default is true)
     /// :returns: `[Registry]`
-    func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true) -> [Registry]{
+    public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true) -> [Registry]{
         var array : [Registry] = medicine.registries.convertToArray()
         
         //make sure that date2 is always after date1
@@ -139,7 +139,7 @@ class RegistriesManager : Manager{
     ///
     /// :param: `NSDate`: date
     /// :returns: `Registry?`
-    func findRegistry(date: NSDate) -> Registry?{
+    public func findRegistry(date: NSDate) -> Registry?{
         let filteredArray = getRegistries(date1: date, date2: date)
         if filteredArray.count > 1{
             Logger.Error("Error: Found too many entries with same date")

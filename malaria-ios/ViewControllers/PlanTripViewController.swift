@@ -143,7 +143,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getStoredPlanTripCashToBring() -> Int64{
-        return tripsManager.getTrip()?.cashToBring ?? 0
+        return tripsManager.getTrip()?.cash ?? 0
     }
     
     @IBAction func generateTrip(sender: AnyObject) {
@@ -183,7 +183,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         Logger.Info(cash)
         Logger.Info(tripReminderDate.formatWith("dd-MM-yyyy"))
         
-        let trip = tripsManager.createTrip(loc, medicine: medication, cashToBring: cash, reminderDate: tripReminderDate)
+        let trip = tripsManager.createTrip(loc, medicine: medication, cash: cash, reminderDate: tripReminderDate)
         for i in selectedItems{
             trip.itemsManager(viewContext).addItem(i, quantity: 1)
         }

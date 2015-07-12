@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Posts: CollectionPosts {
+public class Posts: CollectionPosts {
 
 
 }

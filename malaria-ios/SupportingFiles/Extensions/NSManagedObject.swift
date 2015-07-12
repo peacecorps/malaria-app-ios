@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension NSManagedObject{
+public extension NSManagedObject{
 
     ///Converts MyTarget.ClassName to ClassName
     class func getSimpleClassName(c: AnyClass) -> String {

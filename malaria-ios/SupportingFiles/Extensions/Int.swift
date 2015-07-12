@@ -1,6 +1,6 @@
 import Foundation
 
-extension Int{
+public extension Int{
     /// :returns: (self, NSCalendarUnit.CalendarUnitday)
     var day: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitDay)

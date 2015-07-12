@@ -1,8 +1,8 @@
 import Foundation
 
-class MedicineManager : Manager{
+public class MedicineManager : Manager{
     
-    override init(context: NSManagedObjectContext){
+    override public init(context: NSManagedObjectContext){
         super.init(context: context)
     }
     
@@ -12,7 +12,7 @@ class MedicineManager : Manager{
     ///
     /// :param: `Medicine.Pill`: the pill
     /// :param: `NSDate`: fireDate
-    func setup(medicine : Medicine.Pill, fireDate: NSDate){
+    public func setup(medicine : Medicine.Pill, fireDate: NSDate){
         //unregister previous medicines
         if let currentMed = getCurrentMedicine(){
             currentMed.notificationManager(context).unsheduleNotification()
@@ -29,7 +29,7 @@ class MedicineManager : Manager{
     }
     
     /// Clears instance of Medicines from the CoreData
-    func clearCoreData(){
+    public func clearCoreData(){
         Medicine.clear(Medicine.self, context: self.context)
         CoreDataHelper.sharedInstance.saveContext(self.context)
         UserSettingsManager.setDidConfiguredMedicine(true)
@@ -40,7 +40,7 @@ class MedicineManager : Manager{
     ///
     /// :param: `Medicine.Pill`: The medicine to be registered
     /// :returns: `Bool`:  If registry was success. False if not.
-    func registerNewMedicine(med: Medicine.Pill) -> Bool{
+    public func registerNewMedicine(med: Medicine.Pill) -> Bool{
         let registed: Medicine? = getMedicine(med)
         if let m = registed{
             Logger.Warn("Already registered \(m.name), returning")
@@ -60,8 +60,9 @@ class MedicineManager : Manager{
     /// Retuns the default medicine (if any)
     ///
     /// :returns: `Medicine?`: The default medicine.
-    func getCurrentMedicine() -> Medicine?{
+    public func getCurrentMedicine() -> Medicine?{
         let medicines: [Medicine] = getRegisteredMedicines()
+        
         let result = medicines.filter({ return $0.isCurrent == true})
         
         if result.count > 1{
@@ -75,7 +76,7 @@ class MedicineManager : Manager{
     ///
     /// :param: `Medicine.Pill`: The type of the pill
     /// :returns: `Medicine?`: The default medicine.
-    func getMedicine(pill: Medicine.Pill) -> Medicine?{
+    public func getMedicine(pill: Medicine.Pill) -> Medicine?{
         let medicines: [Medicine] = getRegisteredMedicines()
         let result = medicines.filter({ return $0.name == pill.name()})
         
@@ -85,14 +86,14 @@ class MedicineManager : Manager{
     /// Retuns all medicines registered
     ///
     /// :returns: `[Medicine]`: All the medicines
-    func getRegisteredMedicines() -> [Medicine]{
+    public func getRegisteredMedicines() -> [Medicine]{
         return Medicine.retrieve(Medicine.self, context: self.context)
     }
     
     /// Sets the specified pill as default
     ///
     /// :param: `Medicine.Pill`: The type of the pill
-    func setCurrentPill(med: Medicine.Pill){
+    public func setCurrentPill(med: Medicine.Pill){
         if let m = getMedicine(med){
             for med in getRegisteredMedicines(){
                 med.notificationManager(context).unsheduleNotification()

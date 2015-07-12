@@ -1,6 +1,6 @@
 import Foundation
 
-class MedicineStats : Manager{
+public class MedicineStats : Manager{
     let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){
@@ -13,7 +13,7 @@ class MedicineStats : Manager{
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Number of pills
-    func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
+    public func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var count = 0
         for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2){
             if (r.tookMedicine){
@@ -29,7 +29,7 @@ class MedicineStats : Manager{
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Number of supposed pills
-    func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
+    public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         if (medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).count == 0){
             return 0
         }
@@ -61,7 +61,7 @@ class MedicineStats : Manager{
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Float`: Pill adherence
-    func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Float{
+    public func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Float{
         let supposedPills = numberSupposedPills(date1: date1, date2: date2)
         
         if(supposedPills == 0){
@@ -80,7 +80,7 @@ class MedicineStats : Manager{
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Pill streak
-    func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
+    public func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
         var result = 0
         
         let isDaily = medicine.isDaily()

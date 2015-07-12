@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-class Post: NSManagedObject {
+public class Post: NSManagedObject {
 
-    @NSManaged var created_at: String
-    @NSManaged var id: Int64
-    @NSManaged var owner: Int64
-    @NSManaged var post_description: String
-    @NSManaged var title: String
-    @NSManaged var updated_at: String
-    @NSManaged var contained_in: CollectionPosts
+    @NSManaged public var created_at: String
+    @NSManaged public var id: Int64
+    @NSManaged public var owner: Int64
+    @NSManaged public var post_description: String
+    @NSManaged public var title: String
+    @NSManaged public var updated_at: String
+    @NSManaged public var contained_in: CollectionPosts
 
 }

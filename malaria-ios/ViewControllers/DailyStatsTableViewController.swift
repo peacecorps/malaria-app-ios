@@ -60,7 +60,7 @@ class MedicineLastTaken : Stat{
 class DailyStatsTableViewController : UITableViewController{
     
     var listStats: [Stat] = []
-    var viewContext: NSManagedObjectContext!
+    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,7 +16,7 @@ class DidTakePillsViewController: UIViewController {
     //optional in preparation for calendar view that will show in this screen
     var currentDate: NSDate?
     
-    var viewContext: NSManagedObjectContext!
+    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
     override func viewDidLoad() {
         super.viewDidLoad()

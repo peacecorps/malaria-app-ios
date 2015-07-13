@@ -9,8 +9,6 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
     private var pageViewController : UIPageViewController!
     private var _dict: [UIViewController: HomePage] = [:]
     
-    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,13 +66,10 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         switch value {
             case .DailyPill:
                 vc = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self)
-                (vc as! DidTakePillsViewController).viewContext = viewContext
             case .DailyStates:
                 vc = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self)
-                (vc as! DailyStatsTableViewController).viewContext = viewContext
             case .Stats:
                 vc = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self)
-                //(vc as! PillsStatsViewController).viewContext = viewContext
             default: return nil
         }
         

@@ -18,7 +18,6 @@ public class ItemsManager : Manager{
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
         }else{
-            Logger.Info("Adding \(quantity) \(name)")
             var item = Item.create(Item.self, context: self.context)
             item.name = name
             item.quantity = quantity
@@ -36,9 +35,7 @@ public class ItemsManager : Manager{
     /// :param: `String`: name of the item
     /// :returns: `Item?`:
     public func findItem(name: String) -> Item?{
-        var currentItems = getItems()
-        currentItems = currentItems.filter({$0.name.lowercaseString == name.lowercaseString})
-        
+        var currentItems = getItems().filter({$0.name.lowercaseString == name.lowercaseString})
         return currentItems.count == 0 ? nil : currentItems[0]
     }
     

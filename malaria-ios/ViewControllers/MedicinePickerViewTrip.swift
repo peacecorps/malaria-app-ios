@@ -5,7 +5,6 @@ class MedicinePickerViewTrip : MedicinePickerView{
 
     var tripsManager: TripsManager!
     
-    
     override init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         tripsManager = TripsManager(context: context)
         super.init(context: context, selectCallback: selectCallback)

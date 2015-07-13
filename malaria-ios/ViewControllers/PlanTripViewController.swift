@@ -158,7 +158,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         }else{
             self.storeTrip()
             
-            var confirmAlert = UIAlertController(title: "Updated", message: "", preferredStyle: .Alert)
+            var confirmAlert = UIAlertController(title: "Success!", message: "", preferredStyle: .Alert)
             confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
             presentViewController(confirmAlert, animated: true, completion: nil)
             

@@ -34,7 +34,6 @@ public class MedicineManager : Manager{
         CoreDataHelper.sharedInstance.saveContext(self.context)
         UserSettingsManager.setDidConfiguredMedicine(true)
     }
-    
 
     /// Registers a new medicine (not as default)
     ///

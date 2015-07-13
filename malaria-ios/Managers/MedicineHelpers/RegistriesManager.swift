@@ -35,9 +35,7 @@ public class RegistriesManager : Manager{
                 result.append(r)
             }
         }else if medicine.isWeekly(){
-            let registries = getRegistries(date1: at - 8.day, date2: at + 8.day)
-            
-            for r in registries{
+            for r in getRegistries(date1: at - 8.day, date2: at + 8.day){
                 if NSDate.areDatesSameWeek(at, dateTwo: r.date){
                     result.append(r)
                 }

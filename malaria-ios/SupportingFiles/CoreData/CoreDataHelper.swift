@@ -23,6 +23,7 @@ public class CoreDataHelper: NSObject {
         return managedObjectContext
         }()
     
+    /// Creates a new background context with the mainContext as parent
     public func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
@@ -34,15 +35,17 @@ public class CoreDataHelper: NSObject {
         return backgroundContext
     }
     
+    /// save the context.
+    /// :param: `NSManagedObjectContext`: context to be saved
     public func saveContext (context: NSManagedObjectContext) {
         var error: NSError?
         if context.hasChanges && !context.save(&error) {
             Logger.Error("Unresolved error \(error), \(error!.userInfo)")
-            abort()
         }
     }
     
-    // call back function by saveContext, support multi-thread
+    
+    /// Callback for multi-threading. Syncronizes the background context with the main context. Then the parent context, that has direct connection with persistent storage saves.
     func contextDidSaveContext(notification: NSNotification) {
         let sender = notification.object as! NSManagedObjectContext
         if sender != self.managedObjectContext {

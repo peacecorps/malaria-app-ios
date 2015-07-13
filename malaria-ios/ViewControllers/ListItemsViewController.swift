@@ -4,6 +4,9 @@ import UIKit
 class ListItemsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
 
+    let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)
+    let TextColor = UIColor.fromHex(0x6F5247)
+    
     var initialItems: [String]!
     var completitionHandler: ([String] -> ())!
     
@@ -101,8 +104,8 @@ class ListItemsViewController : UIViewController, UITableViewDataSource, UITable
         
         let isSelected: Bool = listItems[item]!
         cell.accessoryType = isSelected ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None
-        cell.textLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 16.0)
-        cell.textLabel?.textColor = UIColor.fromHex(0x6F5247)
+        cell.textLabel?.font = TextFont
+        cell.textLabel?.textColor = TextColor
         cell.textLabel?.text = item
         
         return cell

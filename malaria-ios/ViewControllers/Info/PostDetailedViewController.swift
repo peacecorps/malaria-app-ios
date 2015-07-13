@@ -11,9 +11,7 @@ import UIKit
 
 
 class PostDetailedViewController : UIViewController{
-
     var post: Post!
-   
     let BackgroundImageId = "background"
     
     @IBOutlet weak var postTitle: UILabel!

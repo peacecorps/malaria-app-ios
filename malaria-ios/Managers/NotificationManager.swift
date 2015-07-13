@@ -3,13 +3,14 @@ import UIKit
 
 public class NotificationManager : Manager{
     
-    override init(context: NSManagedObjectContext!){
-        super.init(context: context)
-    }
-
     var category: String { get{ fatalError("No category provided")} }
     var alertBody: String { get{ fatalError("No alertBody provided")} }
     var alertAction: String { get{ fatalError("No alertAction provided")} }
+    
+    
+    override init(context: NSManagedObjectContext!){
+        super.init(context: context)
+    }
     
     /// Schedule a notification at the fireTime given by argument
     ///

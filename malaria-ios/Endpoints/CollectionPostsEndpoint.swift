@@ -20,7 +20,7 @@ public class CollectionPostsEndpoint : Endpoint{
             }
         }
         
-        Logger.Error("JSON is empty, error")
+        Logger.Error("JSON is empty")
         
         return nil
     }

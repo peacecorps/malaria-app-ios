@@ -5,7 +5,6 @@ public class UserSettingsManager{
     private enum UserSetting: String{
         static let allValues = [DidConfiguredMedicine]
         
-        case ModelVersion = "ModelVersion"
         case DidConfiguredMedicine = "DidConfiguredMedicine"
     }
     

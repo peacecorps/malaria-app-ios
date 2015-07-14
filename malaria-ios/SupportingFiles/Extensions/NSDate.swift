@@ -87,6 +87,22 @@ public extension NSDate{
         
         return weekOfYear1 == weekOfYear2 && year1 == year2
     }
+    
+    /// Returns true if both dates are in the same time.
+    ///
+    /// :returns: `Bool`
+    class func areDatesSameTime(dateOne: NSDate, dateTwo: NSDate) -> Bool {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        
+        let h1 = calendar!.component(NSCalendarUnit.CalendarUnitHour, fromDate: dateOne)
+        let h2 = calendar!.component(NSCalendarUnit.CalendarUnitHour, fromDate: dateTwo)
+        
+        let m1 = calendar!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: dateOne)
+        let m2 = calendar!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: dateTwo)
+        
+        return h1 == h2 && m1 == m2
+    }
+    
 }
 
 

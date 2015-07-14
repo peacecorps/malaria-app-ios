@@ -65,6 +65,7 @@ public class MedicineManager : Manager{
         let result = medicines.filter({ return $0.isCurrent == true})
         
         if result.count > 1{
+            println(result)
             Logger.Error("Multiple current medicines found. Inconsistency found")
         }
         
@@ -93,16 +94,15 @@ public class MedicineManager : Manager{
     ///
     /// :param: `Medicine.Pill`: The type of the pill
     public func setCurrentPill(med: Medicine.Pill){
-        if let m = getMedicine(med){
-            for med in getRegisteredMedicines(){
-                med.notificationManager(context).unsheduleNotification()
-                med.isCurrent = false
-            }
-            
-            m.isCurrent = true
-            CoreDataHelper.sharedInstance.saveContext(context)
+        if let m = getCurrentMedicine(){
+            Logger.Info("Removing \(m.name) from default medicine")
+            m.isCurrent = false
+            m.notificationManager(context).unsheduleNotification()
         }else{
-            Logger.Error("pill not found!")
+            Logger.Error("No current pill found!")
         }
+        Logger.Info("Setting \(med.name()) as default")
+        getMedicine(med)!.isCurrent = true
+        CoreDataHelper.sharedInstance.saveContext(context)
     }
 }

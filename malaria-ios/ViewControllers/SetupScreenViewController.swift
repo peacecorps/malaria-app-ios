@@ -10,7 +10,7 @@ class SetupScreenViewController : UIViewController{
     var medicinePicker: MedicinePickerView!
     var timePickerview: TimePickerView!
     
-    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    var viewContext: NSManagedObjectContext!
     
     var medicineManager: MedicineManager!
     
@@ -29,9 +29,10 @@ class SetupScreenViewController : UIViewController{
         reminderTime.endEditing(true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
         medicineManager = MedicineManager(context: viewContext)
         
@@ -57,23 +58,62 @@ class SetupScreenViewController : UIViewController{
         refreshDate()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
+    }
+    
     private func refreshDate(){
         reminderTime.text = pillReminderNotificationTime.formatWith("HH:mm a")
     }
     
     @IBAction func doneButtonHandler(){
         if(UserSettingsManager.getDidConfiguredMedicine()){
-            dismissViewControllerAnimated(true, completion: nil)
+            
+            //avoid showing the alert view if there are no changes
+            if let current = medicineManager.getCurrentMedicine(){
+                if current.name == medicineName.text && NSDate.areDatesSameTime(current.notificationTime!, dateTwo: pillReminderNotificationTime){
+                    
+                    var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
+                    dispatch_after(time, dispatch_get_main_queue(), {
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                    return
+                }
+            }
+            
+            var medicineAlert = UIAlertController(title: "There is already medicine configured", message: "The current configuration will be changed.", preferredStyle: .Alert)
+            medicineAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { (action: UIAlertAction!) in
+                self.medicineManager.registerNewMedicine(Medicine.Pill(rawValue: self.medicineName.text)!)
+                self.medicineManager.setCurrentPill(Medicine.Pill(rawValue: self.medicineName.text)!)
+                self.medicineManager.getCurrentMedicine()!.notificationManager(self.viewContext).scheduleNotification(self.pillReminderNotificationTime)
+                
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+                
+            }))
+            
+            medicineAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }))
+            
+            presentViewController(medicineAlert, animated: true, completion: nil)
+            
         }else{
-            var view = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
             presentViewController(
-                view,
+                UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self),
                 animated: true,
                 completion: nil
             )
+            medicineManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
         }
         
-        medicineManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
+        
     }
     
     private func getStoredReminderTime() -> NSDate{

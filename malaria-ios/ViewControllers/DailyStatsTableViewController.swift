@@ -60,17 +60,11 @@ class MedicineLastTaken : Stat{
 class DailyStatsTableViewController : UITableViewController{
     
     var listStats: [Stat] = []
-    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    var viewContext: NSManagedObjectContext!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.clearColor()
-        
-        listStats = [
-            MedicineLastTaken(context: viewContext),
-            PillStreak(context: viewContext),
-            Adherence(context: viewContext)
-        ]
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -87,6 +81,13 @@ class DailyStatsTableViewController : UITableViewController{
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+        listStats = [
+            MedicineLastTaken(context: viewContext),
+            PillStreak(context: viewContext),
+            Adherence(context: viewContext)
+        ]
+        
         tableView.reloadData()
     }
     

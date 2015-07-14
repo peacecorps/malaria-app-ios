@@ -14,18 +14,13 @@ class DidTakePillsViewController: UIViewController {
     var medicine: Medicine!
     
     //optional in preparation for calendar view that will show in this screen
-    var currentDate: NSDate?
+    var currentDate: NSDate = NSDate()
     
-    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        medicineManager = MedicineManager(context: viewContext)
-    }
+    var viewContext: NSManagedObjectContext!
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("didNotTookMedicineBtnHandler")
-        if (medicine.registriesManager(viewContext).addRegistry(currentDate!, tookMedicine: false)){
+        if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
             medicine.notificationManager(viewContext).reshedule()
         }
         
@@ -34,7 +29,7 @@ class DidTakePillsViewController: UIViewController {
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("tookMedicineBtnHandler")
-        if (medicine.registriesManager(viewContext).addRegistry(currentDate!, tookMedicine: true)){
+        if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
             medicine.notificationManager(viewContext).reshedule()
         }
         
@@ -43,25 +38,28 @@ class DidTakePillsViewController: UIViewController {
     
     func refreshScreen(){
         if medicine.isWeekly(){
-            if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate!){
+            if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 
                 //reset configuration so that the user can reshedule the time
                 UserSettingsManager.setDidConfiguredMedicine(false)
-            }else if !NSDate.areDatesSameDay(currentDate!, dateTwo: medicine.notificationTime!)
+            }else if !NSDate.areDatesSameDay(currentDate, dateTwo: medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
-                        && !medicine.registriesManager(viewContext).tookMedicine(currentDate!){
+                        && !medicine.registriesManager(viewContext).tookMedicine(currentDate){
                             
                 dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
                 fullDateLbl.textColor = MissedWeeklyPillTextColor
             }
         }
         
-        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate!).count == 0{
+        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate).count == 0{
+            didNotTookPillBtn.enabled = true
+            tookPillBtn.enabled = true
+            
             return
         }else {
-            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate!)
+            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate)
             
             didNotTookPillBtn.enabled = !activateCheckButton
             tookPillBtn.enabled = activateCheckButton
@@ -71,11 +69,13 @@ class DidTakePillsViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        currentDate = currentDate ?? NSDate()
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
+        medicineManager = MedicineManager(context: viewContext)
+        
         medicine = medicineManager.getCurrentMedicine()
         
-        dayOfTheWeekLbl.text = currentDate!.formatWith("EEEE")
-        fullDateLbl.text = currentDate!.formatWith("dd/MM/yyyy")
+        dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
+        fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
         
         refreshScreen()
     }

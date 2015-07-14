@@ -3,8 +3,8 @@ import UIKit
 
 public class TripNotificationsManager : NotificationManager{
     override var category: String { get{ return "TripReminder"} }
-    override var alertBody: String { get{ fatalError("Trip")} }
-    override var alertAction: String { get{ fatalError("Got it")} }
+    override var alertBody: String { get{ fatalError("Don't forget to bring your items to the trip!")} }
+    override var alertAction: String { get{ fatalError("Got it!")} }
     
     let trip: Trip
     

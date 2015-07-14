@@ -3,8 +3,8 @@ import UIKit
 
 public class MedicineNotificationsManager : NotificationManager{
     override var category: String { get{ return "PillReminder" } }
-    override var alertBody: String { get{ return "Medicine" } }
-    override var alertAction: String { get{ return "Yeah. I know"} }
+    override var alertBody: String { get{ return "Don't forget to take \(MedicineManager(context: context).getCurrentMedicine()!.name)" } }
+    override var alertAction: String { get{ return "Take pill"} }
     
     let medicine: Medicine
     

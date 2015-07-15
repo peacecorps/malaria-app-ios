@@ -81,7 +81,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
 }
 
 enum HomePage: Int {
-    static let allValues = [DailyPill, DailyStates]//, Stats]
+    static let allValues = [DailyPill, DailyStates, Stats]
     
     case Nil = -1, DailyPill, DailyStates, Stats
     

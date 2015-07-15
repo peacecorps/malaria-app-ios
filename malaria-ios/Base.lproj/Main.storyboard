@@ -559,7 +559,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ofR-6m-AsH">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -814,22 +814,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar view soon :)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eo-4Q-LXX">
-                                <rect key="frame" x="217" y="289" width="166" height="21"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="byd-UU-zjp">
+                                <rect key="frame" x="0.0" y="28" width="600" height="250"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="166" id="3lR-og-Q9L"/>
+                                    <constraint firstAttribute="height" constant="250" id="xag-XQ-99C"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdherenceHorizontalBarCell" rowHeight="60" id="Nf3-zd-vS4" customClass="AdherenceHorizontalBarCell" customModule="malaria_ios" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nf3-zd-vS4" id="kJZ-ry-5pf">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jan" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRa-ua-81B">
+                                                    <rect key="frame" x="18" y="18.5" width="60" height="23.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="JhX-lj-aOX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                                    <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-Md-fB1">
+                                                    <rect key="frame" x="76" y="15" width="438" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="450" id="p4h-4K-rJK"/>
+                                                    </constraints>
+                                                    <color key="minimumTrackTintColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="maximumTrackTintColor" red="0.30980392159999998" green="0.5450980392" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="p4h-4K-rJK"/>
+                                                        </mask>
+                                                    </variation>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW0-s2-RmX">
+                                                    <rect key="frame" x="512" y="18.5" width="70" height="23.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="XfB-PE-34h"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                                    <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JW0-s2-RmX" secondAttribute="trailing" constant="10" id="5HE-cf-Nzv"/>
+                                                <constraint firstItem="gRa-ua-81B" firstAttribute="leading" secondItem="kJZ-ry-5pf" secondAttribute="leadingMargin" constant="10" id="Iuz-g2-Vt5"/>
+                                                <constraint firstItem="JW0-s2-RmX" firstAttribute="centerY" secondItem="ygE-Md-fB1" secondAttribute="centerY" id="X9R-K6-kfT"/>
+                                                <constraint firstItem="ygE-Md-fB1" firstAttribute="leading" secondItem="gRa-ua-81B" secondAttribute="trailing" id="ebi-BD-nKe"/>
+                                                <constraint firstItem="JW0-s2-RmX" firstAttribute="leading" secondItem="ygE-Md-fB1" secondAttribute="trailing" id="fbe-LZ-49L"/>
+                                                <constraint firstAttribute="centerY" secondItem="gRa-ua-81B" secondAttribute="centerY" id="gaC-h0-PGx"/>
+                                                <constraint firstItem="ygE-Md-fB1" firstAttribute="centerY" secondItem="gRa-ua-81B" secondAttribute="centerY" id="xyk-wF-8we"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="adherenceValue" destination="JW0-s2-RmX" id="sUP-SX-wbk"/>
+                                            <outlet property="month" destination="gRa-ua-81B" id="its-XG-uyL"/>
+                                            <outlet property="slider" destination="ygE-Md-fB1" id="Wfd-oL-FWi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-Yy-17V">
+                                <rect key="frame" x="16" y="286" width="568" height="262"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="2eo-4Q-LXX" secondAttribute="centerY" constant="0.5" id="7M8-Bn-kDj"/>
-                            <constraint firstAttribute="centerX" secondItem="2eo-4Q-LXX" secondAttribute="centerX" id="i9m-2f-WTU"/>
+                            <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="5E1-Wu-0vn" secondAttribute="leadingMargin" id="8s9-iy-xtm"/>
+                            <constraint firstAttribute="centerX" secondItem="byd-UU-zjp" secondAttribute="centerX" id="J81-hy-CqL"/>
+                            <constraint firstItem="cac-e2-LlP" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="8" id="eeW-DG-zfx"/>
+                            <constraint firstAttribute="centerX" secondItem="wyK-Yy-17V" secondAttribute="centerX" id="mgF-kb-4w7"/>
+                            <constraint firstItem="wyK-Yy-17V" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" constant="8" id="msd-3A-BWh"/>
+                            <constraint firstItem="wyK-Yy-17V" firstAttribute="trailing" secondItem="5E1-Wu-0vn" secondAttribute="trailingMargin" id="n8n-9l-yIe"/>
+                            <constraint firstItem="byd-UU-zjp" firstAttribute="top" secondItem="Elu-Z7-SBH" secondAttribute="bottom" constant="8" id="qyR-sS-bQN"/>
+                            <constraint firstItem="byd-UU-zjp" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="rNJ-CF-rmS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="mgF-kb-4w7"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="adherenceSliderTable" destination="byd-UU-zjp" id="1wM-R3-375"/>
+                        <outlet property="chartView" destination="wyK-Yy-17V" id="Aw4-bh-pnl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9i-zm-VnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

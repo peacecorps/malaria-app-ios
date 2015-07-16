@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
-import SwiftCharts
+
+import Charts
 
 class AdherenceHorizontalBarCell: UITableViewCell{
     
@@ -77,8 +78,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     
     var adherences = [Float]()
     
-    @IBOutlet weak var chartView: UIView!
-    private var chart: Chart? // arc
+    @IBOutlet weak var chartView: LineChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,27 +89,27 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.layer.cornerRadius = 20
         chartView.layer.masksToBounds = true
         
-        println(UIFont.fontNamesForFamilyName("American Typewriter"))
+        var days = [NSDate]()
+        var adherences = [Float]()
         
-        gen2()
+        for i in 0...5{
+           days.append(NSDate() + i.day)
+           adherences.append(Float(arc4random_uniform(100)))
+        }
+        
+        
+        setChart(days, values: adherences)
+        
         //generateGraph()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        adherences = [
-            0,
-            10,
-            20,
-            30,
-            40,
-            50,
-            60,
-            70,
-            80,
-            90,
-            100
-        ]
+        
+        for i in 0...100{
+            adherences.append(Float(i))
+        }
+        
     }
     
     
@@ -138,104 +138,68 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     
     /* Graph View related methods */
     
-    let TextFont = UIFont(name: "AmericanTypewriter", size: 14.0)
+    let TextFont = UIFont(name: "AmericanTypewriter", size: 10.0)
+    //fontColor: UIColor.fromHex(0x705246)
     
-    
-    
-    private var iPhoneChartSettings: ChartSettings {
-        let chartSettings = ChartSettings()
-        chartSettings.leading = 10
-        chartSettings.top = 20
-        chartSettings.trailing = 10
-        chartSettings.bottom = 20
-        chartSettings.labelsToAxisSpacingX = 10
-        chartSettings.labelsToAxisSpacingY = 10
-        chartSettings.axisTitleLabelsToLabelsSpacing = 4
-        chartSettings.axisStrokeWidth = 0.2
-        chartSettings.spacingBetweenAxesX = 8
-        chartSettings.spacingBetweenAxesY = 8
+    func setChart(dataPoints: [NSDate], values: [Float]) {
+        
+        var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.M")})
 
-        return chartSettings
-    }
-    
-    func createChartPoint(x: CGFloat, _ y: CGFloat, _ labelSettings: ChartLabelSettings) -> ChartPoint {
-        return ChartPoint(x: ChartAxisValueFloat(x, labelSettings: labelSettings), y: ChartAxisValueFloat(y))
-    }
-    
-    
-    func generateAxis(values: [ChartAxisValue], text: String, settings: ChartLabelSettings) -> ChartAxisModel{
-        return ChartAxisModel(axisValues: values, lineColor: UIColor.grayColor(), axisTitleLabel: ChartAxisLabel(text: text, settings: settings))
-    }
-    
-    
-    //https://github.com/i-schuetz/SwiftCharts/blob/fbe06bad96ab5fa53f6cd6f53c89f5f71f441ad1/Examples/Examples/Examples/TrackerExample.swift
-    
-    
-    func gen2(){
-        let labelSettings = ChartLabelSettings(font: TextFont!, fontColor: UIColor.fromHex(0x705246))
+        var dataEntries: [ChartDataEntry] = []
         
-        let chartPoints = [
-            self.createChartPoint(0, 0, labelSettings),
-            self.createChartPoint(1, 100, labelSettings),
-            self.createChartPoint(2, 10, labelSettings),
-            self.createChartPoint(3, 90, labelSettings),
-            self.createChartPoint(4, 20, labelSettings),
-            self.createChartPoint(5, 80, labelSettings),
-            self.createChartPoint(6, 30, labelSettings),
-            self.createChartPoint(7, 70, labelSettings),
-            self.createChartPoint(8, 40, labelSettings),
-            self.createChartPoint(9, 60, labelSettings),
-            self.createChartPoint(10, 50, labelSettings),
-            self.createChartPoint(11, 55, labelSettings),
-            self.createChartPoint(12, 55, labelSettings)
-        ]
-        
-        let xValues = Array(stride(from: 0, through: 12, by: 1)).map {ChartAxisValueFloat($0, labelSettings: labelSettings)}
-        let yValues = ChartAxisValuesGenerator.generateYAxisValuesWithChartPoints(chartPoints, minSegmentCount: 4, maxSegmentCount: 4, multiple: 25, axisValueGenerator: {ChartAxisValueFloat($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: false)
-        
-        let xModel = generateAxis(xValues, text: "Date", settings: labelSettings)
-        let yModel = generateAxis(yValues, text: "Adherence", settings: labelSettings)
-
-        let scrollViewFrame = self.chartView.bounds
-        let chartFrame = CGRectMake(0, 10, 1000, scrollViewFrame.size.height - 10)
-        
-        let chartSettings = iPhoneChartSettings
-        
-        
-        // calculate coords space in the background to keep UI smooth
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-            let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
-                
-                let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: UIColor.clearColor(), animDuration: 1, animDelay: 0)
-                let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, lineModels: [lineModel])
-                
-                let chartPointsLayer1 = ChartPointsAreaLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, chartPoints: chartPoints, areaColor: UIColor.fromHex(0xA1D4E2), animDuration: 3, animDelay: 0, addContainerPoints: true)
-                
-                let scrollView = UIScrollView(frame: scrollViewFrame)
-                scrollView.contentSize = CGSizeMake(chartFrame.size.width, scrollViewFrame.size.height)
-                
-                let chart = Chart(
-                    frame: chartFrame,
-                    layers: [
-                        xAxis,
-                        yAxis,
-                        chartPointsLineLayer,
-                        chartPointsLayer1
-                    ]
-                )
-                self.chartView.clipsToBounds = true
-                
-                
-                scrollView.addSubview(chart.view)
-                self.chartView.addSubview(scrollView)
-                self.chart = chart
-                
-            }
+        for i in 0..<dataPoints.count {
+            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
+            dataEntries.append(dataEntry)
         }
+        
+        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: "Adherence")
+        lineChartDataSet.colors = [UIColor.blueColor()]
+        lineChartDataSet.drawFilledEnabled = true
+        lineChartDataSet.drawCirclesEnabled = false
+        lineChartDataSet.drawValuesEnabled = false
+        lineChartDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
+        lineChartDataSet.lineWidth = 0
+        
+        let lineChartData = LineChartData(xVals: dataPointsLabels, dataSet: lineChartDataSet)
     
+        
+        chartView.legend.enabled = false
+        chartView.noDataText = "There are no entries yet"
+
+        chartView.data = lineChartData
+        chartView.drawGridBackgroundEnabled = false
+        chartView.highlightEnabled = false
+    
+        chartView.xAxis.labelPosition = .Bottom
+        chartView.xAxis.drawGridLinesEnabled = false
+        chartView.xAxis.labelTextColor = UIColor.fromHex(0x705246)
+        chartView.xAxis.labelFont = TextFont!
+        chartView.xAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
+        chartView.xAxis.axisLineWidth = 4.0
+        
+        chartView.rightAxis.enabled = false
+        /*
+        chartView.rightAxis.drawLabelsEnabled = false
+        chartView.rightAxis.drawGridLinesEnabled = false
+        chartView.rightAxis.axisLineColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+        chartView.rightAxis.axisLineWidth = 4.0
+        */
+        
+        chartView.leftAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
+        chartView.leftAxis.drawGridLinesEnabled = false
+        chartView.leftAxis.startAtZeroEnabled = true
+        chartView.leftAxis.axisLineWidth = 4.0
+        chartView.leftAxis.customAxisMax = 100
+        chartView.leftAxis.labelFont = TextFont!
+        chartView.leftAxis.labelTextColor = UIColor.fromHex(0x705246)
+        
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.PercentStyle
+        numberFormatter.maximumFractionDigits = 0
+        numberFormatter.multiplier = 1
+
+        chartView.leftAxis.valueFormatter = numberFormatter
+        
     }
     
 }

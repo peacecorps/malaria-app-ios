@@ -54,9 +54,6 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         graphFrame.layer.cornerRadius = 20
         graphFrame.layer.masksToBounds = true
         
-        chartView.delegate = self
-        
-        
         var days = [NSDate]()
         var adherences = [Float]()
         
@@ -110,8 +107,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     /* Graph View related methods */
     
     @IBOutlet weak var graphFrame: UIView!
-    let TextFont = UIFont(name: "AmericanTypewriter", size: 10.0)
-    //fontColor: UIColor.fromHex(0x705246)
+    
+    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)
     
     let NoDataText = "There are no entries yet"
     
@@ -119,13 +116,9 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         if !NSDate.areDatesSameDay(date, dateTwo: self.departureEntry) {
             return date.formatWith("yyyy.MM.dd")
         }else {
-            return "End of Service"
+            return "End"
         }
     }
-    
-    var circleDataSet: LineChartDataSet = LineChartDataSet(yVals: [], label: "")
-    var previousSelected: ChartDataEntry?
-    var didConfiguredCircleDataSet = false //crashes if the circleDataSet doesn't contain the same elements on the first run
     
     func setChart(dataPoints: [NSDate], values: [Float]) {
         var dataPointsLabels = dataPoints.map({ self.formatDate($0)})
@@ -137,38 +130,13 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         }
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")
-        circleDataSet = configureCircleView(dataEntries)
-        
-        let data = LineChartData(xVals: dataPointsLabels, dataSets: [circleDataSet, adherenceData])
-        
+        let data = LineChartData(xVals: dataPointsLabels, dataSets: [adherenceData])
         
         configureCharView(data)
-        
         configureLegend()
         configureXAxis()
         configureLeftYAxis()
         configureRightYAxis()
-    }
-    
-    
-    func configureCircleView(dataPointsLabels: [ChartDataEntry]) -> LineChartDataSet{
-        let lineChartDataSet = LineChartDataSet(yVals: dataPointsLabels, label: "")
-        lineChartDataSet.colors = [UIColor.clearColor()]
-        lineChartDataSet.drawCirclesEnabled = false
-        lineChartDataSet.drawValuesEnabled = false
-        
-        lineChartDataSet.valueFont = TextFont!
-        lineChartDataSet.valueTextColor = UIColor.fromHex(0x705246)
-        
-        
-        //hightlight line customization
-        lineChartDataSet.highlightLineWidth = 0.1
-        lineChartDataSet.highlightColor = UIColor.fromHex(0x705246)
-        
-        lineChartDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
-        lineChartDataSet.fillAlpha = 1
-        
-        return lineChartDataSet
     }
     
     func configureCharDataSet(dataEntries: [ChartDataEntry], label: String) -> ChartDataSet{
@@ -193,20 +161,13 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.descriptionText = ""
         chartView.noDataText = NoDataText
         
-        /*
-        chartView.multipleTouchEnabled = false
-        chartView.pinchZoomEnabled = false
         chartView.scaleYEnabled = false
         chartView.doubleTapToZoomEnabled = false
-        chartView.dragEnabled = false
-        */
-        //
         
         chartView.data = data
         chartView.drawGridBackgroundEnabled = false
-        chartView.highlightEnabled = true
-        chartView.highlightIndicatorEnabled = true
-        chartView.highlightPerDragEnabled = true
+        chartView.highlightEnabled = false
+        chartView.highlightIndicatorEnabled = false
     }
     
     func configureXAxis(){
@@ -216,7 +177,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.xAxis.labelFont = TextFont!
         chartView.xAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
         chartView.xAxis.axisLineWidth = 1.0
-        chartView.xAxis.avoidFirstLastClippingEnabled = true
+        chartView.xAxis.avoidFirstLastClippingEnabled = false
         
         let currentDayLine = ChartLimitLine(limit: Float(mostRecentEntry - leastRecentEntry))
         currentDayLine.lineColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
@@ -242,44 +203,5 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         numberFormatter.multiplier = 1
         
         chartView.leftAxis.valueFormatter = numberFormatter
-    }
-}
-
-extension PillsStatsViewController : ChartViewDelegate {
-    
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight){
-        //chartVie
-        if highlight.xIndex > lastEntryIndex {
-            println("No data there")
-            return
-        }
-        
-        //w.highlightValue(xIndex: -1, dataSetIndex: highlight.xIndex, callDelegate: false)
-        
-        if !didConfiguredCircleDataSet{
-            self.circleDataSet.drawCirclesEnabled = true
-            self.circleDataSet.drawValuesEnabled = true
-            
-            didConfiguredCircleDataSet = true
-        }
-        
-        if let data = chartView.data,
-              charDataSet = data.dataSets[0] as? LineChartDataSet{
-                
-                
-                self.circleDataSet.clear()
-                self.circleDataSet.addEntry(entry)
-                previousSelected = entry
-                
-                /*self.circleDataSet//charDataSet.drawCirclesEnabled = true
-                //charDataSet.drawValuesEnabled = true
-                */
-        }
-        
-        println("Selected \(entry)")
-    }
-    
-    func chartValueNothingSelected(chartView: ChartViewBase){
-        println("deselected")
     }
 }

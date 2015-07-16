@@ -86,7 +86,7 @@ enum HomePage: Int {
     case Nil = -1, DailyPill, DailyStates, Stats
     
     init() {
-        self = .DailyPill
+        self = .Stats
     }
     
     func previousIndex() -> HomePage {

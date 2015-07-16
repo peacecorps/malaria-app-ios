@@ -86,7 +86,13 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         adherenceSliderTable.dataSource = self
         adherenceSliderTable.backgroundColor = UIColor.clearColor()
         
-        generateGraph()
+        chartView.layer.cornerRadius = 20
+        chartView.layer.masksToBounds = true
+        
+        println(UIFont.fontNamesForFamilyName("American Typewriter"))
+        
+        gen2()
+        //generateGraph()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -132,21 +138,18 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     
     /* Graph View related methods */
     
-    let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)
+    let TextFont = UIFont(name: "AmericanTypewriter", size: 14.0)
     
-    func genChartFrame(containerBounds: CGRect) -> CGRect {
-        return CGRectMake(0, 0, containerBounds.size.width, containerBounds.size.height)
-    }
     
     
     private var iPhoneChartSettings: ChartSettings {
         let chartSettings = ChartSettings()
         chartSettings.leading = 10
-        chartSettings.top = 10
+        chartSettings.top = 20
         chartSettings.trailing = 10
-        chartSettings.bottom = 10
-        chartSettings.labelsToAxisSpacingX = 5
-        chartSettings.labelsToAxisSpacingY = 5
+        chartSettings.bottom = 20
+        chartSettings.labelsToAxisSpacingX = 10
+        chartSettings.labelsToAxisSpacingY = 10
         chartSettings.axisTitleLabelsToLabelsSpacing = 4
         chartSettings.axisStrokeWidth = 0.2
         chartSettings.spacingBetweenAxesX = 8
@@ -155,52 +158,84 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         return chartSettings
     }
     
+    func createChartPoint(x: CGFloat, _ y: CGFloat, _ labelSettings: ChartLabelSettings) -> ChartPoint {
+        return ChartPoint(x: ChartAxisValueFloat(x, labelSettings: labelSettings), y: ChartAxisValueFloat(y))
+    }
+    
+    
+    func generateAxis(values: [ChartAxisValue], text: String, settings: ChartLabelSettings) -> ChartAxisModel{
+        return ChartAxisModel(axisValues: values, lineColor: UIColor.grayColor(), axisTitleLabel: ChartAxisLabel(text: text, settings: settings))
+    }
+    
+    
     //https://github.com/i-schuetz/SwiftCharts/blob/fbe06bad96ab5fa53f6cd6f53c89f5f71f441ad1/Examples/Examples/Examples/TrackerExample.swift
-    func generateGraph(){
-        let labelSettings = ChartLabelSettings(font: TextFont!)
+    
+    
+    func gen2(){
+        let labelSettings = ChartLabelSettings(font: TextFont!, fontColor: UIColor.fromHex(0x705246))
         
-        //limited to three because clipping.
-        let chartPoints1 = [(0, 15), (1, 30), (2, 45)/*, (3, 60), (4, 75), (5, 80), (6, 90), (7, 100)*/].map{ChartPoint(x: ChartAxisValueInt($0.0, labelSettings: labelSettings), y: ChartAxisValueInt($0.1))}
+        let chartPoints = [
+            self.createChartPoint(0, 0, labelSettings),
+            self.createChartPoint(1, 100, labelSettings),
+            self.createChartPoint(2, 10, labelSettings),
+            self.createChartPoint(3, 90, labelSettings),
+            self.createChartPoint(4, 20, labelSettings),
+            self.createChartPoint(5, 80, labelSettings),
+            self.createChartPoint(6, 30, labelSettings),
+            self.createChartPoint(7, 70, labelSettings),
+            self.createChartPoint(8, 40, labelSettings),
+            self.createChartPoint(9, 60, labelSettings),
+            self.createChartPoint(10, 50, labelSettings),
+            self.createChartPoint(11, 55, labelSettings),
+            self.createChartPoint(12, 55, labelSettings)
+        ]
         
-        let allChartPoints = sorted(chartPoints1) {(obj1, obj2) in return obj1.x.scalar < obj2.x.scalar}
+        let xValues = Array(stride(from: 0, through: 12, by: 1)).map {ChartAxisValueFloat($0, labelSettings: labelSettings)}
+        let yValues = ChartAxisValuesGenerator.generateYAxisValuesWithChartPoints(chartPoints, minSegmentCount: 4, maxSegmentCount: 4, multiple: 25, axisValueGenerator: {ChartAxisValueFloat($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: false)
         
-        let xValues = ChartAxisValuesGenerator.generateXAxisValuesWithChartPoints(allChartPoints, minSegmentCount: 0, maxSegmentCount: 3, multiple: 1, axisValueGenerator: {ChartAxisValueFloat($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: false)
+        let xModel = generateAxis(xValues, text: "Date", settings: labelSettings)
+        let yModel = generateAxis(yValues, text: "Adherence", settings: labelSettings)
+
+        let scrollViewFrame = self.chartView.bounds
+        let chartFrame = CGRectMake(0, 10, 1000, scrollViewFrame.size.height - 10)
         
-        
-        //let xValues: [ChartAxisValue] = (NSOrderedSet(array: allChartPoints).array as! [ChartPoint]).map{$0.x}
-        
-        let yValues = ChartAxisValuesGenerator.generateYAxisValuesWithChartPoints(allChartPoints, minSegmentCount: 1, maxSegmentCount: 4, multiple: 25, axisValueGenerator: {ChartAxisValueFloat($0, labelSettings: labelSettings)}, addPaddingSegmentIfEdge: false)
-        
-        let xModel = ChartAxisModel(axisValues: xValues, axisTitleLabel: ChartAxisLabel(text: "Date", settings: labelSettings))
-        let yModel = ChartAxisModel(axisValues: yValues, axisTitleLabel: ChartAxisLabel(text: "Adherence", settings: labelSettings))
-        let chartFrame = genChartFrame(self.chartView.frame)
         let chartSettings = iPhoneChartSettings
         
-        let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
-        let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
         
-        let chartPointsLayer1 = ChartPointsAreaLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, chartPoints: chartPoints1, areaColor: UIColor.blueColor(), animDuration: 3, animDelay: 0, addContainerPoints: true)
-        
-        
-        let lineModel1 = ChartLineModel(chartPoints: chartPoints1, lineColor: UIColor.clearColor(), animDuration: 1, animDelay: 0)
-        let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, lineModels: [lineModel1])
-        
-        var settings = ChartGuideLinesDottedLayerSettings(linesColor: UIColor.blackColor(), linesWidth: 0.1)
-        let guidelinesLayer = ChartGuideLinesDottedLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, settings: settings)
-        
-        let chart = Chart(
-            frame: chartFrame,
-            layers: [
-                xAxis,
-                yAxis,
-                guidelinesLayer,
-                chartPointsLayer1,
-                chartPointsLineLayer,
-            ]
-        )
-        
-        self.chartView.addSubview(chart.view)
-        self.chart = chart
+        // calculate coords space in the background to keep UI smooth
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            let coordsSpace = ChartCoordsSpaceLeftBottomSingleAxis(chartSettings: chartSettings, chartFrame: chartFrame, xModel: xModel, yModel: yModel)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                let (xAxis, yAxis, innerFrame) = (coordsSpace.xAxis, coordsSpace.yAxis, coordsSpace.chartInnerFrame)
+                
+                let lineModel = ChartLineModel(chartPoints: chartPoints, lineColor: UIColor.clearColor(), animDuration: 1, animDelay: 0)
+                let chartPointsLineLayer = ChartPointsLineLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, lineModels: [lineModel])
+                
+                let chartPointsLayer1 = ChartPointsAreaLayer(xAxis: xAxis, yAxis: yAxis, innerFrame: innerFrame, chartPoints: chartPoints, areaColor: UIColor.fromHex(0xA1D4E2), animDuration: 3, animDelay: 0, addContainerPoints: true)
+                
+                let scrollView = UIScrollView(frame: scrollViewFrame)
+                scrollView.contentSize = CGSizeMake(chartFrame.size.width, scrollViewFrame.size.height)
+                
+                let chart = Chart(
+                    frame: chartFrame,
+                    layers: [
+                        xAxis,
+                        yAxis,
+                        chartPointsLineLayer,
+                        chartPointsLayer1
+                    ]
+                )
+                self.chartView.clipsToBounds = true
+                
+                
+                scrollView.addSubview(chart.view)
+                self.chartView.addSubview(scrollView)
+                self.chart = chart
+                
+            }
+        }
+    
     }
     
 }

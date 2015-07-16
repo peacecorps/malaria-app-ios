@@ -43,6 +43,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     let mostRecentEntry = NSDate() - 6.month
     let departureEntry = NSDate()
     
+    var lastEntryIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adherenceSliderTable.delegate = self
@@ -58,6 +60,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         var days = [NSDate]()
         var adherences = [Float]()
         
+        lastEntryIndex = (mostRecentEntry - leastRecentEntry)
         for i in 0...(departureEntry - leastRecentEntry){
             let day = leastRecentEntry + i.day
             days.append(day)
@@ -110,6 +113,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     let TextFont = UIFont(name: "AmericanTypewriter", size: 10.0)
     //fontColor: UIColor.fromHex(0x705246)
     
+    let NoDataText = "There are no entries yet"
+    
     func formatDate(date: NSDate) -> String{
         if !NSDate.areDatesSameDay(date, dateTwo: self.departureEntry) {
             return date.formatWith("yyyy.MM.dd")
@@ -118,7 +123,10 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    var circleDataSet: LineChartDataSet!
+    var circleDataSet: LineChartDataSet = LineChartDataSet(yVals: [], label: "")
+    var previousSelected: ChartDataEntry?
+    var didConfiguredCircleDataSet = false //crashes if the circleDataSet doesn't contain the same elements on the first run
+    
     func setChart(dataPoints: [NSDate], values: [Float]) {
         var dataPointsLabels = dataPoints.map({ self.formatDate($0)})
 
@@ -128,10 +136,11 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
             dataEntries.append(dataEntry)
         }
         
-        let adherenceData = configureCharDataSet(dataPointsLabels, dataEntries: dataEntries, label: "")
+        let adherenceData = configureCharDataSet(dataEntries, label: "")
+        circleDataSet = configureCircleView(dataEntries)
         
+        let data = LineChartData(xVals: dataPointsLabels, dataSets: [circleDataSet, adherenceData])
         
-        let data = LineChartData(xVals: dataPointsLabels, dataSet: adherenceData)
         
         configureCharView(data)
         
@@ -141,12 +150,16 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         configureRightYAxis()
     }
     
-    /*
-    func configureCircleView(){
-        let lineChartDataSet = LineChartDataSet(yVals: [], label: "")
+    
+    func configureCircleView(dataPointsLabels: [ChartDataEntry]) -> LineChartDataSet{
+        let lineChartDataSet = LineChartDataSet(yVals: dataPointsLabels, label: "")
         lineChartDataSet.colors = [UIColor.clearColor()]
-        lineChartDataSet.drawCirclesEnabled = true
-        lineChartDataSet.drawValuesEnabled = true
+        lineChartDataSet.drawCirclesEnabled = false
+        lineChartDataSet.drawValuesEnabled = false
+        
+        lineChartDataSet.valueFont = TextFont!
+        lineChartDataSet.valueTextColor = UIColor.fromHex(0x705246)
+        
         
         //hightlight line customization
         lineChartDataSet.highlightLineWidth = 0.1
@@ -156,18 +169,14 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         lineChartDataSet.fillAlpha = 1
         
         return lineChartDataSet
-    }*/
+    }
     
-    func configureCharDataSet(dataPointsLabels: [String], dataEntries: [ChartDataEntry], label: String) -> ChartDataSet{
+    func configureCharDataSet(dataEntries: [ChartDataEntry], label: String) -> ChartDataSet{
         let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: label)
         lineChartDataSet.colors = [UIColor.clearColor()]
         lineChartDataSet.drawFilledEnabled = true
         lineChartDataSet.drawCirclesEnabled = false
         lineChartDataSet.drawValuesEnabled = false
-        
-        //hightlight line customization
-        lineChartDataSet.highlightLineWidth = 0.1
-        lineChartDataSet.highlightColor = UIColor.fromHex(0x705246)
         
         lineChartDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
         lineChartDataSet.fillAlpha = 1
@@ -179,12 +188,19 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.legend.enabled = false
     }
     
-    let NoDataText = "There are no entries yet"
-    
     
     func configureCharView(data: LineChartData){
         chartView.descriptionText = ""
         chartView.noDataText = NoDataText
+        
+        /*
+        chartView.multipleTouchEnabled = false
+        chartView.pinchZoomEnabled = false
+        chartView.scaleYEnabled = false
+        chartView.doubleTapToZoomEnabled = false
+        chartView.dragEnabled = false
+        */
+        //
         
         chartView.data = data
         chartView.drawGridBackgroundEnabled = false
@@ -230,17 +246,34 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
 }
 
 extension PillsStatsViewController : ChartViewDelegate {
+    
     func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight){
-        //chartView.highlightValue(xIndex: -1, dataSetIndex: highlight.xIndex, callDelegate: false)
+        //chartVie
+        if highlight.xIndex > lastEntryIndex {
+            println("No data there")
+            return
+        }
+        
+        //w.highlightValue(xIndex: -1, dataSetIndex: highlight.xIndex, callDelegate: false)
+        
+        if !didConfiguredCircleDataSet{
+            self.circleDataSet.drawCirclesEnabled = true
+            self.circleDataSet.drawValuesEnabled = true
+            
+            didConfiguredCircleDataSet = true
+        }
         
         if let data = chartView.data,
               charDataSet = data.dataSets[0] as? LineChartDataSet{
                 
-                println("drawing...")
-            
-                //charDataSet.drawCirclesEnabled = true
-                //charDataSet.drawValuesEnabled = true
                 
+                self.circleDataSet.clear()
+                self.circleDataSet.addEntry(entry)
+                previousSelected = entry
+                
+                /*self.circleDataSet//charDataSet.drawCirclesEnabled = true
+                //charDataSet.drawValuesEnabled = true
+                */
         }
         
         println("Selected \(entry)")

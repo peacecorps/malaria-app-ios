@@ -815,7 +815,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="byd-UU-zjp">
-                                <rect key="frame" x="0.0" y="28" width="600" height="250"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="xag-XQ-99C"/>
@@ -879,18 +879,30 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="xag-XQ-99C"/>
+                                    </mask>
+                                </variation>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHw-W4-VWK">
+                                <rect key="frame" x="0.0" y="296" width="600" height="8"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="2bK-FJ-qPU"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YSN-oU-ez5" userLabel="GraphFrame">
-                                <rect key="frame" x="16" y="286" width="568" height="270"/>
+                                <rect key="frame" x="16" y="304" width="568" height="252"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-LV-AKn">
-                                        <rect key="frame" x="20" y="230.5" width="16" height="24.5"/>
+                                        <rect key="frame" x="20" y="212" width="16" height="24.5"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="21"/>
                                         <color key="textColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-Yy-17V" customClass="LineChartView" customModule="Charts">
-                                        <rect key="frame" x="21" y="20" width="527" height="225.5"/>
+                                        <rect key="frame" x="21" y="20" width="527" height="207.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -915,14 +927,26 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="tHw-W4-VWK" secondAttribute="centerY" id="6XK-ij-qZC"/>
+                            <constraint firstItem="tHw-W4-VWK" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="8kq-7J-rw2"/>
+                            <constraint firstAttribute="centerX" secondItem="tHw-W4-VWK" secondAttribute="centerX" id="J0N-8J-wNY"/>
                             <constraint firstAttribute="centerX" secondItem="byd-UU-zjp" secondAttribute="centerX" id="J81-hy-CqL"/>
                             <constraint firstItem="YSN-oU-ez5" firstAttribute="leading" secondItem="5E1-Wu-0vn" secondAttribute="leadingMargin" id="LPH-Lk-Svb"/>
                             <constraint firstItem="YSN-oU-ez5" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" constant="8" id="QNo-hf-QC9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YSN-oU-ez5" secondAttribute="trailing" id="X1i-qv-ntn"/>
+                            <constraint firstItem="tHw-W4-VWK" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" id="ZiR-Lt-2FY"/>
+                            <constraint firstItem="YSN-oU-ez5" firstAttribute="top" secondItem="tHw-W4-VWK" secondAttribute="bottom" id="qNx-yY-pDQ"/>
                             <constraint firstItem="cac-e2-LlP" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="bottom" id="qWG-DM-OjG"/>
                             <constraint firstItem="byd-UU-zjp" firstAttribute="top" secondItem="Elu-Z7-SBH" secondAttribute="bottom" constant="8" id="qyR-sS-bQN"/>
                             <constraint firstItem="byd-UU-zjp" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="rNJ-CF-rmS"/>
+                            <constraint firstItem="tHw-W4-VWK" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="top" constant="10" id="srG-BS-fPI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="srG-BS-fPI"/>
+                                <exclude reference="QNo-hf-QC9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

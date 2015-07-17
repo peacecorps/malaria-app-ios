@@ -40,8 +40,6 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var chartView: LineChartView!
     
     let leastRecentEntry = NSDate() - 1.year
-    let mostRecentEntry = NSDate() - 6.month
-    let departureEntry = NSDate()
     
     var lastEntryIndex = 0
     
@@ -57,14 +55,9 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         var days = [NSDate]()
         var adherences = [Float]()
         
-        lastEntryIndex = (mostRecentEntry - leastRecentEntry)
-        for i in 0...(departureEntry - leastRecentEntry){
-            let day = leastRecentEntry + i.day
-            days.append(day)
-            
-            let value = day <= mostRecentEntry ? Float((100 * abs(sin(3.145*Double(i))))) : 0
-            
-            adherences.append(value)
+        for i in 0...(NSDate() - leastRecentEntry){
+            days.append(leastRecentEntry + i.day)
+            adherences.append(Float((100 * abs(sin(3.145*Double(i))))))
         }
         
         setChart(days, values: adherences)
@@ -109,19 +102,10 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var graphFrame: UIView!
     
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)
-    
     let NoDataText = "There are no entries yet"
     
-    func formatDate(date: NSDate) -> String{
-        if !NSDate.areDatesSameDay(date, dateTwo: self.departureEntry) {
-            return date.formatWith("yyyy.MM.dd")
-        }else {
-            return "End"
-        }
-    }
-    
     func setChart(dataPoints: [NSDate], values: [Float]) {
-        var dataPointsLabels = dataPoints.map({ self.formatDate($0)})
+        var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
 
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
@@ -178,14 +162,13 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.xAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
         chartView.xAxis.axisLineWidth = 1.0
         chartView.xAxis.avoidFirstLastClippingEnabled = false
-        
-        let currentDayLine = ChartLimitLine(limit: Float(mostRecentEntry - leastRecentEntry))
-        currentDayLine.lineColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-        chartView.xAxis.addLimitLine(currentDayLine)
     }
     
     func configureRightYAxis(){
-        chartView.rightAxis.enabled = false
+        chartView.rightAxis.axisLineColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+        chartView.rightAxis.drawGridLinesEnabled = false
+        chartView.rightAxis.drawLabelsEnabled = false
+        chartView.rightAxis.axisLineWidth = 1.0
     }
     
     func configureLeftYAxis(){

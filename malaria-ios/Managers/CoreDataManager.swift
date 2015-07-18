@@ -1,6 +1,6 @@
 import Foundation
 
-public class Manager{
+public class CoreDataContextManager{
     let context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext){

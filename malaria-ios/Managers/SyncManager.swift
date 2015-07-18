@@ -1,7 +1,7 @@
 import Alamofire
 import SwiftyJSON
 
-public class SyncManager : Manager{
+public class SyncManager : CoreDataContextManager{
     
     let user = "TestUser"
     let password = "password"

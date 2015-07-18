@@ -1,6 +1,6 @@
 import Foundation
 
-public class TripsManager : Manager{
+public class TripsManager : CoreDataContextManager{
     
     public override init(context: NSManagedObjectContext){
         super.init(context: context)

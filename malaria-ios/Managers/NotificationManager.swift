@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class NotificationManager : Manager{
+public class NotificationManager : CoreDataContextManager{
     
     var category: String { get{ fatalError("No category provided")} }
     var alertBody: String { get{ fatalError("No alertBody provided")} }

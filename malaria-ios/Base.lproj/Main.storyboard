@@ -814,16 +814,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="byd-UU-zjp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="byd-UU-zjp">
                                 <rect key="frame" x="0.0" y="28" width="600" height="268"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="xag-XQ-99C"/>
-                                </constraints>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdherenceHorizontalBarCell" rowHeight="60" id="Nf3-zd-vS4" customClass="AdherenceHorizontalBarCell" customModule="malaria_ios" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdherenceHorizontalBarCell" rowHeight="60" id="Nf3-zd-vS4" customClass="AdherenceHorizontalBarCell" customModule="malaria_ios" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nf3-zd-vS4" id="kJZ-ry-5pf">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -839,16 +836,8 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-Md-fB1">
                                                     <rect key="frame" x="66" y="15" width="458" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="450" id="p4h-4K-rJK"/>
-                                                    </constraints>
                                                     <color key="minimumTrackTintColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="maximumTrackTintColor" red="0.30980392159999998" green="0.5450980392" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="p4h-4K-rJK"/>
-                                                        </mask>
-                                                    </variation>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW0-s2-RmX">
                                                     <rect key="frame" x="522" y="18" width="60" height="23.5"/>
@@ -879,11 +868,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="xag-XQ-99C"/>
-                                    </mask>
-                                </variation>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHw-W4-VWK">
                                 <rect key="frame" x="0.0" y="296" width="600" height="8"/>
@@ -908,8 +892,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.98117071390151978" green="0.9539368748664856" blue="0.89111751317977905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="YSN-oU-ez5" secondAttribute="leading" constant="20" id="36s-RK-6NL"/>
-                                    <constraint firstAttribute="bottom" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="20" id="51s-eX-IeW"/>
                                     <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="qL5-LV-AKn" secondAttribute="trailing" constant="-15" id="NsP-ve-VjK"/>
                                     <constraint firstItem="qL5-LV-AKn" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="-15" id="SYo-TO-4wq"/>
                                     <constraint firstItem="wyK-Yy-17V" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="top" constant="20" id="WhJ-Vb-Yqh"/>
@@ -917,12 +899,6 @@
                                     <constraint firstItem="qL5-LV-AKn" firstAttribute="leading" secondItem="YSN-oU-ez5" secondAttribute="leading" constant="20" id="hee-yR-gHC"/>
                                     <constraint firstAttribute="bottom" secondItem="qL5-LV-AKn" secondAttribute="bottom" constant="15" id="saj-LT-Qnh"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="36s-RK-6NL"/>
-                                        <exclude reference="51s-eX-IeW"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -932,21 +908,13 @@
                             <constraint firstAttribute="centerX" secondItem="tHw-W4-VWK" secondAttribute="centerX" id="J0N-8J-wNY"/>
                             <constraint firstAttribute="centerX" secondItem="byd-UU-zjp" secondAttribute="centerX" id="J81-hy-CqL"/>
                             <constraint firstItem="YSN-oU-ez5" firstAttribute="leading" secondItem="5E1-Wu-0vn" secondAttribute="leadingMargin" id="LPH-Lk-Svb"/>
-                            <constraint firstItem="YSN-oU-ez5" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" constant="8" id="QNo-hf-QC9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YSN-oU-ez5" secondAttribute="trailing" id="X1i-qv-ntn"/>
                             <constraint firstItem="tHw-W4-VWK" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" id="ZiR-Lt-2FY"/>
                             <constraint firstItem="YSN-oU-ez5" firstAttribute="top" secondItem="tHw-W4-VWK" secondAttribute="bottom" id="qNx-yY-pDQ"/>
                             <constraint firstItem="cac-e2-LlP" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="bottom" id="qWG-DM-OjG"/>
                             <constraint firstItem="byd-UU-zjp" firstAttribute="top" secondItem="Elu-Z7-SBH" secondAttribute="bottom" constant="8" id="qyR-sS-bQN"/>
                             <constraint firstItem="byd-UU-zjp" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="rNJ-CF-rmS"/>
-                            <constraint firstItem="tHw-W4-VWK" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="top" constant="10" id="srG-BS-fPI"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="srG-BS-fPI"/>
-                                <exclude reference="QNo-hf-QC9"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1087,6 +1055,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J2k-2P-yO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2375" y="1020"/>
+        </scene>
+        <!--Monthly View Controller-->
+        <scene sceneID="CY7-OB-jWN">
+            <objects>
+                <viewController storyboardIdentifier="MonthlyViewController" id="TtL-Cy-8DQ" customClass="MonthlyViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oSr-SE-S2J"/>
+                        <viewControllerLayoutGuide type="bottom" id="JcX-ga-R0d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ya5-II-zxG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckb-C1-aOM">
+                                <rect key="frame" x="238" y="28" width="125" height="23.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRu-lo-cIn" customClass="CVCalendarMenuView" customModule="malaria_ios" customModuleProvider="target">
+                                <rect key="frame" x="16" y="72" width="568" height="23"/>
+                                <connections>
+                                    <outlet property="menuViewDelegate" destination="TtL-Cy-8DQ" id="U7W-Uw-fEC"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oal-Gl-7be">
+                                <rect key="frame" x="535" y="23" width="49" height="34"/>
+                                <state key="normal" title="Today">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="todayMonthView" destination="TtL-Cy-8DQ" eventType="touchUpInside" id="74A-zR-d2V"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-LE-2QN" customClass="CVCalendarView" customModule="malaria_ios" customModuleProvider="target">
+                                <rect key="frame" x="16" y="103" width="568" height="350"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="fIF-q5-aOW">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="480"/>
+                                    </constraint>
+                                </constraints>
+                                <connections>
+                                    <outlet property="calendarAppearanceDelegate" destination="TtL-Cy-8DQ" id="AdM-g3-E5h"/>
+                                    <outlet property="calendarDelegate" destination="TtL-Cy-8DQ" id="Tfd-oW-a5T"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4YK-LE-2QN" firstAttribute="leading" secondItem="NRu-lo-cIn" secondAttribute="leading" id="6uT-cO-l2K"/>
+                            <constraint firstItem="Ckb-C1-aOM" firstAttribute="top" secondItem="oSr-SE-S2J" secondAttribute="bottom" constant="8" symbolic="YES" id="8WL-Gs-cAi"/>
+                            <constraint firstItem="Oal-Gl-7be" firstAttribute="trailing" secondItem="NRu-lo-cIn" secondAttribute="trailing" id="AHK-zJ-Hg6"/>
+                            <constraint firstItem="4YK-LE-2QN" firstAttribute="top" secondItem="Ya5-II-zxG" secondAttribute="top" constant="103" id="Cq9-qn-Fjb"/>
+                            <constraint firstItem="NRu-lo-cIn" firstAttribute="trailing" secondItem="Ya5-II-zxG" secondAttribute="trailingMargin" id="HOf-e6-xDq"/>
+                            <constraint firstItem="NRu-lo-cIn" firstAttribute="top" secondItem="Oal-Gl-7be" secondAttribute="bottom" constant="15" id="Mz1-it-ewi"/>
+                            <constraint firstItem="4YK-LE-2QN" firstAttribute="trailing" secondItem="NRu-lo-cIn" secondAttribute="trailing" id="XTE-Bp-mM4"/>
+                            <constraint firstItem="Ckb-C1-aOM" firstAttribute="centerX" secondItem="NRu-lo-cIn" secondAttribute="centerX" id="cbB-Ff-j0p"/>
+                            <constraint firstItem="4YK-LE-2QN" firstAttribute="top" secondItem="NRu-lo-cIn" secondAttribute="bottom" constant="8" symbolic="YES" id="hyH-lE-nTd"/>
+                            <constraint firstItem="4YK-LE-2QN" firstAttribute="leading" secondItem="Ya5-II-zxG" secondAttribute="leadingMargin" id="lbB-Dc-xnM"/>
+                            <constraint firstItem="Oal-Gl-7be" firstAttribute="top" secondItem="oSr-SE-S2J" secondAttribute="bottom" constant="3" id="tHN-09-ydk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="calendarView" destination="4YK-LE-2QN" id="kIG-sG-6HM"/>
+                        <outlet property="menuView" destination="NRu-lo-cIn" id="EX7-aG-eZZ"/>
+                        <outlet property="monthLabel" destination="Ckb-C1-aOM" id="VX1-0D-YSY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cMa-AW-3ky" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3118" y="2498"/>
         </scene>
     </scenes>
     <resources>

@@ -29,13 +29,16 @@ class AdherenceHorizontalBarCell: UITableViewCell {
         return self
     }
     
+    
+    
 }
 
 class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var adherenceSliderTable: UITableView!
     
-    var adherences = [Float]()
+    var adherences : [NSDate : Float] = [:]
+    var sortedDates = [NSDate]()
     
     @IBOutlet weak var chartView: LineChartView!
     
@@ -67,8 +70,10 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        for i in 0...10{
-            adherences.append(Float(i+i*10))
+        for i in 0...3{
+            let date = NSDate() + i.month
+            sortedDates.append(date)
+            adherences[date] = (Float(i+i*10))
         }
         
     }
@@ -81,7 +86,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return adherences.count
+        return sortedDates.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -89,12 +94,27 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let adherenceValue = adherences[indexPath.row]
+        let date = sortedDates[indexPath.row]
+        let adherenceValue = adherences[date]!
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AdherenceHorizontalBarCell") as! AdherenceHorizontalBarCell
-        cell.configureCell(NSDate() + indexPath.row.month, adhrenceValue: adherenceValue)
+        cell.configureCell(date, adhrenceValue: adherenceValue)
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("Selected \(indexPath.row)")
+        
+        let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
+        monthView.startDay = sortedDates[indexPath.row]
+        
+        presentViewController(
+            monthView,
+            animated: true,
+            completion: nil
+        )
+        
     }
     
     /* Graph View related methods */

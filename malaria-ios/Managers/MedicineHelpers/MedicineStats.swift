@@ -1,6 +1,6 @@
 import Foundation
 
-public class MedicineStats : Manager{
+public class MedicineStats : CoreDataContextManager{
     let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){

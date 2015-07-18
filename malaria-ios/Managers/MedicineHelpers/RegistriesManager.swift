@@ -1,6 +1,6 @@
 import Foundation
 
-public class RegistriesManager : Manager{
+public class RegistriesManager : CoreDataContextManager{
     let medicine: Medicine
     
     init(context: NSManagedObjectContext, medicine: Medicine){

@@ -1,6 +1,6 @@
 import Foundation
 
-public class ItemsManager : Manager{
+public class ItemsManager : CoreDataContextManager{
 
     let trip: Trip
     

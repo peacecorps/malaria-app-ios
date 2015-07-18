@@ -27,11 +27,37 @@ class DidTakePillsViewController: UIViewController {
         refreshScreen()
     }
     
+    func randomTook(probability: Int) -> Bool{
+        let random = Int(arc4random_uniform(100))
+        
+        return probability >= random
+    }
+    
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("tookMedicineBtnHandler")
         if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
             medicine.notificationManager(viewContext).reshedule()
         }
+        
+        Logger.Warn("ADDING DUMMY ENTRIES")
+        for i in 1...50 {
+            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(0))
+        }
+        
+        for i in 51...100 {
+            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(99))
+        }
+        
+        for i in 101...200 {
+            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(30))
+        }
+        
+        for i in 201...365 {
+            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(10))
+        }
+        
+        Logger.Warn("DONE ADDING DUMMY ENTRIES")
+        
         
         refreshScreen()
     }

@@ -10,7 +10,6 @@ class AdherenceHorizontalBarCell: UITableViewCell {
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var adherenceValue: UILabel!
-
     
     var setup = false
     func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
@@ -33,15 +32,23 @@ class AdherenceHorizontalBarCell: UITableViewCell {
 class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var adherenceSliderTable: UITableView!
-    
-    var adherences : [NSDate : Float] = [:]
-    var sortedDates = [NSDate]()
-    
     @IBOutlet weak var chartView: LineChartView!
+
+    var viewContext: NSManagedObjectContext! { didSet {
+            medicine = MedicineManager(context: viewContext).getCurrentMedicine()
+            registriesManager = medicine.registriesManager(viewContext)
+            statsManager = medicine.stats(viewContext)
+        }
+    }
     
-    let leastRecentEntry = NSDate() - 1.year
+    var medicine: Medicine!
+    var registriesManager: RegistriesManager!
+    var statsManager: MedicineStats!
     
-    var lastEntryIndex = 0
+    
+    var months = [NSDate]()
+    
+    var firstEntryDate: NSDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,29 +58,58 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         
         graphFrame.layer.cornerRadius = 20
         graphFrame.layer.masksToBounds = true
-        
-        var days = [NSDate]()
-        var adherences = [Float]()
-        
-        for i in 0...(NSDate() - leastRecentEntry){
-            days.append(leastRecentEntry + i.day)
-            adherences.append(Float((100 * abs(sin(3.145*Double(i))))))
-        }
-        
-        setChart(days, values: adherences)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        for i in 0...3{
-            let date = NSDate() + i.month
-            sortedDates.append(date)
-            adherences[date] = (Float(i+i*10))
-        }
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            let today = NSDate()
+            var adherencesPerDay = [Float]()
+            var days = [NSDate]()
+            
+            if let oldestEntry = self.registriesManager.oldestEntry(){
+                self.firstEntryDate = oldestEntry.date
+                
+                //contruct data for table
+                var setOfMonths = Set<NSDate>()
+                
+                //all days between two dates, contruct graph data
+                for i in 0...(today - self.firstEntryDate!){
+                    let day = self.firstEntryDate! + i.day
+                    
+                    /*
+                    println("-----")
+                    println(day.formatWith("dd-MMMM-yyyy"))
+                    */
+                    
+                    days.append(day)
+                    
+                    //println("From: " + self.firstEntryDate!.formatWith("dd-MMMM-yyyy") + " to " + day.formatWith("dd-MMMM-yyyy"))
+                    adherencesPerDay.append(self.statsManager.pillAdherence(date1: self.firstEntryDate!, date2: day)*100)
+                    
+                    if setOfMonths.count != 4 {
+                        let moreRecentDay = today - i.day
+                        //println("Adding " + moreRecentDay.formatWith("dd-MMMM-yyyy"))
+                        setOfMonths.insert(NSDate.from(moreRecentDay.year, month: moreRecentDay.month, day: 1)) //avoids inserting repeated values
+                    }
+                }
+                
+                self.months = [NSDate](setOfMonths).sorted({$0 > $1}) //most recent month on the top
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.adherenceSliderTable.reloadData()
+                self.setChart(days, values: adherencesPerDay)
+            });
+        });
     }
+    
+    
+    
+    
     
     
     /* Adhrence Slider Table related methods */
@@ -83,7 +119,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedDates.count
+        return months.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -91,18 +127,18 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let date = sortedDates[indexPath.row]
-        let adherenceValue = adherences[date]!
+        let month = months[indexPath.row]
+        let adherenceValue = self.statsManager.pillAdherence(month)*100
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AdherenceHorizontalBarCell") as! AdherenceHorizontalBarCell
-        cell.configureCell(date, adhrenceValue: adherenceValue)
+        cell.configureCell(month, adhrenceValue: adherenceValue)
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
-        monthView.startDay = sortedDates[indexPath.row]
+        monthView.startDay = months[indexPath.row]
         
         presentViewController(
             monthView,
@@ -189,8 +225,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     func configureLeftYAxis(){
         chartView.leftAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
         chartView.leftAxis.drawGridLinesEnabled = false
-        chartView.leftAxis.startAtZeroEnabled = true
         chartView.leftAxis.axisLineWidth = 1.0
+        chartView.leftAxis.customAxisMin = 0
         chartView.leftAxis.customAxisMax = 100
         chartView.leftAxis.labelFont = TextFont!
         chartView.leftAxis.labelTextColor = UIColor.fromHex(0x705246)

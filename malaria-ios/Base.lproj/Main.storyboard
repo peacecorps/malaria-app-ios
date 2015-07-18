@@ -880,7 +880,7 @@
                                 <rect key="frame" x="16" y="304" width="568" height="252"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-LV-AKn">
-                                        <rect key="frame" x="20" y="212" width="16" height="24.5"/>
+                                        <rect key="frame" x="15" y="217.5" width="16" height="24.5"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="21"/>
                                         <color key="textColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -892,12 +892,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.98117071390151978" green="0.9539368748664856" blue="0.89111751317977905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="qL5-LV-AKn" secondAttribute="trailing" constant="-15" id="NsP-ve-VjK"/>
-                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="-15" id="SYo-TO-4wq"/>
+                                    <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="qL5-LV-AKn" secondAttribute="trailing" constant="-10" id="NsP-ve-VjK"/>
+                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="-10" id="SYo-TO-4wq"/>
                                     <constraint firstItem="wyK-Yy-17V" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="top" constant="20" id="WhJ-Vb-Yqh"/>
                                     <constraint firstAttribute="trailing" secondItem="wyK-Yy-17V" secondAttribute="trailing" constant="20" id="hR1-BT-Uev"/>
-                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="leading" secondItem="YSN-oU-ez5" secondAttribute="leading" constant="20" id="hee-yR-gHC"/>
-                                    <constraint firstAttribute="bottom" secondItem="qL5-LV-AKn" secondAttribute="bottom" constant="15" id="saj-LT-Qnh"/>
+                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="leading" secondItem="YSN-oU-ez5" secondAttribute="leading" constant="15" id="hee-yR-gHC"/>
+                                    <constraint firstAttribute="bottom" secondItem="qL5-LV-AKn" secondAttribute="bottom" constant="10" id="saj-LT-Qnh"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1074,6 +1074,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3W-Vc-Knb" userLabel="CalendarFrame">
+                                <rect key="frame" x="16" y="45" width="568" height="449"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M71-Ak-Zdw">
                                 <rect key="frame" x="514" y="545" width="70" height="40"/>
                                 <constraints>
@@ -1089,10 +1093,6 @@
                                     <action selector="todayMonthView" destination="DFN-np-MDb" eventType="touchUpInside" id="fle-0g-TJf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3W-Vc-Knb" userLabel="CalendarFrame">
-                                <rect key="frame" x="16" y="45" width="568" height="449"/>
-                                <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysi-JT-bEw">
                                 <rect key="frame" x="230" y="58" width="139.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>

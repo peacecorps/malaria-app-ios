@@ -106,4 +106,12 @@ public class MedicineStats : CoreDataContextManager{
         
         return result
     }
+    
+    
+    public func pillAdherence(month: NSDate) -> Float{
+        let startMonth = NSDate.from(month.year, month: month.month, day: 1)
+        let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
+        
+        return pillAdherence(date1: startMonth, date2: endMonth)
+    }
 }

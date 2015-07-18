@@ -17,6 +17,26 @@ extension NSDate : Comparable {}
 
 public extension NSDate{
     
+    ///retrieves the month
+    var month: Int {
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitMonth, fromDate: self)
+    }
+    
+    ///retrieves the day
+    var day: Int {
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitDay, fromDate: self)
+    }
+    
+    ///retrieves the year
+    var year: Int{
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: self)
+    }
+    
+    ///retrieves the end day of the current month
+    var endOfCurrentMonth: Int{
+        return (NSDate.from(year, month: month, day: 1) + 1.month - 1.minute).day
+    }
+    
     /// NSDate(timeIntervalSince1970: 0)
     static var min: NSDate {
         return NSDate(timeIntervalSince1970: 0)
@@ -102,7 +122,6 @@ public extension NSDate{
         
         return h1 == h2 && m1 == m2
     }
-    
 }
 
 

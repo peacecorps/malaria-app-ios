@@ -98,5 +98,13 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertEqual((d3 - d1), 7)
     }
     
+    func testCompontents() {
+        let date = NSDate.from(2015, month: 4, day: 1)
+        XCTAssertEqual(date.day, 1)
+        XCTAssertEqual(date.month, 4)
+        XCTAssertEqual(date.year, 2015)
+        XCTAssertEqual(date.endOfCurrentMonth, 30)
+    }
+    
 
 }

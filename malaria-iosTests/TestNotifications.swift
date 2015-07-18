@@ -47,13 +47,18 @@ class TestNotifications: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
+        UserSettingsManager.clear()
     }
     
     
     //only valid in weekly pills
     func testShoudResetNotificationTime(){
         XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1))
+        
+        println("Adding entry")
         XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
+        println("Finished Adding entry")
+        
         
         for i in 1...6 {
             XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1 + i.day))

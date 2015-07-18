@@ -138,6 +138,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: date
     /// :returns: `Registry?`
     public func findRegistry(date: NSDate) -> Registry?{
+        
         let filteredArray = getRegistries(date1: date, date2: date)
         if filteredArray.count > 1{
             Logger.Error("Error: Found too many entries with same date")

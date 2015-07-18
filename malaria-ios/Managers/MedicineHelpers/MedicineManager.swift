@@ -65,7 +65,6 @@ public class MedicineManager : CoreDataContextManager{
         let result = medicines.filter({ return $0.isCurrent == true})
         
         if result.count > 1{
-            println(result)
             Logger.Error("Multiple current medicines found. Inconsistency found")
         }
         

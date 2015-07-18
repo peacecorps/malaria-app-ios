@@ -12,6 +12,7 @@ class TestUserSettings: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        UserSettingsManager.clear()
     }
     
     func testGetSet() {

@@ -5,8 +5,15 @@ class MonthlyViewController: UIViewController {
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!
-    
     @IBOutlet weak var calendarFrame: UIView!
+    
+    var statsController: PillsStatsViewController!
+    
+    let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    
+    var previouslySelect: NSDate?
+    
     let calendarVisualSettings = CalendarVisualSettings()
     
     var startDay: NSDate!
@@ -35,6 +42,10 @@ class MonthlyViewController: UIViewController {
         menuView.commitMenuViewUpdate()
     }
     
+    @IBAction func closeBtnHandler(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func previousMonthToggle(sender: AnyObject) {
         calendarView.loadPreviousView()
     }
@@ -52,11 +63,29 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
+        //circleView.strokeColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
         return circleView
     }
     
     func preliminaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
         return dayView.isCurrentDay
+    }
+    
+    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
+        if let registryDate = dayView.date.convertedDate(){
+            return statsController.tookMedicine[registryDate.startOfDay] != nil
+        }
+        
+        return false
+    }
+    
+    func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
+        if let registryDate = dayView.date.convertedDate(),
+                tookMedicine = statsController.tookMedicine[registryDate.startOfDay]{
+                return tookMedicine ? [HighAdherenceColor] : [LowAdherenceColor]
+        }
+        
+        return []
     }
 }
 
@@ -67,6 +96,36 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func didSelectDayView(dayView: CVCalendarDayView) {
         println("\(calendarView.presentedDate.commonDescription) is selected!")
+        let selected = dayView.date.convertedDate()!
+        
+        println(selected.startOfDay)
+        
+        if let previous = previouslySelect{
+            if NSDate.areDatesSameDay(previous, dateTwo: selected) {
+                var tookMedicine = false
+                var containsEntry = false
+                if let registryDate = dayView.date.convertedDate(),
+                    tookMedicineAux = statsController.tookMedicine[registryDate.startOfDay]{
+                        tookMedicine = tookMedicineAux
+                        containsEntry = true
+                }
+                
+                let title = containsEntry ? "There is no entry yet" : "You " + (tookMedicine ? "took" : "did not take " + " the pill")
+                var message = "Update to: "
+                
+                var refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                refreshAlert.addAction(UIAlertAction(title: "Took", style: .Default, handler: { (action: UIAlertAction!) in
+                    println("I took the pill")
+                }))
+                
+                refreshAlert.addAction(UIAlertAction(title: "Did not took", style: .Default, handler: { (action: UIAlertAction!) in
+                    println("I didn't took the pill")
+                }))
+                presentViewController(refreshAlert, animated: true, completion: nil)
+            }
+        }
+        
+        previouslySelect = selected
     }
     
     func presentedDateUpdated(date: CVDate) {
@@ -107,6 +166,8 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
     }
+    
+
 }
 
 extension MonthlyViewController: CVCalendarViewAppearanceDelegate {

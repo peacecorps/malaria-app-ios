@@ -1146,6 +1146,21 @@
                                     <action selector="nextMonthToggle:" destination="DFN-np-MDb" eventType="touchUpInside" id="ae5-Gq-qgl"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sb6-YA-CKU">
+                                <rect key="frame" x="16" y="540" width="70" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="BFN-pZ-fxG"/>
+                                    <constraint firstAttribute="width" constant="70" id="Qz1-ZX-mcQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="Close" backgroundImage="InfoHubButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeBtnHandler:" destination="DFN-np-MDb" eventType="touchUpInside" id="v4L-xK-Cq1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1153,6 +1168,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="qYA-KO-ewV" secondAttribute="trailing" constant="10" id="8jO-xF-uCe"/>
                             <constraint firstItem="Q3W-Vc-Knb" firstAttribute="trailing" secondItem="M71-Ak-Zdw" secondAttribute="trailing" id="8un-gG-jT9"/>
                             <constraint firstItem="qYA-KO-ewV" firstAttribute="top" secondItem="efL-P0-SDo" secondAttribute="bottom" constant="18" id="9aS-Vi-7fJ"/>
+                            <constraint firstItem="Sb6-YA-CKU" firstAttribute="leading" secondItem="0Zw-jp-Aua" secondAttribute="leadingMargin" id="AlR-t4-HH4"/>
                             <constraint firstAttribute="centerX" secondItem="ysi-JT-bEw" secondAttribute="centerX" id="EzW-wN-4N2"/>
                             <constraint firstItem="efL-P0-SDo" firstAttribute="top" secondItem="ysi-JT-bEw" secondAttribute="bottom" constant="15" id="G9y-4P-et0"/>
                             <constraint firstItem="i7z-bP-SFX" firstAttribute="top" secondItem="M71-Ak-Zdw" secondAttribute="bottom" constant="15" id="Gwk-XE-TQo"/>
@@ -1160,6 +1176,8 @@
                             <constraint firstItem="Q3W-Vc-Knb" firstAttribute="top" secondItem="PYh-D4-aYv" secondAttribute="bottom" constant="25" id="MN1-Lh-LZa"/>
                             <constraint firstItem="Q3W-Vc-Knb" firstAttribute="top" secondItem="ysi-JT-bEw" secondAttribute="top" constant="-13" id="NdX-ks-d3z"/>
                             <constraint firstItem="F53-x4-FQi" firstAttribute="trailing" secondItem="qYA-KO-ewV" secondAttribute="trailing" id="Oxm-JS-QME"/>
+                            <constraint firstItem="Sb6-YA-CKU" firstAttribute="bottom" secondItem="M71-Ak-Zdw" secondAttribute="bottom" constant="-5" id="PaU-CT-cJU"/>
+                            <constraint firstItem="Sb6-YA-CKU" firstAttribute="top" secondItem="M71-Ak-Zdw" secondAttribute="top" constant="-5" id="Q74-5d-fgG"/>
                             <constraint firstItem="WKB-BE-97q" firstAttribute="trailing" secondItem="efL-P0-SDo" secondAttribute="trailing" id="QKE-Lp-JXR"/>
                             <constraint firstItem="WKB-BE-97q" firstAttribute="centerY" secondItem="ysi-JT-bEw" secondAttribute="centerY" id="RfX-kk-FYs"/>
                             <constraint firstAttribute="bottom" secondItem="F53-x4-FQi" secondAttribute="bottom" constant="131" id="SSo-Pz-YtJ"/>

@@ -37,6 +37,14 @@ public extension NSDate{
         return (NSDate.from(year, month: month, day: 1) + 1.month - 1.minute).day
     }
     
+    var startOfDay: NSDate {
+        return NSCalendar.currentCalendar().startOfDayForDate(self)
+    }
+    
+    var endOfDay: NSDate {
+        return startOfDay + 1.day - 1.second
+    }
+    
     /// NSDate(timeIntervalSince1970: 0)
     static var min: NSDate {
         return NSDate(timeIntervalSince1970: 0)

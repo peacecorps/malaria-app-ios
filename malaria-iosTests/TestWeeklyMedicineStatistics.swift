@@ -40,6 +40,7 @@ class TestWeeklyMedicineStatistics: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
+        UserSettingsManager.clear()
     }
     
     func testPillStreak(){

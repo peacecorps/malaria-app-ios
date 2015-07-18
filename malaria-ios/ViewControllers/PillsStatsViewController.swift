@@ -34,17 +34,12 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
 
-    var viewContext: NSManagedObjectContext! { didSet {
-            medicine = MedicineManager(context: viewContext).getCurrentMedicine()
-            registriesManager = medicine.registriesManager(viewContext)
-            statsManager = medicine.stats(viewContext)
-        }
-    }
+    var viewContext: NSManagedObjectContext!
     
     var medicine: Medicine!
     var registriesManager: RegistriesManager!
     var statsManager: MedicineStats!
-    
+    var tookMedicine: [NSDate: Bool] = [:]
     
     var months = [NSDate]()
     
@@ -65,46 +60,51 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
+        medicine = MedicineManager(context: viewContext).getCurrentMedicine()
+        registriesManager = medicine.registriesManager(viewContext)
+        statsManager = medicine.stats(viewContext)
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let today = NSDate()
-            var adherencesPerDay = [Float]()
-            var days = [NSDate]()
-            
             if let oldestEntry = self.registriesManager.oldestEntry(){
                 self.firstEntryDate = oldestEntry.date
                 
+                let today = NSDate()
+                var adherencesPerDay = [Float]()
+                let numDays = (today - self.firstEntryDate!) + 1
+                var days = [NSDate](count: numDays, repeatedValue: today)
+            
                 //contruct data for table
                 var setOfMonths = Set<NSDate>()
                 
                 //all days between two dates, contruct graph data
-                for i in 0...(today - self.firstEntryDate!){
+                for i in 0...(numDays - 1){
                     let day = self.firstEntryDate! + i.day
                     
-                    /*
-                    println("-----")
-                    println(day.formatWith("dd-MMMM-yyyy"))
-                    */
+                    days[i] = day
                     
-                    days.append(day)
                     
-                    //println("From: " + self.firstEntryDate!.formatWith("dd-MMMM-yyyy") + " to " + day.formatWith("dd-MMMM-yyyy"))
+                    if let entry = self.registriesManager.findRegistry(day) {
+                        self.tookMedicine[day.startOfDay] = entry.tookMedicine
+                    }
+
                     adherencesPerDay.append(self.statsManager.pillAdherence(date1: self.firstEntryDate!, date2: day)*100)
+
+                    //adherencesPerDay.append(Float(arc4random_uniform(100)))
                     
                     if setOfMonths.count != 4 {
                         let moreRecentDay = today - i.day
-                        //println("Adding " + moreRecentDay.formatWith("dd-MMMM-yyyy"))
                         setOfMonths.insert(NSDate.from(moreRecentDay.year, month: moreRecentDay.month, day: 1)) //avoids inserting repeated values
                     }
                 }
                 
                 self.months = [NSDate](setOfMonths).sorted({$0 > $1}) //most recent month on the top
-            }
             
-            dispatch_async(dispatch_get_main_queue(), {
-                self.adherenceSliderTable.reloadData()
-                self.setChart(days, values: adherencesPerDay)
-            });
-        });
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.adherenceSliderTable.reloadData()
+                    self.setChart(days, values: adherencesPerDay)
+                })
+            }
+        })
     }
     
     
@@ -139,6 +139,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
         monthView.startDay = months[indexPath.row]
+        monthView.statsController = self
         
         presentViewController(
             monthView,

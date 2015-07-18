@@ -9,14 +9,7 @@ public class TripsManager : CoreDataContextManager{
     /// Returns the current trip if any
     /// :returns: Trip?
     public func getTrip() -> Trip?{
-        let result = Trip.retrieve(Trip.self, context: context)
-        if result.count == 0{
-            return nil
-        }else if result.count > 1 {
-            Logger.Warn("Multiple trips found, error")
-        }
-        
-        return result[0]
+        return Trip.retrieve(Trip.self, fetchLimit: 1, context: context).first
     }
     
     /// Clears any trip from coreData

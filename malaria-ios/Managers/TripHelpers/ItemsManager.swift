@@ -35,8 +35,7 @@ public class ItemsManager : CoreDataContextManager{
     /// :param: `String`: name of the item
     /// :returns: `Item?`:
     public func findItem(name: String) -> Item?{
-        var currentItems = getItems().filter({$0.name.lowercaseString == name.lowercaseString})
-        return currentItems.count == 0 ? nil : currentItems[0]
+        return getItems().filter({$0.name.lowercaseString == name.lowercaseString}).first
     }
     
     /// Removes a item from the trip

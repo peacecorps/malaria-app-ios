@@ -64,8 +64,6 @@
 		20246D1F1B4F28BF00384759 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
 		20246D201B4F29F700384759 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
 		20246D211B4F2C0D00384759 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
-		20246D221B4F2CA000384759 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
-		20246D231B4F2E6D00384759 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		20246D271B532C8E00384759 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */; };
 		203F0B111B45B68800826E06 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B101B45B68700826E06 /* UIColor.swift */; };
@@ -832,8 +830,6 @@
 				20246D1C1B4F278E00384759 /* TestDailyMedicineStatistics.swift in Sources */,
 				20246D1E1B4F28BD00384759 /* TestUserSettings.swift in Sources */,
 				20246D1D1B4F284000384759 /* TestWeeklyMedicineStatistics.swift in Sources */,
-				20246D231B4F2E6D00384759 /* TestSyncManager.swift in Sources */,
-				20246D221B4F2CA000384759 /* TestMapping.swift in Sources */,
 				20246D1B1B4F245300384759 /* TestMedicineRegistries.swift in Sources */,
 				20246D191B4F1FAC00384759 /* TestContexts.swift in Sources */,
 				20246D211B4F2C0D00384759 /* TestTimedInsertions.swift in Sources */,

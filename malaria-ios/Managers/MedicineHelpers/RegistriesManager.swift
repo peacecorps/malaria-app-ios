@@ -49,16 +49,14 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :returns: `Registry?`
     public func mostRecentEntry() -> Registry?{
-        let registries = getRegistries()
-        return registries.count > 0 ? registries[0] : nil
+        return getRegistries().first
     }
     
     /// Returns the oldest entry for that pill if there is
     ///
     /// :returns: `Registry?`
     public func oldestEntry() -> Registry?{
-        let registries = getRegistries(mostRecentFirst: false)
-        return registries.count > 0 ? registries[0] : nil
+        return getRegistries(mostRecentFirst: false).first
     }
 
     /// Adds a new entry for that pill
@@ -106,7 +104,6 @@ public class RegistriesManager : CoreDataContextManager{
         CoreDataHelper.sharedInstance.saveContext(context)
         
         return true
-        
     }
 
     /// Returns entries between the two specified dates
@@ -138,12 +135,6 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: date
     /// :returns: `Registry?`
     public func findRegistry(date: NSDate) -> Registry?{
-        
-        let filteredArray = getRegistries(date1: date, date2: date)
-        if filteredArray.count > 1{
-            Logger.Error("Error: Found too many entries with same date")
-        }
-        
-        return filteredArray.count > 0 ? filteredArray[0] : nil
+        return getRegistries(date1: date, date2: date).first
     }
 }

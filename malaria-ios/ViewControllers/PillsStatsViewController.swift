@@ -76,6 +76,9 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
                 //contruct data for table
                 var setOfMonths = Set<NSDate>()
                 
+                
+                
+                
                 //all days between two dates, contruct graph data
                 for i in 0...(numDays - 1){
                     let day = self.firstEntryDate! + i.day
@@ -106,9 +109,6 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
             }
         })
     }
-    
-    
-    
     
     
     

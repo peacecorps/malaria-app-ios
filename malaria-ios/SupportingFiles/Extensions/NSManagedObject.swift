@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public extension NSManagedObject{
+public extension NSManagedObject {
 
     ///Converts MyTarget.ClassName to ClassName
     class func getSimpleClassName(c: AnyClass) -> String {
@@ -24,7 +24,6 @@ public extension NSManagedObject{
     /// :returns: `T`: A new NSManagedObject of the type given by argument
     class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
         let name = getSimpleClassName(entity)
-        Logger.Info("Creating \(name)")
         
         let entityDescription = NSEntityDescription.entityForName(name, inManagedObjectContext: context)!
         return NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! T
@@ -35,11 +34,12 @@ public extension NSManagedObject{
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
-    class func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, context : NSManagedObjectContext) -> [T]{
+    class func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
         let name = getSimpleClassName(entity)
         
         let fetchRequest = NSFetchRequest(entityName: name)
         fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = fetchLimit
         
         return context.executeFetchRequest(fetchRequest, error: nil) as! [T]
     }

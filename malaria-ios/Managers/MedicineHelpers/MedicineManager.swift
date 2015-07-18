@@ -32,7 +32,7 @@ public class MedicineManager : CoreDataContextManager{
     public func clearCoreData(){
         Medicine.clear(Medicine.self, context: self.context)
         CoreDataHelper.sharedInstance.saveContext(self.context)
-        UserSettingsManager.setDidConfiguredMedicine(true)
+        UserSettingsManager.setDidConfiguredMedicine(false)
     }
 
     /// Registers a new medicine (not as default)
@@ -60,15 +60,8 @@ public class MedicineManager : CoreDataContextManager{
     ///
     /// :returns: `Medicine?`: The default medicine.
     public func getCurrentMedicine() -> Medicine?{
-        let medicines: [Medicine] = getRegisteredMedicines()
-        
-        let result = medicines.filter({ return $0.isCurrent == true})
-        
-        if result.count > 1{
-            Logger.Error("Multiple current medicines found. Inconsistency found")
-        }
-        
-        return result.count == 1 ? result[0] : nil
+        let predicate = NSPredicate(format: "isCurrent == %@", true)
+        return Medicine.retrieve(Medicine.self, predicate: predicate, fetchLimit: 1, context: context).first
     }
     
     /// Retuns a specified medicine
@@ -76,10 +69,8 @@ public class MedicineManager : CoreDataContextManager{
     /// :param: `Medicine.Pill`: The type of the pill
     /// :returns: `Medicine?`: The default medicine.
     public func getMedicine(pill: Medicine.Pill) -> Medicine?{
-        let medicines: [Medicine] = getRegisteredMedicines()
-        let result = medicines.filter({ return $0.name == pill.name()})
-        
-        return result.count == 0 ? nil : result[0]
+        let predicate = NSPredicate(format: "name == %@", pill.name())
+        return Medicine.retrieve(Medicine.self, predicate: predicate, fetchLimit: 1, context: context).first
     }
     
     /// Retuns all medicines registered

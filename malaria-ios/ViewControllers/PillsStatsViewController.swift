@@ -28,9 +28,6 @@ class AdherenceHorizontalBarCell: UITableViewCell {
         
         return self
     }
-    
-    
-    
 }
 
 class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -104,8 +101,6 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("Selected \(indexPath.row)")
-        
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
         monthView.startDay = sortedDates[indexPath.row]
         

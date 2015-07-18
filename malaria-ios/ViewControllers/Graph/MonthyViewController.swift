@@ -6,6 +6,7 @@ class MonthlyViewController: UIViewController {
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!
     
+    @IBOutlet weak var calendarFrame: UIView!
     let calendarVisualSettings = CalendarVisualSettings()
     
     var startDay: NSDate!
@@ -13,13 +14,18 @@ class MonthlyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        monthLabel.text = startDay.formatWith("MMMM")
         
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
+        calendarFrame.layer.cornerRadius = 20
+        calendarFrame.layer.masksToBounds = true
+        
+        monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
-    
+        
     func generateMonthLabel(date: NSDate) -> String {
-        return date.formatWith("MMMM").capitalizedString
+        return date.formatWith("MMMM, yyyy").capitalizedString
     }
     
     override func viewDidLayoutSubviews() {
@@ -27,6 +33,14 @@ class MonthlyViewController: UIViewController {
         
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
+    }
+    
+    @IBAction func previousMonthToggle(sender: AnyObject) {
+        calendarView.loadPreviousView()
+    }
+    
+    @IBAction func nextMonthToggle(sender: AnyObject) {
+        calendarView.loadNextView()
     }
     
     @IBAction func todayMonthView() {
@@ -100,17 +114,14 @@ extension MonthlyViewController: CVCalendarViewAppearanceDelegate {
         return false
     }
     
-    func spaceBetweenDayViews() -> CGFloat {
-        return 2
-    }
     
     /// Generic days settings
     func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
-        return calendarVisualSettings.SelectedColor
+        return calendarVisualSettings.SelectedBackgroundColor
     }
     
     func dayLabelWeekdaySelectedBackgroundAlpha() -> CGFloat {
-        return calendarVisualSettings.SelectedColorAlpha
+        return calendarVisualSettings.SelectedBackgroundColorAlpha
     }
     
     func dayLabelWeekdayInTextColor() -> UIColor {
@@ -135,11 +146,11 @@ extension MonthlyViewController: CVCalendarViewAppearanceDelegate {
     
     /// current day settings
     func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
-        return calendarVisualSettings.SelectedColor
+        return calendarVisualSettings.SelectedTodayBackgroundColor
     }
     
     func dayLabelPresentWeekdaySelectedBackgroundAlpha() -> CGFloat {
-        return calendarVisualSettings.SelectedColorAlpha
+        return calendarVisualSettings.SelectedTodayBackgroundColorAlpha
     }
     
     func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
@@ -147,7 +158,7 @@ extension MonthlyViewController: CVCalendarViewAppearanceDelegate {
     }
     
     func dayLabelPresentWeekdayTextColor() -> UIColor{
-        return calendarVisualSettings.UnselectedTextColor
+        return calendarVisualSettings.UnselectedTodayTextColor
     }
     
     func dayLabelPresentWeekdayFont() -> UIFont {

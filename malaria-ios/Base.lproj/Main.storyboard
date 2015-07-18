@@ -903,11 +903,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YSN-oU-ez5" firstAttribute="trailing" secondItem="5E1-Wu-0vn" secondAttribute="trailing" constant="-16" id="2Pv-xH-pq1"/>
                             <constraint firstAttribute="centerY" secondItem="tHw-W4-VWK" secondAttribute="centerY" id="6XK-ij-qZC"/>
                             <constraint firstItem="tHw-W4-VWK" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="8kq-7J-rw2"/>
                             <constraint firstAttribute="centerX" secondItem="tHw-W4-VWK" secondAttribute="centerX" id="J0N-8J-wNY"/>
                             <constraint firstAttribute="centerX" secondItem="byd-UU-zjp" secondAttribute="centerX" id="J81-hy-CqL"/>
-                            <constraint firstItem="YSN-oU-ez5" firstAttribute="leading" secondItem="5E1-Wu-0vn" secondAttribute="leadingMargin" id="LPH-Lk-Svb"/>
+                            <constraint firstItem="YSN-oU-ez5" firstAttribute="leading" secondItem="5E1-Wu-0vn" secondAttribute="leading" constant="16" id="LPH-Lk-Svb"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YSN-oU-ez5" secondAttribute="trailing" id="X1i-qv-ntn"/>
                             <constraint firstItem="tHw-W4-VWK" firstAttribute="top" secondItem="byd-UU-zjp" secondAttribute="bottom" id="ZiR-Lt-2FY"/>
                             <constraint firstItem="YSN-oU-ez5" firstAttribute="top" secondItem="tHw-W4-VWK" secondAttribute="bottom" id="qNx-yY-pDQ"/>
@@ -915,6 +916,11 @@
                             <constraint firstItem="byd-UU-zjp" firstAttribute="top" secondItem="Elu-Z7-SBH" secondAttribute="bottom" constant="8" id="qyR-sS-bQN"/>
                             <constraint firstItem="byd-UU-zjp" firstAttribute="width" secondItem="5E1-Wu-0vn" secondAttribute="width" id="rNJ-CF-rmS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="X1i-qv-ntn"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1057,77 +1063,127 @@
             <point key="canvasLocation" x="-2375" y="1020"/>
         </scene>
         <!--Monthly View Controller-->
-        <scene sceneID="CY7-OB-jWN">
+        <scene sceneID="i5w-63-bup">
             <objects>
-                <viewController storyboardIdentifier="MonthlyViewController" id="TtL-Cy-8DQ" customClass="MonthlyViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MonthlyViewController" id="DFN-np-MDb" customClass="MonthlyViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="oSr-SE-S2J"/>
-                        <viewControllerLayoutGuide type="bottom" id="JcX-ga-R0d"/>
+                        <viewControllerLayoutGuide type="top" id="PYh-D4-aYv"/>
+                        <viewControllerLayoutGuide type="bottom" id="i7z-bP-SFX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ya5-II-zxG">
+                    <view key="view" contentMode="scaleToFill" id="0Zw-jp-Aua">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ckb-C1-aOM">
-                                <rect key="frame" x="238" y="28" width="125" height="23.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRu-lo-cIn" customClass="CVCalendarMenuView" customModule="malaria_ios" customModuleProvider="target">
-                                <rect key="frame" x="16" y="72" width="568" height="23"/>
-                                <connections>
-                                    <outlet property="menuViewDelegate" destination="TtL-Cy-8DQ" id="U7W-Uw-fEC"/>
-                                </connections>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oal-Gl-7be">
-                                <rect key="frame" x="535" y="23" width="49" height="34"/>
-                                <state key="normal" title="Today">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M71-Ak-Zdw">
+                                <rect key="frame" x="514" y="545" width="70" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="B2U-CI-4ZW"/>
+                                    <constraint firstAttribute="height" constant="40" id="G1p-NX-NaQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="Today" backgroundImage="InfoHubButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="todayMonthView" destination="TtL-Cy-8DQ" eventType="touchUpInside" id="74A-zR-d2V"/>
+                                    <action selector="todayMonthView" destination="DFN-np-MDb" eventType="touchUpInside" id="fle-0g-TJf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4YK-LE-2QN" customClass="CVCalendarView" customModule="malaria_ios" customModuleProvider="target">
-                                <rect key="frame" x="16" y="103" width="568" height="350"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3W-Vc-Knb" userLabel="CalendarFrame">
+                                <rect key="frame" x="16" y="45" width="568" height="449"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="January, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysi-JT-bEw">
+                                <rect key="frame" x="230" y="58" width="139.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efL-P0-SDo" userLabel="Separator">
+                                <rect key="frame" x="46" y="97" width="508" height="1"/>
+                                <color key="backgroundColor" red="0.4378715158" green="0.32177186009999997" blue="0.2744835913" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="bvu-Hr-SPB"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYA-KO-ewV" customClass="CVCalendarMenuView" customModule="malaria_ios" customModuleProvider="target">
+                                <rect key="frame" x="26" y="116" width="548" height="24"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="fIF-q5-aOW">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="480"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="24" id="TVG-2t-oR5"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="calendarAppearanceDelegate" destination="TtL-Cy-8DQ" id="AdM-g3-E5h"/>
-                                    <outlet property="calendarDelegate" destination="TtL-Cy-8DQ" id="Tfd-oW-a5T"/>
+                                    <outlet property="menuViewDelegate" destination="DFN-np-MDb" id="DK2-yB-Kcw"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F53-x4-FQi" customClass="CVCalendarView" customModule="malaria_ios" customModuleProvider="target">
+                                <rect key="frame" x="26" y="150" width="548" height="319"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="calendarAppearanceDelegate" destination="DFN-np-MDb" id="7TO-2C-Tgk"/>
+                                    <outlet property="calendarDelegate" destination="DFN-np-MDb" id="rrj-Zh-wdx"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldq-8p-J9o">
+                                <rect key="frame" x="46" y="53" width="30" height="33"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" red="0.4378715158" green="0.32177186009999997" blue="0.2744835913" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="previousMonthToggle:" destination="DFN-np-MDb" eventType="touchUpInside" id="emQ-ch-ViQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKB-BE-97q">
+                                <rect key="frame" x="524" y="54" width="30" height="33"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
+                                <state key="normal" title="&gt;">
+                                    <color key="titleColor" red="0.4378715158" green="0.32177186009999997" blue="0.2744835913" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextMonthToggle:" destination="DFN-np-MDb" eventType="touchUpInside" id="ae5-Gq-qgl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="4YK-LE-2QN" firstAttribute="leading" secondItem="NRu-lo-cIn" secondAttribute="leading" id="6uT-cO-l2K"/>
-                            <constraint firstItem="Ckb-C1-aOM" firstAttribute="top" secondItem="oSr-SE-S2J" secondAttribute="bottom" constant="8" symbolic="YES" id="8WL-Gs-cAi"/>
-                            <constraint firstItem="Oal-Gl-7be" firstAttribute="trailing" secondItem="NRu-lo-cIn" secondAttribute="trailing" id="AHK-zJ-Hg6"/>
-                            <constraint firstItem="4YK-LE-2QN" firstAttribute="top" secondItem="Ya5-II-zxG" secondAttribute="top" constant="103" id="Cq9-qn-Fjb"/>
-                            <constraint firstItem="NRu-lo-cIn" firstAttribute="trailing" secondItem="Ya5-II-zxG" secondAttribute="trailingMargin" id="HOf-e6-xDq"/>
-                            <constraint firstItem="NRu-lo-cIn" firstAttribute="top" secondItem="Oal-Gl-7be" secondAttribute="bottom" constant="15" id="Mz1-it-ewi"/>
-                            <constraint firstItem="4YK-LE-2QN" firstAttribute="trailing" secondItem="NRu-lo-cIn" secondAttribute="trailing" id="XTE-Bp-mM4"/>
-                            <constraint firstItem="Ckb-C1-aOM" firstAttribute="centerX" secondItem="NRu-lo-cIn" secondAttribute="centerX" id="cbB-Ff-j0p"/>
-                            <constraint firstItem="4YK-LE-2QN" firstAttribute="top" secondItem="NRu-lo-cIn" secondAttribute="bottom" constant="8" symbolic="YES" id="hyH-lE-nTd"/>
-                            <constraint firstItem="4YK-LE-2QN" firstAttribute="leading" secondItem="Ya5-II-zxG" secondAttribute="leadingMargin" id="lbB-Dc-xnM"/>
-                            <constraint firstItem="Oal-Gl-7be" firstAttribute="top" secondItem="oSr-SE-S2J" secondAttribute="bottom" constant="3" id="tHN-09-ydk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="efL-P0-SDo" secondAttribute="trailing" constant="30" id="5P2-wi-hCm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qYA-KO-ewV" secondAttribute="trailing" constant="10" id="8jO-xF-uCe"/>
+                            <constraint firstItem="Q3W-Vc-Knb" firstAttribute="trailing" secondItem="M71-Ak-Zdw" secondAttribute="trailing" id="8un-gG-jT9"/>
+                            <constraint firstItem="qYA-KO-ewV" firstAttribute="top" secondItem="efL-P0-SDo" secondAttribute="bottom" constant="18" id="9aS-Vi-7fJ"/>
+                            <constraint firstAttribute="centerX" secondItem="ysi-JT-bEw" secondAttribute="centerX" id="EzW-wN-4N2"/>
+                            <constraint firstItem="efL-P0-SDo" firstAttribute="top" secondItem="ysi-JT-bEw" secondAttribute="bottom" constant="15" id="G9y-4P-et0"/>
+                            <constraint firstItem="i7z-bP-SFX" firstAttribute="top" secondItem="M71-Ak-Zdw" secondAttribute="bottom" constant="15" id="Gwk-XE-TQo"/>
+                            <constraint firstItem="M71-Ak-Zdw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Q3W-Vc-Knb" secondAttribute="bottom" constant="30" id="HQq-d7-jXm"/>
+                            <constraint firstItem="Q3W-Vc-Knb" firstAttribute="top" secondItem="PYh-D4-aYv" secondAttribute="bottom" constant="25" id="MN1-Lh-LZa"/>
+                            <constraint firstItem="Q3W-Vc-Knb" firstAttribute="top" secondItem="ysi-JT-bEw" secondAttribute="top" constant="-13" id="NdX-ks-d3z"/>
+                            <constraint firstItem="F53-x4-FQi" firstAttribute="trailing" secondItem="qYA-KO-ewV" secondAttribute="trailing" id="Oxm-JS-QME"/>
+                            <constraint firstItem="WKB-BE-97q" firstAttribute="trailing" secondItem="efL-P0-SDo" secondAttribute="trailing" id="QKE-Lp-JXR"/>
+                            <constraint firstItem="WKB-BE-97q" firstAttribute="centerY" secondItem="ysi-JT-bEw" secondAttribute="centerY" id="RfX-kk-FYs"/>
+                            <constraint firstAttribute="bottom" secondItem="F53-x4-FQi" secondAttribute="bottom" constant="131" id="SSo-Pz-YtJ"/>
+                            <constraint firstItem="Ldq-8p-J9o" firstAttribute="leading" secondItem="efL-P0-SDo" secondAttribute="leading" id="Wqu-aD-nex"/>
+                            <constraint firstItem="Q3W-Vc-Knb" firstAttribute="bottom" secondItem="F53-x4-FQi" secondAttribute="bottom" constant="25" id="bzX-jb-eFo"/>
+                            <constraint firstAttribute="centerX" secondItem="Q3W-Vc-Knb" secondAttribute="centerX" id="eke-8w-Xuz"/>
+                            <constraint firstItem="efL-P0-SDo" firstAttribute="leading" secondItem="0Zw-jp-Aua" secondAttribute="leadingMargin" constant="30" id="hS0-Fs-pZB"/>
+                            <constraint firstItem="Ldq-8p-J9o" firstAttribute="centerY" secondItem="ysi-JT-bEw" secondAttribute="centerY" id="iPy-Oc-Xjn"/>
+                            <constraint firstItem="qYA-KO-ewV" firstAttribute="leading" secondItem="0Zw-jp-Aua" secondAttribute="leadingMargin" constant="10" id="ixB-YL-Kpb"/>
+                            <constraint firstItem="M71-Ak-Zdw" firstAttribute="trailing" secondItem="0Zw-jp-Aua" secondAttribute="trailingMargin" id="wAF-y0-OHY"/>
+                            <constraint firstItem="F53-x4-FQi" firstAttribute="top" secondItem="qYA-KO-ewV" secondAttribute="bottom" constant="10" id="wdf-aR-Iqx"/>
+                            <constraint firstItem="F53-x4-FQi" firstAttribute="leading" secondItem="qYA-KO-ewV" secondAttribute="leading" id="xDC-fe-p3m"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="calendarView" destination="4YK-LE-2QN" id="kIG-sG-6HM"/>
-                        <outlet property="menuView" destination="NRu-lo-cIn" id="EX7-aG-eZZ"/>
-                        <outlet property="monthLabel" destination="Ckb-C1-aOM" id="VX1-0D-YSY"/>
+                        <outlet property="calendarFrame" destination="Q3W-Vc-Knb" id="y18-4f-XIn"/>
+                        <outlet property="calendarView" destination="F53-x4-FQi" id="gW7-Ww-oW2"/>
+                        <outlet property="menuView" destination="qYA-KO-ewV" id="7Im-Oa-OPz"/>
+                        <outlet property="monthLabel" destination="ysi-JT-bEw" id="Xt0-rC-c4i"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cMa-AW-3ky" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GZL-i9-0u2" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3118" y="2498"/>
+            <point key="canvasLocation" x="-3118" y="2488"/>
         </scene>
     </scenes>
     <resources>

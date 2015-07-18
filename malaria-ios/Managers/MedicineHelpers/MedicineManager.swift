@@ -93,6 +93,9 @@ public class MedicineManager : CoreDataContextManager{
         }
         Logger.Info("Setting \(med.name()) as default")
         getMedicine(med)!.isCurrent = true
+        
+        NSNotificationEvents.DataUpdated(nil)
+        
         CoreDataHelper.sharedInstance.saveContext(context)
     }
 }

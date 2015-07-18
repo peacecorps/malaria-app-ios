@@ -6,8 +6,8 @@ class NSNotificationEvents{
         case ChangedEntries = "ChangedEntries"
     }
     
-    static func DataUpdated(registry: Registry){
-        NSNotificationEvents.post(Events.ChangedEntries.rawValue, registry)
+    static func DataUpdated(object: AnyObject?){
+        NSNotificationEvents.post(Events.ChangedEntries.rawValue, object)
     }
     
     static func ObserveNewEntries(observer: NSObject, selector: Selector){

@@ -50,6 +50,8 @@ class PillsStatsViewController : UIViewController {
         
         graphFrame.layer.cornerRadius = 20
         graphFrame.layer.masksToBounds = true
+        
+        configureChart()
     }
     
     func refreshData() {
@@ -61,7 +63,7 @@ class PillsStatsViewController : UIViewController {
         }
         
         GraphData.sharedInstance.retrieveGraphData(){
-            self.setChart(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
         }
     }
     
@@ -72,7 +74,7 @@ class PillsStatsViewController : UIViewController {
             GraphData.sharedInstance.refresh()
             refreshData()
         }else{
-            setChart(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
         }
     }
 }
@@ -109,17 +111,15 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
             animated: true,
             completion: nil
         )
-        
     }
 }
 
 extension PillsStatsViewController{
     /* Graph View related methods */
     
-    
-    func setChart(dataPoints: [NSDate], values: [Float]) {
+    func configureData(dataPoints: [NSDate], values: [Float]){
         var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
-
+        
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
             let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
@@ -128,8 +128,12 @@ extension PillsStatsViewController{
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")
         let data = LineChartData(xVals: dataPointsLabels, dataSets: [adherenceData])
-        
-        configureCharView(data)
+
+        chartView.data = data
+    }
+    
+    func configureChart() {
+        configureCharView()
         configureLegend()
         configureXAxis()
         configureLeftYAxis()
@@ -154,14 +158,13 @@ extension PillsStatsViewController{
     }
     
     
-    func configureCharView(data: LineChartData){
+    func configureCharView(){
         chartView.descriptionText = ""
         chartView.noDataText = NoDataText
         
         chartView.scaleYEnabled = false
         chartView.doubleTapToZoomEnabled = false
         
-        chartView.data = data
         chartView.drawGridBackgroundEnabled = false
         chartView.highlightEnabled = false
         chartView.highlightIndicatorEnabled = false

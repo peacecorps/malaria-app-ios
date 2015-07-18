@@ -1,7 +1,7 @@
 import Foundation
 
 public class CoreDataContextManager{
-    let context: NSManagedObjectContext
+    var context: NSManagedObjectContext
     
     init(context: NSManagedObjectContext){
         self.context = context

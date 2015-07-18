@@ -38,14 +38,12 @@ class PillsStatsViewController : UIViewController {
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var graphFrame: UIView!
     
-    var viewContext: NSManagedObjectContext!
-    var graphData: GraphData!
-    
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
     let NoDataText = "There are no entries yet"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         adherenceSliderTable.delegate = self
         adherenceSliderTable.dataSource = self
         adherenceSliderTable.backgroundColor = UIColor.clearColor()
@@ -54,21 +52,27 @@ class PillsStatsViewController : UIViewController {
         graphFrame.layer.masksToBounds = true
     }
     
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-        
+    func refreshData() {
+        println("RENDERING")
         chartView.clear()
         
-        
-        graphData = GraphData(context: viewContext)
-        graphData.retrieveMonthsData(4){
+        GraphData.sharedInstance.retrieveMonthsData(4){
             self.adherenceSliderTable.reloadData()
         }
         
-        graphData.retrieveGraphData(){
-            self.setChart(self.graphData.days, values: self.graphData.adherencesPerDay)
+        GraphData.sharedInstance.retrieveGraphData(){
+            self.setChart(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if GraphData.sharedInstance.outdated{
+            GraphData.sharedInstance.refresh()
+            refreshData()
+        }else{
+            setChart(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
         }
     }
 }
@@ -79,7 +83,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return graphData.months.count
+        return GraphData.sharedInstance.months.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -87,8 +91,8 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let month = graphData.months[indexPath.row]
-        let adherenceValue = graphData.statsManager.pillAdherence(month)*100
+        let month = GraphData.sharedInstance.months[indexPath.row]
+        let adherenceValue = GraphData.sharedInstance.statsManager.pillAdherence(month)*100
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AdherenceHorizontalBarCell") as! AdherenceHorizontalBarCell
         cell.configureCell(month, adhrenceValue: adherenceValue)
@@ -98,8 +102,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
-        monthView.startDay = graphData.months[indexPath.row]
-        monthView.data = graphData
+        monthView.startDay = GraphData.sharedInstance.months[indexPath.row]
         
         presentViewController(
             monthView,

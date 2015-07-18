@@ -92,14 +92,16 @@ public class RegistriesManager : CoreDataContextManager{
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
         }else{
-            var registry = Registry.create(Registry.self, context: context)
-            registry.date = date
-            registry.tookMedicine = tookMedicine
+            registry = Registry.create(Registry.self, context: context)
+            registry!.date = date
+            registry!.tookMedicine = tookMedicine
             
             var newRegistries: [Registry] = medicine.registries.convertToArray()
-            newRegistries.append(registry)
+            newRegistries.append(registry!)
             medicine.registries = NSSet(array: newRegistries)
         }
+        
+        NSNotificationEvents.DataUpdated(registry!)
         
         CoreDataHelper.sharedInstance.saveContext(context)
         

@@ -7,8 +7,6 @@ class MonthlyViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarFrame: UIView!
     
-    var data: GraphData!
-    
     let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     
@@ -73,7 +71,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
         if let registryDate = dayView.date.convertedDate(){
-            return data.tookMedicine[registryDate.startOfDay] != nil
+            return GraphData.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
         }
         
         return false
@@ -81,7 +79,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
         if let registryDate = dayView.date.convertedDate(),
-                tookMedicine = data.tookMedicine[registryDate.startOfDay]{
+                tookMedicine = GraphData.sharedInstance.tookMedicine[registryDate.startOfDay]{
                 return tookMedicine ? [HighAdherenceColor] : [LowAdherenceColor]
         }
         
@@ -104,28 +102,48 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             if NSDate.areDatesSameDay(previous, dateTwo: selected) {
                 var tookMedicine = false
                 var containsEntry = false
-                if let registryDate = dayView.date.convertedDate(),
-                    tookMedicineAux = data.tookMedicine[registryDate.startOfDay]{
-                        tookMedicine = tookMedicineAux
-                        containsEntry = true
+                if let registryDate = dayView.date.convertedDate(){
+                    popup(registryDate)
                 }
-                
-                let title = containsEntry ? "There is no entry yet" : "You " + (tookMedicine ? "took" : "did not take " + " the pill")
-                var message = "Update to: "
-                
-                var refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-                refreshAlert.addAction(UIAlertAction(title: "Took", style: .Default, handler: { (action: UIAlertAction!) in
-                    println("I took the pill")
-                }))
-                
-                refreshAlert.addAction(UIAlertAction(title: "Did not took", style: .Default, handler: { (action: UIAlertAction!) in
-                    println("I didn't took the pill")
-                }))
-                presentViewController(refreshAlert, animated: true, completion: nil)
             }
         }
         
         previouslySelect = selected
+    }
+    
+    func popup(date: NSDate){
+        let isWeekly = GraphData.sharedInstance.medicine.isWeekly()
+        let existsEntry = GraphData.sharedInstance.registriesManager.findRegistry(date) != nil
+        let tookMedicine = GraphData.sharedInstance.registriesManager.tookMedicine(date)
+        
+        var title = ""
+        var message = ""
+        
+        if existsEntry && tookMedicine {
+            title = "You already took your " + (isWeekly ? "weekly" : "daily") + " pill."
+            message = "Have you taken your pill?"
+        } else if existsEntry && !tookMedicine{
+            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + "pill."
+            message = "Have you taken your pill?"
+        } else {
+            title = "There is no entry in that date."
+            message = "Have you taken your pill?"
+        }
+        
+        let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
+        
+        tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler:{ action in
+            println("Pressed yes")
+            GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true)
+        }))
+        
+        tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler:{ action in
+            println("pressed nop")
+            GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true)
+        }))
+        
+        tookPillActionSheet.addAction(UIAlertAction(title:"Cancel", style: .Cancel, handler: nil))
+        presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     
     func presentedDateUpdated(date: CVDate) {

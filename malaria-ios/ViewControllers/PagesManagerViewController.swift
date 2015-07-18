@@ -73,7 +73,6 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
             default: return nil
         }
         
-        
         // store relative enum to view controller
         _dict[vc!] = value
         return vc!
@@ -86,7 +85,7 @@ enum HomePage: Int {
     case Nil = -1, DailyPill, DailyStates, Stats
     
     init() {
-        self = .Stats
+        self = .DailyPill
     }
     
     func previousIndex() -> HomePage {

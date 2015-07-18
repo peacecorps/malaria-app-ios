@@ -1,15 +1,18 @@
 import Foundation
 import UIKit
+import QuartzCore
 
 import Charts
 
 class AdherenceHorizontalBarCell: UITableViewCell {
+    
     let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var adherenceValue: UILabel!
+    
     
     var setup = false
     func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
@@ -29,21 +32,17 @@ class AdherenceHorizontalBarCell: UITableViewCell {
     }
 }
 
-class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PillsStatsViewController : UIViewController {
     
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
-
+    @IBOutlet weak var graphFrame: UIView!
+    
     var viewContext: NSManagedObjectContext!
+    var graphData: GraphData!
     
-    var medicine: Medicine!
-    var registriesManager: RegistriesManager!
-    var statsManager: MedicineStats!
-    var tookMedicine: [NSDate: Bool] = [:]
-    
-    var months = [NSDate]()
-    
-    var firstEntryDate: NSDate?
+    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
+    let NoDataText = "There are no entries yet"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,71 +54,32 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         graphFrame.layer.masksToBounds = true
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
-        medicine = MedicineManager(context: viewContext).getCurrentMedicine()
-        registriesManager = medicine.registriesManager(viewContext)
-        statsManager = medicine.stats(viewContext)
+        chartView.clear()
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if let oldestEntry = self.registriesManager.oldestEntry(){
-                self.firstEntryDate = oldestEntry.date
-                
-                let today = NSDate()
-                var adherencesPerDay = [Float]()
-                let numDays = (today - self.firstEntryDate!) + 1
-                var days = [NSDate](count: numDays, repeatedValue: today)
-            
-                //contruct data for table
-                var setOfMonths = Set<NSDate>()
-                
-                
-                
-                
-                //all days between two dates, contruct graph data
-                for i in 0...(numDays - 1){
-                    let day = self.firstEntryDate! + i.day
-                    
-                    days[i] = day
-                    
-                    
-                    if let entry = self.registriesManager.findRegistry(day) {
-                        self.tookMedicine[day.startOfDay] = entry.tookMedicine
-                    }
-
-                    adherencesPerDay.append(self.statsManager.pillAdherence(date1: self.firstEntryDate!, date2: day)*100)
-
-                    //adherencesPerDay.append(Float(arc4random_uniform(100)))
-                    
-                    if setOfMonths.count != 4 {
-                        let moreRecentDay = today - i.day
-                        setOfMonths.insert(NSDate.from(moreRecentDay.year, month: moreRecentDay.month, day: 1)) //avoids inserting repeated values
-                    }
-                }
-                
-                self.months = [NSDate](setOfMonths).sorted({$0 > $1}) //most recent month on the top
-            
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.adherenceSliderTable.reloadData()
-                    self.setChart(days, values: adherencesPerDay)
-                })
-            }
-        })
+        
+        graphData = GraphData(context: viewContext)
+        graphData.retrieveMonthsData(4){
+            self.adherenceSliderTable.reloadData()
+        }
+        
+        graphData.retrieveGraphData(){
+            self.setChart(self.graphData.days, values: self.graphData.adherencesPerDay)
+        }
     }
-    
-    
-    
-    /* Adhrence Slider Table related methods */
-    
+}
+
+extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return months.count
+        return graphData.months.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -127,8 +87,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let month = months[indexPath.row]
-        let adherenceValue = self.statsManager.pillAdherence(month)*100
+        let month = graphData.months[indexPath.row]
+        let adherenceValue = graphData.statsManager.pillAdherence(month)*100
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AdherenceHorizontalBarCell") as! AdherenceHorizontalBarCell
         cell.configureCell(month, adhrenceValue: adherenceValue)
@@ -138,8 +98,8 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
-        monthView.startDay = months[indexPath.row]
-        monthView.statsController = self
+        monthView.startDay = graphData.months[indexPath.row]
+        monthView.data = graphData
         
         presentViewController(
             monthView,
@@ -148,13 +108,11 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         )
         
     }
-    
+}
+
+extension PillsStatsViewController{
     /* Graph View related methods */
     
-    @IBOutlet weak var graphFrame: UIView!
-    
-    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)
-    let NoDataText = "There are no entries yet"
     
     func setChart(dataPoints: [NSDate], values: [Float]) {
         var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
@@ -210,7 +168,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.xAxis.labelPosition = .Bottom
         chartView.xAxis.drawGridLinesEnabled = false
         chartView.xAxis.labelTextColor = UIColor.fromHex(0x705246)
-        chartView.xAxis.labelFont = TextFont!
+        chartView.xAxis.labelFont = TextFont
         chartView.xAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
         chartView.xAxis.axisLineWidth = 1.0
         chartView.xAxis.avoidFirstLastClippingEnabled = false
@@ -229,7 +187,7 @@ class PillsStatsViewController : UIViewController, UITableViewDelegate, UITableV
         chartView.leftAxis.axisLineWidth = 1.0
         chartView.leftAxis.customAxisMin = 0
         chartView.leftAxis.customAxisMax = 100
-        chartView.leftAxis.labelFont = TextFont!
+        chartView.leftAxis.labelFont = TextFont
         chartView.leftAxis.labelTextColor = UIColor.fromHex(0x705246)
         
         let numberFormatter = NSNumberFormatter()

@@ -7,7 +7,7 @@ class MonthlyViewController: UIViewController {
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarFrame: UIView!
     
-    var statsController: PillsStatsViewController!
+    var data: GraphData!
     
     let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
@@ -73,7 +73,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
         if let registryDate = dayView.date.convertedDate(){
-            return statsController.tookMedicine[registryDate.startOfDay] != nil
+            return data.tookMedicine[registryDate.startOfDay] != nil
         }
         
         return false
@@ -81,7 +81,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
         if let registryDate = dayView.date.convertedDate(),
-                tookMedicine = statsController.tookMedicine[registryDate.startOfDay]{
+                tookMedicine = data.tookMedicine[registryDate.startOfDay]{
                 return tookMedicine ? [HighAdherenceColor] : [LowAdherenceColor]
         }
         
@@ -105,7 +105,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
                 var tookMedicine = false
                 var containsEntry = false
                 if let registryDate = dayView.date.convertedDate(),
-                    tookMedicineAux = statsController.tookMedicine[registryDate.startOfDay]{
+                    tookMedicineAux = data.tookMedicine[registryDate.startOfDay]{
                         tookMedicine = tookMedicineAux
                         containsEntry = true
                 }

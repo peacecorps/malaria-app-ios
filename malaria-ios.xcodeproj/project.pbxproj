@@ -49,6 +49,7 @@
 		200C73101B40370500998100 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 200C730E1B40370500998100 /* Info.plist */; };
 		200C73431B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
 		200C73441B40392A00998100 /* ApiExamples in Resources */ = {isa = PBXBuildFile; fileRef = 200C73421B40392A00998100 /* ApiExamples */; };
+		200E93FF1B5BC42300E6DAC7 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200E93FE1B5BC42300E6DAC7 /* CircleProgressView.swift */; };
 		200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE4891B1343A50087FB24 /* AppDelegate.swift */; };
 		200EE48F1B1343A50087FB24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 200EE48D1B1343A50087FB24 /* Main.storyboard */; };
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
@@ -163,6 +164,7 @@
 		200C72711B40368600998100 /* SetupScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScreenViewController.swift; sourceTree = "<group>"; };
 		200C730E1B40370500998100 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ViewControllers/Info.plist; sourceTree = "<group>"; };
 		200C73421B40392A00998100 /* ApiExamples */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ApiExamples; sourceTree = "<group>"; };
+		200E93FE1B5BC42300E6DAC7 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleProgressView.swift; path = UIView/CircleProgressView.swift; sourceTree = "<group>"; };
 		200EE4841B1343A50087FB24 /* malaria-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "malaria-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		200EE4891B1343A50087FB24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		200EE48E1B1343A50087FB24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 		200C725C1B40368600998100 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				200E93FB1B5B2E5C00E6DAC7 /* UIViews */,
 				2095B8531B5A4AD200119896 /* ExternalCVCalendar */,
 				200C725D1B40368600998100 /* CoreData */,
 				200C72601B40368600998100 /* Extensions */,
@@ -380,6 +383,14 @@
 				203F0B251B481CB900826E06 /* ValuePickers */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		200E93FB1B5B2E5C00E6DAC7 /* UIViews */ = {
+			isa = PBXGroup;
+			children = (
+				200E93FE1B5BC42300E6DAC7 /* CircleProgressView.swift */,
+			);
+			name = UIViews;
 			sourceTree = "<group>";
 		};
 		200EE47B1B1343A50087FB24 = {
@@ -761,6 +772,7 @@
 				200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */,
 				2095B8671B5A4AD200119896 /* CVCalendarWeekView.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
+				200E93FF1B5BC42300E6DAC7 /* CircleProgressView.swift in Sources */,
 				203F0B141B466D2000826E06 /* PostDetailedViewController.swift in Sources */,
 				200C72FC1B40368600998100 /* DailyStatsTableViewController.swift in Sources */,
 				200C72981B40368600998100 /* EndpointType.swift in Sources */,

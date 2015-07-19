@@ -880,21 +880,45 @@
                                 <rect key="frame" x="16" y="304" width="568" height="252"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qL5-LV-AKn">
-                                        <rect key="frame" x="15" y="217.5" width="16" height="24.5"/>
+                                        <rect key="frame" x="15" y="217" width="16" height="24.5"/>
                                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="21"/>
                                         <color key="textColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyK-Yy-17V" customClass="LineChartView" customModule="Charts">
-                                        <rect key="frame" x="21" y="20" width="527" height="207.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="21" y="20" width="527" height="197.5"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VB8-6y-hHC" customClass="CircleProgressView" customModule="malaria_ios" customModuleProvider="target">
+                                        <rect key="frame" x="241.5" y="83" width="85" height="85"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="NKm-bw-g8r"/>
+                                            <constraint firstAttribute="height" constant="85" id="V4U-iA-OXS"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                <color key="value" red="0.85882352939999995" green="0.73725490199999999" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="progressColor">
+                                                <color key="value" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                <real key="value" value="7"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="valueProgress">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.98117071390151978" green="0.9539368748664856" blue="0.89111751317977905" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="wyK-Yy-17V" firstAttribute="leading" secondItem="qL5-LV-AKn" secondAttribute="trailing" constant="-10" id="NsP-ve-VjK"/>
-                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" constant="-10" id="SYo-TO-4wq"/>
+                                    <constraint firstItem="qL5-LV-AKn" firstAttribute="top" secondItem="wyK-Yy-17V" secondAttribute="bottom" id="SYo-TO-4wq"/>
+                                    <constraint firstAttribute="centerX" secondItem="VB8-6y-hHC" secondAttribute="centerX" id="Ugz-U6-ch1"/>
                                     <constraint firstItem="wyK-Yy-17V" firstAttribute="top" secondItem="YSN-oU-ez5" secondAttribute="top" constant="20" id="WhJ-Vb-Yqh"/>
+                                    <constraint firstAttribute="centerY" secondItem="VB8-6y-hHC" secondAttribute="centerY" id="ejX-jm-SWP"/>
                                     <constraint firstAttribute="trailing" secondItem="wyK-Yy-17V" secondAttribute="trailing" constant="20" id="hR1-BT-Uev"/>
                                     <constraint firstItem="qL5-LV-AKn" firstAttribute="leading" secondItem="YSN-oU-ez5" secondAttribute="leading" constant="15" id="hee-yR-gHC"/>
                                     <constraint firstAttribute="bottom" secondItem="qL5-LV-AKn" secondAttribute="bottom" constant="10" id="saj-LT-Qnh"/>
@@ -927,6 +951,7 @@
                         <outlet property="adherenceSliderTable" destination="byd-UU-zjp" id="1wM-R3-375"/>
                         <outlet property="chartView" destination="wyK-Yy-17V" id="Aw4-bh-pnl"/>
                         <outlet property="graphFrame" destination="YSN-oU-ez5" id="Xpk-t9-DqD"/>
+                        <outlet property="loadingGraphView" destination="VB8-6y-hHC" id="Mbj-zF-2S8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9i-zm-VnI" userLabel="First Responder" sceneMemberID="firstResponder"/>

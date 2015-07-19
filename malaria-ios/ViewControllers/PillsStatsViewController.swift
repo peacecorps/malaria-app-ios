@@ -4,6 +4,65 @@ import QuartzCore
 
 import Charts
 
+class PillsStatsViewController : UIViewController {
+    
+    @IBOutlet weak var adherenceSliderTable: UITableView!
+    @IBOutlet weak var chartView: LineChartView!
+    @IBOutlet weak var graphFrame: UIView!
+    
+    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
+    let NoDataText = "No entries"
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        adherenceSliderTable.delegate = self
+        adherenceSliderTable.dataSource = self
+        adherenceSliderTable.backgroundColor = UIColor.clearColor()
+        
+        graphFrame.layer.cornerRadius = 20
+        graphFrame.layer.masksToBounds = true
+        
+        configureChart()
+    }
+    
+    @IBOutlet weak var loadingGraphView: CircleProgressView!
+    
+    
+    func refreshData() {
+        println("RENDERING")
+        
+        GraphData.sharedInstance.refreshContext()
+        graphFrame.bringSubviewToFront(loadingGraphView)
+        
+        
+        GraphData.sharedInstance.retrieveMonthsData(4){
+            self.adherenceSliderTable.reloadData()
+        }
+        
+        GraphData.sharedInstance.retrieveGraphData({(progress: Float) in
+            self.loadingGraphView!.statusProgress = progress
+        }, completition: { _ in
+            println("Called")
+            self.chartView.clear()
+            self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            self.graphFrame.bringSubviewToFront(self.chartView)
+        })
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.graphFrame.bringSubviewToFront(self.chartView)
+        
+        if GraphData.sharedInstance.outdated{
+            refreshData()
+        }else{
+            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+        }
+    }
+}
+
 class AdherenceHorizontalBarCell: UITableViewCell {
     
     let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
@@ -29,53 +88,6 @@ class AdherenceHorizontalBarCell: UITableViewCell {
         adherenceValue.text = "\(Int(adhrenceValue))%"
         
         return self
-    }
-}
-
-class PillsStatsViewController : UIViewController {
-    
-    @IBOutlet weak var adherenceSliderTable: UITableView!
-    @IBOutlet weak var chartView: LineChartView!
-    @IBOutlet weak var graphFrame: UIView!
-    
-    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
-    let NoDataText = "There are no entries yet"
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        adherenceSliderTable.delegate = self
-        adherenceSliderTable.dataSource = self
-        adherenceSliderTable.backgroundColor = UIColor.clearColor()
-        
-        graphFrame.layer.cornerRadius = 20
-        graphFrame.layer.masksToBounds = true
-        
-        configureChart()
-    }
-    
-    func refreshData() {
-        println("RENDERING")
-        
-        chartView.clear()
-        
-        GraphData.sharedInstance.retrieveMonthsData(4){
-            self.adherenceSliderTable.reloadData()
-        }
-        
-        GraphData.sharedInstance.retrieveGraphData(){
-            self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if GraphData.sharedInstance.outdated{
-            refreshData()
-        }else{
-            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
-        }
     }
 }
 

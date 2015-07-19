@@ -123,7 +123,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             title = "You already took your " + (isWeekly ? "weekly" : "daily") + " pill."
             message = "Have you taken your pill?"
         } else if existsEntry && !tookMedicine{
-            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + "pill."
+            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + " pill."
             message = "Have you taken your pill?"
         } else {
             title = "There is no entry in that date."

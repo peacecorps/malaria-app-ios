@@ -30,7 +30,7 @@ import UIKit
         backgroundCircle.path = circlePath.CGPath
         backgroundCircle.strokeColor = circleColor.CGColor
         backgroundCircle.fillColor = UIColor.clearColor().CGColor
-        backgroundCircle.lineWidth = CGFloat(lineWidth)
+        backgroundCircle.lineWidth = lineWidth
         backgroundCircle.strokeStart = 0
         backgroundCircle.strokeEnd = CGFloat(1.0)
         

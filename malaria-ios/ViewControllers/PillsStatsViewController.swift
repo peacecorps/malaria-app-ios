@@ -29,6 +29,9 @@ import Charts
         adherenceSliderTable.dataSource = self
         adherenceSliderTable.backgroundColor = UIColor.clearColor()
         
+        loadingGraphView.layer.cornerRadius = GraphFrameBorderRadius
+        loadingGraphView.layer.masksToBounds = true
+        
         graphFrame.layer.cornerRadius = GraphFrameBorderRadius
         graphFrame.layer.masksToBounds = true
         
@@ -197,7 +200,7 @@ extension PillsStatsViewController{
         chartView.xAxis.labelFont = TextFont
         chartView.xAxis.axisLineColor = XAxisLineColor
         chartView.xAxis.axisLineWidth = 1.0
-        chartView.xAxis.avoidFirstLastClippingEnabled = false
+        chartView.xAxis.avoidFirstLastClippingEnabled = true
     }
     
     func configureRightYAxis(){

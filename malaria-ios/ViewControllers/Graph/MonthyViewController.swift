@@ -27,6 +27,7 @@ import UIKit
         calendarFrame.layer.masksToBounds = true
         
         monthLabel.text = generateMonthLabel(startDay)
+        
         calendarView.toggleViewWithDate(startDay)
     }
         
@@ -59,6 +60,8 @@ import UIKit
 }
 
 extension MonthlyViewController: CVCalendarViewDelegate {
+    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool { return false }
+    
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
@@ -69,22 +72,29 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         return dayView.isCurrentDay
     }
     
-    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool {
-        if let registryDate = dayView.date.convertedDate(){
-            return GraphData.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
+    func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
+        if let date = dayView.date,
+            registryDate = date.convertedDate(),
+            tookMedicine = GraphData.sharedInstance.tookMedicine[registryDate.startOfDay]{
+                let ringView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
+                ringView.fillColor = UIColor.clearColor()
+                ringView.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+                
+                return ringView
         }
         
+        return UIView()
+    }
+    
+    func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
+        if let date = dayView.date,
+            registryDate = date.convertedDate(){
+                return GraphData.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
+        }
+
         return false
     }
     
-    func dotMarker(colorOnDayView dayView: DayView) -> [UIColor] {
-        if let registryDate = dayView.date.convertedDate(),
-                tookMedicine = GraphData.sharedInstance.tookMedicine[registryDate.startOfDay]{
-                return tookMedicine ? [HighAdherenceColor] : [LowAdherenceColor]
-        }
-        
-        return []
-    }
 }
 
 extension MonthlyViewController: CVCalendarViewDelegate {

@@ -56,6 +56,7 @@ class PillsStatsViewController : UIViewController {
     
     func refreshData() {
         println("RENDERING")
+        
         chartView.clear()
         
         GraphData.sharedInstance.retrieveMonthsData(4){
@@ -71,7 +72,6 @@ class PillsStatsViewController : UIViewController {
         super.viewWillAppear(animated)
         
         if GraphData.sharedInstance.outdated{
-            GraphData.sharedInstance.refresh()
             refreshData()
         }else{
             configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
@@ -128,7 +128,7 @@ extension PillsStatsViewController{
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")
         let data = LineChartData(xVals: dataPointsLabels, dataSets: [adherenceData])
-        
+
         chartView.data = data
     }
     

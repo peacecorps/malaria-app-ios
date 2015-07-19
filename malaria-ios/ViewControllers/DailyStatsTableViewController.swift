@@ -18,7 +18,14 @@ class Adherence : Stat{
     
     var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
-    var attributeValue : String { return "\(100 * medicineManager.getCurrentMedicine()!.stats(context).pillAdherence())%"}
+    var attributeValue : String {
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.PercentStyle
+        numberFormatter.maximumFractionDigits = 0
+        numberFormatter.multiplier = 1
+
+        return numberFormatter.stringFromNumber(100 * medicineManager.getCurrentMedicine()!.stats(context).pillAdherence())!
+    }
 }
 
 class PillStreak : Stat{

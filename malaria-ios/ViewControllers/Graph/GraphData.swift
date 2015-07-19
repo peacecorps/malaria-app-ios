@@ -31,10 +31,11 @@ class GraphData : NSObject{
     var adherencesPerDay = [Float]()
     
     var context: NSManagedObjectContext!
-    
     override init(){
         super.init()
         NSNotificationEvents.ObserveNewEntries(self, selector: "updateShouldUpdateFlags")
+        
+        updateShouldUpdateFlags()
     }
     
     
@@ -43,16 +44,14 @@ class GraphData : NSObject{
     }
     
     func updateShouldUpdateFlags() {
-        updatedMonthsAdherences = false
-        updatedDailyAdherences = false
-    }
-    
-    func refresh(){
         self.context = CoreDataHelper.sharedInstance.createBackgroundContext()!
-
+        
         medicine = MedicineManager(context: context).getCurrentMedicine()
         registriesManager = medicine.registriesManager(context)
         statsManager = medicine.stats(context)
+        
+        updatedMonthsAdherences = false
+        updatedDailyAdherences = false
     }
     
     func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {

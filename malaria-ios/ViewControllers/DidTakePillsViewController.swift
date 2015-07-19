@@ -6,8 +6,8 @@ import UIKit
     @IBOutlet weak var tookPillBtn: UIButton!
     @IBOutlet weak var didNotTookPillBtn: UIButton!
     
-    @IBInspectable let MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
-    @IBInspectable let SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
+    @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
+    @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
     
     var medicineManager: MedicineManager!
     

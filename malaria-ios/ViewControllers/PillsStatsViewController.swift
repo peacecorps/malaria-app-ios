@@ -11,14 +11,14 @@ import Charts
     @IBOutlet weak var graphFrame: UIView!
     @IBOutlet weak var loadingGraphView: CircleProgressView!
     
-    @IBInspectable let NoDataText: String = "No entries"
-    @IBInspectable let NumberRecentMonths: Int = 4
-    @IBInspectable let GraphFrameBorderRadius: CGFloat = 20
-    @IBInspectable let GraphFillColor: UIColor = UIColor.fromHex(0xA1D4E2)
-    @IBInspectable let XAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
-    @IBInspectable let RightYAxisLineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    @IBInspectable let LeftYAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
-    @IBInspectable let AxisFontColor: UIColor = UIColor.fromHex(0x705246)
+    @IBInspectable var NoDataText: String = "No entries"
+    @IBInspectable var NumberRecentMonths: Int = 4
+    @IBInspectable var GraphFrameBorderRadius: CGFloat = 20
+    @IBInspectable var GraphFillColor: UIColor = UIColor.fromHex(0xA1D4E2)
+    @IBInspectable var XAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
+    @IBInspectable var RightYAxisLineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var LeftYAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
+    @IBInspectable var AxisFontColor: UIColor = UIColor.fromHex(0x705246)
     
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
     
@@ -73,9 +73,9 @@ import Charts
 
 @IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
     
-    @IBInspectable let LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    @IBInspectable let HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
-    @IBInspectable let BarHeightScale: CGFloat = 8
+    @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable var BarHeightScale: CGFloat = 8
     
     
     @IBOutlet weak var month: UILabel!

@@ -28,7 +28,6 @@ class GraphData : NSObject{
         NSNotificationEvents.ObserveNewEntries(self, selector: "updateShouldUpdateFlags")
     }
     
-    
     deinit{
         NSNotificationEvents.UnregisterAll(self)
     }

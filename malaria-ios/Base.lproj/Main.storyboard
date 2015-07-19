@@ -136,7 +136,7 @@
         <scene sceneID="msH-v8-p5B">
             <objects>
                 <tableViewController storyboardIdentifier="DailyStatsTableViewController" id="sbx-Rv-yM7" customClass="DailyStatsTableViewController" customModule="malaria_ios" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SMA-IW-xMc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SMA-IW-xMc">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -948,6 +948,15 @@
                         </variation>
                     </view>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="NumberRecentMonths">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="GraphFrameBorderRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="NoDataText" value="No entries"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="adherenceSliderTable" destination="byd-UU-zjp" id="1wM-R3-375"/>
                         <outlet property="chartView" destination="wyK-Yy-17V" id="Aw4-bh-pnl"/>

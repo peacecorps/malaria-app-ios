@@ -5,9 +5,9 @@ import UIKit
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var content: UIView!
     
-    @IBInspectable let PageIndicatorTintColor: UIColor = UIColor.fromHex(0xB2BFAF)
-    @IBInspectable let PageIndicatorCurrentColor: UIColor = UIColor.fromHex(0x9EB598)
-    @IBInspectable let DefaultPage: HomePage = HomePage.DailyPill
+    @IBInspectable var PageIndicatorTintColor: UIColor = UIColor.fromHex(0xB2BFAF)
+    @IBInspectable var PageIndicatorCurrentColor: UIColor = UIColor.fromHex(0x9EB598)
+    @IBInspectable var DefaultPage: HomePage = HomePage.DailyPill
     
     
     private var homePageEnum: HomePage = HomePage()

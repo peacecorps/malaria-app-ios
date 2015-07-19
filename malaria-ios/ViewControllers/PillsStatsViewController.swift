@@ -56,7 +56,8 @@ class PillsStatsViewController : UIViewController {
     
     func refreshData() {
         println("RENDERING")
-        chartView.clear()
+        chartView.data?.clearValues()
+        println("DONE CLEARING VALUES")
         
         GraphData.sharedInstance.retrieveMonthsData(4){
             self.adherenceSliderTable.reloadData()
@@ -118,39 +119,50 @@ extension PillsStatsViewController{
     /* Graph View related methods */
     
     func configureData(dataPoints: [NSDate], values: [Float]){
+        println("Configuring data")
+        
         var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
         
-        var dataEntries: [ChartDataEntry] = []
-        for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
-            dataEntries.append(dataEntry)
+        if let data = chartView.data{
+            let datSet = data.getDataSetByLabel("Adherence", ignorecase: true)
+            for i in 0..<dataPoints.count {
+                datSet!.addEntry(ChartDataEntry(value: values[i], xIndex: i))
+            }
+        }else{
+            println("wtf?")
         }
         
-        let adherenceData = configureCharDataSet(dataEntries, label: "")
-        let data = LineChartData(xVals: dataPointsLabels, dataSets: [adherenceData])
+        
 
-        chartView.data = data
     }
     
     func configureChart() {
+        println("Configuring chart")
         configureCharView()
         configureLegend()
         configureXAxis()
         configureLeftYAxis()
         configureRightYAxis()
+        
+        let dataSet = createCharDataSet("Adherence")
+        let data = ChartData(xVals: ["DummyValue"], dataSet: dataSet)
+        chartView.data = data
+        configureDataSetView(dataSet)
+        println("DONE RECONFIGURING")
     }
     
-    func configureCharDataSet(dataEntries: [ChartDataEntry], label: String) -> ChartDataSet{
-        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: label)
-        lineChartDataSet.colors = [UIColor.clearColor()]
-        lineChartDataSet.drawFilledEnabled = true
-        lineChartDataSet.drawCirclesEnabled = false
-        lineChartDataSet.drawValuesEnabled = false
-        
-        lineChartDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
-        lineChartDataSet.fillAlpha = 1
-        
-        return lineChartDataSet
+    func configureDataSetView(adherenceDataSet: LineChartDataSet){
+        adherenceDataSet.colors = [UIColor.clearColor()]
+        adherenceDataSet.drawFilledEnabled = true
+        adherenceDataSet.drawCirclesEnabled = false
+        adherenceDataSet.drawValuesEnabled = false
+        adherenceDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
+        adherenceDataSet.fillAlpha = 1
+    }
+    
+    func createCharDataSet(label: String) -> LineChartDataSet{
+        let dummyEntry = ChartDataEntry(value: 100, xIndex: 0)
+        return LineChartDataSet(yVals: [], label: label)
     }
     
     func configureLegend(){

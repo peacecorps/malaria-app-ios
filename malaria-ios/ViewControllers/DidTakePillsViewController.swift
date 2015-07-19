@@ -1,13 +1,13 @@
 import UIKit
 
-class DidTakePillsViewController: UIViewController {
+@IBDesignable class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var dayOfTheWeekLbl: UILabel!
     @IBOutlet weak var fullDateLbl: UILabel!
     @IBOutlet weak var tookPillBtn: UIButton!
     @IBOutlet weak var didNotTookPillBtn: UIButton!
     
-    let MissedWeeklyPillTextColor = UIColor.redColor()
-    let SeveralDaysRowMissedEntriesTextColor = UIColor.blackColor()
+    @IBInspectable let MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
+    @IBInspectable let SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
     
     var medicineManager: MedicineManager!
     

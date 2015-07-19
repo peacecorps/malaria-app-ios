@@ -1,12 +1,13 @@
 import Foundation
 import UIKit
 
-class ListItemsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+@IBDesignable class ListItemsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
 
-    let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)
-    let TextColor = UIColor.fromHex(0x6F5247)
+    @IBInspectable let TextColor: UIColor = UIColor.fromHex(0x6F5247)
     
+    
+    let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)!
     var initialItems: [String]!
     var completitionHandler: ([String] -> ())!
     

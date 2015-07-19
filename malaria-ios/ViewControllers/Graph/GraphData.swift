@@ -1,11 +1,3 @@
-//
-//  GraphData.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 18/07/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
 import UIKit
 

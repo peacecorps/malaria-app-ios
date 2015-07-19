@@ -1,14 +1,15 @@
 import Foundation
 import UIKit
 
-class MonthlyViewController: UIViewController {
+@IBDesignable class MonthlyViewController: UIViewController {
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarFrame: UIView!
     
-    let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable var CornerRadius: CGFloat = 20
     
     var previouslySelect: NSDate?
     
@@ -22,7 +23,7 @@ class MonthlyViewController: UIViewController {
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        calendarFrame.layer.cornerRadius = 20
+        calendarFrame.layer.cornerRadius = CornerRadius
         calendarFrame.layer.masksToBounds = true
         
         monthLabel.text = generateMonthLabel(startDay)
@@ -61,7 +62,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
-        //circleView.strokeColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
         return circleView
     }
     
@@ -93,15 +93,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool { return false }            /// hide line above day
     
     func didSelectDayView(dayView: CVCalendarDayView) {
-        println("\(calendarView.presentedDate.commonDescription) is selected!")
         let selected = dayView.date.convertedDate()!
-        
-        println(selected.startOfDay)
-        
         if let previous = previouslySelect{
             if NSDate.areDatesSameDay(previous, dateTwo: selected) {
-                var tookMedicine = false
-                var containsEntry = false
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate)
                 }

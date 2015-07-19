@@ -837,7 +837,8 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-Md-fB1">
                                                     <rect key="frame" x="66" y="15" width="458" height="31"/>
                                                     <color key="minimumTrackTintColor" red="0.85882352939999995" green="0.33725490200000002" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="maximumTrackTintColor" red="0.30980392159999998" green="0.5450980392" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="thumbTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW0-s2-RmX">
                                                     <rect key="frame" x="522" y="18" width="60" height="23.5"/>
@@ -1217,6 +1218,11 @@
                             <constraint firstItem="F53-x4-FQi" firstAttribute="leading" secondItem="qYA-KO-ewV" secondAttribute="leading" id="xDC-fe-p3m"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="calendarFrame" destination="Q3W-Vc-Knb" id="y18-4f-XIn"/>
                         <outlet property="calendarView" destination="F53-x4-FQi" id="gW7-Ww-oW2"/>

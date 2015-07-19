@@ -1,9 +1,14 @@
 import Foundation
 import UIKit
 
-class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+@IBDesignable class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var content: UIView!
+    
+    @IBInspectable let PageIndicatorTintColor: UIColor = UIColor.fromHex(0xB2BFAF)
+    @IBInspectable let PageIndicatorCurrentColor: UIColor = UIColor.fromHex(0x9EB598)
+    @IBInspectable let DefaultPage: HomePage = HomePage.DailyPill
+    
     
     private var homePageEnum: HomePage = HomePage()
     private var pageViewController : UIPageViewController!
@@ -24,8 +29,8 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.fromHex(0xB2BFAF)
-        appearance.currentPageIndicatorTintColor = UIColor.fromHex(0x9EB598)
+        appearance.pageIndicatorTintColor = PageIndicatorTintColor
+        appearance.currentPageIndicatorTintColor = PageIndicatorCurrentColor
         appearance.backgroundColor = UIColor.clearColor()
         
         

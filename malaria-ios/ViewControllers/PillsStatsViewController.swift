@@ -4,14 +4,23 @@ import QuartzCore
 
 import Charts
 
-class PillsStatsViewController : UIViewController {
+@IBDesignable class PillsStatsViewController : UIViewController {
     
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var graphFrame: UIView!
+    @IBOutlet weak var loadingGraphView: CircleProgressView!
+    
+    @IBInspectable let NoDataText: String = "No entries"
+    @IBInspectable let NumberRecentMonths: Int = 4
+    @IBInspectable let GraphFrameBorderRadius: CGFloat = 20
+    @IBInspectable let GraphFillColor: UIColor = UIColor.fromHex(0xA1D4E2)
+    @IBInspectable let XAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
+    @IBInspectable let RightYAxisLineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable let LeftYAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
+    @IBInspectable let AxisFontColor: UIColor = UIColor.fromHex(0x705246)
     
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
-    let NoDataText = "No entries"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,14 +29,11 @@ class PillsStatsViewController : UIViewController {
         adherenceSliderTable.dataSource = self
         adherenceSliderTable.backgroundColor = UIColor.clearColor()
         
-        graphFrame.layer.cornerRadius = 20
+        graphFrame.layer.cornerRadius = GraphFrameBorderRadius
         graphFrame.layer.masksToBounds = true
         
         configureChart()
     }
-    
-    @IBOutlet weak var loadingGraphView: CircleProgressView!
-    
     
     func refreshData() {
         println("RENDERING")
@@ -35,13 +41,12 @@ class PillsStatsViewController : UIViewController {
         GraphData.sharedInstance.refreshContext()
         graphFrame.bringSubviewToFront(loadingGraphView)
         
-        
-        GraphData.sharedInstance.retrieveMonthsData(4){
+        GraphData.sharedInstance.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
         
         GraphData.sharedInstance.retrieveGraphData({(progress: Float) in
-            self.loadingGraphView!.statusProgress = progress
+            self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in
             println("Called")
             self.chartView.clear()
@@ -63,20 +68,21 @@ class PillsStatsViewController : UIViewController {
     }
 }
 
-class AdherenceHorizontalBarCell: UITableViewCell {
+@IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
     
-    let LowAdherenceColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    let HighAdherenceColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable let LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable let HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable let BarHeightScale: CGFloat = 8
+    
     
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var adherenceValue: UILabel!
     
-    
     var setup = false
     func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
         if !setup{
-            slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 8)
+            slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, BarHeightScale)
             slider.setThumbImage(UIImage(), forState: UIControlState.Normal)
             slider.maximumTrackTintColor = UIColor.whiteColor()
             setup = true
@@ -127,6 +133,8 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension PillsStatsViewController{
+    
+    
     /* Graph View related methods */
     
     func configureData(dataPoints: [NSDate], values: [Float]){
@@ -159,7 +167,7 @@ extension PillsStatsViewController{
         lineChartDataSet.drawCirclesEnabled = false
         lineChartDataSet.drawValuesEnabled = false
         
-        lineChartDataSet.fillColor = UIColor.fromHex(0xA1D4E2)
+        lineChartDataSet.fillColor = GraphFillColor
         lineChartDataSet.fillAlpha = 1
         
         return lineChartDataSet
@@ -185,28 +193,28 @@ extension PillsStatsViewController{
     func configureXAxis(){
         chartView.xAxis.labelPosition = .Bottom
         chartView.xAxis.drawGridLinesEnabled = false
-        chartView.xAxis.labelTextColor = UIColor.fromHex(0x705246)
+        chartView.xAxis.labelTextColor = AxisFontColor
         chartView.xAxis.labelFont = TextFont
-        chartView.xAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
+        chartView.xAxis.axisLineColor = XAxisLineColor
         chartView.xAxis.axisLineWidth = 1.0
         chartView.xAxis.avoidFirstLastClippingEnabled = false
     }
     
     func configureRightYAxis(){
-        chartView.rightAxis.axisLineColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+        chartView.rightAxis.axisLineColor = RightYAxisLineColor
         chartView.rightAxis.drawGridLinesEnabled = false
         chartView.rightAxis.drawLabelsEnabled = false
         chartView.rightAxis.axisLineWidth = 1.0
     }
     
     func configureLeftYAxis(){
-        chartView.leftAxis.axisLineColor = UIColor.fromHex(0x8A8B8A)
+        chartView.leftAxis.axisLineColor = LeftYAxisLineColor
         chartView.leftAxis.drawGridLinesEnabled = false
         chartView.leftAxis.axisLineWidth = 1.0
         chartView.leftAxis.customAxisMin = 0
         chartView.leftAxis.customAxisMax = 100
         chartView.leftAxis.labelFont = TextFont
-        chartView.leftAxis.labelTextColor = UIColor.fromHex(0x705246)
+        chartView.leftAxis.labelTextColor = AxisFontColor
         
         let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.PercentStyle

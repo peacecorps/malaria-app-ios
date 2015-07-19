@@ -1,23 +1,24 @@
 import UIKit
 
-///based on 2 or 3 tutorials
 @IBDesignable class CircleProgressView: UIView {
     
-    ///to be modified in the storyboard
-    @IBInspectable var lineWidth: CGFloat = 4.0
     @IBInspectable var circleColor: UIColor = UIColor.grayColor()
     @IBInspectable var progressColor: UIColor = UIColor.greenColor()
-    @IBInspectable var valueProgress: Float = Float()
     @IBInspectable var clockWise: Bool = true
+    @IBInspectable var lineWidth: CGFloat = 4.0 {
+        didSet {
+            backgroundCircle.lineWidth = lineWidth
+            self.progressCircle.lineWidth = lineWidth + 0.1
+        }
+    }
+    @IBInspectable var valueProgress: Float = 0 {
+        didSet {
+            self.progressCircle.strokeEnd = CGFloat(valueProgress) / 100
+        }
+    }
     
     private let backgroundCircle = CAShapeLayer()
     private let progressCircle = CAShapeLayer()
-    
-    /// must be in range 0-1
-    var statusProgress: Float {
-        get { return self.statusProgress }
-        set(status) { self.progressCircle.strokeEnd = CGFloat(status) / 100 }
-    }
     
     override func drawRect(rect: CGRect) {
         // Create path
@@ -37,7 +38,7 @@ import UIKit
         progressCircle.path = circlePath.CGPath
         progressCircle.strokeColor = progressColor.CGColor
         progressCircle.fillColor = UIColor.clearColor().CGColor
-        progressCircle.lineWidth = CGFloat(lineWidth) + 0.1
+        progressCircle.lineWidth = lineWidth + 0.1
         progressCircle.strokeStart = 0
         progressCircle.strokeEnd = CGFloat(valueProgress) / 100
         
@@ -48,10 +49,5 @@ import UIKit
     
     private func radial_angle(arc: CGFloat) -> CGFloat {
         return CGFloat(M_PI) * arc / 180
-    }
-    
-    func changeLineWidth(size: CGFloat) {
-        backgroundCircle.lineWidth = size
-        progressCircle.lineWidth = size + 0.1
     }
 }

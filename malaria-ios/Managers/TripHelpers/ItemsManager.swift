@@ -24,7 +24,7 @@ public class ItemsManager : CoreDataContextManager{
             
             var newArray = getItems()
             newArray.append(item)
-            trip.items = NSMutableSet(array: newArray)
+            trip.items = NSSet(array: newArray)
         }
         
         CoreDataHelper.sharedInstance.saveContext(self.context)

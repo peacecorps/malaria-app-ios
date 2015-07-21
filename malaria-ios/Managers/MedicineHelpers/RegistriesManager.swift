@@ -94,6 +94,7 @@ public class RegistriesManager : CoreDataContextManager{
             let previous = r.tookMedicine
             r.tookMedicine = tookMedicine
             
+            /*
             //update future entries
             if(previous != r.tookMedicine){
                 if r.tookMedicine {
@@ -101,14 +102,14 @@ public class RegistriesManager : CoreDataContextManager{
                 }else{
                     getRegistries(date1: date, mostRecentFirst: false).map({$0.numberPillsTaken -= 1})
                 }
-            }
+            }*/
             
             
         }else{
             registry = Registry.create(Registry.self, context: context)
             registry!.date = date
             registry!.tookMedicine = tookMedicine
-            registry!.numberPillsTaken = Int64(medicine.stats(context).numberPillsTaken(date2: date))
+            //registry!.numberPillsTaken = Int64(medicine.stats(context).numberPillsTaken(date2: date))
             
             var newRegistries: [Registry] = medicine.registries.convertToArray()
             newRegistries.append(registry!)
@@ -139,11 +140,15 @@ public class RegistriesManager : CoreDataContextManager{
         //sort entries chronologically
         let registries = mostRecentFirst ? array.sorted({$0.date > $1.date}) : array.sorted({$0.date < $1.date})
         
+        return filter(registries, date1: date1, date2: date2)
+    }
+    
+    public func filter(registries: [Registry], date1: NSDate, date2: NSDate)  -> [Registry]{
         if NSDate.areDatesSameDay(date1, dateTwo: date2){
             return registries.filter({NSDate.areDatesSameDay($0.date, dateTwo: date1)})
         }
         
-        return registries.filter({$0.date >= date1 && $0.date <= date2})
+        return registries.filter({ ($0.date > date1 && $0.date < date2) || NSDate.areDatesSameDay($0.date, dateTwo: date1) || NSDate.areDatesSameDay($0.date, dateTwo: date2)})
     }
 
     /// Returns entry in the specified date if exists

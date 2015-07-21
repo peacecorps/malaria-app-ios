@@ -19,17 +19,29 @@ public extension NSDate{
     
     ///retrieves the month
     var month: Int {
-        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitMonth, fromDate: self)
+        return NSCalendar.currentCalendar().component(.CalendarUnitMonth, fromDate: self)
     }
     
     ///retrieves the day
     var day: Int {
-        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitDay, fromDate: self)
+        return NSCalendar.currentCalendar().component(.CalendarUnitDay, fromDate: self)
     }
     
     ///retrieves the year
     var year: Int{
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: self)
+    }
+    
+    var week: Int {
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitWeekOfYear, fromDate: self)
+    }
+    
+    var hour: Int {
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitHour, fromDate: self)
+    }
+    
+    var minute: Int {
+        return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitMinute, fromDate: self)
     }
     
     ///retrieves the end day of the current month
@@ -66,18 +78,14 @@ public extension NSDate{
     /// :param: `Int` optional: Minute.
     /// :returns: `NSDate`: Customized NSDate.
     class func from(year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0) -> NSDate {
-        var c = NSDateComponents()
+        let c = NSDateComponents()
         c.year = year
         c.month = month
         c.day = day
         c.hour = hour
         c.minute = minute
-        
-        NSDate().formatWith("a")
-        
-        var gregorian = NSCalendar(identifier: NSCalendarIdentifierGregorian)
-        var date = gregorian!.dateFromComponents(c)
-        return date!
+    
+        return NSCalendar.currentCalendar().dateFromComponents(c)!
     }
     
     /// Returns a string according in the format given by argumen
@@ -90,45 +98,34 @@ public extension NSDate{
         return formatter.stringFromDate(self)
     }
     
+    
+    func happensMonthsBefore(date: NSDate) -> Bool{
+        return (self.year < date.year) || (self.year == date.year && self.month < date.month)
+    }
+    
+    func happensMonthsAfter(date: NSDate) -> Bool{
+        return (self.year > date.year) || (self.year == date.year && self.month > date.month)
+    }
+    
     /// Returns true if both dates represents the same day (day, month and year)
     ///
     /// :returns: `Bool`
     class func areDatesSameDay(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        var calender = NSCalendar.currentCalendar()
-        let flags: NSCalendarUnit = .CalendarUnitDay | .CalendarUnitMonth | .CalendarUnitYear
-        var compOne: NSDateComponents = calender.components(flags, fromDate: dateOne)
-        var compTwo: NSDateComponents = calender.components(flags, fromDate: dateTwo);
-        return (compOne.day == compTwo.day && compOne.month == compTwo.month && compOne.year == compTwo.year);
+        return dateOne.year == dateTwo.year && dateOne.month == dateTwo.month && dateOne.day == dateTwo.day
     }
 
     /// Returns true if both dates belong in the same week.
     ///
     /// :returns: `Bool`
     class func areDatesSameWeek(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        
-        let weekOfYear1 = calendar!.component(NSCalendarUnit.CalendarUnitWeekOfYear, fromDate: dateOne)
-        let weekOfYear2 = calendar!.component(NSCalendarUnit.CalendarUnitWeekOfYear, fromDate: dateTwo)
-        
-        let year1 = calendar!.component(NSCalendarUnit.CalendarUnitYear, fromDate: dateOne)
-        let year2 = calendar!.component(NSCalendarUnit.CalendarUnitYear, fromDate: dateTwo)
-        
-        return weekOfYear1 == weekOfYear2 && year1 == year2
+        return dateOne.year == dateTwo.year && dateOne.week == dateTwo.week
     }
     
     /// Returns true if both dates are in the same time.
     ///
     /// :returns: `Bool`
     class func areDatesSameTime(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        
-        let h1 = calendar!.component(NSCalendarUnit.CalendarUnitHour, fromDate: dateOne)
-        let h2 = calendar!.component(NSCalendarUnit.CalendarUnitHour, fromDate: dateTwo)
-        
-        let m1 = calendar!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: dateOne)
-        let m2 = calendar!.component(NSCalendarUnit.CalendarUnitMinute, fromDate: dateTwo)
-        
-        return h1 == h2 && m1 == m2
+        return dateOne.hour == dateTwo.hour && dateOne.minute == dateTwo.minute
     }
 }
 

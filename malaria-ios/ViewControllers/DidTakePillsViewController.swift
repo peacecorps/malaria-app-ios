@@ -35,31 +35,70 @@ import UIKit
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         Logger.Info("tookMedicineBtnHandler")
+        
+        
         if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
             medicine.notificationManager(viewContext).reshedule()
         }
         
+        
         Logger.Warn("ADDING DUMMY ENTRIES")
-        for i in 1...50 {
-            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(0))
-        }
         
-        for i in 51...100 {
-            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(99))
-        }
-        
-        for i in 101...200 {
-            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(30))
-        }
-        
-        for i in 201...365 {
-            medicine.registriesManager(viewContext).addRegistry(currentDate - i.day, tookMedicine: randomTook(10))
-        }
+        //addAllTrue()
+        //halfTookHalfNot()
+        //missingHalfEntries()
+        //missingEntries()
         
         Logger.Warn("DONE ADDING DUMMY ENTRIES")
         
         
         refreshScreen()
+    }
+    
+    
+    func missingEntries(){
+        let today = NSDate()
+        var day = today - 365.day
+        for i in 0...170 {
+            if randomTook(50){
+                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
+            }
+        }
+        
+        for i in 171...365 {
+            let random = randomTook(0)
+            if randomTook(50) {
+                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: false)
+            }
+        }
+    }
+    
+    func missingHalfEntries(){
+        let today = NSDate()
+        var day = today - 365.day
+        for i in 0...170 {
+            medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
+        }
+    }
+    
+    func halfTookHalfNot(){
+        let today = NSDate()
+        var day = today - 365.day
+        for i in 0...170 {
+            medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
+        }
+        
+        for i in 171...365 {
+            medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: false)
+        }        
+    }
+    
+    func addAllTrue() {
+        let today = NSDate()
+        var day = today - 365.day
+        for i in 0...365 {
+            medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
+        }
     }
     
     func refreshScreen(){

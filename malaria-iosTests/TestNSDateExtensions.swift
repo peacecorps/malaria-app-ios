@@ -104,6 +104,15 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertEqual(date.month, 4)
         XCTAssertEqual(date.year, 2015)
         XCTAssertEqual(date.endOfCurrentMonth, 30)
+        
+        let date2 = NSDate.from(2015, month: 7, day: 5)
+        XCTAssertEqual(date2.endOfCurrentMonth, 31)
+        
+        let date3 = NSDate.from(2015, month: 2, day: 5)
+        XCTAssertEqual(date3.endOfCurrentMonth, 28)
+        
+        let date4 = NSDate.from(2015, month: 2, day: 28)
+        XCTAssertEqual(date4.endOfCurrentMonth, 28)
     }
     
 

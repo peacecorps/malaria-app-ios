@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
         }
         
-        
         window!.makeKeyAndVisible()
         
         return true

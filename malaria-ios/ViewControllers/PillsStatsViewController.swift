@@ -39,7 +39,7 @@ import Charts
     }
     
     func refreshData() {
-        println("RENDERING")
+        self.chartView.clear()
         
         GraphData.sharedInstance.refreshContext()
         graphFrame.bringSubviewToFront(loadingGraphView)
@@ -50,11 +50,10 @@ import Charts
             self.adherenceSliderTable.reloadData()
         }
         
+        
         GraphData.sharedInstance.retrieveGraphData({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in
-            println("Called")
-            self.chartView.clear()
             self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })
@@ -69,6 +68,7 @@ import Charts
             refreshData()
         }else{
             configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            adherenceSliderTable.reloadData()
         }
     }
 }

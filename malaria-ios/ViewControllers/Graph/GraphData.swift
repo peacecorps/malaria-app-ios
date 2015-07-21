@@ -74,29 +74,37 @@ class GraphData : NSObject{
         adherencesPerDay = []
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let entries = self.registriesManager.getRegistries(mostRecentFirst: false)
+            var entries = self.registriesManager.getRegistries(mostRecentFirst: false)
+            let oldestDate = entries[0].date
+            let today = NSDate()
+            let numDays = (today - oldestDate) + 1 //include today
             
             if entries.count != 0 {
-                let oldestDate = entries[0].date
                 
-                var day = oldestDate
-                let today = NSDate()
+                self.days = [NSDate](count: numDays, repeatedValue: today)
+                self.adherencesPerDay = [Float](count: numDays, repeatedValue: 0)
                 
-                //only for progress
-                var i = 0
-                let numDays = (today - oldestDate)
-                
-                while (day <= today) {
-                    self.adherencesPerDay.append(self.statsManager.pillAdherence(date1: oldestDate, date2: day) * 100)
-                    self.days.append(day)
+                for v in 0...(numDays - 1) {
+                    let index = (numDays - 1) - v
+                    
+                    let day = today - v.day
+                    
+                    self.days[index] = day
+                    self.adherencesPerDay[index] = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100
+                    
+                    //updating array from front to back
+                    for j in 0...(entries.count - 1) {
+                        let posDate = entries.count - 1 - j
+                        if NSDate.areDatesSameDay(entries[posDate].date, dateTwo: day){
+                            entries.removeAtIndex(posDate)
+                            break
+                        }
+                    }
                     
                     //Update progress bar
                     dispatch_async(dispatch_get_main_queue(), {
-                        progress(progress: 100*Float(numDays - (numDays - i))/Float(numDays))
-                        i++
+                        progress(progress: 100*Float(numDays - (numDays - v))/Float(numDays))
                     })
-                    
-                    day += 1.day
                 }
                 
                 self.updatedDailyAdherences = true

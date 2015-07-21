@@ -14,14 +14,7 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Number of pills
     public func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
-        var count = 0
-        for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2){
-            if (r.tookMedicine){
-                count++
-            }
-        }
-        
-        return count
+        return medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).filter({$0.tookMedicine}).count
     }
     
     /// Returns the number of pills that the user should have taken between two dates
@@ -30,25 +23,18 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :returns: `Int`: Number of supposed pills
     public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
-        if (medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).count == 0){
-            return 0
-        }
-        
         if date1 > date2 {
             return numberSupposedPills(date1: date2, date2: date1)
         }
         
-        var d1: NSDate = date1
-        if NSDate.areDatesSameDay(d1, dateTwo: NSDate.min) {
-            d1 = medicine.registriesManager(context).oldestEntry()!.date
+        let entries = medicine.registriesManager(context).getRegistries(mostRecentFirst: false)
+        if (entries.count == 0){
+            return 0
         }
         
-        var d2: NSDate = date2
-        if NSDate.areDatesSameDay(d2, dateTwo: NSDate.max) {
-            d2 = medicine.registriesManager(context).mostRecentEntry()!.date
-        }
-        
-        //+1 to include d1
+        let d1: NSDate = date1 == NSDate.min ? entries.first!.date : date1
+        let d2: NSDate = date2 == NSDate.max ? entries.last!.date : date2
+
         let numDays = (d2 - d1) + 1
         
         return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
@@ -114,4 +100,5 @@ public class MedicineStats : CoreDataContextManager{
         
         return pillAdherence(date1: startMonth, date2: endMonth)
     }
+    
 }

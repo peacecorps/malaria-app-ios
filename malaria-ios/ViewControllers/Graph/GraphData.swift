@@ -56,9 +56,7 @@ class GraphData : NSObject{
             self.updatedMonthsAdherences = true
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), {
-                completition()
-            })
+            dispatch_async(dispatch_get_main_queue(), completition)
         })
     }
     
@@ -100,10 +98,7 @@ class GraphData : NSObject{
             }
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), {
-                completition()
-            })
-            
+            dispatch_async(dispatch_get_main_queue(), completition)
         })
         
     }

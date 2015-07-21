@@ -60,15 +60,24 @@ class GraphData : NSObject{
         })
     }
     
+    func retrieveTookMedicineStats(){
+        tookMedicine = [:]
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.registriesManager.getRegistries(mostRecentFirst: false).map({tookMedicine[$0.date.startOfDay] = $0.tookMedicine})
+        })
+    }
+    
     
     func retrieveGraphData(progress: (progress: Float) -> (), completition : () -> ()) {
-        tookMedicine = [:]
         days = []
         adherencesPerDay = []
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if let oldestEntry = self.registriesManager.oldestEntry(){
-                let oldestDate = oldestEntry.date
+            let entries = self.registriesManager.getRegistries(mostRecentFirst: false)
+            
+            if entries.count != 0 {
+                let oldestDate = entries[0].date
                 
                 var day = oldestDate
                 let today = NSDate()
@@ -80,10 +89,6 @@ class GraphData : NSObject{
                 while (day <= today) {
                     self.adherencesPerDay.append(self.statsManager.pillAdherence(date1: oldestDate, date2: day) * 100)
                     self.days.append(day)
-                    
-                    if let entry = self.registriesManager.findRegistry(day) {
-                        self.tookMedicine[day.startOfDay] = entry.tookMedicine
-                    }
                     
                     //Update progress bar
                     dispatch_async(dispatch_get_main_queue(), {
@@ -100,6 +105,5 @@ class GraphData : NSObject{
             //update UI when finished
             dispatch_async(dispatch_get_main_queue(), completition)
         })
-        
     }
 }

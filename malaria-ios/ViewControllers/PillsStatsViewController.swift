@@ -44,6 +44,8 @@ import Charts
         GraphData.sharedInstance.refreshContext()
         graphFrame.bringSubviewToFront(loadingGraphView)
         
+        GraphData.sharedInstance.retrieveTookMedicineStats()
+        
         GraphData.sharedInstance.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }

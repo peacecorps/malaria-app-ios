@@ -1,11 +1,3 @@
-//
-//  UISlider.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 22/07/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -30,18 +22,13 @@ extension UISlider {
         }
     }
     
-    @IBInspectable var rightColor: UIColor {
+    @IBInspectable var rightColor: UIColor? {
         get {
-            return self.maximumTrackTintColor ?? UIColor.clearColor()
+            return self.maximumTrackTintColor
         }
         
         set(value){
             self.maximumTrackTintColor = value
         }
     }
-    
-    /*
-    slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, BarHeightScale)
-    slider.maximumTrackTintColor = UIColor.whiteColor()
-    */
 }

@@ -11,4 +11,24 @@ import UIKit
             layer.masksToBounds = newValue > 0
         }
     }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        
+        set(value) {
+            layer.borderWidth = value
+        }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            return UIColor(CGColor: layer.borderColor)
+        }
+        
+        set(value) {
+            layer.borderColor = value?.CGColor
+        }
+    }
 }

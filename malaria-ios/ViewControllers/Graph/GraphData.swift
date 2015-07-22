@@ -46,7 +46,7 @@ class GraphData : NSObject{
     }
     
     func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
-        months = []
+        months.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
@@ -61,7 +61,7 @@ class GraphData : NSObject{
     }
     
     func retrieveTookMedicineStats(){
-        tookMedicine = [:]
+        tookMedicine.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.registriesManager.getRegistries(mostRecentFirst: false).map({tookMedicine[$0.date.startOfDay] = $0.tookMedicine})
@@ -70,16 +70,16 @@ class GraphData : NSObject{
     
     
     func retrieveGraphData(progress: (progress: Float) -> (), completition : () -> ()) {
-        days = []
-        adherencesPerDay = []
+        days.removeAll()
+        adherencesPerDay.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            var entries = self.registriesManager.getRegistries(mostRecentFirst: false)
-            let oldestDate = entries[0].date
             let today = NSDate()
-            let numDays = (today - oldestDate) + 1 //include today
+            var entries = self.registriesManager.getRegistries(mostRecentFirst: false)
             
             if entries.count != 0 {
+                let oldestDate = entries[0].date
+                let numDays = (today - oldestDate) + 1 //include today
                 
                 self.days = [NSDate](count: numDays, repeatedValue: today)
                 self.adherencesPerDay = [Float](count: numDays, repeatedValue: 0)

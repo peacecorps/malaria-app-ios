@@ -69,15 +69,6 @@ class DailyStatsTableViewController : UITableViewController{
     var listStats: [Stat] = []
     var viewContext: NSManagedObjectContext!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor.clearColor()
-    }
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listStats.count
     }

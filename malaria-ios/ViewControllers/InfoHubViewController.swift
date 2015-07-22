@@ -16,9 +16,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     var posts: [Post] = []
     
     let refreshControl = UIRefreshControl()
-    
     var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-    
     var syncManager: SyncManager!
     
     override func viewDidLoad() {
@@ -28,10 +26,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: .ValueChanged)
         collectionView.addSubview(refreshControl)
     }
     

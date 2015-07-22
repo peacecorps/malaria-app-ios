@@ -56,11 +56,6 @@ import UIKit
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    
         for i in initialItems{
             println("setting up initial items")
             listItems[i]? = true
@@ -68,10 +63,6 @@ import UIKit
         
         sortedItems = [String] (listItems.keys).sorted({$0 < $1})
         tableView.reloadData()
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

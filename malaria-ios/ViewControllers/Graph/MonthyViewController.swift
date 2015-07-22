@@ -9,11 +9,23 @@ import UIKit
     
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
-    @IBInspectable var CornerRadius: CGFloat = 20
+    
+    @IBInspectable var SelectedBackgroundColor: UIColor = UIColor.fromHex(0xE3C79B)
+    @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor.fromHex(0xE3C79B)
+    @IBInspectable var UnselectedTextColor: UIColor = UIColor.fromHex(0x444444)
+    @IBInspectable var UnselectedTodayTextColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var DayWeekTextColor: UIColor = UIColor.fromHex(0x444444)
+    @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var SelectedDayDotMarkerColor: UIColor = UIColor.blackColor()
+    @IBInspectable var InsideMonthTextColor: UIColor = UIColor.fromHex(0x444444)
+    @IBInspectable var OutSideMonthTextColor: UIColor = UIColor.fromHex(0x999999)
+    @IBInspectable var SelectedTextBackgroundColor: UIColor = UIColor.blackColor()
+    
+    let WeekDayFont = UIFont(name: "AmericanTypewriter", size: 14)!
+    let WeekDaySelectedFont = UIFont(name: "AmericanTypewriter", size: 14)!
+    let DayWeekTextFont = UIFont(name: "AmericanTypewriter", size: 12)!
     
     var previouslySelect: NSDate?
-    
-    let calendarVisualSettings = CalendarVisualSettings()
     
     var startDay: NSDate!
     var animationFinished = true
@@ -23,11 +35,7 @@ import UIKit
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
-        calendarFrame.layer.cornerRadius = CornerRadius
-        calendarFrame.layer.masksToBounds = true
-        
         monthLabel.text = generateMonthLabel(startDay)
-        
         calendarView.toggleViewWithDate(startDay)
     }
         
@@ -64,7 +72,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
-        circleView.fillColor = calendarVisualSettings.CurrentDayUnselectedCircleFillColor
+        circleView.fillColor = CurrentDayUnselectedCircleFillColor
         return circleView
     }
     
@@ -193,69 +201,29 @@ extension MonthlyViewController: CVCalendarViewDelegate {
 }
 
 extension MonthlyViewController: CVCalendarViewAppearanceDelegate {
-    func dayLabelPresentWeekdayInitallyBold() -> Bool {
-        return false
-    }
-    
+    func dayLabelPresentWeekdayInitallyBold() -> Bool { return false }
     
     /// Generic days settings
-    func dayLabelWeekdaySelectedBackgroundColor() -> UIColor {
-        return calendarVisualSettings.SelectedBackgroundColor
-    }
-    
-    func dayLabelWeekdaySelectedBackgroundAlpha() -> CGFloat {
-        return calendarVisualSettings.SelectedBackgroundColorAlpha
-    }
-    
-    func dayLabelWeekdayInTextColor() -> UIColor {
-        return calendarVisualSettings.UnselectedTextColor
-    }
-    
-    func dayLabelWeekdayOutTextColor() -> UIColor {
-        return calendarVisualSettings.OutSideMonthTextColor
-    }
-    
-    func dayLabelWeekdaySelectedTextColor() -> UIColor {
-        return calendarVisualSettings.SelectedTextBackgroundColor
-    }
-    
-    func dayLabelWeekdayFont() -> UIFont {
-        return calendarVisualSettings.WeekDayFont
-    }
-    
-    func dayLabelWeekdaySelectedFont() -> UIFont {
-        return calendarVisualSettings.WeekDaySelectedFont
-    }
+    func dayLabelWeekdaySelectedBackgroundColor() -> UIColor { return SelectedBackgroundColor }
+    func dayLabelWeekdaySelectedBackgroundAlpha() -> CGFloat { return 1.0 }
+    func dayLabelWeekdayInTextColor() -> UIColor { return UnselectedTextColor }
+    func dayLabelWeekdayOutTextColor() -> UIColor { return OutSideMonthTextColor }
+    func dayLabelWeekdaySelectedTextColor() -> UIColor { return SelectedTextBackgroundColor }
+    func dayLabelWeekdayFont() -> UIFont { return WeekDayFont }
+    func dayLabelWeekdaySelectedFont() -> UIFont { return WeekDaySelectedFont }
     
     /// current day settings
-    func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor {
-        return calendarVisualSettings.SelectedTodayBackgroundColor
-    }
-    
-    func dayLabelPresentWeekdaySelectedBackgroundAlpha() -> CGFloat {
-        return calendarVisualSettings.SelectedTodayBackgroundColorAlpha
-    }
-    
-    func dayLabelPresentWeekdaySelectedTextColor() -> UIColor {
-        return calendarVisualSettings.SelectedTextBackgroundColor
-    }
-    
-    func dayLabelPresentWeekdayTextColor() -> UIColor{
-        return calendarVisualSettings.UnselectedTodayTextColor
-    }
-    
-    func dayLabelPresentWeekdayFont() -> UIFont {
-        return calendarVisualSettings.WeekDayFont
-    }
-    
-    func dayLabelPresentWeekdaySelectedFont() -> UIFont {
-        return calendarVisualSettings.WeekDaySelectedFont
-    }
+    func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor { return SelectedTodayBackgroundColor }
+    func dayLabelPresentWeekdaySelectedBackgroundAlpha() -> CGFloat { return 1.0 }
+    func dayLabelPresentWeekdaySelectedTextColor() -> UIColor { return SelectedTextBackgroundColor }
+    func dayLabelPresentWeekdayTextColor() -> UIColor{ return UnselectedTodayTextColor }
+    func dayLabelPresentWeekdayFont() -> UIFont { return WeekDayFont }
+    func dayLabelPresentWeekdaySelectedFont() -> UIFont { return WeekDaySelectedFont }
 }
 
 extension MonthlyViewController: CVCalendarMenuViewDelegate {
     func presentationMode() -> CalendarMode { return .MonthView }
-    func dayOfWeekTextColor() -> UIColor { return calendarVisualSettings.DayWeekTextColor }
+    func dayOfWeekTextColor() -> UIColor { return DayWeekTextColor }
     func dayOfWeekTextUppercase() -> Bool { return true }
-    func dayOfWeekFont() -> UIFont { return calendarVisualSettings.DayWeekTextFont }
+    func dayOfWeekFont() -> UIFont { return DayWeekTextFont }
 }

@@ -13,7 +13,6 @@ import Charts
     
     @IBInspectable var NoDataText: String = "No entries"
     @IBInspectable var NumberRecentMonths: Int = 4
-    @IBInspectable var GraphFrameBorderRadius: CGFloat = 20
     @IBInspectable var GraphFillColor: UIColor = UIColor.fromHex(0xA1D4E2)
     @IBInspectable var XAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
     @IBInspectable var RightYAxisLineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
@@ -24,16 +23,6 @@ import Charts
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        adherenceSliderTable.delegate = self
-        adherenceSliderTable.dataSource = self
-        adherenceSliderTable.backgroundColor = UIColor.clearColor()
-        
-        loadingGraphView.layer.cornerRadius = GraphFrameBorderRadius
-        loadingGraphView.layer.masksToBounds = true
-        
-        graphFrame.layer.cornerRadius = GraphFrameBorderRadius
-        graphFrame.layer.masksToBounds = true
         
         configureChart()
     }
@@ -49,7 +38,6 @@ import Charts
         GraphData.sharedInstance.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
-        
         
         GraphData.sharedInstance.retrieveGraphData({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
@@ -74,25 +62,14 @@ import Charts
 }
 
 @IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
-    
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
-    @IBInspectable var BarHeightScale: CGFloat = 8
-    
     
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var adherenceValue: UILabel!
     
-    var setup = false
     func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
-        if !setup{
-            slider.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, BarHeightScale)
-            slider.setThumbImage(UIImage(), forState: UIControlState.Normal)
-            slider.maximumTrackTintColor = UIColor.whiteColor()
-            setup = true
-        }
-        
         slider.minimumTrackTintColor = adhrenceValue < 50 ? LowAdherenceColor : HighAdherenceColor
         slider.value = adhrenceValue
         month.text = (date.formatWith("MMM") as NSString).substringToIndex(3).capitalizedString
@@ -103,10 +80,7 @@ import Charts
 }
 
 extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GraphData.sharedInstance.months.count
     }
@@ -138,8 +112,6 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension PillsStatsViewController{
-    
-    
     /* Graph View related methods */
     
     func configureData(dataPoints: [NSDate], values: [Float]){
@@ -147,8 +119,7 @@ extension PillsStatsViewController{
         
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
-            dataEntries.append(dataEntry)
+            dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
         }
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")

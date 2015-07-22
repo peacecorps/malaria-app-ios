@@ -106,7 +106,9 @@
 		2095B86C1B5A4AD200119896 /* CVSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B8511B5A4AD200119896 /* CVSet.swift */; };
 		2095B86D1B5A4AD200119896 /* CVShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B8521B5A4AD200119896 /* CVShape.swift */; };
 		2095B86F1B5A4B7800119896 /* MonthyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B86E1B5A4B7800119896 /* MonthyViewController.swift */; };
-		2095B8721B5A4BA300119896 /* CalendarViewSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B8711B5A4BA300119896 /* CalendarViewSettings.swift */; };
+		20C13EE01B5F990300D66C00 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EDF1B5F990300D66C00 /* UIView.swift */; };
+		20C13EE21B5F9B1D00D66C00 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE11B5F9B1D00D66C00 /* UISlider.swift */; };
+		20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -220,8 +222,10 @@
 		2095B8511B5A4AD200119896 /* CVSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSet.swift; sourceTree = "<group>"; };
 		2095B8521B5A4AD200119896 /* CVShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVShape.swift; sourceTree = "<group>"; };
 		2095B86E1B5A4B7800119896 /* MonthyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthyViewController.swift; path = Graph/MonthyViewController.swift; sourceTree = "<group>"; };
-		2095B8711B5A4BA300119896 /* CalendarViewSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarViewSettings.swift; path = Graph/CalendarViewSettings.swift; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
+		20C13EDF1B5F990300D66C00 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		20C13EE11B5F9B1D00D66C00 /* UISlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
+		20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -366,6 +370,9 @@
 				200C72641B40368600998100 /* NSSet.swift */,
 				203F0B101B45B68700826E06 /* UIColor.swift */,
 				203F0B1B1B46EB9E00826E06 /* UIPickView.swift */,
+				20C13EDF1B5F990300D66C00 /* UIView.swift */,
+				20C13EE11B5F9B1D00D66C00 /* UISlider.swift */,
+				20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -523,7 +530,6 @@
 			children = (
 				200C726F1B40368600998100 /* PillsStatsViewController.swift */,
 				2095B86E1B5A4B7800119896 /* MonthyViewController.swift */,
-				2095B8711B5A4BA300119896 /* CalendarViewSettings.swift */,
 				202E18401B5AD8F0007D5194 /* GraphData.swift */,
 			);
 			name = Graph;
@@ -770,6 +776,7 @@
 				200C72A81B40368600998100 /* SyncManager.swift in Sources */,
 				200C73061B40368600998100 /* PagesManagerViewController.swift in Sources */,
 				200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */,
+				20C13EE21B5F9B1D00D66C00 /* UISlider.swift in Sources */,
 				2095B8671B5A4AD200119896 /* CVCalendarWeekView.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
 				200E93FF1B5BC42300E6DAC7 /* CircleProgressView.swift in Sources */,
@@ -783,7 +790,6 @@
 				200C72EA1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				200C72D21B40368600998100 /* Post.swift in Sources */,
 				200C72EE1B40368600998100 /* Int.swift in Sources */,
-				2095B8721B5A4BA300119896 /* CalendarViewSettings.swift in Sources */,
 				200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				2095B86F1B5A4B7800119896 /* MonthyViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
@@ -807,6 +813,7 @@
 				200C72B61B40368600998100 /* ItemExtension.swift in Sources */,
 				203F0B1E1B46EBC900826E06 /* TimePickerViewer.swift in Sources */,
 				2095B8631B5A4AD200119896 /* CVCalendarViewDelegate.swift in Sources */,
+				20C13EE01B5F990300D66C00 /* UIView.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				2095B86A1B5A4AD200119896 /* CVScrollDirection.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
@@ -822,6 +829,7 @@
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,
 				200C72B41B40368600998100 /* Item.swift in Sources */,
 				200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */,
+				20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */,
 				200C72F81B40368600998100 /* Logger.swift in Sources */,
 				203F0B291B481E6F00826E06 /* ListItemsViewController.swift in Sources */,
 				2095B85C1B5A4AD200119896 /* CVCalendarMonthView.swift in Sources */,

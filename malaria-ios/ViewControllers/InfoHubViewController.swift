@@ -48,13 +48,16 @@ class InfoHubViewController : UIViewController{
         if !refreshFromCoreData(){
             syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
                 if error != nil{
-                    var confirmAlert = UIAlertController(title: "No available messages from Peace Corps", message: "", preferredStyle: .Alert)
-                    confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
                     
-                    var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                    dispatch_after(time, dispatch_get_main_queue(), {
-                        self.presentViewController(confirmAlert, animated: true, completion: nil)
-                    })
+                    delay(0.5){
+                        var confirmAlert = UIAlertController(title: "No available message from Peace Corps", message: "", preferredStyle: .Alert)
+                        confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                        
+                        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                        dispatch_after(time, dispatch_get_main_queue(), {
+                            self.presentViewController(confirmAlert, animated: true, completion: nil)
+                        })
+                    }
                     
                 }else{
                     self.refreshFromCoreData()

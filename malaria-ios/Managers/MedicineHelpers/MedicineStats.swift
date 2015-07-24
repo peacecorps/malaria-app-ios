@@ -104,7 +104,6 @@ public class MedicineStats : CoreDataContextManager{
         let registries = registryManager.getRegistries(mostRecentFirst: false)
         
         if registries.count == 0 {
-            println("NO ENTRIES")
             return 1
         }
         
@@ -115,7 +114,6 @@ public class MedicineStats : CoreDataContextManager{
         let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
         
         if startMonth.happensMonthsBefore(oldestDate) || startMonth.happensMonthsAfter(mostRecentEntry) {
-            println("IN HERE:....")
             return 1.0
         }
         

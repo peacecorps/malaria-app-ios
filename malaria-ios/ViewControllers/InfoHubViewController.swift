@@ -1,16 +1,15 @@
 import Foundation
 import UIKit
 
-class InfoHubViewController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
-
-    @IBOutlet weak var collectionView: UICollectionView!
+class InfoHubViewController : UIViewController{
     
-    var posts: [Post] = []
+    @IBOutlet weak var collectionView: UICollectionView!
     
     let refreshControl = UIRefreshControl()
     
     var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     var syncManager: SyncManager!
+    var posts: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,55 +20,31 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     
         refreshControl.tintColor = UIColor.fromHex(0xE46D71)
         refreshControl.backgroundColor = UIColor.clearColor()
-        
         refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
-        collectionView.addSubview(refreshControl)
-    }
-    
-    func pullRefreshHandler(){
-        println("pull refresh")
-        syncManager.sync(EndpointType.Posts.path(), save: true,
-            completionHandler: {(url: String, error: NSError?) in
-                if let e = error {
-                    
-                    Logger.Error("ERROR RETRIEVING")
-                    println(error?.userInfo)
-                    
-                    var refreshAlert = UIAlertController(title: "Couldn't Update Peace Corps Messages.", message: "Please try again later.", preferredStyle: .Alert)
-                    
-                    if e.code == -1009 {
-                        refreshAlert.message = "No available internet connection. Try again later."
-                        refreshAlert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { _ in
-                            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
-                        }))
-                    }
-                    
-                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                    self.presentViewController(refreshAlert, animated: true, completion: nil)
-                    
-                }else {
-                    self.refreshFromCoreData()
-                }
-                
-                self.refreshControl.endRefreshing()
-        })
-    }
-    
-    func refreshFromCoreData() -> Bool{
-        Logger.Info("Fetching from coreData")
-        if let newPosts = Posts.retrieve(Posts.self, context: viewContext).first {
-            posts = newPosts.posts.convertToArray().sorted({$0.title < $1.title})
-            collectionView.reloadData()
-            return true
-        }
         
-        return false
+        collectionView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        Logger.Info("infoViewController will appear")
-        
+        refreshScreen()
+    }
+    
+    func pullRefreshHandler(){
+        println("pull refresh")
+        syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
+            if let e = error {
+                let refreshAlert = self.createAlertViewError(e)
+                self.presentViewController(refreshAlert, animated: true, completion: nil)
+            }else {
+                self.refreshFromCoreData()
+            }
+            
+            self.refreshControl.endRefreshing()
+        })
+    }
+    
+   func refreshScreen() {
         if !refreshFromCoreData(){
             syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
                 if error != nil{
@@ -87,8 +62,29 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return posts.count
+    private func createAlertViewError(error : NSError) -> UIAlertController {
+        var refreshAlert = UIAlertController(title: "Couldn't Update Peace Corps Messages.", message: "Please try again later.", preferredStyle: .Alert)
+        
+        if error.code == -1009 {
+            refreshAlert.message = "No available internet connection. Try again later."
+            refreshAlert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { _ in
+                UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            }))
+        }
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        return refreshAlert
+    }
+    
+    private func refreshFromCoreData() -> Bool{
+        Logger.Info("Fetching from coreData")
+        if let newPosts = Posts.retrieve(Posts.self, context: viewContext).first {
+            posts = newPosts.posts.convertToArray().sorted({$0.title < $1.title})
+            collectionView.reloadData()
+            return true
+        }
+        
+        return false
     }
     
     @IBAction func settingsBtnHandler(sender: AnyObject) {
@@ -96,6 +92,12 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         dispatch_async(dispatch_get_main_queue()) {
             self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
         }
+    }
+}
+
+extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return posts.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -115,17 +117,13 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         let postView = UIStoryboard.instantiate(viewControllerClass: PostDetailedViewController.self)
         postView.post = posts[indexPath.row]
-
-        Logger.Info("Called didSelectItemAtIndexPath")
         
         dispatch_async(dispatch_get_main_queue()) {
             self.presentViewController(postView, animated: true, completion: nil)
         }
-        
     }
 }
 
 class PeaceCorpsMessageCollectionViewCell : UICollectionViewCell{
-    
     @IBOutlet weak var postBtn: UIButton!
 }

@@ -23,16 +23,10 @@ import UIKit
         pageViewController!.dataSource = self
         pageViewController.view.frame = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
         
-        
         let defaultPage = getController(homePageEnum)!
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
         
-        
-        let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = PageIndicatorTintColor
-        appearance.currentPageIndicatorTintColor = PageIndicatorCurrentColor
-        appearance.backgroundColor = UIColor.clearColor()
-        
+        setupUIPageControl()
         
         //add pretended view to the hierarchy
         pageViewController.view.backgroundColor = UIColor.clearColor()
@@ -40,6 +34,13 @@ import UIKit
         addChildViewController(pageViewController)
         view.addSubview(pageViewController.view)
         pageViewController.didMoveToParentViewController(self)
+    }
+    
+    func setupUIPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = PageIndicatorTintColor
+        appearance.currentPageIndicatorTintColor = PageIndicatorCurrentColor
+        appearance.backgroundColor = UIColor.clearColor()
     }
     
     @IBAction func settingsButtonHandler(){

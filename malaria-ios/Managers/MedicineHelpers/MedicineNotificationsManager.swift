@@ -2,11 +2,17 @@ import Foundation
 import UIKit
 
 public class MedicineNotificationsManager : NotificationManager{
-    override var category: String { get{ return "PillReminder" } }
-    override var alertBody: String { get{ return "Don't forget to take \(MedicineManager(context: context).getCurrentMedicine()!.name)" } }
+    override var category: String { get{ return MedicineNotificationsManager.NotificationCategory } }
+    override var alertBody: String { get{ return "Did you took \(MedicineManager(context: context).getCurrentMedicine()!.name) today?" } }
     override var alertAction: String { get{ return "Take pill"} }
     
     let medicine: Medicine
+    
+    public static let TookPillId = "TookPill"
+    public static let TookPillTitle = "Yes"
+    public static let DidNotTakePillId = "DidNotTakePillId"
+    public static let DidNotTakePillTitle = "No"
+    public static let NotificationCategory = "PILL_REMINDER"
     
     init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
@@ -64,5 +70,28 @@ public class MedicineNotificationsManager : NotificationManager{
         
         Logger.Warn("There are no entries yet. Returning false")
         return false
+    }
+    
+    public static func setup() -> UIMutableUserNotificationCategory{
+        var notificationActionOk = UIMutableUserNotificationAction()
+        notificationActionOk.identifier = TookPillId
+        notificationActionOk.title = TookPillTitle
+        notificationActionOk.destructive = false
+        notificationActionOk.authenticationRequired = false
+        notificationActionOk.activationMode = .Background
+        
+        var notificationActionCancel = UIMutableUserNotificationAction()
+        notificationActionCancel.identifier = DidNotTakePillId
+        notificationActionCancel.title = DidNotTakePillTitle
+        notificationActionCancel.destructive = true
+        notificationActionCancel.authenticationRequired = false
+        notificationActionCancel.activationMode = .Background
+        
+        var notificationCategory = UIMutableUserNotificationCategory()
+        notificationCategory.identifier = NotificationCategory
+        notificationCategory.setActions([notificationActionOk, notificationActionCancel], forContext: .Default)
+        notificationCategory.setActions([notificationActionOk, notificationActionCancel], forContext: .Minimal)
+        
+        return notificationCategory
     }
 }

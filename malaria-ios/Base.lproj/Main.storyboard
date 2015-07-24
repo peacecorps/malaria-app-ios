@@ -1261,11 +1261,6 @@
                             <constraint firstItem="F53-x4-FQi" firstAttribute="leading" secondItem="qYA-KO-ewV" secondAttribute="leading" id="xDC-fe-p3m"/>
                         </constraints>
                     </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="CornerRadius">
-                            <real key="value" value="20"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="calendarFrame" destination="Q3W-Vc-Knb" id="y18-4f-XIn"/>
                         <outlet property="calendarView" destination="F53-x4-FQi" id="gW7-Ww-oW2"/>

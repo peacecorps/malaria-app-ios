@@ -55,6 +55,8 @@
 		200EE4941B1343A50087FB24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4921B1343A50087FB24 /* LaunchScreen.xib */; };
 		200EE4AF1B1349D40087FB24 /* ImagesAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */; };
 		200F22191B623B8D00C29404 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F22181B623B8D00C29404 /* Globals.swift */; };
+		200F221D1B62701000C29404 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221C1B62701000C29404 /* DailyStatsCells.swift */; };
+		200F221F1B6270D700C29404 /* MonthAdherenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */; };
 		20246D151B4F1BA000384759 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D141B4F1BA000384759 /* CoreDataManager.swift */; };
 		20246D161B4F1D3200384759 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20246D191B4F1FAC00384759 /* TestContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D181B4F1FAC00384759 /* TestContexts.swift */; };
@@ -177,6 +179,8 @@
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		200F22171B6234F700C29404 /* Model6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model6.xcdatamodel; sourceTree = "<group>"; };
 		200F22181B623B8D00C29404 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		200F221C1B62701000C29404 /* DailyStatsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsCells.swift; sourceTree = "<group>"; };
+		200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthAdherenceCell.swift; path = Graph/MonthAdherenceCell.swift; sourceTree = "<group>"; };
 		20246D141B4F1BA000384759 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		20246D181B4F1FAC00384759 /* TestContexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestContexts.swift; sourceTree = "<group>"; };
 		20246D241B53241F00384759 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -476,9 +480,10 @@
 		203F0B121B466C7E00826E06 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				200C72691B40368600998100 /* DailyStatsTableViewController.swift */,
 				200C726C1B40368600998100 /* DidTakePillsViewController.swift */,
+				200C72691B40368600998100 /* DailyStatsTableViewController.swift */,
 				200C726E1B40368600998100 /* PagesManagerViewController.swift */,
+				200F221C1B62701000C29404 /* DailyStatsCells.swift */,
 				2095B8701B5A4B8500119896 /* Graph */,
 			);
 			name = Home;
@@ -535,6 +540,7 @@
 				200C726F1B40368600998100 /* PillsStatsViewController.swift */,
 				2095B86E1B5A4B7800119896 /* MonthyViewController.swift */,
 				202E18401B5AD8F0007D5194 /* GraphData.swift */,
+				200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */,
 			);
 			name = Graph;
 			sourceTree = "<group>";
@@ -797,6 +803,7 @@
 				200C730A1B40368600998100 /* PlanTripViewController.swift in Sources */,
 				2095B86F1B5A4B7800119896 /* MonthyViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
+				200F221F1B6270D700C29404 /* MonthAdherenceCell.swift in Sources */,
 				200F22191B623B8D00C29404 /* Globals.swift in Sources */,
 				205D5A221B4558D500C94AA1 /* InfoHubViewController.swift in Sources */,
 				2095B8611B5A4AD200119896 /* CVCalendarViewAppearance.swift in Sources */,
@@ -822,6 +829,7 @@
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				2095B86A1B5A4AD200119896 /* CVScrollDirection.swift in Sources */,
 				200C73021B40368600998100 /* DidTakePillsViewController.swift in Sources */,
+				200F221D1B62701000C29404 /* DailyStatsCells.swift in Sources */,
 				203F0B111B45B68800826E06 /* UIColor.swift in Sources */,
 				2095B85A1B5A4AD200119896 /* CVCalendarMenuViewDelegate.swift in Sources */,
 				2095B85B1B5A4AD200119896 /* CVCalendarMonthContentViewController.swift in Sources */,

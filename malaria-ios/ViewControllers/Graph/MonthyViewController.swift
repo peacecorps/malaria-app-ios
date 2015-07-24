@@ -38,6 +38,10 @@ import UIKit
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
+    
+    func dismiss() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
         
     func generateMonthLabel(date: NSDate) -> String {
         return date.formatWith("MMMM, yyyy").capitalizedString
@@ -216,8 +220,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
     }
-    
-
 }
 
 extension MonthlyViewController: CVCalendarViewAppearanceDelegate {

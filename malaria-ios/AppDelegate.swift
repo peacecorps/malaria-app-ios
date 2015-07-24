@@ -6,7 +6,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //registering for notifications
-        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+        var notificationsCategories = [UIMutableUserNotificationCategory]()
+        notificationsCategories.append(MedicineNotificationsManager.setup())
+        
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: notificationsCategories) as Set<NSObject>)
         application.registerUserNotificationSettings(settings)
         
         //setting up initial screen
@@ -44,10 +47,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        //Logger.Info("did receive local notification")
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> ()) {
+        
+        if let id = identifier {
+            switch (id) {
+                case MedicineNotificationsManager.TookPillId:
+                    let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                    let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                    currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: true)
+                case MedicineNotificationsManager.DidNotTakePillId:
+                    let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                    let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                    currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: false)
+            default:
+                println("not found")
+            }
+        }
+        completionHandler()
     }
-
-
 }
 

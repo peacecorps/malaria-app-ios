@@ -16,13 +16,12 @@ class GraphData : NSObject{
     var statsManager: MedicineStats!
     
     var tookMedicine: [NSDate: Bool] = [:]
-    
     var months = [NSDate]()
-    
     var days = [NSDate]()
     var adherencesPerDay = [Float]()
     
     var context: NSManagedObjectContext!
+    
     override init(){
         super.init()
         NSNotificationEvents.ObserveNewEntries(self, selector: "updateShouldUpdateFlags")
@@ -92,7 +91,7 @@ class GraphData : NSObject{
                     self.days[index] = day
                     self.adherencesPerDay[index] = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100
                     
-                    //updating array from front to back
+                    //updating array from last index to first Index
                     for j in 0...(entries.count - 1) {
                         let posDate = entries.count - 1 - j
                         if NSDate.areDatesSameDay(entries[posDate].date, dateTwo: day){

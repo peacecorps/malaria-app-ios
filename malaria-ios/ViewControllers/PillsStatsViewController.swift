@@ -23,8 +23,29 @@ import Charts
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
         
         configureChart()
+    }
+    
+    deinit{
+        NSNotificationEvents.UnregisterAll(self)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshScreen()
+    }
+    
+    func refreshScreen() {
+        self.graphFrame.bringSubviewToFront(self.chartView)
+        
+        if GraphData.sharedInstance.outdated{
+            refreshData()
+        }else{
+            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            adherenceSliderTable.reloadData()
+        }
     }
     
     func refreshData() {
@@ -45,37 +66,6 @@ import Charts
             self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.graphFrame.bringSubviewToFront(self.chartView)
-        
-        if GraphData.sharedInstance.outdated{
-            refreshData()
-        }else{
-            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
-            adherenceSliderTable.reloadData()
-        }
-    }
-}
-
-@IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
-    @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
-    
-    @IBOutlet weak var month: UILabel!
-    @IBOutlet weak var slider: UISlider!
-    @IBOutlet weak var adherenceValue: UILabel!
-    
-    func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
-        slider.minimumTrackTintColor = adhrenceValue < 50 ? LowAdherenceColor : HighAdherenceColor
-        slider.value = adhrenceValue
-        month.text = (date.formatWith("MMM") as NSString).substringToIndex(3).capitalizedString
-        adherenceValue.text = "\(Int(adhrenceValue))%"
-        
-        return self
     }
 }
 
@@ -111,9 +101,8 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
+/* Graph View related methods */
 extension PillsStatsViewController{
-    /* Graph View related methods */
-    
     func configureData(dataPoints: [NSDate], values: [Float]){
         var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
         

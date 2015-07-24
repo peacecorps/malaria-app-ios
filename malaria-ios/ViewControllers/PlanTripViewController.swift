@@ -4,7 +4,7 @@ import MapKit
 import CoreLocation
 
 
-class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
+class PlanTripViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     var pcLocationPicker: PCLocationPickerViewer!
@@ -36,28 +36,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         }()
     
     let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-    
     var tripsManager: TripsManager!
-    
-    func dismissInputView(sender: UITextField){
-        location.endEditing(true)
-        parkingList.endEditing(true)
-        medicationList.endEditing(true)
-        dayValuePicker.endEditing(true)
-        monthValuePicker.endEditing(true)
-        yearValuePicker.endEditing(true)
-        cashToBring.endEditing(true)
-    }
-    
-    @IBAction func itemListBtnHandler(sender: AnyObject) {
-        //fix delay
-        dispatch_async(dispatch_get_main_queue()) {
-            let view = UIStoryboard.instantiate(viewControllerClass: ListItemsViewController.self)
-            view.initialItems = self.selectedItems
-            view.completitionHandler = self.selectItemsCallback
-            self.presentViewController(view, animated: true, completion: nil)
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +44,10 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         tripsManager = TripsManager(context: viewContext)
-        
         tripReminderDate = getStoredPlanTripNotificationDate()
         selectedItems = getStoredPlanTripItems()
         
+        //Setting up location picker
         pcLocationPicker = PCLocationPickerViewer(context: viewContext, selectCallback: {(object: String) in
             self.location.text = object
         })
@@ -107,7 +86,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         yearValuePicker.inputView = yearDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
         yearValuePicker.inputAccessoryView = toolBar
         
-        
+        ///Setting up cashToBring
         cashToBring.inputAccessoryView = toolBar
         
         location.text = pcLocationPicker.selectedValue
@@ -118,6 +97,83 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
         updateItemsTextField(selectedItems)
     }
     
+    func dismissInputView(sender: UITextField){
+        location.endEditing(true)
+        parkingList.endEditing(true)
+        medicationList.endEditing(true)
+        dayValuePicker.endEditing(true)
+        monthValuePicker.endEditing(true)
+        yearValuePicker.endEditing(true)
+        cashToBring.endEditing(true)
+    }
+    
+    @IBAction func settingsBtnHandler(sender: AnyObject) {
+        //fix delay
+        dispatch_async(dispatch_get_main_queue()) {
+            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func itemListBtnHandler(sender: AnyObject) {
+        //fix delay
+        dispatch_async(dispatch_get_main_queue()) {
+            let view = UIStoryboard.instantiate(viewControllerClass: ListItemsViewController.self)
+            view.initialItems = self.selectedItems
+            view.completitionHandler = self.selectItemsCallback
+            self.presentViewController(view, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func generateTrip(sender: AnyObject) {
+        if tripsManager.getTrip() != nil {
+            var refreshAlert = UIAlertController(title: "Update Trip", message: "All data will be lost.", preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { _ in
+                self.storeTrip()
+            }))
+            
+            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }else{
+            self.storeTrip()
+            
+            var successAlert = UIAlertController(title: "Success!", message: "", preferredStyle: .Alert)
+            successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(successAlert, animated: true, completion: nil)
+            
+            delay(3.0) {
+                successAlert.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+    }
+    
+    func storeTrip(){
+        let loc = location.text
+        let medication = Medicine.Pill(rawValue: medicationList.text)!
+        let cash = Int64(cashToBring.text.toInt()!)
+        
+        Logger.Info("Inserting new trip with:")
+        Logger.Info(location)
+        Logger.Info(medicationList)
+        Logger.Info(cash)
+        Logger.Info(tripReminderDate.formatWith("dd-MM-yyyy"))
+        
+        let trip = tripsManager.createTrip(loc, medicine: medication, cash: cash, reminderDate: tripReminderDate)
+        for i in selectedItems{
+            trip.itemsManager(viewContext).addItem(i, quantity: 1)
+        }
+    }
+    
+    
+    
+    func selectItemsCallback(listItems: [String]){
+        selectedItems = listItems
+        updateItemsTextField(listItems)
+    }
+}
+
+/// local variables updaters
+
+extension PlanTripViewController {
     func updateDateTextFields(date: NSDate){
         dayValuePicker.text = date.formatWith("dd")
         monthValuePicker.text = date.formatWith("MM")
@@ -145,47 +201,10 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     func getStoredPlanTripCashToBring() -> Int64{
         return tripsManager.getTrip()?.cash ?? 0
     }
-    
-    @IBAction func generateTrip(sender: AnyObject) {
-        if tripsManager.getTrip() != nil {
-            var refreshAlert = UIAlertController(title: "Update Trip", message: "All data will be lost.", preferredStyle: .Alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { _ in
-                self.storeTrip()
-            }))
-            
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
-            presentViewController(refreshAlert, animated: true, completion: nil)
-        }else{
-            self.storeTrip()
-            
-            var confirmAlert = UIAlertController(title: "Success!", message: "", preferredStyle: .Alert)
-            confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-            presentViewController(confirmAlert, animated: true, completion: nil)
-            
-            delay(3.0) {
-                confirmAlert.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
-    }
-    
-    func storeTrip(){
-        let loc = location.text
-        let medication = Medicine.Pill(rawValue: medicationList.text)!
-        let cash = Int64(cashToBring.text.toInt()!)
-        
-        Logger.Info("Inserting new trip with:")
-        Logger.Info(location)
-        Logger.Info(medicationList)
-        Logger.Info(cash)
-        Logger.Info(tripReminderDate.formatWith("dd-MM-yyyy"))
-        
-        let trip = tripsManager.createTrip(loc, medicine: medication, cash: cash, reminderDate: tripReminderDate)
-        for i in selectedItems{
-            trip.itemsManager(viewContext).addItem(i, quantity: 1)
-        }
-    }
-    
-    
+}
+
+/// localization
+extension PlanTripViewController : CLLocationManagerDelegate{
     @IBAction func findMyLocation(sender: AnyObject) {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -213,17 +232,5 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         println("Error while updating location " + error.localizedDescription)
-    }
-    
-    @IBAction func settingsBtnHandler(sender: AnyObject) {
-        //fix delay
-        dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
-        }
-    }
-    
-    func selectItemsCallback(listItems: [String]){
-        selectedItems = listItems
-        updateItemsTextField(listItems)
     }
 }

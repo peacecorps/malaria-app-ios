@@ -24,9 +24,9 @@ class SetupScreenViewController : UIViewController{
         return keyboardToolbar
         }()
     
-    func dismissInputView(sender: UITextField){
-        medicineName.endEditing(true)
-        reminderTime.endEditing(true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -58,9 +58,9 @@ class SetupScreenViewController : UIViewController{
         refreshDate()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = UIColor(patternImage: UIImage(named: BackgroundImageId)!)
+    func dismissInputView(sender: UITextField){
+        medicineName.endEditing(true)
+        reminderTime.endEditing(true)
     }
     
     private func refreshDate(){

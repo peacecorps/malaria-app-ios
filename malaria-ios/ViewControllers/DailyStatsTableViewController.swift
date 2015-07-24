@@ -1,84 +1,26 @@
 import Foundation
 import UIKit
 
-protocol Stat{
-    var title : String { get }
-    var image : UIImage { get }
-    var attributeValue : String { get }
-}
-
-class Adherence : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
-    var title : String { return "Adherence to medicine" }
-    var image : UIImage { return UIImage(named: "Adherence")! }
-    var attributeValue : String {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.numberStyle = NSNumberFormatterStyle.PercentStyle
-        numberFormatter.maximumFractionDigits = 0
-        numberFormatter.multiplier = 1
-
-        return numberFormatter.stringFromNumber(100 * medicineManager.getCurrentMedicine()!.stats(context).pillAdherence())!
-    }
-}
-
-class PillStreak : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-    
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
-    var title : String { return "Doses in a Row" }
-    var image : UIImage { return UIImage(named: "DosesInRow")! }
-    var attributeValue : String { return "\(medicineManager.getCurrentMedicine()!.stats(context).pillStreak())"}
-}
-
-class MedicineLastTaken : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-    
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
-    var title : String { return "Medicine Last Take" }
-    var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
-    var attributeValue : String {        
-        for r in medicineManager.getCurrentMedicine()!.registriesManager(context).getRegistries(mostRecentFirst: true){
-            if r.tookMedicine{
-                return r.date.formatWith("d/M")
-            }
-        }
-        
-        return "-/-"
-    }
-}
-
 class DailyStatsTableViewController : UITableViewController{
     
     var listStats: [Stat] = []
     var viewContext: NSManagedObjectContext!
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listStats.count
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 125.0
+    deinit{
+        NSNotificationEvents.UnregisterAll(self)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        refreshScreen()
+    }
+    
+    func refreshScreen() {
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         listStats = [
             MedicineLastTaken(context: viewContext),
@@ -87,6 +29,17 @@ class DailyStatsTableViewController : UITableViewController{
         ]
         
         tableView.reloadData()
+    }
+}
+
+//MARK: Table View Controller related methods
+extension DailyStatsTableViewController{
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return listStats.count
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 125.0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -99,10 +52,4 @@ class DailyStatsTableViewController : UITableViewController{
         
         return cell
     }
-}
-
-class StateCell: UITableViewCell{
-    @IBOutlet weak var statIcon: UIImageView!
-    @IBOutlet weak var statLbl: UILabel!
-    @IBOutlet weak var statValueLbl: UILabel!
 }

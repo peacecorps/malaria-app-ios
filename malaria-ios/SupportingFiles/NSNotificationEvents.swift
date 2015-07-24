@@ -4,6 +4,12 @@ import UIKit
 class NSNotificationEvents{
     enum Events : String{
         case ChangedEntries = "ChangedEntries"
+        case UIApplicationWillEnterForegroundNotification = "UIApplicationWillEnterForegroundNotification"
+    }
+    
+    static func ObserveEnteredForeground(observer: NSObject, selector: Selector){
+        NSNotificationEvents.observe(Events.UIApplicationWillEnterForegroundNotification.rawValue, observer, selector)
+
     }
     
     static func DataUpdated(object: AnyObject?){

@@ -57,6 +57,7 @@
 		200F22191B623B8D00C29404 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F22181B623B8D00C29404 /* Globals.swift */; };
 		200F221D1B62701000C29404 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221C1B62701000C29404 /* DailyStatsCells.swift */; };
 		200F221F1B6270D700C29404 /* MonthAdherenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */; };
+		200F22231B628CAF00C29404 /* HorizontalGraphBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F22221B628CAF00C29404 /* HorizontalGraphBar.swift */; };
 		20246D151B4F1BA000384759 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D141B4F1BA000384759 /* CoreDataManager.swift */; };
 		20246D161B4F1D3200384759 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20246D191B4F1FAC00384759 /* TestContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D181B4F1FAC00384759 /* TestContexts.swift */; };
@@ -110,7 +111,6 @@
 		2095B86D1B5A4AD200119896 /* CVShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B8521B5A4AD200119896 /* CVShape.swift */; };
 		2095B86F1B5A4B7800119896 /* MonthyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B86E1B5A4B7800119896 /* MonthyViewController.swift */; };
 		20C13EE01B5F990300D66C00 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EDF1B5F990300D66C00 /* UIView.swift */; };
-		20C13EE21B5F9B1D00D66C00 /* UISlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE11B5F9B1D00D66C00 /* UISlider.swift */; };
 		20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -181,6 +181,7 @@
 		200F22181B623B8D00C29404 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		200F221C1B62701000C29404 /* DailyStatsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyStatsCells.swift; sourceTree = "<group>"; };
 		200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthAdherenceCell.swift; path = Graph/MonthAdherenceCell.swift; sourceTree = "<group>"; };
+		200F22221B628CAF00C29404 /* HorizontalGraphBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalGraphBar.swift; path = UIView/HorizontalGraphBar.swift; sourceTree = "<group>"; };
 		20246D141B4F1BA000384759 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		20246D181B4F1FAC00384759 /* TestContexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestContexts.swift; sourceTree = "<group>"; };
 		20246D241B53241F00384759 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -231,7 +232,6 @@
 		2095B86E1B5A4B7800119896 /* MonthyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthyViewController.swift; path = Graph/MonthyViewController.swift; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDF1B5F990300D66C00 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		20C13EE11B5F9B1D00D66C00 /* UISlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISlider.swift; sourceTree = "<group>"; };
 		20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
@@ -378,7 +378,6 @@
 				203F0B101B45B68700826E06 /* UIColor.swift */,
 				203F0B1B1B46EB9E00826E06 /* UIPickView.swift */,
 				20C13EDF1B5F990300D66C00 /* UIView.swift */,
-				20C13EE11B5F9B1D00D66C00 /* UISlider.swift */,
 				20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */,
 				200F22181B623B8D00C29404 /* Globals.swift */,
 			);
@@ -404,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				200E93FE1B5BC42300E6DAC7 /* CircleProgressView.swift */,
+				200F22221B628CAF00C29404 /* HorizontalGraphBar.swift */,
 			);
 			name = UIViews;
 			sourceTree = "<group>";
@@ -785,8 +785,8 @@
 				200C73081B40368600998100 /* PillsStatsViewController.swift in Sources */,
 				200C72A81B40368600998100 /* SyncManager.swift in Sources */,
 				200C73061B40368600998100 /* PagesManagerViewController.swift in Sources */,
+				200F22231B628CAF00C29404 /* HorizontalGraphBar.swift in Sources */,
 				200C730C1B40368600998100 /* SetupScreenViewController.swift in Sources */,
-				20C13EE21B5F9B1D00D66C00 /* UISlider.swift in Sources */,
 				2095B8671B5A4AD200119896 /* CVCalendarWeekView.swift in Sources */,
 				200EE48A1B1343A50087FB24 /* AppDelegate.swift in Sources */,
 				200E93FF1B5BC42300E6DAC7 /* CircleProgressView.swift in Sources */,

@@ -73,11 +73,9 @@ class SetupScreenViewController : UIViewController{
             //avoid showing the alert view if there are no changes
             if let current = medicineManager.getCurrentMedicine(){
                 if current.name == medicineName.text && NSDate.areDatesSameTime(current.notificationTime!, dateTwo: pillReminderNotificationTime){
-                    
-                    var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
-                    dispatch_after(time, dispatch_get_main_queue(), {
+                    delay(0.05) {
                         self.dismissViewControllerAnimated(true, completion: nil)
-                    })
+                    }
                     return
                 }
             }
@@ -87,19 +85,15 @@ class SetupScreenViewController : UIViewController{
                 self.medicineManager.registerNewMedicine(Medicine.Pill(rawValue: self.medicineName.text)!)
                 self.medicineManager.setCurrentPill(Medicine.Pill(rawValue: self.medicineName.text)!)
                 self.medicineManager.getCurrentMedicine()!.notificationManager(self.viewContext).scheduleNotification(self.pillReminderNotificationTime)
-                
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue(), {
+                delay(0.05) {
                     self.dismissViewControllerAnimated(true, completion: nil)
-                })
-                
+                }
             }))
             
             medicineAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.05 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue(), {
+                delay(0.05) {
                     self.dismissViewControllerAnimated(true, completion: nil)
-                })
+                }
             }))
             
             presentViewController(medicineAlert, animated: true, completion: nil)

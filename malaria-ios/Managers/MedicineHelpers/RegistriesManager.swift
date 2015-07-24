@@ -90,26 +90,11 @@ public class RegistriesManager : CoreDataContextManager{
             }
             
             Logger.Info("Found entry same date. Modifying entry")
-            
-            let previous = r.tookMedicine
             r.tookMedicine = tookMedicine
-            
-            /*
-            //update future entries
-            if(previous != r.tookMedicine){
-                if r.tookMedicine {
-                    getRegistries(date1: date, mostRecentFirst: false).map({$0.numberPillsTaken += 1})
-                }else{
-                    getRegistries(date1: date, mostRecentFirst: false).map({$0.numberPillsTaken -= 1})
-                }
-            }*/
-            
-            
         }else{
             registry = Registry.create(Registry.self, context: context)
             registry!.date = date
             registry!.tookMedicine = tookMedicine
-            //registry!.numberPillsTaken = Int64(medicine.stats(context).numberPillsTaken(date2: date))
             
             var newRegistries: [Registry] = medicine.registries.convertToArray()
             newRegistries.append(registry!)
@@ -117,7 +102,6 @@ public class RegistriesManager : CoreDataContextManager{
         }
         
         NSNotificationEvents.DataUpdated(registry!)
-        
         CoreDataHelper.sharedInstance.saveContext(context)
         
         return true

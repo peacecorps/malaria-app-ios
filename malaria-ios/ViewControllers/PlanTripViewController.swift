@@ -149,7 +149,7 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func generateTrip(sender: AnyObject) {
         if tripsManager.getTrip() != nil {
             var refreshAlert = UIAlertController(title: "Update Trip", message: "All data will be lost.", preferredStyle: .Alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { (action: UIAlertAction!) in
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { _ in
                 self.storeTrip()
             }))
             
@@ -162,13 +162,9 @@ class PlanTripViewController: UIViewController, CLLocationManagerDelegate {
             confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
             presentViewController(confirmAlert, animated: true, completion: nil)
             
-            // Delay the dismissal by 5 seconds
-            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(3.0 * Double(NSEC_PER_SEC)))
-            dispatch_after(time, dispatch_get_main_queue(), {
+            delay(3.0) {
                 confirmAlert.dismissViewControllerAnimated(true, completion: nil)
-            })
-            
-            
+            }
         }
     }
     

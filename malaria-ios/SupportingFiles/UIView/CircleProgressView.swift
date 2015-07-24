@@ -2,8 +2,8 @@ import UIKit
 
 @IBDesignable class CircleProgressView: UIView {
     
-    @IBInspectable var circleColor: UIColor = UIColor.grayColor()
-    @IBInspectable var progressColor: UIColor = UIColor.greenColor()
+    @IBInspectable var circleColor: UIColor = UIColor.fromHex(0xE3C79B)
+    @IBInspectable var progressColor: UIColor = UIColor.fromHex(0xE46D71)
     @IBInspectable var clockWise: Bool = true
     @IBInspectable var lineWidth: CGFloat = 4.0 {
         didSet {
@@ -19,6 +19,17 @@ import UIKit
     
     private let backgroundCircle = CAShapeLayer()
     private let progressCircle = CAShapeLayer()
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.backgroundColor = UIColor.clearColor()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func drawRect(rect: CGRect) {
         // Create path

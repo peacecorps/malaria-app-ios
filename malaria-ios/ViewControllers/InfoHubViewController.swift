@@ -1,11 +1,3 @@
-//
-//  InfoHubViewController.swift
-//  malaria-ios
-//
-//  Created by Bruno Henriques on 02/07/15.
-//  Copyright (c) 2015 Bruno Henriques. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -16,6 +8,7 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
     var posts: [Post] = []
     
     let refreshControl = UIRefreshControl()
+    
     var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     var syncManager: SyncManager!
     
@@ -25,27 +18,47 @@ class InfoHubViewController : UIViewController, UICollectionViewDelegate, UIColl
         syncManager = SyncManager(context: viewContext)
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+    
+        refreshControl.tintColor = UIColor.fromHex(0xE46D71)
+        refreshControl.backgroundColor = UIColor.clearColor()
         
-        refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: .ValueChanged)
+        refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.addSubview(refreshControl)
     }
     
     func pullRefreshHandler(){
         println("pull refresh")
-        
         syncManager.sync(EndpointType.Posts.path(), save: true,
-            completionHandler: {Void in
-                self.refreshFromCoreData()
+            completionHandler: {(url: String, error: NSError?) in
+                if let e = error {
+                    
+                    Logger.Error("ERROR RETRIEVING")
+                    println(error?.userInfo)
+                    
+                    var refreshAlert = UIAlertController(title: "Couldn't Update Peace Corps Messages.", message: "Please try again later.", preferredStyle: .Alert)
+                    
+                    if e.code == -1009 {
+                        refreshAlert.message = "No available internet connection. Try again later."
+                        refreshAlert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { _ in
+                            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+                        }))
+                    }
+                    
+                    refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    self.presentViewController(refreshAlert, animated: true, completion: nil)
+                    
+                }else {
+                    self.refreshFromCoreData()
+                }
+                
                 self.refreshControl.endRefreshing()
         })
     }
     
     func refreshFromCoreData() -> Bool{
         Logger.Info("Fetching from coreData")
-        let info = Posts.retrieve(Posts.self, context: viewContext)
-        if info.count > 0{
-            posts = info[0].posts.convertToArray()
-            posts.sort({$0.title < $1.title})
+        if let newPosts = Posts.retrieve(Posts.self, context: viewContext).first {
+            posts = newPosts.posts.convertToArray().sorted({$0.title < $1.title})
             collectionView.reloadData()
             return true
         }

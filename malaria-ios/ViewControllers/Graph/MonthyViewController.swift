@@ -73,6 +73,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = CurrentDayUnselectedCircleFillColor
+        circleView.tag = 123
         return circleView
     }
     
@@ -80,15 +81,19 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         return dayView.isCurrentDay
     }
     
+    func createRingView(dayView: DayView, tookMedicine: Bool) -> CVAuxiliaryView {
+        let ringView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
+        ringView.fillColor = UIColor.clearColor()
+        ringView.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+        
+        return ringView
+    }
+    
     func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
         if let date = dayView.date,
             registryDate = date.convertedDate(),
             tookMedicine = GraphData.sharedInstance.tookMedicine[registryDate.startOfDay]{
-                let ringView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
-                ringView.fillColor = UIColor.clearColor()
-                ringView.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
-                
-                return ringView
+                return createRingView(dayView, tookMedicine: tookMedicine)
         }
         
         return UIView()
@@ -115,7 +120,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         if let previous = previouslySelect{
             if NSDate.areDatesSameDay(previous, dateTwo: selected) {
                 if let registryDate = dayView.date.convertedDate(){
-                    popup(registryDate)
+                    popup(registryDate, dayView: dayView)
                 }
             }
         }
@@ -123,7 +128,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         previouslySelect = selected
     }
     
-    func popup(date: NSDate){
+    func popup(date: NSDate, dayView: CVCalendarDayView){
         let isWeekly = GraphData.sharedInstance.medicine.isWeekly()
         let existsEntry = GraphData.sharedInstance.registriesManager.findRegistry(date) != nil
         let tookMedicine = GraphData.sharedInstance.registriesManager.tookMedicine(date)
@@ -146,17 +151,32 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         
         tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler:{ action in
             println("Pressed yes")
-            GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true)
+            if GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
+                self.updateDayView(dayView, tookMedicine: true)
+            }
         }))
         
         tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler:{ action in
             println("pressed nop")
-            GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true)
+            if GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
+                self.updateDayView(dayView, tookMedicine: false)
+            }
         }))
+        
         
         tookPillActionSheet.addAction(UIAlertAction(title:"Cancel", style: .Cancel, handler: nil))
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
+    
+    ///hack until library offers what we need
+    func updateDayView(dayView: CVCalendarDayView, tookMedicine: Bool) {
+        if dayView.subviews.count >= 3 {
+            (dayView.subviews[1] as? CVAuxiliaryView)?.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+        }else {
+            dayView.insertSubview(createRingView(dayView, tookMedicine: tookMedicine), atIndex: 0)
+        }
+    }
+    
     
     func presentedDateUpdated(date: CVDate) {
         if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {

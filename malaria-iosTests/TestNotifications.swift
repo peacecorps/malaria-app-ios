@@ -70,7 +70,7 @@ class TestNotifications: XCTestCase {
     func testNotificationTime(){
         //reshedule notification
         mdDailyNotifManager.reshedule()
-        XCTAssertTrue(NSDate.areDatesSameDay(mdDaily.notificationTime!, dateTwo: d1 + 1.day))
+        XCTAssertTrue(mdDaily.notificationTime!.sameDayAs(d1 + 1.day))
         
         //since mdWeekly is not currentPill, this should return nil
         XCTAssertNil(mdWeekly.notificationTime)
@@ -81,12 +81,12 @@ class TestNotifications: XCTestCase {
         
         //define currentTime
         mdWeeklyNotifManager.scheduleNotification(d1)
-        XCTAssertTrue(NSDate.areDatesSameDay(mdWeekly.notificationTime!, dateTwo: d1))
+        XCTAssertTrue(mdWeekly.notificationTime!.sameDayAs(d1))
         
         //add new entry and reshedule
         XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
         mdWeeklyNotifManager.reshedule()
-        XCTAssertTrue(NSDate.areDatesSameDay(mdWeekly.notificationTime!, dateTwo: d1 + 7.day))
+        XCTAssertTrue(mdWeekly.notificationTime!.sameDayAs(d1 + 7.day))
     }
     
     func testNotificationDampening(){

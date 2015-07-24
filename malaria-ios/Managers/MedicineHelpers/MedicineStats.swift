@@ -12,6 +12,7 @@ public class MedicineStats : CoreDataContextManager{
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Int`: Number of pills
     public func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int{
         if let reg = registries{
@@ -26,6 +27,7 @@ public class MedicineStats : CoreDataContextManager{
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Int`: Number of supposed pills
     public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int{
         if date1 > date2 {
@@ -51,6 +53,7 @@ public class MedicineStats : CoreDataContextManager{
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Float`: Pill adherence
     public func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Float{        
         let supposedPills = numberSupposedPills(date1: date1, date2: date2, registries: registries)
@@ -79,8 +82,8 @@ public class MedicineStats : CoreDataContextManager{
         for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2, mostRecentFirst: true){
             //check for missing entries
             if let previousD = previousDate{
-                if (isDaily && !NSDate.areDatesSameDay(previousD - 1.day, dateTwo: r.date)) ||
-                    (!isDaily && !NSDate.areDatesSameWeek(previousD - 7.day, dateTwo: r.date))
+                if (isDaily && !(previousD - 1.day).sameDayAs(r.date)) ||
+                    (!isDaily && !(previousD - 7.day).sameWeekAs(r.date))
                 {
                     return result
                 }
@@ -98,7 +101,12 @@ public class MedicineStats : CoreDataContextManager{
         return result
     }
     
-    
+    /// returns pill adhrence in a month
+    /// if there are no entries in that month return 0
+    /// if there are entries in that month, truncate to the oldest and the most recent date to account when the user started tracking
+    ///
+    /// :param: `NSDate`: The month
+    /// :returns: `Float`: pill adherence for the month
     public func pillAdherence(month: NSDate) -> Float{
         let registryManager = medicine.registriesManager(context)
         let registries = registryManager.getRegistries(mostRecentFirst: false)

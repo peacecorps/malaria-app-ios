@@ -13,11 +13,11 @@ import Charts
     
     @IBInspectable var NoDataText: String = "No entries"
     @IBInspectable var NumberRecentMonths: Int = 4
-    @IBInspectable var GraphFillColor: UIColor = UIColor.fromHex(0xA1D4E2)
-    @IBInspectable var XAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
+    @IBInspectable var GraphFillColor: UIColor = UIColor(hex: 0xA1D4E2)
+    @IBInspectable var XAxisLineColor: UIColor = UIColor(hex: 0x8A8B8A)
     @IBInspectable var RightYAxisLineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    @IBInspectable var LeftYAxisLineColor: UIColor = UIColor.fromHex(0x8A8B8A)
-    @IBInspectable var AxisFontColor: UIColor = UIColor.fromHex(0x705246)
+    @IBInspectable var LeftYAxisLineColor: UIColor = UIColor(hex: 0x8A8B8A)
+    @IBInspectable var AxisFontColor: UIColor = UIColor(hex: 0x705246)
     
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
     

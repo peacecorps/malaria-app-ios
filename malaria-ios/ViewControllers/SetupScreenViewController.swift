@@ -72,7 +72,7 @@ class SetupScreenViewController : UIViewController{
             
             //avoid showing the alert view if there are no changes
             if let current = medicineManager.getCurrentMedicine(){
-                if current.name == medicineName.text && NSDate.areDatesSameTime(current.notificationTime!, dateTwo: pillReminderNotificationTime){
+                if current.name == medicineName.text && current.notificationTime!.sameClockTimeAs(pillReminderNotificationTime){
                     delay(0.05) {
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }

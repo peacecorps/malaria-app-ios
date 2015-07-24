@@ -58,6 +58,8 @@
 		200F221D1B62701000C29404 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221C1B62701000C29404 /* DailyStatsCells.swift */; };
 		200F221F1B6270D700C29404 /* MonthAdherenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F221E1B6270D700C29404 /* MonthAdherenceCell.swift */; };
 		200F22231B628CAF00C29404 /* HorizontalGraphBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F22221B628CAF00C29404 /* HorizontalGraphBar.swift */; };
+		200F22241B629C0A00C29404 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
+		200F22251B629C0A00C29404 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		20246D151B4F1BA000384759 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D141B4F1BA000384759 /* CoreDataManager.swift */; };
 		20246D161B4F1D3200384759 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20246D191B4F1FAC00384759 /* TestContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D181B4F1FAC00384759 /* TestContexts.swift */; };
@@ -870,12 +872,14 @@
 				20246D1C1B4F278E00384759 /* TestDailyMedicineStatistics.swift in Sources */,
 				20246D1E1B4F28BD00384759 /* TestUserSettings.swift in Sources */,
 				20246D1D1B4F284000384759 /* TestWeeklyMedicineStatistics.swift in Sources */,
+				200F22251B629C0A00C29404 /* TestSyncManager.swift in Sources */,
 				20246D1B1B4F245300384759 /* TestMedicineRegistries.swift in Sources */,
 				20246D191B4F1FAC00384759 /* TestContexts.swift in Sources */,
 				20246D211B4F2C0D00384759 /* TestTimedInsertions.swift in Sources */,
 				20246D161B4F1D3200384759 /* TestPlanTrip.swift in Sources */,
 				20246D201B4F29F700384759 /* TestNotifications.swift in Sources */,
 				20246D1A1B4F20C000384759 /* TestMedicineManager.swift in Sources */,
+				200F22241B629C0A00C29404 /* TestMapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

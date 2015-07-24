@@ -32,14 +32,17 @@ public extension NSDate{
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: self)
     }
     
+    ///retrieves the week
     var week: Int {
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitWeekOfYear, fromDate: self)
     }
     
+    ///retrieves the hour
     var hour: Int {
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitHour, fromDate: self)
     }
     
+    ///retrieves the minute
     var minute: Int {
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitMinute, fromDate: self)
     }
@@ -49,10 +52,12 @@ public extension NSDate{
         return (NSDate.from(year, month: month, day: 1) + 1.month - 1.minute).day
     }
     
+    ///retrieves the start of the day (using startOfDayForDate)
     var startOfDay: NSDate {
         return NSCalendar.currentCalendar().startOfDayForDate(self)
     }
     
+    ///retrieves the end of the day (23:59:59)
     var endOfDay: NSDate {
         return startOfDay + 1.day - 1.second
     }
@@ -92,17 +97,24 @@ public extension NSDate{
     ///
     /// :param: `String`: The format string (e.g. "yyyy-MM-dd")
     /// :returns: `String`
-    func formatWith(format: String) -> String{
+    func formatWith(_ format: String = "dd-MMMM-yyyy hh:mm") -> String{
         let formatter = NSDateFormatter()
         formatter.dateFormat = format
         return formatter.stringFromDate(self)
     }
     
-    
+    /// Returns true if happens before the date given as argument
+    ///
+    /// :param: `NSDate`: The day to compare to
+    /// :returns: `Bool`
     func happensMonthsBefore(date: NSDate) -> Bool{
         return (self.year < date.year) || (self.year == date.year && self.month < date.month)
     }
     
+    /// Returns true if happens after the date given as argument
+    ///
+    /// :param: `NSDate`: The day to compare to
+    /// :returns: `Bool`
     func happensMonthsAfter(date: NSDate) -> Bool{
         return (self.year > date.year) || (self.year == date.year && self.month > date.month)
     }
@@ -110,22 +122,22 @@ public extension NSDate{
     /// Returns true if both dates represents the same day (day, month and year)
     ///
     /// :returns: `Bool`
-    class func areDatesSameDay(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        return dateOne.year == dateTwo.year && dateOne.month == dateTwo.month && dateOne.day == dateTwo.day
+    func sameDayAs(dateTwo: NSDate) -> Bool {
+        return self.year == dateTwo.year && self.month == dateTwo.month && self.day == dateTwo.day
     }
 
     /// Returns true if both dates belong in the same week.
     ///
     /// :returns: `Bool`
-    class func areDatesSameWeek(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        return dateOne.year == dateTwo.year && dateOne.week == dateTwo.week
+    func sameWeekAs(dateTwo: NSDate) -> Bool {
+        return self.year == dateTwo.year && self.week == dateTwo.week
     }
     
     /// Returns true if both dates are in the same time.
     ///
     /// :returns: `Bool`
-    class func areDatesSameTime(dateOne: NSDate, dateTwo: NSDate) -> Bool {
-        return dateOne.hour == dateTwo.hour && dateOne.minute == dateTwo.minute
+    func sameClockTimeAs(dateTwo: NSDate) -> Bool {
+        return self.hour == dateTwo.hour && self.minute == dateTwo.minute
     }
 }
 

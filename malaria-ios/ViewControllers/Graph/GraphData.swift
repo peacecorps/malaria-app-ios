@@ -94,7 +94,7 @@ class GraphData : NSObject{
                     //updating array from last index to first Index
                     for j in 0...(entries.count - 1) {
                         let posDate = entries.count - 1 - j
-                        if NSDate.areDatesSameDay(entries[posDate].date, dateTwo: day){
+                        if entries[posDate].date.sameDayAs(day){
                             entries.removeAtIndex(posDate)
                             break
                         }

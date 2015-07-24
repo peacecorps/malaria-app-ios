@@ -10,15 +10,15 @@ import UIKit
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     
-    @IBInspectable var SelectedBackgroundColor: UIColor = UIColor.fromHex(0xE3C79B)
-    @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor.fromHex(0xE3C79B)
-    @IBInspectable var UnselectedTextColor: UIColor = UIColor.fromHex(0x444444)
+    @IBInspectable var SelectedBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
+    @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
+    @IBInspectable var UnselectedTextColor: UIColor = UIColor(hex: 0x444444)
     @IBInspectable var UnselectedTodayTextColor: UIColor = UIColor.whiteColor()
-    @IBInspectable var DayWeekTextColor: UIColor = UIColor.fromHex(0x444444)
+    @IBInspectable var DayWeekTextColor: UIColor = UIColor(hex: 0x444444)
     @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var SelectedDayDotMarkerColor: UIColor = UIColor.blackColor()
-    @IBInspectable var InsideMonthTextColor: UIColor = UIColor.fromHex(0x444444)
-    @IBInspectable var OutSideMonthTextColor: UIColor = UIColor.fromHex(0x999999)
+    @IBInspectable var InsideMonthTextColor: UIColor = UIColor(hex: 0x444444)
+    @IBInspectable var OutSideMonthTextColor: UIColor = UIColor(hex: 0x999999)
     @IBInspectable var SelectedTextBackgroundColor: UIColor = UIColor.blackColor()
     
     let WeekDayFont = UIFont(name: "AmericanTypewriter", size: 14)!
@@ -122,7 +122,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect{
-            if NSDate.areDatesSameDay(previous, dateTwo: selected) {
+            if previous.sameDayAs(selected) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate, dayView: dayView)
                 }
@@ -133,6 +133,14 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     func popup(date: NSDate, dayView: CVCalendarDayView){
+        if date > NSDate() {
+            var failAlert = UIAlertController(title: "Not possible to change entries in the future.", message: "Try another day", preferredStyle: .Alert)
+            failAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(failAlert, animated: true, completion: nil)
+            
+            return
+        }
+        
         let isWeekly = GraphData.sharedInstance.medicine.isWeekly()
         let existsEntry = GraphData.sharedInstance.registriesManager.findRegistry(date) != nil
         let tookMedicine = GraphData.sharedInstance.registriesManager.tookMedicine(date)

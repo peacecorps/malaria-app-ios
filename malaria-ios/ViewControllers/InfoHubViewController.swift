@@ -18,7 +18,7 @@ class InfoHubViewController : UIViewController{
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
     
-        refreshControl.tintColor = UIColor.fromHex(0xE46D71)
+        refreshControl.tintColor = UIColor(hex: 0xE46D71)
         refreshControl.backgroundColor = UIColor.clearColor()
         refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
         

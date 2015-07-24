@@ -7,19 +7,29 @@ class NSNotificationEvents{
         case UIApplicationWillEnterForegroundNotification = "UIApplicationWillEnterForegroundNotification"
     }
     
+    /// Observe entered foreground events
+    /// :param: `NSObject`: intended object
+    /// :param: `Selector`: NSObject selector
     static func ObserveEnteredForeground(observer: NSObject, selector: Selector){
         NSNotificationEvents.observe(Events.UIApplicationWillEnterForegroundNotification.rawValue, observer, selector)
 
     }
     
+    /// Send event saying that the medicine data was updated
+    /// :param: `AnyObject?`: attached object
     static func DataUpdated(object: AnyObject?){
         NSNotificationEvents.post(Events.ChangedEntries.rawValue, object)
     }
     
+    /// Observe new medicine entries
+    /// :param: `NSObject`: intended object
+    /// :param: `Selector`: NSObject selector
     static func ObserveNewEntries(observer: NSObject, selector: Selector){
         NSNotificationEvents.observe(Events.ChangedEntries.rawValue, observer, selector)
     }
     
+    /// Stop observing all notifications
+    /// :param: `NSObject`: intended object
     static func UnregisterAll(observer: NSObject){
         NSNotificationCenter.defaultCenter().removeObserver(observer)
     }

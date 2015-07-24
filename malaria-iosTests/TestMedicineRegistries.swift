@@ -159,7 +159,7 @@ class TestMedicineRegistries: XCTestCase {
         //verify if modification was a success
         let r = registriesManager.findRegistry(d1 - 4.day)!
         XCTAssertEqual(true, r.tookMedicine)
-        XCTAssertEqual(true, NSDate.areDatesSameDay(r.date, dateTwo: d1 - 4.day))
+        XCTAssertEqual(true, r.date.sameDayAs(d1 - 4.day))
     }
     
     func testCascadeDelete(){

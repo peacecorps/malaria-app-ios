@@ -36,7 +36,7 @@ public class RegistriesManager : CoreDataContextManager{
             }
         }else if medicine.isWeekly(){
             for r in getRegistries(date1: at - 8.day, date2: at + 8.day){
-                if NSDate.areDatesSameWeek(at, dateTwo: r.date){
+                if at.sameWeekAs(r.date){
                     result.append(r)
                 }
             }
@@ -70,7 +70,6 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `Bool` optional: overwrite previous entry (by default is false)
     /// :returns: `Bool`: true if success, false if not
     public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
-        println("HERE -> \(tookMedicine)")
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
             return false
@@ -129,11 +128,11 @@ public class RegistriesManager : CoreDataContextManager{
     }
     
     public func filter(registries: [Registry], date1: NSDate, date2: NSDate)  -> [Registry]{
-        if NSDate.areDatesSameDay(date1, dateTwo: date2){
-            return registries.filter({NSDate.areDatesSameDay($0.date, dateTwo: date1)})
+        if date1.sameDayAs(date2){
+            return registries.filter({$0.date.sameDayAs(date1)})
         }
         
-        return registries.filter({ ($0.date > date1 && $0.date < date2) || NSDate.areDatesSameDay($0.date, dateTwo: date1) || NSDate.areDatesSameDay($0.date, dateTwo: date2)})
+        return registries.filter({ ($0.date > date1 && $0.date < date2) || $0.date.sameDayAs(date1) || $0.date.sameDayAs(date2)})
     }
 
     /// Returns entry in the specified date if exists

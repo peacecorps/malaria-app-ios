@@ -66,7 +66,7 @@ class TestNSDateExtensions: XCTestCase {
     func testSameDate() {
         let d1 = NSDate()
         let d2 = d1 + 7.day - 7.day
-        XCTAssertEqual(true, NSDate.areDatesSameDay(d1, dateTwo: d2))
+        XCTAssertEqual(true, d1.sameDayAs(d2))
     }
     
     func testSameWeek() {
@@ -74,16 +74,16 @@ class TestNSDateExtensions: XCTestCase {
         
         //0 = Saturday, 1 = Sunday, 2 = Monday
         d1 += NSCalendar.currentCalendar().firstWeekday.day
-        
-        XCTAssertFalse(NSDate.areDatesSameWeek(d1, dateTwo: d1 - 1.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 1.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 2.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 3.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 4.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 5.day))
-        XCTAssertTrue(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 6.day))
-        XCTAssertFalse(NSDate.areDatesSameWeek(d1, dateTwo: d1 + 7.day))
+       
+        XCTAssertFalse(d1.sameWeekAs(d1 - 1.day))
+        XCTAssertTrue(d1.sameWeekAs(d1))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 1.day))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 2.day))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 3.day))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 4.day))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 5.day))
+        XCTAssertTrue(d1.sameWeekAs(d1 + 6.day))
+        XCTAssertFalse(d1.sameWeekAs(d1 + 7.day))
     }
     
     func testDaysBetween(){

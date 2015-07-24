@@ -62,7 +62,7 @@ import UIKit
                 
                 //reset configuration so that the user can reshedule the time
                 UserSettingsManager.setDidConfiguredMedicine(false)
-            }else if !NSDate.areDatesSameDay(currentDate, dateTwo: medicine.notificationTime!)
+            }else if !currentDate.sameDayAs(medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
                         && !medicine.registriesManager(viewContext).tookMedicine(currentDate){
                             
@@ -81,7 +81,6 @@ import UIKit
         }
     }
 }
-
 
 extension DidTakePillsViewController {
     func test() {
@@ -141,7 +140,7 @@ extension DidTakePillsViewController {
         //addAllTrue()
         //halfTookHalfNot()
         //missingHalfEntries()
-        //missingEntries()
+        missingEntries()
         
         Logger.Warn("DONE ADDING DUMMY ENTRIES")
     }

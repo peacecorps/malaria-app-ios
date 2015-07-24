@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension UITabBarController {
+@IBDesignable extension UITabBarController {
 
     @IBInspectable var showBar: Bool {
         get {

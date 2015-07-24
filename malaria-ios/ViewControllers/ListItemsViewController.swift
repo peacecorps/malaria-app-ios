@@ -4,7 +4,7 @@ import UIKit
 @IBDesignable class ListItemsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
 
-    @IBInspectable var TextColor: UIColor = UIColor.fromHex(0x6F5247)
+    @IBInspectable var TextColor: UIColor = UIColor(hex: 0x6F5247)
     
     
     let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)!

@@ -96,7 +96,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
         if let date = dayView.date,
             registryDate = date.convertedDate(),
-            tookMedicine = GraphData.sharedInstance.tookMedicine[registryDate.startOfDay]{
+            tookMedicine = CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay]{
                 return createRingView(dayView, tookMedicine: tookMedicine)
         }
         
@@ -106,7 +106,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
         if let date = dayView.date,
             registryDate = date.convertedDate(){
-                return GraphData.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
+                return CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
         }
 
         return false
@@ -141,9 +141,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             return
         }
         
-        let isWeekly = GraphData.sharedInstance.medicine.isWeekly()
-        let existsEntry = GraphData.sharedInstance.registriesManager.findRegistry(date) != nil
-        let tookMedicine = GraphData.sharedInstance.registriesManager.tookMedicine(date)
+        let isWeekly = CachedStatistics.sharedInstance.medicine.isWeekly()
+        let existsEntry = CachedStatistics.sharedInstance.registriesManager.findRegistry(date) != nil
+        let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
         var title = ""
         var message = ""
@@ -163,14 +163,14 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         
         tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler:{ action in
             println("Pressed yes")
-            if GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
+            if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
                 self.updateDayView(dayView, tookMedicine: true)
             }
         }))
         
         tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler:{ action in
             println("pressed nop")
-            if GraphData.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
+            if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
                 self.updateDayView(dayView, tookMedicine: false)
             }
         }))

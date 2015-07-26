@@ -142,4 +142,20 @@ public class RegistriesManager : CoreDataContextManager{
     public func findRegistry(date: NSDate) -> Registry?{
         return getRegistries(date1: date, date2: date).first
     }
+    
+    /// Returns last day when the user taken the medicine
+    ///
+    /// :param `[Registry]? optional`: cached list of entries. Must be sorted from most recent to least recent
+    /// :returns: `NSDate?`
+    
+    func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
+        let entries = registries != nil ? registries! : getRegistries(mostRecentFirst: true)
+        
+        for r in entries{
+            if r.tookMedicine{
+                return r.date
+            }
+        }
+        return nil
+    }
 }

@@ -21,6 +21,11 @@ import Charts
     
     let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
     
+    var isPillStatsUpdated: Bool {
+        let data = CachedStatistics.sharedInstance
+        return data.isMonthlyAdherenceDataUpdated && data.isGraphViewDataUpdated && data.isCalendarViewDataUpdated
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
@@ -40,10 +45,10 @@ import Charts
     func refreshScreen() {
         self.graphFrame.bringSubviewToFront(self.chartView)
         
-        if GraphData.sharedInstance.outdated{
+        if !isPillStatsUpdated {
             refreshData()
         }else{
-            configureData(GraphData.sharedInstance.adherencesPerDay)
+            configureData(CachedStatistics.sharedInstance.adherencesPerDay)
             adherenceSliderTable.reloadData()
         }
     }
@@ -53,7 +58,7 @@ import Charts
         
         chartView.clear()
         
-        let cachedStats = GraphData.sharedInstance
+        let cachedStats = CachedStatistics.sharedInstance
         cachedStats.refreshContext()
         
         cachedStats.setupBeforeCaching()
@@ -64,10 +69,10 @@ import Charts
             self.adherenceSliderTable.reloadData()
         }
         
-        cachedStats.retrieveGraphData({(progress: Float) in
+        cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in
-            self.configureData(GraphData.sharedInstance.adherencesPerDay)
+            self.configureData(CachedStatistics.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })
     }
@@ -76,7 +81,7 @@ import Charts
 extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GraphData.sharedInstance.monthAdhrence.count
+        return CachedStatistics.sharedInstance.monthAdhrence.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -84,7 +89,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let data = GraphData.sharedInstance.monthAdhrence[indexPath.row]
+        let data = CachedStatistics.sharedInstance.monthAdhrence[indexPath.row]
         let month = data.0
         let adherenceValue = data.1
         
@@ -96,7 +101,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
-        monthView.startDay = GraphData.sharedInstance.monthAdhrence[indexPath.row].0
+        monthView.startDay = CachedStatistics.sharedInstance.monthAdhrence[indexPath.row].0
         
         presentViewController(
             monthView,

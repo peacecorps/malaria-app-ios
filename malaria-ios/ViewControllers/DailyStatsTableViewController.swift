@@ -3,8 +3,11 @@ import UIKit
 
 class DailyStatsTableViewController : UITableViewController{
     
-    var listStats: [Stat] = []
-    var viewContext: NSManagedObjectContext!
+    var listStats: [Stat] = [
+        MedicineLastTaken(),
+        PillStreak(),
+        Adherence()
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +24,15 @@ class DailyStatsTableViewController : UITableViewController{
     }
     
     func refreshScreen() {
-        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-        listStats = [
-            MedicineLastTaken(context: viewContext),
-            PillStreak(context: viewContext),
-            Adherence(context: viewContext)
-        ]
-        
-        tableView.reloadData()
+        let cachedStats = CachedStatistics.sharedInstance
+        if !cachedStats.isDailyStatsUpdated {
+            cachedStats.refreshContext()
+            cachedStats.setupBeforeCaching()
+            
+            cachedStats.retrieveDailyStats({ self.tableView.reloadData()})
+        }else {
+            tableView.reloadData()
+        }
     }
 }
 

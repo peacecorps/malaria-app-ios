@@ -14,14 +14,6 @@ protocol Stat{
 }
 
 class Adherence : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-    
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
     var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
     var attributeValue : String {
@@ -30,42 +22,23 @@ class Adherence : Stat{
         numberFormatter.maximumFractionDigits = 0
         numberFormatter.multiplier = 1
         
-        return numberFormatter.stringFromNumber(100 * medicineManager.getCurrentMedicine()!.stats(context).pillAdherence())!
+        return numberFormatter.stringFromNumber(CachedStatistics.sharedInstance.todaysAdherence)!
     }
 }
 
 class PillStreak : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-    
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
-    var attributeValue : String { return "\(medicineManager.getCurrentMedicine()!.stats(context).pillStreak())"}
+    var attributeValue : String { return "\(CachedStatistics.sharedInstance.todaysPillStreak)"}
 }
 
 class MedicineLastTaken : Stat{
-    let context: NSManagedObjectContext
-    let medicineManager: MedicineManager
-    
-    init(context: NSManagedObjectContext){
-        self.context = context
-        medicineManager = MedicineManager(context: context)
-    }
-    
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
     var attributeValue : String {
-        for r in medicineManager.getCurrentMedicine()!.registriesManager(context).getRegistries(mostRecentFirst: true){
-            if r.tookMedicine{
-                return r.date.formatWith("d/M")
-            }
+        if let last = CachedStatistics.sharedInstance.lastMedicine {
+            return last.formatWith("d/M")
         }
-        
-        return "-/-"
+        return  "-/-"
     }
 }

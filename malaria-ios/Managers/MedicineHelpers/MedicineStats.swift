@@ -73,13 +73,16 @@ public class MedicineStats : CoreDataContextManager{
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
+    /// :param: `[Registry]? optional`: Cached list of entries. Must be sorted from most recent to least recent
     /// :returns: `Int`: Pill streak
-    public func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max) -> Int{
+    public func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int{
+        let entries = registries != nil ? registries! : medicine.registriesManager(context).getRegistries(date1: date1, date2: date2, mostRecentFirst: true)
+        
         var result = 0
         
         let isDaily = medicine.isDaily()
         var previousDate: NSDate?
-        for r in medicine.registriesManager(context).getRegistries(date1: date1, date2: date2, mostRecentFirst: true){
+        for r in entries {
             //check for missing entries
             if let previousD = previousDate{
                 if (isDaily && !(previousD - 1.day).sameDayAs(r.date)) ||

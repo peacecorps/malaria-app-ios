@@ -1,39 +1,47 @@
 import Foundation
 import UIKit
 
-class GraphData : NSObject{
-    static let sharedInstance = GraphData()
-    
-    var outdated: Bool { get {
-        return !updatedMonthsAdherences && !updatedDailyAdherences }
-    }
+class CachedStatistics : NSObject{
+    static let sharedInstance = CachedStatistics()
 
-    var updatedMonthsAdherences = false
-    var updatedDailyAdherences = false
+    var context: NSManagedObjectContext!
     
     var medicine: Medicine!
     var registriesManager: RegistriesManager!
     var statsManager: MedicineStats!
     
     var registries = [Registry]()
+
+    //For PillStatsViewController
+    var isMonthlyAdherenceDataUpdated = false
+    var isGraphViewDataUpdated = false
+    var isCalendarViewDataUpdated = false
+    
     var tookMedicine: [NSDate: Bool] = [:]
     var monthAdhrence = [(NSDate, Float)]()
-    var adherencesPerDay = [(NSDate,Float)]()
+    var adherencesPerDay = [(NSDate, Float)]()
     
-    var context: NSManagedObjectContext!
+    //For dailyStats
+    var isDailyStatsUpdated = false
+    
+    var lastMedicine: NSDate?
+    var todaysPillStreak: Int = 0
+    var todaysAdherence: Float = 0
     
     override init(){
         super.init()
-        NSNotificationEvents.ObserveNewEntries(self, selector: "updateShouldUpdateFlags")
+        NSNotificationEvents.ObserveNewEntries(self, selector: "resetFlags")
     }
     
     deinit{
         NSNotificationEvents.UnregisterAll(self)
     }
     
-    func updateShouldUpdateFlags(){
-        updatedMonthsAdherences = false
-        updatedDailyAdherences = false
+    func resetFlags(){
+        isMonthlyAdherenceDataUpdated = false
+        isGraphViewDataUpdated = false
+        isCalendarViewDataUpdated = false
+        isDailyStatsUpdated = false
     }
     
     func refreshContext(){
@@ -47,10 +55,32 @@ class GraphData : NSObject{
     func setupBeforeCaching() {
         registries = registriesManager.getRegistries(mostRecentFirst: false)
     }
+}
+
+extension CachedStatistics {
+    func retrieveDailyStats(completition: () -> ()){
+        lastMedicine = nil
+        todaysPillStreak = 0
+        todaysAdherence = 0
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            self.todaysAdherence = self.statsManager.pillAdherence(registries: self.registries) * 100
+            
+            let mostRecentFirst = self.registries.reverse()
+            self.lastMedicine = self.registriesManager.lastPillDate(registries: mostRecentFirst)
+            self.todaysPillStreak = self.statsManager.pillStreak(registries: mostRecentFirst)
+            
+            self.isDailyStatsUpdated = true
+            
+            //update UI when finished
+            dispatch_async(dispatch_get_main_queue(), completition)
+        })
+        
+    }
     
     func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
         monthAdhrence.removeAll()
-
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
@@ -58,7 +88,7 @@ class GraphData : NSObject{
                 self.monthAdhrence.append((month, self.statsManager.pillAdherence(month, registries: self.registries)*100))
             }
             
-            self.updatedMonthsAdherences = true
+            self.isMonthlyAdherenceDataUpdated = true
             
             //update UI when finished
             dispatch_async(dispatch_get_main_queue(), completition)
@@ -68,14 +98,15 @@ class GraphData : NSObject{
     func retrieveTookMedicineStats(){
         tookMedicine.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            registries.map({tookMedicine[$0.date.startOfDay] = $0.tookMedicine})
+            self.registries.map( {self.tookMedicine[$0.date.startOfDay] = $0.tookMedicine} )
+            self.isCalendarViewDataUpdated = true
         })
     }
     
     
-    func retrieveGraphData(progress: (progress: Float) -> (), completition : () -> ()) {
+    func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
         adherencesPerDay.removeAll()
-
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             var entries = self.registries
@@ -108,11 +139,12 @@ class GraphData : NSObject{
                     })
                 }
                 
-                self.updatedDailyAdherences = true
+                self.isGraphViewDataUpdated = true
             }
             
             //update UI when finished
             dispatch_async(dispatch_get_main_queue(), completition)
         })
     }
+
 }

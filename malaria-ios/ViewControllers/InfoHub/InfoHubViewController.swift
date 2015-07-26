@@ -17,7 +17,7 @@ class InfoHubViewController : UIViewController{
         syncManager = SyncManager(context: viewContext)
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-    
+        
         refreshControl.tintColor = UIColor(hex: 0xE46D71)
         refreshControl.backgroundColor = UIColor.clearColor()
         refreshControl.addTarget(self, action: "pullRefreshHandler", forControlEvents: UIControlEvents.ValueChanged)
@@ -125,8 +125,26 @@ extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewData
             self.presentViewController(postView, animated: true, completion: nil)
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        let spacing = determineSpacing()
+        return UIEdgeInsetsMake(0, spacing, 0, spacing)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return determineSpacing()
+    }
+    
+    private func determineSpacing() -> CGFloat{
+        let screenWidth = UIScreen.mainScreen().bounds.size.width
+        let numberItems = floor(screenWidth/PeaceCorpsMessageCollectionViewCell.CellWidth)
+        let remainingScreen = screenWidth - numberItems*PeaceCorpsMessageCollectionViewCell.CellWidth
+        
+        return floor(remainingScreen/(numberItems - 1 + 2)) //left and right margin plus space between cells (numItems - 1)
+    }
 }
 
 class PeaceCorpsMessageCollectionViewCell : UICollectionViewCell{
+    static let CellWidth: CGFloat = 140
     @IBOutlet weak var postBtn: UIButton!
 }

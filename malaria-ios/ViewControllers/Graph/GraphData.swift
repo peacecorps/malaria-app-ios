@@ -15,10 +15,10 @@ class GraphData : NSObject{
     var registriesManager: RegistriesManager!
     var statsManager: MedicineStats!
     
+    var registries = [Registry]()
     var tookMedicine: [NSDate: Bool] = [:]
-    var months = [NSDate]()
-    var days = [NSDate]()
-    var adherencesPerDay = [Float]()
+    var monthAdhrence = [(NSDate, Float)]()
+    var adherencesPerDay = [(NSDate,Float)]()
     
     var context: NSManagedObjectContext!
     
@@ -44,12 +44,18 @@ class GraphData : NSObject{
         statsManager = medicine.stats(context)
     }
     
+    func setupBeforeCaching() {
+        registries = registriesManager.getRegistries(mostRecentFirst: false)
+    }
+    
     func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
-        months.removeAll()
+        monthAdhrence.removeAll()
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
-                self.months.append(today - i.month)
+                let month = today - i.month
+                self.monthAdhrence.append((month, self.statsManager.pillAdherence(month, registries: self.registries)*100))
             }
             
             self.updatedMonthsAdherences = true
@@ -61,35 +67,31 @@ class GraphData : NSObject{
     
     func retrieveTookMedicineStats(){
         tookMedicine.removeAll()
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.registriesManager.getRegistries(mostRecentFirst: false).map({tookMedicine[$0.date.startOfDay] = $0.tookMedicine})
+            registries.map({tookMedicine[$0.date.startOfDay] = $0.tookMedicine})
         })
     }
     
     
     func retrieveGraphData(progress: (progress: Float) -> (), completition : () -> ()) {
-        days.removeAll()
         adherencesPerDay.removeAll()
-        
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
-            var entries = self.registriesManager.getRegistries(mostRecentFirst: false)
+            var entries = self.registries
             
             if entries.count != 0 {
                 let oldestDate = entries[0].date
                 let numDays = (today - oldestDate) + 1 //include today
                 
-                self.days = [NSDate](count: numDays, repeatedValue: today)
-                self.adherencesPerDay = [Float](count: numDays, repeatedValue: 0)
+                self.adherencesPerDay = [(NSDate,Float)](count: numDays, repeatedValue: (today, 0))
                 
                 for v in 0...(numDays - 1) {
                     let index = (numDays - 1) - v
                     
                     let day = today - v.day
                     
-                    self.days[index] = day
-                    self.adherencesPerDay[index] = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100
+                    self.adherencesPerDay[index] = (day, self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100)
                     
                     //updating array from last index to first Index
                     for j in 0...(entries.count - 1) {

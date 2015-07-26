@@ -106,17 +106,18 @@ public class MedicineStats : CoreDataContextManager{
     /// if there are entries in that month, truncate to the oldest and the most recent date to account when the user started tracking
     ///
     /// :param: `NSDate`: The month
+    /// :param: `Registries`: Previously calculated entries. Must be sorted oldest to recent
     /// :returns: `Float`: pill adherence for the month
-    public func pillAdherence(month: NSDate) -> Float{
-        let registryManager = medicine.registriesManager(context)
-        let registries = registryManager.getRegistries(mostRecentFirst: false)
+    public func pillAdherence(month: NSDate, registries: [Registry]? = nil) -> Float{
+        let registriesManager = medicine.registriesManager(context)
+        let entries = registries != nil ? registries! : registriesManager.getRegistries(mostRecentFirst: false)
         
-        if registries.count == 0 {
+        if entries.count == 0 {
             return 1
         }
         
-        let oldestDate = registries.first!.date
-        let mostRecentEntry = registries.last!.date
+        let oldestDate = entries.first!.date
+        let mostRecentEntry = entries.last!.date
         
         let startMonth = NSDate.from(month.year, month: month.month, day: 1)
         let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
@@ -128,7 +129,7 @@ public class MedicineStats : CoreDataContextManager{
         let day1 = max(startMonth, oldestDate)
         let day2 = min(endMonth, mostRecentEntry)
         
-        return pillAdherence(date1: day1, date2: day2, registries: registryManager.filter(registries, date1: day1, date2: day2))
+        return pillAdherence(date1: day1, date2: day2, registries: registriesManager.filter(entries, date1: day1, date2: day2))
     }
     
 }

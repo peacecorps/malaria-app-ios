@@ -43,27 +43,31 @@ import Charts
         if GraphData.sharedInstance.outdated{
             refreshData()
         }else{
-            configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            configureData(GraphData.sharedInstance.adherencesPerDay)
             adherenceSliderTable.reloadData()
         }
     }
     
     func refreshData() {
-        self.chartView.clear()
-        
-        GraphData.sharedInstance.refreshContext()
         graphFrame.bringSubviewToFront(loadingGraphView)
         
-        GraphData.sharedInstance.retrieveTookMedicineStats()
+        chartView.clear()
         
-        GraphData.sharedInstance.retrieveMonthsData(NumberRecentMonths){
+        let cachedStats = GraphData.sharedInstance
+        cachedStats.refreshContext()
+        
+        cachedStats.setupBeforeCaching()
+        
+        cachedStats.retrieveTookMedicineStats()
+        
+        cachedStats.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
         
-        GraphData.sharedInstance.retrieveGraphData({(progress: Float) in
+        cachedStats.retrieveGraphData({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in
-            self.configureData(GraphData.sharedInstance.days, values: GraphData.sharedInstance.adherencesPerDay)
+            self.configureData(GraphData.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })
     }
@@ -72,7 +76,7 @@ import Charts
 extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GraphData.sharedInstance.months.count
+        return GraphData.sharedInstance.monthAdhrence.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -80,8 +84,9 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let month = GraphData.sharedInstance.months[indexPath.row]
-        let adherenceValue = GraphData.sharedInstance.statsManager.pillAdherence(month)*100
+        let data = GraphData.sharedInstance.monthAdhrence[indexPath.row]
+        let month = data.0
+        let adherenceValue = data.1
         
         let cell = tableView.dequeueReusableCellWithIdentifier("AdherenceHorizontalBarCell") as! AdherenceHorizontalBarCell
         cell.configureCell(month, adhrenceValue: adherenceValue)
@@ -91,7 +96,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
-        monthView.startDay = GraphData.sharedInstance.months[indexPath.row]
+        monthView.startDay = GraphData.sharedInstance.monthAdhrence[indexPath.row].0
         
         presentViewController(
             monthView,
@@ -103,16 +108,17 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 
 /* Graph View related methods */
 extension PillsStatsViewController{
-    func configureData(dataPoints: [NSDate], values: [Float]){
-        var dataPointsLabels = dataPoints.map({ $0.formatWith("yyyy.MM.dd")})
+    func configureData(points: [(NSDate, Float)]){
+        let xValues = points.map({$0.0.formatWith("yyyy.MM.dd")})
+        let values = points.map({$0.1})
         
         var dataEntries: [ChartDataEntry] = []
-        for i in 0..<dataPoints.count {
+        for i in 0..<values.count {
             dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
         }
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")
-        let data = LineChartData(xVals: dataPointsLabels, dataSets: [adherenceData])
+        let data = LineChartData(xVals: xValues, dataSets: [adherenceData])
 
         chartView.data = data
     }

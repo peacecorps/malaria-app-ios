@@ -27,10 +27,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lb-hF-qks" userLabel="DoneBtn">
-                                <rect key="frame" x="274" y="494" width="52" height="41"/>
+                                <rect key="frame" x="260" y="494" width="80" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="1h1-tz-SY0"/>
+                                    <constraint firstAttribute="height" constant="40" id="bJT-XC-IdW"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="20"/>
-                                <state key="normal" title="DONE">
-                                    <color key="titleColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Done" backgroundImage="GenerateTripButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -661,7 +665,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H5z-ac-hcC" userLabel="PostsBtns">
-                                <rect key="frame" x="0.0" y="141" width="600" height="410"/>
+                                <rect key="frame" x="0.0" y="116" width="600" height="435"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="30" minimumInteritemSpacing="10" id="VvQ-e2-Uss">
                                     <size key="itemSize" width="140" height="72"/>
@@ -729,7 +733,7 @@
                             <constraint firstItem="H5z-ac-hcC" firstAttribute="bottom" secondItem="5JC-7b-9Ol" secondAttribute="top" id="fLn-1V-onL"/>
                             <constraint firstAttribute="centerX" secondItem="zJG-Os-SoJ" secondAttribute="centerX" constant="7.5" id="mt9-qf-wy2"/>
                             <constraint firstItem="TNk-Of-8CA" firstAttribute="trailing" secondItem="bXl-ZO-Xhk" secondAttribute="trailingMargin" id="vj1-Kt-5FN"/>
-                            <constraint firstItem="H5z-ac-hcC" firstAttribute="top" secondItem="m1l-QT-U2v" secondAttribute="bottom" constant="45" id="w5T-dz-Wzg"/>
+                            <constraint firstItem="H5z-ac-hcC" firstAttribute="top" secondItem="m1l-QT-U2v" secondAttribute="bottom" constant="20" id="w5T-dz-Wzg"/>
                             <constraint firstItem="zJG-Os-SoJ" firstAttribute="bottom" secondItem="m1l-QT-U2v" secondAttribute="bottom" id="xCw-fM-uoZ"/>
                             <constraint firstAttribute="trailing" secondItem="H5z-ac-hcC" secondAttribute="trailing" id="y5P-yi-1ly"/>
                         </constraints>

@@ -126,6 +126,7 @@ extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewData
         }
     }
     
+    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         let spacing = determineSpacing()
         return UIEdgeInsetsMake(0, spacing, 0, spacing)

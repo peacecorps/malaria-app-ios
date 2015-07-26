@@ -139,8 +139,8 @@ extension DidTakePillsViewController {
         
         //addAllTrue()
         //halfTookHalfNot()
-        //missingHalfEntries()
-        missingEntries()
+        missingHalfEntries()
+        //missingEntries()
         
         Logger.Warn("DONE ADDING DUMMY ENTRIES")
     }

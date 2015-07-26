@@ -104,6 +104,11 @@ public class MedicineStats : CoreDataContextManager{
         return result
     }
     
+    
+    
+    
+    
+    
     /// returns pill adhrence in a month
     /// if there are no entries in that month return 0
     /// if there are entries in that month, truncate to the oldest and the most recent date to account when the user started tracking
@@ -125,7 +130,7 @@ public class MedicineStats : CoreDataContextManager{
         let startMonth = NSDate.from(month.year, month: month.month, day: 1)
         let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
         
-        if startMonth.happensMonthsBefore(oldestDate) || startMonth.happensMonthsAfter(mostRecentEntry) {
+        if startMonth.happensMonthsBefore(oldestDate) {
             return 1.0
         }
         

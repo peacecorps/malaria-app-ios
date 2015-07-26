@@ -755,20 +755,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Post description" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="aNW-cp-qrX" userLabel="Description">
-                                <rect key="frame" x="16" y="83" width="568" height="385"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRQ-Fh-cfe">
-                                <rect key="frame" x="216" y="484" width="169" height="59"/>
+                                <rect key="frame" x="265.5" y="496" width="70" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="169" id="okc-Vd-jzM"/>
+                                    <constraint firstAttribute="height" constant="40" id="hFW-lU-Wcp"/>
+                                    <constraint firstAttribute="width" constant="70" id="okc-Vd-jzM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="16"/>
-                                <state key="normal" title="Go Back" backgroundImage="GenerateTripButton">
+                                <state key="normal" title="Close" backgroundImage="GenerateTripButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -776,28 +770,83 @@
                                     <action selector="goBackBtnHandler:" destination="TZS-MA-Dul" eventType="touchUpInside" id="rnt-fi-5GN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kHK-b1-6Rw">
-                                <rect key="frame" x="16" y="28" width="568" height="47"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1B-Xm-RxD" userLabel="PostFrame">
+                                <rect key="frame" x="16" y="40" width="568" height="441"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kHK-b1-6Rw">
+                                        <rect key="frame" x="247" y="5" width="75" height="47"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="dV4-HF-hMm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="34"/>
+                                        <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aNW-cp-qrX" userLabel="Description">
+                                        <rect key="frame" x="10" y="63" width="548" height="368"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Post description">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="AmericanTypewriter"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="15" lineHeightMultiple="1.5"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gzb-n0-NGs" userLabel="Separator">
+                                        <rect key="frame" x="30" y="57" width="508" height="1"/>
+                                        <color key="backgroundColor" red="0.4378715158" green="0.32177186009999997" blue="0.2744835913" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="gTR-Rb-oyO"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.94509803920000002" blue="0.87058823529999996" alpha="0.97999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="dV4-HF-hMm"/>
+                                    <constraint firstItem="kHK-b1-6Rw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v1B-Xm-RxD" secondAttribute="leading" constant="30" id="0Pu-5x-BSf"/>
+                                    <constraint firstAttribute="centerX" secondItem="Gzb-n0-NGs" secondAttribute="centerX" id="0ey-98-6Uy"/>
+                                    <constraint firstAttribute="trailing" secondItem="aNW-cp-qrX" secondAttribute="trailing" constant="10" id="0fh-5z-aei"/>
+                                    <constraint firstItem="kHK-b1-6Rw" firstAttribute="top" secondItem="v1B-Xm-RxD" secondAttribute="top" constant="5" id="7Hu-wm-93k"/>
+                                    <constraint firstAttribute="centerX" secondItem="Gzb-n0-NGs" secondAttribute="centerX" id="CLe-YY-2bF"/>
+                                    <constraint firstItem="Gzb-n0-NGs" firstAttribute="top" secondItem="kHK-b1-6Rw" secondAttribute="bottom" constant="5" id="ECt-wU-KeK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gzb-n0-NGs" secondAttribute="trailing" constant="30" id="Fgc-0Z-S4E"/>
+                                    <constraint firstItem="Gzb-n0-NGs" firstAttribute="leading" secondItem="v1B-Xm-RxD" secondAttribute="leading" constant="30" id="IEQ-LN-HfS"/>
+                                    <constraint firstAttribute="centerX" secondItem="kHK-b1-6Rw" secondAttribute="centerX" id="OaQ-MH-D8M"/>
+                                    <constraint firstAttribute="centerX" secondItem="aNW-cp-qrX" secondAttribute="centerX" id="UHT-YE-IEv"/>
+                                    <constraint firstItem="aNW-cp-qrX" firstAttribute="leading" secondItem="v1B-Xm-RxD" secondAttribute="leading" constant="10" id="WjT-QR-fhc"/>
+                                    <constraint firstItem="aNW-cp-qrX" firstAttribute="top" secondItem="Gzb-n0-NGs" secondAttribute="bottom" constant="5" id="YNA-0X-jz9"/>
+                                    <constraint firstAttribute="bottom" secondItem="aNW-cp-qrX" secondAttribute="bottom" constant="10" id="tzB-tg-NGF"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kHK-b1-6Rw" secondAttribute="trailing" constant="30" id="wPd-K8-iUS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="34"/>
-                                <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0ey-98-6Uy"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WRQ-Fh-cfe" firstAttribute="top" secondItem="aNW-cp-qrX" secondAttribute="bottom" constant="16" id="33m-ck-30g"/>
-                            <constraint firstItem="kHK-b1-6Rw" firstAttribute="top" secondItem="1fb-yg-QNA" secondAttribute="bottom" constant="8" symbolic="YES" id="8NZ-lW-BWf"/>
-                            <constraint firstItem="kHK-b1-6Rw" firstAttribute="leading" secondItem="aNW-cp-qrX" secondAttribute="leading" id="Ilr-af-Dhl"/>
-                            <constraint firstItem="aNW-cp-qrX" firstAttribute="centerY" secondItem="War-bI-vo6" secondAttribute="centerY" id="RQM-AG-AvX"/>
-                            <constraint firstItem="kHK-b1-6Rw" firstAttribute="trailing" secondItem="aNW-cp-qrX" secondAttribute="trailing" id="ShX-pS-nGA"/>
-                            <constraint firstItem="aNW-cp-qrX" firstAttribute="trailing" secondItem="War-bI-vo6" secondAttribute="trailingMargin" id="TFz-58-N5n"/>
-                            <constraint firstItem="WRQ-Fh-cfe" firstAttribute="centerX" secondItem="aNW-cp-qrX" secondAttribute="centerX" id="Txh-p9-bKS"/>
-                            <constraint firstItem="aNW-cp-qrX" firstAttribute="leading" secondItem="War-bI-vo6" secondAttribute="leadingMargin" id="crN-xm-OzQ"/>
-                            <constraint firstItem="pqP-6N-qHN" firstAttribute="top" secondItem="WRQ-Fh-cfe" secondAttribute="bottom" constant="8" symbolic="YES" id="eUm-im-Icz"/>
-                            <constraint firstItem="aNW-cp-qrX" firstAttribute="top" secondItem="kHK-b1-6Rw" secondAttribute="bottom" constant="8" symbolic="YES" id="kIR-YE-kuj"/>
+                            <constraint firstItem="v1B-Xm-RxD" firstAttribute="leading" secondItem="War-bI-vo6" secondAttribute="leadingMargin" id="7Ss-uA-1If"/>
+                            <constraint firstAttribute="centerX" secondItem="v1B-Xm-RxD" secondAttribute="centerX" id="GLZ-Y3-Ln7"/>
+                            <constraint firstAttribute="centerX" secondItem="WRQ-Fh-cfe" secondAttribute="centerX" id="Rv8-WM-AFN"/>
+                            <constraint firstItem="WRQ-Fh-cfe" firstAttribute="top" secondItem="v1B-Xm-RxD" secondAttribute="bottom" constant="15" id="U08-5z-0zE"/>
+                            <constraint firstItem="v1B-Xm-RxD" firstAttribute="trailing" secondItem="War-bI-vo6" secondAttribute="trailingMargin" id="XCP-h2-1DX"/>
+                            <constraint firstItem="pqP-6N-qHN" firstAttribute="top" secondItem="WRQ-Fh-cfe" secondAttribute="bottom" constant="15" id="eUm-im-Icz"/>
+                            <constraint firstItem="v1B-Xm-RxD" firstAttribute="top" secondItem="1fb-yg-QNA" secondAttribute="bottom" constant="20" id="q9Y-8K-6z6"/>
                         </constraints>
                     </view>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>

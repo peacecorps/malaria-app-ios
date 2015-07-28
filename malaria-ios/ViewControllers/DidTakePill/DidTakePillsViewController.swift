@@ -61,7 +61,7 @@ import UIKit
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 
                 //reset configuration so that the user can reshedule the time
-                UserSettingsManager.setDidConfiguredMedicine(false)
+                UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
             }else if !currentDate.sameDayAs(medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
                         && !medicine.registriesManager(viewContext).tookMedicine(currentDate){

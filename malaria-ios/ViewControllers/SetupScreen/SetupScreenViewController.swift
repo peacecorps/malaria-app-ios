@@ -68,7 +68,7 @@ class SetupScreenViewController : UIViewController{
     }
     
     @IBAction func doneButtonHandler(){
-        if(UserSettingsManager.getDidConfiguredMedicine()){
+        if(UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool()){
             
             //avoid showing the alert view if there are no changes
             if let current = medicineManager.getCurrentMedicine(){

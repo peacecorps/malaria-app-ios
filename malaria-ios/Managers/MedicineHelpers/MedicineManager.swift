@@ -25,14 +25,14 @@ public class MedicineManager : CoreDataContextManager{
         Logger.Info("Setting up notification")
         getCurrentMedicine()!.notificationManager(context).scheduleNotification(fireDate)
 
-        UserSettingsManager.setDidConfiguredMedicine(true)
+        UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
     }
     
     /// Clears instance of Medicines from the CoreData
     public func clearCoreData(){
         Medicine.clear(Medicine.self, context: self.context)
         CoreDataHelper.sharedInstance.saveContext(self.context)
-        UserSettingsManager.setDidConfiguredMedicine(false)
+        UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
     }
 
     /// Registers a new medicine (not as default)

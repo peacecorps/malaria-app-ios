@@ -9,12 +9,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var notificationsCategories = [UIMutableUserNotificationCategory]()
         notificationsCategories.append(MedicineNotificationsManager.setup())
         
+        readApplicationSettings()
+        
         let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: notificationsCategories) as Set<NSObject>)
         application.registerUserNotificationSettings(settings)
         
         //setting up initial screen
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if UserSettingsManager.getDidConfiguredMedicine(){
+        if UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool(){
             window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
         }else{
             window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
@@ -23,6 +25,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         return true
+    }
+    
+    func readApplicationSettings() {
+        if UserSettingsManager.UserSetting.ClearMedicineHistory.getBool(){
+            Logger.Warn("Clearing Medicine History")
+            MedicineManager(context: CoreDataHelper.sharedInstance.createBackgroundContext()!).clearCoreData()
+            UserSettingsManager.UserSetting.ClearMedicineHistory.setBool(false)
+        }
+        
+        if UserSettingsManager.UserSetting.ClearTripHistory.getBool(){
+            Logger.Warn("Clearing Trip History")
+            TripsManager(context: CoreDataHelper.sharedInstance.createBackgroundContext()!).clearCoreData()
+            UserSettingsManager.UserSetting.ClearTripHistory.setBool(false)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

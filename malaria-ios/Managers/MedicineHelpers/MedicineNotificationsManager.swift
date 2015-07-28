@@ -19,13 +19,19 @@ public class MedicineNotificationsManager : NotificationManager{
         super.init(context: context)
     }
     
-    public override func scheduleNotification(fireTime: NSDate){
+    public override func scheduleNotification(fireTime: NSDate) {
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
+            Logger.Error("Medicine Notifications are not enabled")
+            return
+        }
+        
         super.scheduleNotification(fireTime)
         
         if(medicine.notificationTime != fireTime){
             medicine.notificationTime = fireTime
             CoreDataHelper.sharedInstance.saveContext(self.context)
         }
+            
     }
     
     public override func unsheduleNotification(){

@@ -2,22 +2,25 @@ import Foundation
 
 public class UserSettingsManager{
     
-    private enum UserSetting: String{
+    public enum UserSetting: String{
         static let allValues = [DidConfiguredMedicine]
         
         case DidConfiguredMedicine = "DidConfiguredMedicine"
-    }
-    
-    /// Sets DidConfiguredMedicine flag to the value given by argument
-    /// :param: `Bool`: value
-    public class func setDidConfiguredMedicine(value: Bool){
-        NSUserDefaults.standardUserDefaults().setBool(value, forKey: UserSetting.DidConfiguredMedicine.rawValue)
-    }
-    
-    /// Gets the value of the flag DidConfigureMedicine
-    /// :returns: The value of the flag DidConfigureMedicine
-    public class func getDidConfiguredMedicine() -> Bool{
-        return NSUserDefaults.standardUserDefaults().boolForKey(UserSetting.DidConfiguredMedicine.rawValue) ?? false
+        case ClearTripHistory = "ClearTripHistory"
+        case ClearMedicineHistory = "ClearMedicineHistory"
+        case MedicineReminderSwitch = "MedicineReminderSwitch"
+        
+        /// Sets settings boolean flag to the value given by argument
+        /// :param: `Bool`: value
+        public func setBool(value: Bool){
+                NSUserDefaults.standardUserDefaults().setBool(value, forKey: self.rawValue)
+        }
+        
+        /// Gets the value of the boolean user setting
+        /// :returns: The value
+        public func getBool() -> Bool{
+            return NSUserDefaults.standardUserDefaults().boolForKey(self.rawValue) ?? false
+        }
     }
     
     /// Syncronize standardUserDefaults

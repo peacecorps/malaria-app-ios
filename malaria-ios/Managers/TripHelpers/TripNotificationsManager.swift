@@ -29,6 +29,7 @@ public class TripNotificationsManager : NotificationManager {
     
     public func scheduleTripReminder(tripTime: NSDate){
 
+        super.unsheduleNotification()
         switch (UserSettingsManager.UserSetting.TripReminderOption.getString()){
         case FrequentReminderOption:
             Logger.Info("Scheduling frequent notifications for plan my trip")

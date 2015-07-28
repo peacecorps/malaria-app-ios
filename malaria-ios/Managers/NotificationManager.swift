@@ -30,9 +30,8 @@ public class NotificationManager : CoreDataContextManager{
             
             var notification = event as! UILocalNotification
             
-            if notification.category == category{
+            if notification.category == category {
                 UIApplication.sharedApplication().cancelLocalNotification(notification)
-                break;
             }
         }
     }

@@ -161,9 +161,9 @@ class PlanTripViewController: UIViewController {
         for i in selectedItems{
             trip.itemsManager(viewContext).addItem(i, quantity: 1)
         }
+        
+        trip.notificationManager(viewContext).scheduleTripReminder(tripReminderDate)
     }
-    
-    
     
     func selectItemsCallback(listItems: [String]){
         selectedItems = listItems

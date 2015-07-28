@@ -11,6 +11,10 @@ public class UserSettingsManager{
         case MedicineReminderSwitch = "MedicineReminderSwitch"
         case TripReminderOption = "TripReminderOption"
         
+        public func isSet() -> Bool{
+            return NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) != nil
+        }
+        
         /// Sets settings boolean flag to the value given by argument
         /// :param: `Bool`: value
         public func setBool(value: Bool){
@@ -18,15 +22,19 @@ public class UserSettingsManager{
         }
         
         /// Gets the value of the boolean user setting
-        /// :returns: The value
+        /// :returns: `Bool`: The value
         public func getBool() -> Bool{
             return NSUserDefaults.standardUserDefaults().boolForKey(self.rawValue) ?? false
         }
         
+        /// Sets settings String value of the user setting
+        /// :param: `String`: value
         public func setString(value: String){
             NSUserDefaults.standardUserDefaults().setObject(value, forKey: self.rawValue)
         }
         
+        /// Gets the string value for the key. If it is not set, returns empty string
+        /// :returns: `String`:  The value
         public func getString() -> String{
             return (NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) ?? "") as! String
         }

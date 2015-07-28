@@ -96,9 +96,21 @@ extension CachedStatistics {
     }
     
     func retrieveTookMedicineStats(){
+        
         tookMedicine.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.registries.map( {self.tookMedicine[$0.date.startOfDay] = $0.tookMedicine} )
+            let entriesReversed = self.registries.reverse() //most recent first
+            
+            if !entriesReversed.isEmpty {
+                let oldestDate = entriesReversed.last!.date.startOfDay
+                let numDays = (NSDate() - oldestDate) + 1 //include today
+                
+                for i in 0...(numDays - 1) {
+                    let day = oldestDate + i.day
+                    self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed)
+                }
+            }
+            
             self.isCalendarViewDataUpdated = true
         })
     }
@@ -111,7 +123,7 @@ extension CachedStatistics {
             let today = NSDate()
             var entries = self.registries
             
-            if entries.count != 0 {
+            if !entries.isEmpty {
                 let oldestDate = entries[0].date
                 let numDays = (today - oldestDate) + 1 //include today
                 

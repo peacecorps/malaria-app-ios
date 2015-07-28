@@ -23,13 +23,19 @@ public class MedicineNotificationsManager : NotificationManager{
         medicine.notificationTime = fireTime
         CoreDataHelper.sharedInstance.saveContext(self.context)
         
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
+            Logger.Warn("MedicineReminderSwitch wasn't set, setting to default value true")
+            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
+            scheduleNotification(fireTime)
+            return
+        }
         
         if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
             Logger.Error("Medicine Notifications are not enabled")
             return
         }
         
-        unsheduleNotification()
+        super.unsheduleNotification()
         super.scheduleNotification(fireTime)
     }
     

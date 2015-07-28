@@ -27,6 +27,11 @@ public extension NSDate{
         return NSCalendar.currentCalendar().component(.CalendarUnitDay, fromDate: self)
     }
     
+    ///retrieves the day of the week
+    var weekday: Int {
+        return NSCalendar.currentCalendar().component(.CalendarUnitWeekday, fromDate: self)
+    }
+    
     ///retrieves the year
     var year: Int{
         return NSCalendar.currentCalendar().component(NSCalendarUnit.CalendarUnitYear, fromDate: self)
@@ -60,6 +65,10 @@ public extension NSDate{
     ///retrieves the end of the day (23:59:59)
     var endOfDay: NSDate {
         return startOfDay + 1.day - 1.second
+    }
+    
+    var startOfWeek: NSDate {
+        return self - weekday.day
     }
     
     /// NSDate(timeIntervalSince1970: 0)
@@ -126,11 +135,11 @@ public extension NSDate{
         return self.year == dateTwo.year && self.month == dateTwo.month && self.day == dateTwo.day
     }
 
-    /// Returns true if both dates belong in the same week.
+    /// Returns true if both dates belong in the same week. Also takes into account year transition
     ///
     /// :returns: `Bool`
     func sameWeekAs(dateTwo: NSDate) -> Bool {
-        return self.year == dateTwo.year && self.week == dateTwo.week
+        return (self.year == dateTwo.year && self.week == dateTwo.week) || self.startOfWeek.sameDayAs(dateTwo.startOfWeek)
     }
     
     /// Returns true if both dates are in the same time.

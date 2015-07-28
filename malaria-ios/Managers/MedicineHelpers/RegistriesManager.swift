@@ -11,9 +11,10 @@ public class RegistriesManager : CoreDataContextManager{
     /// Check if the pill was already taken in that day if daily pill or in that week if weekly pill
     ///
     /// :param: `NSDate`: the date
+    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `Bool`: True if the user took a pill in that day or week
-    public func tookMedicine(at: NSDate) -> Bool{
-        for r in allRegistriesInPeriod(at){
+    public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Bool{
+        for r in allRegistriesInPeriod(at, registries: registries){
             if r.tookMedicine{
                 return true
             }
@@ -26,16 +27,20 @@ public class RegistriesManager : CoreDataContextManager{
     /// Returns the list of entries that happens in that day or in that week (if daily or weekly pill)
     ///
     /// :param: `NSDate`: the date
+    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `[Registry]` all the entries
-    public  func allRegistriesInPeriod(at: NSDate) -> [Registry] {
+    public  func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> [Registry] {
         var result = [Registry]()
         
         if medicine.isDaily(){
-            if let r = findRegistry(at){
+            if let r = findRegistry(at, registries: registries){
                 result.append(r)
             }
         }else if medicine.isWeekly(){
-            for r in getRegistries(date1: at - 8.day, date2: at + 8.day){
+            let (day1, day2) = (at - 8.day, at + 8.day)
+            let entries = registries != nil ? filter(registries!, date1: day1, date2: day2) : getRegistries(date1: day1, date2: day2)
+            
+            for r in entries {
                 if at.sameWeekAs(r.date){
                     result.append(r)
                 }
@@ -138,9 +143,10 @@ public class RegistriesManager : CoreDataContextManager{
     /// Returns entry in the specified date if exists
     ///
     /// :param: `NSDate`: date
+    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `Registry?`
-    public func findRegistry(date: NSDate) -> Registry?{
-        return getRegistries(date1: date, date2: date).first
+    public func findRegistry(date: NSDate, registries: [Registry]? = nil) -> Registry?{
+        return registries != nil ? filter(registries!, date1: date, date2: date).first : getRegistries(date1: date, date2: date).first
     }
     
     /// Returns last day when the user taken the medicine

@@ -65,20 +65,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> ()) {
         
-        if let id = identifier {
-            switch (id) {
-                case MedicineNotificationsManager.TookPillId:
-                    let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
-                    let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
-                    currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: true)
-                case MedicineNotificationsManager.DidNotTakePillId:
-                    let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
-                    let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
-                    currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: false)
-            default:
-                println("not found")
+        if let category = notification.category{
+            switch(category) {
+            case MedicineNotificationsManager.NotificationCategory:
+                if let id = identifier {
+                    switch (id) {
+                    case MedicineNotificationsManager.TookPillId:
+                        let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                        let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                        currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: true)
+                    case MedicineNotificationsManager.DidNotTakePillId:
+                        let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                        let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                        currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: false)
+                    default:
+                        Logger.Error("ID not found")
+                    }
+                }
+                
+            default: Logger.Error("No support for that category")
             }
         }
+        
         completionHandler()
     }
 }

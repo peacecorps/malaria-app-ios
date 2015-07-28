@@ -42,6 +42,8 @@ import UIKit
             medicine.notificationManager(viewContext).reshedule()
         }
         
+        //test()
+        
         refreshScreen()
     }
     
@@ -135,11 +137,37 @@ extension DidTakePillsViewController {
             }
         }
         
+        func addWeekly() {
+            let today = NSDate()
+            var day = today - 365.day
+            for i in 0...Int(floor(365.0/7)) {
+                medicine.registriesManager(viewContext).addRegistry(day + i.week, tookMedicine: true)
+            }
+        }
+        
+        func addWeeklyYesWeeklyNot() {
+            let today = NSDate()
+            var day = today - 10.week
+
+            medicine.registriesManager(viewContext).addRegistry(day + 1.week, tookMedicine: true)
+            medicine.registriesManager(viewContext).addRegistry(day + 2.week, tookMedicine: false)
+            medicine.registriesManager(viewContext).addRegistry(day + 3.week, tookMedicine: true)
+            medicine.registriesManager(viewContext).addRegistry(day + 4.week, tookMedicine: false)
+            medicine.registriesManager(viewContext).addRegistry(day + 5.week, tookMedicine: true)
+            medicine.registriesManager(viewContext).addRegistry(day + 6.week, tookMedicine: false)
+            medicine.registriesManager(viewContext).addRegistry(day + 7.week, tookMedicine: true)
+            medicine.registriesManager(viewContext).addRegistry(day + 8.week, tookMedicine: false)
+            medicine.registriesManager(viewContext).addRegistry(day + 9.week, tookMedicine: true)
+            medicine.registriesManager(viewContext).addRegistry(day + 10.week, tookMedicine: false)
+            
+        }
+        
         Logger.Warn("ADDING DUMMY ENTRIES")
         
+        //addWeekly()
         //addAllTrue()
-        //halfTookHalfNot()
-        missingHalfEntries()
+        addWeeklyYesWeeklyNot()
+        //missingHalfEntries()
         //missingEntries()
         
         Logger.Warn("DONE ADDING DUMMY ENTRIES")

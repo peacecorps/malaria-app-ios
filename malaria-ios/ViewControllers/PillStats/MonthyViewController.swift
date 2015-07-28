@@ -77,7 +77,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = CurrentDayUnselectedCircleFillColor
-        circleView.tag = 123
         return circleView
     }
     
@@ -142,20 +141,16 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
         
         let isWeekly = CachedStatistics.sharedInstance.medicine.isWeekly()
-        let existsEntry = CachedStatistics.sharedInstance.registriesManager.findRegistry(date) != nil
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
         var title = ""
         var message = ""
         
-        if existsEntry && tookMedicine {
+        if tookMedicine {
             title = "You already took your " + (isWeekly ? "weekly" : "daily") + " pill."
             message = "Have you taken your pill?"
-        } else if existsEntry && !tookMedicine{
-            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + " pill."
-            message = "Have you taken your pill?"
         } else {
-            title = "There is no entry in that date."
+            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + " pill."
             message = "Have you taken your pill?"
         }
         

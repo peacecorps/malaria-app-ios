@@ -19,12 +19,7 @@ public class TripNotificationsManager : NotificationManager {
     }
     
     public override func scheduleNotification(fireTime: NSDate){
-        super.scheduleNotification(fireTime)
-        
-        if(trip.reminderDate != fireTime) {
-            trip.reminderDate = fireTime
-            CoreDataHelper.sharedInstance.saveContext(self.context)
-        }
+        //do nothing
     }
     
     public func scheduleTripReminder(tripTime: NSDate){
@@ -50,8 +45,8 @@ public class TripNotificationsManager : NotificationManager {
             scheduleTripReminder(tripTime)
         }
         
-        if(trip.reminderDate != tripTime) {
-            trip.reminderDate = tripTime
+        if(trip.departure != tripTime) {
+            trip.departure = tripTime
             CoreDataHelper.sharedInstance.saveContext(self.context)
         }
     }

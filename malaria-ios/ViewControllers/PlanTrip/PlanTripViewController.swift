@@ -5,25 +5,21 @@ import CoreLocation
 
 
 class PlanTripViewController: UIViewController {
-    let locationManager = CLLocationManager()
-    
-    var pcLocationPicker: PCLocationPickerViewer!
-    var medicinePicker: MedicinePickerViewTrip!
-    var dayDatePickerview: TimePickerView!
-    var monthDatePickerview: TimePickerView!
-    var yearDatePickerview: TimePickerView!
-    
-    var tripReminderDate: NSDate!
-    var selectedItems = [String]()
-    
-    
     @IBOutlet weak var location: UITextField!
-    @IBOutlet weak var parkingList: UITextField!
-    @IBOutlet weak var medicationList: UITextField!
-    @IBOutlet weak var dayValuePicker: UITextField!
-    @IBOutlet weak var monthValuePicker: UITextField!
-    @IBOutlet weak var yearValuePicker: UITextField!
-    @IBOutlet weak var cashToBring: UITextField!
+    @IBOutlet weak var departure: UITextField!
+    @IBOutlet weak var arrival: UITextField!
+    @IBOutlet weak var packingList: UITextField!
+    
+    var medicinePicker: MedicinePickerViewTrip!
+    var departureDatePickerview: TimePickerView!
+    var arrivalDatePickerview: TimePickerView!
+    
+    //trip information
+    var tripLocation: String = ""
+    var medicine: Medicine.Pill!
+    var departureDay = NSDate()
+    var arrivalDay = NSDate()
+    var selectedItems = [String]()
     
     lazy var toolBar: UIToolbar! = {
         let keyboardToolbar = UIToolbar()
@@ -35,7 +31,7 @@ class PlanTripViewController: UIViewController {
         return keyboardToolbar
         }()
     
-    let viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    var viewContext: NSManagedObjectContext!
     var tripsManager: TripsManager!
     
     override func viewDidLoad() {
@@ -43,68 +39,44 @@ class PlanTripViewController: UIViewController {
                 
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
+        //Setting up departure
+        departureDatePickerview = TimePickerView(view: departure, selectCallback: {(date: NSDate) in
+            self.updateDeparture(date)
+        })
+        departure.inputAccessoryView = toolBar
+        
+        arrivalDatePickerview = TimePickerView(view: arrival, selectCallback: {(date: NSDate) in
+            self.updateArrival(date)
+        })
+        arrival.inputAccessoryView = toolBar
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+        
+        
         tripsManager = TripsManager(context: viewContext)
-        tripReminderDate = getStoredPlanTripNotificationDate()
+        (departureDay, arrivalDay) = getStoredPlanTripDates()
         selectedItems = getStoredPlanTripItems()
+        tripLocation = getStoredLocation()
+        medicine = Medicine.Pill(rawValue: MedicineManager(context: viewContext).getCurrentMedicine()!.name)!
         
-        //Setting up location picker
-        pcLocationPicker = PCLocationPickerViewer(context: viewContext, selectCallback: {(object: String) in
-            self.location.text = object
-        })
-        location.inputView = pcLocationPicker.generateInputView()
-        location.inputAccessoryView = toolBar
-        
-        //Setting up medicinePickerView with default Value
-        medicinePicker = MedicinePickerViewTrip(context: viewContext, selectCallback: {(object: String) in
-            self.medicationList.text = object
-        })
-        medicationList.inputView = medicinePicker.generateInputView()
-        medicationList.inputAccessoryView = toolBar
-        
-        //Setting up dayDatePickerview
-        dayDatePickerview = TimePickerView(view: dayValuePicker, selectCallback: {(date: NSDate) in
-            self.tripReminderDate = date
-            self.updateDateTextFields(date)
-        })
-        dayValuePicker.inputView = dayDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
-        dayValuePicker.inputAccessoryView = toolBar
-        
-        
-        //Setting up monthDatePickerview
-        monthDatePickerview = TimePickerView(view: monthValuePicker, selectCallback: {(date: NSDate) in
-            self.tripReminderDate = date
-            self.updateDateTextFields(date)
-        })
-        monthValuePicker.inputView = monthDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
-        monthValuePicker.inputAccessoryView = toolBar
-        
-        //Setting up yearDatePickerview
-        yearDatePickerview = TimePickerView(view: yearValuePicker, selectCallback: {(date: NSDate) in
-            self.tripReminderDate = date
-            self.updateDateTextFields(date)
-        })
-        yearValuePicker.inputView = yearDatePickerview.generateInputView(.Date, startDate: getStoredPlanTripNotificationDate())
-        yearValuePicker.inputAccessoryView = toolBar
-        
-        ///Setting up cashToBring
-        cashToBring.inputAccessoryView = toolBar
-        
-        location.text = pcLocationPicker.selectedValue
-        medicationList.text = medicinePicker.selectedValue
-        
-        cashToBring.text = "\(getStoredPlanTripCashToBring())"
-        updateDateTextFields(tripReminderDate)
+        updateLocation(tripLocation)
         updateItemsTextField(selectedItems)
+        updateArrival(arrivalDay)
+        updateDeparture(departureDay)
+        
+        arrival.inputView = arrivalDatePickerview.generateInputView(.Date, startDate: arrivalDay)
+        departure.inputView = departureDatePickerview.generateInputView(.Date, startDate: departureDay)
     }
     
     func dismissInputView(sender: UITextField){
         location.endEditing(true)
-        parkingList.endEditing(true)
-        medicationList.endEditing(true)
-        dayValuePicker.endEditing(true)
-        monthValuePicker.endEditing(true)
-        yearValuePicker.endEditing(true)
-        cashToBring.endEditing(true)
+        packingList.endEditing(true)
+        arrival.endEditing(true)
+        departure.endEditing(true)
     }
     
     @IBAction func settingsBtnHandler(sender: AnyObject) {
@@ -118,7 +90,7 @@ class PlanTripViewController: UIViewController {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
             let view = UIStoryboard.instantiate(viewControllerClass: ListItemsViewController.self)
-            view.initialItems = self.selectedItems
+            view.listItems = self.selectedItems
             view.completitionHandler = self.selectItemsCallback
             self.presentViewController(view, animated: true, completion: nil)
         }
@@ -148,89 +120,60 @@ class PlanTripViewController: UIViewController {
     
     func storeTrip(){
         let loc = location.text
-        let medication = Medicine.Pill(rawValue: medicationList.text)!
-        let cash = Int64(cashToBring.text.toInt()!)
         
-        Logger.Info("Inserting new trip with:")
-        Logger.Info(location)
-        Logger.Info(medicationList)
-        Logger.Info(cash)
-        Logger.Info(tripReminderDate.formatWith("dd-MM-yyyy"))
-        
-        let trip = tripsManager.createTrip(loc, medicine: medication, cash: cash, reminderDate: tripReminderDate)
+        let trip = tripsManager.createTrip(loc, medicine: medicine, departure: departureDay, arrival:arrivalDay)
         for i in selectedItems{
             trip.itemsManager(viewContext).addItem(i, quantity: 1)
         }
         
-        trip.notificationManager(viewContext).scheduleTripReminder(tripReminderDate)
+        trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
     }
     
-    func selectItemsCallback(listItems: [String]){
-        selectedItems = listItems
+    func selectItemsCallback(medicine: Medicine.Pill, listItems: [String]){
+        updateMedicine(medicine)
         updateItemsTextField(listItems)
     }
 }
 
 /// local variables updaters
-
 extension PlanTripViewController {
-    func updateDateTextFields(date: NSDate){
-        dayValuePicker.text = date.formatWith("dd")
-        monthValuePicker.text = date.formatWith("MM")
-        yearValuePicker.text = date.formatWith("yyyy")
+    func updateDeparture(date: NSDate){
+        departureDay = date
+        departure.text = date.formatWith("dd / MM / yyyy")
+    }
+    
+    func updateArrival(date: NSDate){
+        arrivalDay = date
+        arrival.text = date.formatWith("dd / MM / yyyy")
+    }
+    
+    func updateLocation(loc: String){
+        tripLocation = loc
+        location.text = loc
+    }
+    
+    func updateMedicine(medicine: Medicine.Pill){
+        self.medicine = medicine
+    }
+    
+    func getStoredLocation() -> String {
+        return tripsManager.getTrip()?.location ?? ""
     }
     
     func updateItemsTextField(items: [String]){
-        parkingList.text = "\(items.count) items"
+        self.selectedItems = items
+        packingList.text = "\(items.count) items"
     }
     
     func getStoredPlanTripItems() -> [String] {
-        var result = [String]()
-        if let t = tripsManager.getTrip(){
-            for i in t.itemsManager(viewContext).getItems(){
-                result.append(i.name)
-            }
+        return tripsManager.getTrip()?.itemsManager(viewContext).getItems().map({ $0.name }) ?? []
+    }
+  
+    func getStoredPlanTripDates() -> (departure: NSDate, arrival: NSDate) {
+        if let trip = tripsManager.getTrip() {
+            return (trip.departure, trip.arrival)
         }
-        return result
-    }
-    
-    func getStoredPlanTripNotificationDate() -> NSDate {
-        return tripsManager.getTrip()?.reminderDate ?? NSDate()
-    }
-    
-    func getStoredPlanTripCashToBring() -> Int64{
-        return tripsManager.getTrip()?.cash ?? 0
-    }
-}
-
-/// localization
-extension PlanTripViewController : CLLocationManagerDelegate{
-    @IBAction func findMyLocation(sender: AnyObject) {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-            if (error != nil) {
-                Logger.Error("Reverse geocoder failed with error" + error.localizedDescription)
-                return
-            }
-            
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as! CLPlacemark
-                //stop updating location to save battery life
-                self.locationManager.stopUpdatingLocation()
-                self.location.text = pm.locality
-            } else {
-                println("Problem with the data received from geocoder")
-            }
-        })
-    }
-    
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println("Error while updating location " + error.localizedDescription)
+        
+        return (NSDate(), NSDate() + 1.week)
     }
 }

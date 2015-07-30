@@ -1,105 +1,165 @@
 import Foundation
 import UIKit
 
-@IBDesignable class ListItemsViewController : UIViewController, UITableViewDataSource, UITableViewDelegate{
+@IBDesignable class ListItemsViewController : UIViewController{
     @IBOutlet weak var tableView: UITableView!
+    @IBInspectable var DeleteButtonColor: UIColor = UIColor(hex: 0xA9504A)
 
-    @IBInspectable var TextColor: UIColor = UIColor(hex: 0x6F5247)
+    //must be provided by previous viewController
+    var departure: NSDate! = NSDate() - 1.year
+    var arrival: NSDate! = NSDate()
+    var listItems: [String] = []
+    var completitionHandler: ((Medicine.Pill, [String]) -> ())!
     
+    //internal
+    var medicine: Medicine.Pill!
+    var medicineManager: MedicineManager!
     
-    let TextFont = UIFont(name: "ChalkboardSE-Regular", size: 16.0)!
-    var initialItems: [String]!
-    var completitionHandler: ([String] -> ())!
+    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
-    var listItems: [String : Bool] = [
-        "Toilet paper" : false,
-        "Luggage Lock" : false,
-        "Flashlight" : false,
-        "Compass" : false,
-        "Whistle" : false,
-        "Sewing Kit" : false,
-        "Repair tape" : false,
-        "Deodorant" : false,
-        "Nail clipper" : false,
-        "Towels" : false,
-        "Tweezers" : false,
-        "Pen" : false,
-        "Notebook" : false,
-        "Map" : false,
-        "Passaport" : false,
-        "Travelling ticket" : false,
-        "Shaving blade" : false,
-        "Extra batteries" : false,
-        "Watch" : false,
-    ]
-    
-    var sortedItems: [String] = []
     
     @IBAction func cancelBtnHandler(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func doneBtnHandler(sender: AnyObject) {
-        var selected = [String]()
-        for (key, value) in listItems{
-            if value {
-                selected.append(key)
-            }
-        }
-        
-        completitionHandler(selected)
+        completitionHandler(medicine, listItems)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
-        
-        for i in initialItems{
-            println("setting up initial items")
-            listItems[i]? = true
-        }
-        
-        sortedItems = [String] (listItems.keys).sorted({$0 < $1})
-        tableView.reloadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+        medicineManager = MedicineManager(context: viewContext)
+        medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
+        
+        tableView.reloadData()
+    }
+}
+
+extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedItems.count
+        return listItems.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 50.0
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var deleteButton = UITableViewRowAction(style: .Default, title: "Delete", handler: { (action, indexPath) in
+            self.listItems.removeAtIndex(indexPath.row)
+            tableView.reloadData()
+        })
+        deleteButton.backgroundColor = DeleteButtonColor
+        return [deleteButton]
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            listItems.removeAtIndex(indexPath.row)
+            tableView.reloadData()
+        }
+    }
+    
+    @IBAction func addNewItem(sender: AnyObject) {
+        modifyItem()
+    }
+    
+    func modifyItem(indexPath: NSIndexPath? = nil) {
+        let modifySelectedEntry = indexPath != nil
+        
+        let title = indexPath != nil ? "Change item" : "New Item"
+        let message = "Type item name"
+        
+        var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: "Done", style: .Default) { _ in
+            let textField = alert.textFields![0] as! UITextField
+            
+            if modifySelectedEntry {
+                self.listItems[indexPath!.row].0 = textField.text
+            }else if !textField.text.isEmpty && self.listItems.filter({$0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
+                self.listItems.append(textField.text!)
+            }
+            
+            self.tableView.reloadData()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        /*
+        if modifySelectedEntry {
+            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: { _ in
+                self.listItems.removeAtIndex(indexPath!.row)
+                self.tableView.reloadData()
+            }))
+        }*/
+        
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Name"
+            textField.text = modifySelectedEntry ? self.listItems[indexPath!.row] : ""
+        }
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
+        cell.name.setTitle(medicine.name(), forState: .Normal)
+        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: medicine.isDaily() ? 1 : 7))"
+        return cell.contentView
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 78.0
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let item: String = sortedItems[indexPath.row]
-        
-        let wasSelected: Bool = listItems[item]!
-        listItems[item] = !wasSelected
-        
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = wasSelected ? UITableViewCellAccessoryType.None : UITableViewCellAccessoryType.Checkmark
+        modifyItem(indexPath: indexPath)
     }
-
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let item = sortedItems[indexPath.row]
+        let item = listItems[indexPath.row]
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell") as! UITableViewCell
-        
-        let isSelected: Bool = listItems[item]!
-        cell.accessoryType = isSelected ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None
-        cell.textLabel?.font = TextFont
-        cell.textLabel?.textColor = TextColor
-        cell.textLabel?.text = item
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell") as! ItemCell
+        cell.name.text = item
         return cell
     }
+    
+    @IBAction func medicineBtn(sender: AnyObject) {
+        var alert = UIAlertController(title: "Medicine for the trip", message: "Choose one", preferredStyle: .Alert)
+        let medicines = Medicine.Pill.allValues.map({$0.name()})
+        for m in medicines {
+            alert.addAction(UIAlertAction(title: m, style: .Default) { _ in
+                self.medicine = Medicine.Pill(rawValue: m)!
+                self.tableView.reloadData()
+            })
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+}
+
+class ItemCell : UITableViewCell {
+    @IBOutlet weak var name: UILabel!
+}
+
+class MedicineHeaderCell : UITableViewCell {
+    @IBOutlet weak var name: UIButton!
+    @IBOutlet weak var quantity: UILabel!
 }

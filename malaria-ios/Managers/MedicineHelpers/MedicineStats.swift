@@ -19,11 +19,10 @@ public class MedicineStats : CoreDataContextManager{
             return reg.filter({$0.tookMedicine}).count
         }
         
-        
         return medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).filter({$0.tookMedicine}).count
     }
     
-    /// Returns the number of pills that the user should have taken between two dates
+    /// Returns the number of pills that the user should have taken between two dates.
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
@@ -34,17 +33,33 @@ public class MedicineStats : CoreDataContextManager{
             return numberSupposedPills(date1: date2, date2: date1, registries: registries)
         }
         
-        let entries = registries != nil ? registries! : medicine.registriesManager(context).getRegistries(mostRecentFirst: false)
-        if (entries.count == 0){
-            return 0
+        var d1 = date1
+        var d2 = date2
+        if date1 == NSDate.min || date2 == NSDate.max {
+            let entries = registries != nil ? registries! : medicine.registriesManager(context).getRegistries(mostRecentFirst: false)
+            if (entries.count == 0){
+                return 0
+            }
+            
+            d1 = entries.first!.date
+            d2 = entries.last!.date
         }
         
-        let d1: NSDate = date1 == NSDate.min ? entries.first!.date : date1
-        let d2: NSDate = date2 == NSDate.max ? entries.last!.date : date2
-
-        let numDays = (d2 - d1) + 1
-        
-        return  medicine.isDaily() ?  numDays : Int(ceil(Float(numDays)/7))
+        return MedicineStats.numberNeededPills(d1, date2: d2, interval: medicine.isDaily() ? 1 : 7)
+    }
+    
+    /// Returns the number of pills that the user should have taken between two dates
+    ///
+    /// :param: `NSDate`: first date
+    /// :param: `NSDate`: second date
+    /// :param: `interval`: Interval (1 = once per day, 7 = once per week)
+    /// :returns: `Int`: Number of supposed pills
+    public class func  numberNeededPills(date1: NSDate, date2: NSDate, interval: Float) -> Int{
+        if date1 > date2 {
+            return numberNeededPills(date2, date2: date1, interval: interval)
+        }
+        let numDays = (date2 - date1) + 1
+        return  Int(ceil(Float(numDays)/interval))
     }
     
     /// Returns the number of pills that the user should have taken between two dates

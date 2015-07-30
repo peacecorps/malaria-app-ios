@@ -9,6 +9,7 @@ class TestPlanTrip: XCTestCase {
     let currentPill = Medicine.Pill.Malarone
     let cashToBring: Int64 = 10
     let d1 = NSDate.from(2015, month: 5, day: 8) //monday
+    let d2 = NSDate.from(2015, month: 5, day: 8) + 1.week//monday
     var trip: Trip!
     var itemsManager: ItemsManager!
     var currentContext: NSManagedObjectContext!
@@ -19,7 +20,7 @@ class TestPlanTrip: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
         tManager = TripsManager(context: currentContext)        
-        trip = tManager.createTrip(location, medicine: currentPill, cash: cashToBring, reminderDate: d1)
+        trip = tManager.createTrip(location, medicine: currentPill, departure: d1, arrival: d2)
         
         itemsManager = trip.itemsManager(currentContext)
     }
@@ -34,8 +35,8 @@ class TestPlanTrip: XCTestCase {
             XCTAssertEqual(t, trip)
             XCTAssertEqual(t.location, location)
             XCTAssertEqual(t.medicine, currentPill.name())
-            XCTAssertEqual(t.cash, cashToBring)
-            XCTAssertEqual(t.reminderDate, d1)
+            XCTAssertEqual(t.departure, d1)
+            XCTAssertEqual(t.arrival, d2)
         }else{
             XCTFail("Trip wasn't created")
         }
@@ -45,19 +46,21 @@ class TestPlanTrip: XCTestCase {
         let location2 = "Alabama"
         let pill2 = Medicine.Pill.Mefloquine
         let cash: Int64 = 9000
-        let reminderDate2 = d1 + 10.day
+        let departure2 = d1 + 10.day
+        let arrival2 = d1 + 20.day
         
-        trip = tManager.createTrip(location2, medicine: pill2, cash: cash, reminderDate: reminderDate2)
+        trip = tManager.createTrip(location2, medicine: pill2, departure: departure2, arrival: arrival2)
         
         XCTAssertEqual(trip.location, location2)
         XCTAssertEqual(trip.medicine, pill2.name())
-        XCTAssertEqual(trip.cash, cash)
-        XCTAssertEqual(trip.reminderDate, reminderDate2)
+        XCTAssertEqual(trip.departure, departure2)
+        XCTAssertEqual(trip.arrival, arrival2)
+
         if let t = tManager.getTrip(){
             XCTAssertEqual(t.location, location2)
             XCTAssertEqual(t.medicine, pill2.name())
-            XCTAssertEqual(t.cash, cash)
-            XCTAssertEqual(t.reminderDate, reminderDate2)
+            XCTAssertEqual(trip.departure, departure2)
+            XCTAssertEqual(trip.arrival, arrival2)
         }else{
             XCTFail("Trip wasn't created")
         }

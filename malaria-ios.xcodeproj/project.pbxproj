@@ -234,6 +234,7 @@
 		2095B8501B5A4AD200119896 /* CVSelectionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSelectionType.swift; sourceTree = "<group>"; };
 		2095B8511B5A4AD200119896 /* CVSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSet.swift; sourceTree = "<group>"; };
 		2095B8521B5A4AD200119896 /* CVShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVShape.swift; sourceTree = "<group>"; };
+		20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model7.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDF1B5F990300D66C00 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
@@ -1148,6 +1149,7 @@
 		20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */,
 				200F22171B6234F700C29404 /* Model6.xcdatamodel */,
 				20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */,
 				20246D2B1B53339900384759 /* Modelv4.xcdatamodel */,
@@ -1155,7 +1157,7 @@
 				20246D241B53241F00384759 /* Model 2.xcdatamodel */,
 				20EA06D51B2234DA00D6840E /* Model.xcdatamodel */,
 			);
-			currentVersion = 200F22171B6234F700C29404 /* Model6.xcdatamodel */;
+			currentVersion = 20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

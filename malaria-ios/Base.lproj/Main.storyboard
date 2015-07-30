@@ -303,6 +303,9 @@
                                         <state key="normal" image="WhereAmIIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="historyButtonHandler:" destination="cfZ-pD-OHm" eventType="touchUpInside" id="dJ5-Rr-4rx"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wsy-a8-zYC" userLabel="LocationInput">
                                         <rect key="frame" x="125" y="8" width="397" height="30"/>
@@ -310,6 +313,9 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="locationEditingChangedHandler:" destination="cfZ-pD-OHm" eventType="editingChanged" id="ErV-5l-RdV"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Departure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsv-66-dIF">
                                         <rect key="frame" x="8" y="53" width="117" height="30"/>
@@ -460,6 +466,7 @@
                     <connections>
                         <outlet property="arrival" destination="Izn-kJ-Tw1" id="3C1-PT-uHN"/>
                         <outlet property="departure" destination="buv-20-bVO" id="ays-sR-r7B"/>
+                        <outlet property="generateTripBtn" destination="w6B-Dp-svL" id="fqp-Hy-7GM"/>
                         <outlet property="location" destination="wsy-a8-zYC" id="4pc-k4-OmW"/>
                         <outlet property="packingList" destination="yRe-ea-anp" id="CSd-DD-adG"/>
                     </connections>

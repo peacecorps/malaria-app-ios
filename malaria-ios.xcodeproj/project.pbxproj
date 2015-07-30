@@ -87,6 +87,7 @@
 		203F0B0F1B45B3B900826E06 /* TabbedBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B0E1B45B3B900826E06 /* TabbedBarController.swift */; };
 		203F0B111B45B68800826E06 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B101B45B68700826E06 /* UIColor.swift */; };
 		203F0B1C1B46EB9E00826E06 /* UIPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203F0B1B1B46EB9E00826E06 /* UIPickView.swift */; };
+		206C0E9F1B6ABF2800772CB3 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206C0E9E1B6ABF2800772CB3 /* AutoCompleteTextField.swift */; };
 		2095B8541B5A4AD200119896 /* CVAuxiliaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B8391B5A4AD200119896 /* CVAuxiliaryView.swift */; };
 		2095B8551B5A4AD200119896 /* CVCalendarContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B83A1B5A4AD200119896 /* CVCalendarContentViewController.swift */; };
 		2095B8561B5A4AD200119896 /* CVCalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2095B83B1B5A4AD200119896 /* CVCalendarDayView.swift */; };
@@ -207,6 +208,7 @@
 		203F0B101B45B68700826E06 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		203F0B1B1B46EB9E00826E06 /* UIPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPickView.swift; sourceTree = "<group>"; };
 		20503CD21B3F497200ED490A /* TestMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMapping.swift; sourceTree = "<group>"; };
+		206C0E9E1B6ABF2800772CB3 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMedicineManager.swift; sourceTree = "<group>"; };
 		2095B8391B5A4AD200119896 /* CVAuxiliaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVAuxiliaryView.swift; sourceTree = "<group>"; };
 		2095B83A1B5A4AD200119896 /* CVCalendarContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVCalendarContentViewController.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 		200C725C1B40368600998100 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				206C0EA01B6ABF2D00772CB3 /* ExternalAutocomplete */,
 				200E93FB1B5B2E5C00E6DAC7 /* UIViews */,
 				2095B8531B5A4AD200119896 /* ExternalCVCalendar */,
 				200C725D1B40368600998100 /* CoreData */,
@@ -546,6 +549,14 @@
 				200A18D21B64F54D00EC2A65 /* PCLocationPickerViewer.swift */,
 			);
 			name = ValuePickers;
+			sourceTree = "<group>";
+		};
+		206C0EA01B6ABF2D00772CB3 /* ExternalAutocomplete */ = {
+			isa = PBXGroup;
+			children = (
+				206C0E9E1B6ABF2800772CB3 /* AutoCompleteTextField.swift */,
+			);
+			name = ExternalAutocomplete;
 			sourceTree = "<group>";
 		};
 		2095B8531B5A4AD200119896 /* ExternalCVCalendar */ = {
@@ -872,6 +883,7 @@
 				2095B86A1B5A4AD200119896 /* CVScrollDirection.swift in Sources */,
 				203F0B111B45B68800826E06 /* UIColor.swift in Sources */,
 				200A18DB1B64F5C200EC2A65 /* DidTakePillsViewController.swift in Sources */,
+				206C0E9F1B6ABF2800772CB3 /* AutoCompleteTextField.swift in Sources */,
 				200A18CD1B64F50500EC2A65 /* MedicinePickerView.swift in Sources */,
 				2095B85A1B5A4AD200119896 /* CVCalendarMenuViewDelegate.swift in Sources */,
 				2095B85B1B5A4AD200119896 /* CVCalendarMonthContentViewController.swift in Sources */,

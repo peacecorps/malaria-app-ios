@@ -6,8 +6,8 @@ import UIKit
     @IBInspectable var DeleteButtonColor: UIColor = UIColor(hex: 0xA9504A)
 
     //must be provided by previous viewController
-    var departure: NSDate! = NSDate() - 1.year
-    var arrival: NSDate! = NSDate()
+    var departure: NSDate!
+    var arrival: NSDate!
     var listItems: [String] = []
     var completitionHandler: ((Medicine.Pill, [String]) -> ())!
     

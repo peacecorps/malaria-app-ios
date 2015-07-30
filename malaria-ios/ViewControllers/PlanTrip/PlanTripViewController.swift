@@ -9,6 +9,7 @@ class PlanTripViewController: UIViewController {
     @IBOutlet weak var departure: UITextField!
     @IBOutlet weak var arrival: UITextField!
     @IBOutlet weak var packingList: UITextField!
+    @IBOutlet weak var generateTripBtn: UIButton!
     
     var medicinePicker: MedicinePickerViewTrip!
     var departureDatePickerview: TimePickerView!
@@ -86,10 +87,16 @@ class PlanTripViewController: UIViewController {
         }
     }
     
+    @IBAction func locationEditingChangedHandler(sender: AnyObject) {
+        updateLocation(location.text)
+    }
+    
     @IBAction func itemListBtnHandler(sender: AnyObject) {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
             let view = UIStoryboard.instantiate(viewControllerClass: ListItemsViewController.self)
+            view.arrival = self.arrivalDay
+            view.departure = self.departureDay
             view.listItems = self.selectedItems
             view.completitionHandler = self.selectItemsCallback
             self.presentViewController(view, animated: true, completion: nil)
@@ -133,6 +140,10 @@ class PlanTripViewController: UIViewController {
         updateMedicine(medicine)
         updateItemsTextField(listItems)
     }
+    
+    @IBAction func historyButtonHandler(sender: AnyObject) {
+    }
+
 }
 
 /// local variables updaters
@@ -148,6 +159,8 @@ extension PlanTripViewController {
     }
     
     func updateLocation(loc: String){
+        generateTripBtn.enabled = !loc.isEmpty
+        
         tripLocation = loc
         location.text = loc
     }

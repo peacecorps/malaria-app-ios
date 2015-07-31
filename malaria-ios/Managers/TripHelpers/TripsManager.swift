@@ -15,6 +15,7 @@ public class TripsManager : CoreDataContextManager{
     /// Clears any trip from coreData
     public func clearCoreData(){
         Trip.clear(Trip.self, context: context)
+        TripHistory.clear(TripHistory.self, context: context)
         CoreDataHelper.sharedInstance.saveContext(context)
     }
     

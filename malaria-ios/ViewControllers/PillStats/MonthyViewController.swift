@@ -13,9 +13,9 @@ import UIKit
     @IBInspectable var SelectedBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var UnselectedTextColor: UIColor = UIColor(hex: 0x444444)
-    @IBInspectable var UnselectedTodayTextColor: UIColor = UIColor.whiteColor()
+    @IBInspectable var UnselectedTodayTextColor: UIColor = UIColor.blackColor()
     @IBInspectable var DayWeekTextColor: UIColor = UIColor(hex: 0x444444)
-    @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(hex: 0xA1D4E2)//UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var SelectedDayDotMarkerColor: UIColor = UIColor.blackColor()
     @IBInspectable var InsideMonthTextColor: UIColor = UIColor(hex: 0x444444)
     @IBInspectable var OutSideMonthTextColor: UIColor = UIColor(hex: 0x999999)
@@ -32,8 +32,6 @@ import UIKit
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)

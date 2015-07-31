@@ -29,6 +29,7 @@ import UIKit
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -117,6 +118,8 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
         cell.name.setTitle(medicine.name(), forState: .Normal)
         cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: medicine.isDaily() ? 1 : 7)) pills"
+        
+        cell.name.titleLabel?.adjustsFontSizeToFitWidth = true
         return cell.contentView
     }
     

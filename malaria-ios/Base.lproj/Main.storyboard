@@ -374,6 +374,11 @@
                                             <action selector="itemListBtnHandler:" destination="cfZ-pD-OHm" eventType="touchUpInside" id="Qzq-tR-UJ2"/>
                                         </connections>
                                     </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OzI-n5-rw0" userLabel="HistoryDummyTextField">
+                                        <rect key="frame" x="249" y="286" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -467,6 +472,8 @@
                         <outlet property="arrival" destination="Izn-kJ-Tw1" id="3C1-PT-uHN"/>
                         <outlet property="departure" destination="buv-20-bVO" id="ays-sR-r7B"/>
                         <outlet property="generateTripBtn" destination="w6B-Dp-svL" id="fqp-Hy-7GM"/>
+                        <outlet property="historyBtn" destination="BNH-Wo-4uw" id="vYe-5q-GzQ"/>
+                        <outlet property="historyTextField" destination="OzI-n5-rw0" id="Ipr-fb-qkx"/>
                         <outlet property="location" destination="wsy-a8-zYC" id="4pc-k4-OmW"/>
                         <outlet property="packingList" destination="yRe-ea-anp" id="CSd-DD-adG"/>
                     </connections>
@@ -522,8 +529,11 @@
                                                                 <constraint firstAttribute="width" constant="75" id="mAQ-ad-Db6"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qtd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wts-tO-p1r">
-                                                            <rect key="frame" x="488" y="26" width="29.5" height="24.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qtd" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Wts-tO-p1r">
+                                                            <rect key="frame" x="469" y="26" width="68" height="24.5"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="68" id="Mv5-c6-xhO"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -544,6 +554,7 @@
                                                     <constraints>
                                                         <constraint firstItem="u39-Kq-OKq" firstAttribute="centerY" secondItem="TsD-op-CWJ" secondAttribute="centerY" id="2WZ-n9-ttz"/>
                                                         <constraint firstItem="u39-Kq-OKq" firstAttribute="leading" secondItem="TsD-op-CWJ" secondAttribute="trailing" constant="10" id="514-uv-Gem"/>
+                                                        <constraint firstItem="ZXW-r1-d8R" firstAttribute="width" secondItem="Wts-tO-p1r" secondAttribute="width" id="9Jv-Vj-fYd"/>
                                                         <constraint firstAttribute="centerY" secondItem="ZXW-r1-d8R" secondAttribute="centerY" id="Es3-40-2Vo"/>
                                                         <constraint firstItem="ZXW-r1-d8R" firstAttribute="centerX" secondItem="Wts-tO-p1r" secondAttribute="centerX" id="JeR-90-qfX"/>
                                                         <constraint firstItem="TsD-op-CWJ" firstAttribute="leading" secondItem="amq-MW-u5w" secondAttribute="leadingMargin" id="LTR-Xt-Jve"/>
@@ -551,6 +562,11 @@
                                                         <constraint firstAttribute="centerY" secondItem="TsD-op-CWJ" secondAttribute="centerY" constant="-0.25" id="VVU-nT-ot2"/>
                                                         <constraint firstItem="ZXW-r1-d8R" firstAttribute="centerY" secondItem="Wts-tO-p1r" secondAttribute="centerY" id="whH-vE-gtF"/>
                                                     </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="9Jv-Vj-fYd"/>
+                                                        </mask>
+                                                    </variation>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="0.9822424054145813" green="0.9400210976600647" blue="0.8404080867767334" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <connections>
@@ -629,7 +645,7 @@
                                             <action selector="cancelBtnHandler:" destination="Nqh-ag-Min" eventType="touchUpInside" id="QO3-Cf-NYL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvk-jT-G0o">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvk-jT-G0o">
                                         <rect key="frame" x="498" y="15" width="35" height="35"/>
                                         <color key="backgroundColor" red="0.83529411760000005" green="0.44705882349999998" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -695,6 +711,11 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gKS-CH-G0x" secondAttribute="trailing" constant="10" id="wlV-CB-UfF"/>
                         </constraints>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="DeleteButtonColor">
+                            <color key="value" red="0.92541885375976562" green="0.45286828279495239" blue="0.40838450193405151" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="tableView" destination="HIY-l7-HPI" id="Y1H-9c-iKJ"/>
                     </connections>

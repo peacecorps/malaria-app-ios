@@ -37,6 +37,9 @@
         <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
     </entity>
+    <entity name="TripHistory" representedClassName="malaria_ios.TripHistory" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="60"/>
         <element name="Item" positionX="-207" positionY="11" width="128" height="90"/>
@@ -45,5 +48,6 @@
         <element name="Posts" positionX="-270" positionY="387" width="128" height="45"/>
         <element name="Registry" positionX="214" positionY="15" width="128" height="90"/>
         <element name="Trip" positionX="-396" positionY="-18" width="128" height="120"/>
+        <element name="TripHistory" positionX="-189" positionY="135" width="128" height="60"/>
     </elements>
 </model>

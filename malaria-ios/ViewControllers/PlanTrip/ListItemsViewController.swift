@@ -36,7 +36,13 @@ import UIKit
         
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
         medicineManager = MedicineManager(context: viewContext)
-        medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
+        
+        if let trip = TripsManager(context: viewContext).getTrip() {
+            medicine = Medicine.Pill(rawValue: trip.medicine)!
+        }else {
+            medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
+        }
+        
         
         tableView.reloadData()
     }
@@ -79,8 +85,8 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     func modifyItem(indexPath: NSIndexPath? = nil) {
         let modifySelectedEntry = indexPath != nil
         
-        let title = indexPath != nil ? "Change item" : "New Item"
-        let message = "Type item name"
+        let title = indexPath != nil ? "Change content" : "New content"
+        let message = "Insert name"
         
         var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
@@ -98,15 +104,6 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
-        /*
-        if modifySelectedEntry {
-            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: { _ in
-                self.listItems.removeAtIndex(indexPath!.row)
-                self.tableView.reloadData()
-            }))
-        }*/
-        
-        
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Name"
             textField.text = modifySelectedEntry ? self.listItems[indexPath!.row] : ""
@@ -119,7 +116,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
         cell.name.setTitle(medicine.name(), forState: .Normal)
-        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: medicine.isDaily() ? 1 : 7))"
+        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: medicine.isDaily() ? 1 : 7)) pills"
         return cell.contentView
     }
     

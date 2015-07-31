@@ -1,8 +1,5 @@
 import Foundation
 import UIKit
-import MapKit
-import CoreLocation
-
 
 class PlanTripViewController: UIViewController {
     @IBOutlet weak var location: UITextField!
@@ -10,10 +7,13 @@ class PlanTripViewController: UIViewController {
     @IBOutlet weak var arrival: UITextField!
     @IBOutlet weak var packingList: UITextField!
     @IBOutlet weak var generateTripBtn: UIButton!
+    @IBOutlet weak var historyBtn: UIButton!
+    @IBOutlet weak var historyTextField: UITextField!
     
     var medicinePicker: MedicinePickerViewTrip!
     var departureDatePickerview: TimePickerView!
     var arrivalDatePickerview: TimePickerView!
+    var tripLocationHistoryPickerViewer : TripLocationHistoryPickerViewer!
     
     //trip information
     var tripLocation: String = ""
@@ -50,6 +50,9 @@ class PlanTripViewController: UIViewController {
             self.updateArrival(date)
         })
         arrival.inputAccessoryView = toolBar
+        
+        historyTextField.inputAccessoryView = toolBar
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,6 +74,16 @@ class PlanTripViewController: UIViewController {
         
         arrival.inputView = arrivalDatePickerview.generateInputView(.Date, startDate: arrivalDay)
         departure.inputView = departureDatePickerview.generateInputView(.Date, startDate: departureDay)
+        
+        prepareHistoryValuePicker()
+    }
+    
+    func prepareHistoryValuePicker(){
+        tripLocationHistoryPickerViewer = TripLocationHistoryPickerViewer(context: viewContext, selectCallback: {(object: String) in
+            self.updateLocation(object)
+        })
+        
+        historyTextField.inputView = tripLocationHistoryPickerViewer.generateInputView()
     }
     
     func dismissInputView(sender: UITextField){
@@ -78,6 +91,7 @@ class PlanTripViewController: UIViewController {
         packingList.endEditing(true)
         arrival.endEditing(true)
         departure.endEditing(true)
+        historyTextField.endEditing(true)
     }
     
     @IBAction func settingsBtnHandler(sender: AnyObject) {
@@ -134,6 +148,8 @@ class PlanTripViewController: UIViewController {
         }
         
         trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
+        
+        self.prepareHistoryValuePicker()
     }
     
     func selectItemsCallback(medicine: Medicine.Pill, listItems: [String]){
@@ -142,6 +158,13 @@ class PlanTripViewController: UIViewController {
     }
     
     @IBAction func historyButtonHandler(sender: AnyObject) {
+        if tripLocationHistoryPickerViewer.locations.isEmpty {
+            var successAlert = UIAlertController(title: "Empty history", message: "", preferredStyle: .Alert)
+            successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(successAlert, animated: true, completion: nil)
+        }else{
+            historyTextField.becomeFirstResponder()
+        }
     }
 
 }

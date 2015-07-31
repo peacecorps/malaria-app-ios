@@ -18,6 +18,31 @@ public class TripsManager : CoreDataContextManager{
         CoreDataHelper.sharedInstance.saveContext(context)
     }
     
+    public func getHistory(limit: Int = 15) -> [TripHistory] {
+        return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context)
+    }
+    
+    public func createHistory(trip: Trip){
+        let previousHistory = TripHistory.retrieve(TripHistory.self, context: context)
+        if previousHistory.count >= 15 {
+            Logger.Info("Deleting history to have more space")
+            var count = 15
+            for entry in previousHistory {
+                if count == 0 {
+                    break
+                }
+                entry.deleteFromContext(context)
+            }
+        }
+        
+        if previousHistory.filter({ $0.location.lowercaseString == trip.location.lowercaseString }).count == 0 {
+            let hist = TripHistory.create(TripHistory.self, context: context)
+            hist.location = trip.location
+        }
+        
+        CoreDataHelper.sharedInstance.saveContext(context)
+    }
+    
     /// Creates a trip.
     ///
     /// It creates an instance of the object in the CoreData, any deletion must be done explicitly.
@@ -38,6 +63,8 @@ public class TripsManager : CoreDataContextManager{
             
             t.itemsManager(context).getItems().map({$0.deleteFromContext(self.context)})
             
+            createHistory(t)
+            
             CoreDataHelper.sharedInstance.saveContext(context)
             return t
         }
@@ -47,6 +74,8 @@ public class TripsManager : CoreDataContextManager{
         trip.medicine = medicine.name()
         trip.departure = departure
         trip.arrival = arrival
+        
+        createHistory(trip)
         
         CoreDataHelper.sharedInstance.saveContext(context)
         

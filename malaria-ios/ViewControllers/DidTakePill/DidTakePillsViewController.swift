@@ -17,7 +17,7 @@ import UIKit
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")        
     }
     
     deinit{
@@ -26,6 +26,7 @@ import UIKit
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         refreshScreen()
     }
     

@@ -57,8 +57,12 @@ import UIKit
     }
     
     @IBAction func closeBtnHandler(sender: AnyObject) {
-        callback?()
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        callback?()
     }
     
     @IBAction func previousMonthToggle(sender: AnyObject) {
@@ -237,10 +241,8 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         if isWeekly {
             for i in -8...8 {
                 let day = (date + i.day).startOfDay
-                if day.sameWeekAs(date){
-                    for view in dayViews[day]!{
-                        updateDayView(view, CachedStatistics.sharedInstance.tookMedicine[day]!)
-                    }
+                for view in dayViews[day]!{
+                    updateDayView(view, CachedStatistics.sharedInstance.tookMedicine[day]!)
                 }
             }
         }else {

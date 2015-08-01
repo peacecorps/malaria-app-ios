@@ -27,11 +27,6 @@ import UIKit
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -43,7 +38,6 @@ import UIKit
         }else {
             medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
         }
-        
         
         tableView.reloadData()
     }

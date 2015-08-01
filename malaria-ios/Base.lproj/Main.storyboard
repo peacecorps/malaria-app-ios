@@ -254,7 +254,11 @@
                             <constraint firstAttribute="trailing" secondItem="S4X-4X-2Rn" secondAttribute="trailing" id="uHP-CQ-m2C"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="TabHomeIcon" id="Nvt-CJ-ssi"/>
+                    <tabBarItem key="tabBarItem" title="" image="TabHomeIconUnselected" id="Nvt-CJ-ssi">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="imageWhenSelected" value="TabHomeIcon"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <connections>
                         <outlet property="content" destination="S4X-4X-2Rn" id="uT3-g4-Het"/>
                         <outlet property="settingsBtn" destination="pq0-mY-A6L" id="cx3-m6-oB4"/>
@@ -467,7 +471,11 @@
                             <constraint firstItem="PFh-kn-Gcg" firstAttribute="trailing" secondItem="ivX-md-p2t" secondAttribute="trailingMargin" id="z5y-f6-QXa"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="PlanTripIcon" id="YVj-9J-zFH"/>
+                    <tabBarItem key="tabBarItem" title="" image="PlanTripIconUnselected" id="YVj-9J-zFH">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="imageWhenSelected" value="PlanTripIcon"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <connections>
                         <outlet property="arrival" destination="Izn-kJ-Tw1" id="3C1-PT-uHN"/>
                         <outlet property="departure" destination="buv-20-bVO" id="ays-sR-r7B"/>
@@ -827,7 +835,11 @@
                             <constraint firstAttribute="trailing" secondItem="H5z-ac-hcC" secondAttribute="trailing" id="y5P-yi-1ly"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="TabInfoHubIcon" id="U6d-Uo-IeG"/>
+                    <tabBarItem key="tabBarItem" title="" image="TabInfoHubIconUnselected" id="U6d-Uo-IeG">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="imageWhenSelected" value="TabInfoHubIcon"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <connections>
                         <outlet property="collectionView" destination="H5z-ac-hcC" id="c3M-NA-k8P"/>
                     </connections>
@@ -1463,9 +1475,12 @@
         <image name="PeaceCorpsLogo" width="524" height="557"/>
         <image name="PeaceCorpsLogoBold" width="317" height="317"/>
         <image name="PlanTripIcon" width="96" height="50"/>
+        <image name="PlanTripIconUnselected" width="96" height="50"/>
         <image name="SettingsIcon" width="26" height="27"/>
         <image name="TabHomeIcon" width="96" height="56"/>
+        <image name="TabHomeIconUnselected" width="96" height="56"/>
         <image name="TabInfoHubIcon" width="55" height="56"/>
+        <image name="TabInfoHubIconUnselected" width="55" height="56"/>
         <image name="WhereAmIIcon" width="19" height="24"/>
         <image name="Yes" width="105" height="104"/>
     </resources>

@@ -3,21 +3,22 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "info.png"
+      "filename" : "trip.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "info-1.png"
+      "filename" : "trip-1.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "info2x.png"
+      "filename" : "trip2x.png"
     }
   ],
   "info" : {
     "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "template-rendering-intent" : "original"
   }
 }

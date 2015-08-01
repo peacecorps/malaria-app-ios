@@ -118,6 +118,7 @@
 		20C13EE01B5F990300D66C00 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EDF1B5F990300D66C00 /* UIView.swift */; };
 		20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
+		20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -250,6 +251,7 @@
 		20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDailyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20EA070C1B23AD9F00D6840E /* TestNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotifications.swift; sourceTree = "<group>"; };
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
+		20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarItem.swift; sourceTree = "<group>"; };
 		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
 		67AE5C8ADFA45BFBD2B8F09D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A4DE863BDDB7DAB1E7ED688C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 				20C13EDF1B5F990300D66C00 /* UIView.swift */,
 				20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */,
 				200F22181B623B8D00C29404 /* Globals.swift */,
+				20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,
 				200A18EB1B64F6EA00EC2A65 /* UIStoryboard.swift in Sources */,
 				200C72B41B40368600998100 /* Item.swift in Sources */,
+				20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */,
 				200A18DD1B64F5F300EC2A65 /* PlanTripViewController.swift in Sources */,
 				200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */,
 				20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */,

@@ -190,6 +190,10 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler: { _ in
             println("Pressed yes")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
+                let d1 = (isWeekly ? date - 8.day : date).startOfDay
+                let d2 = (isWeekly ? date + 8.day : date).startOfDay
+                CachedStatistics.sharedInstance.updateTookMedicineStats(d1, d2: d2)
+                
                 self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: true)
             }else {
                 self.generateErrorMessage()
@@ -199,6 +203,10 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler: { _ in
             println("pressed no")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
+                let d1 = (isWeekly ? date - 8.day : date).startOfDay
+                let d2 = (isWeekly ? date + 8.day : date).startOfDay
+                CachedStatistics.sharedInstance.updateTookMedicineStats(d1, d2: d2)
+                
                 self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: false)
             }else {
                 self.generateErrorMessage()
@@ -231,12 +239,12 @@ extension MonthlyViewController: CVCalendarViewDelegate {
                 let day = (date + i.day).startOfDay
                 if day.sameWeekAs(date){
                     for view in dayViews[day]!{
-                        updateDayView(view, tookMedicine)
+                        updateDayView(view, CachedStatistics.sharedInstance.tookMedicine[day]!)
                     }
                 }
             }
         }else {
-            updateDayView(dayView, tookMedicine)
+            updateDayView(dayView, CachedStatistics.sharedInstance.tookMedicine[date.startOfDay]!)
         }
     }
     

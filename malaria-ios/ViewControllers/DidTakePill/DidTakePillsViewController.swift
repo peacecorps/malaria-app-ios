@@ -66,7 +66,7 @@ import UIKit
                 UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
             }else if !currentDate.sameDayAs(medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
-                        && !medicine.registriesManager(viewContext).tookMedicine(currentDate){
+                        && medicine.registriesManager(viewContext).tookMedicine(currentDate) == nil {
                             
                 dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
                 fullDateLbl.textColor = MissedWeeklyPillTextColor
@@ -77,7 +77,7 @@ import UIKit
             didNotTookPillBtn.enabled = true
             tookPillBtn.enabled = true
         }else {
-            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate)
+            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate) != nil
             didNotTookPillBtn.enabled = !activateCheckButton
             tookPillBtn.enabled = activateCheckButton
         }

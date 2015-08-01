@@ -129,20 +129,20 @@ class TestMedicineRegistries: XCTestCase {
         
         XCTAssertTrue(weeklyRegistriesManager.addRegistry(dStartWeek, tookMedicine: true))
 
-        XCTAssertFalse(weeklyRegistriesManager.tookMedicine(dStartWeek - 1.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 1.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 2.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 3.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 4.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 5.day))
-        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 6.day))
-        XCTAssertFalse(weeklyRegistriesManager.tookMedicine(dStartWeek + 7.day))
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek - 1.day) == nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 1.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 2.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 3.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 4.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 5.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 6.day) != nil)
+        XCTAssertTrue(weeklyRegistriesManager.tookMedicine(dStartWeek + 7.day) == nil)
     }
     
     func testAlreadyRegisteredDailyPill(){
-        XCTAssertTrue(registriesManager.tookMedicine(d1))
-        XCTAssertTrue(registriesManager.tookMedicine(d1 - 1.day))
-        XCTAssertFalse(registriesManager.tookMedicine(d1 + 1.day))
+        XCTAssertTrue(registriesManager.tookMedicine(d1) != nil)
+        XCTAssertTrue(registriesManager.tookMedicine(d1 - 1.day) != nil)
+        XCTAssertTrue(registriesManager.tookMedicine(d1 + 1.day) == nil)
     }
     
     func testFailAddEntryInFuture(){

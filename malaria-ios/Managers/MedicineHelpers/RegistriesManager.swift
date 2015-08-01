@@ -12,15 +12,15 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
-    /// :returns: `Bool`: True if the user took a pill in that day or week
-    public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Bool{
+    /// :returns: `Registry?`: Confliting registry
+    public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Registry?{
         for r in allRegistriesInPeriod(at, registries: registries){
             if r.tookMedicine{
-                return true
+                return r
             }
         }
         
-        return false
+        return nil
     }
     
     
@@ -68,7 +68,10 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// It will return false if trying to add entries in the future
     /// If modify flag is set to false, It will return false it there is
-    /// already an entry in that day if daily pill or in that week if weekly pill
+    /// already an entry in that day if daily pill or in that week if weekly pill.
+    ///
+    /// If weekly pill, if there is already an entry in that week and if modifyEntry is true,
+    /// that same entry is replaced by a new one
     ///
     /// :param: `NSDate`: the date of the entry
     /// :param: `Bool`: if the user took medicine
@@ -80,8 +83,29 @@ public class RegistriesManager : CoreDataContextManager{
             return false
         }
         
-        if (tookMedicine && self.tookMedicine(date)){
-            Logger.Warn("Already took the pill in that pill/week. Aborting")
+        if let conflitingTookMedicineEntry = self.tookMedicine(date) {
+            if tookMedicine && !modifyEntry && conflitingTookMedicineEntry.date.sameDayAs(date) {
+                Logger.Warn("Found equivalent entry on same day")
+                return true
+            } else if modifyEntry {
+                //remove previous, whether it is weekly or daily (if daily we could just change the entry)
+                removeEntry(conflitingTookMedicineEntry)
+                
+                //create new one
+                let registry = Registry.create(Registry.self, context: context)
+                registry.date = date
+                registry.tookMedicine = tookMedicine
+                
+                var newRegistries: [Registry] = medicine.registries.convertToArray()
+                newRegistries.append(registry)
+                medicine.registries = NSSet(array: newRegistries)
+                NSNotificationEvents.DataUpdated(registry)
+                CoreDataHelper.sharedInstance.saveContext(context)
+                
+                return true
+            }
+            
+            Logger.Warn("Can't modify entry, aborting")
             return false
         }
         
@@ -89,14 +113,17 @@ public class RegistriesManager : CoreDataContextManager{
         var registry : Registry? = findRegistry(date)
         
         if let r = registry{
-            if(!modifyEntry){
+            if r.tookMedicine && tookMedicine || !r.tookMedicine && !tookMedicine{
+                Logger.Warn("Found equivalent entry")
+                return true
+            } else if !modifyEntry {
                 Logger.Info("Can't modify entry. Aborting")
                 return false
             }
             
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
-        }else{
+        } else {
             registry = Registry.create(Registry.self, context: context)
             registry!.date = date
             registry!.tookMedicine = tookMedicine
@@ -163,5 +190,14 @@ public class RegistriesManager : CoreDataContextManager{
             }
         }
         return nil
+    }
+    
+    func removeEntry(registry: Registry){
+        var newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(registry.date)})
+        medicine.registries = NSSet(array: newRegistries)
+
+        registry.deleteFromContext(context)
+        NSNotificationEvents.DataUpdated(nil)
+        CoreDataHelper.sharedInstance.saveContext(context)
     }
 }

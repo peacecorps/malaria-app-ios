@@ -119,11 +119,6 @@ public class MedicineStats : CoreDataContextManager{
         return result
     }
     
-    
-    
-    
-    
-    
     /// returns pill adhrence in a month
     /// if there are no entries in that month return 0
     /// if there are entries in that month, truncate to the oldest and the most recent date to account when the user started tracking

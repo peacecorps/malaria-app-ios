@@ -28,16 +28,16 @@ class TestDailyMedicineStatistics: XCTestCase {
         registriesManager = md.registriesManager(currentContext)
         stats = md.stats(currentContext)
         
-        registriesManager.addRegistry(d1, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 1.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 2.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 3.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 4.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 5.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 6.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 7.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 8.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 9.day, tookMedicine: true)
+        XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 1.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 2.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 3.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 4.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 6.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 7.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 8.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 9.day, tookMedicine: true))
     }
     
     override func tearDown() {
@@ -51,7 +51,9 @@ class TestDailyMedicineStatistics: XCTestCase {
         XCTAssertEqual(6, stats.pillStreak(date1: d1, date2: d1 - 5.day))
     
         //miss one pill
+        println("1. ----")
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
+        println("2. ----")
         XCTAssertEqual(0, stats.pillStreak(date1: d1 - 9.day, date2: d1 - 5.day))
         XCTAssertEqual(5, stats.pillStreak(date1: d1, date2: d1 - 5.day))
         

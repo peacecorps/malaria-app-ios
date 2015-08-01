@@ -25,20 +25,24 @@ import UIKit
     let WeekDaySelectedFont = UIFont(name: "AmericanTypewriter", size: 14)!
     let DayWeekTextFont = UIFont(name: "AmericanTypewriter", size: 12)!
     
-    var previouslySelect: NSDate?
-    
+    //provided by previousViewController
     var startDay: NSDate!
-    var animationFinished = true
+    var callback: (() -> ())?
+    
+    private var previouslySelect: NSDate?
+    private var animationFinished = true
+    private let RingViewTag = 123
+    
+    //hack because CVCalendar doesn't support updates yet
+    private var dayViews = [NSDate : Set<DayView>]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        println("Calendar View did load")
+        
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
-    }
-    
-    func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
         
     func generateMonthLabel(date: NSDate) -> String {
@@ -53,6 +57,7 @@ import UIKit
     }
     
     @IBAction func closeBtnHandler(sender: AnyObject) {
+        callback?()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -86,33 +91,61 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         let ringView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         ringView.fillColor = UIColor.clearColor()
         ringView.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
-        
+        ringView.tag = RingViewTag
         return ringView
     }
     
     func supplementaryView(viewOnDayView dayView: DayView) -> UIView {
-        if let date = dayView.date,
-            registryDate = date.convertedDate(),
-            tookMedicine = CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay]{
-                return createRingView(dayView, tookMedicine: tookMedicine)
+        if let  date = dayView.date,
+                registryDate = date.convertedDate(),
+                tookMedicine = CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay]{
+            return createRingView(dayView, tookMedicine: tookMedicine)
         }
         
         return UIView()
     }
     
     func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
-        if let date = dayView.date,
-            registryDate = date.convertedDate(){
-                return CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
+        if let  date = dayView.date,
+                registryDate = date.convertedDate(){
+                    
+            //hack
+            if let d = dayView.date.convertedDate(){
+                if dayViews[d.startOfDay] == nil {
+                    dayViews[d.startOfDay] = Set<DayView>()
+                }
+                dayViews[d.startOfDay]!.insert(dayView)
+            }
+            
+            return CachedStatistics.sharedInstance.tookMedicine[registryDate.startOfDay] != nil
         }
 
         return false
     }
-    
 }
 
 extension MonthlyViewController: CVCalendarViewDelegate {
-    func firstWeekday() -> Weekday { return .Sunday }                                           /// first week day is sunday
+    func firstWeekday() -> Weekday {
+        switch (NSCalendar.currentCalendar().firstWeekday % 7) {
+        case 0:
+            return .Saturday
+        case 1:
+            return .Sunday
+        case 2:
+            return .Monday
+        case 3:
+            return .Tuesday
+        case 4:
+            return .Wednesday
+        case 5:
+            return .Thursday
+        case 6:
+            return .Friday
+        default:
+            return .Sunday
+        }
+    }
+    
     func shouldShowWeekdaysOut() -> Bool { return true }                                        /// show all days
     func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool { return false }            /// hide line above day
     
@@ -121,7 +154,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         if let previous = previouslySelect{
             if previous.sameDayAs(selected) {
                 if let registryDate = dayView.date.convertedDate(){
-                    popup(registryDate, dayView: dayView)
+                    popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
         }
@@ -144,7 +177,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         var title = ""
         var message = ""
         
-        if tookMedicine {
+        if tookMedicine != nil {
             title = "You already took your " + (isWeekly ? "weekly" : "daily") + " pill."
             message = "Have you taken your pill?"
         } else {
@@ -154,17 +187,21 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         
         let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
         
-        tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler:{ action in
+        tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler: { _ in
             println("Pressed yes")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
-                self.updateDayView(dayView, tookMedicine: true)
+                self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: true)
+            }else {
+                self.generateErrorMessage()
             }
         }))
         
-        tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler:{ action in
-            println("pressed nop")
+        tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler: { _ in
+            println("pressed no")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
-                self.updateDayView(dayView, tookMedicine: false)
+                self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: false)
+            }else {
+                self.generateErrorMessage()
             }
         }))
         
@@ -173,12 +210,33 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     
+    func generateErrorMessage() {
+        let errorAlert: UIAlertController = UIAlertController(title: "Error updating", message: "Did you already take your pill?", preferredStyle: .Alert)
+        errorAlert.addAction(UIAlertAction(title:"Dismiss", style: .Default, handler: nil))
+        presentViewController(errorAlert, animated: true, completion: nil)
+    }
+    
     ///hack until library offers what we need
-    func updateDayView(dayView: CVCalendarDayView, tookMedicine: Bool) {
-        if dayView.subviews.count >= 3 {
-            (dayView.subviews[1] as? CVAuxiliaryView)?.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+    func updateDayView(date: NSDate, dayView: CVCalendarDayView, isWeekly: Bool, tookMedicine: Bool) {
+        func updateDayView(dayView: CVCalendarDayView, tookMedicine: Bool){
+            if let ringView = dayView.viewWithTag(RingViewTag){
+                (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+            }else {
+                dayView.insertSubview(createRingView(dayView, tookMedicine: tookMedicine), atIndex: 0)
+            }
+        }
+        
+        if isWeekly {
+            for i in -8...8 {
+                let day = (date + i.day).startOfDay
+                if day.sameWeekAs(date){
+                    for view in dayViews[day]!{
+                        updateDayView(view, tookMedicine)
+                    }
+                }
+            }
         }else {
-            dayView.insertSubview(createRingView(dayView, tookMedicine: tookMedicine), atIndex: 0)
+            updateDayView(dayView, tookMedicine)
         }
     }
     

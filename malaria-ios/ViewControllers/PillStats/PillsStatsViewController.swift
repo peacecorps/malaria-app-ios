@@ -43,6 +43,8 @@ import Charts
     }
     
     func refreshScreen() {
+        println("Refreshing screen")
+        
         self.graphFrame.bringSubviewToFront(self.chartView)
         
         if !isPillStatsUpdated {
@@ -102,7 +104,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let monthView = UIStoryboard.instantiate(viewControllerClass: MonthlyViewController.self)
         monthView.startDay = CachedStatistics.sharedInstance.monthAdhrence[indexPath.row].0
-        
+        monthView.callback = refreshScreen
         presentViewController(
             monthView,
             animated: true,

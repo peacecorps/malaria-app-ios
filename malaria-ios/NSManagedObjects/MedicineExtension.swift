@@ -20,28 +20,12 @@ public extension Medicine{
         case Malarone = "Malarone"
         case Mefloquine = "Mefloquine"
         
-        func isWeekly() -> Bool{
-            return self == Medicine.Pill.Mefloquine
-        }
-        
-        func isDaily() -> Bool{
-            return self != Medicine.Pill.Mefloquine
+        func interval() -> Float {
+            return self == Medicine.Pill.Mefloquine ? 7 : 1
         }
         
         public func name() -> String{
             return self.rawValue
         }
-    }
-    
-    class func PillTypeFromString(type: String) -> Pill?{
-        return Medicine.Pill(rawValue: type)
-    }
-    
-    func isWeekly() -> Bool{
-        return weekly
-    }
-    
-    func isDaily() -> Bool{
-        return !weekly
     }
 }

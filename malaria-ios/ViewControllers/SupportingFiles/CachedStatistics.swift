@@ -115,17 +115,36 @@ extension CachedStatistics {
         })
     }
     
-    func updateTookMedicineStats(d1: NSDate, d2: NSDate){
-        setupBeforeCaching()
-        
-        let entriesReversed = self.registries.reverse()
-        if !entriesReversed.isEmpty {
-            let numDays = (d2 - d1) + 1 //include d2
-            for i in 0...(numDays - 1) {
-                let day = d1 + i.day
-                self.tookMedicine[day] = registriesManager.tookMedicine(day, registries: entriesReversed) != nil
+    func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            
+            self.setupBeforeCaching()
+            
+            let d1 = at - (Int(self.medicine.interval) - 1).day
+            let d2 = at + (Int(self.medicine.interval) - 1).day
+            
+            let entriesReversed = self.registries.reverse() //most recentFirst
+            if !entriesReversed.isEmpty {
+                let numDays = d2 - d1 + 1 //include d2
+                for i in 0...(numDays - 1) {
+                    let day = (d1 + i.day).startOfDay
+                    self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed) != nil
+                }
+                
+                let oldestEntry = entriesReversed.last!.date
+                let numEntries = NSDate() - oldestEntry + 1
+                for i in 0...(numEntries - 1){
+                    let day = (oldestEntry + i.day).startOfDay
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        progress(day: day)
+                    })
+                }
             }
-        }
+            
+            
+            
+        })
     }
     
     func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {

@@ -12,14 +12,23 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
-    /// :returns: `Registry?`: Confliting registry
+    /// :returns: `Registry?`: registry
     public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Registry?{
-        for r in allRegistriesInPeriod(at, registries: registries){
+        
+        let entries = allRegistriesInPeriod(at, registries: registries)
+        if entries.noData {
+            //Logger.Warn("No information available " + at.formatWith())
+            return nil
+        }
+        
+        for r in entries.entries{
             if r.tookMedicine{
+                //Logger.Info("took medicine at " + at.formatWith())
                 return r
             }
         }
-        
+
+        //Logger.Info("Did not take medicine at " + at.formatWith())
         return nil
     }
     
@@ -29,25 +38,29 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `[Registry]` all the entries
-    public  func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> [Registry] {
+    
+    public  func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]) {
         var result = [Registry]()
         
-        if medicine.isDaily(){
-            if let r = findRegistry(at, registries: registries){
-                result.append(r)
+        let (day1, day2) = (at - Int(medicine.interval - 1).day, at + Int(medicine.interval - 1).day)
+        let entries = registries != nil ? filter(registries!, date1: day1, date2: day2) : getRegistries(date1: day1, date2: day2)
+        
+        if entries.count != 0 {
+            let d1 = max(day1, entries.last!.date)
+            let dateLimit = (d1 + Int(medicine.interval - 1).day).endOfDay
+            
+            if at < d1 && !at.sameDayAs(d1) {
+                return (true, result)
             }
-        }else if medicine.isWeekly(){
-            let (day1, day2) = (at - 8.day, at + 8.day)
-            let entries = registries != nil ? filter(registries!, date1: day1, date2: day2) : getRegistries(date1: day1, date2: day2)
             
             for r in entries {
-                if at.sameWeekAs(r.date){
+                if !(r.date < d1 || r.date > dateLimit)  {
                     result.append(r)
                 }
             }
         }
         
-        return result
+        return (false, result)
     }
 
     /// Returns the most recent entry for that pill if there is
@@ -88,6 +101,8 @@ public class RegistriesManager : CoreDataContextManager{
                 Logger.Warn("Found equivalent entry on same day")
                 return true
             } else if modifyEntry {
+                Logger.Warn("Removing confliting entry and replacing by a different one")
+                
                 //remove previous, whether it is weekly or daily (if daily we could just change the entry)
                 removeEntry(conflitingTookMedicineEntry)
                 
@@ -105,7 +120,8 @@ public class RegistriesManager : CoreDataContextManager{
                 return true
             }
             
-            Logger.Warn("Can't modify entry, aborting")
+            Logger.Warn("Can't modify entry on day " + date.formatWith() + " aborting")
+            Logger.Warn("Confliting with " + conflitingTookMedicineEntry.date.formatWith())
             return false
         }
         
@@ -124,6 +140,7 @@ public class RegistriesManager : CoreDataContextManager{
             Logger.Info("Found entry same date. Modifying entry")
             r.tookMedicine = tookMedicine
         } else {
+            Logger.Info("Adding entry on day: " + date.formatWith())
             registry = Registry.create(Registry.self, context: context)
             registry!.date = date
             registry!.tookMedicine = tookMedicine

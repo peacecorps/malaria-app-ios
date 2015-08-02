@@ -76,7 +76,7 @@ class TestTimedInsertions: XCTestCase {
         XCTAssertFalse(weeklyRegistriesManager.addRegistry(d1 + 6.day, tookMedicine: true))
         
         XCTAssertEqual(2, weeklyRegistriesManager.getRegistries().count)
-        XCTAssertTrue(weeklyRegistriesManager.addRegistry(d1 + 1.week, tookMedicine: true))
+        XCTAssertTrue(weeklyRegistriesManager.addRegistry(d1 + 1.day + 1.week, tookMedicine: true))
         XCTAssertEqual(3, weeklyRegistriesManager.getRegistries().count)
     }
     

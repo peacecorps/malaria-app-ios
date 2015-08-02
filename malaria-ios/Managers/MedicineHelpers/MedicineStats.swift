@@ -45,7 +45,7 @@ public class MedicineStats : CoreDataContextManager{
             d2 = entries.last!.date
         }
         
-        return MedicineStats.numberNeededPills(d1, date2: d2, interval: medicine.isDaily() ? 1 : 7)
+        return MedicineStats.numberNeededPills(d1, date2: d2, interval: medicine.interval)
     }
     
     /// Returns the number of pills that the user should have taken between two dates
@@ -95,14 +95,11 @@ public class MedicineStats : CoreDataContextManager{
         
         var result = 0
         
-        let isDaily = medicine.isDaily()
         var previousDate: NSDate?
         for r in entries {
             //check for missing entries
-            if let previousD = previousDate{
-                if (isDaily && !(previousD - 1.day).sameDayAs(r.date)) ||
-                    (!isDaily && !(previousD - 7.day).sameWeekAs(r.date))
-                {
+            if let previousD = previousDate {
+                if r.date < previousD - Int(medicine.interval).day {
                     return result
                 }
             }
@@ -145,7 +142,7 @@ public class MedicineStats : CoreDataContextManager{
         }
         
         let day1 = max(startMonth, oldestDate)
-        let day2 = min(endMonth, mostRecentEntry)
+        let day2 = endMonth.sameMonthAs(NSDate()) ? min(endMonth, NSDate()) : endMonth
         
         return pillAdherence(date1: day1, date2: day2, registries: registriesManager.filter(entries, date1: day1, date2: day2))
     }

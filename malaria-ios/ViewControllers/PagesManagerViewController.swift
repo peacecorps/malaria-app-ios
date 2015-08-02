@@ -7,8 +7,6 @@ import UIKit
     
     @IBInspectable var PageIndicatorTintColor: UIColor = UIColor(hex: 0xB2BFAF)
     @IBInspectable var PageIndicatorCurrentColor: UIColor = UIColor(hex: 0x9EB598)
-    @IBInspectable var DefaultPage: HomePage = HomePage.DailyPill
-    
     
     private var homePageEnum: HomePage = HomePage()
     private var pageViewController : UIPageViewController!

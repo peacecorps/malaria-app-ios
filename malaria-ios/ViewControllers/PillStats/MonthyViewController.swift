@@ -175,7 +175,8 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             return
         }
         
-        let isWeekly = CachedStatistics.sharedInstance.medicine.isWeekly()
+        let interval = Int(CachedStatistics.sharedInstance.medicine.interval)
+        let isWeekly = interval == 7
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
         var title = ""
@@ -194,11 +195,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler: { _ in
             println("Pressed yes")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
-                let d1 = (isWeekly ? date - 8.day : date).startOfDay
-                let d2 = (isWeekly ? date + 8.day : date).startOfDay
-                CachedStatistics.sharedInstance.updateTookMedicineStats(d1, d2: d2)
-                
-                self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: true)
+                CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)
             }else {
                 self.generateErrorMessage()
             }
@@ -207,11 +204,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler: { _ in
             println("pressed no")
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
-                let d1 = (isWeekly ? date - 8.day : date).startOfDay
-                let d2 = (isWeekly ? date + 8.day : date).startOfDay
-                CachedStatistics.sharedInstance.updateTookMedicineStats(d1, d2: d2)
-                
-                self.updateDayView(date, dayView: dayView, isWeekly: isWeekly, tookMedicine: false)
+                CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)                
             }else {
                 self.generateErrorMessage()
             }
@@ -229,27 +222,18 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     ///hack until library offers what we need
-    func updateDayView(date: NSDate, dayView: CVCalendarDayView, isWeekly: Bool, tookMedicine: Bool) {
-        func updateDayView(dayView: CVCalendarDayView, tookMedicine: Bool){
-            if let ringView = dayView.viewWithTag(RingViewTag){
-                (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
-            }else {
-                dayView.insertSubview(createRingView(dayView, tookMedicine: tookMedicine), atIndex: 0)
-            }
-        }
-        
-        if isWeekly {
-            for i in -8...8 {
-                let day = (date + i.day).startOfDay
-                for view in dayViews[day]!{
-                    updateDayView(view, CachedStatistics.sharedInstance.tookMedicine[day]!)
+    func updateDayView(day: NSDate) {
+        if let dViews = dayViews[day] {
+            for dView in dViews {
+                let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day.startOfDay] ?? false
+                if let ringView = dView.viewWithTag(RingViewTag){
+                    (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+                }else {
+                    dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
                 }
             }
-        }else {
-            updateDayView(dayView, CachedStatistics.sharedInstance.tookMedicine[date.startOfDay]!)
         }
     }
-    
     
     func presentedDateUpdated(date: CVDate) {
         if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {

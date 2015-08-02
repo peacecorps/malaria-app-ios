@@ -111,7 +111,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
         cell.name.setTitle(medicine.name(), forState: .Normal)
-        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: medicine.isDaily() ? 1 : 7)) pills"
+        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: self.medicine.interval())) pills"
         
         cell.name.titleLabel?.adjustsFontSizeToFitWidth = true
         return cell.contentView

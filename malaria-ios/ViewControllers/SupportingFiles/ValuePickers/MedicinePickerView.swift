@@ -46,7 +46,7 @@ class MedicinePickerView : UIPickerView{
     }
     
     func generateMedicineString(medicine: Medicine.Pill) -> String{
-        return medicine.name() + " (" + (medicine.isWeekly() ? "Weekly" : "Daily") + ")"
+        return medicine.name() + " (" + (medicine.interval() == 7 ? "Weekly" : "Daily") + ")"
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -20,24 +20,19 @@ class TestMedicineRegistries: XCTestCase {
         m = MedicineManager(context: currentContext)
         m.setup(currentPill, fireDate: NSDate())
         
-        if let medi = m.getMedicine(currentPill){
-            md = medi
-        }else{
-            XCTFail("Fail initializing:")
-        }
-        
+        md = m.getMedicine(currentPill)!
         registriesManager = md.registriesManager(currentContext)
         
-        registriesManager.addRegistry(d1, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 1.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 2.day, tookMedicine: false)
-        registriesManager.addRegistry(d1 - 3.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 4.day, tookMedicine: false)
-        registriesManager.addRegistry(d1 - 5.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 6.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 7.day, tookMedicine: false)
-        registriesManager.addRegistry(d1 - 8.day, tookMedicine: true)
-        registriesManager.addRegistry(d1 - 9.day, tookMedicine: false)
+        XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 1.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 2.day, tookMedicine: false))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 3.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 4.day, tookMedicine: false))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 6.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 7.day, tookMedicine: false))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 8.day, tookMedicine: true))
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 9.day, tookMedicine: false))
     }
     
     override func tearDown() {
@@ -50,7 +45,7 @@ class TestMedicineRegistries: XCTestCase {
         let entries = registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
         
         if entries.count != 3 {
-            XCTFail("Incorrect number of elements")
+            XCTFail("Incorrect number of elements \(entries.count)")
             return
         }
         

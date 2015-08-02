@@ -142,6 +142,10 @@ public extension NSDate{
         return (self.year == dateTwo.year && self.week == dateTwo.week) || self.startOfWeek.sameDayAs(dateTwo.startOfWeek)
     }
     
+    func sameMonthAs(dateTwo: NSDate) -> Bool {
+        return (self.year == dateTwo.year && self.month == dateTwo.month)
+    }
+    
     /// Returns true if both dates are in the same time.
     ///
     /// :returns: `Bool`

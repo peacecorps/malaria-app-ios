@@ -58,7 +58,7 @@ import UIKit
         dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
         fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
         
-        if medicine.isWeekly(){
+        if medicine.interval > 1 {
             if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
@@ -74,7 +74,7 @@ import UIKit
             }
         }
         
-        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate).count == 0{
+        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate).entries.count == 0{
             didNotTookPillBtn.enabled = true
             tookPillBtn.enabled = true
         }else {

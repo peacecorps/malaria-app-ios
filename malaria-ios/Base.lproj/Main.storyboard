@@ -243,16 +243,35 @@
                                     <action selector="settingsButtonHandler" destination="Lad-7d-0dS" eventType="touchUpInside" id="7VT-HD-5Xy"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ie-wB-Jcf" userLabel="Separator (disabled because imo is ugly)">
+                                <rect key="frame" x="71" y="546" width="458" height="1"/>
+                                <color key="backgroundColor" red="0.35686274509999999" green="0.25098039220000001" blue="0.2156862745" alpha="0.32000000000000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="fIm-jH-TT6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="4Ie-wB-Jcf" secondAttribute="bottom" constant="10" id="3Sn-B6-4wq"/>
                             <constraint firstItem="hu7-4k-atF" firstAttribute="top" secondItem="S4X-4X-2Rn" secondAttribute="bottom" constant="30" id="4qK-nL-2HS"/>
                             <constraint firstItem="pq0-mY-A6L" firstAttribute="trailing" secondItem="gFR-P3-LjK" secondAttribute="trailingMargin" id="4s2-HO-k7N"/>
+                            <constraint firstItem="4Ie-wB-Jcf" firstAttribute="top" secondItem="S4X-4X-2Rn" secondAttribute="bottom" constant="25" id="98C-uS-JdZ"/>
+                            <constraint firstItem="4Ie-wB-Jcf" firstAttribute="leading" secondItem="gFR-P3-LjK" secondAttribute="leadingMargin" constant="55" id="EiL-4o-pMW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4Ie-wB-Jcf" secondAttribute="trailing" constant="55" id="Lpx-e0-cSE"/>
                             <constraint firstItem="S4X-4X-2Rn" firstAttribute="leading" secondItem="gFR-P3-LjK" secondAttribute="leading" id="YHJ-qB-EA7"/>
                             <constraint firstItem="pq0-mY-A6L" firstAttribute="top" secondItem="597-Lb-3cL" secondAttribute="bottom" constant="8" symbolic="YES" id="afK-66-otH"/>
                             <constraint firstItem="S4X-4X-2Rn" firstAttribute="top" secondItem="pq0-mY-A6L" secondAttribute="bottom" constant="2" id="qcQ-lt-pwk"/>
                             <constraint firstAttribute="trailing" secondItem="S4X-4X-2Rn" secondAttribute="trailing" id="uHP-CQ-m2C"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="4Ie-wB-Jcf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3Sn-B6-4wq"/>
+                            </mask>
+                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="TabHomeIconUnselected" id="Nvt-CJ-ssi">
                         <userDefinedRuntimeAttributes>

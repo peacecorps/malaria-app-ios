@@ -48,7 +48,7 @@ public class MedicineNotificationsManager : NotificationManager{
 
     public func reshedule(){
         if var nextTime = medicine.notificationTime{
-            nextTime += medicine.isDaily() ? 1.day : 7.day
+            nextTime += Int(medicine.interval).day
             medicine.notificationTime = nextTime
             
             Logger.Info("Resheduling to " + nextTime.formatWith("dd-MMMM-yyyy hh:mm"))
@@ -69,7 +69,7 @@ public class MedicineNotificationsManager : NotificationManager{
     /// :param: `NSDate optional`: Current date. (by default is the most current one)
     /// :returns: `Bool`: true if should, false if not
     public func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
-        if medicine.isDaily(){
+        if medicine.interval == 1 {
             Logger.Warn("checkIfShouldReset only valid for weekly pills")
             return false
         }

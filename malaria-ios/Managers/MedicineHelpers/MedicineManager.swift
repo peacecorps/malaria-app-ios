@@ -49,7 +49,7 @@ public class MedicineManager : CoreDataContextManager{
         
         let medicine = Medicine.create(Medicine.self, context: context)
         medicine.name = med.name()
-        medicine.weekly = med.isWeekly()
+        medicine.interval = med.interval()
         
         CoreDataHelper.sharedInstance.saveContext(context)
         

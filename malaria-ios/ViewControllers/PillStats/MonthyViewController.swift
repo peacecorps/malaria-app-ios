@@ -216,7 +216,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     func generateErrorMessage() {
-        let errorAlert: UIAlertController = UIAlertController(title: "Error updating", message: "Did you already take your pill?", preferredStyle: .Alert)
+        let errorAlert: UIAlertController = UIAlertController(title: "Error updating.", message: "Contact us.", preferredStyle: .Alert)
         errorAlert.addAction(UIAlertAction(title:"Dismiss", style: .Default, handler: nil))
         presentViewController(errorAlert, animated: true, completion: nil)
     }

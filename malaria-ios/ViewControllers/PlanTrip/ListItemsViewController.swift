@@ -80,8 +80,8 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     func modifyItem(indexPath: NSIndexPath? = nil) {
         let modifySelectedEntry = indexPath != nil
         
-        let title = indexPath != nil ? "Change content" : "New content"
-        let message = "Insert name"
+        let title = modifySelectedEntry ? "Change item" : "What do you want to bring to the trip?"
+        let message = ""
         
         var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
@@ -134,7 +134,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func medicineBtn(sender: AnyObject) {
-        var alert = UIAlertController(title: "Medicine for the trip", message: "Choose one", preferredStyle: .Alert)
+        var alert = UIAlertController(title: "What do you want to bring to the trip?", message: "Pick one medicine", preferredStyle: .Alert)
         let medicines = Medicine.Pill.allValues.map({$0.name()})
         for m in medicines {
             alert.addAction(UIAlertAction(title: m, style: .Default) { _ in

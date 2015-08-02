@@ -12,7 +12,6 @@ class NSNotificationEvents{
     /// :param: `Selector`: NSObject selector
     static func ObserveEnteredForeground(observer: NSObject, selector: Selector){
         NSNotificationEvents.observe(Events.UIApplicationWillEnterForegroundNotification.rawValue, observer, selector)
-
     }
     
     /// Send event saying that the medicine data was updated

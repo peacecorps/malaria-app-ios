@@ -43,8 +43,6 @@ import UIKit
             medicine.notificationManager(viewContext).reshedule()
         }
         
-        //test()
-        
         refreshScreen()
     }
     
@@ -82,95 +80,5 @@ import UIKit
             didNotTookPillBtn.enabled = !activateCheckButton
             tookPillBtn.enabled = activateCheckButton
         }
-    }
-}
-
-extension DidTakePillsViewController {
-    func test() {
-        func randomTook(probability: Int) -> Bool{
-            let random = Int(arc4random_uniform(100))
-            
-            return probability >= random
-        }
-        
-        func missingEntries(){
-            let today = NSDate()
-            var day = today - 365.day
-            for i in 0...170 {
-                if randomTook(50){
-                    medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
-                }
-            }
-            
-            for i in 171...365 {
-                let random = randomTook(0)
-                if randomTook(50) {
-                    medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: false)
-                }
-            }
-        }
-        
-        func missingHalfEntries(){
-            let today = NSDate()
-            var day = today - 365.day
-            for i in 0...170 {
-                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
-            }
-        }
-        
-        func halfTookHalfNot(){
-            let today = NSDate()
-            var day = today - 365.day
-            for i in 0...170 {
-                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
-            }
-            
-            for i in 171...365 {
-                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: false)
-            }
-        }
-        
-        func addAllTrue() {
-            let today = NSDate()
-            var day = today - 365.day
-            for i in 0...365 {
-                medicine.registriesManager(viewContext).addRegistry(day + i.day, tookMedicine: true)
-            }
-        }
-        
-        func addWeekly() {
-            let today = NSDate()
-            var day = today - 365.day
-            for i in 0...Int(floor(365.0/7)) {
-                medicine.registriesManager(viewContext).addRegistry(day + i.week, tookMedicine: true)
-            }
-        }
-        
-        func addWeeklyYesWeeklyNot() {
-            let today = NSDate()
-            var day = today - 10.week
-
-            medicine.registriesManager(viewContext).addRegistry(day + 1.week, tookMedicine: true)
-            medicine.registriesManager(viewContext).addRegistry(day + 2.week, tookMedicine: false)
-            medicine.registriesManager(viewContext).addRegistry(day + 3.week, tookMedicine: true)
-            medicine.registriesManager(viewContext).addRegistry(day + 4.week, tookMedicine: false)
-            medicine.registriesManager(viewContext).addRegistry(day + 5.week, tookMedicine: true)
-            medicine.registriesManager(viewContext).addRegistry(day + 6.week, tookMedicine: false)
-            medicine.registriesManager(viewContext).addRegistry(day + 7.week, tookMedicine: true)
-            medicine.registriesManager(viewContext).addRegistry(day + 8.week, tookMedicine: false)
-            medicine.registriesManager(viewContext).addRegistry(day + 9.week, tookMedicine: true)
-            medicine.registriesManager(viewContext).addRegistry(day + 10.week, tookMedicine: false)
-            
-        }
-        
-        Logger.Warn("ADDING DUMMY ENTRIES")
-        
-        //addWeekly()
-        //addAllTrue()
-        addWeeklyYesWeeklyNot()
-        //missingHalfEntries()
-        //missingEntries()
-        
-        Logger.Warn("DONE ADDING DUMMY ENTRIES")
     }
 }

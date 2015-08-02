@@ -12,7 +12,7 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>1.0.0</string>
+			<string>0.9.5</string>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
@@ -21,14 +21,14 @@
 			<string>AppVersion</string>
 		</dict>
 		<dict>
-			<key>DefaultValue</key>
-			<string>www.peacecorps.gov</string>
 			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
+			<string>PSChildPaneSpecifier</string>
+			<key>File</key>
+			<string>Contact</string>
 			<key>Title</key>
-			<string>Help Us Improve</string>
+			<string>Contact Us</string>
 			<key>Key</key>
-			<string>PointOfContact</string>
+			<string>ContactChildPane</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>

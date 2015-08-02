@@ -68,6 +68,8 @@ class SetupScreenViewController : UIViewController{
     }
     
     @IBAction func doneButtonHandler(){
+        let med = Medicine.Pill(rawValue: self.medicineName.text)!
+        
         if(UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool()){
             
             //avoid showing the alert view if there are no changes
@@ -82,8 +84,9 @@ class SetupScreenViewController : UIViewController{
             
             var medicineAlert = UIAlertController(title: "There is already medicine configured", message: "The current configuration will be changed.", preferredStyle: .Alert)
             medicineAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { (action: UIAlertAction!) in
-                self.medicineManager.registerNewMedicine(Medicine.Pill(rawValue: self.medicineName.text)!)
-                self.medicineManager.setCurrentPill(Medicine.Pill(rawValue: self.medicineName.text)!)
+                
+                self.medicineManager.registerNewMedicine(med.name(), interval: med.interval())
+                self.medicineManager.setCurrentPill(med.name())
                 self.medicineManager.getCurrentMedicine()!.notificationManager(self.viewContext).scheduleNotification(self.pillReminderNotificationTime)
                 delay(0.05) {
                     self.dismissViewControllerAnimated(true, completion: nil)
@@ -104,7 +107,7 @@ class SetupScreenViewController : UIViewController{
                 animated: true,
                 completion: nil
             )
-            medicineManager.setup(Medicine.Pill(rawValue: medicineName.text)!, fireDate: pillReminderNotificationTime)
+            medicineManager.setup(med.name(), interval: med.interval(), fireDate: pillReminderNotificationTime)
         }
         
         

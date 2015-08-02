@@ -67,8 +67,9 @@ public extension NSDate{
         return startOfDay + 1.day - 1.second
     }
     
+    /// retrieves the start of the day of the week
     var startOfWeek: NSDate {
-        return self - weekday.day
+        return (self - weekday.day).startOfDay
     }
     
     /// NSDate(timeIntervalSince1970: 0)
@@ -122,14 +123,14 @@ public extension NSDate{
     
     /// Returns true if happens after the date given as argument
     ///
-    /// :param: `NSDate`: The day to compare to
+    /// :param: `NSDate`: the day to compare
     /// :returns: `Bool`
     func happensMonthsAfter(date: NSDate) -> Bool{
         return (self.year > date.year) || (self.year == date.year && self.month > date.month)
     }
     
     /// Returns true if both dates represents the same day (day, month and year)
-    ///
+    /// :param: `NSDate`: the day to compare
     /// :returns: `Bool`
     func sameDayAs(dateTwo: NSDate) -> Bool {
         return self.year == dateTwo.year && self.month == dateTwo.month && self.day == dateTwo.day
@@ -137,11 +138,16 @@ public extension NSDate{
 
     /// Returns true if both dates belong in the same week. Also takes into account year transition
     ///
+    /// :param: `NSDate`: the day to compare
     /// :returns: `Bool`
     func sameWeekAs(dateTwo: NSDate) -> Bool {
         return (self.year == dateTwo.year && self.week == dateTwo.week) || self.startOfWeek.sameDayAs(dateTwo.startOfWeek)
     }
-    
+
+    /// Returns true if both dates happens in the same month.
+    ///
+    /// :param: `NSDate`: the day to compare
+    /// :returns: `Bool`
     func sameMonthAs(dateTwo: NSDate) -> Bool {
         return (self.year == dateTwo.year && self.month == dateTwo.month)
     }

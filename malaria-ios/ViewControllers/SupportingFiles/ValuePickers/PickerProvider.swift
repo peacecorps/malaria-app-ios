@@ -3,7 +3,7 @@ import UIKit
 
 class PickerProvider: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     var possibleValues: [String]
-    var callback: (component: Int, row: Int, value: String) -> ()
+    let callback: (component: Int, row: Int, value: String) -> ()
     
     init(selectedCall:(component: Int, row: Int, value: String)->(), values: [String]) {
         possibleValues = values
@@ -12,7 +12,6 @@ class PickerProvider: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(pickerview: UIPickerView,numberOfRowsInComponent component: Int) -> Int {
         return possibleValues.count;
-        
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

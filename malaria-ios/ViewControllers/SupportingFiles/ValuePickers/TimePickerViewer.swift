@@ -2,11 +2,14 @@ import Foundation
 import UIKit
 
 class TimePickerView: UIDatePicker{
-    var selectCallback: ((date: NSDate) -> ())!
-    var DoneButtonHeight : CFloat { get { return 40.0 } }
-    var DoneButtonWidth : CFloat { get { return 100.0 } }
-    var ValuePickerHeight : CGFloat { get { return CGFloat(200) + CGFloat(DoneButtonHeight) } }
+    private var selectCallback: ((date: NSDate) -> ())!
+    private var DoneButtonHeight : CFloat { get { return 40.0 } }
+    private var DoneButtonWidth : CFloat { get { return 100.0 } }
+    private var ValuePickerHeight : CGFloat { get { return CGFloat(200) + CGFloat(DoneButtonHeight) } }
     
+    /// initialization
+    /// :param: `NSManagedObjectContext`: current context
+    /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
     init(view: UIView, selectCallback: (date: NSDate) -> ()){
         super.init(frame: CGRectZero)
         self.selectCallback = selectCallback
@@ -16,6 +19,10 @@ class TimePickerView: UIDatePicker{
         super.init(coder: aDecoder)
     }
     
+    /// Generates inputview
+    /// :param: `UIDatePickerMode`: The mode of the picker
+    /// :param: `NSDate`: the starting day
+    /// :returns: `UIView`: the generated view
     func generateInputView(pickerMode: UIDatePickerMode, startDate: NSDate) -> UIView{
         let inputView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, ValuePickerHeight))
         
@@ -29,7 +36,7 @@ class TimePickerView: UIDatePicker{
         return inputView
     }
     
-    func onDateChange(sender: UIDatePicker){
+    internal func onDateChange(sender: UIDatePicker){
         selectCallback(date: sender.date)
     }
 }

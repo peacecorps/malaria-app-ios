@@ -15,14 +15,6 @@ import UIKit
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func drawRect(rect: CGRect) {
         let progressWidth = rect.size.width * CGFloat(progressValue/100)
         

@@ -2,13 +2,16 @@ import Foundation
 import UIKit
 
 class TripLocationHistoryPickerViewer : UIPickerView{
-    var pcLocationsPickerProvider: PickerProvider!
-    var locations = [String]()
+    internal var pcLocationsPickerProvider: PickerProvider!
+    internal var locations = [String]()
     
-    var selectedValue: String!
+    var selectedValue = ""
     
     var tripsManager: TripsManager!
     
+    /// initialization
+    /// :param: `NSManagedObjectContext`: current context
+    /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
     init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
         tripsManager = TripsManager(context: context)

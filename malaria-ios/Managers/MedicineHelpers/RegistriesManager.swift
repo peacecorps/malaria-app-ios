@@ -8,7 +8,7 @@ public class RegistriesManager : CoreDataContextManager{
         super.init(context: context)
     }
 
-    /// Check if the pill was already taken in that day if daily pill or in that week if weekly pill
+    /// Check if the pill was already taken in the period
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
@@ -37,17 +37,17 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
-    /// :returns: `[Registry]` all the entries
+    /// :returns: `(noData: Bool, entries: [Registry])`: A tuple where the first value indicates if there are no entries before the date and the second the array of entries.
     
     public  func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]) {
         var result = [Registry]()
         
-        let (day1, day2) = (at - Int(medicine.interval - 1).day, at + Int(medicine.interval - 1).day)
+        let (day1, day2) = (at - (medicine.interval - 1).day, at + (medicine.interval - 1).day)
         let entries = registries != nil ? filter(registries!, date1: day1, date2: day2) : getRegistries(date1: day1, date2: day2)
         
         if entries.count != 0 {
             let d1 = max(day1, entries.last!.date)
-            let dateLimit = (d1 + Int(medicine.interval - 1).day).endOfDay
+            let dateLimit = (d1 + (medicine.interval - 1).day).endOfDay
             
             if at < d1 && !at.sameDayAs(d1) {
                 return (true, result)
@@ -80,11 +80,9 @@ public class RegistriesManager : CoreDataContextManager{
     /// Adds a new entry for that pill
     ///
     /// It will return false if trying to add entries in the future
-    /// If modify flag is set to false, It will return false it there is
-    /// already an entry in that day if daily pill or in that week if weekly pill.
+    /// If modifyEntry flag is set to false, It will return false it there is already an entry in the medicine interval
     ///
-    /// If weekly pill, if there is already an entry in that week and if modifyEntry is true,
-    /// that same entry is replaced by a new one
+    /// If there is already an entry in the period and if modifyEntry is true, then the entry is deleted and replaced
     ///
     /// :param: `NSDate`: the date of the entry
     /// :param: `Bool`: if the user took medicine

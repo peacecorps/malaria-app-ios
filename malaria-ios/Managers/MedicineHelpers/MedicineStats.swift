@@ -48,18 +48,18 @@ public class MedicineStats : CoreDataContextManager{
         return MedicineStats.numberNeededPills(d1, date2: d2, interval: medicine.interval)
     }
     
-    /// Returns the number of pills that the user should have taken between two dates
+    /// Returns the number of pills that the user should have taken between two dates.
     ///
     /// :param: `NSDate`: first date
     /// :param: `NSDate`: second date
     /// :param: `interval`: Interval (1 = once per day, 7 = once per week)
     /// :returns: `Int`: Number of supposed pills
-    public class func  numberNeededPills(date1: NSDate, date2: NSDate, interval: Float) -> Int{
+    public class func  numberNeededPills(date1: NSDate, date2: NSDate, interval: Int) -> Int{
         if date1 > date2 {
             return numberNeededPills(date2, date2: date1, interval: interval)
         }
         let numDays = (date2 - date1) + 1
-        return  Int(ceil(Float(numDays)/interval))
+        return  Int(ceil(Float(numDays)/Float(interval)))
     }
     
     /// Returns the number of pills that the user should have taken between two dates
@@ -99,7 +99,7 @@ public class MedicineStats : CoreDataContextManager{
         for r in entries {
             //check for missing entries
             if let previousD = previousDate {
-                if r.date < previousD - Int(medicine.interval).day {
+                if r.date < previousD - medicine.interval.day {
                     return result
                 }
             }
@@ -116,9 +116,11 @@ public class MedicineStats : CoreDataContextManager{
         return result
     }
     
-    /// returns pill adhrence in a month
-    /// if there are no entries in that month return 0
-    /// if there are entries in that month, truncate to the oldest and the most recent date to account when the user started tracking
+    /// Returns pill adhrence in a month
+    /// If there are no entries in that month return 0
+    /// Starts at max(oldest entry ; first day of the month)
+    /// If current month, only goes up to today
+    /// If not, goes up to the mostRecentEntry
     ///
     /// :param: `NSDate`: The month
     /// :param: `Registries`: Previously calculated entries. Must be sorted oldest to recent

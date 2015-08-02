@@ -24,16 +24,11 @@ class TestNotifications: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill, fireDate: d1) //current pill is daily
-        m.registerNewMedicine(weeklyPill)
+        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: d1) //current pill is daily
+        m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
         
-        if let medi = m.getCurrentMedicine(),
-           let medi2 = m.getMedicine(weeklyPill){
-            mdDaily = medi
-            mdWeekly = medi2
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        mdDaily = m.getCurrentMedicine()!
+        mdWeekly = m.getMedicine(weeklyPill.name())!
         
         mdDailyregistriesManager = mdDaily.registriesManager(currentContext)
         mdWeeklyregistriesManager = mdWeekly.registriesManager(currentContext)
@@ -76,7 +71,7 @@ class TestNotifications: XCTestCase {
         XCTAssertNil(mdWeekly.notificationTime)
         
         //setCurrentPill, current trigger time is not defined yet
-        m.setCurrentPill(weeklyPill)
+        m.setCurrentPill(weeklyPill.name())
         XCTAssertNil(mdWeekly.notificationTime)
         
         //define currentTime

@@ -175,7 +175,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             return
         }
         
-        let interval = Int(CachedStatistics.sharedInstance.medicine.interval)
+        let interval = CachedStatistics.sharedInstance.medicine.interval
         let isWeekly = interval == 7
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         

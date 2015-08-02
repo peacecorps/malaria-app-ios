@@ -4,7 +4,7 @@ import UIKit
 class CachedStatistics : NSObject{
     static let sharedInstance = CachedStatistics()
 
-    var context: NSManagedObjectContext!
+    private var context: NSManagedObjectContext!
     
     var medicine: Medicine!
     var registriesManager: RegistriesManager!
@@ -120,8 +120,8 @@ extension CachedStatistics {
             
             self.setupBeforeCaching()
             
-            let d1 = at - (Int(self.medicine.interval) - 1).day
-            let d2 = at + (Int(self.medicine.interval) - 1).day
+            let d1 = at - (self.medicine.interval - 1).day
+            let d2 = at + (self.medicine.interval - 1).day
             
             let entriesReversed = self.registries.reverse() //most recentFirst
             if !entriesReversed.isEmpty {

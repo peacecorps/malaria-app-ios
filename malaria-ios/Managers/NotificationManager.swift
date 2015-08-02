@@ -7,7 +7,6 @@ public class NotificationManager : CoreDataContextManager{
     var alertBody: String { get{ fatalError("No alertBody provided")} }
     var alertAction: String { get{ fatalError("No alertAction provided")} }
     
-    
     override init(context: NSManagedObjectContext!){
         super.init(context: context)
     }
@@ -39,6 +38,7 @@ public class NotificationManager : CoreDataContextManager{
     /// Creates a notification
     ///
     /// :param: `NSDate`: fireTime
+    /// :returns: `UILocalNotification`: local notification
     private func createNotification(fireDate: NSDate) -> UILocalNotification{
         var localNotification = UILocalNotification()
         localNotification.fireDate = fireDate

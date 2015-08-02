@@ -46,9 +46,12 @@ public class MedicineNotificationsManager : NotificationManager{
         CoreDataHelper.sharedInstance.saveContext(self.context)
     }
 
+    /// Reschedule the pill according to the medicine interval
+    /// So, if on monday, 1/1/2014, and interval is 4 days then
+    /// it will resheduled to (1 + 4) / 1 / 2014
     public func reshedule(){
         if var nextTime = medicine.notificationTime{
-            nextTime += Int(medicine.interval).day
+            nextTime += medicine.interval.day
             medicine.notificationTime = nextTime
             
             Logger.Info("Resheduling to " + nextTime.formatWith("dd-MMMM-yyyy hh:mm"))
@@ -83,6 +86,9 @@ public class MedicineNotificationsManager : NotificationManager{
         return false
     }
     
+    /// Returns interactive notifications settings to be added in the AppDelegate
+    ///
+    /// :returns: `UIMutableUserNotificationCategory`: Configuration
     public static func setup() -> UIMutableUserNotificationCategory{
         var notificationActionOk = UIMutableUserNotificationAction()
         notificationActionOk.identifier = TookPillId

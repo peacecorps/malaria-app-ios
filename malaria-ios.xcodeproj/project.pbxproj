@@ -16,7 +16,6 @@
 		200A18CD1B64F50500EC2A65 /* MedicinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */; };
 		200A18CF1B64F51300EC2A65 /* MedicinePickerViewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */; };
 		200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */; };
-		200A18D31B64F54D00EC2A65 /* PCLocationPickerViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D21B64F54D00EC2A65 /* PCLocationPickerViewer.swift */; };
 		200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */; };
 		200A18D71B64F58F00EC2A65 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */; };
 		200A18D91B64F5A300EC2A65 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */; };
@@ -108,6 +107,7 @@
 		209F60B41B6DA6B100EDA461 /* TestWeeklyMedicineStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */; };
 		209F60B51B6DA6B100EDA461 /* TestNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA070C1B23AD9F00D6840E /* TestNotifications.swift */; };
 		209F60B61B6DA6B100EDA461 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
+		209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */; };
 		20C13EE01B5F990300D66C00 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EDF1B5F990300D66C00 /* UIView.swift */; };
 		20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
@@ -135,7 +135,6 @@
 		200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerView.swift; path = SupportingFiles/ValuePickers/MedicinePickerView.swift; sourceTree = "<group>"; };
 		200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerViewTrip.swift; path = SupportingFiles/ValuePickers/MedicinePickerViewTrip.swift; sourceTree = "<group>"; };
 		200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePickerViewer.swift; path = SupportingFiles/ValuePickers/TimePickerViewer.swift; sourceTree = "<group>"; };
-		200A18D21B64F54D00EC2A65 /* PCLocationPickerViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PCLocationPickerViewer.swift; path = SupportingFiles/ValuePickers/PCLocationPickerViewer.swift; sourceTree = "<group>"; };
 		200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoHubViewController.swift; path = InfoHub/InfoHubViewController.swift; sourceTree = "<group>"; };
 		200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsTableViewController.swift; path = DailyStats/DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsCells.swift; path = DailyStats/DailyStatsCells.swift; sourceTree = "<group>"; };
@@ -233,6 +232,7 @@
 		2095B8511B5A4AD200119896 /* CVSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVSet.swift; sourceTree = "<group>"; };
 		2095B8521B5A4AD200119896 /* CVShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVShape.swift; sourceTree = "<group>"; };
 		209F60AE1B6D8F6B00EDA461 /* Model8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model8.xcdatamodel; sourceTree = "<group>"; };
+		209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicineFrontEndExtension.swift; path = SupportingFiles/MedicineFrontEndExtension.swift; sourceTree = "<group>"; };
 		20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model7.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDF1B5F990300D66C00 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -321,6 +321,7 @@
 			children = (
 				203F0B251B481CB900826E06 /* ValuePickers */,
 				200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */,
+				209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -545,7 +546,6 @@
 				200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */,
 				200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */,
 				200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */,
-				200A18D21B64F54D00EC2A65 /* PCLocationPickerViewer.swift */,
 				205E417D1B6AE74E0028A8D7 /* TripLocationHistoryPickerViewer.swift */,
 			);
 			name = ValuePickers;
@@ -829,7 +829,6 @@
 				20246D151B4F1BA000384759 /* CoreDataManager.swift in Sources */,
 				2095B86B1B5A4AD200119896 /* CVSelectionType.swift in Sources */,
 				205E417C1B6AE4A70028A8D7 /* TripHistory.swift in Sources */,
-				200A18D31B64F54D00EC2A65 /* PCLocationPickerViewer.swift in Sources */,
 				200C72AE1B40368600998100 /* TripsManager.swift in Sources */,
 				200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
 				200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */,
@@ -898,6 +897,7 @@
 				200C72E61B40368600998100 /* Trip.swift in Sources */,
 				200A18DF1B64F60200EC2A65 /* SetupScreenViewController.swift in Sources */,
 				200C72BA1B40368600998100 /* MedicineExtension.swift in Sources */,
+				209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
 				2095B86D1B5A4AD200119896 /* CVShape.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,

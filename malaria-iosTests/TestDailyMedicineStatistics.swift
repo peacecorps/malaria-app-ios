@@ -18,13 +18,10 @@ class TestDailyMedicineStatistics: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        m.setup(currentPill, fireDate: d1)
+        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: d1)
         
-        if let medi = m.getMedicine(currentPill){
-            md = medi
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        md = m.getMedicine(currentPill.name())!
+        
         registriesManager = md.registriesManager(currentContext)
         stats = md.stats(currentContext)
         

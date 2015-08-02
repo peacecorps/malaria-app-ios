@@ -8,7 +8,10 @@ class MedicinePickerView : UIPickerView{
     
     var medicineManager: MedicineManager!
     
-    init(context:NSManagedObjectContext, selectCallback: (object: String) -> ()){
+    /// initialization
+    /// :param: `NSManagedObjectContext`: current context
+    /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
+    init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         medicineManager = MedicineManager(context: context)
         super.init(frame: CGRectZero)
         
@@ -41,10 +44,15 @@ class MedicinePickerView : UIPickerView{
         }
     }
     
+    /// returns the default medicine. If there is nothing configured, returns empty string
+    /// :returns: `String`
     func defaultMedicine() -> String{
         return medicineManager.getCurrentMedicine()?.name ?? ""
     }
     
+    /// generates a string for the medicine by following the rule:
+    /// name + (weekly if interval is 7) OR (daily if interval is 1)
+    /// :returns: `String`: generated string
     func generateMedicineString(medicine: Medicine.Pill) -> String{
         return medicine.name() + " (" + (medicine.interval() == 7 ? "Weekly" : "Daily") + ")"
     }

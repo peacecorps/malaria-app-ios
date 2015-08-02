@@ -39,6 +39,7 @@ public class UserSettingsManager{
             return (NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) ?? "") as! String
         }
         
+        /// clears the key from UserDefaults
         public func removeKey() {
             return NSUserDefaults.standardUserDefaults().removeObjectForKey(self.rawValue)
         }
@@ -51,8 +52,6 @@ public class UserSettingsManager{
     
     /// Clears all values
     public class func clear(){
-        for setting in UserSetting.allValues{
-            setting.removeKey()
-        }
+        UserSetting.allValues.map({$0.removeKey()})
     }
 }

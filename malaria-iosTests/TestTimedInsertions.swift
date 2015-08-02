@@ -23,16 +23,11 @@ class TestTimedInsertions: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        m.registerNewMedicine(weeklyPill)
-        m.registerNewMedicine(dailyPill)
+        m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
+        m.registerNewMedicine(dailyPill.name(), interval: dailyPill.interval())
         
-        if let m1 = m.getMedicine(dailyPill),
-           let m2 = m.getMedicine(weeklyPill){
-            daily = m1
-            weekly = m2
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        daily = m.getMedicine(dailyPill.name())!
+        weekly = m.getMedicine(weeklyPill.name())!
         
         dailyRegistriesManager = daily.registriesManager(currentContext)        
         weeklyRegistriesManager = weekly.registriesManager(currentContext)

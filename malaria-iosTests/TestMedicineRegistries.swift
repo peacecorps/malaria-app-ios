@@ -18,9 +18,9 @@ class TestMedicineRegistries: XCTestCase {
 
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill, fireDate: NSDate())
+        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: NSDate())
         
-        md = m.getMedicine(currentPill)!
+        md = m.getMedicine(currentPill.name())!
         registriesManager = md.registriesManager(currentContext)
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
@@ -107,15 +107,9 @@ class TestMedicineRegistries: XCTestCase {
     
     func testAlreadyRegisteredWeeklyPill(){
         let weeklyPill = Medicine.Pill.Mefloquine
-        m.registerNewMedicine(weeklyPill)
+        m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
 
-        var weekly: Medicine!
-        if let w = m.getMedicine(weeklyPill){
-            weekly = w
-        }else{
-            XCTFail("Failure registering weekly pill")
-        }
-        
+        var weekly = m.getMedicine(weeklyPill.name())!
         
         let weeklyRegistriesManager = weekly.registriesManager(currentContext)
         

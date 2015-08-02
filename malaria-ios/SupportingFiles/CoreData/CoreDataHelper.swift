@@ -12,7 +12,7 @@ public class CoreDataHelper: NSObject {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    lazy var managedObjectContext: NSManagedObjectContext? = {
+    private lazy var managedObjectContext: NSManagedObjectContext? = {
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
             return nil
@@ -24,6 +24,7 @@ public class CoreDataHelper: NSObject {
         }()
     
     /// Creates a new background context with the mainContext as parent
+    /// :returns: `NSManagedObjectContext`
     public func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
@@ -46,7 +47,7 @@ public class CoreDataHelper: NSObject {
     
     
     /// Callback for multi-threading. Syncronizes the background context with the main context. Then the parent context, that has direct connection with persistent storage saves.
-    func contextDidSaveContext(notification: NSNotification) {
+    internal func contextDidSaveContext(notification: NSNotification) {
         let sender = notification.object as! NSManagedObjectContext
         if sender != self.managedObjectContext {
             Logger.Info("Syncing with mainContext")

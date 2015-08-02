@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 @IBDesignable class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var dayOfTheWeekLbl: UILabel!
@@ -15,9 +16,26 @@ import UIKit
     var currentDate: NSDate = NSDate()
     var viewContext: NSManagedObjectContext!
     
+    private let TookPillPath = NSBundle.mainBundle().pathForResource("correct", ofType: "aiff", inDirectory: "Sounds")
+    private let DidNotTakePillPath = NSBundle.mainBundle().pathForResource("incorrect", ofType: "aiff", inDirectory: "Sounds")
+    private var tookPillPlayer = AVAudioPlayer()
+    private var didNotTakePillPlayer = AVAudioPlayer()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")        
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
+        
+        if let tookPillPath = TookPillPath,
+            let didNotTakePillPath = DidNotTakePillPath{
+
+            tookPillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillPath), error: nil)
+            tookPillPlayer.prepareToPlay()
+                
+            didNotTakePillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillPath), error: nil)
+            didNotTakePillPlayer.prepareToPlay()
+        }else {
+            Logger.Error("Error loading sounds effects")
+        }
     }
     
     deinit{
@@ -31,23 +49,27 @@ import UIKit
     }
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+        println("NO")
+        if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+            didNotTakePillPlayer.play()
             medicine.notificationManager(viewContext).reshedule()
+            refreshScreen()
         }
-        
-        refreshScreen()
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
-        if (medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+        println("YES")
+        if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+            tookPillPlayer.play()
             medicine.notificationManager(viewContext).reshedule()
+            refreshScreen()
         }
-        
-        refreshScreen()
     }
     
     func refreshScreen(){
         Logger.Info("Refreshing screen")
+        
+        currentDate = NSDate()
         
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
@@ -76,9 +98,9 @@ import UIKit
             didNotTookPillBtn.enabled = true
             tookPillBtn.enabled = true
         }else {
-            let activateCheckButton = medicine.registriesManager(viewContext).tookMedicine(currentDate) != nil
-            didNotTookPillBtn.enabled = !activateCheckButton
-            tookPillBtn.enabled = activateCheckButton
+            let tookMedicine = medicine.registriesManager(viewContext).tookMedicine(currentDate) != nil
+            didNotTookPillBtn.enabled = !tookMedicine
+            tookPillBtn.enabled = tookMedicine
         }
     }
 }

@@ -118,6 +118,7 @@ extension CachedStatistics {
     func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
+            self.refreshContext()
             self.setupBeforeCaching()
             
             let d1 = at - (self.medicine.interval - 1).day
@@ -135,15 +136,11 @@ extension CachedStatistics {
                 let numEntries = NSDate() - oldestEntry + 1
                 for i in 0...(numEntries - 1){
                     let day = (oldestEntry + i.day).startOfDay
-                    
                     dispatch_async(dispatch_get_main_queue(), {
                         progress(day: day)
                     })
                 }
             }
-            
-            
-            
         })
     }
     

@@ -32,14 +32,12 @@ public class RegistriesManager : CoreDataContextManager{
         return nil
     }
     
-    
-    /// Returns the list of entries that happens in that day or in that week (if daily or weekly pill)
+    /// Returns the list of entries that happens in the period of time
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `(noData: Bool, entries: [Registry])`: A tuple where the first value indicates if there are no entries before the date and the second the array of entries.
-    
-    public  func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]) {
+    public func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]) {
         var result = [Registry]()
         
         let (day1, day2) = (at - (medicine.interval - 1).day, at + (medicine.interval - 1).day)
@@ -49,14 +47,14 @@ public class RegistriesManager : CoreDataContextManager{
             let d1 = max(day1, entries.last!.date)
             let dateLimit = (d1 + (medicine.interval - 1).day).endOfDay
             
-            if at < d1 && !at.sameDayAs(d1) {
-                return (true, result)
-            }
-            
             for r in entries {
-                if !(r.date < d1 || r.date > dateLimit)  {
+                if (r.date.sameDayAs(d1) || r.date > d1) && (r.date.sameDayAs(dateLimit) || r.date < dateLimit)  {
                     result.append(r)
                 }
+            }
+            
+            if at < d1 && !at.sameDayAs(d1) {
+                return (true, result)
             }
         }
         
@@ -87,7 +85,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: the date of the entry
     /// :param: `Bool`: if the user took medicine
     /// :param: `Bool` optional: overwrite previous entry (by default is false)
-    /// :returns: `Bool`: true if success, false if not
+    /// :returns: `Bool`: true if success, false if no
     public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
@@ -97,7 +95,7 @@ public class RegistriesManager : CoreDataContextManager{
         if let conflitingTookMedicineEntry = self.tookMedicine(date) {
             if tookMedicine && !modifyEntry && conflitingTookMedicineEntry.date.sameDayAs(date) {
                 Logger.Warn("Found equivalent entry on same day")
-                return true
+                return false
             } else if modifyEntry {
                 Logger.Warn("Removing confliting entry and replacing by a different one")
                 
@@ -148,8 +146,8 @@ public class RegistriesManager : CoreDataContextManager{
             medicine.registries = NSSet(array: newRegistries)
         }
         
-        NSNotificationEvents.DataUpdated(registry!)
         CoreDataHelper.sharedInstance.saveContext(context)
+        NSNotificationEvents.DataUpdated(registry!)
         
         return true
     }

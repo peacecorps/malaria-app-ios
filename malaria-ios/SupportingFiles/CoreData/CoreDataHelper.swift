@@ -50,7 +50,6 @@ public class CoreDataHelper: NSObject {
     internal func contextDidSaveContext(notification: NSNotification) {
         let sender = notification.object as! NSManagedObjectContext
         if sender != self.managedObjectContext {
-            Logger.Info("Syncing with mainContext")
             self.managedObjectContext!.performBlock {
                 self.managedObjectContext!.mergeChangesFromContextDidSaveNotification(notification)
                 self.saveContext(self.managedObjectContext!)

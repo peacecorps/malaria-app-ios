@@ -78,8 +78,12 @@ import AVFoundation
         dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
         fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
         
+        let medicineRegistries = medicine.registriesManager(viewContext)
+        let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
+        
         if medicine.interval > 1 {
             if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
+                
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 
@@ -87,20 +91,34 @@ import AVFoundation
                 UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
             }else if !currentDate.sameDayAs(medicine.notificationTime!)
                         && currentDate > medicine.notificationTime!
-                        && medicine.registriesManager(viewContext).tookMedicine(currentDate) == nil {
+                        && tookMedicineEntry == nil {
                             
                 dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
                 fullDateLbl.textColor = MissedWeeklyPillTextColor
             }
         }
         
-        if medicine.registriesManager(viewContext).allRegistriesInPeriod(currentDate).entries.count == 0{
-            didNotTookPillBtn.enabled = true
+        if tookMedicineEntry != nil {
+            //if he took
+            didNotTookPillBtn.enabled = false
             tookPillBtn.enabled = true
         }else {
-            let tookMedicine = medicine.registriesManager(viewContext).tookMedicine(currentDate) != nil
-            didNotTookPillBtn.enabled = !tookMedicine
-            tookPillBtn.enabled = tookMedicine
+            //didn't took because there he didn't entered any information
+            if medicineRegistries.allRegistriesInPeriod(currentDate).entries.count == 0 {
+                didNotTookPillBtn.enabled = true
+                tookPillBtn.enabled = true
+            }else {
+                //or did and said that he didn't took the medicine yet
+                //check if he already registered today
+                if medicineRegistries.findRegistry(currentDate) != nil {
+                    didNotTookPillBtn.enabled = true
+                    tookPillBtn.enabled = false
+                }else {
+                    //which means that there are no entries for today, so he still has the opportunity to change that
+                    didNotTookPillBtn.enabled = true
+                    tookPillBtn.enabled = true
+                }
+            }
         }
     }
 }

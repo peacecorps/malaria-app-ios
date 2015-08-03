@@ -16,8 +16,8 @@ import AVFoundation
     var currentDate: NSDate = NSDate()
     var viewContext: NSManagedObjectContext!
     
-    private let TookPillPath = NSBundle.mainBundle().pathForResource("correct", ofType: "aiff", inDirectory: "Sounds")
-    private let DidNotTakePillPath = NSBundle.mainBundle().pathForResource("incorrect", ofType: "aiff", inDirectory: "Sounds")
+    private let TookPillSoundPath = NSBundle.mainBundle().pathForResource("correct", ofType: "aiff", inDirectory: "Sounds")
+    private let DidNotTakePillSoundPath = NSBundle.mainBundle().pathForResource("incorrect", ofType: "aiff", inDirectory: "Sounds")
     private var tookPillPlayer = AVAudioPlayer()
     private var didNotTakePillPlayer = AVAudioPlayer()
 
@@ -25,13 +25,13 @@ import AVFoundation
         super.viewDidLoad()
         NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
         
-        if let tookPillPath = TookPillPath,
-            let didNotTakePillPath = DidNotTakePillPath{
+        if let tookPillSoundPath = TookPillSoundPath,
+            let didNotTakePillSoundPath = DidNotTakePillSoundPath{
 
-            tookPillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillPath), error: nil)
+            tookPillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillSoundPath), error: nil)
             tookPillPlayer.prepareToPlay()
                 
-            didNotTakePillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillPath), error: nil)
+            didNotTakePillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillSoundPath), error: nil)
             didNotTakePillPlayer.prepareToPlay()
         }else {
             Logger.Error("Error loading sounds effects")
@@ -49,7 +49,6 @@ import AVFoundation
     }
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        println("NO")
         if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
             didNotTakePillPlayer.play()
             medicine.notificationManager(viewContext).reshedule()
@@ -58,7 +57,6 @@ import AVFoundation
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
-        println("YES")
         if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
             tookPillPlayer.play()
             medicine.notificationManager(viewContext).reshedule()
@@ -103,12 +101,12 @@ import AVFoundation
             didNotTookPillBtn.enabled = false
             tookPillBtn.enabled = true
         }else {
-            //didn't took because there he didn't entered any information
+            //didn't took because there is no information
             if medicineRegistries.allRegistriesInPeriod(currentDate).entries.count == 0 {
                 didNotTookPillBtn.enabled = true
                 tookPillBtn.enabled = true
             }else {
-                //or did and said that he didn't took the medicine yet
+                //or there is and he he didn't took the medicine yet
                 //check if he already registered today
                 if medicineRegistries.findRegistry(currentDate) != nil {
                     didNotTookPillBtn.enabled = true

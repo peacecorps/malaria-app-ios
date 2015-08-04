@@ -27,14 +27,10 @@ import AVFoundation
         
         if let tookPillSoundPath = TookPillSoundPath,
             let didNotTakePillSoundPath = DidNotTakePillSoundPath{
-
             tookPillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillSoundPath), error: nil)
-            tookPillPlayer.prepareToPlay()
-                
             didNotTakePillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillSoundPath), error: nil)
-            didNotTakePillPlayer.prepareToPlay()
         }else {
-            Logger.Error("Error loading sounds effects")
+            Logger.Error("Error getting sounds effects file paths")
         }
     }
     
@@ -44,6 +40,10 @@ import AVFoundation
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if !(tookPillPlayer.prepareToPlay() && didNotTakePillPlayer.prepareToPlay()) {
+            Logger.Error("Error preparing sounds effects")
+        }
         
         refreshScreen()
     }

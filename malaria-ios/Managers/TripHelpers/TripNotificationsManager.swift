@@ -9,7 +9,7 @@ public class TripNotificationsManager : NotificationManager {
     let FrequentReminderOption = "Frequent"
     let NormalReminderOption = "Normal"
     let MinimalReminderOption = "Minimal"
-    let OffReminderOption = "Off"
+    let OffReminderOption = "None"
     
     let trip: Trip
     

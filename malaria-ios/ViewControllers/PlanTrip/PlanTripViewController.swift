@@ -172,13 +172,25 @@ class PlanTripViewController: UIViewController {
 /// local variables updaters
 extension PlanTripViewController {
     func updateDeparture(date: NSDate){
-        departureDay = date
-        departure.text = date.formatWith("dd / MM / yyyy")
+        if date.startOfDay > arrivalDay.startOfDay {
+            var refreshAlert = UIAlertController(title: "Error", message: "Departure day must happend before arrival.", preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }else {
+            departureDay = date
+            departure.text = date.formatWith("dd / MM / yyyy")
+        }
     }
     
     func updateArrival(date: NSDate){
-        arrivalDay = date
-        arrival.text = date.formatWith("dd / MM / yyyy")
+        if date.startOfDay < departureDay.startOfDay {
+            var refreshAlert = UIAlertController(title: "Error", message: "Arrival day must be after departure.", preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            presentViewController(refreshAlert, animated: true, completion: nil)
+        }else {
+            arrivalDay = date
+            arrival.text = date.formatWith("dd / MM / yyyy")
+        }
     }
     
     func updateLocation(loc: String){
@@ -198,7 +210,7 @@ extension PlanTripViewController {
     
     func updateItemsTextField(items: [String]){
         self.selectedItems = items
-        packingList.text = "\(items.count) items"
+        packingList.text = items.count == 0 ? "Only medicine" : "\(items.count + 1) items"
     }
     
     func getStoredPlanTripItems() -> [String] {

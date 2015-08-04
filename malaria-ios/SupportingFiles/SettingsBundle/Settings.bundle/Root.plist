@@ -61,10 +61,10 @@
 				<string>Frequent</string>
 				<string>Normal</string>
 				<string>Minimal</string>
-				<string>Off</string>
+				<string>None</string>
 			</array>
 			<key>Title</key>
-			<string>Trip reminder frequency:</string>
+			<string>Trip reminder frequency</string>
 			<key>Type</key>
 			<string>PSMultiValueSpecifier</string>
 			<key>Key</key>

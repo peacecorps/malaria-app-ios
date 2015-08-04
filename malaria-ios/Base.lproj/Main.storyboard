@@ -466,7 +466,7 @@
                                     <constraint firstAttribute="height" constant="44" id="zLh-rF-qK1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="18"/>
-                                <state key="normal" title="Generate" backgroundImage="GenerateTripButton">
+                                <state key="normal" title="Remind me" backgroundImage="GenerateTripButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

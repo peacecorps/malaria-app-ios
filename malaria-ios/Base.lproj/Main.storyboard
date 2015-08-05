@@ -607,7 +607,7 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UdA-Az-bZB" id="LRU-Ym-IXI">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg7-vO-TfM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="fg7-vO-TfM">
                                                             <rect key="frame" x="20" y="27" width="36" height="24.5"/>
                                                             <fontDescription key="fontDescription" name="ChalkboardSE-Light" family="Chalkboard SE" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -638,6 +638,7 @@
                                                         <constraint firstItem="fg7-vO-TfM" firstAttribute="centerY" secondItem="1KZ-Ui-FrU" secondAttribute="centerY" id="59p-On-nev"/>
                                                         <constraint firstAttribute="centerX" secondItem="fg7-vO-TfM" secondAttribute="centerX" constant="236" id="Dl7-l6-3jG"/>
                                                         <constraint firstItem="fg7-vO-TfM" firstAttribute="leading" secondItem="LRU-Ym-IXI" secondAttribute="leadingMargin" constant="12" id="OBR-KI-537"/>
+                                                        <constraint firstItem="1KZ-Ui-FrU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fg7-vO-TfM" secondAttribute="trailing" constant="10" id="kXq-x9-3kw"/>
                                                         <constraint firstItem="1KZ-Ui-FrU" firstAttribute="trailing" secondItem="LRU-Ym-IXI" secondAttribute="trailing" constant="-10" id="rUA-et-1pk"/>
                                                     </constraints>
                                                     <variation key="default">

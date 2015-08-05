@@ -13,4 +13,9 @@ public extension Item{
     public func remove(number: Int64){
         self.quantity = max(self.quantity - number, 0)
     }
+    
+    /// toggle check item
+    public func toogle() {
+        self.check = !self.check
+    }    
 }

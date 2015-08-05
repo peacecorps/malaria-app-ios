@@ -64,14 +64,9 @@ public class ItemsManager : CoreDataContextManager{
     /// :param: `[String]`: list of items name
     public func toggleCheckItem(names: [String]){
         let listItems = getItems()
-        for name in names {
-            if let item = self.findItem(name, listItems: listItems) {
-                item.check = !item.check
-            }
-        }
+        names.map({ self.findItem($0, listItems: listItems)?.toogle() })
         CoreDataHelper.sharedInstance.saveContext(self.context)
     }
-    
     
     /// Removes a item from the trip
     ///

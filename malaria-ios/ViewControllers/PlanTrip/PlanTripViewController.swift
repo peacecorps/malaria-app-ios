@@ -147,9 +147,10 @@ class PlanTripViewController: UIViewController {
         let trip = tripsManager.createTrip(loc, medicine: medicine, departure: departureDay, arrival:arrivalDay)
         let itemManager = trip.itemsManager(viewContext)
         
-        for i in items {
-            itemManager.addItem(i.0, quantity: 1)
-        }
+        
+        items.map({ itemManager.addItem($0.0, quantity: 1) })
+        
+        itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))
         
         trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
         

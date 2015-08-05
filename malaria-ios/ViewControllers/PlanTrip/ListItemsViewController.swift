@@ -14,7 +14,6 @@ import UIKit
     //internal
     var medicine: Medicine.Pill!
     var medicineManager: MedicineManager!
-    
     var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
     override func viewDidLoad() {
@@ -110,6 +109,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
             
             if modifySelectedEntry {
                 self.listItems[indexPath!.row].0 = textField.text
+                self.listItems[indexPath!.row].1 = false
             }else if !textField.text.isEmpty && self.listItems.filter({$0.0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
                 let tuple = (textField.text!, false)
                 self.listItems.append(tuple)
@@ -145,7 +145,11 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let isSelected = listItems[indexPath.row].1
+        let item = listItems[indexPath.row]
+        
+        TripsManager(context: viewContext).getTrip()?.itemsManager(viewContext).toggleCheckItem([item.0])
+        
+        let isSelected = item.1
         listItems[indexPath.row].1 = !isSelected
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
     }

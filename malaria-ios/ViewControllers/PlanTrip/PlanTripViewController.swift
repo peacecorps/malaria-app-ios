@@ -151,9 +151,6 @@ class PlanTripViewController: UIViewController {
             itemManager.addItem(i.0, quantity: 1)
         }
         
-        let selectedItems = items.filter({ $0.1 }).map({ $0.0 })
-        itemManager.checkItem(selectedItems)
-        
         trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
         
         self.prepareHistoryValuePicker()
@@ -217,6 +214,12 @@ extension PlanTripViewController {
     
     func updateItemsTextField(items: [(String, Bool)]){
         self.items = items
+        
+        if let currentTrip = tripsManager.getTrip() {
+            let itemsManager = currentTrip.itemsManager(viewContext)
+            itemsManager
+        }
+        
         packingList.text = items.count == 0 ? "Only medicine" : "\(items.count + 1) items"
     }
     

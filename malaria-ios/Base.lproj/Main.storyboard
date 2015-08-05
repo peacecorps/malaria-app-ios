@@ -613,8 +613,8 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1KZ-Ui-FrU">
-                                                            <rect key="frame" x="515" y="27.5" width="25" height="25"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1KZ-Ui-FrU" userLabel="Check">
+                                                            <rect key="frame" x="513" y="27.5" width="25" height="25"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="VgU-0d-oZA"/>
@@ -638,7 +638,7 @@
                                                         <constraint firstItem="fg7-vO-TfM" firstAttribute="centerY" secondItem="1KZ-Ui-FrU" secondAttribute="centerY" id="59p-On-nev"/>
                                                         <constraint firstAttribute="centerX" secondItem="fg7-vO-TfM" secondAttribute="centerX" constant="236" id="Dl7-l6-3jG"/>
                                                         <constraint firstItem="fg7-vO-TfM" firstAttribute="leading" secondItem="LRU-Ym-IXI" secondAttribute="leadingMargin" constant="12" id="OBR-KI-537"/>
-                                                        <constraint firstItem="1KZ-Ui-FrU" firstAttribute="trailing" secondItem="LRU-Ym-IXI" secondAttribute="trailingMargin" id="rUA-et-1pk"/>
+                                                        <constraint firstItem="1KZ-Ui-FrU" firstAttribute="trailing" secondItem="LRU-Ym-IXI" secondAttribute="trailing" constant="-10" id="rUA-et-1pk"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">

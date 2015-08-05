@@ -50,7 +50,7 @@ public class ItemsManager : CoreDataContextManager{
         CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
-    /// Remove the checkmark from theitems
+    /// Remove the checkmark
     ///
     /// :param: `[String]`: list of items name
     public func uncheckItem(names: [String]){
@@ -58,6 +58,20 @@ public class ItemsManager : CoreDataContextManager{
         names.map({ self.findItem($0, listItems: listItems)?.check = false })
         CoreDataHelper.sharedInstance.saveContext(self.context)
     }
+    
+    /// Toggle the checkmark
+    ///
+    /// :param: `[String]`: list of items name
+    public func toggleCheckItem(names: [String]){
+        let listItems = getItems()
+        for name in names {
+            if let item = self.findItem(name, listItems: listItems) {
+                item.check = !item.check
+            }
+        }
+        CoreDataHelper.sharedInstance.saveContext(self.context)
+    }
+    
     
     /// Removes a item from the trip
     ///
@@ -67,7 +81,6 @@ public class ItemsManager : CoreDataContextManager{
     /// :param: `Int64` optional: quantity
     public func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
-            
             i.remove(quantity)
             if i.quantity == 0{
                 var array: [Item] = trip.items.convertToArray()
@@ -77,10 +90,9 @@ public class ItemsManager : CoreDataContextManager{
             }
             
             CoreDataHelper.sharedInstance.saveContext(self.context)
-            return
+        }else {
+            Logger.Error("Item not found")
         }
-        
-        Logger.Error("Item not found")
     }
     
     

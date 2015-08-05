@@ -115,6 +115,7 @@
 		20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
 		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
+		20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -253,6 +254,7 @@
 		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
 		20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentsModalityDelegate.swift; path = SupportingFiles/PresentsModalityDelegate.swift; sourceTree = "<group>"; };
 		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
+		20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarSettings.swift; path = PillStats/CalendarSettings.swift; sourceTree = "<group>"; };
 		67AE5C8ADFA45BFBD2B8F09D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A4DE863BDDB7DAB1E7ED688C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BE51359F71142430EEFFC50A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -599,6 +601,7 @@
 				200A18C21B64F48E00EC2A65 /* PillsStatsViewController.swift */,
 				200A18C41B64F49A00EC2A65 /* MonthyViewController.swift */,
 				200A18C81B64F4C400EC2A65 /* MonthAdherenceCell.swift */,
+				20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */,
 			);
 			name = PillStats;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				200C72A01B40368600998100 /* MedicineNotificationsManager.swift in Sources */,
 				200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */,
 				200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */,
+				20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */,
 				200A18C91B64F4C400EC2A65 /* MonthAdherenceCell.swift in Sources */,
 				200C727C1B40368600998100 /* Endpoint.swift in Sources */,
 				200C72F21B40368600998100 /* NSManagedObject.swift in Sources */,

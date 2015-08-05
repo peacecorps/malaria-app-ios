@@ -10,6 +10,8 @@ class PlanTripViewController: UIViewController {
     @IBOutlet weak var historyBtn: UIButton!
     @IBOutlet weak var historyTextField: UITextField!
 
+    @IBInspectable var textFieldsDateFormat: String = "dd / MM / yyyy"
+    
     //input fields
     private var medicinePicker: MedicinePickerViewTrip!
     private var departureDatePickerview: TimePickerView!
@@ -213,7 +215,7 @@ extension PlanTripViewController {
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             departureDay = date
-            departure.text = date.formatWith("dd / MM / yyyy")
+            departure.text = date.formatWith(textFieldsDateFormat)
         }
     }
     
@@ -224,7 +226,7 @@ extension PlanTripViewController {
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             arrivalDay = date
-            arrival.text = date.formatWith("dd / MM / yyyy")
+            arrival.text = date.formatWith(textFieldsDateFormat)
         }
     }
     

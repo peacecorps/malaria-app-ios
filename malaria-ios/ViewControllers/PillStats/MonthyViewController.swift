@@ -7,6 +7,7 @@ import UIKit
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarFrame: UIView!
     
+    @IBInspectable var TitleDateFormat: String = "MMMM, yyyy"
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     @IBInspectable var SelectedBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
@@ -20,9 +21,6 @@ import UIKit
     @IBInspectable var OutSideMonthTextColor: UIColor = UIColor(hex: 0x999999)
     @IBInspectable var SelectedTextBackgroundColor: UIColor = UIColor.blackColor()
     
-    private let WeekDayFont = UIFont(name: "AmericanTypewriter", size: 14)!
-    private let WeekDaySelectedFont = UIFont(name: "AmericanTypewriter", size: 14)!
-    private let DayWeekTextFont = UIFont(name: "AmericanTypewriter", size: 12)!
     
     //provided by previousViewController
     var startDay: NSDate!
@@ -43,8 +41,8 @@ import UIKit
         calendarView.toggleViewWithDate(startDay)
     }
         
-    func generateMonthLabel(date: NSDate) -> String {
-        return date.formatWith("MMMM, yyyy").capitalizedString
+    private func generateMonthLabel(date: NSDate) -> String {
+        return date.formatWith(TitleDateFormat).capitalizedString
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,8 +78,6 @@ extension MonthlyViewController {
 }
 
 extension MonthlyViewController: CVCalendarViewDelegate {
-    func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool { return false }
-    
     func preliminaryView(viewOnDayView dayView: DayView) -> UIView {
         let circleView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         circleView.fillColor = CurrentDayUnselectedCircleFillColor
@@ -130,29 +126,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
 }
 
 extension MonthlyViewController: CVCalendarViewDelegate {
-    func firstWeekday() -> Weekday {
-        switch (NSCalendar.currentCalendar().firstWeekday % 7) {
-        case 0:
-            return .Saturday
-        case 1:
-            return .Sunday
-        case 2:
-            return .Monday
-        case 3:
-            return .Tuesday
-        case 4:
-            return .Wednesday
-        case 5:
-            return .Thursday
-        case 6:
-            return .Friday
-        default:
-            return .Sunday
-        }
-    }
-    
-    func shouldShowWeekdaysOut() -> Bool { return true }                                        /// show all days
-    func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool { return false }            /// hide line above day
     
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
@@ -167,7 +140,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         previouslySelect = selected
     }
     
-    func popup(date: NSDate, dayView: CVCalendarDayView){
+    private func popup(date: NSDate, dayView: CVCalendarDayView){
         if date > NSDate() {
             var failAlert = UIAlertController(title: SelectedFutureDateAlertText.title, message: SelectedFutureDateAlertText.message, preferredStyle: .Alert)
             failAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
@@ -199,7 +172,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     
-    func generateErrorMessage() {
+    private func generateErrorMessage() {
         let errorAlert: UIAlertController = UIAlertController(title: ErrorAddRegistryAlertText.title, message: ErrorAddRegistryAlertText.message, preferredStyle: .Alert)
         errorAlert.addAction(UIAlertAction(title: AlertOptions.dismiss, style: .Default, handler: nil))
         presentViewController(errorAlert, animated: true, completion: nil)
@@ -219,7 +192,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
     }
     
-    func presentedDateUpdated(date: CVDate) {
+    private func presentedDateUpdated(date: CVDate) {
         if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.text = generateMonthLabel(date.convertedDate()!)
@@ -257,34 +230,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             self.view.insertSubview(updatedMonthLabel, aboveSubview: self.monthLabel)
         }
     }
-}
-
-extension MonthlyViewController: CVCalendarViewAppearanceDelegate {
-    func dayLabelPresentWeekdayInitallyBold() -> Bool { return false }
-    
-    /// Generic days settings
-    func dayLabelWeekdaySelectedBackgroundColor() -> UIColor { return SelectedBackgroundColor }
-    func dayLabelWeekdaySelectedBackgroundAlpha() -> CGFloat { return 1.0 }
-    func dayLabelWeekdayInTextColor() -> UIColor { return UnselectedTextColor }
-    func dayLabelWeekdayOutTextColor() -> UIColor { return OutSideMonthTextColor }
-    func dayLabelWeekdaySelectedTextColor() -> UIColor { return SelectedTextBackgroundColor }
-    func dayLabelWeekdayFont() -> UIFont { return WeekDayFont }
-    func dayLabelWeekdaySelectedFont() -> UIFont { return WeekDaySelectedFont }
-    
-    /// current day settings
-    func dayLabelPresentWeekdaySelectedBackgroundColor() -> UIColor { return SelectedTodayBackgroundColor }
-    func dayLabelPresentWeekdaySelectedBackgroundAlpha() -> CGFloat { return 1.0 }
-    func dayLabelPresentWeekdaySelectedTextColor() -> UIColor { return SelectedTextBackgroundColor }
-    func dayLabelPresentWeekdayTextColor() -> UIColor{ return UnselectedTodayTextColor }
-    func dayLabelPresentWeekdayFont() -> UIFont { return WeekDayFont }
-    func dayLabelPresentWeekdaySelectedFont() -> UIFont { return WeekDaySelectedFont }
-}
-
-extension MonthlyViewController: CVCalendarMenuViewDelegate {
-    func presentationMode() -> CalendarMode { return .MonthView }
-    func dayOfWeekTextColor() -> UIColor { return DayWeekTextColor }
-    func dayOfWeekTextUppercase() -> Bool { return true }
-    func dayOfWeekFont() -> UIFont { return DayWeekTextFont }
 }
 
 ///Alert messages

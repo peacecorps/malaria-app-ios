@@ -7,6 +7,8 @@ import AVFoundation
     @IBOutlet weak var tookPillBtn: UIButton!
     @IBOutlet weak var didNotTookPillBtn: UIButton!
     
+    @IBInspectable var FullDateTextFormat: String = "dd/MM/yyyy"
+    @IBInspectable var MinorDateTextFormat: String = "EEEE"
     @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
     @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
 
@@ -52,8 +54,8 @@ import AVFoundation
         Logger.Info("Refreshing TOOK PILL")
         
         currentDate = NSDate()
-        dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
-        fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
+        dayOfTheWeekLbl.text = currentDate.formatWith(MinorDateTextFormat)
+        fullDateLbl.text = currentDate.formatWith(FullDateTextFormat)
 
         
         if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {

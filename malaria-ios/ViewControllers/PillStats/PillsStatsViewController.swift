@@ -8,6 +8,7 @@ import Charts
     @IBOutlet weak var graphFrame: UIView!
     @IBOutlet weak var loadingGraphView: CircleProgressView!
     
+    @IBInspectable var GraphDateFormat: String = "yyyy.MM.dd"
     @IBInspectable var NoDataText: String = "No entries"
     @IBInspectable var NumberRecentMonths: Int = 4
     @IBInspectable var GraphFillColor: UIColor = UIColor(hex: 0xA1D4E2)
@@ -113,12 +114,8 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 /* Graph View related methods */
 extension PillsStatsViewController{
     
-    private func setupDateLabel(date: NSDate) -> String {
-        return date.formatWith("yyyy.MM.dd")
-    }
-    
     func configureData(points: [(NSDate, Float)]){
-        let xValues = points.map({ self.setupDateLabel($0.0) })
+        let xValues = points.map({ $0.0.formatWith(self.GraphDateFormat) })
         let values = points.map({$0.1})
         
         var dataEntries: [ChartDataEntry] = []

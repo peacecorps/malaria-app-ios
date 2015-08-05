@@ -40,6 +40,8 @@ class PlanTripViewController: UIViewController {
                 
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
+        location.inputAccessoryView = toolBar
+        
         //Setting up departure
         departureDatePickerview = TimePickerView(view: departure, selectCallback: {(date: NSDate) in
             self.updateDeparture(date)

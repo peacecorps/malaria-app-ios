@@ -12,6 +12,8 @@ import UIKit
     private var pageViewController : UIPageViewController!
     private var _dict: [UIViewController: HomePage] = [:]
     
+    var currentViewController: PresentsModalityDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +24,7 @@ import UIKit
         pageViewController.view.frame = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
         
         let defaultPage = getController(homePageEnum)!
+        currentViewController = defaultPage as! PresentsModalityDelegate
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
         
         setupUIPageControl()
@@ -34,6 +37,15 @@ import UIKit
         pageViewController.didMoveToParentViewController(self)
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {
+            presentSetupScreen()
+        }
+    }
+    
     func setupUIPageControl() {
         let appearance = UIPageControl.appearance()
         appearance.pageIndicatorTintColor = PageIndicatorTintColor
@@ -42,9 +54,15 @@ import UIKit
     }
     
     @IBAction func settingsButtonHandler(){
+        presentSetupScreen()
+    }
+    
+    private func presentSetupScreen() {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
+            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self) as SetupScreenViewController
+            view.delegate = self.currentViewController
+            self.presentViewController(view, animated: true, completion: nil)
         }
     }
     
@@ -69,11 +87,17 @@ import UIKit
         
         switch value {
             case .DailyPill:
-                vc = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self) as DidTakePillsViewController
+                view.pagesManager = self
+                vc = view
             case .DailyStates:
-                vc = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self) as DailyStatsTableViewController
+                view.pagesManager = self
+                vc = view
             case .Stats:
-                vc = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self) as PillsStatsViewController
+                view.pagesManager = self
+                vc = view
             default: return nil
         }
         

@@ -18,9 +18,12 @@ class TestMedicineRegistries: XCTestCase {
 
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: NSDate())
         
-        md = m.getMedicine(currentPill.name())!
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
+        
+        md = m.getCurrentMedicine()!
+        md.notificationManager(currentContext).scheduleNotification(d1)
         registriesManager = md.registriesManager(currentContext)
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))

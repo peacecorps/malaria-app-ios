@@ -30,7 +30,7 @@ class CachedStatistics : NSObject{
     
     override init(){
         super.init()
-        NSNotificationEvents.ObserveNewEntries(self, selector: "resetFlags")
+        NSNotificationEvents.ObserveDataUpdated(self, selector: "resetFlags")
     }
     
     deinit{

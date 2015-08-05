@@ -1,10 +1,9 @@
 import Foundation
 import UIKit
 import QuartzCore
-
 import Charts
 
-@IBDesignable class PillsStatsViewController : UIViewController {
+@IBDesignable class PillsStatsViewController : UIViewController, PresentsModalityDelegate {
     
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
@@ -39,11 +38,22 @@ import Charts
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        refreshScreen()
+    }
+    
+    var pagesManager: PagesManagerViewController!
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        pagesManager.currentViewController = self
+    }
+    
+    func OnDismiss() {
         refreshScreen()
     }
     
     func refreshScreen() {
-        println("Refreshing screen")
+        Logger.Info("Refreshing STATS")
         
         self.graphFrame.bringSubviewToFront(self.chartView)
         
@@ -115,8 +125,13 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 
 /* Graph View related methods */
 extension PillsStatsViewController{
+    
+    private func setupDateLabel(date: NSDate) -> String {
+        return date.formatWith("yyyy.MM.dd")
+    }
+    
     func configureData(points: [(NSDate, Float)]){
-        let xValues = points.map({$0.0.formatWith("yyyy.MM.dd")})
+        let xValues = points.map({ self.setupDateLabel($0.0) })
         let values = points.map({$0.1})
         
         var dataEntries: [ChartDataEntry] = []

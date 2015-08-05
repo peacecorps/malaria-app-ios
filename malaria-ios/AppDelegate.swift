@@ -15,14 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: notificationsCategories) as Set<NSObject>)
         application.registerUserNotificationSettings(settings)
         
-        //setting up initial screen
+        //setting up initial screen, can be configured in the storyboard if there is only one option but here we have more flexibility
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool(){
-            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
-        }else{
-            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
-        }
-        
+        window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
         window!.makeKeyAndVisible()
         
         return true

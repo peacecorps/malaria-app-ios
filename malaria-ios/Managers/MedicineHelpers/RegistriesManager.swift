@@ -72,7 +72,7 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :returns: `Registry?`
     public func oldestEntry() -> Registry?{
-        return getRegistries(mostRecentFirst: false).first
+        return getRegistries().last
     }
 
     /// Adds a new entry for that pill
@@ -210,7 +210,7 @@ public class RegistriesManager : CoreDataContextManager{
         medicine.registries = NSSet(array: newRegistries)
 
         registry.deleteFromContext(context)
-        NSNotificationEvents.DataUpdated(nil)
         CoreDataHelper.sharedInstance.saveContext(context)
+        NSNotificationEvents.DataUpdated(nil)
     }
 }

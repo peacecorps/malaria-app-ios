@@ -22,9 +22,11 @@ class TestWeeklyMedicineStatistics: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: d1)
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
         
-        md = m.getMedicine(currentPill.name())!
+        md = m.getCurrentMedicine()!
+        md.notificationManager(currentContext).scheduleNotification(d1)
         
         registriesManager = md.registriesManager(currentContext)
         stats = md.stats(currentContext)

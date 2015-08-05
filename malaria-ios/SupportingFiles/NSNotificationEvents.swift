@@ -3,7 +3,7 @@ import UIKit
 
 class NSNotificationEvents{
     enum Events : String{
-        case ChangedEntries = "ChangedEntries"
+        case DataUpdated = "DataUpdated"
         case UIApplicationWillEnterForegroundNotification = "UIApplicationWillEnterForegroundNotification"
     }
     
@@ -14,17 +14,18 @@ class NSNotificationEvents{
         NSNotificationEvents.observe(Events.UIApplicationWillEnterForegroundNotification.rawValue, observer, selector)
     }
     
-    /// Send event saying that the medicine data was updated
+    
+    /// Send event saying that the current medicine was changed
     /// :param: `AnyObject?`: attached object
     static func DataUpdated(object: AnyObject?){
-        NSNotificationEvents.post(Events.ChangedEntries.rawValue, object)
+        NSNotificationEvents.post(Events.DataUpdated.rawValue, object)
     }
-    
+        
     /// Observe new medicine entries
     /// :param: `NSObject`: intended object
     /// :param: `Selector`: NSObject selector
-    static func ObserveNewEntries(observer: NSObject, selector: Selector){
-        NSNotificationEvents.observe(Events.ChangedEntries.rawValue, observer, selector)
+    static func ObserveDataUpdated(observer: NSObject, selector: Selector){
+        NSNotificationEvents.observe(Events.DataUpdated.rawValue, observer, selector)
     }
     
     /// Stop observing all notifications

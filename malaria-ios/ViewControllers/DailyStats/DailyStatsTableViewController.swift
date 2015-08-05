@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class DailyStatsTableViewController : UITableViewController{
+class DailyStatsTableViewController : UITableViewController, PresentsModalityDelegate{
     
     var listStats: [Stat] = [
         MedicineLastTaken(),
@@ -12,6 +12,7 @@ class DailyStatsTableViewController : UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
+
     }
     
     deinit{
@@ -23,7 +24,18 @@ class DailyStatsTableViewController : UITableViewController{
         refreshScreen()
     }
     
+    var pagesManager: PagesManagerViewController!
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        pagesManager.currentViewController = self
+    }
+    
+    func OnDismiss() {
+        refreshScreen()
+    }
+    
     func refreshScreen() {
+        Logger.Info("Refreshing DAILY")
         let cachedStats = CachedStatistics.sharedInstance
         if !cachedStats.isDailyStatsUpdated {
             cachedStats.refreshContext()

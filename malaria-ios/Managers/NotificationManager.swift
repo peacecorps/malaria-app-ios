@@ -17,14 +17,12 @@ public class NotificationManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: fireTime
     public func scheduleNotification(fireTime: NSDate){
-        Logger.Info("Scheduling \(category) to \(fireTime)")
         let notification: UILocalNotification = createNotification(fireTime)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     /// Unschedule all notifications
     public func unsheduleNotification(){
-        Logger.Info("Unsheduling previous \(category)")
         for event in UIApplication.sharedApplication().scheduledLocalNotifications {
             
             var notification = event as! UILocalNotification

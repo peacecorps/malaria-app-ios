@@ -24,7 +24,6 @@ public class MedicineNotificationsManager : NotificationManager{
         CoreDataHelper.sharedInstance.saveContext(self.context)
         
         if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
-            Logger.Warn("MedicineReminderSwitch wasn't set, setting to default value true")
             UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
             scheduleNotification(fireTime)
             return
@@ -82,7 +81,6 @@ public class MedicineNotificationsManager : NotificationManager{
             return (currentDate - mostRecent.date) >= 7
         }
         
-        Logger.Warn("There are no entries yet. Returning false")
         return false
     }
     

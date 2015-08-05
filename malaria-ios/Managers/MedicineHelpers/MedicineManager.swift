@@ -6,28 +6,6 @@ public class MedicineManager : CoreDataContextManager{
         super.init(context: context)
     }
     
-    /// Setups a new pill and sets it as default
-    ///
-    /// If there is already a pill registed as default, it will no longer be the default pill
-    ///
-    /// :param: `String`: name of the pill
-    /// :param: `Int`: interval of the pill (1 = daily, 7 = weekly)
-    /// :param: `NSDate`: fireDate
-    public func setup(name: String, interval: Int, fireDate: NSDate){
-        //unregister previous medicines
-        if let currentMed = getCurrentMedicine(){
-            currentMed.notificationManager(context).unsheduleNotification()
-        }
-        
-        Logger.Info("Setting medicine")
-        registerNewMedicine(name, interval: interval)
-        setCurrentPill(name)
-        
-        getCurrentMedicine()!.notificationManager(context).scheduleNotification(fireDate)
-
-        UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
-    }
-    
     /// Clears instance of Medicines from the CoreData
     public func clearCoreData(){
         Medicine.clear(Medicine.self, context: self.context)
@@ -43,8 +21,6 @@ public class MedicineManager : CoreDataContextManager{
     public func registerNewMedicine(name: String, interval: Int) -> Bool{
         let registed: Medicine? = getMedicine(name)
         if let m = registed{
-            Logger.Warn("Already registered \(name), returning")
-            
             return false
         }
         
@@ -86,17 +62,16 @@ public class MedicineManager : CoreDataContextManager{
     /// :param: `String`: name of the pill, case sensitive
     public func setCurrentPill(name: String){
         if let m = getCurrentMedicine(){
-            Logger.Info("Removing \(m.name) from default medicine")
             m.isCurrent = false
             m.notificationManager(context).unsheduleNotification()
         }else{
             Logger.Error("No current pill found!")
         }
+        
         Logger.Info("Setting \(name) as default")
         getMedicine(name)!.isCurrent = true
         
-        NSNotificationEvents.DataUpdated(nil)
-        
         CoreDataHelper.sharedInstance.saveContext(context)
+        NSNotificationEvents.DataUpdated(nil)
     }
 }

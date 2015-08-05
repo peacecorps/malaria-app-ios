@@ -113,6 +113,8 @@
 		20C13EE61B5FA4DD00D66C00 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C13EE51B5FA4DD00D66C00 /* UITabBarController.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */; };
+		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
+		20FC56BF1B72658F00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -249,6 +251,8 @@
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
 		20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarItem.swift; sourceTree = "<group>"; };
 		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
+		20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentsModalityDelegate.swift; path = SupportingFiles/PresentsModalityDelegate.swift; sourceTree = "<group>"; };
+		20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeaceCorpsInfo.swift; sourceTree = "<group>"; };
 		67AE5C8ADFA45BFBD2B8F09D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A4DE863BDDB7DAB1E7ED688C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BE51359F71142430EEFFC50A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -325,6 +329,7 @@
 				203F0B251B481CB900826E06 /* ValuePickers */,
 				200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */,
 				209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */,
+				20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */,
 			);
 			name = SupportingFiles;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				200C722E1B40368600998100 /* EndpointType.swift */,
+				20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -859,6 +865,7 @@
 				200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
 				200F22191B623B8D00C29404 /* Globals.swift in Sources */,
+				20FC56BF1B72658F00D51801 /* PeaceCorpsInfo.swift in Sources */,
 				2095B8611B5A4AD200119896 /* CVCalendarViewAppearance.swift in Sources */,
 				200C728A1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
@@ -892,6 +899,7 @@
 				200C72B81B40368600998100 /* Medicine.swift in Sources */,
 				200A18EB1B64F6EA00EC2A65 /* UIStoryboard.swift in Sources */,
 				200C72B41B40368600998100 /* Item.swift in Sources */,
+				20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */,
 				20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */,
 				200A18DD1B64F5F300EC2A65 /* PlanTripViewController.swift in Sources */,
 				200C72B01B40368600998100 /* UserSettingsManager.swift in Sources */,

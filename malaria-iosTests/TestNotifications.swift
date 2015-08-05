@@ -24,7 +24,11 @@ class TestNotifications: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill.name(), interval: currentPill.interval(), fireDate: d1) //current pill is daily
+        
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
+        m.getCurrentMedicine()!.notificationManager(currentContext).scheduleNotification(d1)
+        
         m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
         
         mdDaily = m.getCurrentMedicine()!

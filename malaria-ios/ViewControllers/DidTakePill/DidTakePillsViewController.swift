@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-@IBDesignable class DidTakePillsViewController: UIViewController {
+@IBDesignable class DidTakePillsViewController: UIViewController, PresentsModalityDelegate {
     @IBOutlet weak var dayOfTheWeekLbl: UILabel!
     @IBOutlet weak var fullDateLbl: UILabel!
     @IBOutlet weak var tookPillBtn: UIButton!
@@ -10,8 +10,9 @@ import AVFoundation
     @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
     @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
     
+    
     var medicineManager: MedicineManager!
-    var medicine: Medicine!
+    var medicine: Medicine?
     
     var currentDate: NSDate = NSDate()
     var viewContext: NSManagedObjectContext!
@@ -21,8 +22,10 @@ import AVFoundation
     private var tookPillPlayer = AVAudioPlayer()
     private var didNotTakePillPlayer = AVAudioPlayer()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         NSNotificationEvents.ObserveEnteredForeground(self, selector: "refreshScreen")
         
         if let tookPillSoundPath = TookPillSoundPath,
@@ -41,54 +44,72 @@ import AVFoundation
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if !(tookPillPlayer.prepareToPlay() && didNotTakePillPlayer.prepareToPlay()) {
-            Logger.Error("Error preparing sounds effects")
-        }
-        
+        refreshScreen()
+    }
+    
+    var pagesManager: PagesManagerViewController!
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        pagesManager.currentViewController = self
+    }
+    
+    func OnDismiss() {
         refreshScreen()
     }
     
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
-            didNotTakePillPlayer.play()
-            medicine.notificationManager(viewContext).reshedule()
-            refreshScreen()
+        if let m = medicine {
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+                didNotTakePillPlayer.play()
+                m.notificationManager(viewContext).reshedule()
+                refreshScreen()
+            }
         }
     }
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
-        if (tookPillBtn.enabled && didNotTookPillBtn.enabled && medicine.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
-            tookPillPlayer.play()
-            medicine.notificationManager(viewContext).reshedule()
-            refreshScreen()
+        if let m = medicine {
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+                tookPillPlayer.play()
+                m.notificationManager(viewContext).reshedule()
+                refreshScreen()
+            }
         }
     }
     
     func refreshScreen(){
-        Logger.Info("Refreshing screen")
+        Logger.Info("Refreshing TOOK PILL")
         
         currentDate = NSDate()
+        dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
+        fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
+
+        
+        if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {
+            return
+        }
+        
+        if !(tookPillPlayer.prepareToPlay() && didNotTakePillPlayer.prepareToPlay()) {
+            Logger.Error("Error preparing sounds effects")
+        }
         
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
         medicine = medicineManager.getCurrentMedicine()
         
-        dayOfTheWeekLbl.text = currentDate.formatWith("EEEE")
-        fullDateLbl.text = currentDate.formatWith("dd/MM/yyyy")
-        
-        let medicineRegistries = medicine.registriesManager(viewContext)
+        let medicineRegistries = medicine!.registriesManager(viewContext)
         let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
         
-        if medicine.interval > 1 {
-            if medicine.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
+        if medicine!.interval > 1 {
+            if medicine!.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
                 
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 
                 //reset configuration so that the user can reshedule the time
                 UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
-            }else if !currentDate.sameDayAs(medicine.notificationTime!)
-                        && currentDate > medicine.notificationTime!
+            }else if !currentDate.sameDayAs(medicine!.notificationTime!)
+                        && currentDate > medicine!.notificationTime!
                         && tookMedicineEntry == nil {
                             
                 dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor

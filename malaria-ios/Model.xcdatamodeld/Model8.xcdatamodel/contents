@@ -4,6 +4,7 @@
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="malaria_ios.Item" syncable="YES">
+        <attribute name="check" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="associated_with" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="items" inverseEntity="Trip" syncable="YES"/>
@@ -42,7 +43,7 @@
     </entity>
     <elements>
         <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="60"/>
-        <element name="Item" positionX="-207" positionY="11" width="128" height="90"/>
+        <element name="Item" positionX="-207" positionY="11" width="128" height="105"/>
         <element name="Medicine" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Post" positionX="-101" positionY="201" width="128" height="150"/>
         <element name="Posts" positionX="-270" positionY="387" width="128" height="45"/>

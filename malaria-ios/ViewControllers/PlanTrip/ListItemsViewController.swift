@@ -4,12 +4,12 @@ import UIKit
 @IBDesignable class ListItemsViewController : UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBInspectable var DeleteButtonColor: UIColor = UIColor(hex: 0xA9504A)
-
+    
     //must be provided by previous viewController
     var departure: NSDate!
     var arrival: NSDate!
-    var listItems: [String] = []
-    var completitionHandler: ((Medicine.Pill, [String]) -> ())!
+    var listItems: [(String, Bool)] = []
+    var completitionHandler: ((Medicine.Pill, [(String, Bool)]) -> ())!
     
     //internal
     var medicine: Medicine.Pill!
@@ -17,6 +17,14 @@ import UIKit
     
     var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
+        longPressGestureRecognizer.minimumPressDuration = 1.5
+        longPressGestureRecognizer.delegate = self
+        tableView.addGestureRecognizer(longPressGestureRecognizer)
+    }
     
     @IBAction func cancelBtnHandler(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -39,11 +47,23 @@ import UIKit
             medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
         }
         
+        self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+        
         tableView.reloadData()
     }
 }
 
-extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
+extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
+    
+    func longPressHandler(gestureRecognizer:UIGestureRecognizer) {
+        let p = gestureRecognizer.locationInView(tableView)
+        
+        if let indexPath = tableView.indexPathForRowAtPoint(p) {
+            if gestureRecognizer.state == UIGestureRecognizerState.Began {
+                modifyItem(indexPath: indexPath)
+            }
+        }
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listItems.count
@@ -90,9 +110,12 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
             
             if modifySelectedEntry {
                 self.listItems[indexPath!.row].0 = textField.text
-            }else if !textField.text.isEmpty && self.listItems.filter({$0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
-                self.listItems.append(textField.text!)
+            }else if !textField.text.isEmpty && self.listItems.filter({$0.0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
+                let tuple = (textField.text!, false)
+                self.listItems.append(tuple)
             }
+            
+            self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
             
             self.tableView.reloadData()
         })
@@ -101,7 +124,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Name"
-            textField.text = modifySelectedEntry ? self.listItems[indexPath!.row] : ""
+            textField.text = modifySelectedEntry ? self.listItems[indexPath!.row].0 : ""
         }
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -122,15 +145,15 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        modifyItem(indexPath: indexPath)
+        let isSelected = listItems[indexPath.row].1
+        listItems[indexPath.row].1 = !isSelected
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let item = listItems[indexPath.row]
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell") as! ItemCell
-        cell.name.text = item
-        return cell
+        return cell.configureCell(item.0, broughtItem: item.1)
     }
     
     @IBAction func medicineBtn(sender: AnyObject) {
@@ -151,6 +174,17 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate {
 
 class ItemCell : UITableViewCell {
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var hasItem: UIView!
+    
+    @IBInspectable var BroughtItemColor: UIColor = UIColor(hex: 0x96C262)
+    @IBInspectable var DidNotBringItemColor: UIColor = UIColor(hex: 0xDF8782)
+    
+    func configureCell(name: String, broughtItem: Bool) -> ItemCell {
+        self.name.text = name
+        hasItem.borderColor = broughtItem ? BroughtItemColor : DidNotBringItemColor
+        
+        return self
+    }
 }
 
 class MedicineHeaderCell : UITableViewCell {

@@ -20,7 +20,7 @@ class PlanTripViewController: UIViewController {
     var medicine: Medicine.Pill!
     var departureDay = NSDate()
     var arrivalDay = NSDate()
-    var selectedItems = [String]()
+    var items = [(String, Bool)]()
     
     lazy var toolBar: UIToolbar! = {
         let keyboardToolbar = UIToolbar()
@@ -65,12 +65,12 @@ class PlanTripViewController: UIViewController {
         
         tripsManager = TripsManager(context: viewContext)
         (departureDay, arrivalDay) = getStoredPlanTripDates()
-        selectedItems = getStoredPlanTripItems()
+        items = getStoredPlanTripItems()
         tripLocation = getStoredLocation()
         medicine = Medicine.Pill(rawValue: MedicineManager(context: viewContext).getCurrentMedicine()!.name)!
         
         updateLocation(tripLocation)
-        updateItemsTextField(selectedItems)
+        updateItemsTextField(items)
         updateArrival(arrivalDay)
         updateDeparture(departureDay)
         
@@ -113,7 +113,7 @@ class PlanTripViewController: UIViewController {
             let view = UIStoryboard.instantiate(viewControllerClass: ListItemsViewController.self)
             view.arrival = self.arrivalDay
             view.departure = self.departureDay
-            view.listItems = self.selectedItems
+            view.listItems = self.items
             view.completitionHandler = self.selectItemsCallback
             self.presentViewController(view, animated: true, completion: nil)
         }
@@ -145,16 +145,21 @@ class PlanTripViewController: UIViewController {
         let loc = location.text
         
         let trip = tripsManager.createTrip(loc, medicine: medicine, departure: departureDay, arrival:arrivalDay)
-        for i in selectedItems{
-            trip.itemsManager(viewContext).addItem(i, quantity: 1)
+        let itemManager = trip.itemsManager(viewContext)
+        
+        for i in items {
+            itemManager.addItem(i.0, quantity: 1)
         }
+        
+        let selectedItems = items.filter({ $0.1 }).map({ $0.0 })
+        itemManager.checkItem(selectedItems)
         
         trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
         
         self.prepareHistoryValuePicker()
     }
     
-    func selectItemsCallback(medicine: Medicine.Pill, listItems: [String]){
+    func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){
         updateMedicine(medicine)
         updateItemsTextField(listItems)
     }
@@ -210,13 +215,13 @@ extension PlanTripViewController {
         return tripsManager.getTrip()?.location ?? ""
     }
     
-    func updateItemsTextField(items: [String]){
-        self.selectedItems = items
+    func updateItemsTextField(items: [(String, Bool)]){
+        self.items = items
         packingList.text = items.count == 0 ? "Only medicine" : "\(items.count + 1) items"
     }
     
-    func getStoredPlanTripItems() -> [String] {
-        return tripsManager.getTrip()?.itemsManager(viewContext).getItems().map({ $0.name }) ?? []
+    func getStoredPlanTripItems() -> [(String, Bool)] {
+        return tripsManager.getTrip()?.itemsManager(viewContext).getItems().map({ ($0.name, $0.check) }) ?? []
     }
   
     func getStoredPlanTripDates() -> (departure: NSDate, arrival: NSDate) {

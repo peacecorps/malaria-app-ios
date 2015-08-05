@@ -33,9 +33,30 @@ public class ItemsManager : CoreDataContextManager{
     /// Returns an item from the trip if exists
     ///
     /// :param: `String`: name of the item
+    /// :param: `[Item] optional` cached list of items
     /// :returns: `Item?`:
-    public func findItem(name: String) -> Item?{
-        return getItems().filter({$0.name.lowercaseString == name.lowercaseString}).first
+    public func findItem(name: String, listItems: [Item]? = nil) -> Item?{
+        let items = listItems != nil ? listItems! : getItems()
+        return items.filter({$0.name.lowercaseString == name.lowercaseString}).first
+    }
+    
+    
+    /// Checkmark the items
+    ///
+    /// :param: `[String]`: list of items name
+    public func checkItem(names: [String]){
+        let listItems = getItems()
+        names.map({ self.findItem($0, listItems: listItems)?.check = true })
+        CoreDataHelper.sharedInstance.saveContext(self.context)
+    }
+    
+    /// Remove the checkmark from theitems
+    ///
+    /// :param: `[String]`: list of items name
+    public func uncheckItem(names: [String]){
+        let listItems = getItems()
+        names.map({ self.findItem($0, listItems: listItems)?.check = false })
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
     /// Removes a item from the trip

@@ -613,11 +613,32 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1KZ-Ui-FrU">
+                                                            <rect key="frame" x="515" y="27.5" width="25" height="25"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="VgU-0d-oZA"/>
+                                                                <constraint firstAttribute="height" constant="25" id="kTt-CE-j0j"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="12.5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                    <real key="value" value="2"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" red="0.7843137255" green="0.29803921570000003" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="centerY" secondItem="fg7-vO-TfM" secondAttribute="centerY" id="2iB-Fi-KQw"/>
+                                                        <constraint firstItem="fg7-vO-TfM" firstAttribute="centerY" secondItem="1KZ-Ui-FrU" secondAttribute="centerY" id="59p-On-nev"/>
                                                         <constraint firstAttribute="centerX" secondItem="fg7-vO-TfM" secondAttribute="centerX" constant="236" id="Dl7-l6-3jG"/>
                                                         <constraint firstItem="fg7-vO-TfM" firstAttribute="leading" secondItem="LRU-Ym-IXI" secondAttribute="leadingMargin" constant="12" id="OBR-KI-537"/>
+                                                        <constraint firstItem="1KZ-Ui-FrU" firstAttribute="trailing" secondItem="LRU-Ym-IXI" secondAttribute="trailingMargin" id="rUA-et-1pk"/>
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -627,6 +648,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <connections>
+                                                    <outlet property="hasItem" destination="1KZ-Ui-FrU" id="eTj-da-eyF"/>
                                                     <outlet property="name" destination="fg7-vO-TfM" id="YtC-B0-DJR"/>
                                                 </connections>
                                             </tableViewCell>

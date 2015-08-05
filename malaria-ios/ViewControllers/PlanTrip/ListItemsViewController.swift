@@ -5,16 +5,16 @@ import UIKit
     @IBOutlet weak var tableView: UITableView!
     @IBInspectable var DeleteButtonColor: UIColor = UIColor(hex: 0xA9504A)
     
-    //must be provided by previous viewController
+    //provided by previous viewController
     var departure: NSDate!
     var arrival: NSDate!
     var listItems: [(String, Bool)] = []
     var completitionHandler: ((Medicine.Pill, [(String, Bool)]) -> ())!
     
     //internal
-    var medicine: Medicine.Pill!
-    var medicineManager: MedicineManager!
-    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    private var medicine: Medicine.Pill!
+    private var medicineManager: MedicineManager!
+    private var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,10 @@ import UIKit
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func addNewItem(sender: AnyObject) {
+        generateAddItemAlert()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -47,22 +51,11 @@ import UIKit
         }
         
         self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
-        
         tableView.reloadData()
     }
 }
 
 extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
-    
-    func longPressHandler(gestureRecognizer:UIGestureRecognizer) {
-        let p = gestureRecognizer.locationInView(tableView)
-        
-        if let indexPath = tableView.indexPathForRowAtPoint(p) {
-            if gestureRecognizer.state == UIGestureRecognizerState.Began {
-                modifyItem(indexPath: indexPath)
-            }
-        }
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listItems.count
@@ -92,44 +85,15 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
         }
     }
     
-    @IBAction func addNewItem(sender: AnyObject) {
-        modifyItem()
-    }
-    
-    func modifyItem(indexPath: NSIndexPath? = nil) {
-        let modifySelectedEntry = indexPath != nil
+    internal func longPressHandler(gestureRecognizer:UIGestureRecognizer) {
+        let point = gestureRecognizer.locationInView(tableView)
         
-        let title = modifySelectedEntry ? "Change item" : "What do you want to bring to the trip?"
-        let message = ""
-        
-        var alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        
-        alert.addAction(UIAlertAction(title: "Done", style: .Default) { _ in
-            let textField = alert.textFields![0] as! UITextField
-            
-            if modifySelectedEntry {
-                self.listItems[indexPath!.row].0 = textField.text
-                self.listItems[indexPath!.row].1 = false
-            }else if !textField.text.isEmpty && self.listItems.filter({$0.0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
-                let tuple = (textField.text!, false)
-                self.listItems.append(tuple)
+        if let indexPath = tableView.indexPathForRowAtPoint(point) {
+            if gestureRecognizer.state == UIGestureRecognizerState.Began {
+                generateModifyItemAlert(indexPath)
             }
-            
-            self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
-            
-            self.tableView.reloadData()
-        })
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        
-        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
-            textField.placeholder = "Name"
-            textField.text = modifySelectedEntry ? self.listItems[indexPath!.row].0 : ""
         }
-        
-        self.presentViewController(alert, animated: true, completion: nil)
     }
-    
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
@@ -161,7 +125,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
     }
     
     @IBAction func medicineBtn(sender: AnyObject) {
-        var alert = UIAlertController(title: "What do you want to bring to the trip?", message: "Pick one medicine", preferredStyle: .Alert)
+        var alert = UIAlertController(title: PickMedicineAlertText.title, message: PickMedicineAlertText.message, preferredStyle: .Alert)
         let medicines = Medicine.Pill.allValues.map({$0.name()})
         for m in medicines {
             alert.addAction(UIAlertAction(title: m, style: .Default) { _ in
@@ -170,10 +134,87 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
             })
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
     }
+}
+
+//alerts generators
+extension ListItemsViewController {
+    
+    private func generateAddItemAlert() {
+        var alert = UIAlertController(title: CreateEntryAlertText.title, message: CreateEntryAlertText.message, preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
+            let textField = alert.textFields![0] as! UITextField
+            
+            if !textField.text.isEmpty && self.listItems.filter({$0.0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
+                let tuple = (textField.text!, false)
+                self.listItems.append(tuple)
+                
+                self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+                self.tableView.reloadData()
+            }
+            })
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Name"
+            textField.text = ""
+        }
+        alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
+        
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    private func generateModifyItemAlert(indexPath: NSIndexPath) {
+        var alert = UIAlertController(title: ModifyEntryAlertText.title, message: ModifyEntryAlertText.message, preferredStyle: .Alert)
+        
+        alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
+            let textField = alert.textFields![0] as! UITextField
+            
+            self.listItems[indexPath.row].0 = textField.text
+            self.listItems[indexPath.row].1 = false
+            self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+            self.tableView.reloadData()
+            })
+        
+        alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Name"
+            textField.text = self.listItems[indexPath.row].0
+        }
+        alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+}
+
+//messages
+extension ListItemsViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    //pick medicine
+    private var PickMedicineAlertText: AlertText {get {
+        return ("What do you want to bring to the trip?", "Pick one medicine")
+    }}
+    
+    //change entry
+    private var ModifyEntryAlertText: AlertText {get {
+        return ("Change item", "")
+    }}
+    
+    //new entry
+    private var CreateEntryAlertText: AlertText {get {
+        return ("What do you want to bring to the trip?", "")
+    }}
+    
+    //type of alerts options
+    private var AlertOptions: (done: String, cancel: String) {get {
+        return ("Done", "Cancel")
+    }}
 }
 
 class ItemCell : UITableViewCell {

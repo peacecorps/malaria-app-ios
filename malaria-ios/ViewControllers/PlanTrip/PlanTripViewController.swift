@@ -9,11 +9,22 @@ class PlanTripViewController: UIViewController {
     @IBOutlet weak var generateTripBtn: UIButton!
     @IBOutlet weak var historyBtn: UIButton!
     @IBOutlet weak var historyTextField: UITextField!
+
+    //input fields
+    private var medicinePicker: MedicinePickerViewTrip!
+    private var departureDatePickerview: TimePickerView!
+    private var arrivalDatePickerview: TimePickerView!
+    private var tripLocationHistoryPickerViewer : TripLocationHistoryPickerViewer!
     
-    var medicinePicker: MedicinePickerViewTrip!
-    var departureDatePickerview: TimePickerView!
-    var arrivalDatePickerview: TimePickerView!
-    var tripLocationHistoryPickerViewer : TripLocationHistoryPickerViewer!
+    //context and manager
+    private var viewContext: NSManagedObjectContext!
+    private var tripsManager: TripsManager!
+
+    //Notification options
+    private let FrequentReminderOption = "Frequent"
+    private let NormalReminderOption = "Normal"
+    private let MinimalReminderOption = "Minimal"
+    private let OffReminderOption = "None"
     
     //trip information
     var tripLocation: String = ""
@@ -30,10 +41,8 @@ class PlanTripViewController: UIViewController {
         keyboardToolbar.items = [flexBarButton, doneBarButton]
         
         return keyboardToolbar
-        }()
+    }()
     
-    var viewContext: NSManagedObjectContext!
-    var tripsManager: TripsManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +50,7 @@ class PlanTripViewController: UIViewController {
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
         location.inputAccessoryView = toolBar
+        historyTextField.inputAccessoryView = toolBar
         
         //Setting up departure
         departureDatePickerview = TimePickerView(view: departure, selectCallback: {(date: NSDate) in
@@ -48,35 +58,36 @@ class PlanTripViewController: UIViewController {
         })
         departure.inputAccessoryView = toolBar
         
+        //Setting up arrival date picker
         arrivalDatePickerview = TimePickerView(view: arrival, selectCallback: {(date: NSDate) in
             self.updateArrival(date)
         })
         arrival.inputAccessoryView = toolBar
-        
-        historyTextField.inputAccessoryView = toolBar
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        //refresh context
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-        
-        
         tripsManager = TripsManager(context: viewContext)
+        
+        //get stored information
         (departureDay, arrivalDay) = getStoredPlanTripDates()
-        items = getStoredPlanTripItems()
-        tripLocation = getStoredLocation()
+        (items, tripLocation) = (getStoredPlanTripItems(), getStoredLocation())
         medicine = Medicine.Pill(rawValue: MedicineManager(context: viewContext).getCurrentMedicine()!.name)!
         
+        //update fields
         updateLocation(tripLocation)
         updateItemsTextField(items)
         updateArrival(arrivalDay)
         updateDeparture(departureDay)
         
+        //update input views
         arrival.inputView = arrivalDatePickerview.generateInputView(.Date, startDate: arrivalDay)
         departure.inputView = departureDatePickerview.generateInputView(.Date, startDate: departureDay)
         
+        //update history
         prepareHistoryValuePicker()
     }
     
@@ -96,6 +107,14 @@ class PlanTripViewController: UIViewController {
         historyTextField.endEditing(true)
     }
     
+    func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){
+        updateMedicine(medicine)
+        updateItemsTextField(listItems)
+    }
+}
+
+/// IBActions and helpers
+extension PlanTripViewController{
     @IBAction func settingsBtnHandler(sender: AnyObject) {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
@@ -121,18 +140,17 @@ class PlanTripViewController: UIViewController {
     
     @IBAction func generateTrip(sender: AnyObject) {
         if tripsManager.getTrip() != nil {
-            var refreshAlert = UIAlertController(title: "Update Trip", message: "All data will be lost.", preferredStyle: .Alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { _ in
+            var refreshAlert = UIAlertController(title: UpdateTripAlertText.title, message: UpdateTripAlertText.message, preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.storeTrip()
             }))
-            
-            refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
+            refreshAlert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Default, handler: nil))
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else{
             self.storeTrip()
             
-            var successAlert = UIAlertController(title: "Success!", message: "", preferredStyle: .Alert)
-            successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            var successAlert = UIAlertController(title: SuccessAlertText.title, message: SuccessAlertText.message, preferredStyle: .Alert)
+            successAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(successAlert, animated: true, completion: nil)
             
             delay(3.0) {
@@ -141,45 +159,57 @@ class PlanTripViewController: UIViewController {
         }
     }
     
-    func storeTrip(){
-        let loc = location.text
-        
-        let trip = tripsManager.createTrip(loc, medicine: medicine, departure: departureDay, arrival:arrivalDay)
+    private func storeTrip(){
+        let trip = tripsManager.createTrip(location.text, medicine: medicine, departure: departureDay, arrival:arrivalDay)
         let itemManager = trip.itemsManager(viewContext)
-        
-        
         items.map({ itemManager.addItem($0.0, quantity: 1) })
-        
         itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))
         
-        trip.notificationManager(viewContext).scheduleTripReminder(departureDay)
-        
-        self.prepareHistoryValuePicker()
+        scheduleNotifications(trip)
+        prepareHistoryValuePicker()
     }
     
-    func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){
-        updateMedicine(medicine)
-        updateItemsTextField(listItems)
+    private func scheduleNotifications(trip: Trip) {
+        let notificationManager = trip.notificationManager(viewContext)
+        
+        switch (UserSettingsManager.UserSetting.TripReminderOption.getString()){
+        case FrequentReminderOption:
+            Logger.Info("Scheduling frequent notifications for plan my trip")
+            notificationManager.scheduleNotification(departureDay)
+            notificationManager.scheduleNotification(departureDay - 1.day)
+            notificationManager.scheduleNotification(departureDay - 1.week)
+        case NormalReminderOption:
+            Logger.Info("Scheduling normal notifications for plan my trip")
+            notificationManager.scheduleNotification(departureDay - 1.day)
+            notificationManager.scheduleNotification(departureDay - 1.week)
+        case MinimalReminderOption:
+            Logger.Info("Scheduling minimal notifications for plan my trip")
+            notificationManager.scheduleNotification(departureDay - 1.day)
+        case OffReminderOption:
+            Logger.Warn("Trip Reminder is turned off")
+        default:
+            UserSettingsManager.UserSetting.TripReminderOption.setString(FrequentReminderOption)
+            scheduleNotifications(trip)
+        }
     }
     
     @IBAction func historyButtonHandler(sender: AnyObject) {
         if tripLocationHistoryPickerViewer.locations.isEmpty {
-            var successAlert = UIAlertController(title: "Empty history", message: "", preferredStyle: .Alert)
-            successAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            var successAlert = UIAlertController(title: EmptyHistoryAlertText.title, message: EmptyHistoryAlertText.message, preferredStyle: .Alert)
+            successAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(successAlert, animated: true, completion: nil)
         }else{
             historyTextField.becomeFirstResponder()
         }
     }
-
 }
 
 /// local variables updaters
 extension PlanTripViewController {
-    func updateDeparture(date: NSDate){
+    private func updateDeparture(date: NSDate){
         if date.startOfDay > arrivalDay.startOfDay {
-            var refreshAlert = UIAlertController(title: "Error", message: "Departure day must happend before arrival.", preferredStyle: .Alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            var refreshAlert = UIAlertController(title: InvalidDepartureAlertText.title, message: InvalidDepartureAlertText.message, preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             departureDay = date
@@ -187,10 +217,10 @@ extension PlanTripViewController {
         }
     }
     
-    func updateArrival(date: NSDate){
+    private func updateArrival(date: NSDate){
         if date.startOfDay < departureDay.startOfDay {
-            var refreshAlert = UIAlertController(title: "Error", message: "Arrival day must be after departure.", preferredStyle: .Alert)
-            refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            var refreshAlert = UIAlertController(title: InvalidArrivalAlertText.title, message: InvalidArrivalAlertText.message, preferredStyle: .Alert)
+            refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             arrivalDay = date
@@ -198,33 +228,27 @@ extension PlanTripViewController {
         }
     }
     
-    func updateLocation(loc: String){
+    private func updateLocation(loc: String){
         generateTripBtn.enabled = !loc.isEmpty
         
         tripLocation = loc
         location.text = loc
     }
     
-    func updateMedicine(medicine: Medicine.Pill){
+    private func updateMedicine(medicine: Medicine.Pill){
         self.medicine = medicine
     }
     
-    func getStoredLocation() -> String {
+    private func getStoredLocation() -> String {
         return tripsManager.getTrip()?.location ?? ""
     }
     
-    func updateItemsTextField(items: [(String, Bool)]){
+    private func updateItemsTextField(items: [(String, Bool)]){
         self.items = items
-        
-        if let currentTrip = tripsManager.getTrip() {
-            let itemsManager = currentTrip.itemsManager(viewContext)
-            itemsManager
-        }
-        
         packingList.text = items.count == 0 ? "Only medicine" : "\(items.count + 1) items"
     }
     
-    func getStoredPlanTripItems() -> [(String, Bool)] {
+    private func getStoredPlanTripItems() -> [(String, Bool)] {
         return tripsManager.getTrip()?.itemsManager(viewContext).getItems().map({ ($0.name, $0.check) }) ?? []
     }
   
@@ -235,4 +259,39 @@ extension PlanTripViewController {
         
         return (NSDate(), NSDate() + 1.week)
     }
+}
+
+//messages
+extension PlanTripViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    //update trip
+    private var UpdateTripAlertText: AlertText {get {
+        return ("Update Trip", "All data will be lost")
+        }}
+    
+    //update trip
+    private var SuccessAlertText: AlertText {get {
+        return ("Success", "")
+        }}
+    
+    //empty history
+    private var EmptyHistoryAlertText: AlertText {get {
+        return ("History is empty", "")
+        }}
+    
+    //departure day error
+    private var InvalidDepartureAlertText: AlertText {get {
+        return ("Error", "Departure day must happen before arrival")
+        }}
+    
+    //arrival day error
+    private var InvalidArrivalAlertText: AlertText {get {
+        return ("Error", "Arrival day must be after departure")
+        }}
+    
+    //type of alerts options
+    private var AlertOptions: (ok: String, cancel: String) {get {
+        return ("Ok", "Cancel")
+        }}
 }

@@ -9,19 +9,20 @@ import AVFoundation
     
     @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
     @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
+
+    private var currentDate: NSDate = NSDate()
     
+    //managers
+    private var viewContext: NSManagedObjectContext!
+    private var medicineManager: MedicineManager!
+    private var medicine: Medicine?
+    var pagesManager: PagesManagerViewController!
     
-    var medicineManager: MedicineManager!
-    var medicine: Medicine?
-    
-    var currentDate: NSDate = NSDate()
-    var viewContext: NSManagedObjectContext!
-    
+    //Sound effects
     private let TookPillSoundPath = NSBundle.mainBundle().pathForResource("correct", ofType: "aiff", inDirectory: "Sounds")
     private let DidNotTakePillSoundPath = NSBundle.mainBundle().pathForResource("incorrect", ofType: "aiff", inDirectory: "Sounds")
     private var tookPillPlayer = AVAudioPlayer()
     private var didNotTakePillPlayer = AVAudioPlayer()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,36 +46,6 @@ import AVFoundation
         super.viewWillAppear(animated)
         
         refreshScreen()
-    }
-    
-    var pagesManager: PagesManagerViewController!
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        pagesManager.currentViewController = self
-    }
-    
-    func OnDismiss() {
-        refreshScreen()
-    }
-    
-    @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
-        if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
-                didNotTakePillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
-                refreshScreen()
-            }
-        }
-    }
-    
-    @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
-        if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
-                tookPillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
-                refreshScreen()
-            }
-        }
     }
     
     func refreshScreen(){
@@ -117,8 +88,8 @@ import AVFoundation
             }
         }
         
+        //if took
         if tookMedicineEntry != nil {
-            //if he took
             didNotTookPillBtn.enabled = false
             tookPillBtn.enabled = true
         }else {
@@ -139,5 +110,39 @@ import AVFoundation
                 }
             }
         }
+    }
+}
+
+///IBActions
+extension DidTakePillsViewController{
+    @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
+        if let m = medicine {
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+                didNotTakePillPlayer.play()
+                m.notificationManager(viewContext).reshedule()
+                refreshScreen()
+            }
+        }
+    }
+    
+    @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
+        if let m = medicine {
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+                tookPillPlayer.play()
+                m.notificationManager(viewContext).reshedule()
+                refreshScreen()
+            }
+        }
+    }
+}
+
+extension DidTakePillsViewController {
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        pagesManager.currentViewController = self
+    }
+    
+    func OnDismiss() {
+        refreshScreen()
     }
 }

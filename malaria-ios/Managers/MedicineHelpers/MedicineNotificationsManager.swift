@@ -87,7 +87,7 @@ public class MedicineNotificationsManager : NotificationManager{
     /// Returns interactive notifications settings to be added in the AppDelegate
     ///
     /// :returns: `UIMutableUserNotificationCategory`: Configuration
-    public static func setup() -> UIMutableUserNotificationCategory{
+    public static func setup() -> UIMutableUserNotificationCategory {
         var notificationActionOk = UIMutableUserNotificationAction()
         notificationActionOk.identifier = TookPillId
         notificationActionOk.title = TookPillTitle

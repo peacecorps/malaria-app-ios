@@ -9,37 +9,35 @@ import UIKit
     
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
-    
     @IBInspectable var SelectedBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var UnselectedTextColor: UIColor = UIColor(hex: 0x444444)
     @IBInspectable var UnselectedTodayTextColor: UIColor = UIColor.blackColor()
     @IBInspectable var DayWeekTextColor: UIColor = UIColor(hex: 0x444444)
-    @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(hex: 0xA1D4E2)//UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var CurrentDayUnselectedCircleFillColor: UIColor = UIColor(hex: 0xA1D4E2)
     @IBInspectable var SelectedDayDotMarkerColor: UIColor = UIColor.blackColor()
     @IBInspectable var InsideMonthTextColor: UIColor = UIColor(hex: 0x444444)
     @IBInspectable var OutSideMonthTextColor: UIColor = UIColor(hex: 0x999999)
     @IBInspectable var SelectedTextBackgroundColor: UIColor = UIColor.blackColor()
     
-    let WeekDayFont = UIFont(name: "AmericanTypewriter", size: 14)!
-    let WeekDaySelectedFont = UIFont(name: "AmericanTypewriter", size: 14)!
-    let DayWeekTextFont = UIFont(name: "AmericanTypewriter", size: 12)!
+    private let WeekDayFont = UIFont(name: "AmericanTypewriter", size: 14)!
+    private let WeekDaySelectedFont = UIFont(name: "AmericanTypewriter", size: 14)!
+    private let DayWeekTextFont = UIFont(name: "AmericanTypewriter", size: 12)!
     
     //provided by previousViewController
     var startDay: NSDate!
     var callback: (() -> ())?
     
+    //helpers
     private var previouslySelect: NSDate?
     private var animationFinished = true
-    private let RingViewTag = 123
     
     //hack because CVCalendar doesn't support updates yet
     private var dayViews = [NSDate : Set<DayView>]()
+    private let RingViewTag = 123
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        println("Calendar View did load")
         
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
@@ -56,15 +54,14 @@ import UIKit
         menuView.commitMenuViewUpdate()
     }
     
-    @IBAction func closeBtnHandler(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         callback?()
     }
-    
+}
+
+///IBActions
+extension MonthlyViewController {
     @IBAction func previousMonthToggle(sender: AnyObject) {
         calendarView.loadPreviousView()
     }
@@ -75,6 +72,10 @@ import UIKit
     
     @IBAction func todayMonthView() {
         calendarView.toggleCurrentDayView()
+    }
+    
+    @IBAction func closeBtnHandler(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -168,32 +169,17 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func popup(date: NSDate, dayView: CVCalendarDayView){
         if date > NSDate() {
-            var failAlert = UIAlertController(title: "Not possible to change entries in the future.", message: "Try another day", preferredStyle: .Alert)
-            failAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+            var failAlert = UIAlertController(title: SelectedFutureDateAlertText.title, message: SelectedFutureDateAlertText.message, preferredStyle: .Alert)
+            failAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(failAlert, animated: true, completion: nil)
             
             return
         }
         
-        let interval = CachedStatistics.sharedInstance.medicine.interval
-        let isWeekly = interval == 7
-        let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
-        
-        var title = ""
-        var message = ""
-        
-        if tookMedicine != nil {
-            title = "You already took your " + (isWeekly ? "weekly" : "daily") + " pill."
-            message = "Have you taken your pill?"
-        } else {
-            title = "You did not took your " + (isWeekly ? "weekly" : "daily") + " pill."
-            message = "Have you taken your pill?"
-        }
+        let (title, message) = generateTookMedicineActionSheetText(date)
         
         let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
-        
-        tookPillActionSheet.addAction(UIAlertAction(title:"Yes, I did.", style: .Default, handler: { _ in
-            println("Pressed yes")
+        tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)
             }else {
@@ -201,23 +187,21 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             }
         }))
         
-        tookPillActionSheet.addAction(UIAlertAction(title:"No I didn't.", style: .Default, handler: { _ in
-            println("pressed no")
+        tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.didNot, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)                
             }else {
                 self.generateErrorMessage()
             }
         }))
+        tookPillActionSheet.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
-        
-        tookPillActionSheet.addAction(UIAlertAction(title:"Cancel", style: .Cancel, handler: nil))
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     
     func generateErrorMessage() {
-        let errorAlert: UIAlertController = UIAlertController(title: "Error updating.", message: "Contact us.", preferredStyle: .Alert)
-        errorAlert.addAction(UIAlertAction(title:"Dismiss", style: .Default, handler: nil))
+        let errorAlert: UIAlertController = UIAlertController(title: ErrorAddRegistryAlertText.title, message: ErrorAddRegistryAlertText.message, preferredStyle: .Alert)
+        errorAlert.addAction(UIAlertAction(title: AlertOptions.dismiss, style: .Default, handler: nil))
         presentViewController(errorAlert, animated: true, completion: nil)
     }
     
@@ -231,7 +215,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
                 }else {
                     dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
                 }
-                //dView.viewWithTag(RingViewTag)?.removeFromSuperview()
             }
         }
     }
@@ -303,3 +286,41 @@ extension MonthlyViewController: CVCalendarMenuViewDelegate {
     func dayOfWeekTextUppercase() -> Bool { return true }
     func dayOfWeekFont() -> UIFont { return DayWeekTextFont }
 }
+
+///Alert messages
+extension MonthlyViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    //selected future entry
+    private var SelectedFutureDateAlertText: AlertText {get {
+        return ("Not possible to change entries in the future", "Try another day")
+    }}
+    
+    private func generateTookMedicineActionSheetText(date: NSDate) -> AlertText {
+        let isWeekly = CachedStatistics.sharedInstance.medicine.interval == 7
+        let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
+        
+        if tookMedicine != nil {
+            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+        } else {
+            return ("You did not took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+        }
+    }
+    
+    //did take pill alert text
+    private var TookMedicineAlertActionText: (did: String, didNot: String) {get {
+        return ("Yes, I did.", "No, I didn't")
+    }}
+    
+    //error
+    private var ErrorAddRegistryAlertText: AlertText {get {
+        return ("Error updating.", "Please contact us by clicking the email icon on the setup screen")
+    }}
+    
+    
+    //type of alerts options
+    private var AlertOptions: (ok: String, cancel: String, dismiss: String) {get {
+        return ("Ok", "Cancel", "Dismiss")
+    }}
+}
+

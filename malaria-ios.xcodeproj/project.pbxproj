@@ -114,7 +114,7 @@
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20F3D8DB1B6D550300EA18D9 /* UITabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
-		20FC56BF1B72658F00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */; };
+		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
 		2583765CD97747D49D98F0C8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE51359F71142430EEFFC50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5258A14277AFC3B571DB91E0 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -252,7 +252,7 @@
 		20F3D8DA1B6D550300EA18D9 /* UITabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITabBarItem.swift; sourceTree = "<group>"; };
 		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
 		20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentsModalityDelegate.swift; path = SupportingFiles/PresentsModalityDelegate.swift; sourceTree = "<group>"; };
-		20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeaceCorpsInfo.swift; sourceTree = "<group>"; };
+		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
 		67AE5C8ADFA45BFBD2B8F09D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A4DE863BDDB7DAB1E7ED688C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BE51359F71142430EEFFC50A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +327,7 @@
 			children = (
 				209F60BE1B6E4AED00EDA461 /* Sounds */,
 				203F0B251B481CB900826E06 /* ValuePickers */,
+				20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */,
 				200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */,
 				209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */,
 				20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */,
@@ -348,7 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				200C722E1B40368600998100 /* EndpointType.swift */,
-				20FC56BE1B72658F00D51801 /* PeaceCorpsInfo.swift */,
 			);
 			path = Information;
 			sourceTree = "<group>";
@@ -865,7 +865,6 @@
 				200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
 				200F22191B623B8D00C29404 /* Globals.swift in Sources */,
-				20FC56BF1B72658F00D51801 /* PeaceCorpsInfo.swift in Sources */,
 				2095B8611B5A4AD200119896 /* CVCalendarViewAppearance.swift in Sources */,
 				200C728A1B40368600998100 /* PostsEndpoint.swift in Sources */,
 				200C72E81B40368600998100 /* TripExtension.swift in Sources */,
@@ -873,6 +872,7 @@
 				200A18E31B64F61F00EC2A65 /* ListItemsViewController.swift in Sources */,
 				2095B86C1B5A4AD200119896 /* CVSet.swift in Sources */,
 				202E18431B5AFFB3007D5194 /* NSNotificationEvents.swift in Sources */,
+				20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */,
 				200C72D41B40368600998100 /* Posts.swift in Sources */,
 				203F0B1C1B46EB9E00826E06 /* UIPickView.swift in Sources */,
 				2095B8681B5A4AD200119896 /* CVDate.swift in Sources */,

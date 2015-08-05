@@ -3,18 +3,14 @@ import UIKit
 class SetupScreenViewController : UIViewController{
     @IBOutlet weak var reminderTime: UITextField!
     @IBOutlet weak var medicineName: UITextField!
+    @IBInspectable var reminderTimeFormat: String = "HH:mm a"
     
+    //provided by pagesManagerViewController
     var delegate: PresentsModalityDelegate!
     
-    var pillReminderNotificationTime: NSDate!
-    let BackgroundImageId = "background"
-    
-    var medicinePicker: MedicinePickerView!
-    var timePickerview: TimePickerView!
-    
-    var viewContext: NSManagedObjectContext!
-    
-    var medicineManager: MedicineManager!
+    //input pickers
+    private var medicinePicker: MedicinePickerView!
+    private var timePickerview: TimePickerView!
     
     lazy var toolBar: UIToolbar! = {
         let keyboardToolbar = UIToolbar()
@@ -26,7 +22,13 @@ class SetupScreenViewController : UIViewController{
         return keyboardToolbar
         }()
     
-
+    
+    //mangagers
+    private var viewContext: NSManagedObjectContext!
+    private var medicineManager: MedicineManager!
+    
+    private var pillReminderNotificationTime: NSDate!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -60,11 +62,22 @@ class SetupScreenViewController : UIViewController{
         medicineName.endEditing(true)
         reminderTime.endEditing(true)
     }
-    
-    private func refreshDate(){
-        reminderTime.text = pillReminderNotificationTime.formatWith("HH:mm a")
+}
+
+extension SetupScreenViewController{
+    //could be called on the completition, however It is too late because it is noticible the screen being updated
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.CallOnDismiss()
     }
     
+    func CallOnDismiss() {
+        delegate!.OnDismiss()
+    }
+}
+
+//IBActions and helpers
+extension SetupScreenViewController {
     @IBAction func sendFeedback(sender: AnyObject) {
         openUrl(NSURL(string: "mailto:\(PeaceCorpsInfo.mail)"))
     }
@@ -75,37 +88,25 @@ class SetupScreenViewController : UIViewController{
         //avoid showing the alert view if there are no changes
         if let current = medicineManager.getCurrentMedicine(){
             if current.name == medicineName.text && current.notificationTime!.sameClockTimeAs(pillReminderNotificationTime){
-                delay(0.05) {
-                    self.dismissViewControllerAnimated(true, completion: self.CallOnDismiss)
-                }
+                self.dismissViewControllerAnimated(true, completion: nil)
                 return
             }
             
-            let title = "There is already medicine configured"
-            let message = "The current configuration will be changed"
-            var medicineAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            medicineAlert.addAction(UIAlertAction(title: "Ok", style: .Destructive, handler: { _ in
+            var medicineAlert = UIAlertController(title: ReplaceMedicineAlertText.title, message: ReplaceMedicineAlertText.message, preferredStyle: .Alert)
+            medicineAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.setupMedicine(med)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }))
             
-            medicineAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { _ in
-                delay(0.05) {
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }
+            medicineAlert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Default, handler: { _ in
+                self.dismissViewControllerAnimated(true, completion: nil)
             }))
             
             presentViewController(medicineAlert, animated: true, completion: nil)
         } else {
-            self.setupMedicine(med)
+            setupMedicine(med)
             dismissViewControllerAnimated(true, completion: nil)
         }
-    }
-    
-    //could be called on the completition, however It is too late because it is noticible the screen being updated
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.CallOnDismiss()
     }
     
     private func setupMedicine(med: Medicine.Pill) {
@@ -115,11 +116,26 @@ class SetupScreenViewController : UIViewController{
         UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
     }
     
-    func CallOnDismiss() {
-        delegate!.OnDismiss()
+    private func refreshDate(){
+        reminderTime.text = pillReminderNotificationTime.formatWith(reminderTimeFormat)
     }
     
     private func getStoredReminderTime() -> NSDate{
         return medicineManager.getCurrentMedicine()?.notificationTime ?? NSDate()
     }
+}
+
+//alert messages
+extension SetupScreenViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    //existing medicine configured
+    private var ReplaceMedicineAlertText: AlertText {get {
+        return ("There is already medicine configured", "The current configuration will be changed")
+    }}
+    
+    //type of alerts options
+    private var AlertOptions: (ok: String, cancel: String) {get {
+        return ("ok", "Cancel")
+    }}
 }

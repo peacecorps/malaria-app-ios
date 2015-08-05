@@ -1,10 +1,8 @@
 import Foundation
 import UIKit
-import QuartzCore
 import Charts
 
 @IBDesignable class PillsStatsViewController : UIViewController, PresentsModalityDelegate {
-    
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var graphFrame: UIView!
@@ -18,9 +16,11 @@ import Charts
     @IBInspectable var LeftYAxisLineColor: UIColor = UIColor(hex: 0x8A8B8A)
     @IBInspectable var AxisFontColor: UIColor = UIColor(hex: 0x705246)
     
-    let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
+    private let TextFont = UIFont(name: "AmericanTypewriter", size: 11.0)!
     
-    var isPillStatsUpdated: Bool {
+    var pagesManager: PagesManagerViewController!
+    
+    private var isPillStatsUpdated: Bool {
         let data = CachedStatistics.sharedInstance
         return data.isMonthlyAdherenceDataUpdated && data.isGraphViewDataUpdated && data.isCalendarViewDataUpdated
     }
@@ -39,16 +39,6 @@ import Charts
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        refreshScreen()
-    }
-    
-    var pagesManager: PagesManagerViewController!
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        pagesManager.currentViewController = self
-    }
-    
-    func OnDismiss() {
         refreshScreen()
     }
     
@@ -72,15 +62,12 @@ import Charts
         
         let cachedStats = CachedStatistics.sharedInstance
         cachedStats.refreshContext()
-        
         cachedStats.setupBeforeCaching()
         
         cachedStats.retrieveTookMedicineStats()
-        
         cachedStats.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
-        
         cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in
@@ -215,5 +202,16 @@ extension PillsStatsViewController{
         numberFormatter.multiplier = 1
         
         chartView.leftAxis.valueFormatter = numberFormatter
+    }
+}
+
+extension PillsStatsViewController{
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        pagesManager.currentViewController = self
+    }
+    
+    func OnDismiss() {
+        refreshScreen()
     }
 }

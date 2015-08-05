@@ -2,14 +2,13 @@ import Foundation
 import UIKit
 
 class InfoHubViewController : UIViewController{
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let refreshControl = UIRefreshControl()
-    
-    var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
-    var syncManager: SyncManager!
-    var posts: [Post] = []
+    private let refreshControl = UIRefreshControl()
+
+    private var viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()!
+    private var syncManager: SyncManager!
+    private var posts: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +30,10 @@ class InfoHubViewController : UIViewController{
     }
     
     func pullRefreshHandler(){
-        println("pull refresh")
+        Logger.Info("Pull refresh")
         syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
             if let e = error {
-                let refreshAlert = self.createAlertViewError(e)
-                self.presentViewController(refreshAlert, animated: true, completion: nil)
+                self.presentViewController(self.createAlertViewError(e), animated: true, completion: nil)
             }else {
                 self.refreshFromCoreData()
             }
@@ -50,8 +48,8 @@ class InfoHubViewController : UIViewController{
                 if error != nil{
                     
                     delay(0.5){
-                        var confirmAlert = UIAlertController(title: "No available message from Peace Corps", message: "", preferredStyle: .Alert)
-                        confirmAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                        var confirmAlert = UIAlertController(title: self.NoInformationAvailableAlertText.title, message: self.NoInformationAvailableAlertText.message, preferredStyle: .Alert)
+                        confirmAlert.addAction(UIAlertAction(title: self.AlertOptions.ok, style: .Default, handler: nil))
                         
                         var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                         dispatch_after(time, dispatch_get_main_queue(), {
@@ -66,16 +64,16 @@ class InfoHubViewController : UIViewController{
     }
     
     private func createAlertViewError(error : NSError) -> UIAlertController {
-        var refreshAlert = UIAlertController(title: "Couldn't Update Peace Corps Messages.", message: "Please try again later.", preferredStyle: .Alert)
+        var refreshAlert = UIAlertController(title: CantUpdateFromPeaceCorpsAlertText.title, message: CantUpdateFromPeaceCorpsAlertText.message, preferredStyle: .Alert)
         
         if error.code == -1009 {
-            refreshAlert.message = "No available internet connection. Try again later."
-            refreshAlert.addAction(UIAlertAction(title: "Settings", style: .Default, handler: { _ in
+            refreshAlert.message = NoInternetConnectionAlertText.message
+            refreshAlert.addAction(UIAlertAction(title: AlertOptions.settings, style: .Default, handler: { _ in
                 UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
             }))
         }
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
         return refreshAlert
     }
     
@@ -105,7 +103,7 @@ extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let post = posts[indexPath.row]
-        var  cell = collectionView.dequeueReusableCellWithReuseIdentifier("postCollectionCell", forIndexPath: indexPath) as! PeaceCorpsMessageCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("postCollectionCell", forIndexPath: indexPath) as! PeaceCorpsMessageCollectionViewCell
         
         cell.postBtn.titleLabel?.numberOfLines = 0
         cell.postBtn.titleLabel?.textAlignment = .Center
@@ -143,6 +141,29 @@ extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewData
         
         return floor(remainingScreen/(numberItems - 1 + 2)) //left and right margin plus space between cells (numItems - 1)
     }
+}
+
+//alert messages
+extension InfoHubViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    private var NoInformationAvailableAlertText: AlertText {get {
+        return ("No available message from Peace Corps", "")
+    }}
+    
+    private var CantUpdateFromPeaceCorpsAlertText: AlertText {get {
+        return ("Couldn't Update Peace Corps Messages.", "Please try again later")
+    }}
+    
+    private var NoInternetConnectionAlertText: AlertText {get {
+        return ("Couldn't Update Peace Corps Messages.", "No available internet connection. Try again later")
+    }}
+    
+    //type of alerts options
+    private var AlertOptions: (ok: String, cancel: String, settings: String) {get {
+        return ("ok", "Cancel", "Settings")
+    }}
+    
 }
 
 class PeaceCorpsMessageCollectionViewCell : UICollectionViewCell{

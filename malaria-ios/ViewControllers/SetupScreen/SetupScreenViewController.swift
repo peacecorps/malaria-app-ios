@@ -72,7 +72,7 @@ extension SetupScreenViewController{
     }
     
     func CallOnDismiss() {
-        delegate!.OnDismiss()
+        delegate?.OnDismiss()
     }
 }
 

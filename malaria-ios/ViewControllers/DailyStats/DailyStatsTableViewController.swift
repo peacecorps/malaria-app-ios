@@ -66,6 +66,9 @@ extension DailyStatsTableViewController{
         cell.statIcon.image = stat.image
         cell.statValueLbl.text = stat.attributeValue
         
+        //yes, it is really needed to remove white background color from ipad
+        cell.backgroundColor = cell.backgroundColor
+        
         return cell
     }
 }

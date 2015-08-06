@@ -91,7 +91,8 @@ class InfoHubViewController : UIViewController{
     @IBAction func settingsBtnHandler(sender: AnyObject) {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
+            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self) as SetupScreenViewController
+            self.presentViewController(view, animated: true, completion: nil)
         }
     }
 }

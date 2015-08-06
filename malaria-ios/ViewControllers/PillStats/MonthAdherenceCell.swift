@@ -13,6 +13,10 @@ import UIKit
         horizontalBar.progressColor = adhrenceValue < 50 ? LowAdherenceColor : HighAdherenceColor
         horizontalBar.progressValue = adhrenceValue
         
+        //yes, it is really needed to remove white background color from ipad
+        //https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad
+        self.backgroundColor = self.backgroundColor
+        
         month.text = (date.formatWith("MMM") as NSString).substringToIndex(3).capitalizedString
         adherenceValue.text = "\(Int(adhrenceValue))%"
         

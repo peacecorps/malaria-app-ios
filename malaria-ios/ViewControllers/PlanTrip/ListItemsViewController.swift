@@ -20,7 +20,7 @@ import UIKit
         super.viewDidLoad()
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "longPressHandler:")
-        longPressGestureRecognizer.minimumPressDuration = 1.5
+        longPressGestureRecognizer.minimumPressDuration = 0.75
         longPressGestureRecognizer.delegate = self
         tableView.addGestureRecognizer(longPressGestureRecognizer)
     }
@@ -228,6 +228,8 @@ class ItemCell : UITableViewCell {
         self.name.text = name
         hasItem.borderColor = broughtItem ? BroughtItemColor : DidNotBringItemColor
         
+        //necessary on ipad. Something related on contentView.background not the same as the cell.
+        self.backgroundColor = self.backgroundColor
         return self
     }
 }

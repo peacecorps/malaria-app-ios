@@ -151,6 +151,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         
         let (title, message) = generateTookMedicineActionSheetText(date)
         
+        
         let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
@@ -169,6 +170,12 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }))
         tookPillActionSheet.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
+        
+        //for ipad
+        if let popoverController = tookPillActionSheet.popoverPresentationController {
+            popoverController.sourceView = dayView
+            popoverController.sourceRect = dayView.bounds
+        }
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     

@@ -22,13 +22,11 @@ class TestWeeklyMedicineStatistics: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        m.setup(currentPill, fireDate: d1)
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
         
-        if let medi = m.getMedicine(currentPill){
-            md = medi
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        md = m.getCurrentMedicine()!
+        md.notificationManager(currentContext).scheduleNotification(d1)
         
         registriesManager = md.registriesManager(currentContext)
         stats = md.stats(currentContext)
@@ -40,6 +38,7 @@ class TestWeeklyMedicineStatistics: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
+        UserSettingsManager.clear()
     }
     
     func testPillStreak(){

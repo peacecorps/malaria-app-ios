@@ -12,7 +12,7 @@ public class CollectionPostsEndpoint : Endpoint{
             let collectionPosts = subCollectionsPostsType.create(subCollectionsPostsType.self, context: context)
             
             if let posts = getPosts(results, context: context){
-                collectionPosts.posts = NSMutableSet(array: posts)
+                collectionPosts.posts = NSSet(array: posts)
                 return collectionPosts
             }else{
                 collectionPosts.deleteFromContext(context)

@@ -2,27 +2,39 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //registering for notifications
-        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil)
+        var notificationsCategories = [UIMutableUserNotificationCategory]()
+        notificationsCategories.append(MedicineNotificationsManager.setup())
+        
+        readApplicationSettings()
+        
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: notificationsCategories) as Set<NSObject>)
         application.registerUserNotificationSettings(settings)
         
-        //setting up initial screen
+        //setting up initial screen, can be configured in the storyboard if there is only one option but here we have more flexibility
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        if UserSettingsManager.getDidConfiguredMedicine(){
-            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
-        }else{
-            window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
-        }
-        
-        
+        window!.rootViewController = UIStoryboard.instantiate(viewControllerClass: TabbedBarController.self)
         window!.makeKeyAndVisible()
         
         return true
+    }
+    
+    func readApplicationSettings() {
+        if UserSettingsManager.UserSetting.ClearMedicineHistory.getBool(){
+            Logger.Warn("Clearing Medicine History")
+            MedicineManager(context: CoreDataHelper.sharedInstance.createBackgroundContext()!).clearCoreData()
+            UserSettingsManager.UserSetting.ClearMedicineHistory.setBool(false)
+        }
+        
+        if UserSettingsManager.UserSetting.ClearTripHistory.getBool(){
+            Logger.Warn("Clearing Trip History")
+            TripsManager(context: CoreDataHelper.sharedInstance.createBackgroundContext()!).clearCoreData()
+            UserSettingsManager.UserSetting.ClearTripHistory.setBool(false)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -47,10 +59,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        //Logger.Info("did receive local notification")
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> ()) {
+        
+        if let category = notification.category{
+            switch(category) {
+            case MedicineNotificationsManager.NotificationCategory:
+                if let id = identifier {
+                    switch (id) {
+                    case MedicineNotificationsManager.TookPillId:
+                        let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                        let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                        currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: true)
+                    case MedicineNotificationsManager.DidNotTakePillId:
+                        let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
+                        let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
+                        currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: false)
+                    default:
+                        Logger.Error("ID not found")
+                    }
+                }
+                
+            default: Logger.Error("No support for that category")
+            }
+        }
+        
+        completionHandler()
     }
-
-
 }
 

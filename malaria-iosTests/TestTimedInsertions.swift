@@ -23,16 +23,11 @@ class TestTimedInsertions: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        m.registerNewMedicine(weeklyPill)
-        m.registerNewMedicine(dailyPill)
+        m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
+        m.registerNewMedicine(dailyPill.name(), interval: dailyPill.interval())
         
-        if let m1 = m.getMedicine(dailyPill),
-           let m2 = m.getMedicine(weeklyPill){
-            daily = m1
-            weekly = m2
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        daily = m.getMedicine(dailyPill.name())!
+        weekly = m.getMedicine(weeklyPill.name())!
         
         dailyRegistriesManager = daily.registriesManager(currentContext)        
         weeklyRegistriesManager = weekly.registriesManager(currentContext)
@@ -43,12 +38,17 @@ class TestTimedInsertions: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
+        UserSettingsManager.clear()
     }
 
     func testDailyInsert(){
         
         XCTAssertTrue(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
-        XCTAssertFalse(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
+        //modify entry with same value, should return true
+        XCTAssertTrue(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
+
+        //modify entry with different value
+        XCTAssertFalse(dailyRegistriesManager.addRegistry(d1, tookMedicine: true))
         
         XCTAssertEqual(1, dailyRegistriesManager.getRegistries().count)
         
@@ -71,7 +71,7 @@ class TestTimedInsertions: XCTestCase {
         XCTAssertFalse(weeklyRegistriesManager.addRegistry(d1 + 6.day, tookMedicine: true))
         
         XCTAssertEqual(2, weeklyRegistriesManager.getRegistries().count)
-        XCTAssertTrue(weeklyRegistriesManager.addRegistry(d1 + 1.week, tookMedicine: true))
+        XCTAssertTrue(weeklyRegistriesManager.addRegistry(d1 + 1.day + 1.week, tookMedicine: true))
         XCTAssertEqual(3, weeklyRegistriesManager.getRegistries().count)
     }
     

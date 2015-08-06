@@ -1,13 +1,18 @@
 import Foundation
 import UIKit
 
-class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+@IBDesignable class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var content: UIView!
+    
+    @IBInspectable var PageIndicatorTintColor: UIColor = UIColor(hex: 0xB2BFAF)
+    @IBInspectable var PageIndicatorCurrentColor: UIColor = UIColor(hex: 0x9EB598)
     
     private var homePageEnum: HomePage = HomePage()
     private var pageViewController : UIPageViewController!
     private var _dict: [UIViewController: HomePage] = [:]
+    
+    var currentViewController: PresentsModalityDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,16 +23,11 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         pageViewController!.dataSource = self
         pageViewController.view.frame = CGRectMake(0, content.frame.origin.y, view.frame.width, view.frame.height - content.frame.origin.y - 50)
         
-        
         let defaultPage = getController(homePageEnum)!
+        currentViewController = defaultPage as! PresentsModalityDelegate
         pageViewController!.setViewControllers([defaultPage], direction: .Forward, animated: false, completion: nil)
         
-        
-        let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.fromHex(0xB2BFAF)
-        appearance.currentPageIndicatorTintColor = UIColor.fromHex(0x9EB598)
-        appearance.backgroundColor = UIColor.clearColor()
-        
+        setupUIPageControl()
         
         //add pretended view to the hierarchy
         pageViewController.view.backgroundColor = UIColor.clearColor()
@@ -37,10 +37,32 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         pageViewController.didMoveToParentViewController(self)
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {
+            presentSetupScreen()
+        }
+    }
+    
+    func setupUIPageControl() {
+        let appearance = UIPageControl.appearance()
+        appearance.pageIndicatorTintColor = PageIndicatorTintColor
+        appearance.currentPageIndicatorTintColor = PageIndicatorCurrentColor
+        appearance.backgroundColor = UIColor.clearColor()
+    }
+    
     @IBAction func settingsButtonHandler(){
+        presentSetupScreen()
+    }
+    
+    private func presentSetupScreen() {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            self.presentViewController(UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self), animated: true, completion: nil)
+            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self) as SetupScreenViewController
+            view.delegate = self.currentViewController
+            self.presentViewController(view, animated: true, completion: nil)
         }
     }
     
@@ -65,14 +87,19 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
         
         switch value {
             case .DailyPill:
-                vc = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self) as DidTakePillsViewController
+                view.pagesManager = self
+                vc = view
             case .DailyStates:
-                vc = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self) as DailyStatsTableViewController
+                view.pagesManager = self
+                vc = view
             case .Stats:
-                vc = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self)
+                let view = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self) as PillsStatsViewController
+                view.pagesManager = self
+                vc = view
             default: return nil
         }
-        
         
         // store relative enum to view controller
         _dict[vc!] = value
@@ -81,7 +108,7 @@ class PagesManagerViewController : UIViewController, UIPageViewControllerDataSou
 }
 
 enum HomePage: Int {
-    static let allValues = [DailyPill, DailyStates]//, Stats]
+    static let allValues = [DailyPill, DailyStates, Stats]
     
     case Nil = -1, DailyPill, DailyStates, Stats
     

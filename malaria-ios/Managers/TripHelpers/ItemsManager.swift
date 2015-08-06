@@ -1,6 +1,6 @@
 import Foundation
 
-public class ItemsManager : Manager{
+public class ItemsManager : CoreDataContextManager{
 
     let trip: Trip
     
@@ -24,7 +24,7 @@ public class ItemsManager : Manager{
             
             var newArray = getItems()
             newArray.append(item)
-            trip.items = NSMutableSet(array: newArray)
+            trip.items = NSSet(array: newArray)
         }
         
         CoreDataHelper.sharedInstance.saveContext(self.context)
@@ -33,10 +33,39 @@ public class ItemsManager : Manager{
     /// Returns an item from the trip if exists
     ///
     /// :param: `String`: name of the item
+    /// :param: `[Item] optional` cached list of items
     /// :returns: `Item?`:
-    public func findItem(name: String) -> Item?{
-        var currentItems = getItems().filter({$0.name.lowercaseString == name.lowercaseString})
-        return currentItems.count == 0 ? nil : currentItems[0]
+    public func findItem(name: String, listItems: [Item]? = nil) -> Item?{
+        let items = listItems != nil ? listItems! : getItems()
+        return items.filter({$0.name.lowercaseString == name.lowercaseString}).first
+    }
+    
+    
+    /// Checkmark the items
+    ///
+    /// :param: `[String]`: list of items name
+    public func checkItem(names: [String]){
+        let listItems = getItems()
+        names.map({ self.findItem($0, listItems: listItems)?.check = true })
+        CoreDataHelper.sharedInstance.saveContext(self.context)
+    }
+    
+    /// Remove the checkmark
+    ///
+    /// :param: `[String]`: list of items name
+    public func uncheckItem(names: [String]){
+        let listItems = getItems()
+        names.map({ self.findItem($0, listItems: listItems)?.check = false })
+        CoreDataHelper.sharedInstance.saveContext(self.context)
+    }
+    
+    /// Toggle the checkmark
+    ///
+    /// :param: `[String]`: list of items name
+    public func toggleCheckItem(names: [String]){
+        let listItems = getItems()
+        names.map({ self.findItem($0, listItems: listItems)?.toogle() })
+        CoreDataHelper.sharedInstance.saveContext(self.context)
     }
     
     /// Removes a item from the trip
@@ -47,7 +76,6 @@ public class ItemsManager : Manager{
     /// :param: `Int64` optional: quantity
     public func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
-            
             i.remove(quantity)
             if i.quantity == 0{
                 var array: [Item] = trip.items.convertToArray()
@@ -57,10 +85,9 @@ public class ItemsManager : Manager{
             }
             
             CoreDataHelper.sharedInstance.saveContext(self.context)
-            return
+        }else {
+            Logger.Error("Item not found")
         }
-        
-        Logger.Error("Item not found")
     }
     
     

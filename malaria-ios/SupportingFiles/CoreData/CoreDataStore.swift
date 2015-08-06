@@ -4,15 +4,15 @@ import CoreData
 public class CoreDataStore{
     public static let sharedInstance = CoreDataStore()
     
-    let storeName = "Model"
-    let storeFilename = "malaria-ios.sqlite"
+    private let storeName = "Model"
+    private let storeFilename = "malaria-ios.sqlite"
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    internal lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1] as! NSURL
         }()
     
-    lazy var managedObjectModel: NSManagedObjectModel = {
+    internal lazy var managedObjectModel: NSManagedObjectModel = {
         // Get model
         let modelURL = NSBundle.mainBundle().URLForResource(self.storeName, withExtension: "momd")!
         var model = NSManagedObjectModel(contentsOfURL: modelURL)!
@@ -20,7 +20,7 @@ public class CoreDataStore{
         return model
         }()
     
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+    internal lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
         

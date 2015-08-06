@@ -24,16 +24,15 @@ class TestNotifications: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill, fireDate: d1) //current pill is daily
-        m.registerNewMedicine(weeklyPill)
         
-        if let medi = m.getCurrentMedicine(),
-           let medi2 = m.getMedicine(weeklyPill){
-            mdDaily = medi
-            mdWeekly = medi2
-        }else{
-            XCTFail("Fail initializing:")
-        }
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
+        m.getCurrentMedicine()!.notificationManager(currentContext).scheduleNotification(d1)
+        
+        m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
+        
+        mdDaily = m.getCurrentMedicine()!
+        mdWeekly = m.getMedicine(weeklyPill.name())!
         
         mdDailyregistriesManager = mdDaily.registriesManager(currentContext)
         mdWeeklyregistriesManager = mdWeekly.registriesManager(currentContext)
@@ -47,13 +46,18 @@ class TestNotifications: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
+        UserSettingsManager.clear()
     }
     
     
     //only valid in weekly pills
     func testShoudResetNotificationTime(){
         XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1))
+        
+        println("Adding entry")
         XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
+        println("Finished Adding entry")
+        
         
         for i in 1...6 {
             XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1 + i.day))
@@ -65,23 +69,23 @@ class TestNotifications: XCTestCase {
     func testNotificationTime(){
         //reshedule notification
         mdDailyNotifManager.reshedule()
-        XCTAssertTrue(NSDate.areDatesSameDay(mdDaily.notificationTime!, dateTwo: d1 + 1.day))
+        XCTAssertTrue(mdDaily.notificationTime!.sameDayAs(d1 + 1.day))
         
         //since mdWeekly is not currentPill, this should return nil
         XCTAssertNil(mdWeekly.notificationTime)
         
         //setCurrentPill, current trigger time is not defined yet
-        m.setCurrentPill(weeklyPill)
+        m.setCurrentPill(weeklyPill.name())
         XCTAssertNil(mdWeekly.notificationTime)
         
         //define currentTime
         mdWeeklyNotifManager.scheduleNotification(d1)
-        XCTAssertTrue(NSDate.areDatesSameDay(mdWeekly.notificationTime!, dateTwo: d1))
+        XCTAssertTrue(mdWeekly.notificationTime!.sameDayAs(d1))
         
         //add new entry and reshedule
         XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
         mdWeeklyNotifManager.reshedule()
-        XCTAssertTrue(NSDate.areDatesSameDay(mdWeekly.notificationTime!, dateTwo: d1 + 7.day))
+        XCTAssertTrue(mdWeekly.notificationTime!.sameDayAs(d1 + 7.day))
     }
     
     func testNotificationDampening(){

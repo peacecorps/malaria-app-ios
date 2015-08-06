@@ -77,6 +77,7 @@
 		209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */; };
 		209F60BF1B6E4AED00EDA461 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 209F60BE1B6E4AED00EDA461 /* Sounds */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
+		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
 		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
 		20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */; };
@@ -215,6 +216,7 @@
 		20EA070A1B2394EB00D6840E /* TestDailyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDailyMedicineStatistics.swift; sourceTree = "<group>"; };
 		20EA070C1B23AD9F00D6840E /* TestNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNotifications.swift; sourceTree = "<group>"; };
 		20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimedInsertions.swift; sourceTree = "<group>"; };
+		20EF684F1B72DF1600286A0F /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIButton.swift; path = SupportingFiles/Extensions/UIButton.swift; sourceTree = "<group>"; };
 		20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSyncManager.swift; sourceTree = "<group>"; };
 		20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentsModalityDelegate.swift; path = SupportingFiles/PresentsModalityDelegate.swift; sourceTree = "<group>"; };
 		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
@@ -567,6 +569,7 @@
 				20FC56F61B72C9E700D51801 /* UIPickView.swift */,
 				20FC56F41B72C9CF00D51801 /* UIColor.swift */,
 				20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */,
+				20EF684F1B72DF1600286A0F /* UIButton.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				200C72981B40368600998100 /* EndpointType.swift in Sources */,
 				20FC572E1B72CA8D00D51801 /* CVCalendarWeekView.swift in Sources */,
 				20FC57221B72CA8D00D51801 /* CVCalendarMonthContentViewController.swift in Sources */,
+				20EF68501B72DF1600286A0F /* UIButton.swift in Sources */,
 				200C72AC1B40368600998100 /* TripNotificationsManager.swift in Sources */,
 				20FC571D1B72CA8D00D51801 /* CVCalendarDayView.swift in Sources */,
 				200C72F01B40368600998100 /* NSDate.swift in Sources */,

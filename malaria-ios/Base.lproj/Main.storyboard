@@ -399,7 +399,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OzI-n5-rw0" userLabel="HistoryDummyTextField">
-                                        <rect key="frame" x="249" y="286" width="97" height="30"/>
+                                        <rect key="frame" x="800" y="301" width="97" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>

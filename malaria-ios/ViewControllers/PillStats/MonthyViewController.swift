@@ -28,6 +28,7 @@ import UIKit
     
     //helpers
     private var previouslySelect: NSDate?
+    private var firstRun = true
     private var animationFinished = true
     
     //hack because CVCalendar doesn't support updates yet
@@ -37,6 +38,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        previouslySelect = startDay
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
@@ -130,14 +132,15 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect{
-            if previous.sameDayAs(selected) {
+            if !firstRun && previous.sameMonthAs(selected) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
         }
-        
+
         previouslySelect = selected
+        firstRun = false
     }
     
     private func popup(date: NSDate, dayView: CVCalendarDayView){
@@ -150,7 +153,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
         
         let (title, message) = generateTookMedicineActionSheetText(date)
-        
         
         let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in

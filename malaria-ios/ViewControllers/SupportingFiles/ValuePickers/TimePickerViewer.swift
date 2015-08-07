@@ -24,9 +24,12 @@ class TimePickerView: UIDatePicker{
     /// :param: `NSDate`: the starting day
     /// :returns: `UIView`: the generated view
     func generateInputView(pickerMode: UIDatePickerMode, startDate: NSDate) -> UIView{
-        let inputView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, ValuePickerHeight))
         
-        var datePickerView = UIDatePicker(frame: CGRectMake(0, CGFloat(DoneButtonHeight), 0, 0))
+        let screenWidth = UIScreen.mainScreen().bounds.width
+        let inputView = UIView(frame: CGRectMake(0, 0, screenWidth, CGFloat(ValuePickerHeight)))
+        let inputViewSize = self.frame.size.width
+        
+        var datePickerView = UIDatePicker(frame: CGRectMake(screenWidth*0.5 - inputViewSize*0.5, CGFloat(DoneButtonHeight), 0, 0))
         datePickerView.datePickerMode = pickerMode
         datePickerView.date = startDate
         datePickerView.addTarget(self, action: "onDateChange:", forControlEvents: .AllEvents)

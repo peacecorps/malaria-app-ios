@@ -285,7 +285,7 @@ extension PlanTripViewController {
     
     //departure day error
     private var InvalidDepartureAlertText: AlertText {get {
-        return ("Error", "Departure day must happen before arrival")
+        return ("Error", "Departure day must be before arrival")
         }}
     
     //arrival day error

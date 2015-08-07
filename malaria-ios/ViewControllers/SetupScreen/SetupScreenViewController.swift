@@ -131,11 +131,11 @@ extension SetupScreenViewController {
     
     //existing medicine configured
     private var ReplaceMedicineAlertText: AlertText {get {
-        return ("There is already medicine configured", "The current configuration will be changed")
+        return ("This will change the current settings", "Your previous statistics won't be lost")
     }}
     
     //type of alerts options
     private var AlertOptions: (ok: String, cancel: String) {get {
-        return ("ok", "Cancel")
+        return ("Ok", "Cancel")
     }}
 }

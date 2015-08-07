@@ -27,8 +27,8 @@ import UIKit
     var callback: (() -> ())?
     
     //helpers
-    private var previouslySelect: NSDate?
     private var firstRun = true
+    private var previouslySelect: NSDate?
     private var animationFinished = true
     
     //hack because CVCalendar doesn't support updates yet
@@ -131,16 +131,17 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
-        if let previous = previouslySelect{
-            if !firstRun && previous.sameMonthAs(selected) {
+        if let previous = previouslySelect {
+            
+            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) || (!firstRun && previous.sameDayAs(selected)) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
         }
 
-        previouslySelect = selected
         firstRun = false
+        previouslySelect = selected
     }
     
     private func popup(date: NSDate, dayView: CVCalendarDayView){
@@ -247,7 +248,7 @@ extension MonthlyViewController {
     
     //selected future entry
     private var SelectedFutureDateAlertText: AlertText {get {
-        return ("Not possible to change entries in the future", "Try another day")
+        return ("Not possible to change entries in the future", "")
     }}
     
     private func generateTookMedicineActionSheetText(date: NSDate) -> AlertText {
@@ -255,20 +256,20 @@ extension MonthlyViewController {
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
         if tookMedicine != nil {
-            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
         } else {
-            return ("You did not took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+            return ("You didn't took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
         }
     }
     
     //did take pill alert text
     private var TookMedicineAlertActionText: (did: String, didNot: String) {get {
-        return ("Yes, I did.", "No, I didn't")
+        return ("Yes, I did", "No, I didn't")
     }}
     
     //error
     private var ErrorAddRegistryAlertText: AlertText {get {
-        return ("Error updating.", "Please contact us by clicking the email icon on the setup screen")
+        return ("Error updating", "Please contact us by clicking the email icon on the setup screen")
     }}
     
     

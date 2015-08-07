@@ -814,39 +814,45 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="postCollectionCell" id="Iel-fI-OaE" customClass="PeaceCorpsMessageCollectionViewCell" customModule="malaria_ios" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="postCollectionCell" id="Iel-fI-OaE" customClass="PeaceCorpsMessageCollectionViewCell" customModule="malaria_ios" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2t-UQ-9He" userLabel="PostTitle">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="InfoHubButton" translatesAutoresizingMaskIntoConstraints="NO" id="Pu1-47-Vqa">
                                                     <rect key="frame" x="0.0" y="0.0" width="140" height="72"/>
-                                                    <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
-                                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
-                                                    <state key="normal" title="Post Title" backgroundImage="InfoHubButton">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="z92-ZL-HLa">
+                                                    <rect key="frame" x="10" y="11" width="120" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="PkU-Ot-txC"/>
+                                                        <constraint firstAttribute="height" constant="50" id="gan-PQ-PmJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="16"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="n2t-UQ-9He" firstAttribute="leading" secondItem="Iel-fI-OaE" secondAttribute="leading" id="3Iy-OO-Jso"/>
-                                            <constraint firstItem="n2t-UQ-9He" firstAttribute="trailing" secondItem="Iel-fI-OaE" secondAttribute="trailing" id="6go-V5-6cs"/>
-                                            <constraint firstItem="n2t-UQ-9He" firstAttribute="top" secondItem="Iel-fI-OaE" secondAttribute="top" id="Zzz-ZE-Fms"/>
-                                            <constraint firstAttribute="bottom" secondItem="n2t-UQ-9He" secondAttribute="bottom" id="cHV-Vj-y5w"/>
+                                            <constraint firstItem="Pu1-47-Vqa" firstAttribute="top" secondItem="Iel-fI-OaE" secondAttribute="top" id="2lC-hQ-Sua"/>
+                                            <constraint firstItem="Pu1-47-Vqa" firstAttribute="centerY" secondItem="z92-ZL-HLa" secondAttribute="centerY" id="ceQ-0R-hOa"/>
+                                            <constraint firstAttribute="bottom" secondItem="Pu1-47-Vqa" secondAttribute="bottom" id="dfp-kh-iZG"/>
+                                            <constraint firstItem="Pu1-47-Vqa" firstAttribute="leading" secondItem="Iel-fI-OaE" secondAttribute="leading" id="evj-q0-yA5"/>
+                                            <constraint firstItem="Pu1-47-Vqa" firstAttribute="centerX" secondItem="z92-ZL-HLa" secondAttribute="centerX" id="jZN-Ny-Iek"/>
+                                            <constraint firstAttribute="trailing" secondItem="Pu1-47-Vqa" secondAttribute="trailing" id="mn1-SV-OPR"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="postBtn" destination="n2t-UQ-9He" id="fkv-mM-xvX"/>
+                                            <outlet property="postTitle" destination="z92-ZL-HLa" id="kdi-nM-Iqi"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="Y7x-5C-nhp" id="IvI-Bd-uEa"/>
-                                    <outlet property="delegate" destination="Y7x-5C-nhp" id="kAt-wx-J5D"/>
+                                    <outlet property="dataSource" destination="Y7x-5C-nhp" id="8kU-UL-PWF"/>
+                                    <outlet property="delegate" destination="Y7x-5C-nhp" id="Ai6-8W-O5P"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNk-Of-8CA" userLabel="Settings">

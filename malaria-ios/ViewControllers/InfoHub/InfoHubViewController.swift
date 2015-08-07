@@ -29,7 +29,7 @@ class InfoHubViewController : UIViewController{
         refreshScreen()
     }
     
-    func pullRefreshHandler(){
+    internal func pullRefreshHandler(){
         Logger.Info("Pull refresh")
         syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
             if let e = error {
@@ -42,7 +42,7 @@ class InfoHubViewController : UIViewController{
         })
     }
     
-   func refreshScreen() {
+   private func refreshScreen() {
         if !refreshFromCoreData(){
             syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
                 if error != nil{
@@ -106,12 +106,7 @@ extension InfoHubViewController : UICollectionViewDelegate, UICollectionViewData
         let post = posts[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("postCollectionCell", forIndexPath: indexPath) as! PeaceCorpsMessageCollectionViewCell
         
-        cell.postBtn.titleLabel?.numberOfLines = 0
-        cell.postBtn.titleLabel?.textAlignment = .Center
-        
-        //these two calls in sequence removes animation on title change
-        cell.postBtn.titleLabel?.text = post.title
-        cell.postBtn.setTitle(post.title, forState: .Normal)
+        cell.postTitle.text = post.title
         
         return cell
     }
@@ -168,6 +163,6 @@ extension InfoHubViewController {
 }
 
 class PeaceCorpsMessageCollectionViewCell : UICollectionViewCell{
+    @IBOutlet weak var postTitle: UILabel!
     static let CellWidth: CGFloat = 140
-    @IBOutlet weak var postBtn: UIButton!
 }

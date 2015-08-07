@@ -199,7 +199,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
     }
     
-    private func presentedDateUpdated(date: CVDate) {
+    func presentedDateUpdated(date: CVDate) {
         if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.text = generateMonthLabel(date.convertedDate()!)

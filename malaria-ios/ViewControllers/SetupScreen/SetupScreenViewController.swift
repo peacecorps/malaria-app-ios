@@ -1,4 +1,5 @@
 import UIKit
+import PickerSwift
 
 class SetupScreenViewController : UIViewController{
     @IBOutlet weak var reminderTime: UITextField!

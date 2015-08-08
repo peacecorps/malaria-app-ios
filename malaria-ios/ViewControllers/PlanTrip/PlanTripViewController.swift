@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import PickerSwift
 
 class PlanTripViewController: UIViewController {
     @IBOutlet weak var location: UITextField!

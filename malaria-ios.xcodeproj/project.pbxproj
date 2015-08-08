@@ -12,10 +12,8 @@
 		200A18C51B64F49A00EC2A65 /* MonthyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C41B64F49A00EC2A65 /* MonthyViewController.swift */; };
 		200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */; };
 		200A18C91B64F4C400EC2A65 /* MonthAdherenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C81B64F4C400EC2A65 /* MonthAdherenceCell.swift */; };
-		200A18CB1B64F4FA00EC2A65 /* PickerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */; };
 		200A18CD1B64F50500EC2A65 /* MedicinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */; };
 		200A18CF1B64F51300EC2A65 /* MedicinePickerViewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */; };
-		200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */; };
 		200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */; };
 		200A18D71B64F58F00EC2A65 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */; };
 		200A18D91B64F5A300EC2A65 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */; };
@@ -134,10 +132,8 @@
 		200A18C41B64F49A00EC2A65 /* MonthyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthyViewController.swift; path = PillStats/MonthyViewController.swift; sourceTree = "<group>"; };
 		200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachedStatistics.swift; path = SupportingFiles/CachedStatistics.swift; sourceTree = "<group>"; };
 		200A18C81B64F4C400EC2A65 /* MonthAdherenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthAdherenceCell.swift; path = PillStats/MonthAdherenceCell.swift; sourceTree = "<group>"; };
-		200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerProvider.swift; path = SupportingFiles/ValuePickers/PickerProvider.swift; sourceTree = "<group>"; };
 		200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerView.swift; path = SupportingFiles/ValuePickers/MedicinePickerView.swift; sourceTree = "<group>"; };
 		200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerViewTrip.swift; path = SupportingFiles/ValuePickers/MedicinePickerViewTrip.swift; sourceTree = "<group>"; };
-		200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePickerViewer.swift; path = SupportingFiles/ValuePickers/TimePickerViewer.swift; sourceTree = "<group>"; };
 		200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoHubViewController.swift; path = InfoHub/InfoHubViewController.swift; sourceTree = "<group>"; };
 		200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsTableViewController.swift; path = DailyStats/DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsCells.swift; path = DailyStats/DailyStatsCells.swift; sourceTree = "<group>"; };
@@ -525,10 +521,8 @@
 		203F0B251B481CB900826E06 /* ValuePickers */ = {
 			isa = PBXGroup;
 			children = (
-				200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */,
 				200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */,
 				200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */,
-				200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */,
 				205E417D1B6AE74E0028A8D7 /* TripLocationHistoryPickerViewer.swift */,
 				20C718891B763573007424F6 /* ToolbarWithDone.swift */,
 			);
@@ -880,7 +874,6 @@
 				200C72EA1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				200C72D21B40368600998100 /* Post.swift in Sources */,
 				200C72EE1B40368600998100 /* Int.swift in Sources */,
-				200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */,
 				20FC57241B72CA8D00D51801 /* CVCalendarTouchController.swift in Sources */,
 				20FC572C1B72CA8D00D51801 /* CVCalendarWeekContentViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
@@ -902,7 +895,6 @@
 				20FC57291B72CA8D00D51801 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
 				20FC572B1B72CA8D00D51801 /* CVCalendarViewPresentationMode.swift in Sources */,
 				20FC571B1B72CA8D00D51801 /* CVAuxiliaryView.swift in Sources */,
-				200A18CB1B64F4FA00EC2A65 /* PickerProvider.swift in Sources */,
 				20FC57201B72CA8D00D51801 /* CVCalendarMenuView.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				20FC57251B72CA8D00D51801 /* CVCalendarView.swift in Sources */,

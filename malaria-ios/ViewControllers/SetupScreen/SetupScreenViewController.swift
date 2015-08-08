@@ -56,11 +56,6 @@ class SetupScreenViewController : UIViewController{
         
         refreshDate()
     }
-    
-    func dismissInputView(sender: UIView){
-        medicineName.endEditing(true)
-        reminderTime.endEditing(true)
-    }
 }
 
 extension SetupScreenViewController{

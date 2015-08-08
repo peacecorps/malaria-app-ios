@@ -19,7 +19,7 @@ public class MedicineStats : CoreDataContextManager{
             return reg.filter({$0.tookMedicine}).count
         }
         
-        return medicine.registriesManager(context).getRegistries(date1: date1, date2: date2).filter({$0.tookMedicine}).count
+        return medicine.registriesManager(context).getRegistries(date1: date1, date2: date2, unsorted: true).filter({$0.tookMedicine}).count
     }
     
     /// Returns the number of pills that the user should have taken between two dates.

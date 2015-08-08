@@ -82,7 +82,6 @@
 		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
 		20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */; };
 		20FC56EB1B72C91300D51801 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */; };
-		20FC56ED1B72C95200D51801 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EC1B72C95200D51801 /* CircleProgressView.swift */; };
 		20FC56F01B72C97200D51801 /* HorizontalGraphBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */; };
 		20FC56F31B72C9AF00D51801 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */; };
 		20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F41B72C9CF00D51801 /* UIColor.swift */; };
@@ -222,7 +221,6 @@
 		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
 		20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarSettings.swift; path = PillStats/CalendarSettings.swift; sourceTree = "<group>"; };
 		20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsManager.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UserSettingsManager.swift"; sourceTree = SOURCE_ROOT; };
-		20FC56EC1B72C95200D51801 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleProgressView.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UIViews/CircleProgressView.swift"; sourceTree = SOURCE_ROOT; };
 		20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalGraphBar.swift; path = SupportingFiles/UIViews/HorizontalGraphBar.swift; sourceTree = "<group>"; };
 		20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = SupportingFiles/Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		20FC56F41B72C9CF00D51801 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = SupportingFiles/Extensions/UIColor.swift; sourceTree = "<group>"; };
@@ -554,7 +552,6 @@
 			isa = PBXGroup;
 			children = (
 				20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */,
-				20FC56EC1B72C95200D51801 /* CircleProgressView.swift */,
 			);
 			name = UIViews;
 			sourceTree = "<group>";
@@ -874,7 +871,6 @@
 				200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */,
 				20FC572D1B72CA8D00D51801 /* CVCalendarWeekday.swift in Sources */,
 				200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */,
-				20FC56ED1B72C95200D51801 /* CircleProgressView.swift in Sources */,
 				20FC56FB1B72CA1200D51801 /* UITabBarController.swift in Sources */,
 				20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */,
 				200A18C91B64F4C400EC2A65 /* MonthAdherenceCell.swift in Sources */,

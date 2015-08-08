@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Charts
+import CircleProgressView
 
 @IBDesignable class PillsStatsViewController : UIViewController, PresentsModalityDelegate {
     @IBOutlet weak var adherenceSliderTable: UITableView!

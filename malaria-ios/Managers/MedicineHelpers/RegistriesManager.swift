@@ -74,6 +74,17 @@ public class RegistriesManager : CoreDataContextManager{
     public func oldestEntry() -> Registry?{
         return getRegistries().last
     }
+    
+    public func getLimits() -> (leastRecent: Registry, mostRecent: Registry)? {
+        let registries = getRegistries(mostRecentFirst: true)
+        if let mostRecent = registries.first,
+            leastRecent = registries.last {
+            
+            return (leastRecent, mostRecent)
+        }
+        
+        return nil
+    }
 
     /// Adds a new entry for that pill
     ///
@@ -158,7 +169,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: date2
     /// :param: `Bool` optional: if first element of result should be the most recent entry. (by default is true)
     /// :returns: `[Registry]`
-    public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true, unsorted: Bool = false) -> [Registry]{
+    public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true, unsorted: Bool = false, additionalFilter: ((r: Registry) -> Bool)? = nil) -> [Registry]{
         
         //make sure that date2 is always after date1
         if date1 > date2 {
@@ -166,12 +177,13 @@ public class RegistriesManager : CoreDataContextManager{
         }
         
         //filter first then sort
-        let filtered = filter(medicine.registries.convertToArray(), date1: date1, date2: date2)
+        let filtered = filter(medicine.registries.convertToArray(), date1: date1, date2: date2, additionalFilter: additionalFilter)
         return unsorted ? filtered : (mostRecentFirst ? filtered.sorted({$0.date > $1.date}) : filtered.sorted({$0.date < $1.date}))
     }
     
-    public func filter(registries: [Registry], date1: NSDate, date2: NSDate)  -> [Registry]{
-        return registries.filter({ ($0.date > date1 && $0.date < date2) || $0.date.sameDayAs(date1) || $0.date.sameDayAs(date2)})
+    public func filter(registries: [Registry], date1: NSDate, date2: NSDate, additionalFilter: ((r: Registry) -> Bool)? = nil)  -> [Registry]{
+        return registries.filter({ (additionalFilter?(r: $0) ?? true) &&
+                                    (($0.date > date1 && $0.date < date2) || $0.date.sameDayAs(date1) || $0.date.sameDayAs(date2)) })
     }
 
     /// Returns entry in the specified date if exists

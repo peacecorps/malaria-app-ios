@@ -79,7 +79,6 @@
 		20C718E61B76C28D007424F6 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
 		20C718E71B76C28D007424F6 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
-		20C718E91B76C28D007424F6 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		20C718EA1B76C28D007424F6 /* TestContexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20246D181B4F1FAC00384759 /* TestContexts.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
@@ -946,7 +945,6 @@
 			files = (
 				209F60B51B6DA6B100EDA461 /* TestNotifications.swift in Sources */,
 				20C718E41B76C28D007424F6 /* TestMedicineManager.swift in Sources */,
-				20C718E91B76C28D007424F6 /* TestSyncManager.swift in Sources */,
 				20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */,
 				209F60B31B6DA6B100EDA461 /* TestDailyMedicineStatistics.swift in Sources */,
 				20C718EA1B76C28D007424F6 /* TestContexts.swift in Sources */,

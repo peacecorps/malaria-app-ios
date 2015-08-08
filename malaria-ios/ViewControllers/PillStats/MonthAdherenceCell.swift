@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import HorizontalProgressView
 
 @IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)

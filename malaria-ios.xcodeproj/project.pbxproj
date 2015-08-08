@@ -82,7 +82,6 @@
 		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
 		20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */; };
 		20FC56EB1B72C91300D51801 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */; };
-		20FC56F01B72C97200D51801 /* HorizontalGraphBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */; };
 		20FC56F31B72C9AF00D51801 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */; };
 		20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F41B72C9CF00D51801 /* UIColor.swift */; };
 		20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F61B72C9E700D51801 /* UIPickView.swift */; };
@@ -221,7 +220,6 @@
 		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
 		20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarSettings.swift; path = PillStats/CalendarSettings.swift; sourceTree = "<group>"; };
 		20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsManager.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UserSettingsManager.swift"; sourceTree = SOURCE_ROOT; };
-		20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalGraphBar.swift; path = SupportingFiles/UIViews/HorizontalGraphBar.swift; sourceTree = "<group>"; };
 		20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = SupportingFiles/Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		20FC56F41B72C9CF00D51801 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = SupportingFiles/Extensions/UIColor.swift; sourceTree = "<group>"; };
 		20FC56F61B72C9E700D51801 /* UIPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIPickView.swift; path = SupportingFiles/Extensions/UIPickView.swift; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 			children = (
 				20FC57001B72CA8D00D51801 /* ExternalCVCalendar */,
 				20FC56F11B72C98800D51801 /* Extensions */,
-				20FC56EE1B72C95D00D51801 /* UIViews */,
 				209F60BE1B6E4AED00EDA461 /* Sounds */,
 				203F0B251B481CB900826E06 /* ValuePickers */,
 				20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */,
@@ -546,14 +543,6 @@
 				20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */,
 			);
 			name = PillStats;
-			sourceTree = "<group>";
-		};
-		20FC56EE1B72C95D00D51801 /* UIViews */ = {
-			isa = PBXGroup;
-			children = (
-				20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */,
-			);
-			name = UIViews;
 			sourceTree = "<group>";
 		};
 		20FC56F11B72C98800D51801 /* Extensions */ = {
@@ -942,7 +931,6 @@
 				20FC57311B72CA8D00D51801 /* CVScrollDirection.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
 				20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */,
-				20FC56F01B72C97200D51801 /* HorizontalGraphBar.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
 				20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */,

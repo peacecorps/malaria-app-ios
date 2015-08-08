@@ -70,6 +70,7 @@ import CircleProgressView
         cachedStats.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
+        
         cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in

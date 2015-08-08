@@ -1,6 +1,5 @@
 import Foundation
 
-
 //decoupled from the backend. This enum is only relevant for the frontend
 public extension Medicine{
     enum Pill : String{

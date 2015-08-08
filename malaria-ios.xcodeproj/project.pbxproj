@@ -74,7 +74,6 @@
 		209F60B61B6DA6B100EDA461 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */; };
 		209F60BF1B6E4AED00EDA461 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 209F60BE1B6E4AED00EDA461 /* Sounds */; };
-		20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C718891B763573007424F6 /* ToolbarWithDone.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
@@ -203,7 +202,6 @@
 		20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model7.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
-		20C718891B763573007424F6 /* ToolbarWithDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolbarWithDone.swift; path = SupportingFiles/ToolbarWithDone.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
@@ -524,7 +522,6 @@
 				200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */,
 				200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */,
 				205E417D1B6AE74E0028A8D7 /* TripLocationHistoryPickerViewer.swift */,
-				20C718891B763573007424F6 /* ToolbarWithDone.swift */,
 			);
 			name = ValuePickers;
 			sourceTree = "<group>";
@@ -921,7 +918,6 @@
 				20FC57261B72CA8D00D51801 /* CVCalendarViewAnimator.swift in Sources */,
 				209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */,
 				20FC57311B72CA8D00D51801 /* CVScrollDirection.swift in Sources */,
-				20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,

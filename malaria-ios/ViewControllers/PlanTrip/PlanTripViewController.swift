@@ -36,15 +36,8 @@ class PlanTripViewController: UIViewController {
     var items = [(String, Bool)]()
     
     lazy var toolBar: UIToolbar! = {
-        let keyboardToolbar = UIToolbar()
-        keyboardToolbar.sizeToFit()
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace,target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("dismissInputView:"))
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
-        
-        return keyboardToolbar
+        return ToolbarWithDone(target: self, selector: Selector("dismissInputView:"))
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

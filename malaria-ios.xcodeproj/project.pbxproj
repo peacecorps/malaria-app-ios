@@ -85,7 +85,6 @@
 		20FC56EB1B72C91300D51801 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */; };
 		20FC56F31B72C9AF00D51801 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */; };
 		20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F41B72C9CF00D51801 /* UIColor.swift */; };
-		20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F61B72C9E700D51801 /* UIPickView.swift */; };
 		20FC56F91B72C9FB00D51801 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F81B72C9FB00D51801 /* UIView.swift */; };
 		20FC56FB1B72CA1200D51801 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56FA1B72CA1200D51801 /* UITabBarController.swift */; };
 		20FC56FD1B72CA2800D51801 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56FC1B72CA2800D51801 /* Globals.swift */; };
@@ -224,7 +223,6 @@
 		20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsManager.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UserSettingsManager.swift"; sourceTree = SOURCE_ROOT; };
 		20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = SupportingFiles/Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		20FC56F41B72C9CF00D51801 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = SupportingFiles/Extensions/UIColor.swift; sourceTree = "<group>"; };
-		20FC56F61B72C9E700D51801 /* UIPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIPickView.swift; path = SupportingFiles/Extensions/UIPickView.swift; sourceTree = "<group>"; };
 		20FC56F81B72C9FB00D51801 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = SupportingFiles/Extensions/UIView.swift; sourceTree = "<group>"; };
 		20FC56FA1B72CA1200D51801 /* UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITabBarController.swift; path = SupportingFiles/Extensions/UITabBarController.swift; sourceTree = "<group>"; };
 		20FC56FC1B72CA2800D51801 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = SupportingFiles/Extensions/Globals.swift; sourceTree = "<group>"; };
@@ -555,7 +553,6 @@
 				20FC56FC1B72CA2800D51801 /* Globals.swift */,
 				20FC56FA1B72CA1200D51801 /* UITabBarController.swift */,
 				20FC56F81B72C9FB00D51801 /* UIView.swift */,
-				20FC56F61B72C9E700D51801 /* UIPickView.swift */,
 				20FC56F41B72C9CF00D51801 /* UIColor.swift */,
 				20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */,
 				20EF684F1B72DF1600286A0F /* UIButton.swift */,
@@ -934,7 +931,6 @@
 				20FC57311B72CA8D00D51801 /* CVScrollDirection.swift in Sources */,
 				20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
-				20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
 				20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */,

@@ -35,7 +35,7 @@ class PlanTripViewController: UIViewController {
     var arrivalDay = NSDate()
     var items = [(String, Bool)]()
     
-    private var toolBar: UIToolbar!
+    private var toolBar: ToolbarWithDone!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +48,13 @@ class PlanTripViewController: UIViewController {
         historyTextField.inputAccessoryView = toolBar
         
         //Setting up departure
-        departureDatePickerview = TimePickerView(selectCallback: {(date: NSDate) in
+        departureDatePickerview = TimePickerView(pickerMode: .Date, startDate: departureDay, selectCallback: {(date: NSDate) in
             self.updateDeparture(date)
         })
         departure.inputAccessoryView = toolBar
         
         //Setting up arrival date picker
-        arrivalDatePickerview = TimePickerView(selectCallback: {(date: NSDate) in
+        arrivalDatePickerview = TimePickerView(pickerMode: .Date, startDate: arrivalDay, selectCallback: {(date: NSDate) in
             self.updateArrival(date)
         })
         arrival.inputAccessoryView = toolBar
@@ -79,8 +79,8 @@ class PlanTripViewController: UIViewController {
         updateDeparture(departureDay)
         
         //update input views
-        arrival.inputView = arrivalDatePickerview.generateInputView(.Date, startDate: arrivalDay)
-        departure.inputView = departureDatePickerview.generateInputView(.Date, startDate: departureDay)
+        arrival.inputView = toolBar.generateInputView(arrivalDatePickerview)
+        departure.inputView = toolBar.generateInputView(departureDatePickerview)
         
         //update history
         prepareHistoryValuePicker()
@@ -91,7 +91,7 @@ class PlanTripViewController: UIViewController {
             self.updateLocation(object)
         })
         
-        historyTextField.inputView = tripLocationHistoryPickerViewer.generateInputView()
+        historyTextField.inputView = toolBar.generateInputView(tripLocationHistoryPickerViewer)
     }
     
     func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){

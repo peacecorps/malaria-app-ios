@@ -12,7 +12,7 @@ class SetupScreenViewController : UIViewController{
     private var medicinePicker: MedicinePickerView!
     private var timePickerview: TimePickerView!
     
-    private var toolBar: UIToolbar!
+    private var toolBar: ToolbarWithDone!
     
     //mangagers
     private var viewContext: NSManagedObjectContext!
@@ -39,15 +39,15 @@ class SetupScreenViewController : UIViewController{
         medicinePicker = MedicinePickerView(context: viewContext, selectCallback: {(object: String) in
             self.medicineName.text = object
         })
-        medicineName.inputView = medicinePicker.generateInputView()
+        medicineName.inputView = toolBar.generateInputView(medicinePicker)
         medicineName.inputAccessoryView = toolBar
         
         //Setting up DatePickerView
-        timePickerview = TimePickerView(selectCallback: {(date: NSDate) in
+        timePickerview = TimePickerView(pickerMode: .Time, startDate: pillReminderNotificationTime, selectCallback: {(date: NSDate) in
             self.pillReminderNotificationTime = date
             self.refreshDate()
         })
-        reminderTime.inputView = timePickerview.generateInputView(.Time, startDate: pillReminderNotificationTime)
+        reminderTime.inputView = toolBar.generateInputView(timePickerview)
         reminderTime.inputAccessoryView = toolBar
         
         medicineName.text = medicinePicker.selectedValue

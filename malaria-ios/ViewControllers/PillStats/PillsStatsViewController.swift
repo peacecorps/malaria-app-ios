@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import Charts
+import CircleProgressView
 
 @IBDesignable class PillsStatsViewController : UIViewController, PresentsModalityDelegate {
     @IBOutlet weak var adherenceSliderTable: UITableView!
@@ -69,6 +70,7 @@ import Charts
         cachedStats.retrieveMonthsData(NumberRecentMonths){
             self.adherenceSliderTable.reloadData()
         }
+        
         cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
         }, completition: { _ in

@@ -1,39 +1,27 @@
 import Foundation
 import UIKit
 
-class TimePickerView: UIDatePicker{
+public class TimePickerView: UIDatePicker{
     private var selectCallback: ((date: NSDate) -> ())!
-    private var DoneButtonHeight : CFloat { get { return 40.0 } }
-    private var DoneButtonWidth : CFloat { get { return 100.0 } }
-    private var ValuePickerHeight : CGFloat { get { return CGFloat(200) + CGFloat(DoneButtonHeight) } }
-    
     /// initialization
-    /// :param: `NSManagedObjectContext`: current context
+    /// :param: `UIDatePickerMode`: picker mode .Date or .Time
+    /// :param: `NSDate`: start date
     /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
-    init(view: UIView, selectCallback: (date: NSDate) -> ()){
+    public init(pickerMode: UIDatePickerMode, startDate: NSDate, selectCallback: (date: NSDate) -> ()){
         super.init(frame: CGRectZero)
         self.selectCallback = selectCallback
+        
+        let screenWidth = UIScreen.mainScreen().bounds.width
+        let inputViewWidth = self.frame.size.width
+        
+        self.frame = CGRectMake(screenWidth*0.5 - inputViewWidth*0.5, 0, 0, 0)
+        self.datePickerMode = pickerMode
+        self.date = startDate
+        self.addTarget(self, action: "onDateChange:", forControlEvents: .AllEvents)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    public required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    /// Generates inputview
-    /// :param: `UIDatePickerMode`: The mode of the picker
-    /// :param: `NSDate`: the starting day
-    /// :returns: `UIView`: the generated view
-    func generateInputView(pickerMode: UIDatePickerMode, startDate: NSDate) -> UIView{
-        let inputView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, ValuePickerHeight))
-        
-        var datePickerView = UIDatePicker(frame: CGRectMake(0, CGFloat(DoneButtonHeight), 0, 0))
-        datePickerView.datePickerMode = pickerMode
-        datePickerView.date = startDate
-        datePickerView.addTarget(self, action: "onDateChange:", forControlEvents: .AllEvents)
-        
-        inputView.addSubview(datePickerView) // add date picker to UIView
-        
-        return inputView
     }
     
     internal func onDateChange(sender: UIDatePicker){

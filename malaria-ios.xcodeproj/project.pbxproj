@@ -76,17 +76,15 @@
 		209F60B61B6DA6B100EDA461 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */; };
 		209F60BF1B6E4AED00EDA461 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 209F60BE1B6E4AED00EDA461 /* Sounds */; };
+		20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C718891B763573007424F6 /* ToolbarWithDone.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
 		20FC56C11B729F8B00D51801 /* PeaceCorpsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */; };
 		20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */; };
 		20FC56EB1B72C91300D51801 /* UserSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */; };
-		20FC56ED1B72C95200D51801 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EC1B72C95200D51801 /* CircleProgressView.swift */; };
-		20FC56F01B72C97200D51801 /* HorizontalGraphBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */; };
 		20FC56F31B72C9AF00D51801 /* UIStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */; };
 		20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F41B72C9CF00D51801 /* UIColor.swift */; };
-		20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F61B72C9E700D51801 /* UIPickView.swift */; };
 		20FC56F91B72C9FB00D51801 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56F81B72C9FB00D51801 /* UIView.swift */; };
 		20FC56FB1B72CA1200D51801 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56FA1B72CA1200D51801 /* UITabBarController.swift */; };
 		20FC56FD1B72CA2800D51801 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56FC1B72CA2800D51801 /* Globals.swift */; };
@@ -209,6 +207,7 @@
 		20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model7.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
+		20C718891B763573007424F6 /* ToolbarWithDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolbarWithDone.swift; path = SupportingFiles/ToolbarWithDone.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
@@ -222,11 +221,8 @@
 		20FC56C01B729F8B00D51801 /* PeaceCorpsInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PeaceCorpsInfo.swift; path = "malaria-ios/ViewControllers/SupportingFiles/PeaceCorpsInfo.swift"; sourceTree = SOURCE_ROOT; };
 		20FC56C21B72C1BC00D51801 /* CalendarSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalendarSettings.swift; path = PillStats/CalendarSettings.swift; sourceTree = "<group>"; };
 		20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSettingsManager.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UserSettingsManager.swift"; sourceTree = SOURCE_ROOT; };
-		20FC56EC1B72C95200D51801 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircleProgressView.swift; path = "malaria-ios/ViewControllers/SupportingFiles/UIViews/CircleProgressView.swift"; sourceTree = SOURCE_ROOT; };
-		20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HorizontalGraphBar.swift; path = SupportingFiles/UIViews/HorizontalGraphBar.swift; sourceTree = "<group>"; };
 		20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboard.swift; path = SupportingFiles/Extensions/UIStoryboard.swift; sourceTree = "<group>"; };
 		20FC56F41B72C9CF00D51801 /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColor.swift; path = SupportingFiles/Extensions/UIColor.swift; sourceTree = "<group>"; };
-		20FC56F61B72C9E700D51801 /* UIPickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIPickView.swift; path = SupportingFiles/Extensions/UIPickView.swift; sourceTree = "<group>"; };
 		20FC56F81B72C9FB00D51801 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = SupportingFiles/Extensions/UIView.swift; sourceTree = "<group>"; };
 		20FC56FA1B72CA1200D51801 /* UITabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UITabBarController.swift; path = SupportingFiles/Extensions/UITabBarController.swift; sourceTree = "<group>"; };
 		20FC56FC1B72CA2800D51801 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Globals.swift; path = SupportingFiles/Extensions/Globals.swift; sourceTree = "<group>"; };
@@ -331,7 +327,6 @@
 			children = (
 				20FC57001B72CA8D00D51801 /* ExternalCVCalendar */,
 				20FC56F11B72C98800D51801 /* Extensions */,
-				20FC56EE1B72C95D00D51801 /* UIViews */,
 				209F60BE1B6E4AED00EDA461 /* Sounds */,
 				203F0B251B481CB900826E06 /* ValuePickers */,
 				20FC56EA1B72C91300D51801 /* UserSettingsManager.swift */,
@@ -535,6 +530,7 @@
 				200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */,
 				200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */,
 				205E417D1B6AE74E0028A8D7 /* TripLocationHistoryPickerViewer.swift */,
+				20C718891B763573007424F6 /* ToolbarWithDone.swift */,
 			);
 			name = ValuePickers;
 			sourceTree = "<group>";
@@ -550,15 +546,6 @@
 			name = PillStats;
 			sourceTree = "<group>";
 		};
-		20FC56EE1B72C95D00D51801 /* UIViews */ = {
-			isa = PBXGroup;
-			children = (
-				20FC56EF1B72C97200D51801 /* HorizontalGraphBar.swift */,
-				20FC56EC1B72C95200D51801 /* CircleProgressView.swift */,
-			);
-			name = UIViews;
-			sourceTree = "<group>";
-		};
 		20FC56F11B72C98800D51801 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,7 +553,6 @@
 				20FC56FC1B72CA2800D51801 /* Globals.swift */,
 				20FC56FA1B72CA1200D51801 /* UITabBarController.swift */,
 				20FC56F81B72C9FB00D51801 /* UIView.swift */,
-				20FC56F61B72C9E700D51801 /* UIPickView.swift */,
 				20FC56F41B72C9CF00D51801 /* UIColor.swift */,
 				20FC56F21B72C9AF00D51801 /* UIStoryboard.swift */,
 				20EF684F1B72DF1600286A0F /* UIButton.swift */,
@@ -874,7 +860,6 @@
 				200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */,
 				20FC572D1B72CA8D00D51801 /* CVCalendarWeekday.swift in Sources */,
 				200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */,
-				20FC56ED1B72C95200D51801 /* CircleProgressView.swift in Sources */,
 				20FC56FB1B72CA1200D51801 /* UITabBarController.swift in Sources */,
 				20FC56C31B72C1BC00D51801 /* CalendarSettings.swift in Sources */,
 				200A18C91B64F4C400EC2A65 /* MonthAdherenceCell.swift in Sources */,
@@ -944,9 +929,8 @@
 				20FC57261B72CA8D00D51801 /* CVCalendarViewAnimator.swift in Sources */,
 				209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */,
 				20FC57311B72CA8D00D51801 /* CVScrollDirection.swift in Sources */,
+				20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
-				20FC56F71B72C9E700D51801 /* UIPickView.swift in Sources */,
-				20FC56F01B72C97200D51801 /* HorizontalGraphBar.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
 				20FC56F51B72C9CF00D51801 /* UIColor.swift in Sources */,

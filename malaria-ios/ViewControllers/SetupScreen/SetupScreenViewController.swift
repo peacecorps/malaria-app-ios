@@ -12,22 +12,19 @@ class SetupScreenViewController : UIViewController{
     private var medicinePicker: MedicinePickerView!
     private var timePickerview: TimePickerView!
     
-    lazy var toolBar: UIToolbar! = {
-        let keyboardToolbar = UIToolbar()
-        keyboardToolbar.sizeToFit()
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace,target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("dismissInputView:"))
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
-        
-        return keyboardToolbar
-        }()
-    
+    private var toolBar: ToolbarWithDone!
     
     //mangagers
     private var viewContext: NSManagedObjectContext!
     private var medicineManager: MedicineManager!
     
     private var pillReminderNotificationTime: NSDate!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        toolBar = ToolbarWithDone(viewsWithToolbar: [medicineName, reminderTime])
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,15 +39,15 @@ class SetupScreenViewController : UIViewController{
         medicinePicker = MedicinePickerView(context: viewContext, selectCallback: {(object: String) in
             self.medicineName.text = object
         })
-        medicineName.inputView = medicinePicker.generateInputView()
+        medicineName.inputView = toolBar.generateInputView(medicinePicker)
         medicineName.inputAccessoryView = toolBar
         
         //Setting up DatePickerView
-        timePickerview = TimePickerView(view: reminderTime, selectCallback: {(date: NSDate) in
+        timePickerview = TimePickerView(pickerMode: .Time, startDate: pillReminderNotificationTime, selectCallback: {(date: NSDate) in
             self.pillReminderNotificationTime = date
             self.refreshDate()
         })
-        reminderTime.inputView = timePickerview.generateInputView(.Time, startDate: pillReminderNotificationTime)
+        reminderTime.inputView = toolBar.generateInputView(timePickerview)
         reminderTime.inputAccessoryView = toolBar
         
         medicineName.text = medicinePicker.selectedValue
@@ -58,7 +55,7 @@ class SetupScreenViewController : UIViewController{
         refreshDate()
     }
     
-    func dismissInputView(sender: UITextField){
+    func dismissInputView(sender: UIView){
         medicineName.endEditing(true)
         reminderTime.endEditing(true)
     }
@@ -131,11 +128,11 @@ extension SetupScreenViewController {
     
     //existing medicine configured
     private var ReplaceMedicineAlertText: AlertText {get {
-        return ("There is already medicine configured", "The current configuration will be changed")
+        return ("This will change the current settings", "Your previous statistics won't be lost")
     }}
     
     //type of alerts options
     private var AlertOptions: (ok: String, cancel: String) {get {
-        return ("ok", "Cancel")
+        return ("Ok", "Cancel")
     }}
 }

@@ -35,33 +35,26 @@ class PlanTripViewController: UIViewController {
     var arrivalDay = NSDate()
     var items = [(String, Bool)]()
     
-    lazy var toolBar: UIToolbar! = {
-        let keyboardToolbar = UIToolbar()
-        keyboardToolbar.sizeToFit()
-        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace,target: nil, action: nil)
-        let doneBarButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("dismissInputView:"))
-        keyboardToolbar.items = [flexBarButton, doneBarButton]
-        
-        return keyboardToolbar
-    }()
-    
+    private var toolBar: ToolbarWithDone!
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
+        toolBar = ToolbarWithDone(viewsWithToolbar: [location, packingList, arrival, departure, historyTextField])
+        
         location.inputAccessoryView = toolBar
         historyTextField.inputAccessoryView = toolBar
         
         //Setting up departure
-        departureDatePickerview = TimePickerView(view: departure, selectCallback: {(date: NSDate) in
+        departureDatePickerview = TimePickerView(pickerMode: .Date, startDate: departureDay, selectCallback: {(date: NSDate) in
             self.updateDeparture(date)
         })
         departure.inputAccessoryView = toolBar
         
         //Setting up arrival date picker
-        arrivalDatePickerview = TimePickerView(view: arrival, selectCallback: {(date: NSDate) in
+        arrivalDatePickerview = TimePickerView(pickerMode: .Date, startDate: arrivalDay, selectCallback: {(date: NSDate) in
             self.updateArrival(date)
         })
         arrival.inputAccessoryView = toolBar
@@ -86,8 +79,8 @@ class PlanTripViewController: UIViewController {
         updateDeparture(departureDay)
         
         //update input views
-        arrival.inputView = arrivalDatePickerview.generateInputView(.Date, startDate: arrivalDay)
-        departure.inputView = departureDatePickerview.generateInputView(.Date, startDate: departureDay)
+        arrival.inputView = toolBar.generateInputView(arrivalDatePickerview)
+        departure.inputView = toolBar.generateInputView(departureDatePickerview)
         
         //update history
         prepareHistoryValuePicker()
@@ -98,15 +91,7 @@ class PlanTripViewController: UIViewController {
             self.updateLocation(object)
         })
         
-        historyTextField.inputView = tripLocationHistoryPickerViewer.generateInputView()
-    }
-    
-    func dismissInputView(sender: UITextField){
-        location.endEditing(true)
-        packingList.endEditing(true)
-        arrival.endEditing(true)
-        departure.endEditing(true)
-        historyTextField.endEditing(true)
+        historyTextField.inputView = toolBar.generateInputView(tripLocationHistoryPickerViewer)
     }
     
     func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){
@@ -285,7 +270,7 @@ extension PlanTripViewController {
     
     //departure day error
     private var InvalidDepartureAlertText: AlertText {get {
-        return ("Error", "Departure day must happen before arrival")
+        return ("Error", "Departure day must be before arrival")
         }}
     
     //arrival day error

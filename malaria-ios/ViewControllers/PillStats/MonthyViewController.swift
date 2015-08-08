@@ -27,6 +27,7 @@ import UIKit
     var callback: (() -> ())?
     
     //helpers
+    private var firstRun = true
     private var previouslySelect: NSDate?
     private var animationFinished = true
     
@@ -37,6 +38,7 @@ import UIKit
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        previouslySelect = startDay
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
@@ -129,14 +131,16 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
-        if let previous = previouslySelect{
-            if previous.sameDayAs(selected) {
+        if let previous = previouslySelect {
+            
+            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) || (!firstRun && previous.sameDayAs(selected)) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
         }
-        
+
+        firstRun = false
         previouslySelect = selected
     }
     
@@ -150,7 +154,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
         
         let (title, message) = generateTookMedicineActionSheetText(date)
-        
         
         let tookPillActionSheet: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .ActionSheet)
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in
@@ -199,7 +202,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
     }
     
-    private func presentedDateUpdated(date: CVDate) {
+    func presentedDateUpdated(date: CVDate) {
         if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {
             let updatedMonthLabel = UILabel()
             updatedMonthLabel.text = generateMonthLabel(date.convertedDate()!)
@@ -245,7 +248,7 @@ extension MonthlyViewController {
     
     //selected future entry
     private var SelectedFutureDateAlertText: AlertText {get {
-        return ("Not possible to change entries in the future", "Try another day")
+        return ("Not possible to change entries in the future", "")
     }}
     
     private func generateTookMedicineActionSheetText(date: NSDate) -> AlertText {
@@ -253,20 +256,20 @@ extension MonthlyViewController {
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
         if tookMedicine != nil {
-            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
         } else {
-            return ("You did not took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Have you taken your pill?")
+            return ("You didn't took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
         }
     }
     
     //did take pill alert text
     private var TookMedicineAlertActionText: (did: String, didNot: String) {get {
-        return ("Yes, I did.", "No, I didn't")
+        return ("Yes, I did", "No, I didn't")
     }}
     
     //error
     private var ErrorAddRegistryAlertText: AlertText {get {
-        return ("Error updating.", "Please contact us by clicking the email icon on the setup screen")
+        return ("Error updating", "Please contact us by clicking the email icon on the setup screen")
     }}
     
     

@@ -35,14 +35,14 @@ class PlanTripViewController: UIViewController {
     var arrivalDay = NSDate()
     var items = [(String, Bool)]()
     
-    lazy var toolBar: UIToolbar! = {
-        return ToolbarWithDone(target: self, selector: Selector("dismissInputView:"))
-    }()
+    private var toolBar: UIToolbar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
+        
+        toolBar = ToolbarWithDone(viewsWithToolbar: [location, packingList, arrival, departure, historyTextField])
         
         location.inputAccessoryView = toolBar
         historyTextField.inputAccessoryView = toolBar
@@ -92,14 +92,6 @@ class PlanTripViewController: UIViewController {
         })
         
         historyTextField.inputView = tripLocationHistoryPickerViewer.generateInputView()
-    }
-    
-    func dismissInputView(sender: UITextField){
-        location.endEditing(true)
-        packingList.endEditing(true)
-        arrival.endEditing(true)
-        departure.endEditing(true)
-        historyTextField.endEditing(true)
     }
     
     func selectItemsCallback(medicine: Medicine.Pill, listItems: [(String, Bool)]){

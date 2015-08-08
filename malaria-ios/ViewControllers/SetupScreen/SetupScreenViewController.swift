@@ -12,15 +12,19 @@ class SetupScreenViewController : UIViewController{
     private var medicinePicker: MedicinePickerView!
     private var timePickerview: TimePickerView!
     
-    lazy var toolBar: UIToolbar! = {
-        return ToolbarWithDone(target: self, selector: Selector("dismissInputView:"))
-    }()
+    private var toolBar: UIToolbar!
     
     //mangagers
     private var viewContext: NSManagedObjectContext!
     private var medicineManager: MedicineManager!
     
     private var pillReminderNotificationTime: NSDate!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        toolBar = ToolbarWithDone(viewsWithToolbar: [medicineName, reminderTime])
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,7 +55,7 @@ class SetupScreenViewController : UIViewController{
         refreshDate()
     }
     
-    func dismissInputView(sender: UITextField){
+    func dismissInputView(sender: UIView){
         medicineName.endEditing(true)
         reminderTime.endEditing(true)
     }

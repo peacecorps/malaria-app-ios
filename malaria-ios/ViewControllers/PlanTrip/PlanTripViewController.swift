@@ -55,13 +55,13 @@ class PlanTripViewController: UIViewController {
         historyTextField.inputAccessoryView = toolBar
         
         //Setting up departure
-        departureDatePickerview = TimePickerView(view: departure, selectCallback: {(date: NSDate) in
+        departureDatePickerview = TimePickerView(selectCallback: {(date: NSDate) in
             self.updateDeparture(date)
         })
         departure.inputAccessoryView = toolBar
         
         //Setting up arrival date picker
-        arrivalDatePickerview = TimePickerView(view: arrival, selectCallback: {(date: NSDate) in
+        arrivalDatePickerview = TimePickerView(selectCallback: {(date: NSDate) in
             self.updateArrival(date)
         })
         arrival.inputAccessoryView = toolBar

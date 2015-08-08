@@ -46,7 +46,7 @@ class SetupScreenViewController : UIViewController{
         medicineName.inputAccessoryView = toolBar
         
         //Setting up DatePickerView
-        timePickerview = TimePickerView(view: reminderTime, selectCallback: {(date: NSDate) in
+        timePickerview = TimePickerView(selectCallback: {(date: NSDate) in
             self.pillReminderNotificationTime = date
             self.refreshDate()
         })

@@ -59,32 +59,28 @@ public class TripsManager : CoreDataContextManager{
     /// :param: `Int64`: caseToBring
     /// :param: `NSdate`: reminderDate
     /// :return: `Trip`: Instance of trip
-    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate) -> Trip{
-        if let t = getTrip(){
-            Logger.Warn("Already created a trip: changing stored one")
+    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
+        func create(t: Trip) -> Trip{
             t.location = location
             t.medicine = medicine.name()
             t.departure = departure
             t.arrival = arrival
+            t.reminderTime = timeReminder
             
             t.itemsManager(context).getItems().map({$0.deleteFromContext(self.context)})
             
             createHistory(t)
             
             CoreDataHelper.sharedInstance.saveContext(context)
+            
             return t
         }
         
-        let trip = Trip.create(Trip.self, context: context)
-        trip.location = location
-        trip.medicine = medicine.name()
-        trip.departure = departure
-        trip.arrival = arrival
+        if let t = getTrip(){
+            Logger.Warn("Already created a trip: changing stored one")
+            return create(t)
+        }
         
-        createHistory(trip)
-        
-        CoreDataHelper.sharedInstance.saveContext(context)
-        
-        return trip
+        return create(Trip.create(Trip.self, context: context))
     }
 }

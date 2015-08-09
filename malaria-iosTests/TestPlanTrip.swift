@@ -10,6 +10,7 @@ class TestPlanTrip: XCTestCase {
     let cashToBring: Int64 = 10
     let d1 = NSDate.from(2015, month: 5, day: 8) //monday
     let d2 = NSDate.from(2015, month: 5, day: 8) + 1.week//monday
+    let reminderTime = NSDate.from(1, month: 1, day: 1, hour: 9, minute: 0)
     var trip: Trip!
     var itemsManager: ItemsManager!
     var currentContext: NSManagedObjectContext!
@@ -20,7 +21,7 @@ class TestPlanTrip: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
         tManager = TripsManager(context: currentContext)        
-        trip = tManager.createTrip(location, medicine: currentPill, departure: d1, arrival: d2)
+        trip = tManager.createTrip(location, medicine: currentPill, departure: d1, arrival: d2, timeReminder: reminderTime)
         
         itemsManager = trip.itemsManager(currentContext)
     }
@@ -37,6 +38,7 @@ class TestPlanTrip: XCTestCase {
             XCTAssertEqual(t.medicine, currentPill.name())
             XCTAssertEqual(t.departure, d1)
             XCTAssertEqual(t.arrival, d2)
+            XCTAssertTrue(t.reminderTime.sameClockTimeAs(reminderTime))
         }else{
             XCTFail("Trip wasn't created")
         }
@@ -49,18 +51,21 @@ class TestPlanTrip: XCTestCase {
         let departure2 = d1 + 10.day
         let arrival2 = d1 + 20.day
         
-        trip = tManager.createTrip(location2, medicine: pill2, departure: departure2, arrival: arrival2)
+        trip = tManager.createTrip(location2, medicine: pill2, departure: departure2, arrival: arrival2, timeReminder: reminderTime)
         
         XCTAssertEqual(trip.location, location2)
         XCTAssertEqual(trip.medicine, pill2.name())
         XCTAssertEqual(trip.departure, departure2)
         XCTAssertEqual(trip.arrival, arrival2)
+        XCTAssertTrue(trip.reminderTime.sameClockTimeAs(reminderTime))
 
         if let t = tManager.getTrip(){
             XCTAssertEqual(t.location, location2)
             XCTAssertEqual(t.medicine, pill2.name())
             XCTAssertEqual(trip.departure, departure2)
             XCTAssertEqual(trip.arrival, arrival2)
+            XCTAssertTrue(trip.reminderTime.sameClockTimeAs(reminderTime))
+
         }else{
             XCTFail("Trip wasn't created")
         }

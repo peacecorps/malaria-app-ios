@@ -159,5 +159,4 @@ public class MedicineStats : CoreDataContextManager{
         let filtered = registriesManager.filter(entries, date1: day1, date2: day2)
         return pillAdherence(date1: day1, date2: day2, registries: filtered)
     }
-    
 }

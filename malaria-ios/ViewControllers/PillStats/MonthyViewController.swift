@@ -134,8 +134,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         if let previous = previouslySelect {
             
             //avoid selecting previous months when navigating and avoids opening the action sheet when the view appears
-            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) ||
-                (!firstRun && previous.sameDayAs(selected)) {
+            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) || //avoids appearing when switching months
+                (!firstRun && previous.sameDayAs(selected)) || //avoids opening when the view appears for the first time
+                previous.sameDayAs(startDay) { //fixes requiring 2 taps to select currentDay
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }

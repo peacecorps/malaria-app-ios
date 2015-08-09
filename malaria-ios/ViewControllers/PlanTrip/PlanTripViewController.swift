@@ -107,7 +107,7 @@ extension PlanTripViewController{
     @IBAction func settingsBtnHandler(sender: AnyObject) {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self) as SetupScreenViewController
+            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
             self.presentViewController(view, animated: true, completion: nil)
         }
     }
@@ -130,17 +130,21 @@ extension PlanTripViewController{
     
     @IBAction func generateTrip(sender: AnyObject) {
         if tripsManager.getTrip() != nil {
-            var refreshAlert = UIAlertController(title: UpdateTripAlertText.title, message: UpdateTripAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (UpdateTripAlertText.title, UpdateTripAlertText.message)
+            let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.storeTrip()
             }))
             refreshAlert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Default, handler: nil))
+            
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else{
             self.storeTrip()
             
-            var successAlert = UIAlertController(title: SuccessAlertText.title, message: SuccessAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (SuccessAlertText.title, SuccessAlertText.message)
+            let successAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             successAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
+            
             presentViewController(successAlert, animated: true, completion: nil)
             
             delay(3.0) {
@@ -150,7 +154,7 @@ extension PlanTripViewController{
     }
     
     private func storeTrip(){
-        let trip = tripsManager.createTrip(location.text, medicine: medicine, departure: departureDay, arrival:arrivalDay)
+        let trip = tripsManager.createTrip(location.text, medicine: medicine, departure: departureDay, arrival: arrivalDay)
         let itemManager = trip.itemsManager(viewContext)
         items.map({ itemManager.addItem($0.0, quantity: 1) })
         itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))
@@ -185,8 +189,10 @@ extension PlanTripViewController{
     
     @IBAction func historyButtonHandler(sender: AnyObject) {
         if tripLocationHistoryPickerViewer.locations.isEmpty {
-            var successAlert = UIAlertController(title: EmptyHistoryAlertText.title, message: EmptyHistoryAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (EmptyHistoryAlertText.title, EmptyHistoryAlertText.message)
+            let successAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             successAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
+            
             presentViewController(successAlert, animated: true, completion: nil)
         }else{
             historyTextField.becomeFirstResponder()
@@ -198,8 +204,10 @@ extension PlanTripViewController{
 extension PlanTripViewController {
     private func updateDeparture(date: NSDate){
         if date.startOfDay > arrivalDay.startOfDay {
-            var refreshAlert = UIAlertController(title: InvalidDepartureAlertText.title, message: InvalidDepartureAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (InvalidDepartureAlertText.title, InvalidDepartureAlertText.message)
+            let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
+            
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             departureDay = date
@@ -209,8 +217,10 @@ extension PlanTripViewController {
     
     private func updateArrival(date: NSDate){
         if date.startOfDay < departureDay.startOfDay {
-            var refreshAlert = UIAlertController(title: InvalidArrivalAlertText.title, message: InvalidArrivalAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (InvalidArrivalAlertText.title, InvalidArrivalAlertText.message)
+            let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             refreshAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
+            
             presentViewController(refreshAlert, animated: true, completion: nil)
         }else {
             arrivalDay = date

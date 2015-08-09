@@ -16,12 +16,15 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Int`: Number of pills
-    public func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int {
+    public func numberPillsTaken(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max,
+                                registries: [Registry]? = nil) -> Int {
         if let reg = registries{
             return reg.filter({$0.tookMedicine}).count
         }
 
-        return registriesManager.getRegistries(date1: date1, date2: date2, unsorted: true, additionalFilter: {(r: Registry) in return r.tookMedicine }).count
+        return registriesManager.getRegistries(date1: date1, date2: date2, unsorted: true,
+                                               additionalFilter: {(r: Registry) in return r.tookMedicine }
+                                              ).count
     }
     
     /// Returns the number of pills that the user should have taken between two dates.
@@ -30,7 +33,8 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Int`: Number of supposed pills
-    public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int{
+    public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max,
+                                    registries: [Registry]? = nil) -> Int{
         if date1 > date2 {
             return numberSupposedPills(date1: date2, date2: date1, registries: registries)
         }
@@ -39,7 +43,8 @@ public class MedicineStats : CoreDataContextManager{
         var d2 = date2
         if date1 == NSDate.min || date2 == NSDate.max {
             if let boundaries = registriesManager.getLimits() {
-                (d1, d2) = (boundaries.leastRecent.date, boundaries.mostRecent.date)
+                d1 = d1 == NSDate.min ? boundaries.leastRecent.date : d1
+                d2 = d2 == NSDate.max ? boundaries.mostRecent.date : d2
             }else {
                 return 0
             }
@@ -70,7 +75,8 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
     /// :param: `[Registry] optional`: cached list of entries
     /// :returns: `Float`: Pill adherence
-    public func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Float{        
+    public func pillAdherence(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max,
+                              registries: [Registry]? = nil) -> Float{
         let supposedPills = numberSupposedPills(date1: date1, date2: date2, registries: registries)
         
         if(supposedPills == 0){
@@ -91,27 +97,33 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `[Registry]? optional`: Cached list of entries. Must be sorted from most recent to least recent
     /// :returns: `Int`: Pill streak
     public func pillStreak(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, registries: [Registry]? = nil) -> Int{
-        let entries = registries != nil ? registries! : registriesManager.getRegistries(date1: date1, date2: date2, mostRecentFirst: true)
+        
+        var entries: [Registry] = []
+        if let r = registries{
+            entries = r
+        }else {
+            entries = registriesManager.getRegistries(date1: date1, date2: date2, mostRecentFirst: true)
+        }
         
         var result = 0
-        
-        var previousDate: NSDate?
-        for r in entries {
-            //check for missing entries
-            if let previousD = previousDate {
-                if r.date < previousD - medicine.interval.day {
+        if !entries.isEmpty{
+            var previousDate = date2 == NSDate.max ? entries.first!.date : date2
+            for r in entries {
+                //check for missing entries
+                if r.date < previousDate - medicine.interval.day {
                     return result
                 }
+                
+                if r.tookMedicine{
+                    result += 1
+                }else{
+                    return result
+                }
+                
+                previousDate = r.date
             }
-            
-            if r.tookMedicine{
-                result += 1
-            }else{
-                return result
-            }
-            
-            previousDate = r.date
         }
+        
         
         return result
     }
@@ -134,7 +146,8 @@ public class MedicineStats : CoreDataContextManager{
         
         let (oldestDate, mostRecentEntry) = (entries.first!.date, entries.last!.date)
         
-        let (startMonth, endMonth) = (NSDate.from(month.year, month: month.month, day: 1), NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth))
+        let startMonth = NSDate.from(month.year, month: month.month, day: 1)
+        let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
         
         if startMonth.happensMonthsBefore(oldestDate) {
             return 1.0
@@ -143,7 +156,8 @@ public class MedicineStats : CoreDataContextManager{
         let day1 = max(startMonth, oldestDate)
         let day2 = endMonth.sameMonthAs(NSDate()) ? min(endMonth, NSDate()) : endMonth
         
-        return pillAdherence(date1: day1, date2: day2, registries: registriesManager.filter(entries, date1: day1, date2: day2))
+        let filtered = registriesManager.filter(entries, date1: day1, date2: day2)
+        return pillAdherence(date1: day1, date2: day2, registries: filtered)
     }
     
 }

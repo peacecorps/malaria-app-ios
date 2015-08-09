@@ -14,7 +14,9 @@ extension UIStoryboard{
     /// :param: `C`: Class of the view controller
     /// :returns: `C`: A new instance of the view controller
     public static func instantiate <C:UIViewController> (named: String = "Main", viewControllerClass: C.Type) -> C {
-        return UIStoryboard(name: named, bundle: nil).instantiateViewControllerWithIdentifier(UIStoryboard.getSimpleClassName(viewControllerClass)) as! C
+        let storyboard = UIStoryboard(name: named, bundle: nil)
+        let storyboardId = UIStoryboard.getSimpleClassName(viewControllerClass)
+        return storyboard.instantiateViewControllerWithIdentifier(storyboardId) as! C
     }
     
 }

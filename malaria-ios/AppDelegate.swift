@@ -11,8 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationsCategories.append(MedicineNotificationsManager.setup())
         
         readApplicationSettings()
-        
-        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: NSSet(array: notificationsCategories) as Set<NSObject>)
+        let categories = NSSet(array: notificationsCategories) as Set<NSObject>
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: categories)
         application.registerUserNotificationSettings(settings)
         
         //setting up initial screen, can be configured in the storyboard if there is only one option but here we have more flexibility

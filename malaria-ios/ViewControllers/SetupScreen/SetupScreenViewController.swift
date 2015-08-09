@@ -86,7 +86,8 @@ extension SetupScreenViewController {
                 return
             }
             
-            var medicineAlert = UIAlertController(title: ReplaceMedicineAlertText.title, message: ReplaceMedicineAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (ReplaceMedicineAlertText.title, ReplaceMedicineAlertText.message)
+            var medicineAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             medicineAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.setupMedicine(med)
                 self.dismissViewControllerAnimated(true, completion: nil)

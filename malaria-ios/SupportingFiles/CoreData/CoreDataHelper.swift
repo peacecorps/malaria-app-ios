@@ -5,7 +5,9 @@ public class CoreDataHelper: NSObject {
     
     override init(){
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidSaveContext:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self, selector: "contextDidSaveContext:",
+                                       name: NSManagedObjectContextDidSaveNotification, object: nil)
     }
     
     deinit{
@@ -18,12 +20,13 @@ public class CoreDataHelper: NSObject {
             return nil
         }
         
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
         }()
     
     /// Creates a new background context with the mainContext as parent
+    /// Create background context to keep in sync with the database
     /// :returns: `NSManagedObjectContext`
     public func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
@@ -31,7 +34,7 @@ public class CoreDataHelper: NSObject {
             return nil
         }
         
-        var backgroundContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+        var backgroundContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         backgroundContext.parentContext = self.managedObjectContext
         return backgroundContext
     }
@@ -46,7 +49,8 @@ public class CoreDataHelper: NSObject {
     }
     
     
-    /// Callback for multi-threading. Syncronizes the background context with the main context. Then the parent context, that has direct connection with persistent storage saves.
+    /// Callback for multi-threading. Syncronizes the background context with the main context. 
+    /// Then the parent context, that has direct connection with persistent storage saves.
     internal func contextDidSaveContext(notification: NSNotification) {
         let sender = notification.object as! NSManagedObjectContext
         if sender != self.managedObjectContext {

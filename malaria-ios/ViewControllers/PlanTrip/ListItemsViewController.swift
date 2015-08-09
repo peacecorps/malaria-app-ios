@@ -98,7 +98,9 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = (tableView.dequeueReusableCellWithIdentifier("MedicineHeaderCell") as! MedicineHeaderCell)
         cell.name.setTitle(medicine.name(), forState: .Normal)
-        cell.quantity.text = "\(MedicineStats.numberNeededPills(departure, date2: arrival, interval: self.medicine.interval())) pills"
+        
+        let neededPills = MedicineStats.numberNeededPills(departure, date2: arrival, interval: self.medicine.interval())
+        cell.quantity.text = "\(neededPills) pills"
         
         cell.name.titleLabel?.adjustsFontSizeToFitWidth = true
         return cell.contentView
@@ -125,7 +127,9 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
     }
     
     @IBAction func medicineBtn(sender: AnyObject) {
-        var alert = UIAlertController(title: PickMedicineAlertText.title, message: PickMedicineAlertText.message, preferredStyle: .Alert)
+        let (title, message) = (PickMedicineAlertText.title, PickMedicineAlertText.message)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        
         let medicines = Medicine.Pill.allValues.map({$0.name()})
         for m in medicines {
             alert.addAction(UIAlertAction(title: m, style: .Default) { _ in
@@ -133,7 +137,6 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
                 self.tableView.reloadData()
             })
         }
-        
         alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -144,13 +147,13 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
 extension ListItemsViewController {
     
     private func generateAddItemAlert() {
-        var alert = UIAlertController(title: CreateEntryAlertText.title, message: CreateEntryAlertText.message, preferredStyle: .Alert)
+        let alert = UIAlertController(title: CreateEntryAlertText.title, message: CreateEntryAlertText.message, preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
-            let textField = alert.textFields![0] as! UITextField
+            let textFieldText = (alert.textFields![0] as! UITextField).text!
             
-            if !textField.text.isEmpty && self.listItems.filter({$0.0.lowercaseString == textField.text!.lowercaseString}).isEmpty {
-                let tuple = (textField.text!, false)
+            if !textFieldText.isEmpty && self.listItems.filter({$0.0.lowercaseString == textFieldText.lowercaseString}).isEmpty {
+                let tuple = (textFieldText, false)
                 self.listItems.append(tuple)
                 
                 self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
@@ -161,6 +164,7 @@ extension ListItemsViewController {
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Name"
             textField.text = ""
+            textField.clearButtonMode = .WhileEditing
         }
         alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
@@ -170,7 +174,8 @@ extension ListItemsViewController {
     }
     
     private func generateModifyItemAlert(indexPath: NSIndexPath) {
-        var alert = UIAlertController(title: ModifyEntryAlertText.title, message: ModifyEntryAlertText.message, preferredStyle: .Alert)
+        let (title, message) = (ModifyEntryAlertText.title, ModifyEntryAlertText.message)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
             let textField = alert.textFields![0] as! UITextField
@@ -188,7 +193,6 @@ extension ListItemsViewController {
         alert.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
-        
     }
 }
 

@@ -17,6 +17,7 @@ import AVFoundation
     //managers
     private var viewContext: NSManagedObjectContext!
     private var medicineManager: MedicineManager!
+    private var registriesManager: RegistriesManager!
     private var medicine: Medicine?
     var pagesManager: PagesManagerViewController!
     
@@ -85,6 +86,7 @@ import AVFoundation
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
         medicine = medicineManager.getCurrentMedicine()
+        registriesManager = medicine!.registriesManager(viewContext)
         
         let medicineRegistries = medicine!.registriesManager(viewContext)
         let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
@@ -135,7 +137,7 @@ import AVFoundation
 extension DidTakePillsViewController{
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: false)){
                 didNotTakePillPlayer.play()
                 reshedule(m.notificationManager(viewContext))
                 refreshScreen()
@@ -145,7 +147,7 @@ extension DidTakePillsViewController{
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: true)){
                 tookPillPlayer.play()
                 reshedule(m.notificationManager(viewContext))
                 refreshScreen()

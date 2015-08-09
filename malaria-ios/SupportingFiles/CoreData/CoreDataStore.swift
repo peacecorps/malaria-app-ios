@@ -21,11 +21,11 @@ public class CoreDataStore{
         }()
     
     internal lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
-        var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+        var coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
         
         var error: NSError?
-        if coordinator!.addPersistentStoreWithType(
+        if coordinator.addPersistentStoreWithType(
             NSSQLiteStoreType,
             configuration: nil,
             URL: url,
@@ -33,7 +33,6 @@ public class CoreDataStore{
                 NSInferMappingModelAutomaticallyOption: true,
                 NSMigratePersistentStoresAutomaticallyOption: true
             ], error: &error) == nil {
-            coordinator = nil
             // Report any error we got.
             let dict = NSMutableDictionary()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"

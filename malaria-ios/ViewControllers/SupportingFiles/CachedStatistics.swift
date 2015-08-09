@@ -63,12 +63,13 @@ extension CachedStatistics {
         todaysPillStreak = 0
         todaysAdherence = 0
         
+        println("retrieveingDailyStats")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.todaysAdherence = self.statsManager.pillAdherence(registries: self.registries) * 100
+            self.todaysAdherence = self.statsManager.pillAdherence(date2: NSDate(), registries: self.registries) * 100
             
             let mostRecentFirst = self.registries.reverse()
             self.lastMedicine = self.registriesManager.lastPillDate(registries: mostRecentFirst)
-            self.todaysPillStreak = self.statsManager.pillStreak(registries: mostRecentFirst)
+            self.todaysPillStreak = self.statsManager.pillStreak(date2: NSDate(), registries: mostRecentFirst)
             
             self.isDailyStatsUpdated = true
             
@@ -85,7 +86,8 @@ extension CachedStatistics {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
                 let month = today - i.month
-                self.monthAdhrence.append((month, self.statsManager.pillAdherence(month, registries: self.registries)*100))
+                let adherence = self.statsManager.pillAdherence(month, registries: self.registries)
+                self.monthAdhrence.append((month, adherence * 100))
             }
             
             self.isMonthlyAdherenceDataUpdated = true
@@ -162,7 +164,8 @@ extension CachedStatistics {
                     
                     let day = today - v.day
                     
-                    self.adherencesPerDay[index] = (day, self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100)
+                    let adherence = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries)
+                    self.adherencesPerDay[index] = (day, adherence * 100)
                     
                     //updating array from last index to first Index
                     for j in 0...(entries.count - 1) {

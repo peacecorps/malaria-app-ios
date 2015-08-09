@@ -8,8 +8,8 @@ import UIKit
     @IBOutlet weak var calendarFrame: UIView!
     
     @IBInspectable var TitleDateFormat: String = "MMMM, yyyy"
-    @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
-    @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
+    @IBInspectable var DidNotTakeMedicineColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
+    @IBInspectable var TookMedicineColorColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     @IBInspectable var SelectedBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var SelectedTodayBackgroundColor: UIColor = UIColor(hex: 0xE3C79B)
     @IBInspectable var UnselectedTextColor: UIColor = UIColor(hex: 0x444444)
@@ -93,7 +93,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func createRingView(dayView: DayView, tookMedicine: Bool) -> CVAuxiliaryView {
         let ringView = CVAuxiliaryView(dayView: dayView, rect: dayView.bounds, shape: CVShape.Circle)
         ringView.fillColor = UIColor.clearColor()
-        ringView.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+        ringView.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
         ringView.tag = RingViewTag
         return ringView
     }
@@ -133,7 +133,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect {
             
-            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) || (!firstRun && previous.sameDayAs(selected)) {
+            //avoid selecting previous months when navigating and avoids opening the action sheet when the view appears
+            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) ||
+                (!firstRun && previous.sameDayAs(selected)) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
@@ -146,7 +148,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     
     private func popup(date: NSDate, dayView: CVCalendarDayView){
         if date > NSDate() {
-            var failAlert = UIAlertController(title: SelectedFutureDateAlertText.title, message: SelectedFutureDateAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (SelectedFutureDateAlertText.title, SelectedFutureDateAlertText.message)
+            
+            let failAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             failAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Default, handler: nil))
             presentViewController(failAlert, animated: true, completion: nil)
             
@@ -183,7 +187,9 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     private func generateErrorMessage() {
-        let errorAlert: UIAlertController = UIAlertController(title: ErrorAddRegistryAlertText.title, message: ErrorAddRegistryAlertText.message, preferredStyle: .Alert)
+        let (title, message) = (ErrorAddRegistryAlertText.title, ErrorAddRegistryAlertText.message)
+    
+        let errorAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         errorAlert.addAction(UIAlertAction(title: AlertOptions.dismiss, style: .Default, handler: nil))
         presentViewController(errorAlert, animated: true, completion: nil)
     }
@@ -194,7 +200,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             for dView in dViews {
                 let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day] ?? false
                 if let ringView = dView.viewWithTag(RingViewTag){
-                    (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? HighAdherenceColor : LowAdherenceColor
+                    (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
                 }else {
                     dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
                 }
@@ -255,10 +261,12 @@ extension MonthlyViewController {
         let isWeekly = CachedStatistics.sharedInstance.medicine.interval == 7
         let tookMedicine = CachedStatistics.sharedInstance.registriesManager.tookMedicine(date)
         
+        let intervalRegularity = isWeekly ? "weekly" : "daily"
+        let dateString = date.formatWith("d MMMM yyyy")
         if tookMedicine != nil {
-            return ("You already took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
+            return ("You already took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
         } else {
-            return ("You didn't took your " + (isWeekly ? "weekly" : "daily") + " pill.", "Did you take your medicine on " + date.formatWith("d MMMM yyyy") + "?")
+            return ("You didn't took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
         }
     }
     

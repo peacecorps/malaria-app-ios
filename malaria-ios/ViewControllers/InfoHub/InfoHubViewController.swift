@@ -43,28 +43,29 @@ class InfoHubViewController : UIViewController{
     }
     
    private func refreshScreen() {
+        func completitionHandler(url: String, error: NSError?){
+            if error != nil{
+                delay(0.5){
+                    let (title, message) = (self.NoInformationAvailableAlertText.title, self.NoInformationAvailableAlertText.message)
+                    let confirmAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+                    confirmAlert.addAction(UIAlertAction(title: self.AlertOptions.ok, style: .Default, handler: nil))
+                    
+                    self.presentViewController(confirmAlert, animated: true, completion: nil)
+                }
+                
+            }else{
+                self.refreshFromCoreData()
+            }
+        }
+    
         if !refreshFromCoreData(){
-            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: {(url: String, error: NSError?) in
-                if error != nil{
-                    
-                    delay(0.5){
-                        var confirmAlert = UIAlertController(title: self.NoInformationAvailableAlertText.title, message: self.NoInformationAvailableAlertText.message, preferredStyle: .Alert)
-                        confirmAlert.addAction(UIAlertAction(title: self.AlertOptions.ok, style: .Default, handler: nil))
-                        
-                        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                        dispatch_after(time, dispatch_get_main_queue(), {
-                            self.presentViewController(confirmAlert, animated: true, completion: nil)
-                        })
-                    }
-                    
-                }else{
-                    self.refreshFromCoreData()
-                }})
+            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: completitionHandler)
         }
     }
     
     private func createAlertViewError(error : NSError) -> UIAlertController {
-        var refreshAlert = UIAlertController(title: CantUpdateFromPeaceCorpsAlertText.title, message: CantUpdateFromPeaceCorpsAlertText.message, preferredStyle: .Alert)
+        let (title, message) = (CantUpdateFromPeaceCorpsAlertText.title, CantUpdateFromPeaceCorpsAlertText.message)
+        let refreshAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         if error.code == -1009 {
             refreshAlert.message = NoInternetConnectionAlertText.message
@@ -91,7 +92,7 @@ class InfoHubViewController : UIViewController{
     @IBAction func settingsBtnHandler(sender: AnyObject) {
         //fix delay
         dispatch_async(dispatch_get_main_queue()) {
-            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self) as SetupScreenViewController
+            let view = UIStoryboard.instantiate(viewControllerClass: SetupScreenViewController.self)
             self.presentViewController(view, animated: true, completion: nil)
         }
     }

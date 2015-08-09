@@ -14,7 +14,9 @@ public class SyncManager : CoreDataContextManager{
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
         
-        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
+        let key = "Authorization"
+        let value = "Basic \(base64LoginString)"
+        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue(value, forKey: key)
     }
     
     public var endpoints: [String : Endpoint] = [

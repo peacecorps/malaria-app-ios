@@ -34,7 +34,8 @@ public extension NSManagedObject {
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
-    public static func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
+    public static func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil,
+                                                     fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
         let name = getSimpleClassName(entity)
         
         let fetchRequest = NSFetchRequest(entityName: name)

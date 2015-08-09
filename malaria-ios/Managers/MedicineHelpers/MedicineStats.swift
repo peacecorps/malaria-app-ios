@@ -1,10 +1,10 @@
 import Foundation
 
 public class MedicineStats : CoreDataContextManager{
-    let medicine: Medicine
-    let registriesManager: RegistriesManager
+    private let medicine: Medicine
+    private let registriesManager: RegistriesManager
     
-    init(context: NSManagedObjectContext, medicine: Medicine){
+    public init(context: NSManagedObjectContext, medicine: Medicine) {
         self.medicine = medicine
         registriesManager = self.medicine.registriesManager(context)
         super.init(context: context)
@@ -132,11 +132,9 @@ public class MedicineStats : CoreDataContextManager{
             return 1
         }
         
-        let oldestDate = entries.first!.date
-        let mostRecentEntry = entries.last!.date
+        let (oldestDate, mostRecentEntry) = (entries.first!.date, entries.last!.date)
         
-        let startMonth = NSDate.from(month.year, month: month.month, day: 1)
-        let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
+        let (startMonth, endMonth) = (NSDate.from(month.year, month: month.month, day: 1), NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth))
         
         if startMonth.happensMonthsBefore(oldestDate) {
             return 1.0

@@ -4,7 +4,7 @@ public protocol Endpoint{
     /// full url to the endpoint
     ///
     /// :returns: `String`
-    var path: String { get }
+     var path: String { get }
     
     /// Parses the json and retrieves a NSManagedObject
     ///

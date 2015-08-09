@@ -2,12 +2,11 @@ import Foundation
 import UIKit
 
 public class NotificationManager : CoreDataContextManager{
+    public var category: String { get{ fatalError("No category provided")} }
+    public var alertBody: String { get{ fatalError("No alertBody provided")} }
+    public var alertAction: String { get{ fatalError("No alertAction provided")} }
     
-    var category: String { get{ fatalError("No category provided")} }
-    var alertBody: String { get{ fatalError("No alertBody provided")} }
-    var alertAction: String { get{ fatalError("No alertAction provided")} }
-    
-    override init(context: NSManagedObjectContext!){
+    override public init(context: NSManagedObjectContext!){
         super.init(context: context)
     }
     
@@ -21,12 +20,10 @@ public class NotificationManager : CoreDataContextManager{
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
-    /// Unschedule all notifications
+    /// Unschedule all notifications with the category
     public func unsheduleNotification(){
         for event in UIApplication.sharedApplication().scheduledLocalNotifications {
-            
-            var notification = event as! UILocalNotification
-            
+            let notification = event as! UILocalNotification
             if notification.category == category {
                 UIApplication.sharedApplication().cancelLocalNotification(notification)
             }

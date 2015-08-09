@@ -1,7 +1,6 @@
 import Foundation
 
 public class ItemsManager : CoreDataContextManager{
-
     let trip: Trip
     
     init(context: NSManagedObjectContext, trip: Trip){
@@ -18,7 +17,7 @@ public class ItemsManager : CoreDataContextManager{
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
         }else{
-            var item = Item.create(Item.self, context: self.context)
+            let item = Item.create(Item.self, context: self.context)
             item.name = name
             item.quantity = quantity
             
@@ -39,7 +38,6 @@ public class ItemsManager : CoreDataContextManager{
         let items = listItems != nil ? listItems! : getItems()
         return items.filter({$0.name.lowercaseString == name.lowercaseString}).first
     }
-    
     
     /// Checkmark the items
     ///
@@ -70,7 +68,8 @@ public class ItemsManager : CoreDataContextManager{
     
     /// Removes a item from the trip
     ///
-    /// If quantity is specified, it only removes the specified number
+    /// If quantity is specified, it only removes the specified number,
+    /// if not, removes the item completly
     ///
     /// :param: `String`: name of the item
     /// :param: `Int64` optional: quantity

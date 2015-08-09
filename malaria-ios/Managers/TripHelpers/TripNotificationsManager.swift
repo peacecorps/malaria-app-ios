@@ -2,9 +2,9 @@ import Foundation
 import UIKit
 
 public class TripNotificationsManager : NotificationManager {
-    override var category: String { get{ return "TripReminder"} }
-    override var alertBody: String { get{ return "Don't forget to bring your items to the trip!"} }
-    override var alertAction: String { get{ return "Got it!" } }
+    override public var category: String { get{ return "TripReminder"} }
+    override public var alertBody: String { get{ return "Don't forget to bring your items to the trip!"} }
+    override public var alertAction: String { get{ return "Got it!" } }
     
     let trip: Trip
     

@@ -64,5 +64,4 @@ public class CollectionPostsEndpoint : Endpoint{
     public func clearFromDatabase(context: NSManagedObjectContext){
         subCollectionsPostsType.clear(subCollectionsPostsType.self, context: context)
     }
-    
 }

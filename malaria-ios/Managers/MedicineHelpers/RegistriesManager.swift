@@ -1,9 +1,9 @@
 import Foundation
 
 public class RegistriesManager : CoreDataContextManager{
-    let medicine: Medicine
+    private let medicine: Medicine
     
-    init(context: NSManagedObjectContext, medicine: Medicine){
+    public init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
         super.init(context: context)
     }
@@ -14,7 +14,6 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
     /// :returns: `Registry?`: registry
     public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Registry?{
-        
         let entries = allRegistriesInPeriod(at, registries: registries)
         if entries.noData {
             //Logger.Warn("No information available " + at.formatWith())
@@ -75,10 +74,13 @@ public class RegistriesManager : CoreDataContextManager{
         return getRegistries().last
     }
     
+    /// Returns a tuple with the oldest and most recent entry
+    ///
+    /// :returns: `(leastRecent: Registry, mostRecent: Registry)?`
     public func getLimits() -> (leastRecent: Registry, mostRecent: Registry)? {
         let registries = getRegistries(mostRecentFirst: true)
-        if let mostRecent = registries.first,
-            leastRecent = registries.last {
+        if let  mostRecent = registries.first,
+                leastRecent = registries.last {
             
             return (leastRecent, mostRecent)
         }
@@ -168,6 +170,8 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `NSDate`: date1
     /// :param: `NSDate`: date2
     /// :param: `Bool` optional: if first element of result should be the most recent entry. (by default is true)
+    /// :param: `Bool` optional: if true, it won't sort the elements reducing one sort cycle
+    /// :param: `(r: Registry) -> Bool) optional`: Additional custom filter
     /// :returns: `[Registry]`
     public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true, unsorted: Bool = false, additionalFilter: ((r: Registry) -> Bool)? = nil) -> [Registry]{
         
@@ -181,6 +185,13 @@ public class RegistriesManager : CoreDataContextManager{
         return unsorted ? filtered : (mostRecentFirst ? filtered.sorted({$0.date > $1.date}) : filtered.sorted({$0.date < $1.date}))
     }
     
+    
+    ///
+    /// :param: `[Registry]`: list of entries
+    /// :param: `NSDate`: first day
+    /// :param: `NSDate`: second day
+    /// :param: `(r: Registry) -> Bool) optional`: Additional custom filter
+    /// :returns: `[Registry]`
     public func filter(registries: [Registry], date1: NSDate, date2: NSDate, additionalFilter: ((r: Registry) -> Bool)? = nil)  -> [Registry]{
         return registries.filter({ (additionalFilter?(r: $0) ?? true) &&
                                     (($0.date > date1 && $0.date < date2) || $0.date.sameDayAs(date1) || $0.date.sameDayAs(date2)) })
@@ -199,7 +210,6 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param `[Registry]? optional`: cached list of entries. Must be sorted from most recent to least recent
     /// :returns: `NSDate?`
-    
     func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
         let entries = registries != nil ? registries! : getRegistries(mostRecentFirst: true)
         
@@ -211,6 +221,9 @@ public class RegistriesManager : CoreDataContextManager{
         return nil
     }
     
+    /// Remove the entry
+    ///
+    /// :param `Registry`: the entry to be removed
     func removeEntry(registry: Registry){
         var newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(registry.date)})
         medicine.registries = NSSet(array: newRegistries)

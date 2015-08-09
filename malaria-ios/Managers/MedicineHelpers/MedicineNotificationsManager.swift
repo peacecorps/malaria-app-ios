@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 public class MedicineNotificationsManager : NotificationManager{
-    override var category: String { get{ return MedicineNotificationsManager.NotificationCategory } }
-    override var alertBody: String { get{ return "Did you take \(MedicineManager(context: context).getCurrentMedicine()!.name) today?" } }
-    override var alertAction: String { get{ return "Take pill"} }
+    override public var category: String { get{ return MedicineNotificationsManager.NotificationCategory } }
+    override public var alertBody: String { get{ return "Did you take \(MedicineManager(context: context).getCurrentMedicine()!.name) today?" } }
+    override public var alertAction: String { get{ return "Take pill"} }
     
-    let medicine: Medicine
+    private let medicine: Medicine
     
     public static let TookPillId = "TookPill"
     public static let TookPillTitle = "Yes"
@@ -14,7 +14,7 @@ public class MedicineNotificationsManager : NotificationManager{
     public static let DidNotTakePillTitle = "No"
     public static let NotificationCategory = "PILL_REMINDER"
     
-    init(context: NSManagedObjectContext, medicine: Medicine){
+    public init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
         super.init(context: context)
     }
@@ -22,18 +22,6 @@ public class MedicineNotificationsManager : NotificationManager{
     public override func scheduleNotification(fireTime: NSDate) {
         medicine.notificationTime = fireTime
         CoreDataHelper.sharedInstance.saveContext(self.context)
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
-            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
-            scheduleNotification(fireTime)
-            return
-        }
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
-            Logger.Error("Medicine Notifications are not enabled")
-            return
-        }
-        
         super.unsheduleNotification()
         super.scheduleNotification(fireTime)
     }
@@ -64,24 +52,6 @@ public class MedicineNotificationsManager : NotificationManager{
         if medicine.isCurrent{
             Logger.Error("Error: there should be already a fire date")
         }
-    }
-    
-    /// Checks if a week went by without a entry (only valid for weekly pills)
-    ///
-    /// :param: `NSDate optional`: Current date. (by default is the most current one)
-    /// :returns: `Bool`: true if should, false if not
-    public func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
-        if medicine.interval == 1 {
-            Logger.Warn("checkIfShouldReset only valid for weekly pills")
-            return false
-        }
-        
-        if let mostRecent = medicine.registriesManager(context).mostRecentEntry(){
-            //get ellaped days
-            return (currentDate - mostRecent.date) >= 7
-        }
-        
-        return false
     }
     
     /// Returns interactive notifications settings to be added in the AppDelegate

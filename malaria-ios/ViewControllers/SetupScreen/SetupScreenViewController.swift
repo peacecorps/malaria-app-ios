@@ -104,10 +104,20 @@ extension SetupScreenViewController {
     }
     
     private func setupMedicine(med: Medicine.Pill) {
-        self.medicineManager.registerNewMedicine(med.name(), interval: med.interval())
-        self.medicineManager.setCurrentPill(med.name())
-        self.medicineManager.getCurrentMedicine()!.notificationManager(self.viewContext).scheduleNotification(self.pillReminderNotificationTime)
+        medicineManager.registerNewMedicine(med.name(), interval: med.interval())
+        medicineManager.setCurrentPill(med.name())
         UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
+        
+        let notificationManager = medicineManager.getCurrentMedicine()!.notificationManager(viewContext)
+        
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
+            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
+        }else if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
+            Logger.Error("Medicine Notifications are not enabled")
+            return
+        }
+        
+        notificationManager.scheduleNotification(pillReminderNotificationTime)
     }
     
     private func refreshDate(){

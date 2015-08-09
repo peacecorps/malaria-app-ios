@@ -50,6 +50,22 @@ import AVFoundation
         refreshScreen()
     }
     
+    private func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
+        if let m = medicine {
+            if m.interval == 1 {
+                Logger.Warn("checkIfShouldReset only valid for weekly pills")
+                return false
+            }
+            
+            if let mostRecent = m.registriesManager(viewContext).mostRecentEntry(){
+                //get ellaped days
+                return (currentDate - mostRecent.date) >= 7
+            }
+        }
+
+        return false
+    }
+    
     func refreshScreen(){
         Logger.Info("Refreshing TOOK PILL")
         
@@ -74,7 +90,7 @@ import AVFoundation
         let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
         
         if medicine!.interval > 1 {
-            if medicine!.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
+            if checkIfShouldReset(currentDate: currentDate){
                 
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
@@ -121,7 +137,7 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
                 didNotTakePillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
+                reshedule(m.notificationManager(viewContext))
                 refreshScreen()
             }
         }
@@ -131,10 +147,22 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
                 tookPillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
+                reshedule(m.notificationManager(viewContext))
                 refreshScreen()
             }
         }
+    }
+    
+    private func reshedule(notificationManager: MedicineNotificationsManager) {
+        
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
+            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
+        }else if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
+            Logger.Error("Medicine Notifications are not enabled")
+            return
+        }
+        
+        notificationManager.reshedule()
     }
 }
 

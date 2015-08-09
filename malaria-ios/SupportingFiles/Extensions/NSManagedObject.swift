@@ -4,7 +4,7 @@ import UIKit
 public extension NSManagedObject {
 
     ///Converts MyTarget.ClassName to ClassName
-    class func getSimpleClassName(c: AnyClass) -> String {
+    private static func getSimpleClassName(c: AnyClass) -> String {
         return c.description().componentsSeparatedByString(".").last!
     }
     
@@ -22,7 +22,7 @@ public extension NSManagedObject {
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `T`: A new NSManagedObject of the type given by argument
-    class func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
+    public static func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
         let name = getSimpleClassName(entity)
         
         let entityDescription = NSEntityDescription.entityForName(name, inManagedObjectContext: context)!
@@ -34,7 +34,7 @@ public extension NSManagedObject {
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
     /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
-    class func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
+    public static func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil, fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
         let name = getSimpleClassName(entity)
         
         let fetchRequest = NSFetchRequest(entityName: name)
@@ -48,7 +48,7 @@ public extension NSManagedObject {
     ///
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
     /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
-    class func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext){
+    public static func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext){
         let elements = entity.retrieve(entity, context: context)
         elements.map({context.deleteObject($0)})
     }

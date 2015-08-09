@@ -3,8 +3,8 @@ import SwiftyJSON
 
 public class SyncManager : CoreDataContextManager{
     
-    let user = "TestUser"
-    let password = "password"
+    private let user = "TestUser"
+    private let password = "password"
     
     public override init(context: NSManagedObjectContext!){
         super.init(context: context)

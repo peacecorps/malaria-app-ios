@@ -3,7 +3,7 @@ import Foundation
 public class CoreDataContextManager{
     internal let context: NSManagedObjectContext
     
-    init(context: NSManagedObjectContext){
+    public init(context: NSManagedObjectContext){
         self.context = context
     }
 }

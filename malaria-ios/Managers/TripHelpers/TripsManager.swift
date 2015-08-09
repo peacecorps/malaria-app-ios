@@ -7,7 +7,7 @@ public class TripsManager : CoreDataContextManager{
     }
     
     /// Returns the current trip if any
-    /// :returns: Trip?
+    /// :returns: `Trip?`
     public func getTrip() -> Trip?{
         return Trip.retrieve(Trip.self, fetchLimit: 1, context: context).first
     }
@@ -19,14 +19,19 @@ public class TripsManager : CoreDataContextManager{
         CoreDataHelper.sharedInstance.saveContext(context)
     }
     
+    /// Returns the location history of the trips
+    /// :param: `Int optional`: number of intended items, default is 15
+    /// :returns: `[TripHistory]`: history
     public func getHistory(limit: Int = 15) -> [TripHistory] {
         return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context)
     }
     
-    public func createHistory(trip: Trip){
+    /// Appends the trip to the history
+    /// :param: `Trip`: the trip
+    private func createHistory(trip: Trip){
         let previousHistory = TripHistory.retrieve(TripHistory.self, context: context)
         if previousHistory.count >= 15 {
-            Logger.Info("Deleting history to have more space")
+            Logger.Warn("Deleting history to have more space")
             var count = 15
             for entry in previousHistory {
                 if count == 0 {

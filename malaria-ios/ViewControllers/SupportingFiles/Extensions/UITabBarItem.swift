@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension UITabBarItem {
-    @IBInspectable var imageWhenSelected: UIImage {
+    @IBInspectable public var imageWhenSelected: UIImage {
         get {
             return self.selectedImage
         }

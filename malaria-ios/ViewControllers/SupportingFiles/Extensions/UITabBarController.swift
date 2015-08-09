@@ -3,7 +3,7 @@ import UIKit
 
 @IBDesignable extension UITabBarController {
 
-    @IBInspectable var showBar: Bool {
+    @IBInspectable public var showBar: Bool {
         get {
             fatalError("Never meant to be called")
         }

@@ -160,6 +160,10 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 0)
     }
     
+    func testCheckItems() {
+        //TODO
+    }
+    
     func testCascadeDelete(){
         XCTAssertEqual(Item.retrieve(Item.self, context: currentContext).count, 0)
         itemsManager.addItem("lantern", quantity: 6)

@@ -157,9 +157,7 @@ extension DidTakePillsViewController{
     
     private func reshedule(notificationManager: MedicineNotificationsManager) {
         
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
-            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
-        }else if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
             Logger.Error("Medicine Notifications are not enabled")
             return
         }

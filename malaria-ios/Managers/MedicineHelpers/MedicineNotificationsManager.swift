@@ -44,8 +44,6 @@ public class MedicineNotificationsManager : NotificationManager{
             nextTime += medicine.interval.day
             medicine.notificationTime = nextTime
             
-            Logger.Info("Resheduling to " + nextTime.formatWith("dd-MMMM-yyyy hh:mm"))
-            
             unsheduleNotification()
             scheduleNotification(nextTime)
             

@@ -16,6 +16,7 @@ public class NotificationManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: fireTime
     public func scheduleNotification(fireTime: NSDate){
+        Logger.Info("Sheduling \(category) to " + fireTime.formatWith("dd-MMMM-yyyy hh:mm"))
         let notification: UILocalNotification = createNotification(fireTime)
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }

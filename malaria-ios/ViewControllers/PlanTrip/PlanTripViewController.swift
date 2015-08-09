@@ -166,7 +166,7 @@ extension PlanTripViewController{
     private func scheduleNotifications(trip: Trip) {
         let notificationManager = trip.notificationManager(viewContext)
         
-        switch (UserSettingsManager.UserSetting.TripReminderOption.getString()){
+        switch (UserSettingsManager.UserSetting.TripReminderOption.getString(defaultValue: FrequentReminderOption)){
         case FrequentReminderOption:
             Logger.Info("Scheduling frequent notifications for plan my trip")
             notificationManager.scheduleNotification(departureDay)
@@ -182,8 +182,7 @@ extension PlanTripViewController{
         case OffReminderOption:
             Logger.Warn("Trip Reminder is turned off")
         default:
-            UserSettingsManager.UserSetting.TripReminderOption.setString(FrequentReminderOption)
-            scheduleNotifications(trip)
+            Logger.Warn("Incorrect value set for TripReminderOption")
         }
     }
     

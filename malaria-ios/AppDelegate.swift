@@ -70,10 +70,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
                         let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
                         currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: true)
+                        currentMedicine?.notificationManager(context).reshedule()
                     case MedicineNotificationsManager.DidNotTakePillId:
                         let context = CoreDataHelper.sharedInstance.createBackgroundContext()!
                         let currentMedicine = MedicineManager(context: context).getCurrentMedicine()
                         currentMedicine?.registriesManager(context).addRegistry(NSDate(), tookMedicine: false)
+                        currentMedicine?.notificationManager(context).reshedule()
                     default:
                         Logger.Error("ID not found")
                     }

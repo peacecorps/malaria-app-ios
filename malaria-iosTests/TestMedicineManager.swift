@@ -54,7 +54,6 @@ class TestSetupInsertClear: XCTestCase {
         XCTAssertEqual(m.getRegisteredMedicines().count, 1)
     }
     
-    
     func testClearMedicines(){
         XCTAssertEqual(true, m.getRegisteredMedicines().count == 1)
         

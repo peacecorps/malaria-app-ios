@@ -3,7 +3,7 @@ import Foundation
 public class UserSettingsManager{
     
     public enum UserSetting: String{
-        static let allValues = [DidConfiguredMedicine]
+        static let allValues = [DidConfiguredMedicine, ClearTripHistory, ClearMedicineHistory, MedicineReminderSwitch, TripReminderOption]
         
         case DidConfiguredMedicine = "DidConfiguredMedicine"
         case ClearTripHistory = "ClearTripHistory"

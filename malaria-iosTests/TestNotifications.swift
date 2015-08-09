@@ -75,5 +75,4 @@ class TestNotifications: XCTestCase {
     func testNotificationDampening(){
         //todo when there is more information
     }
-
 }

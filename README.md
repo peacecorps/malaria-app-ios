@@ -33,8 +33,11 @@ mmcallister@peacecorps.gov
 4. Open malaria-ios.xcworkspace
 
 To regenerate docs:
+
 1. Install jazzy (https://github.com/Realm/jazzy):
+
 > sudo gem install jazzy
 
 2. Run:
+
 > jazzy -c --skip-undocumented

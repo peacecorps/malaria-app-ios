@@ -19,7 +19,9 @@ pchoquette@peacecorps.gov
 Matthew McAllister - Special Assistant in the Office of Innovation
 mmcallister@peacecorps.gov
 
-<h3>How to run:</h3>
+<h2>Development</h2>
+
+<h3>Install and run </h3>
 
 1. Install CocoaPods (manage libraries and dependencias like RestKit):
 > sudo gem install cocoapods
@@ -32,7 +34,8 @@ mmcallister@peacecorps.gov
 
 4. Open malaria-ios.xcworkspace
 
-To regenerate docs:
+
+<h3>How to regenerate docs:</h3>
 
 1. Install jazzy (https://github.com/Realm/jazzy):
 
@@ -41,3 +44,18 @@ To regenerate docs:
 2. Run:
 
 > jazzy -c --skip-undocumented
+
+<h3>How to handle dependencies:</h3>
+
+Dependencies must, as possible, be managed using cocoa pods. At the moment CVCalendar is not a cocoa pods because the developer doesn't support that yet. As soon as he releases one version that it does it will be added to the current Podfile
+
+From cocoapods: 
+```
+pod 'Alamofire', '~> 1.2.3'
+pod 'SwiftyJSON', '~> 2.2.0'
+pod 'Charts', '~> 2.1.0'
+pod 'CircleProgressView', :git => 'https://github.com/bphenriques/CircleProgressView.git', :tag => '0.9.10'
+pod 'HorizontalProgressView', :git => 'https://github.com/bphenriques/HorizontalProgressView.git', :tag => '0.9.5'
+pod 'PickerSwift', :git => 'https://github.com/bphenriques/PickerSwift.git', :tag => '0.9.0'
+pod 'DoneToolBarSwift', :git => 'https://github.com/bphenriques/done-toolbar-swift.git', :tag => '0.9.3'
+```

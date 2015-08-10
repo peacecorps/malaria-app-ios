@@ -2,18 +2,22 @@ import Foundation
 import UIKit
 import PickerSwift
 
-class TripLocationHistoryPickerViewer : UIPickerView{
-    internal var pcLocationsPickerProvider: PickerProvider!
-    internal var locations = [String]()
+/// Trip location picker viewer
+public class TripLocationHistoryPickerViewer : UIPickerView{
+    private var pcLocationsPickerProvider: PickerProvider!
+    /// Locations
+    public var locations = [String]()
     
-    var selectedValue = ""
+    /// Selected value
+    public var selectedValue = ""
     
-    var tripsManager: TripsManager!
+    private var tripsManager: TripsManager!
     
-    /// initialization
+    /// Initialization
+    ///
     /// :param: `NSManagedObjectContext`: current context
     /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
-    init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
+    public init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
         tripsManager = TripsManager(context: context)
         
@@ -29,11 +33,11 @@ class TripLocationHistoryPickerViewer : UIPickerView{
         self.dataSource = pcLocationsPickerProvider
     }
     
-    func defaultTripLocation() -> String {
+    private func defaultTripLocation() -> String {
         return locations[0]
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

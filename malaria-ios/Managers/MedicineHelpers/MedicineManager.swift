@@ -1,7 +1,8 @@
 import Foundation
 
+/// Manages `Medicine` core data instances
 public class MedicineManager : CoreDataContextManager{
-    
+    /// Init
     override public init(context: NSManagedObjectContext){
         super.init(context: context)
     }

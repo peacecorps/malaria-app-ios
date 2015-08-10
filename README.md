@@ -1,4 +1,3 @@
-
 To compile and run:
 
 1. Install CocoaPods (manage libraries and dependencias like RestKit):
@@ -11,3 +10,10 @@ To compile and run:
 > pod install
 
 4. Open malaria-ios.xcworkspace
+
+
+To regenerate docs:
+1. Install jazzy: 
+https://github.com/Realm/jazzy
+
+2. Run jazzy

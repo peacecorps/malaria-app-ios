@@ -1,9 +1,10 @@
 import Foundation
 import UIKit
 
-class DailyStatsTableViewController : UITableViewController, PresentsModalityDelegate{
+/// `DailyStatsTableViewController` presents to the user his daily stats for the current medicine
+class DailyStatsTableViewController : UITableViewController{
     
-    var listStats: [Stat] = [
+    private var listStats: [Stat] = [
         MedicineLastTaken(),
         PillStreak(),
         Adherence()
@@ -30,9 +31,7 @@ class DailyStatsTableViewController : UITableViewController, PresentsModalityDel
         pagesManager.currentViewController = self
     }
     
-    func OnDismiss() {
-        refreshScreen()
-    }
+
     
     func refreshScreen() {
         Logger.Info("Refreshing DAILY")
@@ -45,6 +44,13 @@ class DailyStatsTableViewController : UITableViewController, PresentsModalityDel
         }else {
             tableView.reloadData()
         }
+    }
+}
+
+//MARK: PresentsModalityDelegate
+extension DailyStatsTableViewController : PresentsModalityDelegate{
+    func OnDismiss() {
+        refreshScreen()
     }
 }
 

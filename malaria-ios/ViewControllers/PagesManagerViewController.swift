@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-@IBDesignable class PagesManagerViewController : UIViewController {
+/// `PagesManagerViewController` encapsulates a paged view controller
+class PagesManagerViewController : UIViewController {
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var content: UIView!
     

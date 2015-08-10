@@ -1,18 +1,21 @@
 import Foundation
 
+/// Manages `Trip` core data instances
 public class TripsManager : CoreDataContextManager{
     
+    /// Init
     public override init(context: NSManagedObjectContext){
         super.init(context: context)
     }
     
     /// Returns the current trip if any
+    ///
     /// :returns: `Trip?`
     public func getTrip() -> Trip?{
         return Trip.retrieve(Trip.self, fetchLimit: 1, context: context).first
     }
     
-    /// Clears any trip from coreData
+    /// Clears any trip from Core Data
     public func clearCoreData(){
         Trip.clear(Trip.self, context: context)
         TripHistory.clear(TripHistory.self, context: context)
@@ -20,13 +23,16 @@ public class TripsManager : CoreDataContextManager{
     }
     
     /// Returns the location history of the trips
+    ///
     /// :param: `Int optional`: number of intended items, default is 15
+    ///
     /// :returns: `[TripHistory]`: history
     public func getHistory(limit: Int = 15) -> [TripHistory] {
         return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context)
     }
     
     /// Appends the trip to the history
+    ///
     /// :param: `Trip`: the trip
     private func createHistory(trip: Trip){
         let previousHistory = TripHistory.retrieve(TripHistory.self, context: context)
@@ -58,6 +64,7 @@ public class TripsManager : CoreDataContextManager{
     /// :param: `Medicine.Pill`: Location
     /// :param: `Int64`: caseToBring
     /// :param: `NSdate`: reminderDate
+    ///
     /// :return: `Trip`: Instance of trip
     public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
         func create(t: Trip) -> Trip{

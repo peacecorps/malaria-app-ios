@@ -1,9 +1,15 @@
 import Foundation
 import UIKit
 
+/// Abstract class for handling `UILocalNotification`
 public class NotificationManager : CoreDataContextManager{
+    /// Alert category, default fatalError
     public var category: String { get{ fatalError("No category provided")} }
+    
+    /// Alert body, default fatalError
     public var alertBody: String { get{ fatalError("No alertBody provided")} }
+
+    /// Alert action, default fatalError
     public var alertAction: String { get{ fatalError("No alertAction provided")} }
     
     override public init(context: NSManagedObjectContext!){

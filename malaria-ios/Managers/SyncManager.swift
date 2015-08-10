@@ -1,11 +1,12 @@
 import Alamofire
 import SwiftyJSON
 
+/// Responsible for syncing remote server with CoreData
 public class SyncManager : CoreDataContextManager{
-    
     private let user = "TestUser"
     private let password = "password"
     
+    /// Init
     public override init(context: NSManagedObjectContext!){
         super.init(context: context)
         
@@ -19,6 +20,7 @@ public class SyncManager : CoreDataContextManager{
         Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue(value, forKey: key)
     }
     
+    /// dictionary with key full endpoint url path and object an instance of `Endpoint`
     public var endpoints: [String : Endpoint] = [
         EndpointType.Posts.path() : PostsEndpoint(),
     ]

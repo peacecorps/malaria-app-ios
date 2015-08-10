@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    //44 pixels as suggested in Apple's Human Interface Guidelines
+    /// Widens hitArea of every UIButton to at least 44 pixels as suggested in Apple's Human Interface Guidelines
     public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let buttonSize = frame.size
         

@@ -1,7 +1,9 @@
 import Foundation
 import CoreData
 
+/// Manages `NSPersistentStoreCoordinator`. Contains storeName and storeFileName and manages options for auto migration
 public class CoreDataStore{
+    /// Singleton
     public static let sharedInstance = CoreDataStore()
     
     private let storeName = "Model"

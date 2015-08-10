@@ -3,6 +3,10 @@ import UIKit
 
 @IBDesignable extension UITabBarController {
 
+    /// Set to false if you want to disable the bottom bar:
+    ///
+    /// Sets `barTintColor` to clearColor
+    /// Sets `backgroundImage` and `shadowImage` to UIImage
     @IBInspectable public var showBar: Bool {
         get {
             fatalError("Never meant to be called")

@@ -1,7 +1,13 @@
 import Foundation
 
-//decoupled from the backend. This enum is only relevant for the frontend
+/// Decoupled from the backend. This enum is only relevant for the frontend
 public extension Medicine{
+    
+    /// Types of pills:
+    ///
+    /// - `Doxycycline`: Daily
+    /// - `Malarone`: Daily
+    /// - `Mefloquine`: Weekly
     enum Pill : String{
         static let allValues = [Pill.Doxycycline, Pill.Malarone, Pill.Mefloquine]
         
@@ -9,13 +15,15 @@ public extension Medicine{
         case Malarone = "Malarone"
         case Mefloquine = "Mefloquine"
         
-        /// returns the interval of the pill
+        /// Returns the interval of the pill. 7 if Mefloquine, 1 otherwise
+        ///
         /// :returns: `Int`: the pill interval
         public func interval() -> Int {
             return self == Medicine.Pill.Mefloquine ? 7 : 1
         }
         
-        /// returns the name of the pill
+        /// Returns the name of the pill
+        ///
         /// :returns: `String`: the name of the pill
         public func name() -> String{
             return self.rawValue

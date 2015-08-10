@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-@IBDesignable class MonthlyViewController: UIViewController {
+/// `MonthlyViewController`: shows the calendar view
+class MonthlyViewController: UIViewController {
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
     @IBOutlet weak var monthLabel: UILabel!

@@ -1,13 +1,28 @@
 import Foundation
 
+/// Returns true if first argument happens before the second argument
+/// :param: `NSDate`
+/// :param: `NSDate`:
+///
+/// :returns: `Bool`
 public func <(a: NSDate, b: NSDate) -> Bool {
     return a.compare(b) == NSComparisonResult.OrderedAscending
 }
 
+/// Returns true if first argument happens after the second argument
+/// :param: `NSDate`
+/// :param: `NSDate`:
+///
+/// :returns: `Bool`
 public func >(a: NSDate, b: NSDate) -> Bool {
     return a.compare(b) == NSComparisonResult.OrderedDescending
 }
 
+/// Returns true if first argument happens same time as the second argument
+/// :param: `NSDate`
+/// :param: `NSDate`:
+///
+/// :returns: `Bool`
 public func ==(a: NSDate, b: NSDate) -> Bool {
     return a === b || a.compare(b) == NSComparisonResult.OrderedSame
 }
@@ -88,8 +103,9 @@ public extension NSDate{
     /// :param: `Int`: Year.
     /// :param: `Int`: Month.
     /// :param: `Int`: Day.
-    /// :param: `Int` optional: Hour.
-    /// :param: `Int` optional: Minute.
+    /// :param: `Int optional`: Hour.
+    /// :param: `Int optional`: Minute.
+    ///
     /// :returns: `NSDate`: Customized NSDate.
     public static func from(year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0) -> NSDate {
         let c = NSDateComponents()
@@ -104,7 +120,8 @@ public extension NSDate{
     
     /// Returns a string according in the format given by argumen
     ///
-    /// :param: `String`: The format string (e.g. "yyyy-MM-dd")
+    /// :param: `String optional`: default dd-MMMM-yyyy hh:mm
+    ///
     /// :returns: `String`
     public func formatWith(_ format: String = "dd-MMMM-yyyy hh:mm") -> String{
         let formatter = NSDateFormatter()
@@ -114,7 +131,8 @@ public extension NSDate{
     
     /// Returns true if happens before the date given as argument
     ///
-    /// :param: `NSDate`: The day to compare to
+    /// :param: `NSDate`
+    ///
     /// :returns: `Bool`
     public func happensMonthsBefore(date: NSDate) -> Bool{
         return (self.year < date.year) || (self.year == date.year && self.month < date.month)
@@ -122,14 +140,16 @@ public extension NSDate{
     
     /// Returns true if happens after the date given as argument
     ///
-    /// :param: `NSDate`: the day to compare
+    /// :param: `NSDate`
+    ///
     /// :returns: `Bool`
     public func happensMonthsAfter(date: NSDate) -> Bool{
         return (self.year > date.year) || (self.year == date.year && self.month > date.month)
     }
     
     /// Returns true if both dates represents the same day (day, month and year)
-    /// :param: `NSDate`: the day to compare
+    /// :param: `NSDate`
+    ///
     /// :returns: `Bool`
     public func sameDayAs(dateTwo: NSDate) -> Bool {
         return self.year == dateTwo.year && self.month == dateTwo.month && self.day == dateTwo.day
@@ -137,7 +157,8 @@ public extension NSDate{
 
     /// Returns true if both dates belong in the same week. Also takes into account year transition
     ///
-    /// :param: `NSDate`: the day to compare
+    /// :param: `NSDate`
+    ///
     /// :returns: `Bool`
     public func sameWeekAs(dateTwo: NSDate) -> Bool {
         return (self.year == dateTwo.year && self.week == dateTwo.week) || self.startOfWeek.sameDayAs(dateTwo.startOfWeek)
@@ -145,7 +166,8 @@ public extension NSDate{
 
     /// Returns true if both dates happens in the same month.
     ///
-    /// :param: `NSDate`: the day to compare
+    /// :param: `NSDate`
+    ///
     /// :returns: `Bool`
     public func sameMonthAs(dateTwo: NSDate) -> Bool {
         return (self.year == dateTwo.year && self.month == dateTwo.month)

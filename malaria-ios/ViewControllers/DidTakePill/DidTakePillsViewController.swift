@@ -1,7 +1,8 @@
 import UIKit
 import AVFoundation
 
-@IBDesignable class DidTakePillsViewController: UIViewController, PresentsModalityDelegate {
+/// `DidTakePillsViewController` where the user can track his today's/ weekly medicine
+class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var dayOfTheWeekLbl: UILabel!
     @IBOutlet weak var fullDateLbl: UILabel!
     @IBOutlet weak var tookPillBtn: UIButton!
@@ -166,7 +167,7 @@ extension DidTakePillsViewController{
     }
 }
 
-extension DidTakePillsViewController {
+extension DidTakePillsViewController: PresentsModalityDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         pagesManager.currentViewController = self

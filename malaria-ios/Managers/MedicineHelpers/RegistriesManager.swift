@@ -1,8 +1,10 @@
 import Foundation
 
+/// Manages `Medicine` array of entries and provides useful methods to retrieve useful information
 public class RegistriesManager : CoreDataContextManager{
     private let medicine: Medicine
     
+    /// Init
     public init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
         super.init(context: context)
@@ -12,6 +14,7 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    ///
     /// :returns: `Registry?`: registry
     public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Registry?{
         let entries = allRegistriesInPeriod(at, registries: registries)
@@ -35,6 +38,7 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    ///
     /// :returns: `(noData: Bool, entries: [Registry])`: A tuple where the first value indicates if there are no entries
     /// before the date and the second the array of entries.
     public func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]){
@@ -104,7 +108,8 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: the date of the entry
     /// :param: `Bool`: if the user took medicine
-    /// :param: `Bool` optional: overwrite previous entry (by default is false)
+    /// :param: `Bool optional`: overwrite previous entry (by default is false)
+    ///
     /// :returns: `Bool`: true if success, false if no
     public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         if date > NSDate() {
@@ -176,9 +181,10 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: date1
     /// :param: `NSDate`: date2
-    /// :param: `Bool` optional: if first element of result should be the most recent entry. (by default is true)
-    /// :param: `Bool` optional: if true, it won't sort the elements reducing one sort cycle
+    /// :param: `Bool optional`: if first element of result should be the most recent entry. (by default is true)
+    /// :param: `Bool optional`: if true, it won't sort the elements reducing one sort cycle
     /// :param: `(r: Registry) -> Bool) optional`: Additional custom filter
+    ///
     /// :returns: `[Registry]`
     public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true, unsorted: Bool = false, additionalFilter: ((r: Registry) -> Bool)? = nil) -> [Registry]{
         
@@ -196,7 +202,7 @@ public class RegistriesManager : CoreDataContextManager{
         return mostRecentFirst ? filtered.sorted({$0.date > $1.date}) : filtered.sorted({$0.date < $1.date})
     }
     
-    
+    /// Filter entries between two dates and, optionally, with an extra filter
     ///
     /// :param: `[Registry]`: list of entries
     /// :param: `NSDate`: first day
@@ -214,6 +220,7 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// :param: `NSDate`: date
     /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    ///
     /// :returns: `Registry?`
     public func findRegistry(date: NSDate, registries: [Registry]? = nil) -> Registry?{
         if let r = registries {
@@ -225,6 +232,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// Returns last day when the user taken the medicine
     ///
     /// :param `[Registry]? optional`: cached list of entries. Must be sorted from most recent to least recent
+    ///
     /// :returns: `NSDate?`
     func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
         let entries = registries != nil ? registries! : getRegistries(mostRecentFirst: true)

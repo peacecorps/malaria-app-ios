@@ -1,5 +1,25 @@
 import Foundation
 
+/// Possible endpoints for InfoHub
+///
+/// - `BaseUrl`: Base url
+///
+/// - `Api`
+/// - `Posts`
+/// - `Revposts`
+/// - `Regions`
+/// - `Sectors`
+/// - `Ptposts`
+/// - `Projects`
+/// - `Volunteer`
+/// - `Cohort`
+/// - `Measurement`
+/// - `Activity`
+/// - `Outcomes`
+/// - `Outputs`
+/// - `Indicators`
+/// - `Objectives`
+/// - `Goals`
 public enum EndpointType : String{
     case BaseUrl = "http://pc-web-dev.systers.org/"
     
@@ -21,9 +41,8 @@ public enum EndpointType : String{
     case Goals = "goals"
     
     /// Returns the full path to the endpoint
-    /// if BaseUrl returns BaseUrl
-    /// if Api returns Api
-    /// else append BaseUrl/Api/Self
+    ///
+    /// :returns: `String`: If BaseUrl returns the BaseUrl, fullpath otherwise
     public func path() -> String{
         if self == BaseUrl {
             return self.rawValue

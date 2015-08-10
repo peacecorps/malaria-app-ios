@@ -1,7 +1,9 @@
 import Foundation
 import UIKit
 
-class CachedStatistics : NSObject{
+/// Responsible for keep a cache of the data and avoid repeating computations after every view controller transition
+public class CachedStatistics : NSObject{
+    /// Singleton
     static let sharedInstance = CachedStatistics()
 
     private var context: NSManagedObjectContext!
@@ -28,7 +30,8 @@ class CachedStatistics : NSObject{
     var todaysPillStreak: Int = 0
     var todaysAdherence: Float = 0
     
-    override init(){
+    /// Init
+    override public init(){
         super.init()
         NSNotificationEvents.ObserveDataUpdated(self, selector: "resetFlags")
     }
@@ -37,14 +40,15 @@ class CachedStatistics : NSObject{
         NSNotificationEvents.UnregisterAll(self)
     }
     
-    func resetFlags(){
+    internal func resetFlags(){
         isMonthlyAdherenceDataUpdated = false
         isGraphViewDataUpdated = false
         isCalendarViewDataUpdated = false
         isDailyStatsUpdated = false
     }
     
-    func refreshContext(){
+    /// Call this to refresh the context. Don't forget to call desired methods to keep internal cache updated
+    public func refreshContext(){
         self.context = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
         medicine = MedicineManager(context: context).getCurrentMedicine()
@@ -52,13 +56,17 @@ class CachedStatistics : NSObject{
         statsManager = medicine.stats(context)
     }
     
-    func setupBeforeCaching() {
+    /// Updates internal cache
+    public func setupBeforeCaching() {
         registries = registriesManager.getRegistries(mostRecentFirst: false)
     }
 }
 
 extension CachedStatistics {
-    func retrieveDailyStats(completition: () -> ()){
+    /// Retrieves daily stats
+    ///
+    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
+    public func retrieveDailyStats(completition: () -> ()){
         lastMedicine = nil
         todaysPillStreak = 0
         todaysAdherence = 0
@@ -79,7 +87,11 @@ extension CachedStatistics {
         
     }
     
-    func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
+    /// Retrieves month adherece
+    ///
+    /// :param: `NSDate`: Desired month
+    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
+    public func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
         monthAdhrence.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -97,7 +109,8 @@ extension CachedStatistics {
         })
     }
     
-    func retrieveTookMedicineStats(){
+    /// Retrieves took medicine stats. Useful in a calendar view
+    public func retrieveTookMedicineStats(){
         
         tookMedicine.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -116,8 +129,12 @@ extension CachedStatistics {
             self.isCalendarViewDataUpdated = true
         })
     }
-    
-    func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
+
+    /// Update took medicine stats and calls the progress to update any information in the UI
+    ///
+    /// :param: `NSDate`: The day to be updated
+    /// :param: `() -> ()`: Progress handler to be executed in the UI thread
+    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
             self.refreshContext()
@@ -146,7 +163,11 @@ extension CachedStatistics {
         })
     }
     
-    func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
+    /// Retrieves cached statistics for the graph
+    ///
+    /// :param: `(progress: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
+    /// :param: `() -> ()`: Completition handler to be executed in the UI after finishing processing
+    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
         adherencesPerDay.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {

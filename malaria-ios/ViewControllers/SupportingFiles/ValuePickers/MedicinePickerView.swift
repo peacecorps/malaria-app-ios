@@ -2,17 +2,22 @@ import Foundation
 import UIKit
 import PickerSwift
 
-class MedicinePickerView : UIPickerView{
-    var medicinePickerProvider: PickerProvider!
-    var medicines = [String]()
-    var selectedValue = ""
+/// Medicine Picker View, containing all possible medicines and by default is the on selected by the user in the setup
+/// screen
+public class MedicinePickerView : UIPickerView{
+    private var medicinePickerProvider: PickerProvider!
+    private var medicines = [String]()
     
-    var medicineManager: MedicineManager!
+    /// Selected value
+    public var selectedValue = ""
     
-    /// initialization
+    private var medicineManager: MedicineManager!
+    
+    /// Initialization
+    ///
     /// :param: `NSManagedObjectContext`: current context
     /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
-    init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
+    public init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         medicineManager = MedicineManager(context: context)
         super.init(frame: CGRectZero)
         
@@ -45,20 +50,22 @@ class MedicinePickerView : UIPickerView{
         }
     }
     
-    /// returns the default medicine. If there is nothing configured, returns empty string
+    /// Returns the default medicine. If there is nothing configured, returns empty string
+    ///
     /// :returns: `String`
-    func defaultMedicine() -> String{
+    private func defaultMedicine() -> String{
         return medicineManager.getCurrentMedicine()?.name ?? ""
     }
     
-    /// generates a string for the medicine by following the rule:
+    /// Generates a string for the medicine by following the rule:
     /// name + (weekly if interval is 7) OR (daily if interval is 1)
+    ///
     /// :returns: `String`: generated string
-    func generateMedicineString(medicine: Medicine.Pill) -> String{
+    private func generateMedicineString(medicine: Medicine.Pill) -> String{
         return medicine.name() + " (" + (medicine.interval() == 7 ? "Weekly" : "Daily") + ")"
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

@@ -3,6 +3,7 @@ import UIKit
 import PickerSwift
 import DoneToolBarSwift
 
+/// `PlanTripViewController` manages trips
 class PlanTripViewController: UIViewController {
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var departure: UITextField!

@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+/// Trip
 public class Trip: NSManagedObject {
 
     @NSManaged public var medicine: String

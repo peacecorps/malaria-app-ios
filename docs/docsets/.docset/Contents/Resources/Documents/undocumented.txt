@@ -1,0 +1,106 @@
+InfoHubViewController.swift
+	class InfoHubViewController : UIViewController
+	class InfoHubViewController : UIViewController
+TripLocationHistoryPickerViewer.swift
+	required public init(coder aDecoder: NSCoder)
+MedicinePickerViewTrip.swift
+	required public init(coder aDecoder: NSCoder)
+CVCalendarWeekView.swift
+	class CVCalendarWeekView : UIView
+	class CVCalendarWeekView : UIView
+	class CVCalendarWeekView : UIView
+CVCalendarMonthContentViewController.swift
+	class CVCalendarMonthContentViewController : CVCalendarContentViewController
+	class CVCalendarMonthContentViewController : CVCalendarContentViewController
+	class CVCalendarMonthContentViewController : CVCalendarContentViewController
+CVCalendarDayView.swift
+	class CVCalendarDayView : UIView
+	class CVCalendarDayView : UIView
+	class CVCalendarDayView : UIView
+	class CVCalendarDayView : UIView
+	class CVCalendarDayView : UIView
+	class CVCalendarDayView : UIView
+Post.swift
+	@NSManaged public var created_at: String
+	@NSManaged public var id: Int64
+	@NSManaged public var owner: Int64
+	@NSManaged public var post_description: String
+	@NSManaged public var title: String
+	@NSManaged public var updated_at: String
+	@NSManaged public var contained_in: CollectionPosts
+CVCalendarTouchController.swift
+	class CVCalendarTouchController
+	class CVCalendarTouchController
+CVCalendarWeekContentViewController.swift
+	class CVCalendarWeekContentViewController : CVCalendarContentViewController
+	class CVCalendarWeekContentViewController : CVCalendarContentViewController
+	class CVCalendarWeekContentViewController : CVCalendarContentViewController
+	class CVCalendarWeekContentViewController : CVCalendarContentViewController
+CVDate.swift
+	class CVDate : NSObject
+	class CVDate : NSObject
+	class CVDate : NSObject
+CVAuxiliaryView.swift
+	class CVAuxiliaryView : UIView
+	class CVAuxiliaryView : UIView
+CollectionPostsEndpoint.swift
+	public var path: String { get { fatalError("Please specify path") } }
+CVCalendarView.swift
+	class CVCalendarView : UIView
+	class CVCalendarView : UIView
+	class CVCalendarView : UIView
+	class CVCalendarView : UIView
+MedicinePickerView.swift
+	required public init(coder aDecoder: NSCoder)
+Registry.swift
+	@NSManaged public var date: NSDate
+	@NSManaged public var tookMedicine: Bool
+Medicine.swift
+	@NSManaged public var name: String
+	@NSManaged public var isCurrent: Bool
+	@NSManaged public var registries: NSSet
+	@NSManaged public var internalInterval: Int64
+	@NSManaged public var notificationTime: NSDate?
+Item.swift
+	@NSManaged public var check: Bool
+	@NSManaged public var name: String
+	@NSManaged public var quantity: Int64
+	@NSManaged public var associated_with: Trip
+Logger.swift
+	public var description: String { get { return self }}
+CVCalendarContentViewController.swift
+	class CVCalendarContentViewController : UIViewController
+	class CVCalendarContentViewController : UIViewController
+	class CVCalendarContentViewController : UIViewController
+	class CVCalendarContentViewController : UIViewController
+	class CVCalendarContentViewController : UIViewController
+	class CVCalendarContentViewController : UIViewController
+CVCalendarDayViewControlCoordinator.swift
+	class CVCalendarDayViewControlCoordinator
+	class CVCalendarDayViewControlCoordinator
+	class CVCalendarDayViewControlCoordinator
+Trip.swift
+	@NSManaged public var medicine: String
+	@NSManaged public var departure: NSDate
+	@NSManaged public var arrival: NSDate
+	@NSManaged public var location: String
+	@NSManaged public var items: NSSet
+	@NSManaged public var reminderTime: NSDate
+CVCalendarViewAnimator.swift
+	class CVCalendarViewAnimator
+	class CVCalendarViewAnimator
+	class CVCalendarViewAnimator
+CollectionPosts.swift
+	@NSManaged public var posts: NSSet
+DailyStatsCells.swift
+	var title : String { get }
+	var image : UIImage { get }
+	var attributeValue : String { get }
+NotificationManager.swift
+	override public init(context: NSManagedObjectContext!)
+CVCalendarMonthView.swift
+	class CVCalendarMonthView : UIView
+	class CVCalendarMonthView : UIView
+	class CVCalendarMonthView : UIView
+	class CVCalendarMonthView : UIView
+	class CVCalendarMonthView : UIView

@@ -3,24 +3,25 @@ import UIKit
 
 public extension NSManagedObject {
 
-    ///Converts MyTarget.ClassName to ClassName
+    /// Converts MyTarget.ClassName to ClassName
     private static func getSimpleClassName(c: AnyClass) -> String {
         return c.description().componentsSeparatedByString(".").last!
     }
     
-    /// delete object from contect
+    /// Delete object from contect
     ///
-    /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
+    /// :param: `NSManagedObjectContext`
     public func deleteFromContext(context: NSManagedObjectContext){
         context.deleteObject(self)
     }
     
     /// Instanciates a new NSManagedObject.
     ///
-    /// After creation, his deletion must be done explicitly
+    /// After creation, the deletion must be done explicitly
     ///
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
+    /// :param: `NSManagedObjectContext`
+    ///
     /// :returns: `T`: A new NSManagedObject of the type given by argument
     public static func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
         let name = getSimpleClassName(entity)
@@ -32,7 +33,8 @@ public extension NSManagedObject {
     /// Retrieves every object in the CoreData.
     ///
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
+    /// :param: `NSManagedObjectContext`
+    ///
     /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
     public static func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil,
                                                      fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
@@ -48,7 +50,7 @@ public extension NSManagedObject {
     /// Deletes every object in the CoreData.
     ///
     /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`: by default is the one defined in CoreDataHelper
+    /// :param: `NSManagedObjectContext`
     public static func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext){
         let elements = entity.retrieve(entity, context: context)
         elements.map({context.deleteObject($0)})

@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-@IBDesignable class ListItemsViewController : UIViewController{
+/// `ListItemsViewController` manages trip items
+class ListItemsViewController : UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBInspectable var DeleteButtonColor: UIColor = UIColor(hex: 0xA9504A)
     

@@ -41,6 +41,7 @@ public extension Int{
 ///
 /// :param: `NSDate`: a date.
 /// :param: `(Int, NSCalendarUnit)`: the time unit.
+///
 /// :returns: `NSDate`: the date added with the time unit given by argument.
 public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
     let components = NSDateComponents()
@@ -53,15 +54,18 @@ public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDat
 ///
 /// :param: `NSDate`: a date.
 /// :param: `(Int, NSCalendarUnit)`: the time unit.
+///
 /// :returns: `NSDate`: the date subtracted with the time unit given by argument.
 public func - (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
     return date + (-tuple.value, tuple.unit)
 }
 
+/// sugar-syntax for +
 public func += (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
     date = date + tuple
 }
 
+/// sugar-syntax for -
 public func -= (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
     date = date - tuple
 }

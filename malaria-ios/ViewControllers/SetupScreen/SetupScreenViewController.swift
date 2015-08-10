@@ -2,6 +2,7 @@ import UIKit
 import PickerSwift
 import DoneToolBarSwift
 
+/// `SetupViewController` where the user configures the current medicine and the notification time
 class SetupScreenViewController : UIViewController{
     @IBOutlet weak var reminderTime: UITextField!
     @IBOutlet weak var medicineName: UITextField!

@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+/// Medicine containing name, interval and if is set as the current one (among other fields)
 public class Medicine: NSManagedObject {
 
     @NSManaged public var name: String

@@ -2,11 +2,13 @@ import Foundation
 import UIKit
 import PickerSwift
 
-class MedicinePickerViewTrip : MedicinePickerView{
+/// Medicine Picker for the trip
+public class MedicinePickerViewTrip : MedicinePickerView{
 
-    var tripsManager: TripsManager!
+    private var tripsManager: TripsManager!
     
-    /// initialization
+    /// Initialization
+    ///
     /// :param: `NSManagedObjectContext`: current context
     /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
     override init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
@@ -14,13 +16,14 @@ class MedicinePickerViewTrip : MedicinePickerView{
         super.init(context: context, selectCallback: selectCallback)
     }
     
-    /// Returns default medicine for the trip. If there is no trip configured returns empty string.
+    /// Returns default medicine for the trip. If there is no trip configured returns empty string
+    ///
     /// :returns: `String`: medicine for the stored trip
-    override func defaultMedicine() -> String{
+    private func defaultMedicine() -> String{
         return tripsManager.getTrip()?.medicine ?? ""
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

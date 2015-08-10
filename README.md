@@ -47,9 +47,9 @@ mmcallister@peacecorps.gov
 
 <h3>How to handle dependencies:</h3>
 
-Dependencies must, as possible, be managed using cocoa pods. At the moment CVCalendar is not a cocoa pods because the developer doesn't support that yet. As soon as he releases one version that it does it will be added to the current Podfile
+Dependencies must, as possible, be managed using CocoaPods. And use swift as preference.
 
-From cocoapods: 
+Existing dependencies taken from Podfile: 
 ```
 pod 'Alamofire', '~> 1.2.3'
 pod 'SwiftyJSON', '~> 2.2.0'

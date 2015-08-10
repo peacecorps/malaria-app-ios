@@ -1,7 +1,9 @@
 import Foundation
 import UIKit
 
-class CachedStatistics : NSObject{
+/// Responsible for keep a cache of the data and avoid repeating computations after every view controller transition
+public class CachedStatistics : NSObject{
+    /// Singleton
     static let sharedInstance = CachedStatistics()
 
     private var context: NSManagedObjectContext!
@@ -28,7 +30,8 @@ class CachedStatistics : NSObject{
     var todaysPillStreak: Int = 0
     var todaysAdherence: Float = 0
     
-    override init(){
+    /// Init
+    override public init(){
         super.init()
         NSNotificationEvents.ObserveDataUpdated(self, selector: "resetFlags")
     }
@@ -37,14 +40,15 @@ class CachedStatistics : NSObject{
         NSNotificationEvents.UnregisterAll(self)
     }
     
-    func resetFlags(){
+    internal func resetFlags(){
         isMonthlyAdherenceDataUpdated = false
         isGraphViewDataUpdated = false
         isCalendarViewDataUpdated = false
         isDailyStatsUpdated = false
     }
     
-    func refreshContext(){
+    /// Call this to refresh the context. Don't forget to call desired methods to keep internal cache updated
+    public func refreshContext(){
         self.context = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
         medicine = MedicineManager(context: context).getCurrentMedicine()
@@ -52,23 +56,28 @@ class CachedStatistics : NSObject{
         statsManager = medicine.stats(context)
     }
     
-    func setupBeforeCaching() {
+    /// Updates internal cache
+    public func setupBeforeCaching() {
         registries = registriesManager.getRegistries(mostRecentFirst: false)
     }
 }
 
 extension CachedStatistics {
-    func retrieveDailyStats(completition: () -> ()){
+    /// Retrieves daily stats
+    ///
+    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
+    public func retrieveDailyStats(completition: () -> ()){
         lastMedicine = nil
         todaysPillStreak = 0
         todaysAdherence = 0
         
+        Logger.Info("retrieveingDailyStats")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            self.todaysAdherence = self.statsManager.pillAdherence(registries: self.registries) * 100
+            self.todaysAdherence = self.statsManager.pillAdherence(date2: NSDate(), registries: self.registries) * 100
             
             let mostRecentFirst = self.registries.reverse()
             self.lastMedicine = self.registriesManager.lastPillDate(registries: mostRecentFirst)
-            self.todaysPillStreak = self.statsManager.pillStreak(registries: mostRecentFirst)
+            self.todaysPillStreak = self.statsManager.pillStreak(date2: NSDate(), registries: mostRecentFirst)
             
             self.isDailyStatsUpdated = true
             
@@ -78,14 +87,19 @@ extension CachedStatistics {
         
     }
     
-    func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
+    /// Retrieves month adherece
+    ///
+    /// :param: `NSDate`: Desired month
+    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
+    public func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
         monthAdhrence.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
                 let month = today - i.month
-                self.monthAdhrence.append((month, self.statsManager.pillAdherence(month, registries: self.registries)*100))
+                let adherence = self.statsManager.pillAdherence(month, registries: self.registries)
+                self.monthAdhrence.append((month, adherence * 100))
             }
             
             self.isMonthlyAdherenceDataUpdated = true
@@ -95,7 +109,8 @@ extension CachedStatistics {
         })
     }
     
-    func retrieveTookMedicineStats(){
+    /// Retrieves took medicine stats. Useful in a calendar view
+    public func retrieveTookMedicineStats(){
         
         tookMedicine.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -114,8 +129,12 @@ extension CachedStatistics {
             self.isCalendarViewDataUpdated = true
         })
     }
-    
-    func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
+
+    /// Update took medicine stats and calls the progress to update any information in the UI
+    ///
+    /// :param: `NSDate`: The day to be updated
+    /// :param: `() -> ()`: Progress handler to be executed in the UI thread
+    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
             self.refreshContext()
@@ -144,7 +163,11 @@ extension CachedStatistics {
         })
     }
     
-    func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
+    /// Retrieves cached statistics for the graph
+    ///
+    /// :param: `(progress: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
+    /// :param: `() -> ()`: Completition handler to be executed in the UI after finishing processing
+    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
         adherencesPerDay.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -162,7 +185,8 @@ extension CachedStatistics {
                     
                     let day = today - v.day
                     
-                    self.adherencesPerDay[index] = (day, self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries) * 100)
+                    let adherence = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries)
+                    self.adherencesPerDay[index] = (day, adherence * 100)
                     
                     //updating array from last index to first Index
                     for j in 0...(entries.count - 1) {

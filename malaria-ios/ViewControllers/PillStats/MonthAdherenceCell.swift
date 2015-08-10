@@ -2,7 +2,8 @@ import Foundation
 import UIKit
 import HorizontalProgressView
 
-@IBDesignable class AdherenceHorizontalBarCell: UITableViewCell {
+/// `AdherenceHorizontalBarCell` shows a graph bar for the adhrence for a month
+class AdherenceHorizontalBarCell: UITableViewCell {
     @IBInspectable var LowAdherenceColor: UIColor = UIColor(red: 0.894, green: 0.429, blue: 0.442, alpha: 1.0)
     @IBInspectable var HighAdherenceColor: UIColor = UIColor(red: 0.374, green: 0.609, blue: 0.574, alpha: 1.0)
     

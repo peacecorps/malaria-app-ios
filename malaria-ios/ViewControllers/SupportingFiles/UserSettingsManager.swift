@@ -1,9 +1,17 @@
 import Foundation
 
+/// NSUserDefaults Wrapper
 public class UserSettingsManager{
     
+    /// Possible user defined settings
+    ///
+    /// - `DidConfiguredMedicine`: Boolean that represents there is a default pill
+    /// - `ClearTripHistory`: Boolean toggled in the settings that clears trip history on launch
+    /// - `ClearMedicineHistory`: Boolean toggled in the settings that clears medicine history on launch
+    /// - `MedicineReminderSwitch`: Boolean toggled in the settings that allows turning on and off the reminders
+    /// - `TripReminderOption`: String value that represents notification settings for trip
     public enum UserSetting: String{
-        static let allValues = [DidConfiguredMedicine]
+        private static let allValues = [DidConfiguredMedicine, ClearTripHistory, ClearMedicineHistory, MedicineReminderSwitch, TripReminderOption]
         
         case DidConfiguredMedicine = "DidConfiguredMedicine"
         case ClearTripHistory = "ClearTripHistory"
@@ -11,32 +19,50 @@ public class UserSettingsManager{
         case MedicineReminderSwitch = "MedicineReminderSwitch"
         case TripReminderOption = "TripReminderOption"
         
-        public func isSet() -> Bool{
-            return NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) != nil
-        }
-        
         /// Sets settings boolean flag to the value given by argument
-        /// :param: `Bool`: value
+        ///
+        /// :param: `Bool`
         public func setBool(value: Bool){
             NSUserDefaults.standardUserDefaults().setBool(value, forKey: self.rawValue)
         }
         
-        /// Gets the value of the boolean user setting
+        /// Gets the value of the boolean user setting. If the value isn't set, sets it as default value and returns
+        ///
+        /// :param: `Bool optional`: default value when the variable isn't set. Default false
+        ///
         /// :returns: `Bool`: The value
-        public func getBool() -> Bool{
-            return NSUserDefaults.standardUserDefaults().boolForKey(self.rawValue) ?? false
+        public func getBool(defaultValue: Bool = false) -> Bool{
+            if let value = NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) as? Bool{
+                return value
+            }
+            
+            Logger.Warn("\(self.rawValue) isn't set, setting and returning default value \(defaultValue)")
+            
+            self.setBool(defaultValue)
+            return defaultValue
         }
         
         /// Sets settings String value of the user setting
+        ///
         /// :param: `String`: value
         public func setString(value: String){
             NSUserDefaults.standardUserDefaults().setObject(value, forKey: self.rawValue)
         }
         
-        /// Gets the string value for the key. If it is not set, returns empty string
+        /// Gets the string value for the key. If it is not set, returns a default value and sets
+        ///
+        /// :param: `String optional`: default value when the variable isn't set. Default empty string
+        ///
         /// :returns: `String`:  The value
-        public func getString() -> String{
-            return (NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) ?? "") as! String
+        public func getString(defaultValue: String = "") -> String{
+            if let value = NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) as? String{
+                return value
+            }
+            
+            Logger.Warn("\(self.rawValue) isn't set, setting and returning default value \(defaultValue)")
+            
+            self.setString(defaultValue)
+            return defaultValue
         }
         
         /// clears the key from UserDefaults

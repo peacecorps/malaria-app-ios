@@ -14,7 +14,8 @@ class TestSetupInsertClear: XCTestCase {
         
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
-        m.setup(currentPill, fireDate: NSDate())
+        m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
+        m.setCurrentPill(currentPill.name())
     }
     
     override func tearDown() {
@@ -26,7 +27,7 @@ class TestSetupInsertClear: XCTestCase {
     func testCurrentMedicine(){
         if let medi = m.getCurrentMedicine(){
             XCTAssertEqual(medi.name, Medicine.Pill.Malarone.name())
-            XCTAssertEqual(medi.frequency, 1.0)
+            XCTAssertEqual(medi.interval, 1)
             XCTAssertEqual(medi.registries.count, 0)
         }else{
             XCTFail("Fail initializing:")
@@ -34,9 +35,9 @@ class TestSetupInsertClear: XCTestCase {
     }
     
     func testGetMedicine(){
-        if let medi = m.getMedicine(currentPill){
+        if let medi = m.getMedicine(currentPill.name()){
             XCTAssertEqual(medi.name, Medicine.Pill.Malarone.name())
-            XCTAssertEqual(medi.frequency, 1.0)
+            XCTAssertEqual(medi.interval, 1)
             XCTAssertEqual(medi.registries.count, 0)
         }else{
             XCTFail("Fail initializing:")
@@ -44,15 +45,14 @@ class TestSetupInsertClear: XCTestCase {
     }
     
     func testSetCurrentPill(){
-        XCTAssertFalse(m.registerNewMedicine(currentPill))
-        XCTAssertTrue(m.registerNewMedicine(Medicine.Pill.Doxycycline))
-        XCTAssertEqual(m.getCurrentMedicine()!, m.getMedicine(currentPill)!)
+        XCTAssertFalse(m.registerNewMedicine(currentPill.name(), interval: currentPill.interval()))
+        XCTAssertTrue(m.registerNewMedicine(Medicine.Pill.Doxycycline.name(), interval: Medicine.Pill.Doxycycline.interval()))
+        XCTAssertEqual(m.getCurrentMedicine()!, m.getMedicine(currentPill.name())!)
     }
     
     func testRegisteredMedicines(){
         XCTAssertEqual(m.getRegisteredMedicines().count, 1)
     }
-    
     
     func testClearMedicines(){
         XCTAssertEqual(true, m.getRegisteredMedicines().count == 1)

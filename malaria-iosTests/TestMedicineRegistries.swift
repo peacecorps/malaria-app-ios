@@ -44,6 +44,7 @@ class TestMedicineRegistries: XCTestCase {
         UserSettingsManager.clear()
     }
     
+    
     func testFindEntriesInBetween(){
         let entries = registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
         
@@ -152,6 +153,26 @@ class TestMedicineRegistries: XCTestCase {
         let r = registriesManager.findRegistry(d1 - 4.day)!
         XCTAssertEqual(true, r.tookMedicine)
         XCTAssertEqual(true, r.date.sameDayAs(d1 - 4.day))
+    }
+    
+    func testLimits(){
+        if let limits = registriesManager.getLimits(){
+            XCTAssertEqual(limits.leastRecent.date, d1 - 9.day)
+            XCTAssertEqual(limits.mostRecent.date, d1)
+        }else{
+            XCTFail("Couldn't find least and most recent entry, fail")
+        }
+        
+        XCTAssertEqual(registriesManager.oldestEntry()!.date, d1 - 9.day)
+        XCTAssertEqual(registriesManager.mostRecentEntry()!.date, d1)
+    }
+    
+    func testTookMedicine() {
+        //TODO
+    }
+    
+    func testEntriesInPeriod() {
+        //TODO
     }
     
     func testCascadeDelete(){

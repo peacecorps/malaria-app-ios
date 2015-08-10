@@ -18,7 +18,6 @@ class TestDailyMedicineStatistics: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         m = MedicineManager(context: currentContext)
         
-        
         m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
         m.setCurrentPill(currentPill.name())
         m.getCurrentMedicine()!.notificationManager(currentContext).scheduleNotification(d1)
@@ -51,9 +50,7 @@ class TestDailyMedicineStatistics: XCTestCase {
         XCTAssertEqual(6, stats.pillStreak(date1: d1, date2: d1 - 5.day))
     
         //miss one pill
-        println("1. ----")
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
-        println("2. ----")
         XCTAssertEqual(0, stats.pillStreak(date1: d1 - 9.day, date2: d1 - 5.day))
         XCTAssertEqual(5, stats.pillStreak(date1: d1, date2: d1 - 5.day))
         

@@ -2,37 +2,37 @@ import Foundation
 
 public extension Int{
     /// :returns: (self, NSCalendarUnit.CalendarUnitday)
-    var day: (Int, NSCalendarUnit) {
+    public var day: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitDay)
     }
     
     /// :returns: (7 * self, CalendarUnitDay)
-    var week: (Int, NSCalendarUnit) {
+    public var week: (Int, NSCalendarUnit) {
         return (self * 7, NSCalendarUnit.CalendarUnitDay)
     }
     
     /// :returns: (self, CalendarUnitMonth)
-    var month: (Int, NSCalendarUnit) {
+    public var month: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitMonth)
     }
     
     /// :returns: (self, CalendarUnitYear)
-    var year: (Int, NSCalendarUnit) {
+    public var year: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitYear)
     }
     
     /// :returns: (self, CalendarUnitMinute)
-    var minute: (Int, NSCalendarUnit) {
+    public var minute: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitMinute)
     }
     
     /// :returns: (self, CalendarUnitSecond)
-    var second: (Int, NSCalendarUnit) {
+    public var second: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitSecond)
     }
     
     /// :returns: (self, CalendarUnitHour)
-    var hour: (Int, NSCalendarUnit) {
+    public var hour: (Int, NSCalendarUnit) {
         return (self, NSCalendarUnit.CalendarUnitHour)
     }
 }
@@ -41,11 +41,11 @@ public extension Int{
 ///
 /// :param: `NSDate`: a date.
 /// :param: `(Int, NSCalendarUnit)`: the time unit.
+///
 /// :returns: `NSDate`: the date added with the time unit given by argument.
 public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-    var components = NSDateComponents()
+    let components = NSDateComponents()
     components.setValue(tuple.value, forComponent: tuple.unit);
-    
     
     return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
 }
@@ -54,19 +54,18 @@ public func + (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDat
 ///
 /// :param: `NSDate`: a date.
 /// :param: `(Int, NSCalendarUnit)`: the time unit.
+///
 /// :returns: `NSDate`: the date subtracted with the time unit given by argument.
 public func - (date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) -> NSDate {
-    var components = NSDateComponents()
-    components.setValue(-(tuple.value), forComponent: tuple.unit);
-    return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: date, options: NSCalendarOptions(0))!
+    return date + (-tuple.value, tuple.unit)
 }
 
+/// sugar-syntax for +
 public func += (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
-    NSDate() - NSDate()
-
     date = date + tuple
 }
 
+/// sugar-syntax for -
 public func -= (inout date: NSDate, tuple: (value: Int, unit: NSCalendarUnit)) {
     date = date - tuple
 }

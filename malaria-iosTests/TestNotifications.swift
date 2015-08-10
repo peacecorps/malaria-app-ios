@@ -50,22 +50,6 @@ class TestNotifications: XCTestCase {
     }
     
     
-    //only valid in weekly pills
-    func testShoudResetNotificationTime(){
-        XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1))
-        
-        println("Adding entry")
-        XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
-        println("Finished Adding entry")
-        
-        
-        for i in 1...6 {
-            XCTAssertFalse(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1 + i.day))
-        }
-        
-        XCTAssertTrue(mdWeeklyNotifManager.checkIfShouldReset(currentDate: d1 + 7.day))
-    }
-    
     func testNotificationTime(){
         //reshedule notification
         mdDailyNotifManager.reshedule()
@@ -91,5 +75,4 @@ class TestNotifications: XCTestCase {
     func testNotificationDampening(){
         //todo when there is more information
     }
-
 }

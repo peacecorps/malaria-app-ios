@@ -1,7 +1,8 @@
 import UIKit
 import AVFoundation
 
-@IBDesignable class DidTakePillsViewController: UIViewController, PresentsModalityDelegate {
+/// `DidTakePillsViewController` where the user can track his today's/ weekly medicine
+class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var dayOfTheWeekLbl: UILabel!
     @IBOutlet weak var fullDateLbl: UILabel!
     @IBOutlet weak var tookPillBtn: UIButton!
@@ -17,6 +18,7 @@ import AVFoundation
     //managers
     private var viewContext: NSManagedObjectContext!
     private var medicineManager: MedicineManager!
+    private var registriesManager: RegistriesManager!
     private var medicine: Medicine?
     var pagesManager: PagesManagerViewController!
     
@@ -50,6 +52,22 @@ import AVFoundation
         refreshScreen()
     }
     
+    private func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
+        if let m = medicine {
+            if m.interval == 1 {
+                Logger.Warn("checkIfShouldReset only valid for weekly pills")
+                return false
+            }
+            
+            if let mostRecent = m.registriesManager(viewContext).mostRecentEntry(){
+                //get ellaped days
+                return (currentDate - mostRecent.date) >= 7
+            }
+        }
+
+        return false
+    }
+    
     func refreshScreen(){
         Logger.Info("Refreshing TOOK PILL")
         
@@ -69,12 +87,13 @@ import AVFoundation
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
         medicine = medicineManager.getCurrentMedicine()
+        registriesManager = medicine!.registriesManager(viewContext)
         
         let medicineRegistries = medicine!.registriesManager(viewContext)
         let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
         
         if medicine!.interval > 1 {
-            if medicine!.notificationManager(viewContext).checkIfShouldReset(currentDate: currentDate){
+            if checkIfShouldReset(currentDate: currentDate){
                 
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
@@ -119,9 +138,9 @@ import AVFoundation
 extension DidTakePillsViewController{
     @IBAction func didNotTookMedicineBtnHandler(sender: AnyObject) {
         if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: false)){
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: false)){
                 didNotTakePillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
+                reshedule(m.notificationManager(viewContext))
                 refreshScreen()
             }
         }
@@ -129,16 +148,26 @@ extension DidTakePillsViewController{
     
     @IBAction func tookMedicineBtnHandler(sender: AnyObject) {
         if let m = medicine {
-            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && m.registriesManager(viewContext).addRegistry(currentDate, tookMedicine: true)){
+            if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: true)){
                 tookPillPlayer.play()
-                m.notificationManager(viewContext).reshedule()
+                reshedule(m.notificationManager(viewContext))
                 refreshScreen()
             }
         }
     }
+    
+    private func reshedule(notificationManager: MedicineNotificationsManager) {
+        
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+            Logger.Error("Medicine Notifications are not enabled")
+            return
+        }
+        
+        notificationManager.reshedule()
+    }
 }
 
-extension DidTakePillsViewController {
+extension DidTakePillsViewController: PresentsModalityDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         pagesManager.currentViewController = self

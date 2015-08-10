@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
 
-@IBDesignable class PagesManagerViewController : UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+/// `PagesManagerViewController` encapsulates a paged view controller
+class PagesManagerViewController : UIViewController {
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var content: UIView!
     
@@ -46,7 +47,7 @@ import UIKit
         }
     }
     
-    func setupUIPageControl() {
+    private func setupUIPageControl() {
         let appearance = UIPageControl.appearance()
         appearance.pageIndicatorTintColor = PageIndicatorTintColor
         appearance.currentPageIndicatorTintColor = PageIndicatorCurrentColor
@@ -65,7 +66,10 @@ import UIKit
             self.presentViewController(view, animated: true, completion: nil)
         }
     }
-    
+}
+
+extension PagesManagerViewController : UIPageViewControllerDataSource, UIPageViewControllerDelegate{
+
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return HomePage.allValues.count
     }
@@ -86,19 +90,19 @@ import UIKit
         var vc: UIViewController?
         
         switch value {
-            case .DailyPill:
-                let view = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self) as DidTakePillsViewController
-                view.pagesManager = self
-                vc = view
-            case .DailyStates:
-                let view = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self) as DailyStatsTableViewController
-                view.pagesManager = self
-                vc = view
-            case .Stats:
-                let view = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self) as PillsStatsViewController
-                view.pagesManager = self
-                vc = view
-            default: return nil
+        case .DailyPill:
+            let view = UIStoryboard.instantiate(viewControllerClass: DidTakePillsViewController.self) as DidTakePillsViewController
+            view.pagesManager = self
+            vc = view
+        case .DailyStates:
+            let view = UIStoryboard.instantiate(viewControllerClass: DailyStatsTableViewController.self) as DailyStatsTableViewController
+            view.pagesManager = self
+            vc = view
+        case .Stats:
+            let view = UIStoryboard.instantiate(viewControllerClass: PillsStatsViewController.self) as PillsStatsViewController
+            view.pagesManager = self
+            vc = view
+        default: return nil
         }
         
         // store relative enum to view controller
@@ -106,6 +110,7 @@ import UIKit
         return vc!
     }
 }
+
 
 enum HomePage: Int {
     static let allValues = [DailyPill, DailyStates, Stats]

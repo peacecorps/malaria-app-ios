@@ -3,7 +3,9 @@ import UIKit
 import Charts
 import CircleProgressView
 
-@IBDesignable class PillsStatsViewController : UIViewController, PresentsModalityDelegate {
+
+/// `PillsStatsViewController` responsible for showing the monthly stats and the graph
+class PillsStatsViewController : UIViewController {
     @IBOutlet weak var adherenceSliderTable: UITableView!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var graphFrame: UIView!
@@ -80,6 +82,7 @@ import CircleProgressView
     }
 }
 
+//MARK: TableView related methods
 extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,7 +116,7 @@ extension PillsStatsViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-/* Graph View related methods */
+//MARK: Graph View related methods
 extension PillsStatsViewController{
     
     func configureData(points: [(NSDate, Float)]){
@@ -204,7 +207,8 @@ extension PillsStatsViewController{
     }
 }
 
-extension PillsStatsViewController{
+//MARK: PresentsModalityDelegate
+extension PillsStatsViewController : PresentsModalityDelegate{
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         pagesManager.currentViewController = self

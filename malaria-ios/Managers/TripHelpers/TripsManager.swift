@@ -1,32 +1,43 @@
 import Foundation
 
+/// Manages `Trip` core data instances
 public class TripsManager : CoreDataContextManager{
     
+    /// Init
     public override init(context: NSManagedObjectContext){
         super.init(context: context)
     }
     
     /// Returns the current trip if any
-    /// :returns: Trip?
+    ///
+    /// :returns: `Trip?`
     public func getTrip() -> Trip?{
         return Trip.retrieve(Trip.self, fetchLimit: 1, context: context).first
     }
     
-    /// Clears any trip from coreData
+    /// Clears any trip from Core Data
     public func clearCoreData(){
         Trip.clear(Trip.self, context: context)
         TripHistory.clear(TripHistory.self, context: context)
         CoreDataHelper.sharedInstance.saveContext(context)
     }
     
+    /// Returns the location history of the trips
+    ///
+    /// :param: `Int optional`: number of intended items, default is 15
+    ///
+    /// :returns: `[TripHistory]`: history
     public func getHistory(limit: Int = 15) -> [TripHistory] {
         return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context)
     }
     
-    public func createHistory(trip: Trip){
+    /// Appends the trip to the history
+    ///
+    /// :param: `Trip`: the trip
+    private func createHistory(trip: Trip){
         let previousHistory = TripHistory.retrieve(TripHistory.self, context: context)
         if previousHistory.count >= 15 {
-            Logger.Info("Deleting history to have more space")
+            Logger.Warn("Deleting history to have more space")
             var count = 15
             for entry in previousHistory {
                 if count == 0 {
@@ -53,33 +64,30 @@ public class TripsManager : CoreDataContextManager{
     /// :param: `Medicine.Pill`: Location
     /// :param: `Int64`: caseToBring
     /// :param: `NSdate`: reminderDate
+    ///
     /// :return: `Trip`: Instance of trip
-    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate) -> Trip{
-        if let t = getTrip(){
-            Logger.Warn("Already created a trip: changing stored one")
+    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
+        func create(t: Trip) -> Trip{
             t.location = location
             t.medicine = medicine.name()
             t.departure = departure
             t.arrival = arrival
+            t.reminderTime = timeReminder
             
             t.itemsManager(context).getItems().map({$0.deleteFromContext(self.context)})
             
             createHistory(t)
             
             CoreDataHelper.sharedInstance.saveContext(context)
+            
             return t
         }
         
-        let trip = Trip.create(Trip.self, context: context)
-        trip.location = location
-        trip.medicine = medicine.name()
-        trip.departure = departure
-        trip.arrival = arrival
+        if let t = getTrip(){
+            Logger.Warn("Already created a trip: changing stored one")
+            return create(t)
+        }
         
-        createHistory(trip)
-        
-        CoreDataHelper.sharedInstance.saveContext(context)
-        
-        return trip
+        return create(Trip.create(Trip.self, context: context))
     }
 }

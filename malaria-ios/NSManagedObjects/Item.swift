@@ -1,6 +1,7 @@
 import Foundation
 import CoreData
 
+/// Trip Item
 public class Item: NSManagedObject {
 
     @NSManaged public var check: Bool

@@ -1,15 +1,16 @@
 import Foundation
 
+/// Manages trip items
 public class ItemsManager : CoreDataContextManager{
-
     let trip: Trip
     
-    init(context: NSManagedObjectContext, trip: Trip){
+    /// Init
+    public init(context: NSManagedObjectContext, trip: Trip){
         self.trip = trip
         super.init(context: context)
     }
     
-    /// add a new item to the trip
+    /// Adds a new item to the trip
     ///
     /// :param: `String`: name of the item
     /// :param: `Int64`: quantity
@@ -18,7 +19,7 @@ public class ItemsManager : CoreDataContextManager{
             Logger.Info("Updating quantity for an existing item")
             i.add(quantity)
         }else{
-            var item = Item.create(Item.self, context: self.context)
+            let item = Item.create(Item.self, context: self.context)
             item.name = name
             item.quantity = quantity
             
@@ -32,18 +33,18 @@ public class ItemsManager : CoreDataContextManager{
     
     /// Returns an item from the trip if exists
     ///
-    /// :param: `String`: name of the item
+    /// :param: `String`: name of the item (case insensitive)
     /// :param: `[Item] optional` cached list of items
+    ///
     /// :returns: `Item?`:
     public func findItem(name: String, listItems: [Item]? = nil) -> Item?{
         let items = listItems != nil ? listItems! : getItems()
         return items.filter({$0.name.lowercaseString == name.lowercaseString}).first
     }
     
-    
     /// Checkmark the items
     ///
-    /// :param: `[String]`: list of items name
+    /// :param: `[String]`: names of the items (case insensitive)
     public func checkItem(names: [String]){
         let listItems = getItems()
         names.map({ self.findItem($0, listItems: listItems)?.check = true })
@@ -52,7 +53,7 @@ public class ItemsManager : CoreDataContextManager{
     
     /// Remove the checkmark
     ///
-    /// :param: `[String]`: list of items name
+    /// :param: `[String]`: names of the items (case insensitive)
     public func uncheckItem(names: [String]){
         let listItems = getItems()
         names.map({ self.findItem($0, listItems: listItems)?.check = false })
@@ -61,7 +62,7 @@ public class ItemsManager : CoreDataContextManager{
     
     /// Toggle the checkmark
     ///
-    /// :param: `[String]`: list of items name
+    /// :param: `[String]`: name of the items (case insensitive)
     public func toggleCheckItem(names: [String]){
         let listItems = getItems()
         names.map({ self.findItem($0, listItems: listItems)?.toogle() })
@@ -70,10 +71,11 @@ public class ItemsManager : CoreDataContextManager{
     
     /// Removes a item from the trip
     ///
-    /// If quantity is specified, it only removes the specified number
+    /// If quantity is specified, it only removes the specified number,
+    /// if not, removes the item completly
     ///
     /// :param: `String`: name of the item
-    /// :param: `Int64` optional: quantity
+    /// :param: `Int64 optional` quantity
     public func removeItem(name: String, quantity: Int64 = Int64.max){
         if let i = findItem(name){
             i.remove(quantity)

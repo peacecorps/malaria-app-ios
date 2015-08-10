@@ -12,10 +12,8 @@
 		200A18C51B64F49A00EC2A65 /* MonthyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C41B64F49A00EC2A65 /* MonthyViewController.swift */; };
 		200A18C71B64F4B800EC2A65 /* CachedStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */; };
 		200A18C91B64F4C400EC2A65 /* MonthAdherenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18C81B64F4C400EC2A65 /* MonthAdherenceCell.swift */; };
-		200A18CB1B64F4FA00EC2A65 /* PickerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */; };
 		200A18CD1B64F50500EC2A65 /* MedicinePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */; };
 		200A18CF1B64F51300EC2A65 /* MedicinePickerViewTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */; };
-		200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */; };
 		200A18D51B64F55F00EC2A65 /* InfoHubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */; };
 		200A18D71B64F58F00EC2A65 /* DailyStatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */; };
 		200A18D91B64F5A300EC2A65 /* DailyStatsCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */; };
@@ -76,7 +74,12 @@
 		209F60B61B6DA6B100EDA461 /* TestTimedInsertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EE2E451B28AC7900948240 /* TestTimedInsertions.swift */; };
 		209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209F60B71B6E2AB300EDA461 /* MedicineFrontEndExtension.swift */; };
 		209F60BF1B6E4AED00EDA461 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 209F60BE1B6E4AED00EDA461 /* Sounds */; };
-		20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C718891B763573007424F6 /* ToolbarWithDone.swift */; };
+		20C718E41B76C28D007424F6 /* TestMedicineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208FE0871B42F1A400C5F447 /* TestMedicineManager.swift */; };
+		20C718E51B76C28D007424F6 /* TestUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EE49F1B1343A60087FB24 /* TestUserSettings.swift */; };
+		20C718E61B76C28D007424F6 /* TestNSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EA07061B23258900D6840E /* TestNSDateExtensions.swift */; };
+		20C718E71B76C28D007424F6 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
+		20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
+		20C718ED1B77DCB1007424F6 /* TestMonthAdherence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C718EC1B77DCB1007424F6 /* TestMonthAdherence.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
@@ -134,10 +137,8 @@
 		200A18C41B64F49A00EC2A65 /* MonthyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthyViewController.swift; path = PillStats/MonthyViewController.swift; sourceTree = "<group>"; };
 		200A18C61B64F4B800EC2A65 /* CachedStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CachedStatistics.swift; path = SupportingFiles/CachedStatistics.swift; sourceTree = "<group>"; };
 		200A18C81B64F4C400EC2A65 /* MonthAdherenceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthAdherenceCell.swift; path = PillStats/MonthAdherenceCell.swift; sourceTree = "<group>"; };
-		200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PickerProvider.swift; path = SupportingFiles/ValuePickers/PickerProvider.swift; sourceTree = "<group>"; };
 		200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerView.swift; path = SupportingFiles/ValuePickers/MedicinePickerView.swift; sourceTree = "<group>"; };
 		200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MedicinePickerViewTrip.swift; path = SupportingFiles/ValuePickers/MedicinePickerViewTrip.swift; sourceTree = "<group>"; };
-		200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimePickerViewer.swift; path = SupportingFiles/ValuePickers/TimePickerViewer.swift; sourceTree = "<group>"; };
 		200A18D41B64F55F00EC2A65 /* InfoHubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoHubViewController.swift; path = InfoHub/InfoHubViewController.swift; sourceTree = "<group>"; };
 		200A18D61B64F58F00EC2A65 /* DailyStatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsTableViewController.swift; path = DailyStats/DailyStatsTableViewController.swift; sourceTree = "<group>"; };
 		200A18D81B64F5A300EC2A65 /* DailyStatsCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DailyStatsCells.swift; path = DailyStats/DailyStatsCells.swift; sourceTree = "<group>"; };
@@ -190,7 +191,6 @@
 		200EE4AE1B1349D40087FB24 /* ImagesAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesAssets.xcassets; sourceTree = "<group>"; };
 		200F22171B6234F700C29404 /* Model6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model6.xcdatamodel; sourceTree = "<group>"; };
 		20246D141B4F1BA000384759 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		20246D181B4F1FAC00384759 /* TestContexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestContexts.swift; sourceTree = "<group>"; };
 		20246D241B53241F00384759 /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		20246D251B5327BD00384759 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		20246D2B1B53339900384759 /* Modelv4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Modelv4.xcdatamodel; sourceTree = "<group>"; };
@@ -207,7 +207,8 @@
 		20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model7.xcdatamodel; sourceTree = "<group>"; };
 		20C13EDE1B5E561F00D66C00 /* ModelV5Cached.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ModelV5Cached.xcdatamodel; sourceTree = "<group>"; };
 		20C20FEE1B39D828007A7414 /* TestWeeklyMedicineStatistics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWeeklyMedicineStatistics.swift; sourceTree = "<group>"; };
-		20C718891B763573007424F6 /* ToolbarWithDone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolbarWithDone.swift; path = SupportingFiles/ToolbarWithDone.swift; sourceTree = "<group>"; };
+		20C718EB1B77BBCF007424F6 /* Model 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 9.xcdatamodel"; sourceTree = "<group>"; };
+		20C718EC1B77DCB1007424F6 /* TestMonthAdherence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMonthAdherence.swift; sourceTree = "<group>"; };
 		20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPlanTrip.swift; sourceTree = "<group>"; };
 		20EA06D51B2234DA00D6840E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		20EA07061B23258900D6840E /* TestNSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNSDateExtensions.swift; sourceTree = "<group>"; };
@@ -509,7 +510,7 @@
 				20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */,
 				20503CD21B3F497200ED490A /* TestMapping.swift */,
 				20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */,
-				20246D181B4F1FAC00384759 /* TestContexts.swift */,
+				20C718EC1B77DCB1007424F6 /* TestMonthAdherence.swift */,
 			);
 			path = "malaria-iosTests";
 			sourceTree = "<group>";
@@ -525,12 +526,9 @@
 		203F0B251B481CB900826E06 /* ValuePickers */ = {
 			isa = PBXGroup;
 			children = (
-				200A18CA1B64F4FA00EC2A65 /* PickerProvider.swift */,
 				200A18CC1B64F50500EC2A65 /* MedicinePickerView.swift */,
 				200A18CE1B64F51300EC2A65 /* MedicinePickerViewTrip.swift */,
-				200A18D01B64F52000EC2A65 /* TimePickerViewer.swift */,
 				205E417D1B6AE74E0028A8D7 /* TripLocationHistoryPickerViewer.swift */,
-				20C718891B763573007424F6 /* ToolbarWithDone.swift */,
 			);
 			name = ValuePickers;
 			sourceTree = "<group>";
@@ -880,7 +878,6 @@
 				200C72EA1B40368600998100 /* CoreDataHelper.swift in Sources */,
 				200C72D21B40368600998100 /* Post.swift in Sources */,
 				200C72EE1B40368600998100 /* Int.swift in Sources */,
-				200A18D11B64F52000EC2A65 /* TimePickerViewer.swift in Sources */,
 				20FC57241B72CA8D00D51801 /* CVCalendarTouchController.swift in Sources */,
 				20FC572C1B72CA8D00D51801 /* CVCalendarWeekContentViewController.swift in Sources */,
 				200C72A41B40368600998100 /* RegistriesManager.swift in Sources */,
@@ -902,7 +899,6 @@
 				20FC57291B72CA8D00D51801 /* CVCalendarViewAppearanceDelegate.swift in Sources */,
 				20FC572B1B72CA8D00D51801 /* CVCalendarViewPresentationMode.swift in Sources */,
 				20FC571B1B72CA8D00D51801 /* CVAuxiliaryView.swift in Sources */,
-				200A18CB1B64F4FA00EC2A65 /* PickerProvider.swift in Sources */,
 				20FC57201B72CA8D00D51801 /* CVCalendarMenuView.swift in Sources */,
 				200C72781B40368600998100 /* CollectionPostsEndpoint.swift in Sources */,
 				20FC57251B72CA8D00D51801 /* CVCalendarView.swift in Sources */,
@@ -929,7 +925,6 @@
 				20FC57261B72CA8D00D51801 /* CVCalendarViewAnimator.swift in Sources */,
 				209F60B81B6E2AB300EDA461 /* MedicineFrontEndExtension.swift in Sources */,
 				20FC57311B72CA8D00D51801 /* CVScrollDirection.swift in Sources */,
-				20C7188A1B763573007424F6 /* ToolbarWithDone.swift in Sources */,
 				200A18C31B64F48E00EC2A65 /* PillsStatsViewController.swift in Sources */,
 				200C72C21B40368600998100 /* CollectionPosts.swift in Sources */,
 				20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */,
@@ -950,10 +945,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				209F60B51B6DA6B100EDA461 /* TestNotifications.swift in Sources */,
+				20C718E41B76C28D007424F6 /* TestMedicineManager.swift in Sources */,
+				20C718ED1B77DCB1007424F6 /* TestMonthAdherence.swift in Sources */,
+				20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */,
 				209F60B31B6DA6B100EDA461 /* TestDailyMedicineStatistics.swift in Sources */,
 				209F60B41B6DA6B100EDA461 /* TestWeeklyMedicineStatistics.swift in Sources */,
+				20C718E61B76C28D007424F6 /* TestNSDateExtensions.swift in Sources */,
+				20C718E71B76C28D007424F6 /* TestPlanTrip.swift in Sources */,
 				20246D1B1B4F245300384759 /* TestMedicineRegistries.swift in Sources */,
 				209F60B61B6DA6B100EDA461 /* TestTimedInsertions.swift in Sources */,
+				20C718E51B76C28D007424F6 /* TestUserSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1080,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				INFOPLIST_FILE = "malaria-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1113,6 +1116,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1134,6 +1139,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = "malaria-iosTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1178,6 +1185,7 @@
 		20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				20C718EB1B77BBCF007424F6 /* Model 9.xcdatamodel */,
 				209F60AE1B6D8F6B00EDA461 /* Model8.xcdatamodel */,
 				20ABA5AF1B697DFA00F18F39 /* Model7.xcdatamodel */,
 				200F22171B6234F700C29404 /* Model6.xcdatamodel */,
@@ -1187,7 +1195,7 @@
 				20246D241B53241F00384759 /* Model 2.xcdatamodel */,
 				20EA06D51B2234DA00D6840E /* Model.xcdatamodel */,
 			);
-			currentVersion = 209F60AE1B6D8F6B00EDA461 /* Model8.xcdatamodel */;
+			currentVersion = 20C718EB1B77BBCF007424F6 /* Model 9.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

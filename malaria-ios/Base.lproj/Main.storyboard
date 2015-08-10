@@ -65,14 +65,14 @@
                                             <constraint firstAttribute="height" constant="30" id="P7x-gn-jbX"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYR-ux-kkO" userLabel="NotificationTimeInput">
                                         <rect key="frame" x="140" y="130" width="398" height="30"/>
                                         <color key="backgroundColor" red="0.52156862749999999" green="0.72156862749999995" blue="0.31372549020000001" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Remind me at:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8of-jF-OFO">
@@ -89,7 +89,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUG-La-vXk">
-                                        <rect key="frame" x="498" y="10.5" width="35" height="35"/>
+                                        <rect key="frame" x="498" y="10" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="0Yp-t1-ouk"/>
                                             <constraint firstAttribute="width" constant="35" id="oKX-SI-eA4"/>
@@ -310,10 +310,10 @@
                                 <rect key="frame" x="16" y="121" width="568" height="348"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDI-g8-P7t">
-                                        <rect key="frame" x="8" y="8" width="117" height="30"/>
+                                        <rect key="frame" x="8" y="8" width="120" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="7Jj-kw-IeY"/>
-                                            <constraint firstAttribute="width" constant="117" id="UF4-Kd-laB"/>
+                                            <constraint firstAttribute="width" constant="120" id="UF4-Kd-laB"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -332,7 +332,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="wsy-a8-zYC" userLabel="LocationInput">
-                                        <rect key="frame" x="125" y="8" width="397" height="30"/>
+                                        <rect key="frame" x="128" y="8" width="394" height="30"/>
                                         <color key="backgroundColor" red="0.52156862745098043" green="0.72156862745098038" blue="0.31372549019607843" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
@@ -342,7 +342,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Departure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsv-66-dIF">
-                                        <rect key="frame" x="8" y="53" width="117" height="30"/>
+                                        <rect key="frame" x="8" y="53" width="120" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="bAL-cI-MIt"/>
                                         </constraints>
@@ -351,14 +351,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="buv-20-bVO" userLabel="dayInput">
-                                        <rect key="frame" x="125" y="53" width="435" height="30"/>
+                                        <rect key="frame" x="128" y="53" width="432" height="30"/>
                                         <color key="backgroundColor" red="0.52156862749999999" green="0.72156862749999995" blue="0.31372549020000001" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Arrival" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EB-cQ-R9d">
-                                        <rect key="frame" x="8" y="98" width="117" height="30"/>
+                                        <rect key="frame" x="8" y="98" width="120" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Jsj-0v-jst"/>
                                         </constraints>
@@ -367,14 +367,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Izn-kJ-Tw1" userLabel="dayInput">
-                                        <rect key="frame" x="125" y="98" width="435" height="30"/>
+                                        <rect key="frame" x="128" y="98" width="432" height="30"/>
                                         <color key="backgroundColor" red="0.52156862749999999" green="0.72156862749999995" blue="0.31372549020000001" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Packing List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oL5-9q-JdS">
-                                        <rect key="frame" x="8" y="143" width="117" height="30"/>
+                                        <rect key="frame" x="8" y="143" width="120" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="X2H-SY-RNp"/>
                                         </constraints>
@@ -382,15 +382,24 @@
                                         <color key="textColor" red="0.43787151575088501" green="0.32177186012268066" blue="0.27448359131813049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Remind me at" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7x-NC-6ho" userLabel="ReminderTime">
+                                        <rect key="frame" x="8" y="188" width="120" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="gs7-5K-SBZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
+                                        <color key="textColor" red="0.4378715158" green="0.32177186009999997" blue="0.2744835913" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yRe-ea-anp" userLabel="PackagingListInput">
-                                        <rect key="frame" x="125" y="143" width="435" height="30"/>
+                                        <rect key="frame" x="128" y="143" width="432" height="30"/>
                                         <color key="backgroundColor" red="0.52156862749999999" green="0.72156862749999995" blue="0.31372549020000001" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeO-hB-pOE" userLabel="PackagingListBtn">
-                                        <rect key="frame" x="125" y="143" width="435" height="30"/>
+                                        <rect key="frame" x="128" y="143" width="432" height="30"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -398,9 +407,25 @@
                                             <action selector="itemListBtnHandler:" destination="cfZ-pD-OHm" eventType="touchUpInside" id="Qzq-tR-UJ2"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwx-5V-tby" userLabel="PackagingListBtn">
+                                        <rect key="frame" x="135" y="153" width="435" height="30"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="itemListBtnHandler:" destination="cfZ-pD-OHm" eventType="touchUpInside" id="kMH-6f-kFX"/>
+                                        </connections>
+                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OzI-n5-rw0" userLabel="HistoryDummyTextField">
                                         <rect key="frame" x="800" y="301" width="97" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="FYx-2W-myp" userLabel="timeInput">
+                                        <rect key="frame" x="128" y="188" width="432" height="30"/>
+                                        <color key="backgroundColor" red="0.52156862749999999" green="0.72156862749999995" blue="0.31372549020000001" alpha="0.93000000000000005" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
@@ -414,7 +439,10 @@
                                     <constraint firstItem="oL5-9q-JdS" firstAttribute="top" secondItem="0EB-cQ-R9d" secondAttribute="bottom" constant="15" id="8Fv-2d-RDs"/>
                                     <constraint firstItem="yRe-ea-anp" firstAttribute="centerY" secondItem="oL5-9q-JdS" secondAttribute="centerY" id="8It-w7-HCp"/>
                                     <constraint firstItem="buv-20-bVO" firstAttribute="leading" secondItem="Izn-kJ-Tw1" secondAttribute="leading" id="AON-XF-618"/>
+                                    <constraint firstItem="FYx-2W-myp" firstAttribute="centerY" secondItem="d7x-NC-6ho" secondAttribute="centerY" id="CQe-Vb-SgW"/>
+                                    <constraint firstItem="OeO-hB-pOE" firstAttribute="leading" secondItem="FYx-2W-myp" secondAttribute="leading" id="EKZ-oi-OU0"/>
                                     <constraint firstItem="yRe-ea-anp" firstAttribute="leading" secondItem="Izn-kJ-Tw1" secondAttribute="leading" id="Eam-A6-K5z"/>
+                                    <constraint firstItem="d7x-NC-6ho" firstAttribute="trailing" secondItem="oL5-9q-JdS" secondAttribute="trailing" id="HuS-Vt-ZgP"/>
                                     <constraint firstItem="wsy-a8-zYC" firstAttribute="top" secondItem="lDI-g8-P7t" secondAttribute="top" id="I5y-FZ-Mlw"/>
                                     <constraint firstItem="Zsv-66-dIF" firstAttribute="top" secondItem="lDI-g8-P7t" secondAttribute="bottom" constant="15" id="Jc7-YQ-90o"/>
                                     <constraint firstItem="lDI-g8-P7t" firstAttribute="leading" secondItem="Zsv-66-dIF" secondAttribute="leading" id="UPn-qS-zLb"/>
@@ -427,11 +455,14 @@
                                     <constraint firstItem="yRe-ea-anp" firstAttribute="leading" secondItem="OeO-hB-pOE" secondAttribute="leading" id="c8B-1N-YFR"/>
                                     <constraint firstItem="Zsv-66-dIF" firstAttribute="centerY" secondItem="buv-20-bVO" secondAttribute="centerY" id="ehS-56-Ls9"/>
                                     <constraint firstItem="BNH-Wo-4uw" firstAttribute="leading" secondItem="wsy-a8-zYC" secondAttribute="trailing" constant="8" symbolic="YES" id="ejD-TA-npe"/>
+                                    <constraint firstItem="OeO-hB-pOE" firstAttribute="trailing" secondItem="FYx-2W-myp" secondAttribute="trailing" id="flm-d4-azF"/>
                                     <constraint firstItem="BNH-Wo-4uw" firstAttribute="trailing" secondItem="aEx-jR-M42" secondAttribute="trailingMargin" id="h0k-ye-uaE"/>
                                     <constraint firstItem="0EB-cQ-R9d" firstAttribute="leading" secondItem="oL5-9q-JdS" secondAttribute="leading" id="i3o-45-GCc"/>
                                     <constraint firstItem="BNH-Wo-4uw" firstAttribute="top" secondItem="aEx-jR-M42" secondAttribute="topMargin" id="jk7-dw-NH4"/>
                                     <constraint firstItem="wsy-a8-zYC" firstAttribute="leading" secondItem="buv-20-bVO" secondAttribute="leading" id="jrg-aI-Eof"/>
                                     <constraint firstItem="BNH-Wo-4uw" firstAttribute="trailing" secondItem="buv-20-bVO" secondAttribute="trailing" id="kT0-wO-wy2"/>
+                                    <constraint firstItem="d7x-NC-6ho" firstAttribute="top" secondItem="oL5-9q-JdS" secondAttribute="bottom" constant="15" id="m0g-s7-7lN"/>
+                                    <constraint firstItem="d7x-NC-6ho" firstAttribute="leading" secondItem="oL5-9q-JdS" secondAttribute="leading" id="o9y-rW-fNn"/>
                                     <constraint firstItem="wsy-a8-zYC" firstAttribute="leading" secondItem="lDI-g8-P7t" secondAttribute="trailing" id="pSt-J8-RMM"/>
                                     <constraint firstItem="0EB-cQ-R9d" firstAttribute="leading" secondItem="Zsv-66-dIF" secondAttribute="leading" id="uLY-u4-XE6"/>
                                     <constraint firstItem="wsy-a8-zYC" firstAttribute="bottom" secondItem="lDI-g8-P7t" secondAttribute="bottom" id="xe0-nu-Nhl"/>
@@ -460,7 +491,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6B-Dp-svL" userLabel="GenerateTrip">
-                                <rect key="frame" x="216" y="497" width="169" height="44"/>
+                                <rect key="frame" x="216" y="492" width="169" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="169" id="I1M-2i-rr3"/>
                                     <constraint firstAttribute="height" constant="44" id="zLh-rF-qK1"/>
@@ -479,7 +510,7 @@
                         <constraints>
                             <constraint firstItem="aEx-jR-M42" firstAttribute="trailing" secondItem="ivX-md-p2t" secondAttribute="trailingMargin" id="0Le-GL-a28"/>
                             <constraint firstItem="qdc-Ua-tsy" firstAttribute="top" secondItem="7gc-SS-cEZ" secondAttribute="bottom" constant="21" id="Qay-bU-oa1"/>
-                            <constraint firstItem="gqA-48-mWq" firstAttribute="top" secondItem="w6B-Dp-svL" secondAttribute="bottom" constant="10" id="Rl0-1J-q5e"/>
+                            <constraint firstItem="gqA-48-mWq" firstAttribute="top" secondItem="w6B-Dp-svL" secondAttribute="bottom" constant="15" id="Rl0-1J-q5e"/>
                             <constraint firstItem="aEx-jR-M42" firstAttribute="leading" secondItem="qdc-Ua-tsy" secondAttribute="leading" id="YmO-nX-aDZ"/>
                             <constraint firstItem="qdc-Ua-tsy" firstAttribute="bottom" secondItem="vS7-WU-xrN" secondAttribute="bottom" id="bFh-yA-nqS"/>
                             <constraint firstItem="aEx-jR-M42" firstAttribute="centerX" secondItem="w6B-Dp-svL" secondAttribute="centerX" id="dyj-xS-Qnq"/>
@@ -504,6 +535,7 @@
                         <outlet property="historyTextField" destination="OzI-n5-rw0" id="Ipr-fb-qkx"/>
                         <outlet property="location" destination="wsy-a8-zYC" id="4pc-k4-OmW"/>
                         <outlet property="packingList" destination="yRe-ea-anp" id="CSd-DD-adG"/>
+                        <outlet property="reminderTime" destination="FYx-2W-myp" id="ahK-zG-o7h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BS-cb-c7D" userLabel="First Responder" sceneMemberID="firstResponder"/>

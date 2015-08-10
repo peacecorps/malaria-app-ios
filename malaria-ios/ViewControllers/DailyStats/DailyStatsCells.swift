@@ -1,19 +1,22 @@
 import Foundation
 import UIKit
 
-class StateCell: UITableViewCell{
+/// DailyStatCell, is generic
+public class StateCell: UITableViewCell{
     @IBOutlet weak var statIcon: UIImageView!
     @IBOutlet weak var statLbl: UILabel!
     @IBOutlet weak var statValueLbl: UILabel!
 }
 
-protocol Stat{
+/// Protocol to be followed to extend the stats shown on the view controller
+public protocol Stat{
     var title : String { get }
     var image : UIImage { get }
     var attributeValue : String { get }
 }
 
-class Adherence : Stat{
+/// Adherence stats
+class Adherence: Stat{
     var title : String { return "Adherence to medicine" }
     var image : UIImage { return UIImage(named: "Adherence")! }
     var attributeValue : String {
@@ -26,12 +29,14 @@ class Adherence : Stat{
     }
 }
 
+/// Pill Streakstats
 class PillStreak : Stat{
     var title : String { return "Doses in a Row" }
     var image : UIImage { return UIImage(named: "DosesInRow")! }
     var attributeValue : String { return "\(CachedStatistics.sharedInstance.todaysPillStreak)"}
 }
 
+/// When the user last taken his medicine stats
 class MedicineLastTaken : Stat{
     var title : String { return "Medicine Last Take" }
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }

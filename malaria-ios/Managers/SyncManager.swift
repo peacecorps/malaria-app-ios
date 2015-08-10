@@ -1,11 +1,12 @@
 import Alamofire
 import SwiftyJSON
 
+/// Responsible for syncing remote server with CoreData
 public class SyncManager : CoreDataContextManager{
+    private let user = "TestUser"
+    private let password = "password"
     
-    let user = "TestUser"
-    let password = "password"
-    
+    /// Init
     public override init(context: NSManagedObjectContext!){
         super.init(context: context)
         
@@ -14,9 +15,12 @@ public class SyncManager : CoreDataContextManager{
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
         
-        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue("Basic \(base64LoginString)", forKey: "Authorization")
+        let key = "Authorization"
+        let value = "Basic \(base64LoginString)"
+        Alamofire.Manager.sharedInstance.session.configuration.HTTPAdditionalHeaders!.updateValue(value, forKey: key)
     }
     
+    /// dictionary with key full endpoint url path and object an instance of `Endpoint`
     public var endpoints: [String : Endpoint] = [
         EndpointType.Posts.path() : PostsEndpoint(),
     ]

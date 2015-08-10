@@ -1,5 +1,8 @@
 import UIKit
+import PickerSwift
+import DoneToolBarSwift
 
+/// `SetupViewController` where the user configures the current medicine and the notification time
 class SetupScreenViewController : UIViewController{
     @IBOutlet weak var reminderTime: UITextField!
     @IBOutlet weak var medicineName: UITextField!
@@ -54,11 +57,6 @@ class SetupScreenViewController : UIViewController{
         
         refreshDate()
     }
-    
-    func dismissInputView(sender: UIView){
-        medicineName.endEditing(true)
-        reminderTime.endEditing(true)
-    }
 }
 
 extension SetupScreenViewController{
@@ -89,7 +87,8 @@ extension SetupScreenViewController {
                 return
             }
             
-            var medicineAlert = UIAlertController(title: ReplaceMedicineAlertText.title, message: ReplaceMedicineAlertText.message, preferredStyle: .Alert)
+            let (title, message) = (ReplaceMedicineAlertText.title, ReplaceMedicineAlertText.message)
+            var medicineAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             medicineAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.setupMedicine(med)
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -107,10 +106,18 @@ extension SetupScreenViewController {
     }
     
     private func setupMedicine(med: Medicine.Pill) {
-        self.medicineManager.registerNewMedicine(med.name(), interval: med.interval())
-        self.medicineManager.setCurrentPill(med.name())
-        self.medicineManager.getCurrentMedicine()!.notificationManager(self.viewContext).scheduleNotification(self.pillReminderNotificationTime)
+        medicineManager.registerNewMedicine(med.name(), interval: med.interval())
+        medicineManager.setCurrentPill(med.name())
         UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
+        
+        let notificationManager = medicineManager.getCurrentMedicine()!.notificationManager(viewContext)
+        
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+            Logger.Error("Medicine Notifications are not enabled")
+            return
+        }
+        
+        notificationManager.scheduleNotification(pillReminderNotificationTime)
     }
     
     private func refreshDate(){

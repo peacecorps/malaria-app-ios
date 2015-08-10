@@ -69,6 +69,15 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertEqual(true, d1.sameDayAs(d2))
     }
     
+    func testSameClock() {
+        let date1 = NSDate.from(2015, month: 4, day: 1, hour: 10, minute: 1)
+        let date2 = NSDate.from(2014, month: 1, day: 10, hour: 10, minute: 1)
+        XCTAssertTrue(date1.sameClockTimeAs(date2))
+        
+        let date3 = NSDate.from(2015, month: 1, day: 10, hour: 9, minute: 1)
+        XCTAssertFalse(date1.sameClockTimeAs(date3))
+    }
+    
     func testSameWeek() {
         var d1 = NSDate.from(2015, month: 6, day: 6) //saturday
         
@@ -84,6 +93,41 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertTrue(d1.sameWeekAs(d1 + 5.day))
         XCTAssertTrue(d1.sameWeekAs(d1 + 6.day))
         XCTAssertFalse(d1.sameWeekAs(d1 + 7.day))
+        
+        //test year transition
+        let d2014 = NSDate.from(2014, month: 12, day: 31)
+        let d2015 = NSDate.from(2015, month: 1, day: 1)
+        XCTAssertTrue(d2014.sameWeekAs(d2015))
+    }
+    
+    func testMonthComparator() {
+        let m0 = NSDate.from(2013, month: 1, day: 31)
+        let m1 = NSDate.from(2014, month: 1, day: 31)
+        let m2 = NSDate.from(2014, month: 6, day: 31)
+        let m3 = NSDate.from(2014, month: 1, day: 31)
+        let m4 = NSDate.from(2015, month: 1, day: 31)
+        let m42 = NSDate.from(2015, month: 1, day: 1)
+        
+        
+        XCTAssertTrue(m0.happensMonthsBefore(m1))
+        XCTAssertTrue(m0.happensMonthsBefore(m4))
+        XCTAssertTrue(m3.happensMonthsBefore(m4))
+        
+        XCTAssertTrue(m1.happensMonthsAfter(m0))
+        XCTAssertTrue(m4.happensMonthsAfter(m0))
+        XCTAssertTrue(m4.happensMonthsAfter(m3))
+        
+        XCTAssertTrue(m4.sameMonthAs(m42))
+        XCTAssertFalse(m4.sameMonthAs(m0))
+        XCTAssertFalse(m4.sameMonthAs(m1))
+    }
+    
+    func testEndOfDay() {
+        let d1 = NSDate.from(2014, month: 1, day: 1, hour: 23, minute: 59)
+        let d2 = NSDate.from(2014, month: 1, day: 1, hour: 0, minute: 0)
+        
+        XCTAssertTrue(d1.sameClockTimeAs(d1.endOfDay))
+        XCTAssertTrue(d1.sameClockTimeAs(d2.endOfDay))
     }
     
     func testDaysBetween(){
@@ -99,12 +143,26 @@ class TestNSDateExtensions: XCTestCase {
     }
     
     func testCompontents() {
-        let date = NSDate.from(2015, month: 4, day: 1)
+        let date = NSDate.from(2015, month: 4, day: 1, hour: 10, minute: 1)
         XCTAssertEqual(date.day, 1)
         XCTAssertEqual(date.month, 4)
         XCTAssertEqual(date.year, 2015)
         XCTAssertEqual(date.endOfCurrentMonth, 30)
-        
+    }
+    
+    func testStartDay() {
+        let date = NSDate.from(2015, month: 4, day: 1, hour: 10, minute: 1)
+        //test start of day
+        let startDay = date.startOfDay
+        XCTAssertEqual(startDay.day, 1)
+        XCTAssertEqual(startDay.month, 4)
+        XCTAssertEqual(startDay.year, 2015)
+        XCTAssertEqual(startDay.hour, 0)
+        XCTAssertEqual(startDay.minutes, 0)
+    }
+    
+    func testEndCurrentMonth() {
+        ///test endCurrentMonth
         let date2 = NSDate.from(2015, month: 7, day: 5)
         XCTAssertEqual(date2.endOfCurrentMonth, 31)
         

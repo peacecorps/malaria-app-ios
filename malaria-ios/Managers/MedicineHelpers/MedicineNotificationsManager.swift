@@ -1,43 +1,50 @@
 import Foundation
 import UIKit
 
+/// Manages notifications for medicine
 public class MedicineNotificationsManager : NotificationManager{
-    override var category: String { get{ return MedicineNotificationsManager.NotificationCategory } }
-    override var alertBody: String { get{ return "Did you take \(MedicineManager(context: context).getCurrentMedicine()!.name) today?" } }
-    override var alertAction: String { get{ return "Take pill"} }
+    /// Notification category
+    override public var category: String { get{ return MedicineNotificationsManager.NotificationCategory } }
+
+    /// Notification alert body
+    override public var alertBody: String { get{
+        let medicineName = MedicineManager(context: context).getCurrentMedicine()!.name
+        return "Did you take \(medicineName) today?" }
+    }
     
-    let medicine: Medicine
+    /// Notification alert action
+    override public var alertAction: String { get{ return "Take pill"} }
     
+    private let medicine: Medicine
+    
+    /// If for Yes in interactive notifications
     public static let TookPillId = "TookPill"
+    /// Yes aciton string for interactive notifications
     public static let TookPillTitle = "Yes"
+    /// Id for No in interactive notifications
     public static let DidNotTakePillId = "DidNotTakePillId"
+    /// No action string for interactive notifications
     public static let DidNotTakePillTitle = "No"
+    /// notification category
     public static let NotificationCategory = "PILL_REMINDER"
     
-    init(context: NSManagedObjectContext, medicine: Medicine){
+    /// Init
+    public init(context: NSManagedObjectContext, medicine: Medicine){
         self.medicine = medicine
         super.init(context: context)
     }
     
+    /// Schedule notification and stores the fireTime in the medicine object
+    ///
+    /// :param: `NSDate`: trigger time
     public override func scheduleNotification(fireTime: NSDate) {
         medicine.notificationTime = fireTime
         CoreDataHelper.sharedInstance.saveContext(self.context)
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.isSet() {
-            UserSettingsManager.UserSetting.MedicineReminderSwitch.setBool(true)
-            scheduleNotification(fireTime)
-            return
-        }
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(){
-            Logger.Error("Medicine Notifications are not enabled")
-            return
-        }
-        
         super.unsheduleNotification()
         super.scheduleNotification(fireTime)
     }
     
+    /// Unshedule notification and sets the fireTime in medicine object as nil
     public override func unsheduleNotification(){
         super.unsheduleNotification()
         
@@ -53,8 +60,6 @@ public class MedicineNotificationsManager : NotificationManager{
             nextTime += medicine.interval.day
             medicine.notificationTime = nextTime
             
-            Logger.Info("Resheduling to " + nextTime.formatWith("dd-MMMM-yyyy hh:mm"))
-            
             unsheduleNotification()
             scheduleNotification(nextTime)
             
@@ -64,24 +69,6 @@ public class MedicineNotificationsManager : NotificationManager{
         if medicine.isCurrent{
             Logger.Error("Error: there should be already a fire date")
         }
-    }
-    
-    /// Checks if a week went by without a entry (only valid for weekly pills)
-    ///
-    /// :param: `NSDate optional`: Current date. (by default is the most current one)
-    /// :returns: `Bool`: true if should, false if not
-    public func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
-        if medicine.interval == 1 {
-            Logger.Warn("checkIfShouldReset only valid for weekly pills")
-            return false
-        }
-        
-        if let mostRecent = medicine.registriesManager(context).mostRecentEntry(){
-            //get ellaped days
-            return (currentDate - mostRecent.date) >= 7
-        }
-        
-        return false
     }
     
     /// Returns interactive notifications settings to be added in the AppDelegate

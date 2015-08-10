@@ -71,7 +71,7 @@ extension CachedStatistics {
         todaysPillStreak = 0
         todaysAdherence = 0
         
-        println("retrieveingDailyStats")
+        Logger.Info("retrieveingDailyStats")
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.todaysAdherence = self.statsManager.pillAdherence(date2: NSDate(), registries: self.registries) * 100
             

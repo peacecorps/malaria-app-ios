@@ -31,7 +31,7 @@ class MonthlyViewController: UIViewController {
     private var firstRun = true
     private var previouslySelect: NSDate?
     private var animationFinished = true
-    
+
     //hack because CVCalendar doesn't support updates yet
     private var dayViews = [NSDate : Set<DayView>]()
     private let RingViewTag = 123
@@ -53,6 +53,7 @@ class MonthlyViewController: UIViewController {
         
         calendarView.commitCalendarViewUpdate()
         menuView.commitMenuViewUpdate()
+        firstRun = false
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -130,21 +131,23 @@ extension MonthlyViewController: CVCalendarViewDelegate {
 
 extension MonthlyViewController: CVCalendarViewDelegate {
     
+    /// Note in the current version there are some issues with the calendar.
+    /// When chooosing a month in todays day this is called, however, in another month this is called therefore firstRun
+    /// becomes useful avoiding appearing
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect {
             
-            //avoid selecting previous months when navigating and avoids opening the action sheet when the view appears
-            if (previous.sameMonthAs(selected) && !previous.sameDayAs(selected)) || //avoids appearing when switching months
-                (!firstRun && previous.sameDayAs(selected)) || //avoids opening when the view appears for the first time
-                previous.sameDayAs(startDay) { //fixes requiring 2 taps to select currentDay
+            //avoids appearing when switching months
+            let selectedSameMonth = previous.sameMonthAs(selected)
+            
+            if (!firstRun && selectedSameMonth) {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
         }
 
-        firstRun = false
         previouslySelect = selected
     }
     

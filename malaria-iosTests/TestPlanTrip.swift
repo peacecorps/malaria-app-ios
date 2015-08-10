@@ -161,7 +161,80 @@ class TestPlanTrip: XCTestCase {
     }
     
     func testCheckItems() {
-        //TODO
+        itemsManager.addItem("lantern", quantity: 9)
+        itemsManager.addItem("ball", quantity: 1)
+        
+        //default value
+        XCTAssertFalse(itemsManager.findItem("lantern")!.check)
+        XCTAssertFalse(itemsManager.findItem("ball")!.check)
+        
+        //check every item
+        itemsManager.checkItem(["lantern", "ball"])
+        XCTAssertTrue(itemsManager.findItem("lantern")!.check)
+        XCTAssertTrue(itemsManager.findItem("ball")!.check)
+        
+        //uncheck every item
+        itemsManager.uncheckItem(["lantern", "ball"])
+        XCTAssertFalse(itemsManager.findItem("lantern")!.check)
+        XCTAssertFalse(itemsManager.findItem("ball")!.check)
+
+        //check only ball to true
+        itemsManager.checkItem(["lantern"])
+        XCTAssertTrue(itemsManager.findItem("lantern")!.check)
+        //toggle all
+        itemsManager.toggleCheckItem(["lantern", "ball"])
+        XCTAssertFalse(itemsManager.findItem("lantern")!.check)
+        XCTAssertTrue(itemsManager.findItem("ball")!.check)
+    }
+    
+    func testLocationHistory() {
+        let history = tManager.getHistory(limit: 10)
+        XCTAssertEqual(1, history.count)
+        
+        XCTAssertEqual(history.first!.location, location)
+        XCTAssertEqual(history.first!.timestamp, d1)
+        
+        tManager.createTrip("LA", medicine: currentPill, departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
+        let history2 = tManager.getHistory(limit: 10)
+        XCTAssertEqual(2, history2.count)
+        
+        XCTAssertEqual("LA", history2.first!.location)
+        XCTAssertEqual(location, history2[1].location)
+        
+        // there are 2, but we only limit to one
+        let history3 = tManager.getHistory(limit: 1)
+        XCTAssertEqual(1, history3.count)
+
+        // create same trip, shouldn't record again
+        tManager.createTrip("LA", medicine: currentPill, departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
+        let history4 = tManager.getHistory(limit: 10)
+        XCTAssertEqual(2, history4.count)
+
+        //test history limit (15), there already 2
+        tManager.createTrip("3", medicine: currentPill, departure: d1 + 2.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("4", medicine: currentPill, departure: d1 + 3.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("5", medicine: currentPill, departure: d1 + 4.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("6", medicine: currentPill, departure: d1 + 5.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("7", medicine: currentPill, departure: d1 + 6.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("8", medicine: currentPill, departure: d1 + 7.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("9", medicine: currentPill, departure: d1 + 8.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("10", medicine: currentPill, departure: d1 + 9.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("11", medicine: currentPill, departure: d1 + 10.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("12", medicine: currentPill, departure: d1 + 11.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("12", medicine: currentPill, departure: d1 + 12.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("13", medicine: currentPill, departure: d1 + 13.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("14", medicine: currentPill, departure: d1 + 14.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("15", medicine: currentPill, departure: d1 + 15.day, arrival: d2, timeReminder: reminderTime)
+        XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
+
+        // one above the limit
+        tManager.createTrip("16", medicine: currentPill, departure: d1 + 16.day, arrival: d2, timeReminder: reminderTime)
+        XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
+        
+        // should have deleted the oldest entry at location
+        let mostRecentHistory = tManager.getHistory(limit: Int.max).last!
+        XCTAssertEqual("LA", mostRecentHistory.location)
+        XCTAssertEqual(d1 + 1.day, mostRecentHistory.timestamp)
     }
     
     func testCascadeDelete(){

@@ -168,15 +168,31 @@ class TestMedicineRegistries: XCTestCase {
     }
     
     func testTookMedicine() {
-        //TODO
+        let tookMedicineYes = registriesManager.tookMedicine(d1)
+        XCTAssertNotNil(tookMedicineYes)
+        XCTAssertEqual(tookMedicineYes!.date, d1)
+        
+        let tookMedicineNo = registriesManager.tookMedicine(d1 - 2.day)
+        XCTAssertNil(tookMedicineNo)
+        
+        let tookMedicinRandom = registriesManager.tookMedicine(d1 - 2.year)
+        XCTAssertNil(tookMedicineNo)
     }
     
     func testEntriesInPeriod() {
-        //TODO
+        //it's a daily pill
+        let entriesInPeriod = registriesManager.allRegistriesInPeriod(d1)
+        XCTAssertEqual(1, entriesInPeriod.entries.count)
+        XCTAssertFalse(entriesInPeriod.noData)
+        
+        let entriesInPeriod2 = registriesManager.allRegistriesInPeriod(d1 - 10.day)
+        XCTAssertEqual(0, entriesInPeriod2.entries.count)
+        XCTAssertTrue(entriesInPeriod2.noData)
     }
     
     func testAditionalFilter(){
-    
+        XCTAssertEqual(6, registriesManager.getRegistries(additionalFilter: {(r: Registry) in r.tookMedicine}).count)
+        XCTAssertEqual(4, registriesManager.getRegistries(additionalFilter: {(r: Registry) in !r.tookMedicine}).count)
     }
     
     func testCascadeDelete(){

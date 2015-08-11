@@ -133,11 +133,11 @@ class CVCalendarMonthContentViewController: CVCalendarContentViewController {
             if dayView.date.day > 20 {
                 let presentedDate = dayView.monthView.date
                 calendarView.presentedDate = Date(date: self.dateBeforeDate(presentedDate))
-                presentPreviousView(dayView)
+                //presentPreviousView(dayView)
             } else {
                 let presentedDate = dayView.monthView.date
                 calendarView.presentedDate = Date(date: self.dateAfterDate(presentedDate))
-                presentNextView(dayView)
+                //presentNextView(dayView)
             }
         }
     }

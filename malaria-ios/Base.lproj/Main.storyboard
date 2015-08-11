@@ -1459,7 +1459,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F53-x4-FQi" customClass="CVCalendarView" customModule="malaria_ios" customModuleProvider="target">
-                                <rect key="frame" x="36" y="150" width="528" height="320"/>
+                                <rect key="frame" x="36" y="150" width="528" height="285"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="calendarAppearanceDelegate" destination="DFN-np-MDb" id="7TO-2C-Tgk"/>
@@ -1512,7 +1512,7 @@
                             <constraint firstItem="Ldq-8p-J9o" firstAttribute="centerY" secondItem="ysi-JT-bEw" secondAttribute="centerY" id="iPy-Oc-Xjn"/>
                             <constraint firstItem="qYA-KO-ewV" firstAttribute="top" secondItem="efL-P0-SDo" secondAttribute="bottom" constant="18" id="l0b-Vs-UYb"/>
                             <constraint firstItem="qYA-KO-ewV" firstAttribute="leading" secondItem="0Zw-jp-Aua" secondAttribute="leadingMargin" constant="20" id="o7x-Tc-uDw"/>
-                            <constraint firstItem="Sb6-YA-CKU" firstAttribute="bottom" secondItem="F53-x4-FQi" secondAttribute="bottom" constant="65" id="vFA-2M-Rvx"/>
+                            <constraint firstItem="Sb6-YA-CKU" firstAttribute="bottom" secondItem="F53-x4-FQi" secondAttribute="bottom" constant="100" id="vFA-2M-Rvx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Q3W-Vc-Knb" secondAttribute="trailing" constant="10" id="wUR-OT-N0r"/>
                         </constraints>
                         <variation key="default">

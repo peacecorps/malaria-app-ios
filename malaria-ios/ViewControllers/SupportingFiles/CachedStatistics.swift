@@ -34,6 +34,7 @@ public class CachedStatistics : NSObject{
     override public init(){
         super.init()
         NSNotificationEvents.ObserveDataUpdated(self, selector: "resetFlags")
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "resetFlags")
     }
     
     deinit{
@@ -119,7 +120,9 @@ extension CachedStatistics {
             if !entriesReversed.isEmpty {
                 let oldestDate = entriesReversed.last!.date.startOfDay
                 let numDays = (NSDate() - oldestDate) + 1 //include today
-                
+                if numDays == 0 {
+                    return
+                }
                 for i in 0...(numDays - 1) {
                     let day = oldestDate + i.day
                     self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed) != nil
@@ -146,6 +149,9 @@ extension CachedStatistics {
             let entriesReversed = self.registries.reverse() //most recentFirst
             if !entriesReversed.isEmpty {
                 let numDays = d2 - d1 + 1 //include d2
+                if numDays == 0 {
+                    return
+                }
                 for i in 0...(numDays - 1) {
                     let day = (d1 + i.day).startOfDay
                     self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed) != nil
@@ -180,6 +186,9 @@ extension CachedStatistics {
                 
                 self.adherencesPerDay = [(NSDate,Float)](count: numDays, repeatedValue: (today, 0))
                 
+                if numDays == 0 {
+                    return
+                }
                 for v in 0...(numDays - 1) {
                     let index = (numDays - 1) - v
                     

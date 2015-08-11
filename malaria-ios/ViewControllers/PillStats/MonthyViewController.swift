@@ -1,7 +1,11 @@
 import Foundation
 import UIKit
 
+
 /// `MonthlyViewController`: shows the calendar view
+/// Using variation of CVCalendar by changing CVCalendarMonthContentViewController
+/// and commenting the lines calling the methods responsible for making the transitioning.
+/// This was done because, for e.g., August 30 and 31 2015 were impossible to select due to the automatic transition
 class MonthlyViewController: UIViewController {
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
@@ -30,6 +34,7 @@ class MonthlyViewController: UIViewController {
     //helpers
     private var firstRun = true
     private var previouslySelect: NSDate?
+    private var currentMonth: NSDate?
     private var animationFinished = true
 
     //hack because CVCalendar doesn't support updates yet
@@ -40,6 +45,7 @@ class MonthlyViewController: UIViewController {
         super.viewDidLoad()
         
         previouslySelect = startDay
+        currentMonth = startDay
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
@@ -134,18 +140,20 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     /// Note in the current version there are some issues with the calendar.
     /// When chooosing a month in todays day this is called, however, in another month this is called therefore firstRun
     /// becomes useful avoiding appearing
+    /// It always calls this when transitioning between months (-.-)
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect {
             
             //avoids appearing when switching months
             let selectedSameMonth = previous.sameMonthAs(selected)
-            
-            if (!firstRun && selectedSameMonth) {
+                            
+            if !firstRun && selectedSameMonth {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
+            
         }
 
         previouslySelect = selected
@@ -214,9 +222,11 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     func presentedDateUpdated(date: CVDate) {
-        if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {
+        let convertedDate = date.convertedDate()!
+        if !currentMonth!.sameMonthAs(convertedDate) && self.animationFinished {
+            currentMonth = convertedDate
             let updatedMonthLabel = UILabel()
-            updatedMonthLabel.text = generateMonthLabel(date.convertedDate()!)
+            updatedMonthLabel.text = generateMonthLabel(convertedDate)
             
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font

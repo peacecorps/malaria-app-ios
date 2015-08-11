@@ -66,9 +66,11 @@ public class RegistriesManager : CoreDataContextManager{
             if at < d1 && !at.sameDayAs(d1) {
                 return (true, result)
             }
+            
+            return (false, result)
         }
         
-        return (false, result)
+        return (true, result)
     }
 
     /// Returns the most recent entry for that pill if there is

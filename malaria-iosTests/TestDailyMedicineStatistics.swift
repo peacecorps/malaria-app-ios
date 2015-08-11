@@ -45,6 +45,38 @@ class TestDailyMedicineStatistics: XCTestCase {
         UserSettingsManager.clear()
     }
     
+    func testProvidingRegistries(){
+        let entries = registriesManager.getRegistries(mostRecentFirst: true)
+        let entriesOldestFirst = entries.reverse()
+        
+        // must be mostRecentFirst
+        XCTAssertEqual(10, stats.pillStreak(registries: entries))
+        let customInterval = registriesManager.getRegistries(date1: d1 - 3.day, date2: d1, mostRecentFirst: true)
+        XCTAssertEqual(4, stats.pillStreak(date1: d1 - 3.day, date2: d1, registries: customInterval))
+        
+        //oldest to recent
+        XCTAssertEqual(10, stats.numberSupposedPills(registries: entriesOldestFirst))
+        let customInterval2 = registriesManager.getRegistries(date1: d1 - 1.day, date2: d1, mostRecentFirst: true)
+        XCTAssertEqual(2, stats.numberSupposedPills(date1: d1 - 1.day, date2: d1, registries: customInterval2))
+        
+        //indiferent
+        XCTAssertEqual(10, stats.numberPillsTaken(registries: entries))
+        XCTAssertEqual(10, stats.numberPillsTaken(registries: entriesOldestFirst))
+        XCTAssertEqual(4, stats.numberPillsTaken(date1: d1 - 3.day, date2: d1, registries: customInterval.reverse()))
+        
+        //indiferent
+        XCTAssertEqual(1, stats.pillAdherence(registries: entries))
+        XCTAssertEqual(1, stats.pillAdherence(registries: entriesOldestFirst))
+        // miss one: 9/10
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
+        
+        let updatedEntries = registriesManager.getRegistries(mostRecentFirst: true)
+        let reverseUpdatedEntries = updatedEntries.reverse()
+        
+        XCTAssertEqual(0.9, stats.pillAdherence(registries: updatedEntries))
+        XCTAssertEqual(0.9, stats.pillAdherence(registries: reverseUpdatedEntries))
+    }
+    
     func testPillStreak(){
         XCTAssertEqual(10, stats.pillStreak())
         XCTAssertEqual(6, stats.pillStreak(date1: d1, date2: d1 - 5.day))
@@ -57,6 +89,15 @@ class TestDailyMedicineStatistics: XCTestCase {
         //did not took a pill more recently
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: false, modifyEntry: true))
         XCTAssertEqual(0, stats.pillStreak())
+    }
+    
+    func testPillStreakCustomArgs() {
+        XCTAssertEqual(3, stats.pillStreak(date1: d1 - 2.day))
+        
+        //miss one pill
+        XCTAssertTrue(registriesManager.addRegistry(d1 - 3.day, tookMedicine: false, modifyEntry: true))
+        XCTAssertEqual(1, stats.pillStreak(date2: d1 - 2.day))
+        XCTAssertEqual(0, stats.pillStreak(date2: d1 - 3.day))
     }
     
     func testPillStreakMissingEntries(){

@@ -29,10 +29,11 @@ public class MedicineStats : CoreDataContextManager{
     }
     
     /// Returns the number of pills that the user should have taken between two dates.
+    /// Uses static func numberNeededPills internally
     ///
     /// :param: `NSDate optional`: first date (by default is NSDate.min)
     /// :param: `NSDate optional`: second date (by default is NSDate.max)
-    /// :param: `[Registry] optional`: cached list of entries
+    /// :param: `[Registry] optional`: cached list of entries, oldest to recent
     ///
     /// :returns: `Int`: Number of supposed pills
     public func numberSupposedPills(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max,
@@ -44,11 +45,21 @@ public class MedicineStats : CoreDataContextManager{
         var d1 = date1
         var d2 = date2
         if date1 == NSDate.min || date2 == NSDate.max {
-            if let boundaries = registriesManager.getLimits() {
-                d1 = d1 == NSDate.min ? boundaries.leastRecent.date : d1
-                d2 = d2 == NSDate.max ? boundaries.mostRecent.date : d2
+            if let r = registries {
+                if let oldest = r.first,
+                       recent = r.last{
+                    d1 = d1 == NSDate.min ? oldest.date : d1
+                    d2 = d2 == NSDate.max ? recent.date : d2
+                }else {
+                    return 0
+                }
             }else {
-                return 0
+                if let boundaries = registriesManager.getLimits() {
+                    d1 = d1 == NSDate.min ? boundaries.leastRecent.date : d1
+                    d2 = d2 == NSDate.max ? boundaries.mostRecent.date : d2
+                }else {
+                    return 0
+                }
             }
         }
         

@@ -175,6 +175,10 @@ class TestMedicineRegistries: XCTestCase {
         //TODO
     }
     
+    func testAditionalFilter(){
+    
+    }
+    
     func testCascadeDelete(){
         XCTAssertEqual(Registry.retrieve(Registry.self, context: currentContext).count, 10)
         Medicine.clear(Medicine.self, context: currentContext)

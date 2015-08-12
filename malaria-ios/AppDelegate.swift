@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Logger.Warn("Clearing Medicine History")
             MedicineManager(context: CoreDataHelper.sharedInstance.createBackgroundContext()!).clearCoreData()
             UserSettingsManager.UserSetting.ClearMedicineHistory.setBool(false)
+            UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
         }
         
         if UserSettingsManager.UserSetting.ClearTripHistory.getBool(){

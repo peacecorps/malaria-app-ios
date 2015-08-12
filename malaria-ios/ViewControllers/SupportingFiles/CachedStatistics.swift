@@ -99,7 +99,7 @@ extension CachedStatistics {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
                 let month = today - i.month
-                let adherence = self.statsManager.pillAdherence(month, registries: self.registries)
+                let adherence = self.statsManager.monthAdherence(month, registries: self.registries)
                 self.monthAdhrence.append((month, adherence * 100))
             }
             

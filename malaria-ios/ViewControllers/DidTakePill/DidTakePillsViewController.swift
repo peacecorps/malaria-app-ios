@@ -75,11 +75,6 @@ class DidTakePillsViewController: UIViewController {
         dayOfTheWeekLbl.text = currentDate.formatWith(MinorDateTextFormat)
         fullDateLbl.text = currentDate.formatWith(FullDateTextFormat)
 
-        
-        if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {
-            return
-        }
-        
         if !(tookPillPlayer.prepareToPlay() && didNotTakePillPlayer.prepareToPlay()) {
             Logger.Error("Error preparing sounds effects")
         }
@@ -87,10 +82,12 @@ class DidTakePillsViewController: UIViewController {
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
         medicine = medicineManager.getCurrentMedicine()
-        registriesManager = medicine!.registriesManager(viewContext)
+        if medicine == nil {
+            return
+        }
         
-        let medicineRegistries = medicine!.registriesManager(viewContext)
-        let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
+        registriesManager = medicine!.registriesManager(viewContext)
+        let tookMedicineEntry = registriesManager.tookMedicine(currentDate)
         
         if medicine!.interval > 1 {
             if checkIfShouldReset(currentDate: currentDate){
@@ -111,20 +108,24 @@ class DidTakePillsViewController: UIViewController {
         
         //if took
         if tookMedicineEntry != nil {
+            Logger.Info("Took medicine today")
             didNotTookPillBtn.enabled = false
             tookPillBtn.enabled = true
         }else {
             //didn't took because there is no information
-            if medicineRegistries.allRegistriesInPeriod(currentDate).entries.count == 0 {
+            if registriesManager.allRegistriesInPeriod(currentDate).entries.count == 0 {
+                Logger.Info("No information")
                 didNotTookPillBtn.enabled = true
                 tookPillBtn.enabled = true
             }else {
                 //or there is and he he didn't took the medicine yet
                 //check if he already registered today
-                if medicineRegistries.findRegistry(currentDate) != nil {
+                if registriesManager.findRegistry(currentDate) != nil {
+                    Logger.Info("Didn't took today")
                     didNotTookPillBtn.enabled = true
                     tookPillBtn.enabled = false
                 }else {
+                    Logger.Info("Hasn't took yet")
                     //which means that there are no entries for today, so he still has the opportunity to change that
                     didNotTookPillBtn.enabled = true
                     tookPillBtn.enabled = true
@@ -157,13 +158,11 @@ extension DidTakePillsViewController{
     }
     
     private func reshedule(notificationManager: MedicineNotificationsManager) {
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+        if UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+            notificationManager.reshedule()
+        }else {
             Logger.Error("Medicine Notifications are not enabled")
-            return
         }
-        
-        notificationManager.reshedule()
     }
 }
 

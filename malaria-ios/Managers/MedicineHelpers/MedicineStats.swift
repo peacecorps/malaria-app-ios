@@ -73,7 +73,7 @@ public class MedicineStats : CoreDataContextManager{
     /// :param: `interval`: Interval (1 = once per day, 7 = once per week)
     ///
     /// :returns: `Int`: Number of supposed pills
-    public class func  numberNeededPills(date1: NSDate, date2: NSDate, interval: Int) -> Int{
+    public static func  numberNeededPills(date1: NSDate, date2: NSDate, interval: Int) -> Int{
         if date1 > date2 {
             return numberNeededPills(date2, date2: date1, interval: interval)
         }
@@ -151,14 +151,15 @@ public class MedicineStats : CoreDataContextManager{
     /// If not, goes up to the mostRecentEntry
     ///
     /// :param: `NSDate`: The month
+    /// :param: `NSDate optional`: Current day, default is NSDate
     /// :param: `Registries`: Previously calculated entries. Must be sorted oldest to recent
     ///
     /// :returns: `Float`: pill adherence for the month
-    public func pillAdherence(month: NSDate, registries: [Registry]? = nil) -> Float{
+    public func monthAdherence(month: NSDate, currentDay: NSDate = NSDate(), registries: [Registry]? = nil) -> Float{
         let entries = registries != nil ? registries! : registriesManager.getRegistries(mostRecentFirst: false)
         
         if entries.count == 0 {
-            return 1
+            return 1.0
         }
         
         let (oldestDate, mostRecentEntry) = (entries.first!.date, entries.last!.date)
@@ -171,7 +172,7 @@ public class MedicineStats : CoreDataContextManager{
         }
         
         let day1 = max(startMonth, oldestDate)
-        let day2 = endMonth.sameMonthAs(NSDate()) ? min(endMonth, NSDate()) : endMonth
+        let day2 = endMonth.sameMonthAs(currentDay) ? min(endMonth, currentDay) : endMonth
         
         let filtered = registriesManager.filter(entries, date1: day1, date2: day2)
         return pillAdherence(date1: day1, date2: day2, registries: filtered)

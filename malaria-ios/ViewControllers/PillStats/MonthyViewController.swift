@@ -279,9 +279,9 @@ extension MonthlyViewController {
         let intervalRegularity = isWeekly ? "weekly" : "daily"
         let dateString = date.formatWith("d MMMM yyyy")
         if tookMedicine != nil {
-            return ("You already took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
+            return ("You already took your " + intervalRegularity + " pill", "Did you take your medicine on " + dateString + "?")
         } else {
-            return ("You didn't took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
+            return ("You didn't took your " + intervalRegularity + " pill", "Did you take your medicine on " + dateString + "?")
         }
     }
     

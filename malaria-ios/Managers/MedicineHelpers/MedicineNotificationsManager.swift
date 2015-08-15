@@ -44,7 +44,7 @@ public class MedicineNotificationsManager : NotificationManager{
         super.scheduleNotification(fireTime)
     }
     
-    /// Unshedule notification and sets the fireTime in medicine object as nil
+    /// Unschedule notification and sets the fireTime in medicine object as nil
     public override func unsheduleNotification(){
         super.unsheduleNotification()
         
@@ -55,7 +55,9 @@ public class MedicineNotificationsManager : NotificationManager{
     /// Reschedule the pill according to the medicine interval
     /// So, if on monday, 1/1/2014, and interval is 4 days then
     /// it will resheduled to (1 + 4) / 1 / 2014
-    public func reshedule(){
+    ///
+    /// :returns: `NSDate`: Next reminder time
+    public func reshedule() -> NSDate?{
         if var nextTime = medicine.notificationTime{
             nextTime += medicine.interval.day
             medicine.notificationTime = nextTime
@@ -63,12 +65,10 @@ public class MedicineNotificationsManager : NotificationManager{
             unsheduleNotification()
             scheduleNotification(nextTime)
             
-            return
+            return nextTime
         }
         
-        if medicine.isCurrent{
-            Logger.Error("Error: there should be already a fire date")
-        }
+        return nil
     }
     
     /// Returns interactive notifications settings to be added in the AppDelegate

@@ -14,10 +14,10 @@ public class MedicineManager : CoreDataContextManager{
         UserSettingsManager.UserSetting.DidConfiguredMedicine.removeKey()
     }
 
-    /// Registers a new medicine
+    /// Register a new medicine with a name and a interval (e.g. 1 for daily and 7 for weekly)
     ///
-    /// :param: `String`: name of the pill
-    /// :param: `Int`: interval of the pill (1 = daily, 7 = weekly). If argument is less than 1, it will be 1.
+    /// :param: `String`
+    /// :param: `Int`
     /// :returns: `Bool`:  true if success. false if not.
     public func registerNewMedicine(name: String, interval: Int) -> Bool{
         if let m = getMedicine(name){
@@ -33,7 +33,7 @@ public class MedicineManager : CoreDataContextManager{
         return true
     }
     
-    /// Retuns the default medicine (if any)
+    /// Retuns the current medicine being tracked (if any)
     ///
     /// :returns: `Medicine?`: default medicine.
     public func getCurrentMedicine() -> Medicine?{
@@ -41,7 +41,7 @@ public class MedicineManager : CoreDataContextManager{
         return Medicine.retrieve(Medicine.self, predicate: predicate, fetchLimit: 1, context: context).first
     }
     
-    /// Retuns a specified medicine
+    /// Returns a specified medicine
     ///
     /// :param: `String`: name of pill, case sensitive
     /// :returns: `Medicine?`

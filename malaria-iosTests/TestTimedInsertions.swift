@@ -38,14 +38,13 @@ class TestTimedInsertions: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
-        UserSettingsManager.clear()
     }
 
     func testDailyInsert(){
         
         XCTAssertTrue(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
-        //modify entry with same value, should return true
-        XCTAssertTrue(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
+        //modify entry with same value, should return false
+        XCTAssertFalse(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
 
         //modify entry with different value
         XCTAssertFalse(dailyRegistriesManager.addRegistry(d1, tookMedicine: true))

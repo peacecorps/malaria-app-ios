@@ -41,6 +41,16 @@ class TestMedicineRegistries: XCTestCase {
         m.clearCoreData()
     }
     
+    
+    func testDeleteEntry(){
+        registriesManager.removeEntry(d1 - 3.day)
+        XCTAssertNil(registriesManager.findRegistry(d1 - 3.day))
+        
+        registriesManager.removeEntry(d1)
+        XCTAssertEqual(registriesManager.mostRecentEntry()!.date, d1 - 1.day)
+    }
+    
+    
     func testFindEntriesInBetween(){
         let entries = registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
         
@@ -242,5 +252,12 @@ class TestMedicineRegistries: XCTestCase {
         
         //elapsed enough days to restart cycle
         XCTAssertFalse(registriesManager.tookMedicine(tookWeeklyDate + 7.day) != nil)
+    }
+    
+    func testLastTimeTaken(){
+        XCTAssertEqual(registriesManager.lastPillDate()!, d1)
+        registriesManager.removeEntry(d1 - 1.day)
+        registriesManager.removeEntry(d1)
+        XCTAssertEqual(registriesManager.lastPillDate()!, d1 - 3.day)
     }
 }

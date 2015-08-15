@@ -46,11 +46,10 @@ class TestNotifications: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
-        UserSettingsManager.clear()
     }
     
     
-    func testNotificationTime(){
+    func testReshedule(){
         //reshedule notification
         mdDailyNotifManager.reshedule()
         XCTAssertTrue(mdDaily.notificationTime!.sameDayAs(d1 + 1.day))
@@ -70,9 +69,5 @@ class TestNotifications: XCTestCase {
         XCTAssertTrue(mdWeeklyregistriesManager.addRegistry(d1, tookMedicine: true))
         mdWeeklyNotifManager.reshedule()
         XCTAssertTrue(mdWeekly.notificationTime!.sameDayAs(d1 + 7.day))
-    }
-    
-    func testNotificationDampening(){
-        //todo when there is more information
     }
 }

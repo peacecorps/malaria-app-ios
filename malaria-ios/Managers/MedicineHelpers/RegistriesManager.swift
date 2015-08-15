@@ -112,7 +112,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param: `Bool`: if the user took medicine
     /// :param: `Bool optional`: overwrite previous entry (by default is false)
     ///
-    /// :returns: `Bool`: true if success, false if no
+    /// :returns: `Bool`: true if there was a change, false if not
     public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
@@ -127,7 +127,7 @@ public class RegistriesManager : CoreDataContextManager{
                 Logger.Warn("Removing confliting entry and replacing by a different one")
                 
                 //remove previous, whether it is weekly or daily (if daily we could just change the entry)
-                removeEntry(conflitingTookMedicineEntry)
+                removeEntry(conflitingTookMedicineEntry.date)
                 
                 //create new one
                 let registry = Registry.create(Registry.self, context: context)
@@ -154,7 +154,7 @@ public class RegistriesManager : CoreDataContextManager{
         if let r = registry{
             if r.tookMedicine && tookMedicine || !r.tookMedicine && !tookMedicine{
                 Logger.Warn("Found equivalent entry")
-                return true
+                return false
             } else if !modifyEntry {
                 Logger.Info("Can't modify entry. Aborting")
                 return false
@@ -236,7 +236,7 @@ public class RegistriesManager : CoreDataContextManager{
     /// :param `[Registry]? optional`: cached list of entries. Must be sorted from most recent to least recent
     ///
     /// :returns: `NSDate?`
-    func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
+    public func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
         let entries = registries != nil ? registries! : getRegistries(mostRecentFirst: true)
         
         for r in entries{
@@ -250,12 +250,17 @@ public class RegistriesManager : CoreDataContextManager{
     /// Remove the entry
     ///
     /// :param `Registry`: the entry to be removed
-    func removeEntry(registry: Registry){
-        var newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(registry.date)})
-        medicine.registries = NSSet(array: newRegistries)
+    public func removeEntry(date: NSDate){
+        if let entry = findRegistry(date){
 
-        registry.deleteFromContext(context)
-        CoreDataHelper.sharedInstance.saveContext(context)
-        NSNotificationEvents.DataUpdated(nil)
+            var newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(date)})
+            medicine.registries = NSSet(array: newRegistries)
+            entry.deleteFromContext(context)
+            CoreDataHelper.sharedInstance.saveContext(context)
+
+            NSNotificationEvents.DataUpdated(nil)
+        }else {
+            Logger.Error("Removing entry: entry not found!!!")
+        }
     }
 }

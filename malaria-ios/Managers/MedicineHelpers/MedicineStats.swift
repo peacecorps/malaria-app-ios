@@ -6,10 +6,10 @@ public class MedicineStats : CoreDataContextManager{
     private let registriesManager: RegistriesManager
     
     /// Init
-    public init(context: NSManagedObjectContext, medicine: Medicine) {
+    public init(medicine: Medicine) {
         self.medicine = medicine
-        registriesManager = self.medicine.registriesManager(context)
-        super.init(context: context)
+        registriesManager = self.medicine.registriesManager
+        super.init(context: medicine.managedObjectContext!)
     }
     
     /// Returns the number of pills taken between two dates

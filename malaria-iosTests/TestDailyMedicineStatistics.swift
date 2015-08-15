@@ -20,12 +20,11 @@ class TestDailyMedicineStatistics: XCTestCase {
         
         m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
         m.setCurrentPill(currentPill.name())
-        m.getCurrentMedicine()!.notificationManager(currentContext).scheduleNotification(d1)
         
         md = m.getMedicine(currentPill.name())!
         
-        registriesManager = md.registriesManager(currentContext)
-        stats = md.stats(currentContext)
+        registriesManager = md.registriesManager
+        stats = md.stats
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
         XCTAssertTrue(registriesManager.addRegistry(d1 - 1.day, tookMedicine: true))

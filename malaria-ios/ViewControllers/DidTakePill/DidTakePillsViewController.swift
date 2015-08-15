@@ -59,7 +59,7 @@ class DidTakePillsViewController: UIViewController {
                 return false
             }
             
-            if let mostRecent = m.registriesManager(viewContext).mostRecentEntry(){
+            if let mostRecent = m.registriesManager.mostRecentEntry(){
                 //get ellaped days
                 return (currentDate - mostRecent.date) >= 7
             }
@@ -86,7 +86,7 @@ class DidTakePillsViewController: UIViewController {
             return
         }
         
-        registriesManager = medicine!.registriesManager(viewContext)
+        registriesManager = medicine!.registriesManager
         let tookMedicineEntry = registriesManager.tookMedicine(currentDate)
         
         if medicine!.interval > 1 {
@@ -141,7 +141,7 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: false)){
                 didNotTakePillPlayer.play()
-                reshedule(m.notificationManager(viewContext))
+                reshedule(m.notificationManager)
                 refreshScreen()
             }
         }
@@ -151,7 +151,7 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: true)){
                 tookPillPlayer.play()
-                reshedule(m.notificationManager(viewContext))
+                reshedule(m.notificationManager)
                 refreshScreen()
             }
         }

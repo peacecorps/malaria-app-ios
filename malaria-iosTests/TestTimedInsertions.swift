@@ -29,10 +29,8 @@ class TestTimedInsertions: XCTestCase {
         daily = m.getMedicine(dailyPill.name())!
         weekly = m.getMedicine(weeklyPill.name())!
         
-        dailyRegistriesManager = daily.registriesManager(currentContext)        
-        weeklyRegistriesManager = weekly.registriesManager(currentContext)
-        
-        
+        dailyRegistriesManager = daily.registriesManager
+        weeklyRegistriesManager = weekly.registriesManager
     }
     
     override func tearDown() {

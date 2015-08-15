@@ -29,9 +29,9 @@ public class MedicineNotificationsManager : NotificationManager{
     public static let NotificationCategory = "PILL_REMINDER"
     
     /// Init
-    public init(context: NSManagedObjectContext, medicine: Medicine){
+    public init(medicine: Medicine){
         self.medicine = medicine
-        super.init(context: context)
+        super.init(context: medicine.managedObjectContext!)
     }
     
     /// Schedule notification and stores the fireTime in the medicine object

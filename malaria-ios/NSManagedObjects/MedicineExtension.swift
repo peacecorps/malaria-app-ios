@@ -13,29 +13,17 @@ public extension Medicine{
     }
     
     /// Returns an object responsible for computing the statistics
-    ///
-    /// :param: `NSManagedObjectContext`: context
-    ///
-    /// :returns: `MedicineStats`: the stats object manager
-    public func stats(context: NSManagedObjectContext) -> MedicineStats {
-        return MedicineStats(context: context, medicine: self)
+    public var stats: MedicineStats {
+        return MedicineStats(medicine: self)
     }
     
     /// Returns an object responsible for handling the registries
-    ///
-    /// :param: `NSManagedObjectContext`: context
-    ///
-    /// :returns: `RegistriesManager`
-    public func registriesManager(context: NSManagedObjectContext) -> RegistriesManager{
-        return RegistriesManager(context: context, medicine: self)
+    public var registriesManager: RegistriesManager{
+        return RegistriesManager(medicine: self)
     }
     
     /// Returns an object responsible for hadling the notifications
-    ///
-    /// :param: `NSManagedObjectContext`: context
-    ///
-    /// :returns: `MedicineNotificationsManager`
-    public func notificationManager(context: NSManagedObjectContext) -> MedicineNotificationsManager{
-        return MedicineNotificationsManager(context: context, medicine: self)
+    public var notificationManager: MedicineNotificationsManager{
+        return MedicineNotificationsManager(medicine: self)
     }
 }

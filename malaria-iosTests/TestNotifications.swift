@@ -27,18 +27,18 @@ class TestNotifications: XCTestCase {
         
         m.registerNewMedicine(currentPill.name(), interval: currentPill.interval())
         m.setCurrentPill(currentPill.name())
-        m.getCurrentMedicine()!.notificationManager(currentContext).scheduleNotification(d1)
+        m.getCurrentMedicine()!.notificationManager.scheduleNotification(d1)
         
         m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
         
         mdDaily = m.getCurrentMedicine()!
         mdWeekly = m.getMedicine(weeklyPill.name())!
         
-        mdDailyregistriesManager = mdDaily.registriesManager(currentContext)
-        mdWeeklyregistriesManager = mdWeekly.registriesManager(currentContext)
+        mdDailyregistriesManager = mdDaily.registriesManager
+        mdWeeklyregistriesManager = mdWeekly.registriesManager
         
-        mdDailyNotifManager = mdDaily.notificationManager(currentContext)
-        mdWeeklyNotifManager = mdWeekly.notificationManager(currentContext)
+        mdDailyNotifManager = mdDaily.notificationManager
+        mdWeeklyNotifManager = mdWeekly.notificationManager
         
         XCTAssertTrue(mdDailyregistriesManager.addRegistry(d1, tookMedicine: true))
     }

@@ -30,9 +30,8 @@ class TestMonthAdherence: XCTestCase {
         m.setCurrentPill(currentPill.name())
         
         md = m.getCurrentMedicine()!
-        md.notificationManager(currentContext).scheduleNotification(d1)
-        registriesManager = md.registriesManager(currentContext)
-        stats = md.stats(currentContext)
+        registriesManager = md.registriesManager
+        stats = md.stats
     }
     
     override func tearDown() {

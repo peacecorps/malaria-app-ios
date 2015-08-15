@@ -114,7 +114,7 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let item = listItems[indexPath.row]
         
-        TripsManager(context: viewContext).getTrip()?.itemsManager(viewContext).toggleCheckItem([item.0])
+        TripsManager(context: viewContext).getTrip()?.itemsManager.toggleCheckItem([item.0])
         
         let isSelected = item.1
         listItems[indexPath.row].1 = !isSelected

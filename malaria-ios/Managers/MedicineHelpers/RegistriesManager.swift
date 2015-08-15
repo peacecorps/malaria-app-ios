@@ -5,9 +5,9 @@ public class RegistriesManager : CoreDataContextManager{
     private let medicine: Medicine
     
     /// Init
-    public init(context: NSManagedObjectContext, medicine: Medicine){
+    public init(medicine: Medicine){
         self.medicine = medicine
-        super.init(context: context)
+        super.init(context: medicine.managedObjectContext!)
     }
 
     /// Check if the pill was already taken in the period

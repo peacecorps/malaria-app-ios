@@ -71,7 +71,7 @@ public class TripsManager : CoreDataContextManager{
             t.arrival = arrival
             t.reminderTime = timeReminder
             
-            t.itemsManager(context).getItems().map({$0.deleteFromContext(self.context)})
+            t.itemsManager.getItems().map({$0.deleteFromContext(self.context)})
             
             createHistory(t)
             

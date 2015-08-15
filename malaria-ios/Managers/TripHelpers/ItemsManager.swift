@@ -5,23 +5,25 @@ public class ItemsManager : CoreDataContextManager{
     let trip: Trip
     
     /// Init
-    public init(context: NSManagedObjectContext, trip: Trip){
+    public init(trip: Trip){
         self.trip = trip
-        super.init(context: context)
+        super.init(context: trip.managedObjectContext!)
     }
     
     /// Adds a new item to the trip
     ///
     /// :param: `String`: name of the item
-    /// :param: `Int64`: quantity
+    /// :param: `Int64`: quantity, it will be always at least 1
     public func addItem(name: String, quantity: Int64){
+        let quant = max(quantity, 1)
+        
         if let i = findItem(name){
             Logger.Info("Updating quantity for an existing item")
-            i.add(quantity)
+            i.add(quant)
         }else{
             let item = Item.create(Item.self, context: self.context)
             item.name = name
-            item.quantity = quantity
+            item.quantity = quant
             
             var newArray = getItems()
             newArray.append(item)

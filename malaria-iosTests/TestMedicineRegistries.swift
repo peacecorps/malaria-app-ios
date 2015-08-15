@@ -21,8 +21,8 @@ class TestMedicineRegistries: XCTestCase {
         m.setCurrentPill(currentPill.name())
         
         md = m.getCurrentMedicine()!
-        md.notificationManager(currentContext).scheduleNotification(d1)
-        registriesManager = md.registriesManager(currentContext)
+        md.notificationManager.scheduleNotification(d1)
+        registriesManager = md.registriesManager
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
         XCTAssertTrue(registriesManager.addRegistry(d1 - 1.day, tookMedicine: true))
@@ -121,7 +121,7 @@ class TestMedicineRegistries: XCTestCase {
 
         var weekly = m.getMedicine(weeklyPill.name())!
         
-        let weeklyRegistriesManager = weekly.registriesManager(currentContext)
+        let weeklyRegistriesManager = weekly.registriesManager
         
         //Saturday = 0, Sunday = 1, etc
         var dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day
@@ -209,7 +209,7 @@ class TestMedicineRegistries: XCTestCase {
     
     func testWeeklyTookMedicine() {
         m.registerNewMedicine(Medicine.Pill.Mefloquine.name(), interval: Medicine.Pill.Mefloquine.interval())
-        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager(currentContext)
+        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
         for i in 1...6{
@@ -231,7 +231,7 @@ class TestMedicineRegistries: XCTestCase {
     
     func testWeeklyTookMedicineMixedChoices() {
         m.registerNewMedicine(Medicine.Pill.Mefloquine.name(), interval: Medicine.Pill.Mefloquine.interval())
-        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager(currentContext)
+        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: false))
         for i in 0...6{

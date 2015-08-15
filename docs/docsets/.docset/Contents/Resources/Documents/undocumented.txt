@@ -1,3 +1,6 @@
+TripHistory.swift
+	@NSManaged public var location: String
+	@NSManaged public var timestamp: NSDate
 InfoHubViewController.swift
 	class InfoHubViewController : UIViewController
 	class InfoHubViewController : UIViewController

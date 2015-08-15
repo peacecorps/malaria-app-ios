@@ -53,8 +53,8 @@ public class CachedStatistics : NSObject{
         self.context = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
         medicine = MedicineManager(context: context).getCurrentMedicine()
-        registriesManager = medicine.registriesManager(context)
-        statsManager = medicine.stats(context)
+        registriesManager = medicine.registriesManager
+        statsManager = medicine.stats
     }
     
     /// Updates internal cache

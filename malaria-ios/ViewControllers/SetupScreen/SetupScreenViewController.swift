@@ -110,7 +110,7 @@ extension SetupScreenViewController {
         medicineManager.setCurrentPill(med.name())
         UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(true)
         
-        let notificationManager = medicineManager.getCurrentMedicine()!.notificationManager(viewContext)
+        let notificationManager = medicineManager.getCurrentMedicine()!.notificationManager
         
         if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
             Logger.Error("Medicine Notifications are not enabled")

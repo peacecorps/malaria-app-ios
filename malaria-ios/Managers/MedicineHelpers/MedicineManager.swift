@@ -63,7 +63,7 @@ public class MedicineManager : CoreDataContextManager{
     public func setCurrentPill(name: String){
         if let m = getCurrentMedicine(){
             m.isCurrent = false
-            m.notificationManager(context).unsheduleNotification()
+            m.notificationManager.unsheduleNotification()
         }else{
             Logger.Error("No current pill found!")
         }

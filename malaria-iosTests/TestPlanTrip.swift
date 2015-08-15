@@ -23,7 +23,7 @@ class TestPlanTrip: XCTestCase {
         tManager = TripsManager(context: currentContext)        
         trip = tManager.createTrip(location, medicine: currentPill, departure: d1, arrival: d2, timeReminder: reminderTime)
         
-        itemsManager = trip.itemsManager(currentContext)
+        itemsManager = trip.itemsManager
     }
     
     override func tearDown() {

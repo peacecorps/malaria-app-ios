@@ -176,16 +176,12 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)
-            }else {
-                self.generateErrorMessage()
             }
         }))
         
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.didNot, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)                
-            }else {
-                self.generateErrorMessage()
             }
         }))
         tookPillActionSheet.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
@@ -197,14 +193,6 @@ extension MonthlyViewController: CVCalendarViewDelegate {
             popoverController.sourceRect = dayView.bounds
         }
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
-    }
-    
-    private func generateErrorMessage() {
-        let (title, message) = (ErrorAddRegistryAlertText.title, ErrorAddRegistryAlertText.message)
-    
-        let errorAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        errorAlert.addAction(UIAlertAction(title: AlertOptions.dismiss, style: .Default, handler: nil))
-        presentViewController(errorAlert, animated: true, completion: nil)
     }
     
     ///hack until library offers what we need
@@ -296,12 +284,6 @@ extension MonthlyViewController {
     private var TookMedicineAlertActionText: (did: String, didNot: String) {get {
         return ("Yes, I did", "No, I didn't")
     }}
-    
-    //error
-    private var ErrorAddRegistryAlertText: AlertText {get {
-        return ("Error updating", "Please contact us by clicking the email icon on the setup screen")
-    }}
-    
     
     //type of alerts options
     private var AlertOptions: (ok: String, cancel: String, dismiss: String) {get {

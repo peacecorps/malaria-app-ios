@@ -92,7 +92,6 @@ class DidTakePillsViewController: UIViewController {
         //there is is the text being black which is not that noticible
         //
         // UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
-        
     }
     
     func refreshScreen(){

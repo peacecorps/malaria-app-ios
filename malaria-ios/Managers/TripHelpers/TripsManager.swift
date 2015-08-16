@@ -58,15 +58,15 @@ public class TripsManager : CoreDataContextManager{
     /// If there is already an instance of trip, it modifies it.
     ///
     /// :param: `String`: Location
-    /// :param: `Medicine.Pill`: Location
+    /// :param: `String`: Medicine name
     /// :param: `Int64`: caseToBring
     /// :param: `NSdate`: reminderDate
     ///
     /// :return: `Trip`: Instance of trip
-    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
-        func create(t: Trip) -> Trip{
+    public func createTrip(location: String, medicine: String, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
+        func create(t: Trip) -> Trip {
             t.location = location
-            t.medicine = medicine.name()
+            t.medicine = medicine
             t.departure = departure
             t.arrival = arrival
             t.reminderTime = timeReminder

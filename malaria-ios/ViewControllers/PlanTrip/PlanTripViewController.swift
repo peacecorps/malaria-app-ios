@@ -166,7 +166,7 @@ extension PlanTripViewController{
     }
     
     private func storeTrip(){
-        let trip = tripsManager.createTrip(location.text, medicine: medicine, departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
+        let trip = tripsManager.createTrip(location.text, medicine: medicine.name(), departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
         let itemManager = trip.itemsManager
         items.map({ itemManager.addItem($0.0, quantity: 1) })
         itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))

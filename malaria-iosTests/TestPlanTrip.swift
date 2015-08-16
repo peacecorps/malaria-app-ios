@@ -21,7 +21,7 @@ class TestPlanTrip: XCTestCase {
         currentContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         
         tManager = TripsManager(context: currentContext)        
-        trip = tManager.createTrip(location, medicine: currentPill, departure: d1, arrival: d2, timeReminder: reminderTime)
+        trip = tManager.createTrip(location, medicine: currentPill.name(), departure: d1, arrival: d2, timeReminder: reminderTime)
         
         itemsManager = trip.itemsManager
     }
@@ -51,7 +51,7 @@ class TestPlanTrip: XCTestCase {
         let departure2 = d1 + 10.day
         let arrival2 = d1 + 20.day
         
-        trip = tManager.createTrip(location2, medicine: pill2, departure: departure2, arrival: arrival2, timeReminder: reminderTime)
+        trip = tManager.createTrip(location2, medicine: pill2.name(), departure: departure2, arrival: arrival2, timeReminder: reminderTime)
         
         XCTAssertEqual(trip.location, location2)
         XCTAssertEqual(trip.medicine, pill2.name())
@@ -194,7 +194,7 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(history.first!.location, location)
         XCTAssertEqual(history.first!.timestamp, d1)
         
-        tManager.createTrip("LA", medicine: currentPill, departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("LA", medicine: currentPill.name(), departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
         let history2 = tManager.getHistory(limit: 10)
         XCTAssertEqual(2, history2.count)
         
@@ -206,29 +206,29 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(1, history3.count)
 
         // create same trip, shouldn't record again
-        tManager.createTrip("LA", medicine: currentPill, departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("LA", medicine: currentPill.name(), departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
         let history4 = tManager.getHistory(limit: 10)
         XCTAssertEqual(2, history4.count)
 
         //test history limit (15), there already 2
-        tManager.createTrip("3", medicine: currentPill, departure: d1 + 2.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("4", medicine: currentPill, departure: d1 + 3.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("5", medicine: currentPill, departure: d1 + 4.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("6", medicine: currentPill, departure: d1 + 5.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("7", medicine: currentPill, departure: d1 + 6.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("8", medicine: currentPill, departure: d1 + 7.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("9", medicine: currentPill, departure: d1 + 8.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("10", medicine: currentPill, departure: d1 + 9.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("11", medicine: currentPill, departure: d1 + 10.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("12", medicine: currentPill, departure: d1 + 11.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("12", medicine: currentPill, departure: d1 + 12.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("13", medicine: currentPill, departure: d1 + 13.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("14", medicine: currentPill, departure: d1 + 14.day, arrival: d2, timeReminder: reminderTime)
-        tManager.createTrip("15", medicine: currentPill, departure: d1 + 15.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("3", medicine: currentPill.name(), departure: d1 + 2.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("4", medicine: currentPill.name(), departure: d1 + 3.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("5", medicine: currentPill.name(), departure: d1 + 4.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("6", medicine: currentPill.name(), departure: d1 + 5.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("7", medicine: currentPill.name(), departure: d1 + 6.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("8", medicine: currentPill.name(), departure: d1 + 7.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("9", medicine: currentPill.name(), departure: d1 + 8.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("10", medicine: currentPill.name(), departure: d1 + 9.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("11", medicine: currentPill.name(), departure: d1 + 10.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("12", medicine: currentPill.name(), departure: d1 + 11.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("12", medicine: currentPill.name(), departure: d1 + 12.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("13", medicine: currentPill.name(), departure: d1 + 13.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("14", medicine: currentPill.name(), departure: d1 + 14.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("15", medicine: currentPill.name(), departure: d1 + 15.day, arrival: d2, timeReminder: reminderTime)
         XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
 
         // one above the limit
-        tManager.createTrip("16", medicine: currentPill, departure: d1 + 16.day, arrival: d2, timeReminder: reminderTime)
+        tManager.createTrip("16", medicine: currentPill.name(), departure: d1 + 16.day, arrival: d2, timeReminder: reminderTime)
         XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
         
         // should have deleted the oldest entry at location

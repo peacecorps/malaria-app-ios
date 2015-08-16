@@ -75,7 +75,7 @@ class PillsStatsViewController : UIViewController {
         
         cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
-        }, completition: { _ in
+        }, completion: { _ in
             self.configureData(CachedStatistics.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })

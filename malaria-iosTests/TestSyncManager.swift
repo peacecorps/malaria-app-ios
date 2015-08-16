@@ -43,7 +43,7 @@ class TestSyncManager: XCTestCase {
             }
             
             if !self.completionCalled{
-                XCTFail("Completition handler wasn't called")
+                XCTFail("completion handler wasn't called")
             }
             
             //assure only one object per endpoint
@@ -65,7 +65,7 @@ class TestSyncManager: XCTestCase {
         expectation = expectationWithDescription("syncall")
         
         
-        sm.syncAll(completitionHandler: { Void in self.expectation!.fulfill() })
+        sm.syncAll(completionHandler: { Void in self.expectation!.fulfill() })
         var done: Bool = false
         waitForExpectationsWithTimeout(60, handler: { error in
             if let error = error {

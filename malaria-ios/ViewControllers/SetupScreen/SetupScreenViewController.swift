@@ -60,7 +60,7 @@ class SetupScreenViewController : UIViewController{
 }
 
 extension SetupScreenViewController{
-    //could be called on the completition, however It is too late because it is noticible the screen being updated
+    //could be called on the completion, however It is too late because it is noticible the screen being updated
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.CallOnDismiss()

@@ -43,7 +43,7 @@ class InfoHubViewController : UIViewController{
     }
     
    private func refreshScreen() {
-        func completitionHandler(url: String, error: NSError?){
+        func completionHandler(url: String, error: NSError?){
             if error != nil{
                 delay(0.5){
                     let (title, message) = (self.NoInformationAvailableAlertText.title, self.NoInformationAvailableAlertText.message)
@@ -59,7 +59,7 @@ class InfoHubViewController : UIViewController{
         }
     
         if !refreshFromCoreData(){
-            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: completitionHandler)
+            syncManager.sync(EndpointType.Posts.path(), save: true, completionHandler: completionHandler)
         }
     }
     

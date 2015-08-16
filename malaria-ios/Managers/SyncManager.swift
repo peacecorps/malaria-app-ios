@@ -29,7 +29,7 @@ public class SyncManager : CoreDataContextManager{
     ///
     /// :param: `String`: full path
     /// :param: `Bool`: Save context after success
-    /// :param: `((url: String, error: NSError?)->())?`: completition Handler (default nil)
+    /// :param: `((url: String, error: NSError?)->())?`: completion Handler (default nil)
     public func sync(path: String, save: Bool = false, completionHandler: ((url: String, error: NSError?)->())? = nil){
         func expandedCompletionHandler(url: String, error: NSError?){
             completionHandler?(url: url, error: error)
@@ -52,16 +52,16 @@ public class SyncManager : CoreDataContextManager{
     
     /// Syncs every endpoint
     ///
-    /// Runs the specified completition handler after syncing every endpoint.
+    /// Runs the specified completion handler after syncing every endpoint.
     ///
-    /// :param: `(()->())?`: completition handler (default nil)
-    public func syncAll(completitionHandler: (()->())? = nil){
+    /// :param: `(()->())?`: completion handler (default nil)
+    public func syncAll(completionHandler: (()->())? = nil){
         var count = endpoints.count
-        func completitionHandlerExpanded(url: String, error: NSError?){
+        func completionHandlerExpanded(url: String, error: NSError?){
             count--
             if(count == 0){
                 Logger.Info("Sync complete")
-                completitionHandler?()
+                completionHandler?()
             }
             
             Logger.Info("Saving to core data")
@@ -69,7 +69,7 @@ public class SyncManager : CoreDataContextManager{
         }
         
         for (path, endpoint) in endpoints{
-            sync(path, completionHandler: completitionHandlerExpanded)
+            sync(path, completionHandler: completionHandlerExpanded)
         }
     }
     

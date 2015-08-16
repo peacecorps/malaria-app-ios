@@ -135,7 +135,7 @@ extension PlanTripViewController{
             view.arrival = self.arrivalDay
             view.departure = self.departureDay
             view.listItems = self.items
-            view.completitionHandler = self.selectItemsCallback
+            view.completionHandler = self.selectItemsCallback
             self.presentViewController(view, animated: true, completion: nil)
         }
     }

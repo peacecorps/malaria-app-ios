@@ -10,7 +10,7 @@ class ListItemsViewController : UIViewController{
     var departure: NSDate!
     var arrival: NSDate!
     var listItems: [(String, Bool)] = []
-    var completitionHandler: ((Medicine.Pill, [(String, Bool)]) -> ())!
+    var completionHandler: ((Medicine.Pill, [(String, Bool)]) -> ())!
     
     //internal
     private var medicine: Medicine.Pill!
@@ -31,7 +31,7 @@ class ListItemsViewController : UIViewController{
     }
 
     @IBAction func doneBtnHandler(sender: AnyObject) {
-        completitionHandler(medicine, listItems)
+        completionHandler(medicine, listItems)
         dismissViewControllerAnimated(true, completion: nil)
     }
     

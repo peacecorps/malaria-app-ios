@@ -66,8 +66,8 @@ public class CachedStatistics : NSObject{
 extension CachedStatistics {
     /// Retrieves daily stats
     ///
-    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
-    public func retrieveDailyStats(completition: () -> ()){
+    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    public func retrieveDailyStats(completion: () -> ()){
         lastMedicine = nil
         todaysPillStreak = 0
         todaysAdherence = 0
@@ -83,7 +83,7 @@ extension CachedStatistics {
             self.isDailyStatsUpdated = true
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
         
     }
@@ -91,8 +91,8 @@ extension CachedStatistics {
     /// Retrieves month adherece
     ///
     /// :param: `NSDate`: Desired month
-    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
-    public func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
+    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    public func retrieveMonthsData(numberMonths: Int, completion : () -> ()) {
         monthAdhrence.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -106,7 +106,7 @@ extension CachedStatistics {
             self.isMonthlyAdherenceDataUpdated = true
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
     }
     
@@ -180,8 +180,8 @@ extension CachedStatistics {
     /// Retrieves cached statistics for the graph
     ///
     /// :param: `(progress: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
-    /// :param: `() -> ()`: Completition handler to be executed in the UI after finishing processing
-    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
+    /// :param: `() -> ()`: completion handler to be executed in the UI after finishing processing
+    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completion : () -> ()) {
         adherencesPerDay.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -224,7 +224,7 @@ extension CachedStatistics {
             }
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
     }
 

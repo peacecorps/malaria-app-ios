@@ -82,6 +82,7 @@
 		20C718E71B76C28D007424F6 /* TestPlanTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E6DC3A1B38B53C0003B777 /* TestPlanTrip.swift */; };
 		20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20503CD21B3F497200ED490A /* TestMapping.swift */; };
 		20C718ED1B77DCB1007424F6 /* TestMonthAdherence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C718EC1B77DCB1007424F6 /* TestMonthAdherence.swift */; };
+		20E928A51B80CB8C00F3F387 /* TestSyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F9945C1B3F649F00925FA1 /* TestSyncManager.swift */; };
 		20EA06DB1B2234DA00D6840E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20EA06D41B2234DA00D6840E /* Model.xcdatamodeld */; };
 		20EF68501B72DF1600286A0F /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20EF684F1B72DF1600286A0F /* UIButton.swift */; };
 		20FC56BD1B71951300D51801 /* PresentsModalityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FC56BC1B71951300D51801 /* PresentsModalityDelegate.swift */; };
@@ -951,6 +952,7 @@
 				20C718E41B76C28D007424F6 /* TestMedicineManager.swift in Sources */,
 				20C718ED1B77DCB1007424F6 /* TestMonthAdherence.swift in Sources */,
 				20C718E81B76C28D007424F6 /* TestMapping.swift in Sources */,
+				20E928A51B80CB8C00F3F387 /* TestSyncManager.swift in Sources */,
 				209F60B31B6DA6B100EDA461 /* TestDailyMedicineStatistics.swift in Sources */,
 				209F60B41B6DA6B100EDA461 /* TestWeeklyMedicineStatistics.swift in Sources */,
 				20C718E61B76C28D007424F6 /* TestNSDateExtensions.swift in Sources */,

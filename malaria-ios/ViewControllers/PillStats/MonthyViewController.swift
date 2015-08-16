@@ -208,14 +208,21 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
     
     ///hack until library offers what we need
-    func updateDayView(day: NSDate) {
+    func updateDayView(day: NSDate, remove: Bool) {
         if let dViews = dayViews[day] {
-            for dView in dViews {
-                let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day] ?? false
-                if let ringView = dView.viewWithTag(RingViewTag){
-                    (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
-                }else {
-                    dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
+            
+            if remove{
+                for dView in dViews {
+                    dView.viewWithTag(RingViewTag)?.removeFromSuperview()
+                }
+            } else {
+                for dView in dViews {
+                    let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day] ?? false
+                    if let ringView = dView.viewWithTag(RingViewTag){
+                        (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
+                    }else {
+                        dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
+                    }
                 }
             }
         }

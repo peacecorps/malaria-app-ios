@@ -137,8 +137,8 @@ public class RegistriesManager : CoreDataContextManager{
                 var newRegistries: [Registry] = medicine.registries.convertToArray()
                 newRegistries.append(registry)
                 medicine.registries = NSSet(array: newRegistries)
-                NSNotificationEvents.DataUpdated(registry)
                 CoreDataHelper.sharedInstance.saveContext(context)
+                NSNotificationEvents.DataUpdated(registry)
                 
                 return true
             }

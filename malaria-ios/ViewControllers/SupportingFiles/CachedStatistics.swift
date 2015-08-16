@@ -137,7 +137,7 @@ extension CachedStatistics {
     ///
     /// :param: `NSDate`: The day to be updated
     /// :param: `() -> ()`: Progress handler to be executed in the UI thread
-    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
+    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate, remove: Bool) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
             self.refreshContext()
@@ -158,11 +158,19 @@ extension CachedStatistics {
                 }
                 
                 let oldestEntry = entriesReversed.last!.date
+                
+                //Removing previous suplementary views. Happens when the oldest entry data changes
+                let startDelete = oldestEntry - self.medicine.interval.day
+                for i in 0...self.medicine.interval {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        progress(day: (startDelete + i.day).startOfDay, remove: true)
+                    })
+                }
+                
                 let numEntries = NSDate() - oldestEntry + 1
                 for i in 0...(numEntries - 1){
-                    let day = (oldestEntry + i.day).startOfDay
                     dispatch_async(dispatch_get_main_queue(), {
-                        progress(day: day)
+                        progress(day: (oldestEntry + i.day).startOfDay, remove: false)
                     })
                 }
             }

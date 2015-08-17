@@ -135,7 +135,7 @@ extension PlanTripViewController{
             view.arrival = self.arrivalDay
             view.departure = self.departureDay
             view.listItems = self.items
-            view.completitionHandler = self.selectItemsCallback
+            view.completionHandler = self.selectItemsCallback
             self.presentViewController(view, animated: true, completion: nil)
         }
     }
@@ -166,8 +166,8 @@ extension PlanTripViewController{
     }
     
     private func storeTrip(){
-        let trip = tripsManager.createTrip(location.text, medicine: medicine, departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
-        let itemManager = trip.itemsManager(viewContext)
+        let trip = tripsManager.createTrip(location.text, medicine: medicine.name(), departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
+        let itemManager = trip.itemsManager
         items.map({ itemManager.addItem($0.0, quantity: 1) })
         itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))
         
@@ -176,7 +176,7 @@ extension PlanTripViewController{
     }
     
     private func scheduleNotifications(trip: Trip) {
-        let notificationManager = trip.notificationManager(viewContext)
+        let notificationManager = trip.notificationManager
         
         var notificationTime = departureDay.startOfDay + reminder.hour.hour + reminder.minutes.minute
         
@@ -271,7 +271,7 @@ extension PlanTripViewController {
     }
     
     private func getStoredPlanTripItems() -> [(String, Bool)] {
-        return tripsManager.getTrip()?.itemsManager(viewContext).getItems().map({ ($0.name, $0.check) }) ?? []
+        return tripsManager.getTrip()?.itemsManager.getItems().map({ ($0.name, $0.check) }) ?? []
     }
   
     func getStoredPlanTripDates() -> (departure: NSDate, arrival: NSDate) {

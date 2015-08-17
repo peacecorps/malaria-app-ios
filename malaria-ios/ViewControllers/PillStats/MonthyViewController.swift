@@ -1,7 +1,11 @@
 import Foundation
 import UIKit
 
+
 /// `MonthlyViewController`: shows the calendar view
+/// Using variation of CVCalendar by changing CVCalendarMonthContentViewController
+/// and commenting the lines calling the methods responsible for making the transitioning.
+/// This was done because, for e.g., August 30 and 31 2015 were impossible to select due to the automatic transition
 class MonthlyViewController: UIViewController {
     @IBOutlet weak var calendarView: CVCalendarView!
     @IBOutlet weak var menuView: CVCalendarMenuView!
@@ -30,6 +34,7 @@ class MonthlyViewController: UIViewController {
     //helpers
     private var firstRun = true
     private var previouslySelect: NSDate?
+    private var currentMonth: NSDate?
     private var animationFinished = true
 
     //hack because CVCalendar doesn't support updates yet
@@ -40,6 +45,7 @@ class MonthlyViewController: UIViewController {
         super.viewDidLoad()
         
         previouslySelect = startDay
+        currentMonth = startDay
         monthLabel.text = generateMonthLabel(startDay)
         calendarView.toggleViewWithDate(startDay)
     }
@@ -134,18 +140,20 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     /// Note in the current version there are some issues with the calendar.
     /// When chooosing a month in todays day this is called, however, in another month this is called therefore firstRun
     /// becomes useful avoiding appearing
+    /// It always calls this when transitioning between months (-.-)
     func didSelectDayView(dayView: CVCalendarDayView) {
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect {
             
             //avoids appearing when switching months
             let selectedSameMonth = previous.sameMonthAs(selected)
-            
-            if (!firstRun && selectedSameMonth) {
+                            
+            if !firstRun && selectedSameMonth {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)
                 }
             }
+            
         }
 
         previouslySelect = selected
@@ -168,16 +176,12 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.did, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: true, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)
-            }else {
-                self.generateErrorMessage()
             }
         }))
         
         tookPillActionSheet.addAction(UIAlertAction(title: TookMedicineAlertActionText.didNot, style: .Default, handler: { _ in
             if CachedStatistics.sharedInstance.registriesManager.addRegistry(date, tookMedicine: false, modifyEntry: true) {
                 CachedStatistics.sharedInstance.updateTookMedicineStats(date, progress: self.updateDayView)                
-            }else {
-                self.generateErrorMessage()
             }
         }))
         tookPillActionSheet.addAction(UIAlertAction(title: AlertOptions.cancel, style: .Cancel, handler: nil))
@@ -191,32 +195,33 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
     
-    private func generateErrorMessage() {
-        let (title, message) = (ErrorAddRegistryAlertText.title, ErrorAddRegistryAlertText.message)
-    
-        let errorAlert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        errorAlert.addAction(UIAlertAction(title: AlertOptions.dismiss, style: .Default, handler: nil))
-        presentViewController(errorAlert, animated: true, completion: nil)
-    }
-    
     ///hack until library offers what we need
-    func updateDayView(day: NSDate) {
+    func updateDayView(day: NSDate, remove: Bool) {
         if let dViews = dayViews[day] {
-            for dView in dViews {
-                let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day] ?? false
-                if let ringView = dView.viewWithTag(RingViewTag){
-                    (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
-                }else {
-                    dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
+            
+            if remove{
+                for dView in dViews {
+                    dView.viewWithTag(RingViewTag)?.removeFromSuperview()
+                }
+            } else {
+                for dView in dViews {
+                    let tookMedicine = CachedStatistics.sharedInstance.tookMedicine[day] ?? false
+                    if let ringView = dView.viewWithTag(RingViewTag){
+                        (ringView as? CVAuxiliaryView)!.strokeColor = tookMedicine ? TookMedicineColorColor : DidNotTakeMedicineColor
+                    }else {
+                        dView.insertSubview(createRingView(dView, tookMedicine: tookMedicine), atIndex: 0)
+                    }
                 }
             }
         }
     }
     
     func presentedDateUpdated(date: CVDate) {
-        if monthLabel.text != generateMonthLabel(date.convertedDate()!) && self.animationFinished {
+        let convertedDate = date.convertedDate()!
+        if !currentMonth!.sameMonthAs(convertedDate) && self.animationFinished {
+            currentMonth = convertedDate
             let updatedMonthLabel = UILabel()
-            updatedMonthLabel.text = generateMonthLabel(date.convertedDate()!)
+            updatedMonthLabel.text = generateMonthLabel(convertedDate)
             
             updatedMonthLabel.textColor = monthLabel.textColor
             updatedMonthLabel.font = monthLabel.font
@@ -269,9 +274,9 @@ extension MonthlyViewController {
         let intervalRegularity = isWeekly ? "weekly" : "daily"
         let dateString = date.formatWith("d MMMM yyyy")
         if tookMedicine != nil {
-            return ("You already took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
+            return ("You already took your " + intervalRegularity + " pill", "Did you take your medicine on " + dateString + "?")
         } else {
-            return ("You didn't took your " + intervalRegularity + " pill.", "Did you take your medicine on " + dateString + "?")
+            return ("You didn't took your " + intervalRegularity + " pill", "Did you take your medicine on " + dateString + "?")
         }
     }
     
@@ -279,12 +284,6 @@ extension MonthlyViewController {
     private var TookMedicineAlertActionText: (did: String, didNot: String) {get {
         return ("Yes, I did", "No, I didn't")
     }}
-    
-    //error
-    private var ErrorAddRegistryAlertText: AlertText {get {
-        return ("Error updating", "Please contact us by clicking the email icon on the setup screen")
-    }}
-    
     
     //type of alerts options
     private var AlertOptions: (ok: String, cancel: String, dismiss: String) {get {

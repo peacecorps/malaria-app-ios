@@ -3,20 +3,12 @@ import CoreData
 
 public extension Trip{
     /// Returns an object responsible for managing the items
-    ///
-    /// :param: `NSManagedObjectContext`: context
-    ///
-    /// :returns: `ItemsManager`
-    public func itemsManager(context: NSManagedObjectContext) -> ItemsManager{
-        return ItemsManager(context: context, trip: self)
+    public var itemsManager: ItemsManager{
+        return ItemsManager(trip: self)
     }
     
     /// Returns an object responsible for managing the notifications
-    ///
-    /// :param: `NSManagedObjectContext`: context
-    ///
-    /// :returns: `TripNotificationsManager`
-    public func notificationManager(context: NSManagedObjectContext) -> TripNotificationsManager{
-        return TripNotificationsManager(context: context, trip: self)
+    public var notificationManager: TripNotificationsManager{
+        return TripNotificationsManager(trip: self)
     }
 }

@@ -3,14 +3,12 @@ import malaria_ios
 
 class TestMedicineRegistries: XCTestCase {
 
-    var m: MedicineManager!
-    
     let d1 = NSDate.from(2015, month: 6, day: 13) //Saturday intentionally
-    
     let currentPill = Medicine.Pill.Malarone
-    var md: Medicine!
     
     var currentContext: NSManagedObjectContext!
+    var m: MedicineManager!
+    var md: Medicine!
     var registriesManager: RegistriesManager!
     
     override func setUp() {
@@ -23,8 +21,8 @@ class TestMedicineRegistries: XCTestCase {
         m.setCurrentPill(currentPill.name())
         
         md = m.getCurrentMedicine()!
-        md.notificationManager(currentContext).scheduleNotification(d1)
-        registriesManager = md.registriesManager(currentContext)
+        md.notificationManager.scheduleNotification(d1)
+        registriesManager = md.registriesManager
         
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
         XCTAssertTrue(registriesManager.addRegistry(d1 - 1.day, tookMedicine: true))
@@ -41,7 +39,15 @@ class TestMedicineRegistries: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
-        UserSettingsManager.clear()
+    }
+    
+    
+    func testDeleteEntry(){
+        registriesManager.removeEntry(d1 - 3.day)
+        XCTAssertNil(registriesManager.findRegistry(d1 - 3.day))
+        
+        registriesManager.removeEntry(d1)
+        XCTAssertEqual(registriesManager.mostRecentEntry()!.date, d1 - 1.day)
     }
     
     
@@ -115,7 +121,7 @@ class TestMedicineRegistries: XCTestCase {
 
         var weekly = m.getMedicine(weeklyPill.name())!
         
-        let weeklyRegistriesManager = weekly.registriesManager(currentContext)
+        let weeklyRegistriesManager = weekly.registriesManager
         
         //Saturday = 0, Sunday = 1, etc
         var dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day
@@ -168,16 +174,90 @@ class TestMedicineRegistries: XCTestCase {
     }
     
     func testTookMedicine() {
-        //TODO
+        let tookMedicineYes = registriesManager.tookMedicine(d1)
+        XCTAssertNotNil(tookMedicineYes)
+        XCTAssertEqual(tookMedicineYes!.date, d1)
+        
+        let tookMedicineNo = registriesManager.tookMedicine(d1 - 2.day)
+        XCTAssertNil(tookMedicineNo)
+        
+        let tookMedicinRandom = registriesManager.tookMedicine(d1 - 2.year)
+        XCTAssertNil(tookMedicineNo)
     }
     
     func testEntriesInPeriod() {
-        //TODO
+        //it's a daily pill
+        let entriesInPeriod = registriesManager.allRegistriesInPeriod(d1)
+        XCTAssertEqual(1, entriesInPeriod.entries.count)
+        XCTAssertFalse(entriesInPeriod.noData)
+        
+        let entriesInPeriod2 = registriesManager.allRegistriesInPeriod(d1 - 10.day)
+        XCTAssertEqual(0, entriesInPeriod2.entries.count)
+        XCTAssertTrue(entriesInPeriod2.noData)
+    }
+    
+    func testAditionalFilter(){
+        XCTAssertEqual(6, registriesManager.getRegistries(additionalFilter: {(r: Registry) in r.tookMedicine}).count)
+        XCTAssertEqual(4, registriesManager.getRegistries(additionalFilter: {(r: Registry) in !r.tookMedicine}).count)
     }
     
     func testCascadeDelete(){
         XCTAssertEqual(Registry.retrieve(Registry.self, context: currentContext).count, 10)
         Medicine.clear(Medicine.self, context: currentContext)
         XCTAssertEqual(Registry.retrieve(Registry.self, context: currentContext).count, 0)
+    }
+    
+    func testWeeklyTookMedicine() {
+        m.registerNewMedicine(Medicine.Pill.Mefloquine.name(), interval: Medicine.Pill.Mefloquine.interval())
+        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager
+        
+        XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: true))
+        for i in 1...6{
+            XCTAssertFalse(registriesManager.tookMedicine(d1 - i.day) != nil)
+        }
+        for i in 0...6{
+            XCTAssertTrue(registriesManager.tookMedicine(d1 + i.day) != nil)
+        }
+        
+        //elapsed enough days to restart cycle
+        XCTAssertFalse(registriesManager.tookMedicine(d1 + 7.day) != nil)
+        
+        //skip one day
+        XCTAssertTrue(registriesManager.addRegistry(d1 + 8.day, tookMedicine: true))
+        XCTAssertFalse(registriesManager.tookMedicine(d1 + 7.day) != nil)
+    }
+    
+    
+    
+    func testWeeklyTookMedicineMixedChoices() {
+        m.registerNewMedicine(Medicine.Pill.Mefloquine.name(), interval: Medicine.Pill.Mefloquine.interval())
+        registriesManager = m.getMedicine(Medicine.Pill.Mefloquine.name())!.registriesManager
+        
+        XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: false))
+        for i in 0...6{
+            XCTAssertFalse(registriesManager.tookMedicine(d1 - i.day) != nil)
+        }
+        for i in 0...6{
+            XCTAssertFalse(registriesManager.tookMedicine(d1 + i.day) != nil)
+        }
+        
+        let tookWeeklyDate = d1 + 2.day
+        XCTAssertTrue(registriesManager.addRegistry(tookWeeklyDate, tookMedicine: false))
+        for i in 0...6{
+            XCTAssertFalse(registriesManager.tookMedicine(tookWeeklyDate - i.day) != nil)
+        }
+        for i in 0...6{
+            XCTAssertFalse(registriesManager.tookMedicine(tookWeeklyDate + i.day) != nil)
+        }
+        
+        //elapsed enough days to restart cycle
+        XCTAssertFalse(registriesManager.tookMedicine(tookWeeklyDate + 7.day) != nil)
+    }
+    
+    func testLastTimeTaken(){
+        XCTAssertEqual(registriesManager.lastPillDate()!, d1)
+        registriesManager.removeEntry(d1 - 1.day)
+        registriesManager.removeEntry(d1)
+        XCTAssertEqual(registriesManager.lastPillDate()!, d1 - 3.day)
     }
 }

@@ -19,5 +19,4 @@ extension UIStoryboard{
         let storyboardId = UIStoryboard.getSimpleClassName(viewControllerClass)
         return storyboard.instantiateViewControllerWithIdentifier(storyboardId) as! C
     }
-    
 }

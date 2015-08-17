@@ -12,9 +12,10 @@ class DidTakePillsViewController: UIViewController {
     @IBInspectable var MinorDateTextFormat: String = "EEEE"
     @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
     @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()
+    @IBInspectable var NormalColor: UIColor = UIColor(hex: 0x6F5247)
 
     private var currentDate: NSDate = NSDate()
-    
+
     //managers
     private var viewContext: NSManagedObjectContext!
     private var medicineManager: MedicineManager!
@@ -52,20 +53,45 @@ class DidTakePillsViewController: UIViewController {
         refreshScreen()
     }
     
-    private func checkIfShouldReset(currentDate: NSDate = NSDate()) -> Bool{
+    private func shouldReset(currentDate: NSDate = NSDate(), interval: Int) -> Bool{
         if let m = medicine {
             if m.interval == 1 {
                 Logger.Warn("checkIfShouldReset only valid for weekly pills")
                 return false
             }
-            
-            if let mostRecent = m.registriesManager(viewContext).mostRecentEntry(){
-                //get ellaped days
-                return (currentDate - mostRecent.date) >= 7
+
+            //get ellaped days
+            if let mostRecent = m.registriesManager.mostRecentEntry(){
+                if registriesManager.tookMedicine(mostRecent.date) != nil{
+                    return (currentDate - (mostRecent.date + interval.day)) >= interval
+                }
+                
+                return (currentDate - mostRecent.date) >= interval
             }
         }
-
+        
+        Logger.Warn("No medicine configured")
         return false
+    }
+    
+    private func reset(){
+        let (title, message) = (ResheduleNotificationAlertText.title, ResheduleNotificationAlertText.message)
+        var resheduleAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        resheduleAlert.addAction(UIAlertAction(title: AlertOptions.yes, style: .Default, handler: { _ in
+            self.pagesManager.presentSetupScreen()
+        }))
+        
+        resheduleAlert.addAction(UIAlertAction(title: AlertOptions.no, style: .Default, handler: nil))
+        
+        delay(0.85){
+            self.presentViewController(resheduleAlert, animated: true, completion: nil)
+        }
+        
+        //Old method described in the requirements document but in my opinion is confusing and leds to believe
+        //there is a bug in the app because next time the app runs, it goes straight to setup screen and the only hint
+        //there is is the text being black which is not that noticible
+        //
+        // UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
     }
     
     func refreshScreen(){
@@ -75,11 +101,6 @@ class DidTakePillsViewController: UIViewController {
         dayOfTheWeekLbl.text = currentDate.formatWith(MinorDateTextFormat)
         fullDateLbl.text = currentDate.formatWith(FullDateTextFormat)
 
-        
-        if !UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool() {
-            return
-        }
-        
         if !(tookPillPlayer.prepareToPlay() && didNotTakePillPlayer.prepareToPlay()) {
             Logger.Error("Error preparing sounds effects")
         }
@@ -87,48 +108,57 @@ class DidTakePillsViewController: UIViewController {
         viewContext = CoreDataHelper.sharedInstance.createBackgroundContext()
         medicineManager = MedicineManager(context: viewContext)
         medicine = medicineManager.getCurrentMedicine()
-        registriesManager = medicine!.registriesManager(viewContext)
-        
-        let medicineRegistries = medicine!.registriesManager(viewContext)
-        let tookMedicineEntry = medicineRegistries.tookMedicine(currentDate)
-        
-        if medicine!.interval > 1 {
-            if checkIfShouldReset(currentDate: currentDate){
-                
-                dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
-                fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
-                
-                //reset configuration so that the user can reshedule the time
-                UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
-            }else if !currentDate.sameDayAs(medicine!.notificationTime!)
-                        && currentDate > medicine!.notificationTime!
-                        && tookMedicineEntry == nil {
-                            
-                dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
-                fullDateLbl.textColor = MissedWeeklyPillTextColor
-            }
+        if medicine == nil {
+            return
         }
+        
+        registriesManager = medicine!.registriesManager
+        let tookMedicineEntry = registriesManager.tookMedicine(currentDate)
         
         //if took
         if tookMedicineEntry != nil {
+            Logger.Info("Took medicine today")
             didNotTookPillBtn.enabled = false
             tookPillBtn.enabled = true
         }else {
             //didn't took because there is no information
-            if medicineRegistries.allRegistriesInPeriod(currentDate).entries.count == 0 {
+            if registriesManager.allRegistriesInPeriod(currentDate).entries.count == 0 {
+                Logger.Info("No information")
                 didNotTookPillBtn.enabled = true
                 tookPillBtn.enabled = true
             }else {
                 //or there is and he he didn't took the medicine yet
                 //check if he already registered today
-                if medicineRegistries.findRegistry(currentDate) != nil {
+                if registriesManager.findRegistry(currentDate) != nil {
+                    Logger.Info("Didn't took today")
                     didNotTookPillBtn.enabled = true
                     tookPillBtn.enabled = false
                 }else {
+                    Logger.Info("Hasn't took yet")
                     //which means that there are no entries for today, so he still has the opportunity to change that
                     didNotTookPillBtn.enabled = true
                     tookPillBtn.enabled = true
                 }
+            }
+        }
+        
+        if medicine!.interval > 1 {
+            if shouldReset(currentDate: currentDate, interval: medicine!.interval){
+                
+                dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
+                fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
+                
+                //reset configuration so that the user can reshedule the time
+                reset()
+            }else if !currentDate.sameDayAs(medicine!.notificationTime!)
+                && currentDate > medicine!.notificationTime!
+                && tookMedicineEntry == nil {
+                    
+                    dayOfTheWeekLbl.textColor = MissedWeeklyPillTextColor
+                    fullDateLbl.textColor = MissedWeeklyPillTextColor
+            }else {
+                dayOfTheWeekLbl.textColor = NormalColor
+                fullDateLbl.textColor = NormalColor
             }
         }
     }
@@ -140,7 +170,7 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: false)){
                 didNotTakePillPlayer.play()
-                reshedule(m.notificationManager(viewContext))
+                reshedule(m.notificationManager)
                 refreshScreen()
             }
         }
@@ -150,30 +180,44 @@ extension DidTakePillsViewController{
         if let m = medicine {
             if (tookPillBtn.enabled && didNotTookPillBtn.enabled && registriesManager.addRegistry(currentDate, tookMedicine: true)){
                 tookPillPlayer.play()
-                reshedule(m.notificationManager(viewContext))
+                reshedule(m.notificationManager)
                 refreshScreen()
             }
         }
     }
     
     private func reshedule(notificationManager: MedicineNotificationsManager) {
-        
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+        if UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+            notificationManager.reshedule()
+        }else {
             Logger.Error("Medicine Notifications are not enabled")
-            return
         }
-        
-        notificationManager.reshedule()
     }
 }
 
 extension DidTakePillsViewController: PresentsModalityDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         pagesManager.currentViewController = self
     }
     
     func OnDismiss() {
         refreshScreen()
     }
+}
+
+//alert messages
+extension DidTakePillsViewController {
+    typealias AlertText = (title: String, message: String)
+    
+    //existing medicine configured
+    private var ResheduleNotificationAlertText: AlertText {get {
+        return ("You forgot your medicine for quite a while", "Would you like to change your reminder time?")
+        }}
+    
+    //type of alerts options
+    private var AlertOptions: (yes: String, no: String) {get {
+        return ("Yes", "No")
+        }}
 }

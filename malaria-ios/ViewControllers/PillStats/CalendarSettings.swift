@@ -23,7 +23,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         }
     }
     
-    func shouldShowWeekdaysOut() -> Bool { return false }                                        /// show all days
+    func shouldShowWeekdaysOut() -> Bool { return true }                                        /// show all days
     func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool { return false }            /// hide line above day
 }
 

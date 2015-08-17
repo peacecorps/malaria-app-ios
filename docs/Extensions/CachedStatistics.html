@@ -273,7 +273,7 @@
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveDailyStats</span><span class="p">(</span><span class="nv">completition</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveDailyStats</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
 
                         </div>
                       </div>
@@ -289,7 +289,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p><code>() -&gt; ()</code>: Completition handler to be executed in the UI thread</p>
+                                  <p><code>() -&gt; ()</code>: completion handler to be executed in the UI thread</p>
 
                                 </div>
                               </td>
@@ -303,9 +303,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios16CachedStatistics18retrieveMonthsDataFS0_FTSi12completitionFT_T__T_"></a>
-                    <a name="//apple_ref/swift/Method/retrieveMonthsData(_:completition:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics18retrieveMonthsDataFS0_FTSi12completitionFT_T__T_">retrieveMonthsData(_:completition:)</a>
+                    <a name="/s:FC11malaria_ios16CachedStatistics18retrieveMonthsDataFS0_FTSi10completionFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/retrieveMonthsData(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics18retrieveMonthsDataFS0_FTSi10completionFT_T__T_">retrieveMonthsData(_:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -320,7 +320,7 @@
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveMonthsData</span><span class="p">(</span><span class="nv">numberMonths</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">completition</span> <span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveMonthsData</span><span class="p">(</span><span class="nv">numberMonths</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">completion</span> <span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
 
                         </div>
                       </div>
@@ -349,7 +349,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p><code>() -&gt; ()</code>: Completition handler to be executed in the UI thread</p>
+                                  <p><code>() -&gt; ()</code>: completion handler to be executed in the UI thread</p>
 
                                 </div>
                               </td>
@@ -390,9 +390,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios16CachedStatistics23updateTookMedicineStatsFS0_FTCSo6NSDate8progressFT3dayS1__T__T_"></a>
+                    <a name="/s:FC11malaria_ios16CachedStatistics23updateTookMedicineStatsFS0_FTCSo6NSDate8progressFT3dayS1_6removeSb_T__T_"></a>
                     <a name="//apple_ref/swift/Method/updateTookMedicineStats(_:progress:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics23updateTookMedicineStatsFS0_FTCSo6NSDate8progressFT3dayS1__T__T_">updateTookMedicineStats(_:progress:)</a>
+                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics23updateTookMedicineStatsFS0_FTCSo6NSDate8progressFT3dayS1_6removeSb_T__T_">updateTookMedicineStats(_:progress:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -407,7 +407,7 @@
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateTookMedicineStats</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">(</span><span class="nv">day</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateTookMedicineStats</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">progress</span><span class="p">:</span> <span class="p">(</span><span class="nv">day</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">remove</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
 
                         </div>
                       </div>
@@ -450,9 +450,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios16CachedStatistics24retrieveCachedStatisticsFS0_FTFT8progressSf_T_12completitionFT_T__T_"></a>
-                    <a name="//apple_ref/swift/Method/retrieveCachedStatistics(_:completition:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics24retrieveCachedStatisticsFS0_FTFT8progressSf_T_12completitionFT_T__T_">retrieveCachedStatistics(_:completition:)</a>
+                    <a name="/s:FC11malaria_ios16CachedStatistics24retrieveCachedStatisticsFS0_FTFT8progressSf_T_10completionFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/retrieveCachedStatistics(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios16CachedStatistics24retrieveCachedStatisticsFS0_FTFT8progressSf_T_10completionFT_T__T_">retrieveCachedStatistics(_:completion:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -467,7 +467,7 @@
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveCachedStatistics</span><span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(),</span> <span class="nv">completition</span> <span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">retrieveCachedStatistics</span><span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="p">(</span><span class="nv">progress</span><span class="p">:</span> <span class="kt">Float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(),</span> <span class="nv">completion</span> <span class="p">:</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="p">())</span></code></pre>
 
                         </div>
                       </div>
@@ -496,7 +496,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p><code>() -&gt; ()</code>: Completition handler to be executed in the UI after finishing processing</p>
+                                  <p><code>() -&gt; ()</code>: completion handler to be executed in the UI after finishing processing</p>
 
                                 </div>
                               </td>
@@ -512,7 +512,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-10)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

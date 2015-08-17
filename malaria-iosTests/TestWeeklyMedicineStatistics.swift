@@ -26,10 +26,9 @@ class TestWeeklyMedicineStatistics: XCTestCase {
         m.setCurrentPill(currentPill.name())
         
         md = m.getCurrentMedicine()!
-        md.notificationManager(currentContext).scheduleNotification(d1)
         
-        registriesManager = md.registriesManager(currentContext)
-        stats = md.stats(currentContext)
+        registriesManager = md.registriesManager
+        stats = md.stats
         for i in 0...5{
             XCTAssertTrue(registriesManager.addRegistry(d1 + i.week, tookMedicine: true))
         }
@@ -38,7 +37,6 @@ class TestWeeklyMedicineStatistics: XCTestCase {
     override func tearDown() {
         super.tearDown()
         m.clearCoreData()
-        UserSettingsManager.clear()
     }
     
     func testPillStreak(){

@@ -256,9 +256,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios17RegistriesManagercFMS0_FT7contextCSo22NSManagedObjectContext8medicineCS_8Medicine_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(context:medicine:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManagercFMS0_FT7contextCSo22NSManagedObjectContext8medicineCS_8Medicine_S0_">init(context:medicine:)</a>
+                    <a name="/s:FC11malaria_ios17RegistriesManagercFMS0_FT8medicineCS_8Medicine_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(medicine:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManagercFMS0_FT8medicineCS_8Medicine_S0_">init(medicine:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -273,7 +273,7 @@
                         <h4>Declaration</h4>
                         <div class="Swift">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">context</span><span class="p">:</span> <span class="kt">NSManagedObjectContext</span><span class="p">,</span> <span class="nv">medicine</span><span class="p">:</span> <span class="kt">Medicine</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">medicine</span><span class="p">:</span> <span class="kt">Medicine</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -583,7 +583,7 @@ If modifyEntry flag is set to false, It will return false it there is already an
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p><code>Bool</code>: true if success, false if no</p>
+                        <p><code>Bool</code>: true if there was a change, false if not</p>
 
                       </div>
                     </section>
@@ -849,12 +849,75 @@ If modifyEntry flag is set to false, It will return false it there is already an
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FT10registriesGSqGSaCS_8Registry___GSqCSo6NSDate_"></a>
+                    <a name="//apple_ref/swift/Method/lastPillDate(registries:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FT10registriesGSqGSaCS_8Registry___GSqCSo6NSDate_">lastPillDate(registries:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns last day when the user taken the medicine</p>
+
+<p>:param <code>[Registry]? optional</code>: cached list of entries. Must be sorted from most recent to least recent</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lastPillDate</span><span class="p">(</span><span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSDate</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>NSDate?</code></p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC11malaria_ios17RegistriesManager11removeEntryFS0_FCSo6NSDateT_"></a>
+                    <a name="//apple_ref/swift/Method/removeEntry(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager11removeEntryFS0_FCSo6NSDateT_">removeEntry(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Remove the entry</p>
+
+<p>:param <code>Registry</code>: the entry to be removed</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="Swift">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeEntry</span><span class="p">(</span><span class="nv">date</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-10)</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -75,7 +75,7 @@ class PillsStatsViewController : UIViewController {
         
         cachedStats.retrieveCachedStatistics({(progress: Float) in
             self.loadingGraphView!.valueProgress = progress
-        }, completition: { _ in
+        }, completion: { _ in
             self.configureData(CachedStatistics.sharedInstance.adherencesPerDay)
             self.graphFrame.bringSubviewToFront(self.chartView)
         })
@@ -125,7 +125,7 @@ extension PillsStatsViewController{
         
         var dataEntries: [ChartDataEntry] = []
         for i in 0..<values.count {
-            dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
+            dataEntries.append(ChartDataEntry(value: Double(values[i]), xIndex: i))
         }
         
         let adherenceData = configureCharDataSet(dataEntries, label: "")
@@ -165,11 +165,10 @@ extension PillsStatsViewController{
         chartView.noDataText = NoDataText
         
         chartView.scaleYEnabled = false
-        chartView.doubleTapToZoomEnabled = false
-        
+        chartView.doubleTapToZoomEnabled = true
         chartView.drawGridBackgroundEnabled = false
         chartView.highlightEnabled = false
-        chartView.highlightIndicatorEnabled = false
+        chartView.highlightPerDragEnabled = false
     }
     
     func configureXAxis(){

@@ -34,6 +34,7 @@ public class CachedStatistics : NSObject{
     override public init(){
         super.init()
         NSNotificationEvents.ObserveDataUpdated(self, selector: "resetFlags")
+        NSNotificationEvents.ObserveEnteredForeground(self, selector: "resetFlags")
     }
     
     deinit{
@@ -52,8 +53,8 @@ public class CachedStatistics : NSObject{
         self.context = CoreDataHelper.sharedInstance.createBackgroundContext()!
         
         medicine = MedicineManager(context: context).getCurrentMedicine()
-        registriesManager = medicine.registriesManager(context)
-        statsManager = medicine.stats(context)
+        registriesManager = medicine.registriesManager
+        statsManager = medicine.stats
     }
     
     /// Updates internal cache
@@ -65,8 +66,8 @@ public class CachedStatistics : NSObject{
 extension CachedStatistics {
     /// Retrieves daily stats
     ///
-    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
-    public func retrieveDailyStats(completition: () -> ()){
+    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    public func retrieveDailyStats(completion: () -> ()){
         lastMedicine = nil
         todaysPillStreak = 0
         todaysAdherence = 0
@@ -82,7 +83,7 @@ extension CachedStatistics {
             self.isDailyStatsUpdated = true
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
         
     }
@@ -90,22 +91,22 @@ extension CachedStatistics {
     /// Retrieves month adherece
     ///
     /// :param: `NSDate`: Desired month
-    /// :param: `() -> ()`: Completition handler to be executed in the UI thread
-    public func retrieveMonthsData(numberMonths: Int, completition : () -> ()) {
+    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    public func retrieveMonthsData(numberMonths: Int, completion : () -> ()) {
         monthAdhrence.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             let today = NSDate()
             for i in 0...(numberMonths - 1) {
                 let month = today - i.month
-                let adherence = self.statsManager.pillAdherence(month, registries: self.registries)
+                let adherence = self.statsManager.monthAdherence(month, registries: self.registries)
                 self.monthAdhrence.append((month, adherence * 100))
             }
             
             self.isMonthlyAdherenceDataUpdated = true
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
     }
     
@@ -119,7 +120,9 @@ extension CachedStatistics {
             if !entriesReversed.isEmpty {
                 let oldestDate = entriesReversed.last!.date.startOfDay
                 let numDays = (NSDate() - oldestDate) + 1 //include today
-                
+                if numDays == 0 {
+                    return
+                }
                 for i in 0...(numDays - 1) {
                     let day = oldestDate + i.day
                     self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed) != nil
@@ -134,7 +137,7 @@ extension CachedStatistics {
     ///
     /// :param: `NSDate`: The day to be updated
     /// :param: `() -> ()`: Progress handler to be executed in the UI thread
-    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate) -> ()){
+    public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate, remove: Bool) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
             self.refreshContext()
@@ -146,17 +149,28 @@ extension CachedStatistics {
             let entriesReversed = self.registries.reverse() //most recentFirst
             if !entriesReversed.isEmpty {
                 let numDays = d2 - d1 + 1 //include d2
+                if numDays == 0 {
+                    return
+                }
                 for i in 0...(numDays - 1) {
                     let day = (d1 + i.day).startOfDay
                     self.tookMedicine[day] = self.registriesManager.tookMedicine(day, registries: entriesReversed) != nil
                 }
                 
                 let oldestEntry = entriesReversed.last!.date
+                
+                //Removing previous suplementary views. Happens when the oldest entry data changes
+                let startDelete = oldestEntry - self.medicine.interval.day
+                for i in 0...self.medicine.interval {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        progress(day: (startDelete + i.day).startOfDay, remove: true)
+                    })
+                }
+                
                 let numEntries = NSDate() - oldestEntry + 1
                 for i in 0...(numEntries - 1){
-                    let day = (oldestEntry + i.day).startOfDay
                     dispatch_async(dispatch_get_main_queue(), {
-                        progress(day: day)
+                        progress(day: (oldestEntry + i.day).startOfDay, remove: false)
                     })
                 }
             }
@@ -166,8 +180,8 @@ extension CachedStatistics {
     /// Retrieves cached statistics for the graph
     ///
     /// :param: `(progress: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
-    /// :param: `() -> ()`: Completition handler to be executed in the UI after finishing processing
-    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completition : () -> ()) {
+    /// :param: `() -> ()`: completion handler to be executed in the UI after finishing processing
+    public func retrieveCachedStatistics(progress: (progress: Float) -> (), completion : () -> ()) {
         adherencesPerDay.removeAll()
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
@@ -180,6 +194,9 @@ extension CachedStatistics {
                 
                 self.adherencesPerDay = [(NSDate,Float)](count: numDays, repeatedValue: (today, 0))
                 
+                if numDays == 0 {
+                    return
+                }
                 for v in 0...(numDays - 1) {
                     let index = (numDays - 1) - v
                     
@@ -207,7 +224,7 @@ extension CachedStatistics {
             }
             
             //update UI when finished
-            dispatch_async(dispatch_get_main_queue(), completition)
+            dispatch_async(dispatch_get_main_queue(), completion)
         })
     }
 

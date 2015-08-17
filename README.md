@@ -4,7 +4,6 @@ The malaria-app-readme repository is intended to be the central repo for discuss
 
 <h3>Link to README Repo:</h3> https://github.com/PeaceCorps/malaria-app-readme
 
-
 Please keep all discussion regarding features that will be cross-platform on that repository, and code-specific discussion on this one.
 
 <h2>Application Description</h2>
@@ -41,21 +40,22 @@ mmcallister@peacecorps.gov
 
 > sudo gem install jazzy
 
-2. Run:
+2. Generate documentation:
 
 > jazzy -c --skip-undocumented
+
+3. Open docs/index.html
 
 <h3>How to handle dependencies:</h3>
 
 Dependencies must, as possible, be managed using CocoaPods. And use swift as preference.
 
 Existing dependencies taken from Podfile: 
-```
-pod 'Alamofire', '~> 1.2.3'
-pod 'SwiftyJSON', '~> 2.2.0'
-pod 'Charts', '~> 2.1.0'
-pod 'CircleProgressView', :git => 'https://github.com/bphenriques/CircleProgressView.git', :tag => '0.9.10'
-pod 'HorizontalProgressView', :git => 'https://github.com/bphenriques/HorizontalProgressView.git', :tag => '0.9.5'
-pod 'PickerSwift', :git => 'https://github.com/bphenriques/PickerSwift.git', :tag => '0.9.0'
-pod 'DoneToolBarSwift', :git => 'https://github.com/bphenriques/done-toolbar-swift.git', :tag => '0.9.3'
-```
+
+* Alamofire, 1.2.3
+* SwiftyJSON, 2.2.0
+* Charts, 2.1.0
+* CircleProgressView, https://github.com/bphenriques/CircleProgressView.git, tag 0.9.10
+* HorizontalProgressView, https://github.com/bphenriques/HorizontalProgressView.git, tag 0.9.5
+* PickerSwift, https://github.com/bphenriques/PickerSwift.git, tag 0.9.0
+* DoneToolBarSwift, https://github.com/bphenriques/done-toolbar-swift.git, tag 0.9.3

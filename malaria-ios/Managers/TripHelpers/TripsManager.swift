@@ -22,34 +22,31 @@ public class TripsManager : CoreDataContextManager{
         CoreDataHelper.sharedInstance.saveContext(context)
     }
     
-    /// Returns the location history of the trips
+    /// Returns the location history of the trips sorted by most recent first
     ///
     /// :param: `Int optional`: number of intended items, default is 15
     ///
     /// :returns: `[TripHistory]`: history
     public func getHistory(limit: Int = 15) -> [TripHistory] {
-        return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context)
+        return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context).sorted({ $0.timestamp > $1.timestamp})
     }
     
     /// Appends the trip to the history
     ///
     /// :param: `Trip`: the trip
     private func createHistory(trip: Trip){
-        let previousHistory = TripHistory.retrieve(TripHistory.self, context: context)
+        let previousHistory = getHistory(limit: Int.max)
         if previousHistory.count >= 15 {
             Logger.Warn("Deleting history to have more space")
-            var count = 15
-            for entry in previousHistory {
-                if count == 0 {
-                    break
-                }
-                entry.deleteFromContext(context)
-            }
+            
+            //delete oldest entry
+            previousHistory.last!.deleteFromContext(context)
         }
         
         if previousHistory.filter({ $0.location.lowercaseString == trip.location.lowercaseString }).count == 0 {
             let hist = TripHistory.create(TripHistory.self, context: context)
             hist.location = trip.location
+            hist.timestamp = trip.departure
         }
         
         CoreDataHelper.sharedInstance.saveContext(context)
@@ -61,20 +58,20 @@ public class TripsManager : CoreDataContextManager{
     /// If there is already an instance of trip, it modifies it.
     ///
     /// :param: `String`: Location
-    /// :param: `Medicine.Pill`: Location
+    /// :param: `String`: Medicine name
     /// :param: `Int64`: caseToBring
     /// :param: `NSdate`: reminderDate
     ///
     /// :return: `Trip`: Instance of trip
-    public func createTrip(location: String, medicine: Medicine.Pill, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
-        func create(t: Trip) -> Trip{
+    public func createTrip(location: String, medicine: String, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
+        func create(t: Trip) -> Trip {
             t.location = location
-            t.medicine = medicine.name()
+            t.medicine = medicine
             t.departure = departure
             t.arrival = arrival
             t.reminderTime = timeReminder
             
-            t.itemsManager(context).getItems().map({$0.deleteFromContext(self.context)})
+            t.itemsManager.getItems().map({$0.deleteFromContext(self.context)})
             
             createHistory(t)
             

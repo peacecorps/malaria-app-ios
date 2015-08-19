@@ -8,7 +8,7 @@ class DidTakePillsViewController: UIViewController {
     @IBOutlet weak var tookPillBtn: UIButton!
     @IBOutlet weak var didNotTookPillBtn: UIButton!
     
-    @IBInspectable var FullDateTextFormat: String = "dd/MM/yyyy"
+    @IBInspectable var FullDateTextFormat: String = "M/d/yyyy"
     @IBInspectable var MinorDateTextFormat: String = "EEEE"
     @IBInspectable var MissedWeeklyPillTextColor: UIColor = UIColor.redColor()
     @IBInspectable var SeveralDaysRowMissedEntriesTextColor: UIColor = UIColor.blackColor()

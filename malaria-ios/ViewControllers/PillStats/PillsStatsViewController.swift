@@ -11,7 +11,7 @@ class PillsStatsViewController : UIViewController {
     @IBOutlet weak var graphFrame: UIView!
     @IBOutlet weak var loadingGraphView: CircleProgressView!
     
-    @IBInspectable var GraphDateFormat: String = "yyyy.MM.dd"
+    @IBInspectable var GraphDateFormat: String = "M.d.yyyy"
     @IBInspectable var NoDataText: String = "No entries"
     @IBInspectable var NumberRecentMonths: Int = 4
     @IBInspectable var GraphFillColor: UIColor = UIColor(hex: 0xA1D4E2)

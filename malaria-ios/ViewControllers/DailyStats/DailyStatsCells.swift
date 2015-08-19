@@ -42,7 +42,7 @@ class MedicineLastTaken : Stat{
     var image : UIImage { return UIImage(named: "MedicineLastTaken")! }
     var attributeValue : String {
         if let last = CachedStatistics.sharedInstance.lastMedicine {
-            return last.formatWith("d/M")
+            return last.formatWith("M/d")
         }
         return  "-/-"
     }

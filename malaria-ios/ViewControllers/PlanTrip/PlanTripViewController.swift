@@ -14,7 +14,7 @@ class PlanTripViewController: UIViewController {
     @IBOutlet weak var historyTextField: UITextField!
     @IBOutlet weak var reminderTime: UITextField!
 
-    @IBInspectable var textFieldsDateFormat: String = "dd / MM / yyyy"
+    @IBInspectable var textFieldsDateFormat: String = "M / d / yyyy"
     
     //input fields
     private var medicinePicker: MedicinePickerViewTrip!

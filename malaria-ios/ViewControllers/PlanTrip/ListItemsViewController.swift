@@ -160,7 +160,7 @@ extension ListItemsViewController {
                 self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
                 self.tableView.reloadData()
             }
-            })
+        })
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Name"
@@ -185,7 +185,7 @@ extension ListItemsViewController {
             self.listItems[indexPath.row].1 = false
             self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
             self.tableView.reloadData()
-            })
+        })
         
         alert.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
             textField.placeholder = "Name"

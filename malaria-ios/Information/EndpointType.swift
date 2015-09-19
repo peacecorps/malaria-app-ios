@@ -42,7 +42,7 @@ public enum EndpointType : String{
     
     /// Returns the full path to the endpoint
     ///
-    /// :returns: `String`: If BaseUrl returns the BaseUrl, fullpath otherwise
+    /// - returns: `String`: If BaseUrl returns the BaseUrl, fullpath otherwise
     public func path() -> String{
         if self == BaseUrl {
             return self.rawValue

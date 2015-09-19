@@ -81,7 +81,7 @@ class InfoHubViewController : UIViewController{
     private func refreshFromCoreData() -> Bool{
         Logger.Info("Fetching from coreData")
         if let newPosts = Posts.retrieve(Posts.self, context: viewContext).first {
-            posts = newPosts.posts.convertToArray().sorted({$0.title < $1.title})
+            posts = newPosts.posts.convertToArray().sort({$0.title < $1.title})
             collectionView.reloadData()
             return true
         }

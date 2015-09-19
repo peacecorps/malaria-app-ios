@@ -31,25 +31,28 @@ public class CoreDataHelper: NSObject {
     /// Creates a new background context with the mainContext as parent
     /// Create background context to keep in sync with the database
     ///
-    /// :returns: `NSManagedObjectContext`
+    /// - returns: `NSManagedObjectContext`
     public func createBackgroundContext() -> NSManagedObjectContext?{
         let coordinator = CoreDataStore.sharedInstance.persistentStoreCoordinator
         if coordinator == nil {
             return nil
         }
         
-        var backgroundContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        let backgroundContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         backgroundContext.parentContext = self.managedObjectContext
         return backgroundContext
     }
     
     /// Save the context
     ///
-    /// :param: `NSManagedObjectContext`: context to be saved
+    /// - parameter `NSManagedObjectContext`:: context to be saved
     public func saveContext (context: NSManagedObjectContext) {
-        var error: NSError?
-        if context.hasChanges && !context.save(&error) {
-            Logger.Error("Unresolved error \(error), \(error!.userInfo)")
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                Logger.Error("Unresolved error \(error), \(error.userInfo)")
+            }
         }
     }
     

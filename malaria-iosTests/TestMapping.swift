@@ -16,7 +16,7 @@ class TestMapping: XCTestCase {
     }
     
     override func tearDown() {
-        for(key, value) in endpoints{
+        for(_, value) in endpoints{
             value.clearFromDatabase(currentContext)
         }
     }
@@ -35,7 +35,7 @@ class TestMapping: XCTestCase {
     
     func testGenericCollectionPost(posts: [Post]){
         //objects retrived may be unsorted
-        var sorted = posts.sorted({$0.id < $1.id})
+        var sorted = posts.sort({$0.id < $1.id})
         
         XCTAssertTrue(sorted.count == 2)
         samplePost1Test(sorted[0])
@@ -66,7 +66,7 @@ class TestMapping: XCTestCase {
             var results: [Post] = posts.posts.convertToArray()
             
             //objects retrived may be unsorted
-            results.sort({$0.id < $1.id})
+            results.sortInPlace({$0.id < $1.id})
             
             XCTAssertTrue(results.count == 2)
             

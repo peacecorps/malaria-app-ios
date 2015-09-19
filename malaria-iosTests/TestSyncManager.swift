@@ -20,7 +20,7 @@ class TestSyncManager: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        for (path, endpoint) in sm.endpoints{
+        for (_, endpoint) in sm.endpoints{
             endpoint.clearFromDatabase(currentContext)
         }
     }
@@ -65,7 +65,7 @@ class TestSyncManager: XCTestCase {
         expectation = expectationWithDescription("syncall")
         
         
-        sm.syncAll(completionHandler: { Void in self.expectation!.fulfill() })
+        sm.syncAll({ Void in self.expectation!.fulfill() })
         var done: Bool = false
         waitForExpectationsWithTimeout(60, handler: { error in
             if let error = error {

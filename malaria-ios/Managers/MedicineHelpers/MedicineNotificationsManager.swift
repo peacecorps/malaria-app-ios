@@ -36,7 +36,7 @@ public class MedicineNotificationsManager : NotificationManager{
     
     /// Schedule notification and stores the fireTime in the medicine object
     ///
-    /// :param: `NSDate`: trigger time
+    /// - parameter `NSDate`:: trigger time
     public override func scheduleNotification(fireTime: NSDate) {
         medicine.notificationTime = fireTime
         CoreDataHelper.sharedInstance.saveContext(self.context)
@@ -56,7 +56,7 @@ public class MedicineNotificationsManager : NotificationManager{
     /// So, if on monday, 1/1/2014, and interval is 4 days then
     /// it will resheduled to (1 + 4) / 1 / 2014
     ///
-    /// :returns: `NSDate`: Next reminder time
+    /// - returns: `NSDate`: Next reminder time
     public func reshedule() -> NSDate?{
         if var nextTime = medicine.notificationTime{
             nextTime += medicine.interval.day
@@ -73,23 +73,23 @@ public class MedicineNotificationsManager : NotificationManager{
     
     /// Returns interactive notifications settings to be added in the AppDelegate
     ///
-    /// :returns: `UIMutableUserNotificationCategory`: Configuration
+    /// - returns: `UIMutableUserNotificationCategory`: Configuration
     public static func setup() -> UIMutableUserNotificationCategory {
-        var notificationActionOk = UIMutableUserNotificationAction()
+        let notificationActionOk = UIMutableUserNotificationAction()
         notificationActionOk.identifier = TookPillId
         notificationActionOk.title = TookPillTitle
         notificationActionOk.destructive = false
         notificationActionOk.authenticationRequired = false
         notificationActionOk.activationMode = .Background
         
-        var notificationActionCancel = UIMutableUserNotificationAction()
+        let notificationActionCancel = UIMutableUserNotificationAction()
         notificationActionCancel.identifier = DidNotTakePillId
         notificationActionCancel.title = DidNotTakePillTitle
         notificationActionCancel.destructive = true
         notificationActionCancel.authenticationRequired = false
         notificationActionCancel.activationMode = .Background
         
-        var notificationCategory = UIMutableUserNotificationCategory()
+        let notificationCategory = UIMutableUserNotificationCategory()
         notificationCategory.identifier = NotificationCategory
         notificationCategory.setActions([notificationActionOk, notificationActionCancel], forContext: .Default)
         notificationCategory.setActions([notificationActionOk, notificationActionCancel], forContext: .Minimal)

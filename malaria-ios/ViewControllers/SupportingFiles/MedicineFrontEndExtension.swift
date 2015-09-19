@@ -11,20 +11,20 @@ public extension Medicine{
     enum Pill : String{
         static let allValues = [Pill.Doxycycline, Pill.Malarone, Pill.Mefloquine]
         
-        case Doxycycline = "Doxycycline"
-        case Malarone = "Malarone"
-        case Mefloquine = "Mefloquine"
+        case Doxycycline
+        case Malarone
+        case Mefloquine
         
         /// Returns the interval of the pill. 7 if Mefloquine, 1 otherwise
         ///
-        /// :returns: `Int`: the pill interval
+        /// - returns: `Int`: the pill interval
         public func interval() -> Int {
             return self == Medicine.Pill.Mefloquine ? 7 : 1
         }
         
         /// Returns the name of the pill
         ///
-        /// :returns: `String`: the name of the pill
+        /// - returns: `String`: the name of the pill
         public func name() -> String{
             return self.rawValue
         }

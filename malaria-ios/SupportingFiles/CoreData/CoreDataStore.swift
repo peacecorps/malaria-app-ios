@@ -11,7 +11,7 @@ public class CoreDataStore{
     
     internal lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
         }()
     
     internal lazy var managedObjectModel: NSManagedObjectModel = {
@@ -26,23 +26,20 @@ public class CoreDataStore{
         var coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent(self.storeFilename)
         
-        var error: NSError?
-        if coordinator.addPersistentStoreWithType(
-            NSSQLiteStoreType,
-            configuration: nil,
-            URL: url,
-            options: [
-                NSInferMappingModelAutomaticallyOption: true,
-                NSMigratePersistentStoresAutomaticallyOption: true
-            ], error: &error) == nil {
-            // Report any error we got.
-            let dict = NSMutableDictionary()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = "There was an error creating or loading the application's saved data."
-            dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "PERSISTENT_CONFIGURATION", code: 9999, userInfo: dict as [NSObject : AnyObject])
-            NSLog("Unresolved error \(error), \(error!.userInfo)")
+        do {
+            try coordinator.addPersistentStoreWithType(
+                        NSSQLiteStoreType,
+                        configuration: nil,
+                        URL: url,
+                        options: [
+                            NSInferMappingModelAutomaticallyOption: true,
+                            NSMigratePersistentStoresAutomaticallyOption: true
+                        ])
+        } catch var error as NSError {
+            NSLog("Unresolved error \(error), \(error.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
 
         return coordinator

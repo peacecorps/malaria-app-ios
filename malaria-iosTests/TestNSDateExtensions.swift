@@ -103,7 +103,6 @@ class TestNSDateExtensions: XCTestCase {
     func testMonthComparator() {
         let m0 = NSDate.from(2013, month: 1, day: 31)
         let m1 = NSDate.from(2014, month: 1, day: 31)
-        let m2 = NSDate.from(2014, month: 6, day: 31)
         let m3 = NSDate.from(2014, month: 1, day: 31)
         let m4 = NSDate.from(2015, month: 1, day: 31)
         let m42 = NSDate.from(2015, month: 1, day: 1)

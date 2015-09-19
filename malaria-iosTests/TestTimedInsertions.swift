@@ -82,6 +82,6 @@ class TestTimedInsertions: XCTestCase {
     func testDifferentTimes(){
         XCTAssertTrue(dailyRegistriesManager.addRegistry(d1, tookMedicine: false))
         let b = d1 + 1.minute
-        XCTAssertEqual(1, dailyRegistriesManager.getRegistries(date1: b, date2: b).count)
+        XCTAssertEqual(1, dailyRegistriesManager.getRegistries(b, date2: b).count)
     }
 }

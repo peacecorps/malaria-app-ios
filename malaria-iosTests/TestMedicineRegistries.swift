@@ -52,7 +52,7 @@ class TestMedicineRegistries: XCTestCase {
     
     
     func testFindEntriesInBetween(){
-        let entries = registriesManager.getRegistries(date1: d1 - 5.day, date2: d1 - 3.day)
+        let entries = registriesManager.getRegistries(d1 - 5.day, date2: d1 - 3.day)
         
         if entries.count != 3 {
             XCTFail("Incorrect number of elements \(entries.count)")
@@ -73,7 +73,7 @@ class TestMedicineRegistries: XCTestCase {
         
         
         //flip the dates, should reproduce the same results
-        let entriesFlipped = registriesManager.getRegistries(date1:d1 - 3.day, date2: d1 - 5.day)
+        let entriesFlipped = registriesManager.getRegistries(d1 - 3.day, date2: d1 - 5.day)
         
         if entriesFlipped.count == 0 {
             XCTFail("No element found")
@@ -94,20 +94,20 @@ class TestMedicineRegistries: XCTestCase {
         
         
         //check interval without entries
-        XCTAssertEqual(0, registriesManager.getRegistries(date1:d1 - 30.day,  date2: d1 - 25.day).count)
+        XCTAssertEqual(0, registriesManager.getRegistries(d1 - 30.day,  date2: d1 - 25.day).count)
         
         //check interval big enough to fit every entry
-        let entries2 = registriesManager.getRegistries(date1:d1 - 50.day, date2: d1 + 50.day)
+        let entries2 = registriesManager.getRegistries(d1 - 50.day, date2: d1 + 50.day)
         XCTAssertEqual(registriesManager.getRegistries().count, entries2.count)
         
         //single registry
-        let entries3 = registriesManager.getRegistries(date1:d1 - 4.day, date2: d1 - 4.day)
+        let entries3 = registriesManager.getRegistries(d1 - 4.day, date2: d1 - 4.day)
         XCTAssertEqual(1, entries3.count)
     }
     
     func testFindEntry(){
         //find existing entry
-        var r = registriesManager.findRegistry(d1 - 4.day)!
+        let r = registriesManager.findRegistry(d1 - 4.day)!
         XCTAssertEqual(r.date, d1 - 4.day)
         XCTAssertEqual(r.tookMedicine, false)
         
@@ -119,12 +119,12 @@ class TestMedicineRegistries: XCTestCase {
         let weeklyPill = Medicine.Pill.Mefloquine
         m.registerNewMedicine(weeklyPill.name(), interval: weeklyPill.interval())
 
-        var weekly = m.getMedicine(weeklyPill.name())!
+        let weekly = m.getMedicine(weeklyPill.name())!
         
         let weeklyRegistriesManager = weekly.registriesManager
         
         //Saturday = 0, Sunday = 1, etc
-        var dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day
+        let dStartWeek = d1 + NSCalendar.currentCalendar().firstWeekday.day
         
         XCTAssertTrue(weeklyRegistriesManager.addRegistry(dStartWeek, tookMedicine: true))
 
@@ -182,7 +182,7 @@ class TestMedicineRegistries: XCTestCase {
         XCTAssertNil(tookMedicineNo)
         
         let tookMedicinRandom = registriesManager.tookMedicine(d1 - 2.year)
-        XCTAssertNil(tookMedicineNo)
+        XCTAssertNil(tookMedicinRandom)
     }
     
     func testEntriesInPeriod() {

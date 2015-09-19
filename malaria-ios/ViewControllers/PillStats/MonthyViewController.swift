@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-
+import CVCalendar
 
 /// `MonthlyViewController`: shows the calendar view
 /// Using variation of CVCalendar by changing CVCalendarMonthContentViewController
@@ -135,7 +135,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     }
 }
 
-extension MonthlyViewController: CVCalendarViewDelegate {
+extension MonthlyViewController {
     
     /// Note in the current version there are some issues with the calendar.
     /// When chooosing a month in todays day this is called, however, in another month this is called therefore firstRun

@@ -78,7 +78,7 @@ extension SetupScreenViewController {
     }
     
     @IBAction func doneButtonHandler(){
-        let med = Medicine.Pill(rawValue: self.medicineName.text)!
+        let med = Medicine.Pill(rawValue: self.medicineName.text!)!
         
         //avoid showing the alert view if there are no changes
         if let current = medicineManager.getCurrentMedicine(){
@@ -88,7 +88,7 @@ extension SetupScreenViewController {
             }
             
             let (title, message) = (ReplaceMedicineAlertText.title, ReplaceMedicineAlertText.message)
-            var medicineAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            let medicineAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
             medicineAlert.addAction(UIAlertAction(title: AlertOptions.ok, style: .Destructive, handler: { _ in
                 self.setupMedicine(med)
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -112,7 +112,7 @@ extension SetupScreenViewController {
         
         let notificationManager = medicineManager.getCurrentMedicine()!.notificationManager
         
-        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+        if !UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(true){
             Logger.Error("Medicine Notifications are not enabled")
             return
         }

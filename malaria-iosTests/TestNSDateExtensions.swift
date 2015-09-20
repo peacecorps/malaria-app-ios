@@ -146,7 +146,6 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertEqual(date.day, 1)
         XCTAssertEqual(date.month, 4)
         XCTAssertEqual(date.year, 2015)
-        XCTAssertEqual(date.endOfCurrentMonth, 30)
     }
     
     func testStartDay() {
@@ -160,16 +159,33 @@ class TestNSDateExtensions: XCTestCase {
         XCTAssertEqual(startDay.minutes, 0)
     }
     
+    func testEndOfWeek() {
+        var d1 = NSDate.from(2015, month: 6, day: 6, hour: 12, minute: 11) //saturday
+        //0 = Saturday, 1 = Sunday, 2 = Monday = Normalize
+        d1 += NSCalendar.currentCalendar().firstWeekday.day
+        
+        let endWeek = NSDate.from(2015, month: 6, day: 12 + NSCalendar.currentCalendar().firstWeekday - 1, hour: 23, minute: 59)
+        
+        
+        XCTAssertTrue(d1.endOfWeek.sameDayAs(endWeek))
+        XCTAssertTrue(d1.endOfWeek.sameClockTimeAs(endWeek))
+    }
+    
     func testEndCurrentMonth() {
         ///test endCurrentMonth
-        let date2 = NSDate.from(2015, month: 7, day: 5)
-        XCTAssertEqual(date2.endOfCurrentMonth, 31)
+        let date2 = NSDate.from(2015, month: 7, day: 5, hour: 10, minute: 1)
+        XCTAssertTrue(date2.endOfCurrentMonth.sameDayAs(NSDate.from(2015, month: 7, day: 31, hour: 10, minute: 1).endOfDay))
+        XCTAssertTrue(date2.endOfCurrentMonth.sameClockTimeAs(NSDate.from(2015, month: 7, day: 31, hour: 10, minute: 1).endOfDay))
         
         let date3 = NSDate.from(2015, month: 2, day: 5)
-        XCTAssertEqual(date3.endOfCurrentMonth, 28)
+        XCTAssertTrue(date3.endOfCurrentMonth.sameDayAs(NSDate.from(2015, month: 2, day: 28).endOfDay))
+        XCTAssertTrue(date3.endOfCurrentMonth.sameClockTimeAs(NSDate.from(2015, month: 2, day: 28).endOfDay))
+        
         
         let date4 = NSDate.from(2015, month: 2, day: 28)
-        XCTAssertEqual(date4.endOfCurrentMonth, 28)
+        XCTAssertTrue(date4.endOfCurrentMonth.sameDayAs(date4.endOfDay))
+        XCTAssertTrue(date4.endOfCurrentMonth.sameClockTimeAs(date4.endOfDay))
+        
     }
     
 

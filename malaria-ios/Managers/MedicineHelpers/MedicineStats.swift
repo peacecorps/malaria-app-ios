@@ -165,7 +165,7 @@ public class MedicineStats : CoreDataContextManager{
         let oldestDate = entries.first!.date
         
         let startMonth = NSDate.from(month.year, month: month.month, day: 1)
-        let endMonth = NSDate.from(month.year, month: month.month, day: month.endOfCurrentMonth)
+        let endMonth = month.endOfCurrentMonth
         
         if startMonth.happensMonthsBefore(oldestDate) {
             return 1.0

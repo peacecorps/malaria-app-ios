@@ -66,9 +66,14 @@ public extension NSDate{
         return NSCalendar.currentCalendar().component(NSCalendarUnit.Minute, fromDate: self)
     }
     
+    ///retrieves the start day of the current month
+    public var startOfCurrentMonth: NSDate{
+        return NSDate.from(year, month: month, day: 1)
+    }
+    
     ///retrieves the end day of the current month
-    public var endOfCurrentMonth: Int{
-        return (NSDate.from(year, month: month, day: 1) + 1.month - 1.minute).day
+    public var endOfCurrentMonth: NSDate{
+        return (NSDate.from(year, month: month, day: 1) + 1.month - 1.minute)
     }
     
     ///retrieves the start of the day (using startOfDayForDate)
@@ -81,9 +86,14 @@ public extension NSDate{
         return startOfDay + 1.day - 1.second
     }
     
-    /// retrieves the start of the day of the week
+    /// retrieves the start of the week
     public var startOfWeek: NSDate {
         return (self - weekday.day).startOfDay
+    }
+    
+    /// retrieves the end of the week
+    public var endOfWeek: NSDate {
+        return self.startOfWeek + 7.day - 1.minute
     }
     
     /// NSDate(timeIntervalSince1970: 0)

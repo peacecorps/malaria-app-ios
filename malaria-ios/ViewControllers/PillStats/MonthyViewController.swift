@@ -147,7 +147,7 @@ extension MonthlyViewController {
             
             //avoids appearing when switching months
             let selectedSameMonth = previous.sameMonthAs(selected)
-                            
+            
             if !firstRun && selectedSameMonth {
                 if let registryDate = dayView.date.convertedDate(){
                     popup(registryDate.startOfDay, dayView: dayView)

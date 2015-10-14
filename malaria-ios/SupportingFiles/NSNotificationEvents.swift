@@ -9,14 +9,14 @@ public class NSNotificationEvents{
     /// - DataUpdated: When medicine is changed or if there was a change in the entries
     /// - UIApplicationWillEnterForegroundNotification: When application enters foreground
     public enum Events : String{
-        case DataUpdated = "DataUpdated"
-        case UIApplicationWillEnterForegroundNotification = "UIApplicationWillEnterForegroundNotification"
+        case DataUpdated
+        case UIApplicationWillEnterForegroundNotification
     }
     
     /// Observe entered foreground events
     ///
-    /// :param: `NSObject`: intended object
-    /// :param: `Selector`: NSObject selector
+    /// - parameter `NSObject`:: intended object
+    /// - parameter `Selector`:: NSObject selector
     public static func ObserveEnteredForeground(observer: NSObject, selector: Selector){
         NSNotificationEvents.observe(Events.UIApplicationWillEnterForegroundNotification.rawValue, observer, selector)
     }
@@ -24,22 +24,22 @@ public class NSNotificationEvents{
     
     /// Send event saying that the current medicine was changed
     ///
-    /// :param: `AnyObject?`: attached object
+    /// - parameter `AnyObject?`:: attached object
     public static func DataUpdated(object: AnyObject?){
         NSNotificationEvents.post(Events.DataUpdated.rawValue, object)
     }
         
     /// Observe new medicine entries
     ///
-    /// :param: `NSObject`: intended object
-    /// :param: `Selector`: NSObject selector
+    /// - parameter `NSObject`:: intended object
+    /// - parameter `Selector`:: NSObject selector
     public static func ObserveDataUpdated(observer: NSObject, selector: Selector){
         NSNotificationEvents.observe(Events.DataUpdated.rawValue, observer, selector)
     }
     
     /// Stop observing all notifications
     ///
-    /// :param: `NSObject`: intended object
+    /// - parameter `NSObject`:: intended object
     public static func UnregisterAll(observer: NSObject){
         NSNotificationCenter.defaultCenter().removeObserver(observer)
     }

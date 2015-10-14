@@ -15,8 +15,8 @@ public class TripLocationHistoryPickerViewer : UIPickerView{
     
     /// Initialization
     ///
-    /// :param: `NSManagedObjectContext`: current context
-    /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
+    /// - parameter `NSManagedObjectContext`:: current context
+    /// - parameter `(object:: String) -> ()`: on selection callback. Usually to change a view element content
     public init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         super.init(frame: CGRectZero)
         tripsManager = TripsManager(context: context)
@@ -37,7 +37,7 @@ public class TripLocationHistoryPickerViewer : UIPickerView{
         return locations[0]
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

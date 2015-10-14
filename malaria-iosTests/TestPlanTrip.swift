@@ -47,7 +47,6 @@ class TestPlanTrip: XCTestCase {
     func testCreateAnotherTrip(){
         let location2 = "Alabama"
         let pill2 = Medicine.Pill.Mefloquine
-        let cash: Int64 = 9000
         let departure2 = d1 + 10.day
         let arrival2 = d1 + 20.day
         
@@ -80,8 +79,7 @@ class TestPlanTrip: XCTestCase {
         XCTAssertEqual(trip.items.count, 2)
         
         
-        if let  lantern = itemsManager.findItem("lantern"),
-                lanternUpper = itemsManager.findItem("Lantern")
+        if let  lantern = itemsManager.findItem("lantern")
         {
             XCTAssertEqual(lantern.quantity, 1)
         }else{
@@ -136,10 +134,7 @@ class TestPlanTrip: XCTestCase {
         //test removing more elements that there is. The item must be removed
         itemsManager.removeItem("lantern", quantity: 30)
         
-        if let lantern = itemsManager.findItem("lantern"){
-            XCTFail("item was not removed despite")
-        }
-        
+        XCTAssertNil(itemsManager.findItem("lantern"), "item was not removed")
         
         //adding again
         itemsManager.addItem("lantern", quantity: 9)
@@ -153,9 +148,8 @@ class TestPlanTrip: XCTestCase {
         
         //removing again
         itemsManager.removeItem("lantern")
-        if let lantern = itemsManager.findItem("lantern"){
-            XCTFail("item was not removed despite")
-        }
+        
+        XCTAssertNil(itemsManager.findItem("lantern"), "item was not removed")
         
         XCTAssertEqual(trip.items.count, 0)
     }
@@ -188,26 +182,26 @@ class TestPlanTrip: XCTestCase {
     }
     
     func testLocationHistory() {
-        let history = tManager.getHistory(limit: 10)
+        let history = tManager.getHistory(10)
         XCTAssertEqual(1, history.count)
         
         XCTAssertEqual(history.first!.location, location)
         XCTAssertEqual(history.first!.timestamp, d1)
         
         tManager.createTrip("LA", medicine: currentPill.name(), departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
-        let history2 = tManager.getHistory(limit: 10)
+        let history2 = tManager.getHistory(10)
         XCTAssertEqual(2, history2.count)
         
         XCTAssertEqual("LA", history2.first!.location)
         XCTAssertEqual(location, history2[1].location)
         
         // there are 2, but we only limit to one
-        let history3 = tManager.getHistory(limit: 1)
+        let history3 = tManager.getHistory(1)
         XCTAssertEqual(1, history3.count)
 
         // create same trip, shouldn't record again
         tManager.createTrip("LA", medicine: currentPill.name(), departure: d1 + 1.day, arrival: d2, timeReminder: reminderTime)
-        let history4 = tManager.getHistory(limit: 10)
+        let history4 = tManager.getHistory(10)
         XCTAssertEqual(2, history4.count)
 
         //test history limit (15), there already 2
@@ -225,14 +219,14 @@ class TestPlanTrip: XCTestCase {
         tManager.createTrip("13", medicine: currentPill.name(), departure: d1 + 13.day, arrival: d2, timeReminder: reminderTime)
         tManager.createTrip("14", medicine: currentPill.name(), departure: d1 + 14.day, arrival: d2, timeReminder: reminderTime)
         tManager.createTrip("15", medicine: currentPill.name(), departure: d1 + 15.day, arrival: d2, timeReminder: reminderTime)
-        XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
+        XCTAssertEqual(15, tManager.getHistory(Int.max).count)
 
         // one above the limit
         tManager.createTrip("16", medicine: currentPill.name(), departure: d1 + 16.day, arrival: d2, timeReminder: reminderTime)
-        XCTAssertEqual(15, tManager.getHistory(limit: Int.max).count)
+        XCTAssertEqual(15, tManager.getHistory(Int.max).count)
         
         // should have deleted the oldest entry at location
-        let mostRecentHistory = tManager.getHistory(limit: Int.max).last!
+        let mostRecentHistory = tManager.getHistory(Int.max).last!
         XCTAssertEqual("LA", mostRecentHistory.location)
         XCTAssertEqual(d1 + 1.day, mostRecentHistory.timestamp)
     }

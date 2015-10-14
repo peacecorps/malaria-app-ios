@@ -52,15 +52,15 @@ class TestMonthAdherence: XCTestCase {
         
         
         //july month, between first entry in 10 July and end of July
-        let numberPillsTaken = stats.numberPillsTaken(date1: tenJuly, date2: NSDate.from(2015, month: 7, day: 31))
+        let numberPillsTaken = stats.numberPillsTaken(tenJuly, date2: NSDate.from(2015, month: 7, day: 31))
         XCTAssertEqual(1, numberPillsTaken)
-        let supposedPills = stats.numberSupposedPills(date1: tenJuly, date2: NSDate.from(2015, month: 7, day: 31))
+        let supposedPills = stats.numberSupposedPills(tenJuly, date2: NSDate.from(2015, month: 7, day: 31))
         XCTAssertEqual(Float(numberPillsTaken)/Float(supposedPills), stats.monthAdherence(tenJuly, currentDay: tenAugust))
         
         //In august, between 1 August and ten august (currentDay)
-        let numberPillsTaken2 = stats.numberPillsTaken(date1: NSDate.from(2015, month: 8, day: 1), date2: tenAugust)
+        let numberPillsTaken2 = stats.numberPillsTaken(NSDate.from(2015, month: 8, day: 1), date2: tenAugust)
         XCTAssertEqual(1, numberPillsTaken2)
-        let supposedPills2 = stats.numberSupposedPills(date1: NSDate.from(2015, month: 8, day: 1), date2: tenAugust)
+        let supposedPills2 = stats.numberSupposedPills(NSDate.from(2015, month: 8, day: 1), date2: tenAugust)
         XCTAssertEqual(Float(numberPillsTaken2)/Float(supposedPills2), stats.monthAdherence(tenAugust, currentDay: tenAugust))
         
         //Without entries assume max adherence

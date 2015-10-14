@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Medicine{
-    /// :returns: `Int`: medicine interval
+    /// - returns: `Int`: medicine interval
     public var interval: Int {
         get {
             return Int(internalInterval)

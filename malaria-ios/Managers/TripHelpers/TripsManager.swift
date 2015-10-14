@@ -10,7 +10,7 @@ public class TripsManager : CoreDataContextManager{
     
     /// Returns the current trip if any
     ///
-    /// :returns: `Trip?`
+    /// - returns: `Trip?`
     public func getTrip() -> Trip?{
         return Trip.retrieve(Trip.self, fetchLimit: 1, context: context).first
     }
@@ -24,18 +24,18 @@ public class TripsManager : CoreDataContextManager{
     
     /// Returns the location history of the trips sorted by most recent first
     ///
-    /// :param: `Int optional`: number of intended items, default is 15
+    /// - parameter `Int: optional`: number of intended items, default is 15
     ///
-    /// :returns: `[TripHistory]`: history
+    /// - returns: `[TripHistory]`: history
     public func getHistory(limit: Int = 15) -> [TripHistory] {
-        return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context).sorted({ $0.timestamp > $1.timestamp})
+        return TripHistory.retrieve(TripHistory.self, fetchLimit: limit, context: context).sort({ $0.timestamp > $1.timestamp})
     }
     
     /// Appends the trip to the history
     ///
-    /// :param: `Trip`: the trip
+    /// - parameter `Trip`:: the trip
     private func createHistory(trip: Trip){
-        let previousHistory = getHistory(limit: Int.max)
+        let previousHistory = getHistory(Int.max)
         if previousHistory.count >= 15 {
             Logger.Warn("Deleting history to have more space")
             
@@ -57,10 +57,10 @@ public class TripsManager : CoreDataContextManager{
     /// It creates an instance of the object in the CoreData, any deletion must be done explicitly.
     /// If there is already an instance of trip, it modifies it.
     ///
-    /// :param: `String`: Location
-    /// :param: `String`: Medicine name
-    /// :param: `Int64`: caseToBring
-    /// :param: `NSdate`: reminderDate
+    /// - parameter `String`:: Location
+    /// - parameter `String`:: Medicine name
+    /// - parameter `Int64`:: caseToBring
+    /// - parameter `NSdate`:: reminderDate
     ///
     /// :return: `Trip`: Instance of trip
     public func createTrip(location: String, medicine: String, departure: NSDate, arrival: NSDate, timeReminder: NSDate) -> Trip{
@@ -71,7 +71,7 @@ public class TripsManager : CoreDataContextManager{
             t.arrival = arrival
             t.reminderTime = timeReminder
             
-            t.itemsManager.getItems().map({$0.deleteFromContext(self.context)})
+            t.itemsManager.getItems().foreach({$0.deleteFromContext(self.context)})
             
             createHistory(t)
             

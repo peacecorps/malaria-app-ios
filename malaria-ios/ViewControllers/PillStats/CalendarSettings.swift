@@ -1,7 +1,8 @@
 import Foundation
 import UIKit
+import CVCalendar
 
-extension MonthlyViewController: CVCalendarViewDelegate {
+extension MonthlyViewController {
     func firstWeekday() -> Weekday {
         switch (NSCalendar.currentCalendar().firstWeekday % 7) {
         case 0:
@@ -27,7 +28,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
     func topMarker(shouldDisplayOnDayView dayView: DayView) -> Bool { return false }            /// hide line above day
 }
 
-extension MonthlyViewController: CVCalendarViewDelegate {
+extension MonthlyViewController {
     func dotMarker(shouldShowOnDayView dayView: DayView) -> Bool { return false }
 }
 

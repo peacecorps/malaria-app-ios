@@ -20,7 +20,7 @@ public class NotificationManager : CoreDataContextManager{
     ///
     /// All previous notifications will be unsheduled
     ///
-    /// :param: `NSDate`: fireTime
+    /// - parameter `NSDate`:: fireTime
     public func scheduleNotification(fireTime: NSDate){
         Logger.Info("Sheduling \(category) to " + fireTime.formatWith("dd-MMMM-yyyy hh:mm"))
         let notification: UILocalNotification = createNotification(fireTime)
@@ -29,20 +29,19 @@ public class NotificationManager : CoreDataContextManager{
     
     /// Unschedule all notifications with the category
     public func unsheduleNotification(){
-        for event in UIApplication.sharedApplication().scheduledLocalNotifications {
-            let notification = event as! UILocalNotification
-            if notification.category == category {
-                UIApplication.sharedApplication().cancelLocalNotification(notification)
+        for event in UIApplication.sharedApplication().scheduledLocalNotifications! {
+            if event.category == category {
+                UIApplication.sharedApplication().cancelLocalNotification(event)
             }
         }
     }
     
     /// Creates a notification
     ///
-    /// :param: `NSDate`: fireTime
-    /// :returns: `UILocalNotification`: local notification
+    /// - parameter `NSDate`:: fireTime
+    /// - returns: `UILocalNotification`: local notification
     private func createNotification(fireDate: NSDate) -> UILocalNotification{
-        var localNotification = UILocalNotification()
+        let localNotification = UILocalNotification()
         localNotification.fireDate = fireDate
         localNotification.soundName = UILocalNotificationDefaultSoundName;
         localNotification.alertAction = alertAction

@@ -12,10 +12,10 @@ public class RegistriesManager : CoreDataContextManager{
 
     /// Check if the pill was already taken in the period
     ///
-    /// :param: `NSDate`: the date
-    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    /// - parameter `NSDate`:: the date
+    /// - parameter `[Registry]: optional`: Cached vector of entries, most recent first
     ///
-    /// :returns: `Registry?`: registry
+    /// - returns: `Registry?`: registry
     public func tookMedicine(at: NSDate, registries: [Registry]? = nil) -> Registry?{
         let entries = allRegistriesInPeriod(at, registries: registries)
         if entries.noData {
@@ -36,10 +36,10 @@ public class RegistriesManager : CoreDataContextManager{
     
     /// Returns the list of entries that happens in the period of time
     ///
-    /// :param: `NSDate`: the date
-    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    /// - parameter `NSDate`:: the date
+    /// - parameter `[Registry]: optional`: Cached vector of entries, most recent first
     ///
-    /// :returns: `(noData: Bool, entries: [Registry])`: A tuple where the first value indicates if there are no entries
+    /// - returns: `(noData: Bool, entries: [Registry])`: A tuple where the first value indicates if there are no entries
     /// before the date and the second the array of entries.
     public func allRegistriesInPeriod(at: NSDate, registries: [Registry]? = nil) -> (noData: Bool, entries: [Registry]){
         var result = [Registry]()
@@ -47,10 +47,10 @@ public class RegistriesManager : CoreDataContextManager{
         let (day1, day2) = (at - (medicine.interval - 1).day, at + (medicine.interval - 1).day)
         
         var entries: [Registry] = []
-        if let r = registries {
+        if let _ = registries {
             entries = filter(registries!, date1: day1, date2: day2)
         }else {
-            entries = getRegistries(date1: day1, date2: day2, mostRecentFirst: true)
+            entries = getRegistries(day1, date2: day2, mostRecentFirst: true)
         }
         
         if entries.count != 0 {
@@ -75,21 +75,21 @@ public class RegistriesManager : CoreDataContextManager{
 
     /// Returns the most recent entry for that pill if there is
     ///
-    /// :returns: `Registry?`
+    /// - returns: `Registry?`
     public func mostRecentEntry() -> Registry?{
         return getRegistries().first
     }
     
     /// Returns the oldest entry for that pill if there is
     ///
-    /// :returns: `Registry?`
+    /// - returns: `Registry?`
     public func oldestEntry() -> Registry?{
         return getRegistries().last
     }
     
     /// Returns a tuple with the oldest and most recent entry
     ///
-    /// :returns: `(leastRecent: Registry, mostRecent: Registry)?`
+    /// - returns: `(leastRecent: Registry, mostRecent: Registry)?`
     public func getLimits() -> (leastRecent: Registry, mostRecent: Registry)? {
         let registries = getRegistries(mostRecentFirst: true)
         if let  mostRecent = registries.first,
@@ -108,11 +108,11 @@ public class RegistriesManager : CoreDataContextManager{
     ///
     /// If there is already an entry in the period and if modifyEntry is true, then the entry is deleted and replaced
     ///
-    /// :param: `NSDate`: the date of the entry
-    /// :param: `Bool`: if the user took medicine
-    /// :param: `Bool optional`: overwrite previous entry (by default is false)
+    /// - parameter `NSDate`:: the date of the entry
+    /// - parameter `Bool`:: if the user took medicine
+    /// - parameter `Bool: optional`: overwrite previous entry (by default is false)
     ///
-    /// :returns: `Bool`: true if there was a change, false if not
+    /// - returns: `Bool`: true if there was a change, false if not
     public func addRegistry(date: NSDate, tookMedicine: Bool, modifyEntry: Bool = false) -> Bool{
         if date > NSDate() {
             Logger.Error("Cannot change entries in the future")
@@ -181,18 +181,18 @@ public class RegistriesManager : CoreDataContextManager{
 
     /// Returns entries between the two specified dates
     ///
-    /// :param: `NSDate`: date1
-    /// :param: `NSDate`: date2
-    /// :param: `Bool optional`: if first element of result should be the most recent entry. (by default is true)
-    /// :param: `Bool optional`: if true, it won't sort the elements reducing one sort cycle
-    /// :param: `(r: Registry) -> Bool) optional`: Additional custom filter
+    /// - parameter `NSDate`:: date1
+    /// - parameter `NSDate`:: date2
+    /// - parameter `Bool: optional`: if first element of result should be the most recent entry. (by default is true)
+    /// - parameter `Bool: optional`: if true, it won't sort the elements reducing one sort cycle
+    /// - parameter `(r:: Registry) -> Bool) optional`: Additional custom filter
     ///
-    /// :returns: `[Registry]`
+    /// - returns: `[Registry]`
     public func getRegistries(date1: NSDate = NSDate.min, date2: NSDate = NSDate.max, mostRecentFirst: Bool = true, unsorted: Bool = false, additionalFilter: ((r: Registry) -> Bool)? = nil) -> [Registry]{
         
         //make sure that date2 is always after date1
         if date1 > date2 {
-            return getRegistries(date1: date2, date2: date1, mostRecentFirst: mostRecentFirst)
+            return getRegistries(date2, date2: date1, mostRecentFirst: mostRecentFirst)
         }
         
         //filter first then sort
@@ -201,16 +201,16 @@ public class RegistriesManager : CoreDataContextManager{
         if unsorted {
             return filtered
         }
-        return mostRecentFirst ? filtered.sorted({$0.date > $1.date}) : filtered.sorted({$0.date < $1.date})
+        return mostRecentFirst ? filtered.sort({$0.date > $1.date}) : filtered.sort({$0.date < $1.date})
     }
     
     /// Filter entries between two dates and, optionally, with an extra filter
     ///
-    /// :param: `[Registry]`: list of entries
-    /// :param: `NSDate`: first day
-    /// :param: `NSDate`: second day
-    /// :param: `(r: Registry) -> Bool) optional`: Additional custom filter
-    /// :returns: `[Registry]`
+    /// - parameter `[Registry]`:: list of entries
+    /// - parameter `NSDate`:: first day
+    /// - parameter `NSDate`:: second day
+    /// - parameter `(r:: Registry) -> Bool) optional`: Additional custom filter
+    /// - returns: `[Registry]`
     public func filter(registries: [Registry], date1: NSDate, date2: NSDate, additionalFilter: ((r: Registry) -> Bool)? = nil)  -> [Registry]{
         return registries.filter({ (additionalFilter?(r: $0) ?? true) &&
                                     (($0.date > date1 && $0.date < date2) ||
@@ -220,22 +220,22 @@ public class RegistriesManager : CoreDataContextManager{
 
     /// Returns entry in the specified date if exists
     ///
-    /// :param: `NSDate`: date
-    /// :param: `[Registry] optional`: Cached vector of entries, most recent first
+    /// - parameter `NSDate`:: date
+    /// - parameter `[Registry]: optional`: Cached vector of entries, most recent first
     ///
-    /// :returns: `Registry?`
+    /// - returns: `Registry?`
     public func findRegistry(date: NSDate, registries: [Registry]? = nil) -> Registry?{
         if let r = registries {
             return filter(r, date1: date, date2: date).first
         }
-        return getRegistries(date1: date, date2: date, unsorted: true).first
+        return getRegistries(date, date2: date, unsorted: true).first
     }
     
     /// Returns last day when the user taken the medicine
     ///
     /// :param `[Registry]? optional`: cached list of entries. Must be sorted from most recent to least recent
     ///
-    /// :returns: `NSDate?`
+    /// - returns: `NSDate?`
     public func lastPillDate(registries: [Registry]? = nil) -> NSDate?{
         let entries = registries != nil ? registries! : getRegistries(mostRecentFirst: true)
         
@@ -253,7 +253,7 @@ public class RegistriesManager : CoreDataContextManager{
     public func removeEntry(date: NSDate){
         if let entry = findRegistry(date){
 
-            var newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(date)})
+            let newRegistries: [Registry] = medicine.registries.convertToArray().filter({!$0.date.sameDayAs(date)})
             medicine.registries = NSSet(array: newRegistries)
             entry.deleteFromContext(context)
             CoreDataHelper.sharedInstance.saveContext(context)

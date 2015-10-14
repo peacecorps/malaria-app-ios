@@ -4,14 +4,14 @@ public extension Item{
     
     /// Increase number of items. Never greater than `Int64.max`
     ///
-    /// :param: `Int64`: quantity
+    /// - parameter `Int64`:: quantity
     public func add(number: Int64){
         self.quantity = (self.quantity + number) % Int64.max
     }
     
     /// Decrease number of items
     ///
-    /// :param: `Int64`: quantity always equal or greated than 0
+    /// - parameter `Int64`:: quantity always equal or greated than 0
     public func remove(number: Int64){
         self.quantity = max(self.quantity - number, 0)
     }

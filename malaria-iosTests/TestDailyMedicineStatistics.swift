@@ -45,22 +45,22 @@ class TestDailyMedicineStatistics: XCTestCase {
     
     func testProvidingRegistries(){
         let entries = registriesManager.getRegistries(mostRecentFirst: true)
-        let entriesOldestFirst = entries.reverse()
+        let entriesOldestFirst = registriesManager.getRegistries(mostRecentFirst: false)
         
         // must be mostRecentFirst
         XCTAssertEqual(10, stats.pillStreak(registries: entries))
-        let customInterval = registriesManager.getRegistries(date1: d1 - 3.day, date2: d1, mostRecentFirst: true)
-        XCTAssertEqual(4, stats.pillStreak(date1: d1 - 3.day, date2: d1, registries: customInterval))
+        let customInterval = registriesManager.getRegistries(d1 - 3.day, date2: d1, mostRecentFirst: true)
+        XCTAssertEqual(4, stats.pillStreak(d1 - 3.day, date2: d1, registries: customInterval))
         
         //oldest to recent
         XCTAssertEqual(10, stats.numberSupposedPills(registries: entriesOldestFirst))
-        let customInterval2 = registriesManager.getRegistries(date1: d1 - 1.day, date2: d1, mostRecentFirst: true)
-        XCTAssertEqual(2, stats.numberSupposedPills(date1: d1 - 1.day, date2: d1, registries: customInterval2))
+        let customInterval2 = registriesManager.getRegistries(d1 - 1.day, date2: d1, mostRecentFirst: true)
+        XCTAssertEqual(2, stats.numberSupposedPills(d1 - 1.day, date2: d1, registries: customInterval2))
         
         //indiferent
         XCTAssertEqual(10, stats.numberPillsTaken(registries: entries))
         XCTAssertEqual(10, stats.numberPillsTaken(registries: entriesOldestFirst))
-        XCTAssertEqual(4, stats.numberPillsTaken(date1: d1 - 3.day, date2: d1, registries: customInterval.reverse()))
+        XCTAssertEqual(4, stats.numberPillsTaken(d1 - 3.day, date2: d1, registries: customInterval.reverse()))
         
         //indiferent
         XCTAssertEqual(1, stats.pillAdherence(registries: entries))
@@ -69,7 +69,7 @@ class TestDailyMedicineStatistics: XCTestCase {
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
         
         let updatedEntries = registriesManager.getRegistries(mostRecentFirst: true)
-        let reverseUpdatedEntries = updatedEntries.reverse()
+        let reverseUpdatedEntries = registriesManager.getRegistries(mostRecentFirst: false)
         
         XCTAssertEqual(0.9, stats.pillAdherence(registries: updatedEntries))
         XCTAssertEqual(0.9, stats.pillAdherence(registries: reverseUpdatedEntries))
@@ -77,12 +77,12 @@ class TestDailyMedicineStatistics: XCTestCase {
     
     func testPillStreak(){
         XCTAssertEqual(10, stats.pillStreak())
-        XCTAssertEqual(6, stats.pillStreak(date1: d1, date2: d1 - 5.day))
+        XCTAssertEqual(6, stats.pillStreak(d1, date2: d1 - 5.day))
     
         //miss one pill
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
-        XCTAssertEqual(0, stats.pillStreak(date1: d1 - 9.day, date2: d1 - 5.day))
-        XCTAssertEqual(5, stats.pillStreak(date1: d1, date2: d1 - 5.day))
+        XCTAssertEqual(0, stats.pillStreak(d1 - 9.day, date2: d1 - 5.day))
+        XCTAssertEqual(5, stats.pillStreak(d1, date2: d1 - 5.day))
         
         //did not took a pill more recently
         XCTAssertTrue(registriesManager.addRegistry(d1, tookMedicine: false, modifyEntry: true))
@@ -90,7 +90,7 @@ class TestDailyMedicineStatistics: XCTestCase {
     }
     
     func testPillStreakCustomArgs() {
-        XCTAssertEqual(3, stats.pillStreak(date1: d1 - 2.day))
+        XCTAssertEqual(3, stats.pillStreak(d1 - 2.day))
         
         //miss one pill
         XCTAssertTrue(registriesManager.addRegistry(d1 - 3.day, tookMedicine: false, modifyEntry: true))
@@ -127,7 +127,7 @@ class TestDailyMedicineStatistics: XCTestCase {
         
         //miss one pill in the past
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
-        XCTAssertEqual(3, stats.numberSupposedPills(date1: d1 - 6.day, date2: d1 - 4.day))
+        XCTAssertEqual(3, stats.numberSupposedPills(d1 - 6.day, date2: d1 - 4.day))
     }
     
     func testSupposedPillsMissingEntries(){
@@ -141,7 +141,7 @@ class TestDailyMedicineStatistics: XCTestCase {
     
     func testPillsTaken(){
         XCTAssertEqual(10, stats.numberPillsTaken())
-        XCTAssertEqual(6, stats.numberPillsTaken(date1: d1, date2: d1 - 5.day))
+        XCTAssertEqual(6, stats.numberPillsTaken(d1, date2: d1 - 5.day))
         
         //add one pill
         XCTAssertTrue(registriesManager.addRegistry(d1 - 11.day, tookMedicine: true))
@@ -153,7 +153,7 @@ class TestDailyMedicineStatistics: XCTestCase {
         
         //miss one pill in the past
         XCTAssertTrue(registriesManager.addRegistry(d1 - 5.day, tookMedicine: false, modifyEntry: true))
-        XCTAssertEqual(2, stats.numberPillsTaken(date1: d1 - 6.day, date2: d1 - 4.day))
+        XCTAssertEqual(2, stats.numberPillsTaken(d1 - 6.day, date2: d1 - 4.day))
     }
     
     func testPillsTakenMissingEntries(){
@@ -180,7 +180,6 @@ class TestDailyMedicineStatistics: XCTestCase {
         XCTAssertTrue(registriesManager.addRegistry(d1 - 11.day, tookMedicine: false))
         
         
-        let numberPillsTaken = Float(stats.numberPillsTaken())
         XCTAssertEqual(Float(stats.numberPillsTaken())/Float(stats.numberSupposedPills()), stats.pillAdherence())
         
         //miss one pill in the past
@@ -189,8 +188,8 @@ class TestDailyMedicineStatistics: XCTestCase {
         let afterDate = d1 - 6.day
         let beforeDate = d1 - 4.day
         
-        let expectedAdherence = Float(stats.numberPillsTaken(date1: afterDate, date2: beforeDate))/Float(stats.numberSupposedPills(date1: afterDate, date2: beforeDate))
+        let expectedAdherence = Float(stats.numberPillsTaken(afterDate, date2: beforeDate))/Float(stats.numberSupposedPills(afterDate, date2: beforeDate))
         
-        XCTAssertEqual(expectedAdherence, stats.pillAdherence(date1: afterDate, date2: beforeDate))
+        XCTAssertEqual(expectedAdherence, stats.pillAdherence(afterDate, date2: beforeDate))
     }
 }

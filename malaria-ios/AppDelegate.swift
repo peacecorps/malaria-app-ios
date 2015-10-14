@@ -8,13 +8,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         //registering for notifications
-        var notificationsCategories = [UIMutableUserNotificationCategory]()
+        var notificationsCategories: [UIMutableUserNotificationCategory] = [UIMutableUserNotificationCategory]()
         notificationsCategories.append(MedicineNotificationsManager.setup())
+        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: NSSet(array: notificationsCategories) as? Set<UIUserNotificationCategory>)
+        application.registerUserNotificationSettings(settings)
         
         readApplicationSettings()
-        let categories = NSSet(array: notificationsCategories) as Set<NSObject>
-        let settings : UIUserNotificationSettings = UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: categories)
-        application.registerUserNotificationSettings(settings)
         
         //setting up initial screen, can be configured in the storyboard if there is only one option but here we have more flexibility
         window = UIWindow(frame: UIScreen.mainScreen().bounds)

@@ -13,24 +13,24 @@ public class UserSettingsManager{
     public enum UserSetting: String{
         private static let allValues = [DidConfiguredMedicine, ClearTripHistory, ClearMedicineHistory, MedicineReminderSwitch, TripReminderOption]
         
-        case DidConfiguredMedicine = "DidConfiguredMedicine"
-        case ClearTripHistory = "ClearTripHistory"
-        case ClearMedicineHistory = "ClearMedicineHistory"
-        case MedicineReminderSwitch = "MedicineReminderSwitch"
-        case TripReminderOption = "TripReminderOption"
+        case DidConfiguredMedicine
+        case ClearTripHistory
+        case ClearMedicineHistory
+        case MedicineReminderSwitch
+        case TripReminderOption
         
         /// Sets settings boolean flag to the value given by argument
         ///
-        /// :param: `Bool`
+        /// - parameter `Bool`:
         public func setBool(value: Bool){
             NSUserDefaults.standardUserDefaults().setBool(value, forKey: self.rawValue)
         }
         
         /// Gets the value of the boolean user setting. If the value isn't set, sets it as default value and returns
         ///
-        /// :param: `Bool optional`: default value when the variable isn't set. Default false
+        /// - parameter `Bool: optional`: default value when the variable isn't set. Default false
         ///
-        /// :returns: `Bool`: The value
+        /// - returns: `Bool`: The value
         public func getBool(defaultValue: Bool = false) -> Bool{
             if let value = NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) as? Bool{
                 return value
@@ -44,16 +44,16 @@ public class UserSettingsManager{
         
         /// Sets settings String value of the user setting
         ///
-        /// :param: `String`: value
+        /// - parameter `String`:: value
         public func setString(value: String){
             NSUserDefaults.standardUserDefaults().setObject(value, forKey: self.rawValue)
         }
         
         /// Gets the string value for the key. If it is not set, returns a default value and sets
         ///
-        /// :param: `String optional`: default value when the variable isn't set. Default empty string
+        /// - parameter `String: optional`: default value when the variable isn't set. Default empty string
         ///
-        /// :returns: `String`:  The value
+        /// - returns: `String`:  The value
         public func getString(defaultValue: String = "") -> String{
             if let value = NSUserDefaults.standardUserDefaults().objectForKey(self.rawValue) as? String{
                 return value
@@ -78,6 +78,6 @@ public class UserSettingsManager{
     
     /// Clears all values
     public class func clear(){
-        UserSetting.allValues.map({$0.removeKey()})
+        UserSetting.allValues.foreach({$0.removeKey()})
     }
 }

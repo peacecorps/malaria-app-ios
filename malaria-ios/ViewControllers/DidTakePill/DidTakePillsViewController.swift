@@ -26,8 +26,8 @@ class DidTakePillsViewController: UIViewController {
     //Sound effects
     private let TookPillSoundPath = NSBundle.mainBundle().pathForResource("correct", ofType: "aiff", inDirectory: "Sounds")
     private let DidNotTakePillSoundPath = NSBundle.mainBundle().pathForResource("incorrect", ofType: "aiff", inDirectory: "Sounds")
-    private var tookPillPlayer = AVAudioPlayer()
-    private var didNotTakePillPlayer = AVAudioPlayer()
+    private var tookPillPlayer: AVAudioPlayer!
+    private var didNotTakePillPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,14 @@ class DidTakePillsViewController: UIViewController {
         
         if let tookPillSoundPath = TookPillSoundPath,
             let didNotTakePillSoundPath = DidNotTakePillSoundPath{
-            tookPillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillSoundPath), error: nil)
-            didNotTakePillPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillSoundPath), error: nil)
+                
+                do {
+                    tookPillPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillSoundPath))
+                    didNotTakePillPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillSoundPath))
+                } catch _ {
+                
+                }
+            
         }else {
             Logger.Error("Error getting sounds effects file paths")
         }
@@ -76,7 +82,7 @@ class DidTakePillsViewController: UIViewController {
     
     private func reset(){
         let (title, message) = (ResheduleNotificationAlertText.title, ResheduleNotificationAlertText.message)
-        var resheduleAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let resheduleAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         resheduleAlert.addAction(UIAlertAction(title: AlertOptions.yes, style: .Default, handler: { _ in
             self.pagesManager.presentSetupScreen()
         }))
@@ -143,7 +149,7 @@ class DidTakePillsViewController: UIViewController {
         }
         
         if medicine!.interval > 1 {
-            if shouldReset(currentDate: currentDate, interval: medicine!.interval){
+            if shouldReset(currentDate, interval: medicine!.interval){
                 
                 dayOfTheWeekLbl.textColor = SeveralDaysRowMissedEntriesTextColor
                 fullDateLbl.textColor = SeveralDaysRowMissedEntriesTextColor
@@ -187,7 +193,7 @@ extension DidTakePillsViewController{
     }
     
     private func reshedule(notificationManager: MedicineNotificationsManager) {
-        if UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(defaultValue: true){
+        if UserSettingsManager.UserSetting.MedicineReminderSwitch.getBool(true){
             notificationManager.reshedule()
         }else {
             Logger.Error("Medicine Notifications are not enabled")

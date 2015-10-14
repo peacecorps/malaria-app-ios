@@ -66,7 +66,7 @@ public class CachedStatistics : NSObject{
 extension CachedStatistics {
     /// Retrieves daily stats
     ///
-    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    /// - parameter `(): -> ()`: completion handler to be executed in the UI thread
     public func retrieveDailyStats(completion: () -> ()){
         lastMedicine = nil
         todaysPillStreak = 0
@@ -76,8 +76,8 @@ extension CachedStatistics {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             self.todaysAdherence = self.statsManager.pillAdherence(date2: NSDate(), registries: self.registries) * 100
             
-            let mostRecentFirst = self.registries.reverse()
-            self.lastMedicine = self.registriesManager.lastPillDate(registries: mostRecentFirst)
+            let mostRecentFirst = Array(self.registries.reverse())
+            self.lastMedicine = self.registriesManager.lastPillDate(mostRecentFirst)
             self.todaysPillStreak = self.statsManager.pillStreak(date2: NSDate(), registries: mostRecentFirst)
             
             self.isDailyStatsUpdated = true
@@ -90,8 +90,8 @@ extension CachedStatistics {
     
     /// Retrieves month adherece
     ///
-    /// :param: `NSDate`: Desired month
-    /// :param: `() -> ()`: completion handler to be executed in the UI thread
+    /// - parameter `NSDate`:: Desired month
+    /// - parameter `(): -> ()`: completion handler to be executed in the UI thread
     public func retrieveMonthsData(numberMonths: Int, completion : () -> ()) {
         monthAdhrence.removeAll()
         
@@ -115,7 +115,7 @@ extension CachedStatistics {
         
         tookMedicine.removeAll()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            let entriesReversed = self.registries.reverse() //most recent first
+            let entriesReversed = Array(self.registries.reverse()) //most recent first
             
             if !entriesReversed.isEmpty {
                 let oldestDate = entriesReversed.last!.date.startOfDay
@@ -135,8 +135,8 @@ extension CachedStatistics {
 
     /// Update took medicine stats and calls the progress to update any information in the UI
     ///
-    /// :param: `NSDate`: The day to be updated
-    /// :param: `() -> ()`: Progress handler to be executed in the UI thread
+    /// - parameter `NSDate`:: The day to be updated
+    /// - parameter `(): -> ()`: Progress handler to be executed in the UI thread
     public func updateTookMedicineStats(at: NSDate, progress: (day: NSDate, remove: Bool) -> ()){
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
             
@@ -146,7 +146,7 @@ extension CachedStatistics {
             let d1 = at - (self.medicine.interval - 1).day
             let d2 = at + (self.medicine.interval - 1).day
             
-            let entriesReversed = self.registries.reverse() //most recentFirst
+            let entriesReversed = Array(self.registries.reverse()) //most recentFirst
             if !entriesReversed.isEmpty {
                 let numDays = d2 - d1 + 1 //include d2
                 if numDays == 0 {
@@ -179,8 +179,8 @@ extension CachedStatistics {
     
     /// Retrieves cached statistics for the graph
     ///
-    /// :param: `(progress: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
-    /// :param: `() -> ()`: completion handler to be executed in the UI after finishing processing
+    /// - parameter `(progress:: Float) -> ()`: Progress handler to be executed in the UI thread. Usually a progress bar
+    /// - parameter `(): -> ()`: completion handler to be executed in the UI after finishing processing
     public func retrieveCachedStatistics(progress: (progress: Float) -> (), completion : () -> ()) {
         adherencesPerDay.removeAll()
         
@@ -202,7 +202,7 @@ extension CachedStatistics {
                     
                     let day = today - v.day
                     
-                    let adherence = self.statsManager.pillAdherence(date1: oldestDate, date2: day, registries: entries)
+                    let adherence = self.statsManager.pillAdherence(oldestDate, date2: day, registries: entries)
                     self.adherencesPerDay[index] = (day, adherence * 100)
                     
                     //updating array from last index to first Index

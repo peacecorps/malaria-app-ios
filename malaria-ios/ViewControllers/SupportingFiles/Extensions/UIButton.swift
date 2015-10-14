@@ -13,7 +13,7 @@ extension UIButton {
         let originY: CGFloat = 0 - (extraHeight/2)
         let width: CGFloat = buttonSize.width + extraWidth
         let height: CGFloat = buttonSize.height + extraHeight
-        let largerFrame = CGRect(x: originX, y: originX, width: width, height: height)
+        let largerFrame = CGRect(x: originX, y: originY, width: width, height: height)
         
         return (CGRectContainsPoint(largerFrame, point)) ? self : nil
     }

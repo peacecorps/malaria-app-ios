@@ -13,7 +13,7 @@ public class SyncManager : CoreDataContextManager{
         // set up the base64-encoded credentials
         let loginString = NSString(format: "%@:%@", user, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64LoginString = loginData.base64EncodedStringWithOptions(nil)
+        let base64LoginString = loginData.base64EncodedStringWithOptions([])
         
         let key = "Authorization"
         let value = "Basic \(base64LoginString)"
@@ -27,9 +27,9 @@ public class SyncManager : CoreDataContextManager{
     
     /// Syncs a specific endpoint
     ///
-    /// :param: `String`: full path
-    /// :param: `Bool`: Save context after success
-    /// :param: `((url: String, error: NSError?)->())?`: completion Handler (default nil)
+    /// - parameter `String`:: full path
+    /// - parameter `Bool`:: Save context after success
+    /// - parameter `((url:: String, error: NSError?)->())?`: completion Handler (default nil)
     public func sync(path: String, save: Bool = false, completionHandler: ((url: String, error: NSError?)->())? = nil){
         func expandedCompletionHandler(url: String, error: NSError?){
             completionHandler?(url: url, error: error)
@@ -54,7 +54,7 @@ public class SyncManager : CoreDataContextManager{
     ///
     /// Runs the specified completion handler after syncing every endpoint.
     ///
-    /// :param: `(()->())?`: completion handler (default nil)
+    /// - parameter `(()->())?`:: completion handler (default nil)
     public func syncAll(completionHandler: (()->())? = nil){
         var count = endpoints.count
         func completionHandlerExpanded(url: String, error: NSError?){
@@ -68,7 +68,7 @@ public class SyncManager : CoreDataContextManager{
             CoreDataHelper.sharedInstance.saveContext(self.context)
         }
         
-        for (path, endpoint) in endpoints{
+        for (path, _) in endpoints{
             sync(path, completionHandler: completionHandlerExpanded)
         }
     }
@@ -76,17 +76,25 @@ public class SyncManager : CoreDataContextManager{
     private func remoteFetch(endpoint: Endpoint, save: Bool = false, completion: ((url: String, error: NSError?)->())? = nil){
         Logger.Info("Syncing: \(endpoint.path)")
         Alamofire.request(.GET, endpoint.path, parameters: ["format": "json"])
-            .responseJSON { (req, res, json, error) in
+            .responseJSON { (_, _, result) in
+                var resultError: NSError? = nil
                 
-                var resultError = error
-                if(error == nil) {
+                switch result {
+                case .Success(let data):
                     endpoint.clearFromDatabase(self.context)
-                    if let objectMapped = endpoint.retrieveJSONObject(JSON(json!), context: self.context){
+                    if let _ = endpoint.retrieveJSONObject(JSON(data), context: self.context){
                         Logger.Info("Success \(endpoint.path)")
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")
                         resultError = NSError(domain: "PARSE_ERROR", code: 9999, userInfo: [:])
                     }
+                
+                
+                case .Failure(_, _):
+                    resultError = NSError(domain: "CONNECTION_ERROR", code: 9999, userInfo: [:])
+                    
+                    //doesn't compile, still figuring out
+                    //resultError = error
                 }
                 
                 completion?(url: endpoint.path, error: resultError)

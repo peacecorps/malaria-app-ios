@@ -51,7 +51,7 @@ class ListItemsViewController : UIViewController{
             medicine = Medicine.Pill(rawValue: medicineManager.getCurrentMedicine()!.name)!
         }
         
-        self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+        self.listItems.sortInPlace({ $0.0.lowercaseString < $1.0.lowercaseString })
         tableView.reloadData()
     }
 }
@@ -66,8 +66,8 @@ extension ListItemsViewController : UITableViewDataSource, UITableViewDelegate, 
         return 50.0
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var deleteButton = UITableViewRowAction(style: .Default, title: "Delete", handler: { (action, indexPath) in
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .Default, title: "Delete", handler: { (action, indexPath) in
             self.listItems.removeAtIndex(indexPath.row)
             tableView.reloadData()
         })
@@ -151,13 +151,13 @@ extension ListItemsViewController {
         let alert = UIAlertController(title: CreateEntryAlertText.title, message: CreateEntryAlertText.message, preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
-            let textFieldText = (alert.textFields![0] as! UITextField).text!
+            let textFieldText = (alert.textFields![0] ).text!
             
             if !textFieldText.isEmpty && self.listItems.filter({$0.0.lowercaseString == textFieldText.lowercaseString}).isEmpty {
                 let tuple = (textFieldText, false)
                 self.listItems.append(tuple)
                 
-                self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+                self.listItems.sortInPlace({ $0.0.lowercaseString < $1.0.lowercaseString })
                 self.tableView.reloadData()
             }
         })
@@ -179,11 +179,11 @@ extension ListItemsViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
         alert.addAction(UIAlertAction(title: AlertOptions.done, style: .Default) { _ in
-            let textField = alert.textFields![0] as! UITextField
+            let textField = alert.textFields![0] 
             
-            self.listItems[indexPath.row].0 = textField.text
+            self.listItems[indexPath.row].0 = textField.text!
             self.listItems[indexPath.row].1 = false
-            self.listItems.sort({ $0.0.lowercaseString < $1.0.lowercaseString })
+            self.listItems.sortInPlace({ $0.0.lowercaseString < $1.0.lowercaseString })
             self.tableView.reloadData()
         })
         

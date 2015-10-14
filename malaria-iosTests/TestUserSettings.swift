@@ -25,7 +25,7 @@ class TestUserSettings: XCTestCase {
     }
     
     func testUndefinedValue() {
-        XCTAssertEqual(UserSettingsManager.UserSetting.TripReminderOption.getString(defaultValue: "Bla"), "Bla")
-        XCTAssertTrue(UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool(defaultValue: true))
+        XCTAssertEqual(UserSettingsManager.UserSetting.TripReminderOption.getString("Bla"), "Bla")
+        XCTAssertTrue(UserSettingsManager.UserSetting.DidConfiguredMedicine.getBool(true))
     }
 }

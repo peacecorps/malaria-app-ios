@@ -10,7 +10,7 @@ public extension NSManagedObject {
     
     /// Delete object from contect
     ///
-    /// :param: `NSManagedObjectContext`
+    /// - parameter `NSManagedObjectContext`:
     public func deleteFromContext(context: NSManagedObjectContext){
         context.deleteObject(self)
     }
@@ -19,23 +19,21 @@ public extension NSManagedObject {
     ///
     /// After creation, the deletion must be done explicitly
     ///
-    /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`
+    /// - parameter `T.Type`:: The class of any subclass of NSManagedObject
+    /// - parameter `NSManagedObjectContext`:
     ///
-    /// :returns: `T`: A new NSManagedObject of the type given by argument
+    /// - returns: `T`: A new NSManagedObject of the type given by argument
     public static func create<T : NSManagedObject>(entity: T.Type, context: NSManagedObjectContext) -> T{
         let name = getSimpleClassName(entity)
-        
-        let entityDescription = NSEntityDescription.entityForName(name, inManagedObjectContext: context)!
         return NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context) as! T
     }
     
     /// Retrieves every object in the CoreData.
     ///
-    /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`
+    /// - parameter `T.Type`:: The class of any subclass of NSManagedObject
+    /// - parameter `NSManagedObjectContext`:
     ///
-    /// :returns: `[T]`: A array of NSManagedObject of the type given by argument
+    /// - returns: `[T]`: A array of NSManagedObject of the type given by argument
     public static func retrieve<T : NSManagedObject>(entity: T.Type, predicate: NSPredicate? = nil,
                                                      fetchLimit: Int = Int.max, context : NSManagedObjectContext) -> [T]{
         let name = getSimpleClassName(entity)
@@ -44,15 +42,15 @@ public extension NSManagedObject {
         fetchRequest.predicate = predicate
         fetchRequest.fetchLimit = fetchLimit
         
-        return context.executeFetchRequest(fetchRequest, error: nil) as! [T]
+        return (try! context.executeFetchRequest(fetchRequest)) as! [T]
     }
     
     /// Deletes every object in the CoreData.
     ///
-    /// :param: `T.Type`: The class of any subclass of NSManagedObject
-    /// :param: `NSManagedObjectContext`
+    /// - parameter `T.Type`:: The class of any subclass of NSManagedObject
+    /// - parameter `NSManagedObjectContext`:
     public static func clear<T : NSManagedObject>(entity: T.Type, context : NSManagedObjectContext){
         let elements = entity.retrieve(entity, context: context)
-        elements.map({context.deleteObject($0)})
+        elements.foreach({context.deleteObject($0)})
     }
 }

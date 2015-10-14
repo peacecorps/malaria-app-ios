@@ -125,7 +125,7 @@ extension PlanTripViewController{
     }
     
     @IBAction func locationEditingChangedHandler(sender: AnyObject) {
-        updateLocation(location.text)
+        updateLocation(location.text!)
     }
     
     @IBAction func itemListBtnHandler(sender: AnyObject) {
@@ -166,9 +166,9 @@ extension PlanTripViewController{
     }
     
     private func storeTrip(){
-        let trip = tripsManager.createTrip(location.text, medicine: medicine.name(), departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
+        let trip = tripsManager.createTrip(location.text!, medicine: medicine.name(), departure: departureDay, arrival: arrivalDay, timeReminder: reminder)
         let itemManager = trip.itemsManager
-        items.map({ itemManager.addItem($0.0, quantity: 1) })
+        items.foreach({ itemManager.addItem($0.0, quantity: 1) })
         itemManager.toggleCheckItem( items.filter({ $0.1 }).map({ $0.0 }))
         
         scheduleNotifications(trip)
@@ -178,9 +178,9 @@ extension PlanTripViewController{
     private func scheduleNotifications(trip: Trip) {
         let notificationManager = trip.notificationManager
         
-        var notificationTime = departureDay.startOfDay + reminder.hour.hour + reminder.minutes.minute
+        let notificationTime = departureDay.startOfDay + reminder.hour.hour + reminder.minutes.minute
         
-        switch (UserSettingsManager.UserSetting.TripReminderOption.getString(defaultValue: FrequentReminderOption)){
+        switch (UserSettingsManager.UserSetting.TripReminderOption.getString(FrequentReminderOption)){
         case FrequentReminderOption:
             Logger.Info("Scheduling frequent notifications for plan my trip")
             notificationManager.scheduleNotification(notificationTime)

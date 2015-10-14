@@ -9,8 +9,8 @@ public class MedicinePickerViewTrip : MedicinePickerView{
     
     /// Initialization
     ///
-    /// :param: `NSManagedObjectContext`: current context
-    /// :param: `(object: String) -> ()`: on selection callback. Usually to change a view element content
+    /// - parameter `NSManagedObjectContext`:: current context
+    /// - parameter `(object:: String) -> ()`: on selection callback. Usually to change a view element content
     override init(context: NSManagedObjectContext, selectCallback: (object: String) -> ()){
         tripsManager = TripsManager(context: context)
         super.init(context: context, selectCallback: selectCallback)
@@ -18,12 +18,12 @@ public class MedicinePickerViewTrip : MedicinePickerView{
     
     /// Returns default medicine for the trip. If there is no trip configured returns empty string
     ///
-    /// :returns: `String`: medicine for the stored trip
+    /// - returns: `String`: medicine for the stored trip
     private func defaultMedicine() -> String{
         return tripsManager.getTrip()?.medicine ?? ""
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

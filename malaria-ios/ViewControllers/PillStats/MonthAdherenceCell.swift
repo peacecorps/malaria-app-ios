@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-//import HorizontalProgressView
+import HorizontalProgressView
 
 /// `AdherenceHorizontalBarCell` shows a graph bar for the adhrence for a month
 class AdherenceHorizontalBarCell: UITableViewCell {

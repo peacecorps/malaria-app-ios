@@ -13,8 +13,7 @@
     <a title="UserSetting Enum Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>UserSetting</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">UserSetting</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                </div>
+              </div>
             <p>Possible user defined settings</p>
 
 <ul>
@@ -276,6 +254,8 @@
                       <div class="abstract">
                         <p>Sets settings boolean flag to the value given by argument</p>
 
+<p>:param: <code>Bool</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -285,35 +265,15 @@
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool</code></p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FOC11malaria_ios19UserSettingsManager11UserSetting7getBoolFS1_FT12defaultValueSb_Sb"></a>
-                    <a name="//apple_ref/swift/Method/getBool(defaultValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FOC11malaria_ios19UserSettingsManager11UserSetting7getBoolFS1_FT12defaultValueSb_Sb">getBool(defaultValue:)</a>
+                    <a name="/s:FOC11malaria_ios19UserSettingsManager11UserSetting7getBoolFS1_FTSb_Sb"></a>
+                    <a name="//apple_ref/swift/Method/getBool(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOC11malaria_ios19UserSettingsManager11UserSetting7getBoolFS1_FTSb_Sb">getBool(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -323,6 +283,10 @@
                       <div class="abstract">
                         <p>Gets the value of the boolean user setting. If the value isn&rsquo;t set, sets it as default value and returns</p>
 
+<p>:param: <code>Bool optional</code>: default value when the variable isn&rsquo;t set. Default false</p>
+
+<p>:returns: <code>Bool</code>: The value</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -331,31 +295,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getBool</span><span class="p">(</span><span class="n">defaultValue</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool optional</code>: default value when the variable isn&rsquo;t set. Default false</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Bool</code>: The value</p>
-
                       </div>
                     </section>
                   </div>
@@ -375,6 +314,8 @@
                       <div class="abstract">
                         <p>Sets settings String value of the user setting</p>
 
+<p>:param: <code>String</code>: value</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -384,35 +325,15 @@
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: value</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FOC11malaria_ios19UserSettingsManager11UserSetting9getStringFS1_FT12defaultValueSS_SS"></a>
-                    <a name="//apple_ref/swift/Method/getString(defaultValue:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FOC11malaria_ios19UserSettingsManager11UserSetting9getStringFS1_FT12defaultValueSS_SS">getString(defaultValue:)</a>
+                    <a name="/s:FOC11malaria_ios19UserSettingsManager11UserSetting9getStringFS1_FTSS_SS"></a>
+                    <a name="//apple_ref/swift/Method/getString(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FOC11malaria_ios19UserSettingsManager11UserSetting9getStringFS1_FTSS_SS">getString(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -422,6 +343,10 @@
                       <div class="abstract">
                         <p>Gets the string value for the key. If it is not set, returns a default value and sets</p>
 
+<p>:param: <code>String optional</code>: default value when the variable isn&rsquo;t set. Default empty string</p>
+
+<p>:returns: <code>String</code>:  The value</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -430,31 +355,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getString</span><span class="p">(</span><span class="n">defaultValue</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String optional</code>: default value when the variable isn&rsquo;t set. Default empty string</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>String</code>:  The value</p>
-
                       </div>
                     </section>
                   </div>
@@ -491,8 +391,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

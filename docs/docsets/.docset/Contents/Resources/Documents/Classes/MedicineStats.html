@@ -13,8 +13,7 @@
     <a title="MedicineStats Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>MedicineStats</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">MedicineStats</span> <span class="p">:</span> <span class="kt">CoreDataContextManager</span></code></pre>
+
+                </div>
+              </div>
             <p>Responsible for generating statistics for medicine using <code>RegistriesManager</code></p>
 
           </section>
@@ -283,9 +261,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios13MedicineStats16numberPillsTakenFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
-                    <a name="//apple_ref/swift/Method/numberPillsTaken(date1:date2:registries:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats16numberPillsTakenFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">numberPillsTaken(date1:date2:registries:)</a>
+                    <a name="/s:FC11malaria_ios13MedicineStats16numberPillsTakenFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
+                    <a name="//apple_ref/swift/Method/numberPillsTaken(_:date2:registries:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats16numberPillsTakenFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">numberPillsTaken(_:date2:registries:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -294,6 +272,12 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the number of pills taken between two dates</p>
+
+<p>:param: <code>NSDate optional</code>: first date (by default is NSDate.min)
+:param: <code>NSDate optional</code>: second date (by default is NSDate.max)
+:param: <code>[Registry] optional</code>: cached list of entries</p>
+
+<p>:returns: <code>Int</code></p>
 
                       </div>
                       <div class="declaration">
@@ -304,66 +288,15 @@
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: first date (by default is NSDate.min)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: second date (by default is NSDate.max)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: cached list of entries</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Int</code></p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios13MedicineStats19numberSupposedPillsFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
-                    <a name="//apple_ref/swift/Method/numberSupposedPills(date1:date2:registries:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats19numberSupposedPillsFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">numberSupposedPills(date1:date2:registries:)</a>
+                    <a name="/s:FC11malaria_ios13MedicineStats19numberSupposedPillsFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
+                    <a name="//apple_ref/swift/Method/numberSupposedPills(_:date2:registries:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats19numberSupposedPillsFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">numberSupposedPills(_:date2:registries:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -374,6 +307,12 @@
                         <p>Returns the number of pills that the user should have taken between two dates.
 Uses static func numberNeededPills internally</p>
 
+<p>:param: <code>NSDate optional</code>: first date (by default is NSDate.min)
+:param: <code>NSDate optional</code>: second date (by default is NSDate.max)
+:param: <code>[Registry] optional</code>: cached list of entries, oldest to recent</p>
+
+<p>:returns: <code>Int</code>: Number of supposed pills</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -383,57 +322,6 @@ Uses static func numberNeededPills internally</p>
                                     <span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: first date (by default is NSDate.min)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: second date (by default is NSDate.max)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: cached list of entries, oldest to recent</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Int</code>: Number of supposed pills</p>
-
                       </div>
                     </section>
                   </div>
@@ -453,6 +341,12 @@ Uses static func numberNeededPills internally</p>
                       <div class="abstract">
                         <p>Returns the number of pills that the user should have taken between two dates.</p>
 
+<p>:param: <code>NSDate</code>: first date
+:param: <code>NSDate</code>: second date
+:param: <code>interval</code>: Interval (1 = once per day, 7 = once per week)</p>
+
+<p>:returns: <code>Int</code>: Number of supposed pills</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -462,66 +356,15 @@ Uses static func numberNeededPills internally</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: first date</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: second date</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>interval</code>: Interval (1 = once per day, 7 = once per week)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Int</code>: Number of supposed pills</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios13MedicineStats13pillAdherenceFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Sf"></a>
-                    <a name="//apple_ref/swift/Method/pillAdherence(date1:date2:registries:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats13pillAdherenceFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Sf">pillAdherence(date1:date2:registries:)</a>
+                    <a name="/s:FC11malaria_ios13MedicineStats13pillAdherenceFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Sf"></a>
+                    <a name="//apple_ref/swift/Method/pillAdherence(_:date2:registries:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats13pillAdherenceFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Sf">pillAdherence(_:date2:registries:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -533,6 +376,12 @@ Uses static func numberNeededPills internally</p>
 
 <p>Adherence = numberPillsTaken/SupposedPills</p>
 
+<p>:param: <code>NSDate optional</code>: first date (by default is NSDate.min)
+:param: <code>NSDate optional</code>: second date (by default is NSDate.max)
+:param: <code>[Registry] optional</code>: cached list of entries</p>
+
+<p>:returns: <code>Float</code>: Pill adherence</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -543,66 +392,15 @@ Uses static func numberNeededPills internally</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: first date (by default is NSDate.min)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: second date (by default is NSDate.max)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: cached list of entries</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Float</code>: Pill adherence</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios13MedicineStats10pillStreakFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
-                    <a name="//apple_ref/swift/Method/pillStreak(date1:date2:registries:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats10pillStreakFS0_FT5date1CSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">pillStreak(date1:date2:registries:)</a>
+                    <a name="/s:FC11malaria_ios13MedicineStats10pillStreakFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si"></a>
+                    <a name="//apple_ref/swift/Method/pillStreak(_:date2:registries:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios13MedicineStats10pillStreakFS0_FTCSo6NSDate5date2S1_10registriesGSqGSaCS_8Registry___Si">pillStreak(_:date2:registries:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -614,6 +412,12 @@ Uses static func numberNeededPills internally</p>
 
 <p>If the user misses a day, the streak will be reset to 0</p>
 
+<p>:param: <code>NSDate optional</code>: first date (by default is NSDate.min)
+:param: <code>NSDate optional</code>: second date (by default is NSDate.max)
+:param: <code>[Registry]? optional</code>: Cached list of entries. Must be sorted from most recent to least recent</p>
+
+<p>:returns: <code>Int</code>: Pill streak</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -622,57 +426,6 @@ Uses static func numberNeededPills internally</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">pillStreak</span><span class="p">(</span><span class="nv">date1</span><span class="p">:</span> <span class="kt">NSDate</span> <span class="o">=</span> <span class="kt">NSDate</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="nv">date2</span><span class="p">:</span> <span class="kt">NSDate</span> <span class="o">=</span> <span class="kt">NSDate</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Int</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: first date (by default is NSDate.min)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: second date (by default is NSDate.max)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry]? optional</code>: Cached list of entries. Must be sorted from most recent to least recent</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Int</code>: Pill streak</p>
-
                       </div>
                     </section>
                   </div>
@@ -696,6 +449,12 @@ Starts at max(oldest entry ; first day of the month)
 If current month, only goes up to today
 If not, goes up to the mostRecentEntry</p>
 
+<p>:param: <code>NSDate</code>: The month
+:param: <code>NSDate optional</code>: Current day, default is NSDate
+:param: <code>Registries</code>: Previously calculated entries. Must be sorted oldest to recent</p>
+
+<p>:returns: <code>Float</code>: pill adherence for the month</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -705,57 +464,6 @@ If not, goes up to the mostRecentEntry</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: The month</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate optional</code>: Current day, default is NSDate</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Registries</code>: Previously calculated entries. Must be sorted oldest to recent</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Float</code>: pill adherence for the month</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -764,8 +472,8 @@ If not, goes up to the mostRecentEntry</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

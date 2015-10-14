@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
-import HorizontalProgressView
+//import HorizontalProgressView
 
 /// `AdherenceHorizontalBarCell` shows a graph bar for the adhrence for a month
 class AdherenceHorizontalBarCell: UITableViewCell {
@@ -10,7 +10,6 @@ class AdherenceHorizontalBarCell: UITableViewCell {
     @IBOutlet weak var month: UILabel!
     @IBOutlet weak var horizontalBar: HorizontalGraphBar!
     @IBOutlet weak var adherenceValue: UILabel!
-    
     func configureCell(date: NSDate, adhrenceValue: Float) -> AdherenceHorizontalBarCell{
         horizontalBar.progressColor = adhrenceValue < 50 ? LowAdherenceColor : HighAdherenceColor
         horizontalBar.progressValue = adhrenceValue

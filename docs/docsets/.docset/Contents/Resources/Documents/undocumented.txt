@@ -1,27 +1,29 @@
 TripHistory.swift
 	@NSManaged public var location: String
 	@NSManaged public var timestamp: NSDate
-InfoHubViewController.swift
-	class InfoHubViewController : UIViewController
-	class InfoHubViewController : UIViewController
 TripLocationHistoryPickerViewer.swift
 	required public init(coder aDecoder: NSCoder)
 MedicinePickerViewTrip.swift
 	required public init(coder aDecoder: NSCoder)
-CVCalendarWeekView.swift
-	class CVCalendarWeekView : UIView
-	class CVCalendarWeekView : UIView
-	class CVCalendarWeekView : UIView
-CVCalendarMonthContentViewController.swift
-	class CVCalendarMonthContentViewController : CVCalendarContentViewController
-	class CVCalendarMonthContentViewController : CVCalendarContentViewController
-	class CVCalendarMonthContentViewController : CVCalendarContentViewController
+EndpointType.swift
+	case BaseUrl = "http://pc-web-dev.systers.org/"
+	case Api = "api"
+	case Posts = "posts"
+	case Revposts = "revposts"
+	case Regions = "regions"
+	case Sectors = "sectors"
+	case Ptposts = "ptposts"
+	case Projects = "projects"
+	case Volunteer = "volunteer"
+	case Cohort = "cohort"
+	case Measurement = "measurement"
+	case Activity = "activity"
+	case Outcomes = "outcomes"
+	case Outputs = "outputs"
+	case Indicators = "indicators"
+	case Objectives = "objectives"
+	case Goals = "goals"
 CVCalendarDayView.swift
-	class CVCalendarDayView : UIView
-	class CVCalendarDayView : UIView
-	class CVCalendarDayView : UIView
-	class CVCalendarDayView : UIView
-	class CVCalendarDayView : UIView
 	class CVCalendarDayView : UIView
 Post.swift
 	@NSManaged public var created_at: String
@@ -31,28 +33,17 @@ Post.swift
 	@NSManaged public var title: String
 	@NSManaged public var updated_at: String
 	@NSManaged public var contained_in: CollectionPosts
-CVCalendarTouchController.swift
-	class CVCalendarTouchController
-	class CVCalendarTouchController
-CVCalendarWeekContentViewController.swift
-	class CVCalendarWeekContentViewController : CVCalendarContentViewController
-	class CVCalendarWeekContentViewController : CVCalendarContentViewController
-	class CVCalendarWeekContentViewController : CVCalendarContentViewController
-	class CVCalendarWeekContentViewController : CVCalendarContentViewController
-CVDate.swift
-	class CVDate : NSObject
-	class CVDate : NSObject
-	class CVDate : NSObject
-CVAuxiliaryView.swift
-	class CVAuxiliaryView : UIView
-	class CVAuxiliaryView : UIView
+NSNotificationEvents.swift
+	case DataUpdated = "DataUpdated"
+	case UIApplicationWillEnterForegroundNotification = "UIApplicationWillEnterForegroundNotification"
+UserSettingsManager.swift
+	case DidConfiguredMedicine = "DidConfiguredMedicine"
+	case ClearTripHistory = "ClearTripHistory"
+	case ClearMedicineHistory = "ClearMedicineHistory"
+	case MedicineReminderSwitch = "MedicineReminderSwitch"
+	case TripReminderOption = "TripReminderOption"
 CollectionPostsEndpoint.swift
 	public var path: String { get { fatalError("Please specify path") } }
-CVCalendarView.swift
-	class CVCalendarView : UIView
-	class CVCalendarView : UIView
-	class CVCalendarView : UIView
-	class CVCalendarView : UIView
 MedicinePickerView.swift
 	required public init(coder aDecoder: NSCoder)
 Registry.swift
@@ -71,17 +62,6 @@ Item.swift
 	@NSManaged public var associated_with: Trip
 Logger.swift
 	public var description: String { get { return self }}
-CVCalendarContentViewController.swift
-	class CVCalendarContentViewController : UIViewController
-	class CVCalendarContentViewController : UIViewController
-	class CVCalendarContentViewController : UIViewController
-	class CVCalendarContentViewController : UIViewController
-	class CVCalendarContentViewController : UIViewController
-	class CVCalendarContentViewController : UIViewController
-CVCalendarDayViewControlCoordinator.swift
-	class CVCalendarDayViewControlCoordinator
-	class CVCalendarDayViewControlCoordinator
-	class CVCalendarDayViewControlCoordinator
 Trip.swift
 	@NSManaged public var medicine: String
 	@NSManaged public var departure: NSDate
@@ -89,10 +69,10 @@ Trip.swift
 	@NSManaged public var location: String
 	@NSManaged public var items: NSSet
 	@NSManaged public var reminderTime: NSDate
-CVCalendarViewAnimator.swift
-	class CVCalendarViewAnimator
-	class CVCalendarViewAnimator
-	class CVCalendarViewAnimator
+MedicineFrontEndExtension.swift
+	case Doxycycline = "Doxycycline"
+	case Malarone = "Malarone"
+	case Mefloquine = "Mefloquine"
 CollectionPosts.swift
 	@NSManaged public var posts: NSSet
 DailyStatsCells.swift
@@ -101,9 +81,3 @@ DailyStatsCells.swift
 	var attributeValue : String { get }
 NotificationManager.swift
 	override public init(context: NSManagedObjectContext!)
-CVCalendarMonthView.swift
-	class CVCalendarMonthView : UIView
-	class CVCalendarMonthView : UIView
-	class CVCalendarMonthView : UIView
-	class CVCalendarMonthView : UIView
-	class CVCalendarMonthView : UIView

@@ -13,8 +13,7 @@
     <a title="Endpoint Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>Endpoint</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Endpoint</span></code></pre>
+
+                </div>
+              </div>
             <p>Endpoint protocol for retrieving and storing information from the remote json server</p>
 
           </section>
@@ -298,6 +276,11 @@
 <p>Keep in mind that the object is created in the CoreData,
 therefore any deletion must be done explicitly.</p>
 
+<p>:param: <code>JSON</code>: json data
+:param: <code>NSManagedObjectContext</code>: Current context</p>
+
+<p>:returns: <code>NSManagedObject?</code>: The parsed object or nil if parse failed</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -307,53 +290,15 @@ therefore any deletion must be done explicitly.</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>JSON</code>: json data</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSManagedObjectContext</code>: Current context</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>NSManagedObject?</code>: The parsed object or nil if parse failed</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP11malaria_ios8Endpoint17clearFromDatabaseUS0___FQPS0_FCSo22NSManagedObjectContextT_"></a>
+                    <a name="/s:FP11malaria_ios8Endpoint17clearFromDatabaseuRq_S0__Fq_FCSo22NSManagedObjectContextT_"></a>
                     <a name="//apple_ref/swift/Method/clearFromDatabase(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP11malaria_ios8Endpoint17clearFromDatabaseUS0___FQPS0_FCSo22NSManagedObjectContextT_">clearFromDatabase(_:)</a>
+                    <a class="token" href="#/s:FP11malaria_ios8Endpoint17clearFromDatabaseuRq_S0__Fq_FCSo22NSManagedObjectContextT_">clearFromDatabase(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -362,6 +307,8 @@ therefore any deletion must be done explicitly.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Clear all NSManagedObjects used by the endpoint</p>
+
+<p>:param: <code>NSManagedObjectContext</code>: Current context</p>
 
                       </div>
                       <div class="declaration">
@@ -372,26 +319,6 @@ therefore any deletion must be done explicitly.</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSManagedObjectContext</code>: Current context</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -400,8 +327,8 @@ therefore any deletion must be done explicitly.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

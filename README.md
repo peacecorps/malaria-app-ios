@@ -33,6 +33,12 @@ mmcallister@peacecorps.gov
 
 4. Open malaria-ios.xcworkspace
 
+If the build fails because pod modules are not identified:
+
+1. In the project settings, find the target malaria.ios
+
+2. Under "Linked Frameworks and Libraries," add Pods/Pods.xcodeproj
+
 
 <h3>How to regenerate docs:</h3>
 

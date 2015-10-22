@@ -13,8 +13,7 @@
     <a title="ItemsManager Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>ItemsManager</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ItemsManager</span> <span class="p">:</span> <span class="kt">CoreDataContextManager</span></code></pre>
+
+                </div>
+              </div>
             <p>Manages trip items</p>
 
           </section>
@@ -295,6 +273,9 @@
                       <div class="abstract">
                         <p>Adds a new item to the trip</p>
 
+<p>:param: <code>String</code>: name of the item
+:param: <code>Int64</code>: quantity, it will be always at least 1</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -303,39 +284,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addItem</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">quantity</span><span class="p">:</span> <span class="kt">Int64</span><span class="p">)</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: name of the item</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Int64</code>: quantity, it will be always at least 1</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -355,6 +303,11 @@
                       <div class="abstract">
                         <p>Returns an item from the trip if exists</p>
 
+<p>:param: <code>String</code>: name of the item (case insensitive)
+:param: <code>[Item] optional</code> cached list of items</p>
+
+<p>:returns: <code>Item?</code>:</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -363,44 +316,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">findItem</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">listItems</span><span class="p">:</span> <span class="p">[</span><span class="kt">Item</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Item</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: name of the item (case insensitive)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Item] optional</code> cached list of items</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Item?</code>:</p>
-
                       </div>
                     </section>
                   </div>
@@ -420,6 +335,8 @@
                       <div class="abstract">
                         <p>Checkmark the items</p>
 
+<p>:param: <code>[String]</code>: names of the items (case insensitive)</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -428,26 +345,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">checkItem</span><span class="p">(</span><span class="nv">names</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[String]</code>: names of the items (case insensitive)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -467,6 +364,8 @@
                       <div class="abstract">
                         <p>Remove the checkmark</p>
 
+<p>:param: <code>[String]</code>: names of the items (case insensitive)</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -475,26 +374,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">uncheckItem</span><span class="p">(</span><span class="nv">names</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[String]</code>: names of the items (case insensitive)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -514,6 +393,8 @@
                       <div class="abstract">
                         <p>Toggle the checkmark</p>
 
+<p>:param: <code>[String]</code>: name of the items (case insensitive)</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -522,26 +403,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toggleCheckItem</span><span class="p">(</span><span class="nv">names</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">])</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[String]</code>: name of the items (case insensitive)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -564,6 +425,9 @@
 <p>If quantity is specified, it only removes the specified number,
 if not, removes the item completly</p>
 
+<p>:param: <code>String</code>: name of the item
+:param: <code>Int64 optional</code> quantity</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -572,39 +436,6 @@ if not, removes the item completly</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">removeItem</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">quantity</span><span class="p">:</span> <span class="kt">Int64</span> <span class="o">=</span> <span class="kt">Int64</span><span class="o">.</span><span class="n">max</span><span class="p">)</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: name of the item</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Int64 optional</code> quantity</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -624,6 +455,8 @@ if not, removes the item completly</p>
                       <div class="abstract">
                         <p>Returns all items from the trip</p>
 
+<p>:returns: <code>[Item]</code>: Array of items</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -633,11 +466,6 @@ if not, removes the item completly</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>[Item]</code>: Array of items</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -646,8 +474,8 @@ if not, removes the item completly</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

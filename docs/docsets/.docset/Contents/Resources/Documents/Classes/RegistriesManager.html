@@ -13,8 +13,7 @@
     <a title="RegistriesManager Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>RegistriesManager</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">RegistriesManager</span> <span class="p">:</span> <span class="kt">CoreDataContextManager</span></code></pre>
+
+                </div>
+              </div>
             <p>Manages <code>Medicine</code> array of entries and provides useful methods to retrieve useful information</p>
 
           </section>
@@ -295,6 +273,11 @@
                       <div class="abstract">
                         <p>Check if the pill was already taken in the period</p>
 
+<p>:param: <code>NSDate</code>: the date
+:param: <code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
+
+<p>:returns: <code>Registry?</code>: registry</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -303,44 +286,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tookMedicine</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Registry</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: the date</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Registry?</code>: registry</p>
-
                       </div>
                     </section>
                   </div>
@@ -360,6 +305,12 @@
                       <div class="abstract">
                         <p>Returns the list of entries that happens in the period of time</p>
 
+<p>:param: <code>NSDate</code>: the date
+:param: <code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
+
+<p>:returns: <code>(noData: Bool, entries: [Registry])</code>: A tuple where the first value indicates if there are no entries
+before the date and the second the array of entries.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -368,44 +319,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">allRegistriesInPeriod</span><span class="p">(</span><span class="nv">at</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">noData</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">,</span> <span class="nv">entries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">])</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: the date</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>(noData: Bool, entries: [Registry])</code>: A tuple where the first value indicates if there are no entries</p>
-
                       </div>
                     </section>
                   </div>
@@ -425,6 +338,8 @@
                       <div class="abstract">
                         <p>Returns the most recent entry for that pill if there is</p>
 
+<p>:returns: <code>Registry?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -433,11 +348,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">mostRecentEntry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Registry</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Registry?</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -457,6 +367,8 @@
                       <div class="abstract">
                         <p>Returns the oldest entry for that pill if there is</p>
 
+<p>:returns: <code>Registry?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -465,11 +377,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">oldestEntry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Registry</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Registry?</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -489,6 +396,8 @@
                       <div class="abstract">
                         <p>Returns a tuple with the oldest and most recent entry</p>
 
+<p>:returns: <code>(leastRecent: Registry, mostRecent: Registry)?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -497,11 +406,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getLimits</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nv">leastRecent</span><span class="p">:</span> <span class="kt">Registry</span><span class="p">,</span> <span class="nv">mostRecent</span><span class="p">:</span> <span class="kt">Registry</span><span class="p">)?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>(leastRecent: Registry, mostRecent: Registry)?</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -526,6 +430,12 @@ If modifyEntry flag is set to false, It will return false it there is already an
 
 <p>If there is already an entry in the period and if modifyEntry is true, then the entry is deleted and replaced</p>
 
+<p>:param: <code>NSDate</code>: the date of the entry
+:param: <code>Bool</code>: if the user took medicine
+:param: <code>Bool optional</code>: overwrite previous entry (by default is false)</p>
+
+<p>:returns: <code>Bool</code>: true if there was a change, false if not</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -535,66 +445,15 @@ If modifyEntry flag is set to false, It will return false it there is already an
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: the date of the entry</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool</code>: if the user took medicine</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool optional</code>: overwrite previous entry (by default is false)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Bool</code>: true if there was a change, false if not</p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios17RegistriesManager13getRegistriesFS0_FT5date1CSo6NSDate5date2S1_15mostRecentFirstSb8unsortedSb16additionalFilterGSqFT1rCS_8Registry_Sb__GSaS2__"></a>
-                    <a name="//apple_ref/swift/Method/getRegistries(date1:date2:mostRecentFirst:unsorted:additionalFilter:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager13getRegistriesFS0_FT5date1CSo6NSDate5date2S1_15mostRecentFirstSb8unsortedSb16additionalFilterGSqFT1rCS_8Registry_Sb__GSaS2__">getRegistries(date1:date2:mostRecentFirst:unsorted:additionalFilter:)</a>
+                    <a name="/s:FC11malaria_ios17RegistriesManager13getRegistriesFS0_FTCSo6NSDate5date2S1_15mostRecentFirstSb8unsortedSb16additionalFilterGSqFT1rCS_8Registry_Sb__GSaS2__"></a>
+                    <a name="//apple_ref/swift/Method/getRegistries(_:date2:mostRecentFirst:unsorted:additionalFilter:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager13getRegistriesFS0_FTCSo6NSDate5date2S1_15mostRecentFirstSb8unsortedSb16additionalFilterGSqFT1rCS_8Registry_Sb__GSaS2__">getRegistries(_:date2:mostRecentFirst:unsorted:additionalFilter:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -604,6 +463,14 @@ If modifyEntry flag is set to false, It will return false it there is already an
                       <div class="abstract">
                         <p>Returns entries between the two specified dates</p>
 
+<p>:param: <code>NSDate</code>: date1
+:param: <code>NSDate</code>: date2
+:param: <code>Bool optional</code>: if first element of result should be the most recent entry. (by default is true)
+:param: <code>Bool optional</code>: if true, it won&rsquo;t sort the elements reducing one sort cycle
+:param: <code>(r: Registry) -&gt; Bool) optional</code>: Additional custom filter</p>
+
+<p>:returns: <code>[Registry]</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -612,83 +479,6 @@ If modifyEntry flag is set to false, It will return false it there is already an
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRegistries</span><span class="p">(</span><span class="nv">date1</span><span class="p">:</span> <span class="kt">NSDate</span> <span class="o">=</span> <span class="kt">NSDate</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="nv">date2</span><span class="p">:</span> <span class="kt">NSDate</span> <span class="o">=</span> <span class="kt">NSDate</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="nv">mostRecentFirst</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span> <span class="nv">unsorted</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span> <span class="nv">additionalFilter</span><span class="p">:</span> <span class="p">((</span><span class="nv">r</span><span class="p">:</span> <span class="kt">Registry</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: date1</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: date2</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool optional</code>: if first element of result should be the most recent entry. (by default is true)</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Bool optional</code>: if true, it won&rsquo;t sort the elements reducing one sort cycle</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>(r: Registry) -&gt; Bool) optional</code>: Additional custom filter</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>[Registry]</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -708,6 +498,12 @@ If modifyEntry flag is set to false, It will return false it there is already an
                       <div class="abstract">
                         <p>Filter entries between two dates and, optionally, with an extra filter</p>
 
+<p>:param: <code>[Registry]</code>: list of entries
+:param: <code>NSDate</code>: first day
+:param: <code>NSDate</code>: second day
+:param: <code>(r: Registry) -&gt; Bool) optional</code>: Additional custom filter
+:returns: <code>[Registry]</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -716,70 +512,6 @@ If modifyEntry flag is set to false, It will return false it there is already an
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">filter</span><span class="p">(</span><span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">],</span> <span class="nv">date1</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">date2</span><span class="p">:</span> <span class="kt">NSDate</span><span class="p">,</span> <span class="nv">additionalFilter</span><span class="p">:</span> <span class="p">((</span><span class="nv">r</span><span class="p">:</span> <span class="kt">Registry</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span>  <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry]</code>: list of entries</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: first day</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: second day</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>(r: Registry) -&gt; Bool) optional</code>: Additional custom filter</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>[Registry]</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -799,6 +531,11 @@ If modifyEntry flag is set to false, It will return false it there is already an
                       <div class="abstract">
                         <p>Returns entry in the specified date if exists</p>
 
+<p>:param: <code>NSDate</code>: date
+:param: <code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
+
+<p>:returns: <code>Registry?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -808,53 +545,15 @@ If modifyEntry flag is set to false, It will return false it there is already an
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSDate</code>: date</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>[Registry] optional</code>: Cached vector of entries, most recent first</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Registry?</code></p>
-
-                      </div>
                     </section>
                   </div>
                 </li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FT10registriesGSqGSaCS_8Registry___GSqCSo6NSDate_"></a>
-                    <a name="//apple_ref/swift/Method/lastPillDate(registries:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FT10registriesGSqGSaCS_8Registry___GSqCSo6NSDate_">lastPillDate(registries:)</a>
+                    <a name="/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FTGSqGSaCS_8Registry___GSqCSo6NSDate_"></a>
+                    <a name="//apple_ref/swift/Method/lastPillDate(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios17RegistriesManager12lastPillDateFS0_FTGSqGSaCS_8Registry___GSqCSo6NSDate_">lastPillDate(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -866,6 +565,8 @@ If modifyEntry flag is set to false, It will return false it there is already an
 
 <p>:param <code>[Registry]? optional</code>: cached list of entries. Must be sorted from most recent to least recent</p>
 
+<p>:returns: <code>NSDate?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -874,11 +575,6 @@ If modifyEntry flag is set to false, It will return false it there is already an
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lastPillDate</span><span class="p">(</span><span class="nv">registries</span><span class="p">:</span> <span class="p">[</span><span class="kt">Registry</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSDate</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>NSDate?</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -917,8 +613,8 @@ If modifyEntry flag is set to false, It will return false it there is already an
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

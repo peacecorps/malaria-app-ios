@@ -13,8 +13,7 @@
     <a title="TripsManager Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html"> Docs</a> (72% documented)</p>
-        <p class="header-right"><a href=""><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p><a href="../index.html"> Docs</a> (74% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -137,16 +136,7 @@
           <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:V11malaria_ios5CVSet">CVSet</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/CachedStatistics.html">CachedStatistics</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios29DailyStatsTableViewController">DailyStatsTableViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26DidTakePillsViewController">DidTakePillsViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions/Int.html">Int</a>
@@ -155,28 +145,10 @@
                 <a href="../Extensions/Item.html">Item</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios23ListItemsViewController">ListItemsViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/Medicine.html">Medicine</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios21MonthlyViewController">MonthlyViewController</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Extensions/NSSet.html">NSSet</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios26PagesManagerViewController">PagesManagerViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios24PillsStatsViewController">PillsStatsViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios22PlanTripViewController">PlanTripViewController</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Extensions.html#/s:C11malaria_ios25SetupScreenViewController">SetupScreenViewController</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Extensions.html#/s:SS">String</a>
@@ -223,7 +195,7 @@
                 <a href="../Functions.html#/s:ZF11malaria_iosoi1gFTCSo6NSDateS0__Sb">&gt;(_:_:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F11malaria_ios5delayFTSdFT_T__T_">delay(_:_:)</a>
+                <a href="../Functions.html#/s:F11malaria_ios5delayFTSd8functionFT_T__T_">delay(_:function:)</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F11malaria_ios7openUrlFGSQCSo5NSURL_Sb">openUrl(_:)</a>
@@ -247,6 +219,12 @@
         <section>
           <section class="section">
             <h1>TripsManager</h1>
+              <div class="declaration">
+                <div class="Swift">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TripsManager</span> <span class="p">:</span> <span class="kt">CoreDataContextManager</span></code></pre>
+
+                </div>
+              </div>
             <p>Manages <code>Trip</code> core data instances</p>
 
           </section>
@@ -295,6 +273,8 @@
                       <div class="abstract">
                         <p>Returns the current trip if any</p>
 
+<p>:returns: <code>Trip?</code></p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -303,11 +283,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getTrip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Trip</span><span class="p">?</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>Trip?</code></p>
-
                       </div>
                     </section>
                   </div>
@@ -342,9 +317,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC11malaria_ios12TripsManager10getHistoryFS0_FT5limitSi_GSaCS_11TripHistory_"></a>
-                    <a name="//apple_ref/swift/Method/getHistory(limit:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC11malaria_ios12TripsManager10getHistoryFS0_FT5limitSi_GSaCS_11TripHistory_">getHistory(limit:)</a>
+                    <a name="/s:FC11malaria_ios12TripsManager10getHistoryFS0_FTSi_GSaCS_11TripHistory_"></a>
+                    <a name="//apple_ref/swift/Method/getHistory(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC11malaria_ios12TripsManager10getHistoryFS0_FTSi_GSaCS_11TripHistory_">getHistory(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -354,6 +329,10 @@
                       <div class="abstract">
                         <p>Returns the location history of the trips sorted by most recent first</p>
 
+<p>:param: <code>Int optional</code>: number of intended items, default is 15</p>
+
+<p>:returns: <code>[TripHistory]</code>: history</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -362,31 +341,6 @@
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getHistory</span><span class="p">(</span><span class="nv">limit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">TripHistory</span><span class="p">]</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Int optional</code>: number of intended items, default is 15</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p><code>[TripHistory]</code>: history</p>
-
                       </div>
                     </section>
                   </div>
@@ -409,6 +363,13 @@
 <p>It creates an instance of the object in the CoreData, any deletion must be done explicitly.
 If there is already an instance of trip, it modifies it.</p>
 
+<p>:param: <code>String</code>: Location
+:param: <code>String</code>: Medicine name
+:param: <code>Int64</code>: caseToBring
+:param: <code>NSdate</code>: reminderDate</p>
+
+<p>:return: <code>Trip</code>: Instance of trip</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -418,65 +379,6 @@ If there is already an instance of trip, it modifies it.</p>
 
                         </div>
                       </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: Location</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>String</code>: Medicine name</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>Int64</code>: caseToBring</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em></em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><code>NSdate</code>: reminderDate</p>
-
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
                     </section>
                   </div>
                 </li>
@@ -485,8 +387,8 @@ If there is already an instance of trip, it modifies it.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-08-16)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2015 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2015-10-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.3.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

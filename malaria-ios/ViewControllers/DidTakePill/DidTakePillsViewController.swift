@@ -36,14 +36,12 @@ class DidTakePillsViewController: UIViewController {
         
         if let tookPillSoundPath = TookPillSoundPath,
             let didNotTakePillSoundPath = DidNotTakePillSoundPath{
-                
                 do {
                     tookPillPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: tookPillSoundPath))
                     didNotTakePillPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: didNotTakePillSoundPath))
                 } catch _ {
-                
+                    /* do nothing */
                 }
-            
         }else {
             Logger.Error("Error getting sounds effects file paths")
         }
@@ -92,12 +90,6 @@ class DidTakePillsViewController: UIViewController {
         delay(0.85){
             self.presentViewController(resheduleAlert, animated: true, completion: nil)
         }
-        
-        //Old method described in the requirements document but in my opinion is confusing and leds to believe
-        //there is a bug in the app because next time the app runs, it goes straight to setup screen and the only hint
-        //there is is the text being black which is not that noticible
-        //
-        // UserSettingsManager.UserSetting.DidConfiguredMedicine.setBool(false)
     }
     
     func refreshScreen(){

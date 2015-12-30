@@ -1,6 +1,6 @@
 import UIKit
 import PickerSwift
-import DoneToolBarSwift
+import DoneToolbarSwift
 
 /// `SetupViewController` where the user configures the current medicine and the notification time
 class SetupScreenViewController : UIViewController{

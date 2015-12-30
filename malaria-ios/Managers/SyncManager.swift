@@ -73,31 +73,36 @@ public class SyncManager : CoreDataContextManager{
         }
     }
     
+    
+    
+    
     private func remoteFetch(endpoint: Endpoint, save: Bool = false, completion: ((url: String, error: NSError?)->())? = nil){
         Logger.Info("Syncing: \(endpoint.path)")
-        Alamofire.request(.GET, endpoint.path, parameters: ["format": "json"])
-            .responseJSON { (_, _, result) in
-                var resultError: NSError? = nil
+        
+        
+        Alamofire.request(.GET, endpoint.path, parameters: ["format": "json"]).validate().responseJSON { response in
+            var resultError: NSError? = nil
+            
+            switch response.result {
+            case .Success:
                 
-                switch result {
-                case .Success(let data):
+                if let data = response.result.value {
+                    let json = JSON(data)
                     endpoint.clearFromDatabase(self.context)
-                    if let _ = endpoint.retrieveJSONObject(JSON(data), context: self.context){
+                    
+                    if let _ = endpoint.retrieveJSONObject(json, context: self.context){
                         Logger.Info("Success \(endpoint.path)")
                     }else{
                         Logger.Error("Error parsing \(endpoint.path)")
                         resultError = NSError(domain: "PARSE_ERROR", code: 9999, userInfo: [:])
                     }
-                
-                
-                case .Failure(_, _):
-                    resultError = NSError(domain: "CONNECTION_ERROR", code: 9999, userInfo: [:])
-                    
-                    //doesn't compile, still figuring out
-                    //resultError = error
                 }
                 
-                completion?(url: endpoint.path, error: resultError)
+            case .Failure(_):
+                resultError = NSError(domain: "CONNECTION_ERROR", code: 9999, userInfo: [:])
             }
+            
+            completion?(url: endpoint.path, error: resultError)
+        }
     }
 }

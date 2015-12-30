@@ -116,6 +116,7 @@ extension MonthlyViewController: CVCalendarViewDelegate {
         return UIView()
     }
     
+    
     func supplementaryView(shouldDisplayOnDayView dayView: DayView) -> Bool {
         if let  date = dayView.date,
                 registryDate = date.convertedDate(){
@@ -137,11 +138,8 @@ extension MonthlyViewController: CVCalendarViewDelegate {
 
 extension MonthlyViewController {
     
-    /// Note in the current version there are some issues with the calendar.
-    /// When chooosing a month in todays day this is called, however, in another month this is called therefore firstRun
-    /// becomes useful avoiding appearing
-    /// It always calls this when transitioning between months (-.-)
-    func didSelectDayView(dayView: CVCalendarDayView) {
+    func didSelectDayView(dayView: DayView, animationDidFinish: Bool){
+        
         let selected = dayView.date.convertedDate()!
         if let previous = previouslySelect {
             
@@ -155,7 +153,7 @@ extension MonthlyViewController {
             }
             
         }
-
+        
         previouslySelect = selected
     }
     
@@ -194,6 +192,8 @@ extension MonthlyViewController {
         }
         presentViewController(tookPillActionSheet, animated: true, completion: nil)
     }
+    
+    
     
     ///hack until library offers what we need
     func updateDayView(day: NSDate, remove: Bool) {

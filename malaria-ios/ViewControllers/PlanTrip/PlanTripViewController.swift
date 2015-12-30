@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import PickerSwift
-import DoneToolBarSwift
+import DoneToolbarSwift
 
 /// `PlanTripViewController` manages trips
 class PlanTripViewController: UIViewController {

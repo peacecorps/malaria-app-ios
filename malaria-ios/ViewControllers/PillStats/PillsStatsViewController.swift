@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 import Charts
-import CircleProgressView
+import SimpleCircleProgressView
 
 
 /// `PillsStatsViewController` responsible for showing the monthly stats and the graph
@@ -167,7 +167,7 @@ extension PillsStatsViewController{
         chartView.scaleYEnabled = false
         chartView.doubleTapToZoomEnabled = true
         chartView.drawGridBackgroundEnabled = false
-        chartView.highlightEnabled = false
+        chartView.highlightPerTapEnabled = false
         chartView.highlightPerDragEnabled = false
     }
     

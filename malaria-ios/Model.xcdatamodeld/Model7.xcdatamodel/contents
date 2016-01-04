@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="4" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CollectionPosts" representedClassName="malaria_ios.CollectionPosts" isAbstract="YES" syncable="YES">
+        <relationship name="posts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="contained_in" inverseEntity="Post" syncable="YES"/>
+    </entity>
+    <entity name="Item" representedClassName="malaria_ios.Item" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="associated_with" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="items" inverseEntity="Trip" syncable="YES"/>
+    </entity>
+    <entity name="Medicine" representedClassName="malaria_ios.Medicine" syncable="YES">
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="notificationTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="weekly" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="registries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Registry" inverseName="medicine" inverseEntity="Registry" syncable="YES"/>
+    </entity>
+    <entity name="Post" representedClassName="malaria_ios.Post" syncable="YES">
+        <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="owner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="post_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contained_in" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CollectionPosts" inverseName="posts" inverseEntity="CollectionPosts" syncable="YES"/>
+    </entity>
+    <entity name="Posts" representedClassName="malaria_ios.Posts" parentEntity="CollectionPosts" syncable="YES"/>
+    <entity name="Registry" representedClassName="malaria_ios.Registry" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tookMedicine" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="medicine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Medicine" inverseName="registries" inverseEntity="Medicine" syncable="YES"/>
+    </entity>
+    <entity name="Trip" representedClassName="malaria_ios.Trip" syncable="YES">
+        <attribute name="arrival" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="departure" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="medicine" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="associated_with" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="TripHistory" representedClassName="malaria_ios.TripHistory" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CollectionPosts" positionX="-270" positionY="207" width="128" height="60"/>
+        <element name="Item" positionX="-207" positionY="11" width="128" height="90"/>
+        <element name="Medicine" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Post" positionX="-101" positionY="201" width="128" height="150"/>
+        <element name="Posts" positionX="-270" positionY="387" width="128" height="45"/>
+        <element name="Registry" positionX="214" positionY="15" width="128" height="90"/>
+        <element name="Trip" positionX="-396" positionY="-18" width="128" height="120"/>
+        <element name="TripHistory" positionX="-189" positionY="135" width="128" height="60"/>
+    </elements>
+</model>
